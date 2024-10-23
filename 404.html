@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>404</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .system-message {
+      padding: 24px 48px;
+    }
+
+    .system-message h1 {
+      font-size: 100px;
+      font-weight: normal;
+      line-height: 120px;
+      margin-bottom: 12px;
+    }
+
+    .system-message .jump {
+      padding-top: 10px
+    }
+
+    .system-message .jump a {
+      color: #333;
+    }
+
+    .system-message .error {
+      line-height: 1.8em;
+      font-size: 36px
+    }
+
+    .system-message .detail {
+      font-size: 12px;
+      line-height: 20px;
+      margin-top: 12px;
+      display: none
+    }
+  </style>
+</head>
+<body>
+<div class="system-message">
+  <h1>:(</h1>
+  <p class="error">404 Page Not Found !</p>
+  <p class="detail"></p>
+  <p class="jump">
+    您访问的页面不存在 还有 <b id="wait">10</b>s 自动返回 [ <a href="javascript:goBack();">上一页</a> ]
+  </p>
+  <p class="jump">
+    [ <a href="javascript:goHome();">首页传送门</a> ]
+  </p>
+  <br>
+  <p>原因可能是: </p>
+  <p>1. 从浏览器地址栏中输入的URL有误</p>
+  <p>2. 资源的存放位置已经转移或删除了</p>
+  <br/>
+</div>
+<script type="text/javascript">
+
+  function goHome() {
+    window.open("/", "_self");
+  }
+
+  function goBack() {
+    if (window.history.length === 1) {
+      window.open("/", "_self");
+    } else {
+      window.history.back();
+    }
+  }
+
+  (function () {
+    let wait = document.getElementById('wait');
+    let interval = setInterval(function () {
+      let time = --wait.innerHTML;
+      // 回到上一页
+      if (time < 0) {
+        goBack();
+        clearInterval(interval);
+      }
+    }, 1000);
+  })();
+
+</script>
+</body>
+</html>

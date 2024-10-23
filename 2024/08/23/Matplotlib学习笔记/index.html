@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/08/23/Matplotlib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/08/23/Matplotlib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2024/08/23/Matplotlib学习笔记/","title":"【笔记】Matplotlib学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Matplotlib学习笔记 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">修改字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%97%E4%BD%93%E5%90%8D"><span class="nav-number">4.1.</span> <span class="nav-text">查看字体名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93-1"><span class="nav-number">4.2.</span> <span class="nav-text">修改字体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%A4%87%E9%80%89%E5%AD%97%E4%BD%93"><span class="nav-number">4.2.1.</span> <span class="nav-text">指定备选字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93%E5%90%8E%E8%B4%9F%E5%8F%B7%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.3.</span> <span class="nav-text">解决修改字体后负号不显示的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%BB%E5%B8%83"><span class="nav-number">5.</span> <span class="nav-text">画布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83%EF%BC%88figure%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">创建画布（figure）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E7%B3%BB%EF%BC%88subplot%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">坐标系（subplot）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%A4%9A%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E6%8C%89%E7%85%A7%E4%B8%A4%E8%A1%8C%E4%B8%80%E5%88%97%E7%9A%84%E6%96%B9%E5%BC%8F%E5%B1%95%E7%8E%B0"><span class="nav-number">6.1.</span> <span class="nav-text">将多个坐标系按照两行一列的方式展现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%A4%9A%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E6%8C%89%E7%85%A7%E4%B8%80%E8%A1%8C%E4%B8%A4%E5%88%97%E7%9A%84%E6%96%B9%E5%BC%8F%E5%B1%95%E7%8E%B0"><span class="nav-number">6.2.</span> <span class="nav-text">将多个坐标系按照一行两列的方式展现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%A4%9A%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E8%87%AA%E7%94%B1%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">6.3.</span> <span class="nav-text">将多个坐标系自由合并单元格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E8%BE%B9%E6%A1%86%E6%94%B9%E4%B8%BA%E4%B8%AD%E5%BF%83%E5%8E%9F%E7%82%B9%E7%9A%84%E5%B9%B3%E9%9D%A2%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">6.4.</span> <span class="nav-text">将边框改为中心原点的平面直角坐标系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%BD%B4%E5%88%BB%E5%BA%A6"><span class="nav-number">6.5.</span> <span class="nav-text">修改轴刻度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9x%E8%BD%B4%E5%88%BB%E5%BA%A6"><span class="nav-number">6.5.1.</span> <span class="nav-text">修改x轴刻度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9y%E8%BD%B4%E5%88%BB%E5%BA%A6"><span class="nav-number">6.5.2.</span> <span class="nav-text">修改y轴刻度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">6.6.</span> <span class="nav-text">嵌套坐标系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%A1%A8"><span class="nav-number">7.</span> <span class="nav-text">图表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="nav-number">7.1.</span> <span class="nav-text">折线图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BE%E4%BE%8B"><span class="nav-number">7.1.1.</span> <span class="nav-text">添加图例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%9B%BE%E4%BE%8B%E4%BD%8D%E7%BD%AE"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">定义图例位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-number">7.2.</span> <span class="nav-text">散点图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%94%E6%B3%A1%E5%9B%BE"><span class="nav-number">7.2.1.</span> <span class="nav-text">气泡图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%90%E5%8F%98%E8%89%B2"><span class="nav-number">7.2.2.</span> <span class="nav-text">渐变色</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%A9%E8%99%B9%E8%89%B2"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">彩虹色</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="nav-number">7.3.</span> <span class="nav-text">柱状图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E4%B8%AA%E6%9F%B1%E5%AD%90"><span class="nav-number">7.3.1.</span> <span class="nav-text">绘制多个柱子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%BD%B4%E5%88%BB%E5%BA%A6-1"><span class="nav-number">7.3.2.</span> <span class="nav-text">修改轴刻度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9x%E8%BD%B4%E5%88%BB%E5%BA%A6-1"><span class="nav-number">7.3.2.1.</span> <span class="nav-text">修改x轴刻度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9y%E8%BD%B4%E5%88%BB%E5%BA%A6-1"><span class="nav-number">7.3.2.2.</span> <span class="nav-text">修改y轴刻度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BE%E4%BE%8B-1"><span class="nav-number">7.3.3.</span> <span class="nav-text">添加图例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%E5%8F%A0%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="nav-number">7.3.4.</span> <span class="nav-text">堆叠柱状图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="nav-number">7.3.5.</span> <span class="nav-text">对称条形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E5%AD%97"><span class="nav-number">7.3.6.</span> <span class="nav-text">添加文字</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">7.4.</span> <span class="nav-text">饼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">7.5.</span> <span class="nav-text">直方图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%94%E5%9B%9E%E6%AF%8F%E4%B8%AA%E7%AE%B1%E5%AD%90%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%AA%E6%95%B0"><span class="nav-number">7.5.1.</span> <span class="nav-text">返回值返回每个箱子内的数据个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%94%E5%9B%9E%E5%AF%86%E5%BA%A6"><span class="nav-number">7.5.2.</span> <span class="nav-text">返回值返回密度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%AF%E8%AE%A1%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">7.5.3.</span> <span class="nav-text">累计直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%B1%E7%BA%BF%E5%9B%BE"><span class="nav-number">7.6.</span> <span class="nav-text">箱线图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%A0%87%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">添加标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E5%AD%97-1"><span class="nav-number">9.</span> <span class="nav-text">添加文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%A0%87%E6%B3%A8"><span class="nav-number">10.</span> <span class="nav-text">添加标注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E7%BD%91%E6%A0%BC"><span class="nav-number">11.</span> <span class="nav-text">显示网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%9B%BE%E8%A1%A8"><span class="nav-number">12.</span> <span class="nav-text">显示图表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%9B%BE%E8%A1%A8%E4%B8%BA%E6%96%87%E4%BB%B6"><span class="nav-number">13.</span> <span class="nav-text">保存图表为文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%88%B0%E6%8C%87%E5%AE%9A%E8%B7%AF%E5%BE%84%E5%92%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">13.1.</span> <span class="nav-text">保存到指定路径和文件格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E9%A2%84%E8%A7%88%E5%92%8C%E5%9B%BE%E8%A1%A8%E4%B8%BA%E6%96%87%E4%BB%B6"><span class="nav-number">13.2.</span> <span class="nav-text">同时预览和图表为文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87"><span class="nav-number">14.</span> <span class="nav-text">读取图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E8%A7%88%E5%9B%BE%E7%89%87"><span class="nav-number">15.</span> <span class="nav-text">预览图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">16.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">17.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/08/23/Matplotlib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Matplotlib学习笔记 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Matplotlib学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-23 14:44:45" itemprop="dateCreated datePublished" datetime="2024-08-23T14:44:45+00:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. Matplotlib makes easy things easy and hard things possible.（<a href="/302.html?target=https://matplotlib.org">官网</a>）</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install matplotlib</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h2><ul>
+<li>图表中默认字体不支持中文，中文会变成<code>口</code></li>
+<li>默认字体为<code>sans-serif</code></li>
+</ul>
+<h3 id="查看字体名"><a href="#查看字体名" class="headerlink" title="查看字体名"></a>查看字体名</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.matplotlib/fontlist-v330.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取对象中<code>name</code>字段的值</li>
+</ul>
+<h3 id="修改字体-1"><a href="#修改字体-1" class="headerlink" title="修改字体"></a>修改字体</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;SimHei&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定备选字体"><a href="#指定备选字体" class="headerlink" title="指定备选字体"></a>指定备选字体</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;SimHei&quot;</span>, <span class="string">&quot;Microsoft YaHei&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决修改字体后负号不显示的问题"><a href="#解决修改字体后负号不显示的问题" class="headerlink" title="解决修改字体后负号不显示的问题"></a>解决修改字体后负号不显示的问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&quot;axes.unicode_minus&quot;</span>] = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="画布"><a href="#画布" class="headerlink" title="画布"></a>画布</h2><h3 id="创建画布（figure）"><a href="#创建画布（figure）" class="headerlink" title="创建画布（figure）"></a>创建画布（figure）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>), dpi=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="坐标系（subplot）"><a href="#坐标系（subplot）" class="headerlink" title="坐标系（subplot）"></a>坐标系（subplot）</h2><ul>
+<li>将每个图表单独放到一个坐标系中</li>
+</ul>
+<h3 id="将多个坐标系按照两行一列的方式展现"><a href="#将多个坐标系按照两行一列的方式展现" class="headerlink" title="将多个坐标系按照两行一列的方式展现"></a>将多个坐标系按照两行一列的方式展现</h3><blockquote>
+<p><code>subplot()</code>：第一个参数表示行，第二个参数表示列，第三个参数表示当前图表的顺序</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br></pre></td></tr></table></figure>
+
+<h3 id="将多个坐标系按照一行两列的方式展现"><a href="#将多个坐标系按照一行两列的方式展现" class="headerlink" title="将多个坐标系按照一行两列的方式展现"></a>将多个坐标系按照一行两列的方式展现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br></pre></td></tr></table></figure>
+
+<h3 id="将多个坐标系自由合并单元格"><a href="#将多个坐标系自由合并单元格" class="headerlink" title="将多个坐标系自由合并单元格"></a>将多个坐标系自由合并单元格</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>), dpi=<span class="number">200</span>)</span><br><span class="line">gs = plt.GridSpec(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fig.add_subplot(gs[<span class="number">0</span>:<span class="number">1</span>, <span class="number">0</span>:<span class="number">1</span>])</span><br><span class="line">fig.add_subplot(gs[<span class="number">0</span>:<span class="number">1</span>, <span class="number">1</span>:<span class="number">2</span>])</span><br><span class="line">fig.add_subplot(gs[<span class="number">0</span>:<span class="number">2</span>, <span class="number">2</span>:<span class="number">3</span>])</span><br><span class="line">fig.add_subplot(gs[<span class="number">1</span>:<span class="number">2</span>, <span class="number">0</span>:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="将边框改为中心原点的平面直角坐标系"><a href="#将边框改为中心原点的平面直角坐标系" class="headerlink" title="将边框改为中心原点的平面直角坐标系"></a>将边框改为中心原点的平面直角坐标系</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">plt.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">plt.spines[<span class="string">&quot;bottom&quot;</span>].set_position(<span class="string">&quot;center&quot;</span>)</span><br><span class="line">plt.spines[<span class="string">&quot;left&quot;</span>].set_position(<span class="string">&quot;center&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改轴刻度"><a href="#修改轴刻度" class="headerlink" title="修改轴刻度"></a>修改轴刻度</h3><h4 id="修改x轴刻度"><a href="#修改x轴刻度" class="headerlink" title="修改x轴刻度"></a>修改x轴刻度</h4><blockquote>
+<p><code>labels=[]</code>：定义标签</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.xticks(np.arange(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.1</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改y轴刻度"><a href="#修改y轴刻度" class="headerlink" title="修改y轴刻度"></a>修改y轴刻度</h4><ul>
+<li>从[-1,1]，间隔0.1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.yticks(np.arange(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.1</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌套坐标系"><a href="#嵌套坐标系" class="headerlink" title="嵌套坐标系"></a>嵌套坐标系</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt_object = plt.plot(x, y)</span><br><span class="line">add_axes_object = plt_object.add_axes((&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;))</span><br><span class="line">add_axes_object.plot(x, y)</span><br></pre></td></tr></table></figure>
+
+<h2 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h2><h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><ul>
+<li>折线图用来看趋势</li>
+</ul>
+<blockquote>
+<p><code>color=&quot;black&quot;</code>、<code>color=[&quot;black&quot;, &quot;#000000&quot;]</code>：定义所有矩形颜色<br><code>linewidth=&quot;&lt;num&gt;&quot;</code>：线条粗细<br><code>linestyle=&quot;&lt;type&gt;&quot;</code>：网格线类型</p>
+<blockquote>
+<p><code>--</code>：虚线<br><code>-.</code>：点线</p>
+</blockquote>
+<p><code>marker=&quot;*&quot;</code>：在线条中添加标记</p>
+<blockquote>
+<p><code>.</code>、<code>,</code>、<code>o</code>、<code>v</code>、<code>^</code>、<code>&lt;</code>、<code>&gt;</code>、<code>1</code>、<code>2</code>、<code>3</code>、<code>4</code>、<code>s</code>、<code>p</code>、<code>*</code>、<code>h</code>、<code>H</code>、<code>+</code>、<code>x</code>、<code>D</code>、<code>d</code>、<code>|</code>、<code>_</code></p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y)</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加图例"><a href="#添加图例" class="headerlink" title="添加图例"></a>添加图例</h4><blockquote>
+<p><code>label=&quot;&quot;</code>：定义该折线的标签</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([&lt;data_x_1&gt;, &lt;data_x_2&gt;], [&lt;data_y_1&gt;, &lt;data_y_2&gt;], label=<span class="string">&quot;&quot;</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义图例位置"><a href="#定义图例位置" class="headerlink" title="定义图例位置"></a>定义图例位置</h5><blockquote>
+<p><code>loc=&quot;&quot;</code>：定义图例位置</p>
+<blockquote>
+<p><code>best</code>：缺省值，自动摆放到最佳位置<br><code>upper right</code>、<code>upper left</code>、<code>lower left</code>、<code>lower right</code>、<code>right</code>、<code>center left</code>、<code>center right</code>、<code>lower center</code>、<code>upper center</code>、<code>center</code></p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.legend(loc=<span class="string">&quot;best&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><ul>
+<li>散点图用来看两个变量的关系</li>
+<li>气泡图用来看多个变量的关系</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter([&lt;data_x_1&gt;, &lt;data_x_2&gt;], [&lt;data_y_1&gt;, &lt;data_y_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="气泡图"><a href="#气泡图" class="headerlink" title="气泡图"></a>气泡图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter([&lt;data_x_1&gt;, &lt;data_x_2&gt;], [&lt;data_y_1&gt;, &lt;data_y_2&gt;], s=np.<span class="built_in">abs</span>(y) * <span class="number">150</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="渐变色"><a href="#渐变色" class="headerlink" title="渐变色"></a>渐变色</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter([&lt;data_x_1&gt;, &lt;data_x_2&gt;], [&lt;data_y_1&gt;, &lt;data_y_2&gt;], c=y, cmap=<span class="string">&quot;Reds&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="彩虹色"><a href="#彩虹色" class="headerlink" title="彩虹色"></a>彩虹色</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter([&lt;data_x_1&gt;, &lt;data_x_2&gt;], [&lt;data_y_1&gt;, &lt;data_y_2&gt;], c=y, cmap=<span class="string">&quot;rainbow&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h3><ul>
+<li>柱状图用于对比数据</li>
+</ul>
+<blockquote>
+<p><code>width=&lt;num&gt;</code>：柱子的宽度<br><code>color=&quot;&lt;color&gt;&quot;</code>、<code>color=[&quot;&lt;color_1&gt;&quot;, &quot;&lt;color_2&gt;&quot;]</code>：柱子的颜色<br><code>alpha=0.5</code>：柱子透明度<br><code>hatch=&quot;/&quot;</code>：柱子花纹</p>
+<blockquote>
+<p><code>/</code>、<code>///</code>、<code>***</code>、<code>xxx</code></p>
+</blockquote>
+<p><code>yerr=[&lt;num_1&gt;, &lt;num_2&gt;]</code>：定义误差值，显示误差线<br><code>color=&quot;&quot;</code>：误差线颜色<br><code>capsize=&lt;num&gt;</code>：误差线帽子的尺寸</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="绘制多个柱子"><a href="#绘制多个柱子" class="headerlink" title="绘制多个柱子"></a>绘制多个柱子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>) - <span class="number">0.1</span>, [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.bar(np.arange(<span class="number">2</span>) + <span class="number">0.1</span>, [&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改轴刻度-1"><a href="#修改轴刻度-1" class="headerlink" title="修改轴刻度"></a>修改轴刻度</h4><h5 id="修改x轴刻度-1"><a href="#修改x轴刻度-1" class="headerlink" title="修改x轴刻度"></a>修改x轴刻度</h5><blockquote>
+<p><code>rotation=0</code>：旋转标签<br><code>labels=[&quot;&quot;]</code>：定义标签</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.xticks(np.arange(<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改y轴刻度-1"><a href="#修改y轴刻度-1" class="headerlink" title="修改y轴刻度"></a>修改y轴刻度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.yticks(np.arange(<span class="number">0</span>, <span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加图例-1"><a href="#添加图例-1" class="headerlink" title="添加图例"></a>添加图例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+
+<h4 id="堆叠柱状图"><a href="#堆叠柱状图" class="headerlink" title="堆叠柱状图"></a>堆叠柱状图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_3&gt;, &lt;data_4&gt;], bottom=[&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="对称条形图"><a href="#对称条形图" class="headerlink" title="对称条形图"></a>对称条形图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.bar(np.arange(<span class="number">2</span>), (-<span class="number">1</span>) * [&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加文字"><a href="#添加文字" class="headerlink" title="添加文字"></a>添加文字</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.bar(np.arange(<span class="number">2</span>), [&lt;data_1&gt;, &lt;data_2&gt;])</span><br><span class="line">plt.text(<span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;文本内容&quot;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><ul>
+<li>饼图用于看占比</li>
+</ul>
+<blockquote>
+<p><code>labels=[&quot;&quot;]</code>：定义标签<br><code>labeldistance=0.5</code>：定义标签到饼图圆心的距离<br><code>autopct=&quot;%.2f%%&quot;</code>：格式化数据<br><code>pctdistance=0.5</code>：定义数据到饼图圆心的距离<br><code>explode=[0, 0.1]</code>：定义饼图中每个块距离圆心的偏移量<br><code>shadow=True</code>：添加阴影<br><code>wedgeprops=&#123;&#125;</code>：定义为环状饼图</p>
+<blockquote>
+<p><code>&quot;width&quot;: 0.25</code>：定义圆环宽度<br><code>&quot;edgecolor&quot;: &quot;w&quot;</code>：定义分割线的颜色</p>
+</blockquote>
+<p><code>textprops=&#123;&#125;</code>：设置文字属性</p>
+<blockquote>
+<p><code>&quot;fontsize&quot;: 12</code>：设置文字字号<br><code>&quot;color&quot;: &quot;k&quot;</code>：设置文字颜色</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.pie([&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><h4 id="返回值返回每个箱子内的数据个数"><a href="#返回值返回每个箱子内的数据个数" class="headerlink" title="返回值返回每个箱子内的数据个数"></a>返回值返回每个箱子内的数据个数</h4><blockquote>
+<p><code>bins=&lt;num&gt;</code>：柱子个数<br><code>color=&quot;&quot;</code>：柱子颜色<br><code>histtype=&quot;step&quot;</code>：只显示轮廓不显示柱子</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.hist([&lt;data_1&gt;, &lt;data_2&gt;], bins=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回值返回密度"><a href="#返回值返回密度" class="headerlink" title="返回值返回密度"></a>返回值返回密度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.hist([&lt;data_1&gt;, &lt;data_2&gt;], bins=<span class="number">20</span>, density=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="累计直方图"><a href="#累计直方图" class="headerlink" title="累计直方图"></a>累计直方图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.hist([&lt;data_1&gt;, &lt;data_2&gt;], bins=<span class="number">20</span>, cumulative=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><blockquote>
+<p><code>showmeans=True</code>：显示中位数<br><code>notch=True</code>：中位数展示为小蛮腰<br><code>whis=1.5</code>：数值判定法得到离群点的系数<br><code>sym=&quot;x&quot;</code>：异常值标记</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.boxplot([&lt;data_1&gt;, &lt;data_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加标题"><a href="#添加标题" class="headerlink" title="添加标题"></a>添加标题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.title(<span class="string">&quot;文本内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加文字-1"><a href="#添加文字-1" class="headerlink" title="添加文字"></a>添加文字</h2><blockquote>
+<p><code>&lt;x&gt;</code>：指定横轴坐标<br><code>&lt;y&gt;</code>：指定纵轴坐标<br><code>fontdict=&#123;&quot;&lt;key&gt;&quot;: &lt;value&gt;&#125;</code>：设置字体</p>
+<blockquote>
+<p><code>&quot;fortsize&quot;: &lt;num&gt;</code>：指定字号<br><code>&quot;color&quot;: &quot;&lt;color&gt;&quot;</code>：指定颜色</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.text(&lt;x&gt;, &lt;y&gt;, <span class="string">&quot;文本内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加标注"><a href="#添加标注" class="headerlink" title="添加标注"></a>添加标注</h2><blockquote>
+<p><code>xytext=(&lt;x&gt;, &lt;y&gt;)</code>：文字的位置<br><code>xy=(&lt;x&gt;, &lt;y&gt;)</code>：箭头的位置<br><code>fontsize=&lt;num&gt;</code>：指定字号<br><code>arrowprops=&#123;&#125;</code>：指定箭头属性<br><code>arrowstyle</code>：指定箭头类型</p>
+<blockquote>
+<p><code>-&gt;</code>、<code>-|&gt;</code></p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.annotate(<span class="string">&quot;文本内容&quot;</span>, xytext=(&lt;x&gt;, &lt;y&gt;), xy=(&lt;x&gt;, &lt;y&gt;), arrowprops=&#123;</span><br><span class="line">    <span class="string">&quot;arrowstyle&quot;</span>: <span class="string">&quot;-&gt;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;color&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;connectionstyle&quot;</span>: <span class="string">&quot;angle3, angleA=90, angleB=0&quot;</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示网格"><a href="#显示网格" class="headerlink" title="显示网格"></a>显示网格</h2><blockquote>
+<p><code>alpha=0.5</code>：网格透明度<br><code>axis=&quot;&lt;directions&gt;&quot;</code>：网格线方向</p>
+<blockquote>
+<p><code>x</code>：只显示x轴的纵向的网格线<br><code>y</code>：只显示y轴的横向的网格线</p>
+</blockquote>
+<p><code>linestyle=&quot;&lt;type&gt;&quot;</code>：网格线类型</p>
+<blockquote>
+<p><code>--</code>：虚线<br><code>:</code>：点线</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.grid(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示图表"><a href="#显示图表" class="headerlink" title="显示图表"></a>显示图表</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存图表为文件"><a href="#保存图表为文件" class="headerlink" title="保存图表为文件"></a>保存图表为文件</h2><ul>
+<li>默认保存到当前路径</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig()</span><br></pre></td></tr></table></figure>
+
+<h3 id="保存到指定路径和文件格式"><a href="#保存到指定路径和文件格式" class="headerlink" title="保存到指定路径和文件格式"></a>保存到指定路径和文件格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">&quot;&lt;file&gt;.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">&quot;&lt;file&gt;.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">&quot;&lt;file&gt;.svg&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="同时预览和图表为文件"><a href="#同时预览和图表为文件" class="headerlink" title="同时预览和图表为文件"></a>同时预览和图表为文件</h3><ul>
+<li>要先保存到文件再显示，因为调用<code>show()</code>的时候会释放图表对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取图片"><a href="#读取图片" class="headerlink" title="读取图片"></a>读取图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imread(<span class="string">&quot;&lt;file&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是没有alpha通道的图片，读取后会得到三维数组</li>
+<li>如果是有alpha通道的图片，读取后会得到四维数组</li>
+</ul>
+<h2 id="预览图片"><a href="#预览图片" class="headerlink" title="预览图片"></a>预览图片</h2><blockquote>
+<p><code>&lt;arr&gt;</code>：三维数组</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(&lt;arr&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18S4y1H7Bg/">哔哩哔哩——骆昊jackfrued</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44940488/article/details/117328478">CSDN——简时刻</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/23/Python3%E5%88%A9%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%94%9F%E6%88%90%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="prev" title="【代码】Python3利用迭代器生成斐波那契数列">
+                  <i class="fa fa-angle-left"></i> 【代码】Python3利用迭代器生成斐波那契数列
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/23/Python3%E5%AE%9E%E7%8E%B0%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" rel="next" title="【笔记】Python3实现人脸识别">
+                  【笔记】Python3实现人脸识别 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>系统更新</title>
+  <!-- index -->
+  <style>
+    html, body, div, p, h1, h2, h3, h4, h5, h6, span, img, a, ul, li, ol, button, script, input, label {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-weight: 500;
+    }
+
+    body {
+      background-color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #000;
+      text-align: center;
+    }
+
+    html, body, .wrapper {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .center {
+      justify-content: center;
+    }
+
+    .middle {
+      align-content: center;
+      align-items: center;
+    }
+
+    body {
+      position: relative;
+    }
+
+    button {
+      background-color: #000;
+      color: #fff;
+      padding: 8px 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 3px;
+    }
+
+    .wrapper {
+      display: none;
+    }
+
+    /* 控制层 */
+    #control {
+      display: block;
+      padding-top: 20vh;
+      color: #333;
+      position: relative
+    }
+
+    .main-title {
+      margin-bottom: 10px;
+      font-weight: 600;
+      margin-bottom: 100px;
+    }
+
+    #control-btn {
+      margin-bottom: 26px;
+    }
+
+    #radio-box .fixeld-row {
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    .fixeld {
+      width: 340px;
+    }
+
+    .fixeld .flex {
+      margin-right: 10px;
+    }
+
+    .config-label {
+      width: 100px;
+    }
+
+    #radio-box input, #radio-box label {
+      padding-left: 8px;
+      cursor: pointer;
+    }
+
+    .explain {
+      padding-top: 20px;
+      color: #6d6d6d;
+      line-height: 30px;
+      font-size: 13px;
+    }
+
+    .explain p {
+      text-align: center;
+    }
+
+    .explain a {
+      padding-top: 20px;
+      color: #6d6d6d;
+      line-height: 30px;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .github-box {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background-color: #2c2c2c;
+      right: -74px;
+      top: -74px;
+      transform: rotate(45deg);
+    }
+
+    .github-box:hover {
+      background-color: #4c4c4c;
+    }
+
+    .github-box a {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      align-content: flex-end;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hidden-cursor {
+      width: 100%;
+      height: 15vh;
+      bottom: 0;
+      z-index: 2;
+      position: absolute;
+      cursor: none;
+    }
+
+    .ipc-info {
+      /* padding-top: 10vh; */
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      z-index: 3;
+    }
+
+    .ipc-info a {
+      color: #9a9a9a;
+      font-size: 12px;
+    }
+  </style>
+  <!-- Windows -->
+  <style>
+    /* windows界面层 */
+    #windows {
+      font-size: 16px;
+    }
+
+    .loading {
+      padding-top: 25vh;
+      height: calc(100% - 15vh);
+    }
+
+    .loading:hover #control-btn {
+      visibility: visible !important;
+    }
+
+    .loading-content {
+      color: #fff;
+      letter-spacing: 1px;
+      padding-top: 40px;
+    }
+
+    .prog-row {
+      margin-bottom: 4px;
+    }
+
+    .prog-row > div {
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 20px;
+    }
+
+    .prog-pancel {
+      width: 36px;
+      text-align: right;
+    }
+
+    #footer-tips {
+      width: 100%;
+      height: 15vh;
+      color: #fff;
+    }
+
+    .loading .loading-icon {
+      margin: auto;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+
+    .loading-icon span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    .loading-icon span:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 6px;
+      height: 6px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
+    .loading-icon span:nth-child(1) {
+      animation: i1 5.5s 0.2s infinite;
+    }
+
+    .loading-icon span:nth-child(2) {
+      animation: i2 5.5s 0.4s infinite;
+    }
+
+    .loading-icon span:nth-child(3) {
+      animation: i3 5.5s 0.6s infinite;
+    }
+
+    .loading-icon span:nth-child(4) {
+      animation: i4 5.5s 0.8s infinite;
+    }
+
+    .loading-icon span:nth-child(5) {
+      animation: i5 5.5s 1s infinite;
+    }
+
+    .loading-icon span:nth-child(6) {
+      animation: i6 5.5s 1.2s infinite;
+    }
+
+    @keyframes i1 {
+      0% {
+        opacity: 1;
+        transform: rotate(190deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(920deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(930deg);
+      }
+    }
+
+    @keyframes i2 {
+      0% {
+        opacity: 1;
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(910deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(920deg);
+      }
+    }
+
+    @keyframes i3 {
+      0% {
+        opacity: 1;
+        transform: rotate(170deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(900deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(910deg);
+      }
+    }
+
+    @keyframes i4 {
+      0% {
+        opacity: 1;
+        transform: rotate(160deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(890deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(900deg);
+      }
+    }
+
+    @keyframes i5 {
+      0% {
+        opacity: 1;
+        transform: rotate(150deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(880deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(880deg);
+      }
+    }
+
+    @keyframes i6 {
+      0% {
+        opacity: 1;
+        transform: rotate(140deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+      68% {
+        opacity: 1;
+        transform: rotate(870deg);
+        animation-timing-function: ease-in;
+      }
+      69% {
+        opacity: 0;
+        transform: rotate(880deg);
+      }
+    }
+  </style>
+  <!-- MacOS -->
+  <style>
+    .mac-box {
+      height: 100%;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
+      padding-bottom: 0vh;
+    }
+
+    .mac-box > div {
+      width: 100%;
+    }
+
+    .mac-prog-box {
+      display: flex;
+      justify-content: center;
+      padding-top: 60px;
+      padding-bottom: 20px;
+    }
+
+    .mac-logo-box img {
+      width: 110px;
+      height: auto;
+    }
+
+    .max-prog {
+      width: 300px;
+      /* min-width: 300px; */
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      background-color: #262626;
+      border: 1px solid #333333;
+    }
+
+    #prog-bar {
+      background-color: #ccccccff;
+      width: 0%;
+      max-width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      /* box-shadow: 0 0 5px #fff; */
+      transition: width .5s;
+    }
+  </style>
+  <!-- mobile -->
+  <style>
+    /* mobile界面层 */
+    #mobile-tips {
+      margin-top: 20vh;
+      font-size: .8rem;
+      display: none;
+    }
+
+    #mobile-tips h3 {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: .8rem;
+    }
+  </style>
+
+</head>
+
+<body>
+<!-- 移动端提示 -->
+<div id="mobile-tips" class="wrapper">
+  <!--  <h3>休息片刻</h3>-->
+  <!--  <h4>让你的电脑看起来在更新</h4>-->
+  <p style="margin-top: 30px;color: #888;font-size: 12px;">暂不支持移动端，请使用PC访问</p>
+</div>
+
+
+<!-- 控制部分 -->
+<div id="control" class="wrapper">
+  <!--  <h3 class="main-title">休息片刻，让你的电脑看起来在更新</h3>-->
+  <button id="control-btn">更新</button>
+  <div id="radio-box">
+    <div class="fixeld-row flex center">
+      <div class="flex middle fixeld">
+        <div class="config-label">更新界面：</div>
+        <div class="flex middle">
+          <input name="wrapperId" type="radio" value="" id="radio-auto" checked="true"><label
+            for="radio-auto">自动</label>
+        </div>
+        <div class="flex middle">
+          <input name="wrapperId" type="radio" value="windows" id="radio-windows"><label
+            for="radio-windows">windows</label>
+        </div>
+        <div class="flex middle">
+          <input name="wrapperId" type="radio" value="mac" id="radio-mac"><label for="radio-mac">Mac</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixeld-row flex center">
+      <div class="flex middle fixeld">
+        <div class="config-label">更新时长：</div>
+        <div class="flex middle">
+          <input name="updateDuration" type="radio" value="30" id="30-min" checked="true"><label
+            for="30-min">30分钟</label>
+        </div>
+        <div class="flex middle">
+          <input name="updateDuration" type="radio" value="15" id="15-min"><label for="15-min">10分钟</label>
+        </div>
+        <div class="flex middle">
+          <input name="updateDuration" type="radio" value="5" id="5-min"><label for="5-min">5分钟</label>
+        </div>
+        <!-- <div class="flex middle">
+          <input name="updateDuration" type="radio" value="60" id="60-min"><label for="60-min">60分钟</label>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="fixeld-row flex center">
+      <div class="flex middle fixeld">
+        <div class="config-label">副屏模式：</div>
+        <div class="flex middle">
+          <input name="viceScreen" type="radio" value="off" id="vice-off" checked="true"><label
+            for="vice-off">关闭</label>
+        </div>
+        <div class="flex middle">
+          <input name="viceScreen" type="radio" value="on" id="vice-on"><label for="vice-on">开启</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="explain">
+    <p>鼠标移入底部可以隐藏</p>
+    <p>退出更新：ESC</p>
+    <p><a href="https://github.com/nijun008/sit_back">nijun008 / sit_back</a></p>
+  </div>
+
+</div>
+
+<!-- windows -->
+<div id="windows" class="wrapper">
+  <div>
+    <div class="loading">
+      <div style="padding-right: 40px;">
+        <div class="loading-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="loading-content">
+        <div class="prog-row">
+          <div>正在进行更新</div>
+          <div class="prog-pancel">
+            <span id="prog">0</span>%
+          </div>
+        </div>
+        <div class="">请保持计算机打开状态</div>
+      </div>
+    </div>
+    <div id="footer-tips">计算机可能会重启几次</div>
+  </div>
+</div>
+
+<!-- Mac -->
+<div id="mac" class="wrapper">
+  <div class="mac-box">
+    <div class="mac-logo-box">
+      <img
+          src="data:image/png;base64,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">
+    </div>
+    <div class="mac-prog-box">
+      <div class="max-prog">
+        <div id="prog-bar"></div>
+      </div>
+    </div>
+
+    <div class="mac-text">此更新需要几分钟时间完成，且屏幕将变暗长达一分钟。</div>
+
+  </div>
+</div>
+
+<!-- TODO IOS -->
+<div class="wrapper"></div>
+
+<!-- TODO Android -->
+<div class="wrapper"></div>
+
+<div class="hidden-cursor"></div>
+
+<script>
+
+  var config = {
+    updateDuration: 60,             // 更新完成时间 单位：分钟
+    completedExit: false,           // 更新完成是否退出
+    initProg: 5,                    // 初始进度
+    wrapperId: '',                  // 更新界面容器id
+    viceScreen: 'off'               // 副屏模式
+  }
+
+  window.onload = () => {
+    if (isMobile()) {
+      document.getElementById('control').style.display = 'none'
+      document.getElementById('mobile-tips').style.display = 'block'
+    } else {
+      var update = new Update(config)
+      var radioParent = document.getElementById('radio-box')
+      radioParent.addEventListener('click', function (e) {
+        var el = e.target
+        var tagName = el.tagName.toLowerCase()
+        if (tagName === 'input') {
+          config[el.name] = el.value
+          update.setUiWrapper()
+        }
+      })
+    }
+  }
+
+  function isMobile() {
+    var userAgent = navigator.userAgent, Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"]
+    return Agents.some((i) => {
+      return userAgent.includes(i)
+    })
+  }
+
+  function isMac() {
+    return navigator.userAgent.toLowerCase().indexOf('mac') > -1
+  }
+
+  /**
+   * @param { object } config 配置
+   */
+  class Update {
+
+    constructor(options) {
+      const {completedExit = false, initProg = 1} = options
+      this.defaultWrapper = isMac() ? 'mac' : 'windows'
+
+      this.completedExit = completedExit
+      this.initProg = initProg  // 初始进度
+      this.prog = initProg      // 当前进度
+      this.progTimer = null     // 更新定时器
+      this.controlWrapper = document.getElementById('control')  // 控制层
+      this.cursorEl = document.getElementById('footer-tips')    // 鼠标el
+      this.progEl = document.getElementById('prog')             // windows进度el
+      this.progBar = document.getElementById('prog-bar')        // mac进度条el
+
+      this.controlEl = document.getElementById('control-btn')   // 控制el
+      this.setUiWrapper()
+
+      this.controlEl.addEventListener('click', () => {
+        if (this.isFullScreen()) {
+          this.exitUpdate()
+        } else {
+          this.enterUpdate()
+        }
+      })
+
+      window.onresize = () => {
+        var isFull = this.isFullScreen()
+        if (isFull) {
+          this.enterUpdate()
+        } else {
+          this.exitUpdate()
+        }
+      }
+    }
+
+    exitUpdate() {
+      switch (config.viceScreen) {
+        case 'off':
+          this.init()
+          break
+        case 'on':
+          this.showWrapper()
+        default:
+          break
+      }
+    }
+
+    enterUpdate() {
+      switch (config.viceScreen) {
+        case 'off':
+          this.startUpdate()
+          break
+        case 'on':
+          this.hideWrapper()
+        default:
+          break
+      }
+    }
+
+    hideWrapper() {
+      document.body.style.backgroundColor = '#000'
+      this.controlWrapper.style.display = 'none'
+      if (!this.isFullScreen()) {
+        this.fullScreen()
+      }
+    }
+
+    showWrapper() {
+      document.body.style.backgroundColor = '#fff'
+      this.controlWrapper.style.display = 'block'
+      if (this.isFullScreen()) {
+        this.exitFullscreen()
+      }
+    }
+
+    setUiWrapper() {
+      this.uiWrapper = document.getElementById(config.wrapperId || this.defaultWrapper)
+    }
+
+    // 初始化
+    init() {
+      clearInterval(this.progTimer)
+      document.body.style.backgroundColor = '#fff'
+      this.prog = this.initProg
+      this.progEl.innerHTML = this.prog
+      this.progBar.style.width = this.prog + '%'
+      this.controlEl.innerHTML = '更 新'
+      this.cursorEl.style.cursor = 'default'
+      this.uiWrapper.style.display = 'none'
+      this.controlWrapper.style.display = 'block'
+
+      this.controlEl.style.visibility = 'visible'
+
+      if (this.isFullScreen()) {
+        this.exitFullscreen()
+      }
+    }
+
+    // 开始
+    startUpdate() {
+      if (!this.isFullScreen()) {
+        this.fullScreen()
+      }
+      document.body.style.backgroundColor = '#000'
+      this.controlEl.innerHTML = '结 束'
+      this.cursorEl.style.cursor = 'none'
+
+      this.controlWrapper.style.display = 'none'
+      this.uiWrapper.style.display = 'block'
+      this.controlEl.style.visibility = 'hidden'
+      this.progEl.innerHTML = this.prog
+      this.progBar.style.width = this.prog + '%'
+
+      clearInterval(this.progTimer)
+      this.progTimer = setInterval(() => {
+        this.prog++
+        if (this.prog >= 100) {
+          this.prog = this.initProg
+          if (this.completedExit) {
+            clearInterval(this.progTimer)
+            this.exitFullscreen()
+            return
+          }
+        }
+        this.progEl.innerHTML = this.prog
+        this.progBar.style.width = this.prog + '%'
+      }, Math.ceil(config.updateDuration * 60 * 1000 / 100))
+    }
+
+    // 进入全屏
+    fullScreen(ele) {
+      var element = ele || document.body
+      if (element.requestFullscreen) {
+        element.requestFullscreen()
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen()
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen()
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen()
+      }
+    }
+
+    // 退出全屏
+    exitFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen()
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen()
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen()
+      }
+    }
+
+    // 是否全屏
+    isFullScreen() {
+      return !!(
+          document.fullscreen ||
+          document.mozFullScreen ||
+          document.webkitIsFullScreen ||
+          document.webkitFullScreen ||
+          document.msFullScreen ||
+          (document.body.clientHeight === window.screen.height)
+      )
+    }
+  }
+
+</script>
+</body>
+</html>

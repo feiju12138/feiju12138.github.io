@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/10/28/Python3%E6%93%8D%E4%BD%9Cpptx/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/10/28/Python3%E6%93%8D%E4%BD%9Cpptx/","path":"2023/10/28/Python3操作pptx/","title":"【笔记】Python3操作pptx"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Python3操作pptx | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E5%B7%B2%E6%9C%89%E7%9A%84pptx%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">打开一个已有的pptx文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E5%B8%A7%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">通过文件对象获取帧对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%B8%A7%E5%88%97%E8%A1%A8"><span class="nav-number">5.1.</span> <span class="nav-text">获取所有帧列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B8%A7%E7%9A%84%E4%B8%AA%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">获取帧的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%B8%A7"><span class="nav-number">5.3.</span> <span class="nav-text">获取指定帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%B8%A7"><span class="nav-number">5.4.</span> <span class="nav-text">遍历所有帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%B8%A7%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">通过帧对象获取样式对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%A0%B7%E5%BC%8F%E5%88%97%E8%A1%A8"><span class="nav-number">6.1.</span> <span class="nav-text">获取所有样式列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%B7%E5%BC%8F%E4%B8%AA%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">获取样式个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E6%A0%B7%E5%BC%8F"><span class="nav-number">6.3.</span> <span class="nav-text">获取指定样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E6%A0%B7%E5%BC%8F"><span class="nav-number">6.4.</span> <span class="nav-text">遍历所有样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E5%A1%AB%E5%85%85%E8%83%8C%E6%99%AF%E8%89%B2"><span class="nav-number">6.5.</span> <span class="nav-text">通过样式对象填充背景色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC%E6%A1%86"><span class="nav-number">6.6.</span> <span class="nav-text">通过样式对象绘制文本框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E6%A1%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.</span> <span class="nav-text">通过样式对象获取文本框对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%96%87%E6%9C%AC%E6%A1%86"><span class="nav-number">7.1.</span> <span class="nav-text">判断是否存在文本框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E6%A1%86"><span class="nav-number">7.2.</span> <span class="nav-text">获取文本框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E6%9C%AC%E6%A1%86%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">7.3.</span> <span class="nav-text">通过文本框对象获取文本内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E6%9C%AC%E6%A1%86%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%AE%B5%E8%90%BD%E5%AF%B9%E8%B1%A1"><span class="nav-number">8.</span> <span class="nav-text">通过文本框对象获取段落对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%9A%84%E6%AE%B5%E8%90%BD%E5%88%97%E8%A1%A8"><span class="nav-number">8.1.</span> <span class="nav-text">获取所有的段落列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%AE%B5%E8%90%BD%E4%B8%AA%E6%95%B0"><span class="nav-number">8.2.</span> <span class="nav-text">获取段落个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E6%AE%B5%E8%90%BD"><span class="nav-number">8.3.</span> <span class="nav-text">遍历所有段落</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%AE%B5%E8%90%BD%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%AF%B9%E8%B1%A1"><span class="nav-number">9.</span> <span class="nav-text">通过段落对象获取文本对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">9.1.</span> <span class="nav-text">获取文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">9.2.</span> <span class="nav-text">修改文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%87%E5%AD%97%E5%B1%9E%E6%80%A7"><span class="nav-number">9.3.</span> <span class="nav-text">设置文字属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">9.3.1.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%8F%B7"><span class="nav-number">9.3.2.</span> <span class="nav-text">字号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E9%A2%9C%E8%89%B2"><span class="nav-number">9.3.3.</span> <span class="nav-text">文字颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E7%B2%97"><span class="nav-number">9.3.4.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%9C%E4%BD%93"><span class="nav-number">9.3.5.</span> <span class="nav-text">斜体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="nav-number">9.3.6.</span> <span class="nav-text">下划线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%AE%B5%E8%90%BD%E5%B1%9E%E6%80%A7"><span class="nav-number">9.4.</span> <span class="nav-text">设置段落属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E9%97%B4%E8%B7%9D"><span class="nav-number">9.4.1.</span> <span class="nav-text">行间距</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5%E8%90%BD%E5%89%8D%E9%9D%A2%E7%9A%84%E7%A9%BA%E7%99%BD"><span class="nav-number">9.4.2.</span> <span class="nav-text">段落前面的空白</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5%E8%90%BD%E5%89%8D%E9%9D%A2%E7%9A%84%E7%A9%BA%E7%99%BD-1"><span class="nav-number">9.4.3.</span> <span class="nav-text">段落前面的空白</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5%E8%90%BD%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">9.4.4.</span> <span class="nav-text">段落对齐方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%AE%B5%E8%90%BD%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%9D%97%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.</span> <span class="nav-text">通过段落对象获取文本块对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%96%87%E6%9C%AC%E5%9D%97%E5%88%97%E8%A1%A8"><span class="nav-number">10.1.</span> <span class="nav-text">获取所有文本块列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%9D%97%E4%B8%AA%E6%95%B0"><span class="nav-number">10.2.</span> <span class="nav-text">获取文本块个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E6%96%87%E6%9C%AC%E5%9D%97"><span class="nav-number">10.3.</span> <span class="nav-text">遍历所有文本块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9-1"><span class="nav-number">10.4.</span> <span class="nav-text">获取文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9-1"><span class="nav-number">10.5.</span> <span class="nav-text">修改文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%87%E5%AD%97%E5%B1%9E%E6%80%A7-1"><span class="nav-number">10.6.</span> <span class="nav-text">设置文字属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93-1"><span class="nav-number">10.6.1.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%8F%B7-1"><span class="nav-number">10.6.2.</span> <span class="nav-text">字号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E9%A2%9C%E8%89%B2-1"><span class="nav-number">10.6.3.</span> <span class="nav-text">文字颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E7%B2%97-1"><span class="nav-number">10.6.4.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%9C%E4%BD%93-1"><span class="nav-number">10.6.5.</span> <span class="nav-text">斜体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E5%88%92%E7%BA%BF-1"><span class="nav-number">10.6.6.</span> <span class="nav-text">下划线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E6%9C%AC%E6%A1%86%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E5%AF%B9%E8%B1%A1"><span class="nav-number">11.</span> <span class="nav-text">通过文本框对象获取图片对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%9B%BE%E7%89%87"><span class="nav-number">11.1.</span> <span class="nav-text">判断是否是图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="nav-number">11.2.</span> <span class="nav-text">获取图片二进制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%9B%BE%E7%89%87%E4%B8%BA%E6%96%87%E4%BB%B6"><span class="nav-number">11.2.1.</span> <span class="nav-text">保存图片为文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E6%89%A9%E5%B1%95%E5%90%8D"><span class="nav-number">11.3.</span> <span class="nav-text">获取图片扩展名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F"><span class="nav-number">11.4.</span> <span class="nav-text">获取图片大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%AE%B5%E8%90%BD%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.</span> <span class="nav-text">通过段落对象获取表格对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E8%A1%A8%E6%A0%BC"><span class="nav-number">12.1.</span> <span class="nav-text">判断是否是表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.2.</span> <span class="nav-text">获取表格对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%A1%A8%E6%A0%BC%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E8%A1%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.3.</span> <span class="nav-text">通过表格对象获取所有行对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%8C%E5%AF%B9%E8%B1%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">12.4.</span> <span class="nav-text">获取行对象个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E8%A1%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.5.</span> <span class="nav-text">遍历所有行对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%A1%8C%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.6.</span> <span class="nav-text">通过行对象获取所有单元格对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC%E5%AF%B9%E8%B1%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">12.7.</span> <span class="nav-text">获取所有单元格对象个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC%E5%AF%B9%E8%B1%A1"><span class="nav-number">12.8.</span> <span class="nav-text">遍历所有单元格对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8D%95%E5%85%83%E6%A0%BC%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC"><span class="nav-number">12.9.</span> <span class="nav-text">通过单元格对象获取文本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E6%A8%A1%E6%9D%BF%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">13.</span> <span class="nav-text">通过文件对象获取模板样式对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%A8%A1%E6%9D%BF%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">13.1.</span> <span class="nav-text">获取所有模板样式对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%A8%A1%E7%89%88%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">13.2.</span> <span class="nav-text">获取模版样式对象个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%A8%A1%E7%89%88%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">13.3.</span> <span class="nav-text">遍历模版样式对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%A8%A1%E7%89%88%E6%A0%B7%E5%BC%8F%E5%90%8D%E7%A7%B0"><span class="nav-number">13.4.</span> <span class="nav-text">获取模版样式名称</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%B8%A7%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.</span> <span class="nav-text">通过帧对象获取占位符对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.1.</span> <span class="nav-text">获取所有占位符对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">14.2.</span> <span class="nav-text">获取占位符对象个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.3.</span> <span class="nav-text">遍历所有占位符对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%90%8D"><span class="nav-number">14.4.</span> <span class="nav-text">通过占位符对象获取占位符名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E7%B4%A2%E5%BC%95"><span class="nav-number">14.5.</span> <span class="nav-text">获取占位符索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E7%B1%BB%E5%9E%8B"><span class="nav-number">14.6.</span> <span class="nav-text">获取占位符类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BB%E7%81%AF%E7%89%87%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E7%9A%84%E5%86%99%E5%85%A5"><span class="nav-number">15.</span> <span class="nav-text">幻灯片文本内容的写入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%AF%B9%E8%B1%A1%E5%86%99%E5%85%A5%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">15.1.</span> <span class="nav-text">通过占位符对象写入文本数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E6%9C%AC%E6%A1%86%E5%AF%B9%E8%B1%A1%E5%86%99%E5%85%A5%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">15.2.</span> <span class="nav-text">通过文本框对象写入文本数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E5%86%99%E5%85%A5%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="nav-number">15.3.</span> <span class="nav-text">通过样式对象写入表格数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%A1%A8%E6%A0%BC%E5%AF%B9%E8%B1%A1%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">15.4.</span> <span class="nav-text">通过表格对象修改数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BB%E7%81%AF%E7%89%87%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%E7%9A%84%E5%86%99%E5%85%A5"><span class="nav-number">16.</span> <span class="nav-text">幻灯片图片内容的写入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E5%86%99%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE"><span class="nav-number">16.1.</span> <span class="nav-text">通过样式对象写入图片数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BB%E7%81%AF%E7%89%87%E5%9B%BE%E8%A1%A8%E5%86%85%E5%AE%B9%E7%9A%84%E5%86%99%E5%85%A5"><span class="nav-number">17.</span> <span class="nav-text">幻灯片图表内容的写入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E5%AF%B9%E8%B1%A1%E5%86%99%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE-1"><span class="nav-number">17.1.</span> <span class="nav-text">通过样式对象写入图片数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">17.1.1.</span> <span class="nav-text">饼图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E4%BF%9D%E5%AD%98%E4%B8%BA%E6%96%87%E4%BB%B6"><span class="nav-number">18.</span> <span class="nav-text">通过文件对象保存为文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">19.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">20.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/10/28/Python3%E6%93%8D%E4%BD%9Cpptx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Python3操作pptx | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Python3操作pptx
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-28 16:07:16" itemprop="dateCreated datePublished" datetime="2023-10-28T16:07:16+00:00">2023-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python3通过<code>python-pptx</code>操作pptx实现办公自动化</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install python-pptx</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx <span class="keyword">import</span> Presentation</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开一个已有的pptx文档"><a href="#打开一个已有的pptx文档" class="headerlink" title="打开一个已有的pptx文档"></a>打开一个已有的pptx文档</h2><blockquote>
+<p><code>&lt;file&gt;.pptx</code>：指定已存在的文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presentation = Presentation(<span class="string">&quot;&lt;file&gt;.pptx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过文件对象获取帧对象"><a href="#通过文件对象获取帧对象" class="headerlink" title="通过文件对象获取帧对象"></a>通过文件对象获取帧对象</h2><h3 id="获取所有帧列表"><a href="#获取所有帧列表" class="headerlink" title="获取所有帧列表"></a>获取所有帧列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slide_list = presentation.slides</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取帧的个数"><a href="#获取帧的个数" class="headerlink" title="获取帧的个数"></a>获取帧的个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(slide_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取指定帧"><a href="#获取指定帧" class="headerlink" title="获取指定帧"></a>获取指定帧</h3><blockquote>
+<p><code>&lt;index&gt;</code>：帧下标</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slide_list[&lt;index&gt;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有帧"><a href="#遍历所有帧" class="headerlink" title="遍历所有帧"></a>遍历所有帧</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> slide <span class="keyword">in</span> slide_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过帧对象获取样式对象"><a href="#通过帧对象获取样式对象" class="headerlink" title="通过帧对象获取样式对象"></a>通过帧对象获取样式对象</h2><h3 id="获取所有样式列表"><a href="#获取所有样式列表" class="headerlink" title="获取所有样式列表"></a>获取所有样式列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shape_list = slide.shapes</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取样式个数"><a href="#获取样式个数" class="headerlink" title="获取样式个数"></a>获取样式个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(shape_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取指定样式"><a href="#获取指定样式" class="headerlink" title="获取指定样式"></a>获取指定样式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shape_list[&lt;index&gt;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有样式"><a href="#遍历所有样式" class="headerlink" title="遍历所有样式"></a>遍历所有样式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> shape <span class="keyword">in</span> shape_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过样式对象填充背景色"><a href="#通过样式对象填充背景色" class="headerlink" title="通过样式对象填充背景色"></a>通过样式对象填充背景色</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.dml.color <span class="keyword">import</span> RGBColor</span><br><span class="line"></span><br><span class="line">fill = shape.fill</span><br><span class="line">fill.solid()</span><br><span class="line">fill.fore_color.rgb = RGBColor(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过样式对象绘制文本框"><a href="#通过样式对象绘制文本框" class="headerlink" title="通过样式对象绘制文本框"></a>通过样式对象绘制文本框</h3><ul>
+<li>设置文本框颜色和文本框粗细</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"><span class="keyword">from</span> pptx.dml.color <span class="keyword">import</span> RGBColor</span><br><span class="line"></span><br><span class="line">line = shape.line</span><br><span class="line">line.color.rgb = RGBColor(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br><span class="line">line.width = Cm(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过样式对象获取文本框对象"><a href="#通过样式对象获取文本框对象" class="headerlink" title="通过样式对象获取文本框对象"></a>通过样式对象获取文本框对象</h2><h3 id="判断是否存在文本框"><a href="#判断是否存在文本框" class="headerlink" title="判断是否存在文本框"></a>判断是否存在文本框</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exist = shape.has_text_frame</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取文本框"><a href="#获取文本框" class="headerlink" title="获取文本框"></a>获取文本框</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text_frame = shape.text_frame</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过文本框对象获取文本内容"><a href="#通过文本框对象获取文本内容" class="headerlink" title="通过文本框对象获取文本内容"></a>通过文本框对象获取文本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text_frame.text</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过文本框对象获取段落对象"><a href="#通过文本框对象获取段落对象" class="headerlink" title="通过文本框对象获取段落对象"></a>通过文本框对象获取段落对象</h2><h3 id="获取所有的段落列表"><a href="#获取所有的段落列表" class="headerlink" title="获取所有的段落列表"></a>获取所有的段落列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph_list = shape.text_frame.paragraphs</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取段落个数"><a href="#获取段落个数" class="headerlink" title="获取段落个数"></a>获取段落个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(paragraph_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有段落"><a href="#遍历所有段落" class="headerlink" title="遍历所有段落"></a>遍历所有段落</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> paragraph <span class="keyword">in</span> paragraph_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过段落对象获取文本对象"><a href="#通过段落对象获取文本对象" class="headerlink" title="通过段落对象获取文本对象"></a>通过段落对象获取文本对象</h2><h3 id="获取文本内容"><a href="#获取文本内容" class="headerlink" title="获取文本内容"></a>获取文本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.text</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文本内容"><a href="#修改文本内容" class="headerlink" title="修改文本内容"></a>修改文本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.text = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置文字属性"><a href="#设置文字属性" class="headerlink" title="设置文字属性"></a>设置文字属性</h3><h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><ul>
+<li>通过字体名定义字体</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.font.name = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字号"><a href="#字号" class="headerlink" title="字号"></a>字号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Pt</span><br><span class="line"></span><br><span class="line">paragraph.font.size = Pt(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h4><blockquote>
+<p><code>RGBColor(&lt;red&gt;, &lt;green&gt;, &lt;blue&gt;)</code>：设置RGB颜色，每个颜色的取值范围为0~255</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.dml.color <span class="keyword">import</span> RGBColor</span><br><span class="line"></span><br><span class="line">paragraph.font.color.rgb = RGBColor(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.font.bold = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.font.italic = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paragraph.font.underline = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置段落属性"><a href="#设置段落属性" class="headerlink" title="设置段落属性"></a>设置段落属性</h3><h4 id="行间距"><a href="#行间距" class="headerlink" title="行间距"></a>行间距</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line">paragraph.line_space = Cm(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="段落前面的空白"><a href="#段落前面的空白" class="headerlink" title="段落前面的空白"></a>段落前面的空白</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line">paragraph.space_before = Cm(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="段落前面的空白-1"><a href="#段落前面的空白-1" class="headerlink" title="段落前面的空白"></a>段落前面的空白</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line">paragraph.space_after = Cm(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="段落对齐方式"><a href="#段落对齐方式" class="headerlink" title="段落对齐方式"></a>段落对齐方式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.enum.text <span class="keyword">import</span> PP_PARAGRAPH_ALIGNMENT</span><br><span class="line"></span><br><span class="line">paragraph.alignment = PP_PARAGRAPH_ALIGNMENT.LEFT</span><br><span class="line">paragraph.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER</span><br><span class="line">paragraph.alignment = PP_PARAGRAPH_ALIGNMENT.RIGHT</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过段落对象获取文本块对象"><a href="#通过段落对象获取文本块对象" class="headerlink" title="通过段落对象获取文本块对象"></a>通过段落对象获取文本块对象</h2><h3 id="获取所有文本块列表"><a href="#获取所有文本块列表" class="headerlink" title="获取所有文本块列表"></a>获取所有文本块列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run_list = paragraph.runs</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取文本块个数"><a href="#获取文本块个数" class="headerlink" title="获取文本块个数"></a>获取文本块个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(run_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有文本块"><a href="#遍历所有文本块" class="headerlink" title="遍历所有文本块"></a>遍历所有文本块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> run <span class="keyword">in</span> run_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取文本内容-1"><a href="#获取文本内容-1" class="headerlink" title="获取文本内容"></a>获取文本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.text</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文本内容-1"><a href="#修改文本内容-1" class="headerlink" title="修改文本内容"></a>修改文本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.text = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置文字属性-1"><a href="#设置文字属性-1" class="headerlink" title="设置文字属性"></a>设置文字属性</h3><h4 id="字体-1"><a href="#字体-1" class="headerlink" title="字体"></a>字体</h4><ul>
+<li>通过字体名定义字体</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.font.name = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字号-1"><a href="#字号-1" class="headerlink" title="字号"></a>字号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Pt</span><br><span class="line"></span><br><span class="line">run.font.size = Pt(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="文字颜色-1"><a href="#文字颜色-1" class="headerlink" title="文字颜色"></a>文字颜色</h4><blockquote>
+<p><code>RGBColor(&lt;red&gt;, &lt;green&gt;, &lt;blue&gt;)</code>：设置RGB颜色，每个颜色的取值范围为0~255</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.dml.color <span class="keyword">import</span> RGBColor</span><br><span class="line"></span><br><span class="line">run.font.color.rgb = RGBColor(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="加粗-1"><a href="#加粗-1" class="headerlink" title="加粗"></a>加粗</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.font.bold = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="斜体-1"><a href="#斜体-1" class="headerlink" title="斜体"></a>斜体</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.font.italic = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="下划线-1"><a href="#下划线-1" class="headerlink" title="下划线"></a>下划线</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run.font.underline = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过文本框对象获取图片对象"><a href="#通过文本框对象获取图片对象" class="headerlink" title="通过文本框对象获取图片对象"></a>通过文本框对象获取图片对象</h2><h3 id="判断是否是图片"><a href="#判断是否是图片" class="headerlink" title="判断是否是图片"></a>判断是否是图片</h3><ul>
+<li>通过捕获异常来判断文本框内是否是图片，如果不是图片会抛出异常</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    image = shape.image</span><br><span class="line">except:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取图片二进制"><a href="#获取图片二进制" class="headerlink" title="获取图片二进制"></a>获取图片二进制</h3><ul>
+<li>用于保存图片为文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blob = image.blob</span><br></pre></td></tr></table></figure>
+
+<h4 id="保存图片为文件"><a href="#保存图片为文件" class="headerlink" title="保存图片为文件"></a>保存图片为文件</h4><ul>
+<li>如果图片文件名相同会被覆盖</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">blob = image.blob</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&quot;img.<span class="subst">&#123;image.ext&#125;</span>&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(blob)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取图片扩展名"><a href="#获取图片扩展名" class="headerlink" title="获取图片扩展名"></a>获取图片扩展名</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ext = image.ext</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取图片大小"><a href="#获取图片大小" class="headerlink" title="获取图片大小"></a>获取图片大小</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size = image.size</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过段落对象获取表格对象"><a href="#通过段落对象获取表格对象" class="headerlink" title="通过段落对象获取表格对象"></a>通过段落对象获取表格对象</h2><h3 id="判断是否是表格"><a href="#判断是否是表格" class="headerlink" title="判断是否是表格"></a>判断是否是表格</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shape.has_table</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取表格对象"><a href="#获取表格对象" class="headerlink" title="获取表格对象"></a>获取表格对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table = shape.table</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过表格对象获取所有行对象"><a href="#通过表格对象获取所有行对象" class="headerlink" title="通过表格对象获取所有行对象"></a>通过表格对象获取所有行对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">row_list = table.rows</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取行对象个数"><a href="#获取行对象个数" class="headerlink" title="获取行对象个数"></a>获取行对象个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(row_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有行对象"><a href="#遍历所有行对象" class="headerlink" title="遍历所有行对象"></a>遍历所有行对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> row_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过行对象获取所有单元格对象"><a href="#通过行对象获取所有单元格对象" class="headerlink" title="通过行对象获取所有单元格对象"></a>通过行对象获取所有单元格对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell_list = row.cells</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取所有单元格对象个数"><a href="#获取所有单元格对象个数" class="headerlink" title="获取所有单元格对象个数"></a>获取所有单元格对象个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(cell_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有单元格对象"><a href="#遍历所有单元格对象" class="headerlink" title="遍历所有单元格对象"></a>遍历所有单元格对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> cell <span class="keyword">in</span> cell_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过单元格对象获取文本"><a href="#通过单元格对象获取文本" class="headerlink" title="通过单元格对象获取文本"></a>通过单元格对象获取文本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.text</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过文件对象获取模板样式对象"><a href="#通过文件对象获取模板样式对象" class="headerlink" title="通过文件对象获取模板样式对象"></a>通过文件对象获取模板样式对象</h2><h3 id="获取所有模板样式对象"><a href="#获取所有模板样式对象" class="headerlink" title="获取所有模板样式对象"></a>获取所有模板样式对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slide_layout_list = presentation.slide_layouts</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取模版样式对象个数"><a href="#获取模版样式对象个数" class="headerlink" title="获取模版样式对象个数"></a>获取模版样式对象个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(slide_layout_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历模版样式对象"><a href="#遍历模版样式对象" class="headerlink" title="遍历模版样式对象"></a>遍历模版样式对象</h3><ul>
+<li>内置模板样式共11个</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index, slide_layout <span class="keyword">in</span> <span class="built_in">enumerate</span>(slide_layout_list):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取模版样式名称"><a href="#获取模版样式名称" class="headerlink" title="获取模版样式名称"></a>获取模版样式名称</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slide_layout.name</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过帧对象获取占位符对象"><a href="#通过帧对象获取占位符对象" class="headerlink" title="通过帧对象获取占位符对象"></a>通过帧对象获取占位符对象</h2><h3 id="获取所有占位符对象"><a href="#获取所有占位符对象" class="headerlink" title="获取所有占位符对象"></a>获取所有占位符对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">placeholder_list = slide.placeholders</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取占位符对象个数"><a href="#获取占位符对象个数" class="headerlink" title="获取占位符对象个数"></a>获取占位符对象个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(placeholder_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历所有占位符对象"><a href="#遍历所有占位符对象" class="headerlink" title="遍历所有占位符对象"></a>遍历所有占位符对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> placeholder of placeholder_list:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过占位符对象获取占位符名"><a href="#通过占位符对象获取占位符名" class="headerlink" title="通过占位符对象获取占位符名"></a>通过占位符对象获取占位符名</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">placeholder.name</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取占位符索引"><a href="#获取占位符索引" class="headerlink" title="获取占位符索引"></a>获取占位符索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">placeholder.placeholder_format.idx</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取占位符类型"><a href="#获取占位符类型" class="headerlink" title="获取占位符类型"></a>获取占位符类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">placeholder.placeholder_format.<span class="built_in">type</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="幻灯片文本内容的写入"><a href="#幻灯片文本内容的写入" class="headerlink" title="幻灯片文本内容的写入"></a>幻灯片文本内容的写入</h2><ul>
+<li>所有添加内容操作完成后，都需要保存操作</li>
+</ul>
+<h3 id="通过占位符对象写入文本数据"><a href="#通过占位符对象写入文本数据" class="headerlink" title="通过占位符对象写入文本数据"></a>通过占位符对象写入文本数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">placeholder.text = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过文本框对象写入文本数据"><a href="#通过文本框对象写入文本数据" class="headerlink" title="通过文本框对象写入文本数据"></a>通过文本框对象写入文本数据</h3><ul>
+<li>向文本框对象内添加一个段落对象并添加文本内容</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paragraph = text_frame.add_paragraph()</span><br><span class="line">paragraph.text = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过样式对象写入表格数据"><a href="#通过样式对象写入表格数据" class="headerlink" title="通过样式对象写入表格数据"></a>通过样式对象写入表格数据</h3><blockquote>
+<p><code>rows</code>：定义行数<br><code>cols</code>：定义列数<br><code>left</code>：定义左外边距<br><code>top</code>：定义上外边距<br><code>width</code>：定义表格宽<br><code>height</code>：定义表格高</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line">table = shape.add_table(rows=<span class="number">1</span>, cols=<span class="number">1</span>, left=Cm(<span class="number">1</span>), top=Cm(<span class="number">1</span>), width=Cm(<span class="number">1</span>), height=Cm(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过表格对象修改数据"><a href="#通过表格对象修改数据" class="headerlink" title="通过表格对象修改数据"></a>通过表格对象修改数据</h3><blockquote>
+<p><code>&lt;row&gt;</code>：行号，从0开始<br><code>&lt;col&gt;</code>：列号，从0开始</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table.table.cell(&lt;row&gt;, &lt;col&gt;).text = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="幻灯片图片内容的写入"><a href="#幻灯片图片内容的写入" class="headerlink" title="幻灯片图片内容的写入"></a>幻灯片图片内容的写入</h2><h3 id="通过样式对象写入图片数据"><a href="#通过样式对象写入图片数据" class="headerlink" title="通过样式对象写入图片数据"></a>通过样式对象写入图片数据</h3><blockquote>
+<p><code>&lt;file&gt;</code>：图片文件路径<br><code>left</code>：定义左边距<br><code>top</code>：定义上边距</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">picture = shape.add_picture(<span class="string">&quot;&lt;file&gt;&quot;</span>, left=<span class="number">1</span>, top=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>width</code>：定义图片宽<br><code>height</code>：定义图片高</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line">picture = shape.add_picture(<span class="string">&quot;&lt;file&gt;&quot;</span>, left=<span class="number">1</span>, top=<span class="number">1</span>, width=Cm(<span class="number">1</span>), height=Cm(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="幻灯片图表内容的写入"><a href="#幻灯片图表内容的写入" class="headerlink" title="幻灯片图表内容的写入"></a>幻灯片图表内容的写入</h2><h3 id="通过样式对象写入图片数据-1"><a href="#通过样式对象写入图片数据-1" class="headerlink" title="通过样式对象写入图片数据"></a>通过样式对象写入图片数据</h3><h4 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pptx.util <span class="keyword">import</span> Cm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备数据</span></span><br><span class="line">chart_data = CharData()</span><br><span class="line">chart_data.categories = [<span class="string">&quot;分类1&quot;</span>, <span class="string">&quot;分类2&quot;</span>]</span><br><span class="line">chart_data.add_series(<span class="string">&quot;主标题&quot;</span>, (<span class="number">0.1</span>, <span class="number">0.9</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加图表</span></span><br><span class="line">chart = shape.add_chart(XL_CHART_TYPE.PIE, x=Cm(<span class="number">1</span>), y=Cm(<span class="number">1</span>), cx=Cm(<span class="number">1</span>), cy=Cm(<span class="number">1</span>), chart_data=chart_data).chart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置图例</span></span><br><span class="line">chart.has_legend = <span class="literal">True</span></span><br><span class="line">chart.legend.position = XL_LEGEND_POSITION.BOTTOM</span><br><span class="line">chart.legend.include_in_layout = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置图标格式</span></span><br><span class="line">chart.plots[<span class="number">0</span>].has_data_labels = <span class="literal">True</span></span><br><span class="line">data_labels = chart.plots[<span class="number">0</span>].data_labels</span><br><span class="line">data_labels.number_format = <span class="string">&quot;0%&quot;</span></span><br><span class="line">data_labels.position = XL_DATA_LABEL_POSITION.OUTSIDE_END</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过文件对象保存为文件"><a href="#通过文件对象保存为文件" class="headerlink" title="通过文件对象保存为文件"></a>通过文件对象保存为文件</h2><blockquote>
+<p><code>&lt;file&gt;.pptx</code>：文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presentation.save(<span class="string">&quot;&lt;file&gt;.pptx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1Th411W7bo">哔哩哔哩——千锋教育</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Office/" rel="tag"># Office</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/27/Python%E7%88%AC%E8%99%AB%E7%A7%9F%E5%8F%B7%E7%8E%A9%E7%9B%91%E6%B5%8B%E5%87%BA%E7%A7%9F%E7%8A%B6%E6%80%81/" rel="prev" title="【代码】Python爬虫租号玩监测出租状态">
+                  <i class="fa fa-angle-left"></i> 【代码】Python爬虫租号玩监测出租状态
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/28/Pandas%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】Pandas学习笔记">
+                  【笔记】Pandas学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

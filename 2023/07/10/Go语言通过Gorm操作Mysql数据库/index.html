@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/07/10/Go%E8%AF%AD%E8%A8%80%E9%80%9A%E8%BF%87Gorm%E6%93%8D%E4%BD%9CMysql%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/07/10/Go%E8%AF%AD%E8%A8%80%E9%80%9A%E8%BF%87Gorm%E6%93%8D%E4%BD%9CMysql%E6%95%B0%E6%8D%AE%E5%BA%93/","path":"2023/07/10/Go语言通过Gorm操作Mysql数据库/","title":"【笔记】Go语言通过Gorm操作Mysql数据库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Go语言通过Gorm操作Mysql数据库 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">获取数据库连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">创建实体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E"><span class="nav-number">5.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">6.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">添加条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">7.</span> <span class="nav-text">修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96"><span class="nav-number">7.1.</span> <span class="nav-text">覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">7.2.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8D%95%E4%B8%AA%E5%AD%97%E6%AE%B5"><span class="nav-number">7.2.1.</span> <span class="nav-text">修改单个字段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87SQL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9B%B4%E6%96%B0"><span class="nav-number">7.2.1.1.</span> <span class="nav-text">通过SQL表达式更新</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5"><span class="nav-number">7.2.2.</span> <span class="nav-text">更新所有字段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%BB%93%E6%9E%84%E4%BD%93%E6%9B%B4%E6%96%B0"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">通过结构体更新</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%98%A0%E5%B0%84%E6%9B%B4%E6%96%B0"><span class="nav-number">7.2.2.2.</span> <span class="nav-text">通过映射更新</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Where%E5%AD%90%E5%8F%A5"><span class="nav-number">8.1.</span> <span class="nav-text">Where子句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">8.1.1.</span> <span class="nav-text">查询全部数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%8D%95%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">8.1.2.</span> <span class="nav-text">查询单条数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E9%9B%86%E7%9A%84%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">查询结果集的第一条数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">8.1.3.</span> <span class="nav-text">根据条件查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">占位符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">算数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97"><span class="nav-number">8.1.3.2.1.</span> <span class="nav-text">相等运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-number">8.1.3.2.2.</span> <span class="nav-text">其他算数运算</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E5%88%A4%E6%96%AD"><span class="nav-number">8.1.3.3.</span> <span class="nav-text">包含判断</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.1.3.4.</span> <span class="nav-text">模糊查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-number">8.1.3.5.</span> <span class="nav-text">逻辑运算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%94"><span class="nav-number">8.1.3.5.1.</span> <span class="nav-text">且</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%88%96"><span class="nav-number">8.1.3.5.2.</span> <span class="nav-text">或</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%88%A4%E6%96%AD"><span class="nav-number">8.1.3.6.</span> <span class="nav-text">时间判断</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%A4%E6%96%AD"><span class="nav-number">8.1.3.7.</span> <span class="nav-text">区间判断</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%A8%E2%80%A6%E4%B9%8B%E9%97%B4"><span class="nav-number">8.1.3.7.1.</span> <span class="nav-text">在…之间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%9C%A8%E2%80%A6%E4%B9%8B%E9%97%B4"><span class="nav-number">8.1.3.7.2.</span> <span class="nav-text">不在…之间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="nav-number">8.1.3.8.</span> <span class="nav-text">空判断</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A9%BA"><span class="nav-number">8.1.3.8.1.</span> <span class="nav-text">空</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%9D%9E%E7%A9%BA"><span class="nav-number">8.1.3.8.2.</span> <span class="nav-text">非空</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Select%E5%AD%90%E5%8F%A5"><span class="nav-number">8.2.</span> <span class="nav-text">Select子句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">8.2.1.</span> <span class="nav-text">使用聚合函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OrderBy%E5%AD%90%E5%8F%A5"><span class="nav-number">8.3.</span> <span class="nav-text">OrderBy子句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%8D%95%E6%AC%A1"><span class="nav-number">8.3.1.</span> <span class="nav-text">排序单次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%A4%9A%E6%AC%A1"><span class="nav-number">8.3.2.</span> <span class="nav-text">排序多次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99%E6%8E%92%E5%BA%8F"><span class="nav-number">8.3.3.</span> <span class="nav-text">自定义规则排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E6%95%B0%E7%BB%84%E5%8F%98%E9%87%8F%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99"><span class="nav-number">8.3.3.1.</span> <span class="nav-text">以数组变量作为参数传递自定义规则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit%E5%AD%90%E5%8F%A5"><span class="nav-number">8.4.</span> <span class="nav-text">Limit子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%95%B0%E6%8D%AE%E6%80%BB%E6%95%B0"><span class="nav-number">8.5.</span> <span class="nav-text">计算数据总数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%B8%80%E5%88%97%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%88%97%E8%A1%A8"><span class="nav-number">8.6.</span> <span class="nav-text">查询某一列的所有数据列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9FSQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.</span> <span class="nav-text">使用原生SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B2%A1%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.1.</span> <span class="nav-text">执行没有返回值的SQL语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.2.</span> <span class="nav-text">执行有返回值的SQL语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E5%85%B3%E8%81%94"><span class="nav-number">10.</span> <span class="nav-text">多表关联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-number">10.1.</span> <span class="nav-text">一对一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BelongsTo"><span class="nav-number">10.1.1.</span> <span class="nav-text">BelongsTo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HasOne"><span class="nav-number">10.1.2.</span> <span class="nav-text">HasOne</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E4%B8%80"><span class="nav-number">10.2.</span> <span class="nav-text">多对一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HasMany"><span class="nav-number">10.2.1.</span> <span class="nav-text">HasMany</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">10.3.</span> <span class="nav-text">多对多</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ManyToMany"><span class="nav-number">10.3.1.</span> <span class="nav-text">ManyToMany</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%92%E9%99%A4%E6%9D%A1%E4%BB%B6"><span class="nav-number">10.3.1.1.</span> <span class="nav-text">排除条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E7%BB%93%E6%9E%9C%E9%87%8D%E6%96%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">10.3.1.2.</span> <span class="nav-text">将结果重新排序</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.1.</span> <span class="nav-text">禁用事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.</span> <span class="nav-text">使用事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.1.</span> <span class="nav-text">开启事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BA%8B%E5%8A%A1%E6%89%A7%E8%A1%8CSQL"><span class="nav-number">11.2.2.</span> <span class="nav-text">通过事务执行SQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.3.</span> <span class="nav-text">提交事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.4.</span> <span class="nav-text">回滚事务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%83%85%E5%86%B5%E5%9B%9E%E6%BB%9A%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.4.1.</span> <span class="nav-text">异常情况回滚事务</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/07/10/Go%E8%AF%AD%E8%A8%80%E9%80%9A%E8%BF%87Gorm%E6%93%8D%E4%BD%9CMysql%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Go语言通过Gorm操作Mysql数据库 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Go语言通过Gorm操作Mysql数据库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-10 16:00:39" itemprop="dateCreated datePublished" datetime="2023-07-10T16:00:39+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Go语言通过Gorm操作Mysql数据库</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go get gorm.io/gorm</span><br><span class="line">go get gorm.io/driver/mysql</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取数据库连接"><a href="#获取数据库连接" class="headerlink" title="获取数据库连接"></a>获取数据库连接</h2><blockquote>
+<p><code>&lt;username&gt;</code>：用户名<br><code>&lt;password&gt;</code>：密码<br><code>&lt;ip&gt;</code>：IP<br><code>&lt;port&gt;</code>：端口号<br><code>&lt;databasename&gt;</code>：数据库名</p>
+</blockquote>
+<blockquote>
+<p><code>charset=utf8mb4</code>：指定字符集</p>
+</blockquote>
+<blockquote>
+<p><code>&amp;gorm.Config&#123;&#125;</code>：指定配置</p>
+<blockquote>
+<p><code>QueryFields: true</code>：输出执行的SQL日志<br><code>SkipDefaultTransaction: true</code>：禁用事务</p>
+</blockquote>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;gorm.io/driver/mysql&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	dsn := <span class="string">&quot;&lt;username&gt;:&lt;password&gt;@tcp(&lt;ip&gt;:&lt;port&gt;)/&lt;databasename&gt;?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;</span></span><br><span class="line">	db, err := gorm.Open(mysql.Open(dsn), &amp;gorm.Config&#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建实体"><a href="#创建实体" class="headerlink" title="创建实体"></a>创建实体</h2><ul>
+<li>继承<code>gorm.Model</code>结构体</li>
+<li>结构体名<ul>
+<li>如果结构体名是User，那么映射的数据表名默认为users<ul>
+<li>默认情况下数据表名默认为复数</li>
+</ul>
+</li>
+<li>如果结构体名是UserTable，那么映射的数据表名默认为user_table</li>
+</ul>
+</li>
+<li>字段名<ul>
+<li>如果字段名是ID，那么映射的数据表字段名默认为id</li>
+<li>如果字段名是UserID，那么映射的数据表名默认为user_id</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>TableName()</code>：重新映射表名<br><code>column</code>：重新指定Mysql数据表的字段的映射关系</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	gorm.Model</span><br><span class="line">	Username <span class="type">string</span> <span class="string">`gorm:&quot;column:username&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;ID: <span class="number">1</span>, Username: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Create(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;ID: <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Delete(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加条件"><a href="#添加条件" class="headerlink" title="添加条件"></a>添加条件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id &gt; 1&quot;</span>).Delete(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h3><ul>
+<li>覆盖所有字段，无论是否为零值</li>
+<li>如果数据存在，则覆盖；如果数据不存在，则新增</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;ID: <span class="number">1</span>, Username: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Save(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><h4 id="修改单个字段"><a href="#修改单个字段" class="headerlink" title="修改单个字段"></a>修改单个字段</h4><ul>
+<li>通过<code>Model()</code>指定结构体，间接指定数据表名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Model(&amp;user).Where(<span class="string">&quot;id = 1&quot;</span>).Update(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过<code>Table()</code>直接指定数据表名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Table(<span class="string">&quot;user&quot;</span>).Where(<span class="string">&quot;id = 1&quot;</span>).Update(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过SQL表达式更新"><a href="#通过SQL表达式更新" class="headerlink" title="通过SQL表达式更新"></a>通过SQL表达式更新</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Model(&amp;user).Where(<span class="string">&quot;id = 1&quot;</span>).Update(<span class="string">&quot;id&quot;</span>, gorm.Expr(<span class="string">&quot;id + ?&quot;</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新所有字段"><a href="#更新所有字段" class="headerlink" title="更新所有字段"></a>更新所有字段</h4><ul>
+<li>只修改非零值的字段，零值字段自动跳过</li>
+</ul>
+<h5 id="通过结构体更新"><a href="#通过结构体更新" class="headerlink" title="通过结构体更新"></a>通过结构体更新</h5><ul>
+<li>通过<code>Model()</code>指定结构体，间接指定数据表名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;Username: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Model(&amp;user).Updates(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过<code>Table()</code>直接指定数据表名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;Username: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Table(<span class="string">&quot;user&quot;</span>).Updates(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过映射更新"><a href="#通过映射更新" class="headerlink" title="通过映射更新"></a>通过映射更新</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;Username&quot;</span>: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Table(<span class="string">&quot;user&quot;</span>).Updates(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="Where子句"><a href="#Where子句" class="headerlink" title="Where子句"></a>Where子句</h3><h4 id="查询全部数据"><a href="#查询全部数据" class="headerlink" title="查询全部数据"></a>查询全部数据</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询单条数据"><a href="#查询单条数据" class="headerlink" title="查询单条数据"></a>查询单条数据</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;ID: <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line">db.Find(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询结果集的第一条数据"><a href="#查询结果集的第一条数据" class="headerlink" title="查询结果集的第一条数据"></a>查询结果集的第一条数据</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.First(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据条件查询数据"><a href="#根据条件查询数据" class="headerlink" title="根据条件查询数据"></a>根据条件查询数据</h4><h5 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id &gt; ?&quot;</span>, <span class="number">1</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="算数运算"><a href="#算数运算" class="headerlink" title="算数运算"></a>算数运算</h5><h6 id="相等运算"><a href="#相等运算" class="headerlink" title="相等运算"></a>相等运算</h6><ul>
+<li>获取第一次匹配的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user := User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id = ?&quot;</span>, <span class="number">1</span>).Find(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取所有匹配的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id &lt;&gt; ?&quot;</span>, <span class="number">1</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h6 id="其他算数运算"><a href="#其他算数运算" class="headerlink" title="其他算数运算"></a>其他算数运算</h6><blockquote>
+<p><code>&gt;</code>：大于<br><code>&lt;</code>：小于<br><code>&gt;=</code>：大于等于<br><code>&lt;=</code>：小于等于<br><code>!=</code>：不等于</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id &gt; ?&quot;</span>, <span class="number">1</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="包含判断"><a href="#包含判断" class="headerlink" title="包含判断"></a>包含判断</h5><ul>
+<li>查询id等于0或等于2的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id IN (?)&quot;</span>, []<span class="type">int</span>&#123;<span class="number">0</span>, <span class="number">2</span>&#125;).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id LIKE ?&quot;</span>, <span class="string">&quot;%1%&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h5><h6 id="且"><a href="#且" class="headerlink" title="且"></a>且</h6><ul>
+<li>查询id大于0且小于2的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id &gt; ? AND id &lt; ?&quot;</span>, <span class="number">0</span>, <span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h6 id="或"><a href="#或" class="headerlink" title="或"></a>或</h6><ul>
+<li>查询id等于0或等于2的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id = ? OR id = ?&quot;</span>, <span class="number">0</span>, <span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id = ?&quot;</span>, <span class="number">0</span>).Or(<span class="string">&quot;id = ?&quot;</span>, <span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="时间判断"><a href="#时间判断" class="headerlink" title="时间判断"></a>时间判断</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;time &gt; ?&quot;</span>, time).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="区间判断"><a href="#区间判断" class="headerlink" title="区间判断"></a>区间判断</h5><h6 id="在…之间"><a href="#在…之间" class="headerlink" title="在…之间"></a>在…之间</h6><ul>
+<li>查询id大于等于0小于等于2的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id BETWEEN ? AND ?&quot;</span>, <span class="number">0</span>, <span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h6 id="不在…之间"><a href="#不在…之间" class="headerlink" title="不在…之间"></a>不在…之间</h6><ul>
+<li>查询id小于0并且大于2的数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id NOT BETWEEN ? AND ?&quot;</span>, <span class="number">0</span>, <span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="空判断"><a href="#空判断" class="headerlink" title="空判断"></a>空判断</h5><h6 id="空"><a href="#空" class="headerlink" title="空"></a>空</h6><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id IS NULL&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h6 id="非空"><a href="#非空" class="headerlink" title="非空"></a>非空</h6><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Where(<span class="string">&quot;id IS NOT NULL&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Select子句"><a href="#Select子句" class="headerlink" title="Select子句"></a>Select子句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Select(<span class="string">&quot;id, username&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用聚合函数"><a href="#使用聚合函数" class="headerlink" title="使用聚合函数"></a>使用聚合函数</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> idMax <span class="type">int64</span></span><br><span class="line"></span><br><span class="line">db.Select(<span class="string">&quot;MAX(id)&quot;</span>).Scan(&amp;idMax)</span><br></pre></td></tr></table></figure>
+
+<h3 id="OrderBy子句"><a href="#OrderBy子句" class="headerlink" title="OrderBy子句"></a>OrderBy子句</h3><h4 id="排序单次"><a href="#排序单次" class="headerlink" title="排序单次"></a>排序单次</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Order(<span class="string">&quot;id asc&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="排序多次"><a href="#排序多次" class="headerlink" title="排序多次"></a>排序多次</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Order(<span class="string">&quot;id asc&quot;</span>).Order(<span class="string">&quot;username desc&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义规则排序"><a href="#自定义规则排序" class="headerlink" title="自定义规则排序"></a>自定义规则排序</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Order(<span class="string">&quot;FIELD(username, &#x27;排在前面的用户名&#x27;, &#x27;排在后面的用户名&#x27;)&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="以数组变量作为参数传递自定义规则"><a href="#以数组变量作为参数传递自定义规则" class="headerlink" title="以数组变量作为参数传递自定义规则"></a>以数组变量作为参数传递自定义规则</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Clauses(clause.OrderBy&#123;Expression: clause.Expr&#123;SQL: <span class="string">&quot;FIELD(username, ?)&quot;</span>, Vars: []<span class="keyword">interface</span>&#123;&#125;&#123;[]<span class="type">string</span>&#123;<span class="string">&quot;排在前面的用户名&quot;</span>, <span class="string">&quot;排在后面的用户名&quot;</span>&#125;&#125;, WithoutParentheses: <span class="literal">true</span>&#125;&#125;).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Limit子句"><a href="#Limit子句" class="headerlink" title="Limit子句"></a>Limit子句</h3><blockquote>
+<p><code>Offset()</code>：跳过几条数据<br><code>Limit()</code>：每页的数据总数</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Offset(<span class="number">1</span>).Limit(<span class="number">2</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算数据总数"><a href="#计算数据总数" class="headerlink" title="计算数据总数"></a>计算数据总数</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> count <span class="type">int64</span></span><br><span class="line"></span><br><span class="line">db.Find(&amp;userList).Count(&amp;count)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询某一列的所有数据列表"><a href="#查询某一列的所有数据列表" class="headerlink" title="查询某一列的所有数据列表"></a>查询某一列的所有数据列表</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userUsernameList := []<span class="type">string</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Distinct(<span class="string">&quot;username&quot;</span>).Pluck(<span class="string">&quot;username&quot;</span>, &amp;userUsernameList)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用原生SQL语句"><a href="#使用原生SQL语句" class="headerlink" title="使用原生SQL语句"></a>使用原生SQL语句</h2><blockquote>
+<p><code>&lt;sql&gt;</code>：SQL语句</p>
+</blockquote>
+<h3 id="执行没有返回值的SQL语句"><a href="#执行没有返回值的SQL语句" class="headerlink" title="执行没有返回值的SQL语句"></a>执行没有返回值的SQL语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.Exec(<span class="string">&quot;&lt;sql&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.Exec(<span class="string">&quot;DELETE FROM user WHERE id = ?&quot;</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行有返回值的SQL语句"><a href="#执行有返回值的SQL语句" class="headerlink" title="执行有返回值的SQL语句"></a>执行有返回值的SQL语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Raw(<span class="string">&quot;SELECT * FROM user&quot;</span>).Scan(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h2 id="多表关联"><a href="#多表关联" class="headerlink" title="多表关联"></a>多表关联</h2><h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><ul>
+<li>一个用户映射一个地址</li>
+</ul>
+<h4 id="BelongsTo"><a href="#BelongsTo" class="headerlink" title="BelongsTo"></a>BelongsTo</h4><ul>
+<li>默认主键在结构体中的属性名是<code>ID</code>，在数据库中的属性名是<code>id</code></li>
+<li>默认外键（逻辑外键）在结构体中的属性名是<code>XxxID</code>，在数据库中的属性名是<code>xxx_id</code>，关联<code>xxx</code>数据表的<code>id</code>字段</li>
+</ul>
+<blockquote>
+<p><code>foreignKey</code>：当前表的外键<br><code>references</code>：另一个表的主键</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID        <span class="type">int</span></span><br><span class="line">	Username  <span class="type">string</span></span><br><span class="line">	AddressID <span class="type">string</span></span><br><span class="line">	Address   Address <span class="string">`gorm:&quot;foreignKey:AddressID;references:ID&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID      <span class="type">int</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(Address)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;address&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载，在查询的同时查询关联表</li>
+</ul>
+<blockquote>
+<p><code>Address</code>：此处是关联表属性的属性名，用于存放关联表数据</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;Address&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按条件预加载</li>
+</ul>
+<p>根据地址id为1的数据查询用户</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;Address&quot;</span>, <span class="string">&quot;id = ?&quot;</span>, <span class="number">1</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h4 id="HasOne"><a href="#HasOne" class="headerlink" title="HasOne"></a>HasOne</h4><blockquote>
+<p><code>foreignKey</code>：另一个表的外键<br><code>references</code>：当前表的主键</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID        <span class="type">int</span></span><br><span class="line">	Username  <span class="type">string</span></span><br><span class="line">	AddressID <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID      <span class="type">int</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">	User    User <span class="string">`gorm:&quot;foreignKey:AddressID;references:ID&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(Address)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;address&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载，在查询的同时查询关联表</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">addressList := []Address&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;User&quot;</span>).Find(&amp;addressList)</span><br></pre></td></tr></table></figure>
+
+<h3 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a>多对一</h3><ul>
+<li>一个地址映射多个用户</li>
+</ul>
+<h4 id="HasMany"><a href="#HasMany" class="headerlink" title="HasMany"></a>HasMany</h4><blockquote>
+<p><code>foreignKey</code>：另一个表的外键<br><code>references</code>：当前表的主键</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID        <span class="type">int</span></span><br><span class="line">	Username  <span class="type">string</span></span><br><span class="line">	AddressID <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID      <span class="type">int</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">	User    []User <span class="string">`gorm:&quot;foreignKey:AddressID;references:ID&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(Address)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;address&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载，在查询的同时查询关联表</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">addressList := []Address&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;User&quot;</span>).Find(&amp;addressList)</span><br></pre></td></tr></table></figure>
+
+<h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><ul>
+<li>查询所有用户及其关联的所有地址</li>
+</ul>
+<h4 id="ManyToMany"><a href="#ManyToMany" class="headerlink" title="ManyToMany"></a>ManyToMany</h4><blockquote>
+<p><code>foreignKey</code>：当前表主键<br><code>joinForeignKey</code>：关联表与当前表关联的外键<br><code>References</code>：另一个表的主键<br><code>joinReferences</code>：关联表与另一个表关联的外键</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID       <span class="type">int</span></span><br><span class="line">	Username <span class="type">string</span></span><br><span class="line">	Address  []Address <span class="string">`gorm:&quot;many2many:user_address;foreignKey:ID;joinForeignKey:UserID;References:UUID;joinReferences:AddressUUID&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(User)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;</span><br><span class="line">	UUID      <span class="type">string</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(Address)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;address&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> UserAddress <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID        <span class="type">int</span></span><br><span class="line">	UserID    <span class="type">int</span></span><br><span class="line">	AddressUUID <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(UserAddress)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;user_address&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载，在查询的同时查询关联表</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;Address&quot;</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="排除条件"><a href="#排除条件" class="headerlink" title="排除条件"></a>排除条件</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userList := []User&#123;&#125;</span><br><span class="line"></span><br><span class="line">db.Preload(<span class="string">&quot;Address&quot;</span>, <span class="string">&quot;id != ?&quot;</span>, <span class="number">1</span>).Find(&amp;userList)</span><br></pre></td></tr></table></figure>
+
+<h5 id="将结果重新排序"><a href="#将结果重新排序" class="headerlink" title="将结果重新排序"></a>将结果重新排序</h5><ul>
+<li>通过自定义预加载函数实现将结果重新排序</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.Preload(<span class="string">&quot;Address&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(db *gorm.DB)</span></span> *gorm.DB &#123;</span><br><span class="line">    <span class="keyword">return</span> db.Order(<span class="string">&quot;id asc&quot;</span>)</span><br><span class="line">&#125;).Find(&amp;user)</span><br></pre></td></tr></table></figure>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="禁用事务"><a href="#禁用事务" class="headerlink" title="禁用事务"></a>禁用事务</h3><ul>
+<li>gorm的事务默认是开启的，如果不需要使用事务需要禁用事务</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;gorm.io/driver/mysql&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	dsn := <span class="string">&quot;&lt;username&gt;:&lt;password&gt;@tcp(&lt;ip&gt;:&lt;port&gt;)/&lt;databasename&gt;?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;</span></span><br><span class="line">	db, err := gorm.Open(mysql.Open(dsn), &amp;gorm.Config&#123;</span><br><span class="line">	    SkipDefaultTransaction: <span class="literal">true</span>,</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用事务"><a href="#使用事务" class="headerlink" title="使用事务"></a>使用事务</h3><h4 id="开启事务"><a href="#开启事务" class="headerlink" title="开启事务"></a>开启事务</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tx := db.Begin()</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过事务执行SQL"><a href="#通过事务执行SQL" class="headerlink" title="通过事务执行SQL"></a>通过事务执行SQL</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tx.Create(...)</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交事务"><a href="#提交事务" class="headerlink" title="提交事务"></a>提交事务</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tx.Commit()</span><br></pre></td></tr></table></figure>
+
+<h4 id="回滚事务"><a href="#回滚事务" class="headerlink" title="回滚事务"></a>回滚事务</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tx.Rollback()</span><br></pre></td></tr></table></figure>
+
+<h5 id="异常情况回滚事务"><a href="#异常情况回滚事务" class="headerlink" title="异常情况回滚事务"></a>异常情况回滚事务</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> r := <span class="built_in">recover</span>(); r != <span class="literal">nil</span> &#123;</span><br><span class="line">        tx.Rollback()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1XY4y1t76G">哔哩哔哩——筱筱知晓</a><br><a target="_blank" rel="noopener" href="https://gorm.io/zh_CN/docs/index.html">Gorm官方文档</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2272246">腾讯开发者社区——堕落飞鸟</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/taozhengquan/p/15214215.html">博客园——TY520</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+              <a href="/tags/Gorm/" rel="tag"># Gorm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/10/%E9%80%9A%E8%BF%87Hexo%E8%BF%87%E6%BB%A4%E5%99%A8%E5%AE%9E%E7%8E%B0%E8%B4%A1%E7%8C%AE%E6%97%A5%E5%8E%86/" rel="prev" title="【笔记】通过Hexo过滤器实现贡献日历">
+                  <i class="fa fa-angle-left"></i> 【笔记】通过Hexo过滤器实现贡献日历
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/11/Python3%E6%89%93%E5%8D%B0%E5%BB%B6%E6%97%B6%E8%BF%9B%E5%BA%A6%E6%9D%A1/" rel="next" title="【笔记】Python3打印延时进度条">
+                  【笔记】Python3打印延时进度条 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

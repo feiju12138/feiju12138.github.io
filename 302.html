@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>302</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .system-message {
+      padding: 24px 48px;
+    }
+
+    .system-message h1 {
+      font-size: 100px;
+      font-weight: normal;
+      line-height: 120px;
+      margin-bottom: 12px;
+    }
+
+    .system-message .jump {
+      padding-top: 10px
+    }
+
+    .system-message .jump a {
+      color: #333;
+    }
+
+    .system-message .error {
+      line-height: 1.8em;
+      font-size: 36px
+    }
+
+    .system-message .detail {
+      font-size: 12px;
+      line-height: 20px;
+      margin-top: 12px;
+      display: none
+    }
+  </style>
+</head>
+<body>
+<div class="system-message">
+  <h1>:)</h1>
+  <p class="error">302 Redirect !</p>
+  <p class="detail"></p>
+  <p class="jump" id="text">
+    您即将离开本站 还有 <b id="wait">2</b>s 自动跳转至目标站点 [ <span id="target"></span> ]
+  </p>
+  <p class="jump" id="jump">
+    [ <a href="javascript:goJump();">立即跳转至目标站点</a> ]
+  </p>
+  <br/>
+</div>
+<script type="text/javascript">
+
+  function goHome() {
+    window.open("/", "_self");
+  }
+
+  if (getUrlParam("target") == null) {
+    if (window.history.length === 1) {
+      window.open("/", "_self");
+    } else {
+      window.history.back();
+    }
+  }
+  document.getElementById("target").innerText = getUrlParam("target");
+
+  // 回到上一页
+  function goBack() {
+    if (window.history.length === 1) {
+      window.open("/", "_self");
+    } else {
+      window.history.back();
+    }
+  }
+
+  // 跳转到目标页
+  function goJump() {
+    window.open(getUrlParam("target"), "_self");
+  }
+
+  (function () {
+    let wait = document.getElementById('wait');
+
+    let interval = setInterval(function () {
+      let time = --wait.innerHTML;
+      // 跳转到目标页
+      if (time < 0) {
+        goJump();
+        clearInterval(interval);
+        document.getElementById("text").innerHTML += `<br/>都跳转完了，你咋又回来啦，难道你想 [ <a href="javascript:goBack();">返回上一页</a> ] [ <a href="javascript:goHome();">回到首页</a> ]`
+        document.getElementById("jump").innerHTML = `<a href="javascript:goJump();">重新跳转至目标站点</a>`
+      }
+    }, 1000);
+  })();
+
+  function getUrlParam(name) {
+    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    let r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2])
+    }
+    return null;
+  }
+
+</script>
+</body>
+</html>

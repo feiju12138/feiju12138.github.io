@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dist/images/favicon_package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/images/favicon_package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dist/images/favicon_package/favicon-16x16.png">
+  <link rel="mask-icon" href="/dist/images/favicon_package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/dist/images/favicon_package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/pace-js/themes/black/pace-theme-material.css">
+  <script src="/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/11/30/Hexo%E9%87%87%E7%94%A8Elasticsearch%E8%BF%9B%E8%A1%8C%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/11/30/Hexo%E9%87%87%E7%94%A8Elasticsearch%E8%BF%9B%E8%A1%8C%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/","path":"2023/11/30/Hexo采用Elasticsearch进行全文搜索/","title":"【笔记】Hexo采用Elasticsearch进行全文搜索"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Hexo采用Elasticsearch进行全文搜索 | 绯鞠的博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="绯鞠的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">绯鞠的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">连蜜统治世界!!!💗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+<!-- 加载字体样式 -->
+<link rel="stylesheet" href="/dist/css/fonts.css">
+<!-- 加载鼠标样式 -->
+<link rel="stylesheet" href="/dist/css/cursor.css">
+<!-- 加载滚动条样式 -->
+<link rel="stylesheet" href="/dist/css/scrollbar.css">
+<!-- 加载分类页样式 -->
+<link rel="stylesheet" href="/categories/index.css">
+<!-- 加载标签页样式 -->
+<link rel="stylesheet" href="/tags/index.css">
+<!-- 加载投币动画 -->
+<link rel="stylesheet" href="/dist/css/coin.css">
+
+<!-- 加载颜色常量 -->
+<script type="text/javascript" src="/dist/js/color_library.js"></script>
+<!-- 加载站内快捷键 -->
+<script type="text/javascript" src="/dist/js/hotkey.js"></script>
+<!-- Toast加载 -->
+<script type="text/javascript" src="/dist/js/toast.js"></script>
+<!-- 获取浏览器类型 -->
+<script type="text/javascript" src="/dist/js/get_browser_kind.js"></script>
+<!-- 禁止镜像站 -->
+<script type="text/javascript" src="/dist/js/ban_mirror.js"></script>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">数据库更新脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF"><span class="nav-number">4.</span> <span class="nav-text">后端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%90%AF%E5%8A%A8"><span class="nav-number">4.1.</span> <span class="nav-text">直接启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8"><span class="nav-number">4.2.</span> <span class="nav-text">通过配置文件启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAHook%E8%84%9A%E6%9C%AC"><span class="nav-number">5.</span> <span class="nav-text">编写一个Hook脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">Nginx反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">7.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">8.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="绯鞠"
+      src="/dist/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">绯鞠</p>
+  <div class="site-description" itemprop="description">捕捉一只爱折腾的绯鞠</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+<!-- 设置Aplayer挂载点 -->
+<div id="aplayer"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/11/30/Hexo%E9%87%87%E7%94%A8Elasticsearch%E8%BF%9B%E8%A1%8C%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/dist/images/avatar.gif">
+      <meta itemprop="name" content="绯鞠">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="绯鞠的博客">
+      <meta itemprop="description" content="捕捉一只爱折腾的绯鞠">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Hexo采用Elasticsearch进行全文搜索 | 绯鞠的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Hexo采用Elasticsearch进行全文搜索
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-30 15:33:34" itemprop="dateCreated datePublished" datetime="2023-11-30T15:33:34+00:00">2023-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 10:27:43" itemprop="dateModified" datetime="2024-10-23T10:27:43+00:00">2024-10-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文仅提供一种针对于 Hexo采用Elasticsearch进行全文搜索 的一个思路，如果需要复现，请对文内代码稍作改动，以便适配当前环境<br>如果你有更好的方案，欢迎在评论区留言</p>
+<span id="more"></span>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p><a href="/2022/11/03/%E9%80%9A%E8%BF%87Docker%E9%83%A8%E7%BD%B2Elasticsearch/#%E9%83%A8%E7%BD%B2Elasticsearch">部署Elasticsearch容器</a><br><a href="/2022/11/03/%E9%80%9A%E8%BF%87Docker%E9%83%A8%E7%BD%B2Elasticsearch/#%E9%83%A8%E7%BD%B2ik%E5%88%86%E8%AF%8D%E5%99%A8">部署ik分词器</a></p>
+<h2 id="数据库更新脚本"><a href="#数据库更新脚本" class="headerlink" title="数据库更新脚本"></a>数据库更新脚本</h2><ul>
+<li>通过Sqlite3创建一个数据表，用来存储所有文章的基本信息</li>
+</ul>
+<p>采用Sqlite3存储文章的好处是可以在提交Git仓库时将数据库文件一并提交到项目中</p>
+<ul>
+<li>通过Python脚本，在每次更新文章之后执行脚本，将所有文章的信息保存到Sqlite3数据库</li>
+</ul>
+<blockquote>
+<p><code>base_dir</code>：指定Hexo项目根目录的路径，如果是相对路径就是相对于Python脚本的路径<br><code>post_cn_filename_list</code>：指定所有文章所在的目录<br><code>database_file</code>：指定为Sqlite3数据库文件的路径</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">采集AI摘要，保存到数据库</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据表名</span></span><br><span class="line">table_name = <span class="string">&quot;posts&quot;</span></span><br><span class="line"><span class="comment"># 切换到项目根目录路径</span></span><br><span class="line">os.chdir(<span class="string">&quot;../../&quot;</span>)</span><br><span class="line">base_dir = os.getcwd()</span><br><span class="line"><span class="comment"># 中文文章文件名列表</span></span><br><span class="line">post_cn_filename_list = os.listdir(<span class="string">f&quot;<span class="subst">&#123;base_dir&#125;</span>/source/_posts/zh-CN/&quot;</span>)</span><br><span class="line"><span class="comment"># 数据库文件</span></span><br><span class="line">database_file = <span class="string">f&quot;<span class="subst">&#123;base_dir&#125;</span>/source/scripts/data.db&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历文件名</span></span><br><span class="line"><span class="keyword">for</span> post_cn_filename <span class="keyword">in</span> post_cn_filename_list:</span><br><span class="line">    <span class="keyword">if</span> post_cn_filename == <span class="string">&quot;.DS_Store&quot;</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="built_in">print</span>(post_cn_filename)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取文件绝对路径</span></span><br><span class="line">    file_src = <span class="string">f&quot;<span class="subst">&#123;base_dir&#125;</span>/source/_posts/zh-CN/<span class="subst">&#123;post_cn_filename&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(file_src)</span><br><span class="line">    filename_without_suffix = post_cn_filename.replace(<span class="string">&quot;.md&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算文件名的MD5</span></span><br><span class="line">    filename_md5 = hashlib.md5(post_cn_filename.encode(<span class="string">&quot;utf-8&quot;</span>)).hexdigest()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;filename_md5: <span class="subst">&#123;filename_md5&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取文件修改时间</span></span><br><span class="line">    updated_at = os.path.getmtime(file_src)</span><br><span class="line">    updated_at = datetime.datetime.fromtimestamp(<span class="built_in">int</span>(updated_at)).isoformat()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;updated_at: <span class="subst">&#123;updated_at&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取文件</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_src) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 读取整篇文章</span></span><br><span class="line">        content_all = f.read()</span><br><span class="line">        content = content_all[content_all.find(<span class="string">&quot;## 前言&quot;</span>):]</span><br><span class="line">        content = base64.b64encode(content.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">        content = <span class="built_in">str</span>(content,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        <span class="comment"># print(f&quot;content: &#123;content&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_src) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 读取所有行</span></span><br><span class="line">        line_list = f.readlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> line_list:</span><br><span class="line">            <span class="keyword">if</span> line.startswith(<span class="string">&quot;title: &quot;</span>):</span><br><span class="line">                title = line.replace(<span class="string">&quot;title: &quot;</span>, <span class="string">&quot;&quot;</span>).strip()</span><br><span class="line">                title = base64.b64encode(title.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">                title = <span class="built_in">str</span>(title,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;title: <span class="subst">&#123;title&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">elif</span> line.startswith(<span class="string">&quot;sticky: &quot;</span>):</span><br><span class="line">                sticky = line.replace(<span class="string">&quot;sticky: &quot;</span>, <span class="string">&quot;&quot;</span>).strip()</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;sticky: <span class="subst">&#123;sticky&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">elif</span> line.startswith(<span class="string">&quot;lang: &quot;</span>):</span><br><span class="line">                lang = line.replace(<span class="string">&quot;lang: &quot;</span>, <span class="string">&quot;&quot;</span>).strip()</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;lang: <span class="subst">&#123;lang&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">elif</span> line.startswith(<span class="string">&quot;date: &quot;</span>):</span><br><span class="line">                date = line.replace(<span class="string">&quot;date: &quot;</span>, <span class="string">&quot;&quot;</span>).strip()</span><br><span class="line">                created_date = datetime.datetime.strptime(date, <span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">                created_at = created_date.isoformat()</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;created_at: <span class="subst">&#123;created_at&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    month = <span class="string">&quot;%02d&quot;</span> % created_date.month</span><br><span class="line">    day = <span class="string">&quot;%02d&quot;</span> % created_date.day</span><br><span class="line">    path = <span class="string">f&quot;/zh-CN/<span class="subst">&#123;created_date.year&#125;</span>/<span class="subst">&#123;month&#125;</span>/<span class="subst">&#123;day&#125;</span>/<span class="subst">&#123;filename_without_suffix&#125;</span>&quot;</span></span><br><span class="line">    path = base64.b64encode(path.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    path = <span class="built_in">str</span>(path,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;path: <span class="subst">&#123;path&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接数据库</span></span><br><span class="line">    conn = sqlite3.connect(database_file)</span><br><span class="line">    cur = conn.cursor()</span><br><span class="line">    <span class="comment"># 写入数据库</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;REPLACE INTO <span class="subst">&#123;table_name&#125;</span> VALUES(&#x27;<span class="subst">&#123;filename_md5&#125;</span>&#x27;, &#x27;<span class="subst">&#123;title&#125;</span>&#x27;, &#x27;<span class="subst">&#123;lang&#125;</span>&#x27;, <span class="subst">&#123;sticky&#125;</span>, &#x27;<span class="subst">&#123;path&#125;</span>&#x27;, &#x27;<span class="subst">&#123;content&#125;</span>&#x27;, &#x27;<span class="subst">&#123;created_at&#125;</span>&#x27;, &#x27;<span class="subst">&#123;updated_at&#125;</span>&#x27;)&quot;</span>)</span><br><span class="line">    cur.execute(<span class="string">f&quot;REPLACE INTO <span class="subst">&#123;table_name&#125;</span> VALUES(&#x27;<span class="subst">&#123;filename_md5&#125;</span>&#x27;, &#x27;<span class="subst">&#123;title&#125;</span>&#x27;, &#x27;<span class="subst">&#123;lang&#125;</span>&#x27;, <span class="subst">&#123;sticky&#125;</span>, &#x27;<span class="subst">&#123;path&#125;</span>&#x27;, &#x27;<span class="subst">&#123;content&#125;</span>&#x27;, &#x27;<span class="subst">&#123;created_at&#125;</span>&#x27;, &#x27;<span class="subst">&#123;updated_at&#125;</span>&#x27;)&quot;</span>)</span><br><span class="line">    conn.commit()</span><br><span class="line">    <span class="comment"># 关闭数据库连接</span></span><br><span class="line">    cur.close()</span><br><span class="line">    conn.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接数据库</span></span><br><span class="line">conn = sqlite3.connect(database_file)</span><br><span class="line">cur = conn.cursor()</span><br><span class="line"><span class="comment"># 查询数据库中所有的数据</span></span><br><span class="line">cur.execute(<span class="string">f&quot;SELECT filename_md5 FROM <span class="subst">&#123;table_name&#125;</span>&quot;</span>)</span><br><span class="line">result_list = cur.fetchall()</span><br><span class="line"><span class="comment"># 关闭数据库连接</span></span><br><span class="line">cur.close()</span><br><span class="line">conn.close()</span><br><span class="line"><span class="comment"># 获取数据库中的所有文件名MD5列表</span></span><br><span class="line">filename_md5_in_database_list = []</span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> result_list:</span><br><span class="line">    filename_md5_in_database_list.append(result[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># print(&quot;数据库中的文件名MD5值&quot;, filename_md5_in_database_list)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取磁盘中的所有文件名列表</span></span><br><span class="line">filename_in_disk_list = post_cn_filename_list</span><br><span class="line"><span class="comment"># print(&quot;磁盘中的文件名MD5值&quot;, filename_in_disk_list)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取磁盘中的所有文件名MD5列表</span></span><br><span class="line">filename_md5_in_disk_list = []</span><br><span class="line"><span class="keyword">for</span> filename_in_disk <span class="keyword">in</span> filename_in_disk_list:</span><br><span class="line">    <span class="comment"># 计算文件名MD5值</span></span><br><span class="line">    filename_md5_in_disk = hashlib.md5(filename_in_disk.encode(<span class="string">&quot;utf-8&quot;</span>)).hexdigest()</span><br><span class="line">    filename_md5_in_disk_list.append(filename_md5_in_disk)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">清理数据库中多余的记录</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历数据库中所有文件的MD5值列表，将所有数据库中存在但是磁盘中不存在数据删除</span></span><br><span class="line"><span class="keyword">for</span> filename_md5_in_database <span class="keyword">in</span> filename_md5_in_database_list:</span><br><span class="line">    <span class="keyword">if</span> filename_md5_in_database <span class="keyword">not</span> <span class="keyword">in</span> filename_md5_in_disk_list:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;数据库中多余文件名MD5值&quot;</span>, filename_md5_in_database)</span><br><span class="line">        <span class="comment"># 连接数据库</span></span><br><span class="line">        conn = sqlite3.connect(database_file)</span><br><span class="line">        cur = conn.cursor()</span><br><span class="line">        <span class="comment"># 删除数据</span></span><br><span class="line">        cur.execute(<span class="string">f&quot;DELETE FROM <span class="subst">&#123;table_name&#125;</span> WHERE filename_md5=&#x27;<span class="subst">&#123;filename_md5_in_database&#125;</span>&#x27;&quot;</span>)</span><br><span class="line">        <span class="comment"># 提交SQL</span></span><br><span class="line">        conn.commit()</span><br><span class="line">        <span class="comment"># 关闭数据库连接</span></span><br><span class="line">        cur.close()</span><br><span class="line">        conn.close()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;删除了数据库中的数据:&quot;</span>, filename_md5_in_database)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><ul>
+<li><p>虽然Elasticsearch可以通过Restful请求直接对数据库进行操作，但是不安全，所以通过一个后端程序进行维护</p>
+</li>
+<li><p>创建一个配置文件用于维护不同环境下（开发环境和生产环境）的配置</p>
+</li>
+</ul>
+<blockquote>
+<p><code>app.port</code>：Gin服务器的访问端口<br><code>es.ip</code>：ES服务器的IP地址<br><code>es.port</code>：ES服务器的端口号<br><code>db</code>：通过上一步骤进行文章数据存储的数据库文件</p>
+</blockquote>
+<figure class="highlight plaintext"><figcaption><span>config.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.port=8080</span><br><span class="line">es.ip=127.0.0.1</span><br><span class="line">es.port=9200</span><br><span class="line">es.db=posts</span><br><span class="line">db=/root/hexo/data.db</span><br></pre></td></tr></table></figure>
+
+<p>对外只暴露全文搜索接口<br>对内暴露刷新所有文章数据的接口，如果对外暴露刷新所有文章数据的接口，可能会被DOS攻击<br>我采用了Nginx来允许跨域请求，如果你遇到了跨域问题，可以解除<code>允许跨域请求中间件</code>的注释</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;encoding/base64&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/olivere/elastic/v7&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/driver/sqlite&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">	FilenameMD5   <span class="type">string</span> <span class="string">`json:&quot;filename_md5&quot;   gorm:&quot;primaryKey;column:filename_md5&quot;`</span></span><br><span class="line">	TitleBase64   <span class="type">string</span> <span class="string">`json:&quot;title_base64&quot;   gorm:&quot;column:title_base64&quot;           `</span></span><br><span class="line">	Title         <span class="type">string</span> <span class="string">`json:&quot;title&quot;          gorm:&quot;-&quot;                             `</span></span><br><span class="line">	ContentBase64 <span class="type">string</span> <span class="string">`json:&quot;content_base64&quot; gorm:&quot;column:content_base64&quot;         `</span></span><br><span class="line">	Content       <span class="type">string</span> <span class="string">`json:&quot;content&quot;        gorm:&quot;-&quot;                             `</span></span><br><span class="line">	PathBase64    <span class="type">string</span> <span class="string">`json:&quot;path_base64&quot;    gorm:&quot;column:path_base64&quot;            `</span></span><br><span class="line">	Path          <span class="type">string</span> <span class="string">`json:&quot;path&quot;           gorm:&quot;-&quot;                             `</span></span><br><span class="line">	Lang          <span class="type">string</span> <span class="string">`json:&quot;lang&quot;           gorm:&quot;column:lang&quot;                   `</span></span><br><span class="line">	Sticky        <span class="type">string</span> <span class="string">`json:&quot;sticky&quot;         gorm:&quot;column:sticky&quot;                 `</span></span><br><span class="line">	CreatedAt     <span class="type">string</span> <span class="string">`json:&quot;created_at&quot;     gorm:&quot;column:created_at&quot;             `</span></span><br><span class="line">	UpdatedAt     <span class="type">string</span> <span class="string">`json:&quot;updated_at&quot;     gorm:&quot;column:updated_at&quot;             `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getMapping</span><span class="params">()</span></span> <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">`</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    &quot;mappings&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;properties&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;title_base64&quot;: &#123;&quot;type&quot;: &quot;keyword&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;title&quot;: &#123;&quot;type&quot;: &quot;text&quot;,&quot;analyzer&quot;: &quot;standard&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;content_base64&quot;: &#123;&quot;type&quot;: &quot;keyword&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;content&quot;: &#123;&quot;type&quot;: &quot;text&quot;,&quot;analyzer&quot;: &quot;standard&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;path_base64&quot;: &#123;&quot;type&quot;: &quot;keyword&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;path&quot;: &#123;&quot;type&quot;: &quot;keyword&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;lang&quot;: &#123;&quot;type&quot;: &quot;keyword&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;sticky&quot;: &#123;&quot;type&quot;: &quot;integer&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;created_at&quot;: &#123;&quot;type&quot;: &quot;date&quot;&#125;,</span></span><br><span class="line"><span class="string">            &quot;updated_at&quot;: &#123;&quot;type&quot;: &quot;date&quot;&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取配置文件</span></span><br><span class="line"><span class="keyword">var</span> configMap <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> = initConfig()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initConfig</span><span class="params">()</span></span> (result <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>) &#123;</span><br><span class="line">	<span class="comment">// 初始化配置文件路径</span></span><br><span class="line">	<span class="keyword">var</span> configFileSrc = <span class="string">&quot;./config.conf&quot;</span></span><br><span class="line">	<span class="comment">// 根据启动参数修改配置文件路径</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) != <span class="number">1</span> &#123;</span><br><span class="line">		<span class="comment">// 遍历所有参数</span></span><br><span class="line">		<span class="keyword">for</span> _, arg := <span class="keyword">range</span> os.Args &#123;</span><br><span class="line">			<span class="comment">// DE<span class="doctag">BUG:</span> 当前遍历的参数</span></span><br><span class="line">			log.Println(<span class="string">&quot;当前遍历的参数:&quot;</span>, arg)</span><br><span class="line">			<span class="keyword">if</span> strings.HasPrefix(arg, <span class="string">&quot;--config=&quot;</span>) &#123;</span><br><span class="line">				<span class="keyword">var</span> argList = strings.Split(arg, <span class="string">&quot;=&quot;</span>)</span><br><span class="line">				<span class="keyword">if</span> <span class="built_in">len</span>(argList) == <span class="number">1</span> &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				log.Println(<span class="string">&quot;成功捕获到自定义配置:&quot;</span>, argList[<span class="number">1</span>])</span><br><span class="line">				configFileSrc = argList[<span class="number">1</span>]</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">&quot;获取配置文件路径 成功:&quot;</span>, configFileSrc)</span><br><span class="line">	<span class="comment">// 定义配置Map</span></span><br><span class="line">	result = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>)</span><br><span class="line">	<span class="comment">// 读取配置文件</span></span><br><span class="line">	allConfig, _ := ioutil.ReadFile(configFileSrc)</span><br><span class="line">	log.Println(<span class="string">&quot;获取配置文件内容 成功:&quot;</span>, <span class="type">string</span>(allConfig))</span><br><span class="line">	<span class="comment">// 分割字符串为每一行</span></span><br><span class="line">	<span class="keyword">var</span> allConfigLineList = strings.Split(<span class="type">string</span>(allConfig), <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">	<span class="comment">// 遍历每一行</span></span><br><span class="line">	<span class="keyword">for</span> _, line := <span class="keyword">range</span> allConfigLineList &#123;</span><br><span class="line">		<span class="comment">// 字符串分割得到Key-Value键值对</span></span><br><span class="line">		<span class="keyword">var</span> keyAndValue = strings.Split(line, <span class="string">&quot;=&quot;</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">len</span>(keyAndValue) != <span class="number">2</span> &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 截取Key键</span></span><br><span class="line">		<span class="keyword">var</span> key = keyAndValue[<span class="number">0</span>]</span><br><span class="line">		<span class="comment">// 截取Value值</span></span><br><span class="line">		<span class="keyword">var</span> value = keyAndValue[<span class="number">1</span>]</span><br><span class="line">		<span class="comment">// 加入到配置Map</span></span><br><span class="line">		result[key] = value</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">&quot;读取配置文件 完成:&quot;</span>, result)</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立Sqlite数据库连接</span></span><br><span class="line"><span class="keyword">var</span> db *gorm.DB = initDB()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initDB</span><span class="params">()</span></span> (result *gorm.DB) &#123;</span><br><span class="line">	log.Println(<span class="string">&quot;获取Sqlite数据库文件路径:&quot;</span>, configMap[<span class="string">&quot;db&quot;</span>])</span><br><span class="line">	<span class="comment">// 创建Gorm对象连接Sqlite3</span></span><br><span class="line">	<span class="keyword">if</span> res, err := gorm.Open(sqlite.Open(configMap[<span class="string">&quot;db&quot;</span>]), &amp;gorm.Config&#123;&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Panicln(<span class="string">&quot;建立Sqlite数据库连接 失败:&quot;</span>, err.Error())</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		log.Println(<span class="string">&quot;建立Sqlite数据库连接 成功:&quot;</span>, res)</span><br><span class="line">		result = res</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立ES数据库连接</span></span><br><span class="line"><span class="keyword">var</span> es *elastic.Client = initES()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initES</span><span class="params">()</span></span> (result *elastic.Client) &#123;</span><br><span class="line">	<span class="keyword">var</span> url <span class="type">string</span> = <span class="string">&quot;http://&quot;</span> + configMap[<span class="string">&quot;es.ip&quot;</span>] + <span class="string">&quot;:&quot;</span> + configMap[<span class="string">&quot;es.port&quot;</span>]</span><br><span class="line">	log.Println(<span class="string">&quot;es url:&quot;</span>, url)</span><br><span class="line">	<span class="keyword">if</span> res, err := elastic.NewClient(</span><br><span class="line">		elastic.SetSniff(<span class="literal">false</span>),</span><br><span class="line">		elastic.SetURL(url),</span><br><span class="line">	); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Panicln(<span class="string">&quot;建立ES数据库连接 失败:&quot;</span>, err.Error())</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		log.Println(<span class="string">&quot;建立ES数据库连接 成功:&quot;</span>, res)</span><br><span class="line">		result = res</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建Gin对象</span></span><br><span class="line">	engine := gin.Default()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 允许跨域请求中间件</span></span><br><span class="line">	<span class="comment">// engine.Use(func(context *gin.Context) &#123;</span></span><br><span class="line">	<span class="comment">// 	if context.Request.Header.Get(&quot;Origin&quot;) != &quot;&quot; &#123;</span></span><br><span class="line">	<span class="comment">// 		context.Header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;)</span></span><br><span class="line">	<span class="comment">// 		context.Header(&quot;Access-Control-Allow-Methods&quot;, &quot;POST, GET, OPTIONS, PUT, DELETE, UPDATE&quot;)</span></span><br><span class="line">	<span class="comment">// 		context.Header(&quot;Access-Control-Allow-Headers&quot;, &quot;Origin, X-Requested-With, Content-Type, Accept, Authorization&quot;)</span></span><br><span class="line">	<span class="comment">// 		context.Header(&quot;Access-Control-Expose-Headers&quot;, &quot;Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Cache-Control, Content-Language, Content-Type&quot;)</span></span><br><span class="line">	<span class="comment">// 		context.Header(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;)</span></span><br><span class="line">	<span class="comment">// 	&#125;</span></span><br><span class="line">	<span class="comment">// 	if context.Request.Method == &quot;OPTIONS&quot; &#123;</span></span><br><span class="line">	<span class="comment">// 		context.AbortWithStatus(http.StatusOK)</span></span><br><span class="line">	<span class="comment">// 	&#125;</span></span><br><span class="line">	<span class="comment">// 	context.Next()</span></span><br><span class="line">	<span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 刷新ES数据库</span></span><br><span class="line">	engine.Handle(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/refresh&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		<span class="comment">// 如果不是本机，则禁止访问</span></span><br><span class="line">		<span class="keyword">if</span> context.ClientIP() != <span class="string">&quot;127.0.0.1&quot;</span> &#123;</span><br><span class="line">			<span class="comment">// 返回响应数据</span></span><br><span class="line">			context.JSON(http.StatusOK, <span class="string">&quot;Access denied&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取Sqlite数据库内的所有数据</span></span><br><span class="line">		<span class="keyword">var</span> postList []Post</span><br><span class="line">		<span class="keyword">if</span> err := db.Find(&amp;postList).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;获取Sqlite数据库内的所有数据 失败:&quot;</span>, err)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// log.Println(&quot;获取Sqlite数据库内的所有数据 完成:&quot;, postList)</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 查询ES的索引是否存在</span></span><br><span class="line">		<span class="keyword">var</span> indexExist <span class="type">bool</span></span><br><span class="line">		<span class="keyword">if</span> res, err := es.IndexExists(configMap[<span class="string">&quot;es.db&quot;</span>]).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;查询ES的索引是否存在 失败:&quot;</span>, err)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;查询ES的索引是否存在 完成:&quot;</span>, res)</span><br><span class="line">			indexExist = res</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> indexExist &#123;</span><br><span class="line">			<span class="comment">// 删除ES的索引</span></span><br><span class="line">			<span class="keyword">if</span> res, err := es.DeleteIndex(configMap[<span class="string">&quot;es.db&quot;</span>]).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;删除ES的索引 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;删除ES的索引 完成:&quot;</span>, res)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 创建ES的索引</span></span><br><span class="line">			<span class="keyword">if</span> res, err := es.CreateIndex(configMap[<span class="string">&quot;es.db&quot;</span>]).BodyString(getMapping()).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;创建ES的索引 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;创建ES的索引 完成:&quot;</span>, res)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 遍历所有post数据</span></span><br><span class="line">		<span class="keyword">for</span> _, post := <span class="keyword">range</span> postList &#123;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> title, err := base64.StdEncoding.DecodeString(post.TitleBase64); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(TitleBase64) 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(TitleBase64) 成功:&quot;</span>, <span class="type">string</span>(title))</span><br><span class="line">				post.Title = <span class="type">string</span>(title)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> content, err := base64.StdEncoding.DecodeString(post.ContentBase64); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(ContentBase64) 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(ContentBase64) 成功:&quot;</span>, <span class="type">string</span>(content))</span><br><span class="line">				post.Content = <span class="type">string</span>(content)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> path, err := base64.StdEncoding.DecodeString(post.PathBase64); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(PathBase64) 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;Base64解码(PathBase64) 成功:&quot;</span>, <span class="type">string</span>(path))</span><br><span class="line">				post.Path = <span class="type">string</span>(path)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 新增单条文档</span></span><br><span class="line">			<span class="keyword">if</span> res, err := es.Index().Index(configMap[<span class="string">&quot;es.db&quot;</span>]).Id(post.FilenameMD5).BodyJson(post).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;新增单条文档(&quot;</span>+post.FilenameMD5+<span class="string">&quot;) 失败:&quot;</span>, err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;新增单条文档(&quot;</span>+post.FilenameMD5+<span class="string">&quot;) 成功:&quot;</span>, res)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// DE<span class="doctag">BUG:</span> 只测试数组中的一条数据</span></span><br><span class="line">			<span class="comment">// break</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 返回响应数据</span></span><br><span class="line">		context.JSON(http.StatusOK, <span class="string">&quot;Ok&quot;</span>)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查询全部</span></span><br><span class="line">	engine.Handle(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/search&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		<span class="comment">// 从ES索引中查询所有文档</span></span><br><span class="line">		<span class="keyword">var</span> searchHitList []*elastic.SearchHit</span><br><span class="line">		<span class="keyword">if</span> res, err := es.Search().Index(configMap[<span class="string">&quot;es.db&quot;</span>]).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;从ES索引中查询所有文档 失败: err:&quot;</span>, err)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			searchHitList = res.Hits.Hits</span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(searchHitList) == <span class="number">0</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;从ES索引中查询所有文档 完成: res.Hits.Hits 为空数组&quot;</span>)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;从ES索引中查询所有文档 完成: searchHitList:&quot;</span>, searchHitList)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 解析击中的文档数据</span></span><br><span class="line">		<span class="keyword">var</span> resultList []<span class="type">string</span></span><br><span class="line">		<span class="keyword">for</span> _, searchHit := <span class="keyword">range</span> searchHitList &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;searchHit.Id:&quot;</span>, searchHit.Id)</span><br><span class="line">			<span class="keyword">if</span> res, err := searchHit.Source.MarshalJSON(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;获取击中的文档数据 失败:&quot;</span>, err.Error())</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;获取击中的文档数据 完成:&quot;</span>, <span class="type">string</span>(res))</span><br><span class="line">				resultList = <span class="built_in">append</span>(resultList, <span class="type">string</span>(res))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		context.JSON(http.StatusOK, resultList)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 搜索关键词</span></span><br><span class="line">	engine.Handle(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/search/:keywords&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		<span class="comment">// 获取关键词</span></span><br><span class="line">		<span class="keyword">var</span> keywords <span class="type">string</span></span><br><span class="line">		<span class="keyword">if</span> res := context.Param(<span class="string">&quot;keywords&quot;</span>); res == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;获取关键词 失败: 获取请求参数失败&quot;</span>)</span><br><span class="line">			<span class="comment">// 返回响应数据</span></span><br><span class="line">			context.JSON(http.StatusOK, <span class="literal">nil</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;获取关键词 完成:&quot;</span>, res)</span><br><span class="line">			keywords = res</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 全文检索</span></span><br><span class="line">		<span class="keyword">var</span> searchHitList []*elastic.SearchHit</span><br><span class="line">		<span class="comment">// 根据关键词从ES索引中查询文档</span></span><br><span class="line">		<span class="keyword">if</span> res, err := es.Search().Index(configMap[<span class="string">&quot;es.db&quot;</span>]).Query(elastic.NewMatchPhraseQuery(<span class="string">&quot;content&quot;</span>, keywords)).Do(context); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;根据关键词从ES索引中查询文档 失败: err:&quot;</span>, err)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> res.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;根据关键词从ES索引中查询文档 失败: res.Error:&quot;</span>, res.Error)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			searchHitList = res.Hits.Hits</span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(searchHitList) == <span class="number">0</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;根据关键词从ES索引中查询文档 完成: res.Hits.Hits 为空数组&quot;</span>)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;根据关键词从ES索引中查询文档 完成: searchHitList:&quot;</span>, searchHitList)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 解析击中的文档数据</span></span><br><span class="line">		<span class="keyword">var</span> resultList []<span class="type">string</span></span><br><span class="line">		<span class="keyword">for</span> _, searchHit := <span class="keyword">range</span> searchHitList &#123;</span><br><span class="line">			log.Println(<span class="string">&quot;searchHit.Id:&quot;</span>, searchHit.Id)</span><br><span class="line">			<span class="keyword">if</span> res, err := searchHit.Source.MarshalJSON(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;获取击中的文档数据 失败:&quot;</span>, err.Error())</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Println(<span class="string">&quot;获取击中的文档数据 完成:&quot;</span>, <span class="type">string</span>(res))</span><br><span class="line">				resultList = <span class="built_in">append</span>(resultList, <span class="type">string</span>(res))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		context.JSON(http.StatusOK, resultList)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := engine.Run(<span class="string">&quot;:&quot;</span> + configMap[<span class="string">&quot;app.port&quot;</span>]); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Panicln(<span class="string">&quot;Gin启动服务 失败:&quot;</span>, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="直接启动"><a href="#直接启动" class="headerlink" title="直接启动"></a>直接启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go build main.go</span><br><span class="line">./main</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过配置文件启动"><a href="#通过配置文件启动" class="headerlink" title="通过配置文件启动"></a>通过配置文件启动</h3><blockquote>
+<p><code>&lt;config&gt;</code>：配置文件路径</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go build main.go</span><br><span class="line">./main --config=&lt;config&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写一个Hook脚本"><a href="#编写一个Hook脚本" class="headerlink" title="编写一个Hook脚本"></a>编写一个Hook脚本</h2><ul>
+<li>每当文章被更新，自动触发Hook刷新所有文章数据</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>/root/hook.shell</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://127.0.0.1:8080/refresh</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx反向代理"><a href="#Nginx反向代理" class="headerlink" title="Nginx反向代理"></a>Nginx反向代理</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  es-search.loli.fj.cn;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;*&#x27;;</span><br><span class="line">        add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET, POST, PUT, DELETE&#x27;;</span><br><span class="line">        add_header &#x27;Access-Control-Allow-Headers&#x27; &#x27;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization&#x27;;</span><br><span class="line">        </span><br><span class="line">        proxy_pass  http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><ul>
+<li>设置双击放大镜图标的事件，加载Elasticsearch搜索引擎</li>
+</ul>
+<blockquote>
+<p><code>http://127.0.0.1:80/</code>：指定后端API的访问URL</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过Elasticsearch进行搜索</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">let</span> search = <span class="string">&quot;local&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">initElasticsearch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 放大镜图标</span></span><br><span class="line">    <span class="keyword">const</span> search_icon = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.search-pop-overlay .search-icon&quot;</span>);</span><br><span class="line">    <span class="comment">// 搜索框</span></span><br><span class="line">    <span class="keyword">const</span> search_input = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.search-pop-overlay .search-input&quot;</span>);</span><br><span class="line">    <span class="comment">// 搜索结果框</span></span><br><span class="line">    <span class="keyword">const</span> search_output = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.search-pop-overlay .search-result-container&quot;</span>);</span><br><span class="line">    <span class="comment">// 初始化搜索框内的文字为Local搜索</span></span><br><span class="line">    search_input.<span class="property">placeholder</span> = <span class="string">&quot;Local搜索...&quot;</span>;</span><br><span class="line">    <span class="comment">// 放大镜双击事件</span></span><br><span class="line">    search_icon.<span class="title function_">addEventListener</span>(<span class="string">&quot;dblclick&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (search === <span class="string">&quot;local&quot;</span>) &#123;</span><br><span class="line">            <span class="comment">// 搜索框内的文字切换为Elasticsearch搜索</span></span><br><span class="line">            search_input.<span class="property">placeholder</span> = <span class="string">&quot;Elasticsearch搜索...&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;恭喜你发现了一个彩蛋，现在可以通过Enter来使用Elasticsearch进行全文搜索了，点击放大镜将继续使用Local搜索&quot;</span>);</span><br><span class="line">            search = <span class="string">&quot;elasticsearch&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 克隆搜索框节点，以清除所有事件</span></span><br><span class="line">            <span class="keyword">const</span> new_search_input = search_input.<span class="title function_">cloneNode</span>(<span class="literal">true</span>);</span><br><span class="line">            search_input.<span class="property">parentNode</span>.<span class="title function_">append</span>(new_search_input);</span><br><span class="line">            search_input.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(search_input);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 克隆搜索图标节点，以清除所有事件</span></span><br><span class="line">            <span class="keyword">const</span> new_search_icon = search_icon.<span class="title function_">cloneNode</span>(<span class="literal">true</span>);</span><br><span class="line">            search_icon.<span class="property">parentNode</span>.<span class="title function_">append</span>(new_search_icon);</span><br><span class="line">            search_icon.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(new_search_icon);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 切换为Elasticsearch搜索</span></span><br><span class="line">            <span class="title function_">changeSearchToElasticsearch</span>(new_search_icon, new_search_input, search_output);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">changeSearchToElasticsearch</span>(<span class="params">search_icon, search_input, search_output</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Dec2Dig</span>(<span class="params">n1</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">let</span> n2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            n2 = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">3</span> - i);</span><br><span class="line">            <span class="keyword">if</span> (n1 &gt;= n2) &#123;</span><br><span class="line">                s += <span class="string">&quot;1&quot;</span>;</span><br><span class="line">                n1 = n1 - n2;</span><br><span class="line">            &#125; <span class="keyword">else</span></span><br><span class="line">                s += <span class="string">&quot;0&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Dig2Dec</span>(<span class="params">s</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> retV = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="property">length</span> === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">                retV += <span class="built_in">eval</span>(s.<span class="title function_">charAt</span>(i)) * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">3</span> - i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> retV;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Hex2Utf8</span>(<span class="params">s</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> retS = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">let</span> tempS = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">let</span> ss = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="property">length</span> === <span class="number">16</span>) &#123;</span><br><span class="line">            tempS = <span class="string">&quot;1110&quot;</span> + s.<span class="title function_">substring</span>(<span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">            tempS += <span class="string">&quot;10&quot;</span> + s.<span class="title function_">substring</span>(<span class="number">4</span>, <span class="number">10</span>);</span><br><span class="line">            tempS += <span class="string">&quot;10&quot;</span> + s.<span class="title function_">substring</span>(<span class="number">10</span>, <span class="number">16</span>);</span><br><span class="line">            <span class="keyword">let</span> sss = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">                retS += <span class="string">&quot;%&quot;</span>;</span><br><span class="line">                ss = tempS.<span class="title function_">substring</span>(i * <span class="number">8</span>, (<span class="built_in">eval</span>(i) + <span class="number">1</span>) * <span class="number">8</span>);</span><br><span class="line">                retS += sss.<span class="title function_">charAt</span>(<span class="title class_">Dig2Dec</span>(ss.<span class="title function_">substring</span>(<span class="number">0</span>, <span class="number">4</span>)));</span><br><span class="line">                retS += sss.<span class="title function_">charAt</span>(<span class="title class_">Dig2Dec</span>(ss.<span class="title function_">substring</span>(<span class="number">4</span>, <span class="number">8</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> retS;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Str2Hex</span>(<span class="params">s</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> c = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">let</span> n;</span><br><span class="line">        <span class="keyword">let</span> ss = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">        <span class="keyword">let</span> digS = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            c = s.<span class="title function_">charAt</span>(i);</span><br><span class="line">            n = ss.<span class="title function_">indexOf</span>(c);</span><br><span class="line">            digS += <span class="title class_">Dec2Dig</span>(<span class="built_in">eval</span>(n));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> digS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">EncodeUtf8</span>(<span class="params">s1</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> s = <span class="built_in">escape</span>(s1);</span><br><span class="line">        <span class="keyword">let</span> sa = s.<span class="title function_">split</span>(<span class="string">&quot;%&quot;</span>);</span><br><span class="line">        <span class="keyword">let</span> retV = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (sa[<span class="number">0</span>] !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">            retV = sa[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; sa.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sa[i].<span class="title function_">substring</span>(<span class="number">0</span>, <span class="number">1</span>) === <span class="string">&quot;u&quot;</span>) &#123;</span><br><span class="line">                retV += <span class="title class_">Hex2Utf8</span>(<span class="title class_">Str2Hex</span>(sa[i].<span class="title function_">substring</span>(<span class="number">1</span>, <span class="number">5</span>)));</span><br><span class="line">            &#125; <span class="keyword">else</span> retV += <span class="string">&quot;%&quot;</span> + sa[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> retV;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">search_to_elasticsearch</span>(<span class="params">keywords</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;正在使用Elasticsearch搜索&quot;</span>);</span><br><span class="line">        <span class="comment">// 清除结果列表</span></span><br><span class="line">        search_output.<span class="property">innerHTML</span> = <span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;search-stats&quot;&gt;正在使用Elasticsearch全文搜索...&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;hr&gt;</span></span><br><span class="line"><span class="string">            &lt;ul class=&quot;search-result-list&quot;&gt;&lt;/ul&gt;</span></span><br><span class="line"><span class="string">        `</span>;</span><br><span class="line">        <span class="keyword">const</span> result_header = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.search-pop-overlay .search-stats&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> result_ul = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.search-pop-overlay .search-result-list&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">fetch</span>(<span class="string">`http://127.0.0.1:80/search/<span class="subst">$&#123;keywords&#125;</span>`</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> response.<span class="title function_">json</span>();</span><br><span class="line">        &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">results</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (results == <span class="literal">null</span>) &#123;</span><br><span class="line">                result_header.<span class="property">innerHTML</span> = <span class="string">&quot;找到 0 个搜索结果&quot;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> result_count = results.<span class="property">length</span>;</span><br><span class="line">                result_header.<span class="property">innerHTML</span> = <span class="string">`找到 <span class="subst">$&#123;result_count&#125;</span> 个搜索结果`</span>;</span><br><span class="line">                <span class="comment">// 遍历结果集</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">let</span> result <span class="keyword">of</span> results) &#123;</span><br><span class="line">                    result = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(result);</span><br><span class="line">                    <span class="comment">// 解析标题</span></span><br><span class="line">                    <span class="keyword">const</span> title_base64 = result[<span class="string">&quot;title_base64&quot;</span>];</span><br><span class="line">                    <span class="keyword">let</span> title = <span class="variable language_">window</span>.<span class="title function_">atob</span>(title_base64);</span><br><span class="line">                    title = <span class="built_in">decodeURIComponent</span>(<span class="title class_">EncodeUtf8</span>(title));</span><br><span class="line">                    <span class="comment">// 解析路径</span></span><br><span class="line">                    <span class="keyword">const</span> path_base64 = result[<span class="string">&quot;path_base64&quot;</span>];</span><br><span class="line">                    <span class="keyword">let</span> path = <span class="variable language_">window</span>.<span class="title function_">atob</span>(path_base64);</span><br><span class="line">                    path = <span class="built_in">decodeURIComponent</span>(<span class="title class_">EncodeUtf8</span>(path));</span><br><span class="line">                    <span class="comment">// 创建超链接节点</span></span><br><span class="line">                    <span class="keyword">const</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">                    a.<span class="property">href</span> = <span class="string">`<span class="subst">$&#123;path&#125;</span>?highlight=<span class="subst">$&#123;keywords&#125;</span>`</span>;</span><br><span class="line">                    a.<span class="property">className</span> = <span class="string">&quot;search-result-title&quot;</span>;</span><br><span class="line">                    a.<span class="title function_">setAttribute</span>(<span class="string">&quot;data-pjax-state&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                    a.<span class="property">innerHTML</span> = title;</span><br><span class="line">                    <span class="comment">// 创建列表项节点</span></span><br><span class="line">                    <span class="keyword">const</span> li = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">                    <span class="comment">// 追加超链接节点到列表项节点</span></span><br><span class="line">                    li.<span class="title function_">append</span>(a);</span><br><span class="line">                    <span class="comment">// 追加列表项节点到无序列表节点</span></span><br><span class="line">                    result_ul.<span class="title function_">append</span>(li);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    search_icon.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="title function_">search_to_elasticsearch</span>(search_input.<span class="property">value</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    search_input.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (event.<span class="property">keyCode</span> === <span class="number">13</span>) &#123;</span><br><span class="line">            <span class="title function_">search_to_elasticsearch</span>(search_input.<span class="property">value</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">initElasticsearch</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><ul>
+<li>现在可以先打开搜索窗口，然后双击放大镜图标以激活Elasticsearch全文搜索，输入关键词后，通过Enter键来使用Elasticsearch进行全文搜索，点击放大镜将继续使用Local搜索</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/dist/images/reward/images/wxpay.png" alt="绯鞠 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/alipay.png" alt="绯鞠 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/qqpay.png" alt="绯鞠 qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/bitcoin.png" alt="绯鞠 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/ethereum.png" alt="绯鞠 ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/monero.png" alt="绯鞠 monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/dist/images/reward/images/paypal.png" alt="绯鞠 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+              <a href="/tags/Go/" rel="tag"># Go</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/29/JS%E6%B8%85%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" rel="prev" title="【笔记】JS清除节点的事件监听">
+                  <i class="fa fa-angle-left"></i> 【笔记】JS清除节点的事件监听
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/30/Nginx%E9%80%9A%E8%BF%87%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A6%81%E6%AD%A2%E6%8C%87%E5%AE%9AURL%E7%9A%84%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE/" rel="next" title="【笔记】Nginx通过正则表达式禁止指定URL的请求访问">
+                  【笔记】Nginx通过正则表达式禁止指定URL的请求访问 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">绯鞠</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><!-- 当前在线人数统计 -->
+<div>当前在线人数 <span id="current_visitors_count">0</span></div>
+<script src="/dist/js/current_visitors_count.js"></script>
+
+<!-- 网站运行时间统计 -->
+<div id="sitetime"></div>
+<script type="text/javascript" src="/dist/js/sitetime.js"></script>
+
+<!-- 网站标记 -->
+<div>
+    <!-- SSL标记 -->
+    <a href="https://ipw.cn/ssl/?site=loli.fj.cn" title="本站支持SSL安全访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问"
+                src="https://static.ipw.cn/icon/ssl-s6.svg"></a>
+    <!-- IPv6标记 -->
+    <a href="https://ipw.cn/ipv6webcheck/?site=loli.fj.cn" title="本站支持IPv6访问" target='_blank'
+       style="display: inline; border-bottom: 1px solid rgba(255, 255, 255, 0);"><img
+                style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问"
+                src="https://static.ipw.cn/icon/ipv6-certified-s6.svg"></a>
+</div>
+
+<!-- 滑翔机 -->
+<a target="_blank" rel="noopener" href="http://www.catb.org/hacker-emblem/" style="border-bottom: 0 solid #999;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg" style="width: 55px; height: 55px;">
+</a>
+
+<!-- 加载APlayer播放器 -->
+<link rel="stylesheet" href="/dist/aplayer/APlayer.min.css">
+<script type="text/javascript" src="/dist/aplayer/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/aplayer/index.js"></script>
+
+<!-- 加载看板娘 必须在渲染APlayer播放器之后渲染 -->
+<link rel="stylesheet" href="/dist/live2d/v2/waifu.css">
+<script type="text/javascript" src="/dist/live2d/v2/live2d.min.js"></script>
+<script type="text/javascript" src="/dist/live2d/v2/waifu.js"></script>
+
+<!-- 加载钢琴音 -->
+<script type="text/javascript" src="/dist/js/play_piano.js"></script>
+
+<!-- 渲染分类页面 PJAX排除 -->
+<script type="text/javascript" src="/categories/index.js" data-pjax=""></script>
+
+<!-- 渲染标签页面 PJAX排除 -->
+<script type="text/javascript" src="/tags/index.js" data-pjax=""></script>
+
+<!-- 渲染贡献页面 PJAX排除 -->
+<script type="text/javascript" src="/dist/echarts5/echarts.min.js"></script>
+<script type="text/javascript" src="/contribute/index.js" data-pjax=""></script>
+
+<!-- 渲染代码块中代码类型 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_type.js" data-pjax=""></script>
+
+<!-- 渲染代码块顶部按钮 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/code_block_button.js" data-pjax=""></script>
+
+<!-- 渲染打字机效果 PJAX排除 -->
+<script type="text/javascript" src="/dist/js/ai_excerpt_typing.js" data-pjax=""></script>
+
+<!-- 渲染加载门 -->
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+<link rel="stylesheet" href="/dist/css/loading_door.css">
+
+<!-- 其他JS代码 -->
+<script>
+
+    // 移除PJAX
+    function removePJAX() {
+        // 获取所有菜单的超链接
+        let menus = document.querySelectorAll(".site-nav a");
+        // 遍历这些超链接对象
+        for (let menu of menus) {
+            // 移除首页的PJAX
+            // if (menu.getAttribute("href")==="/") {
+            //     menu.setAttribute("data-pjax-state", "unload");
+            // }
+        }
+    }
+    removePJAX();
+
+    // 加载门关闭
+    function loadingDoorClose() {
+        // 加载门关闭
+        document.getElementById("loading-door-left").style.width = `${window.innerWidth / 2}px`;
+        document.getElementById("loading-door-right").style.width = `${window.innerWidth / 2}px`;
+        // 锁定滚动条
+        document.body.style.overflow = "hidden";
+        // 显示咒语
+        setTimeout(function () {
+            if (document.getElementById("loading-door-left").style.width === `${window.innerWidth / 2}px`) {
+                document.getElementById("loading-door-a").style.display = "inline";
+            }
+        }, 3000);
+    }
+
+    // 加载门打开
+    function loadingDoorOpen() {
+        // 加载门打开
+        document.getElementById("loading-door-left").style.width = "0";
+        document.getElementById("loading-door-right").style.width = "0";
+        // 解锁滚动条
+        document.body.style.overflow = "";
+        // 隐藏咒语
+        document.getElementById("loading-door-a").style.display = "none";
+    }
+
+    // PJAX渲染完成后执行
+    document.addEventListener("pjax:success", function () {
+        // 将滚动条置顶
+        document.documentElement.scrollTop = 0;
+        // 移除PJAX
+        removePJAX();
+    });
+
+    // PJAX开始请求后执行
+    document.addEventListener("pjax:send", function () {
+        // 加载门关闭
+        loadingDoorClose();
+    });
+    // PJAX结束请求后执行
+    document.addEventListener("pjax:complete", function () {
+        // 加载门打开
+        loadingDoorOpen();
+    });
+
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="/lib/pangu/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"/lib/mermaid/dist/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"/dist/js/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
