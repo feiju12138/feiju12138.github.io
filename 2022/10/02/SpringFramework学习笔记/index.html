@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言SpringFramework学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】SpringFramework学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2022/10/02/SpringFramework%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言SpringFramework学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-02T12:44:15.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.925Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/10/02/SpringFramework%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/10/02/SpringFramework%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2022/10/02/SpringFramework学习笔记/","title":"【笔记】SpringFramework学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】SpringFramework学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoC%E5%AE%B9%E5%99%A8%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">5.</span> <span class="nav-text">IoC容器快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEbean"><span class="nav-number">5.1.</span> <span class="nav-text">配置bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAIoC%E5%AE%B9%E5%99%A8%E5%B9%B6%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.2.</span> <span class="nav-text">创建IoC容器并获取bean对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DI%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">6.</span> <span class="nav-text">DI依赖注入快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87setter%E6%B3%A8%E5%85%A5"><span class="nav-number">6.1.</span> <span class="nav-text">通过setter注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.1.1.</span> <span class="nav-text">引用类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.1.2.</span> <span class="nav-text">基本类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E6%94%B9%E4%B8%BA%E4%B8%8D%E8%B5%8B%E5%80%BC"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">直接赋值改为不赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-1"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A5"><span class="nav-number">6.2.</span> <span class="nav-text">通过构造器注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">引用类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#new%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">new创建对象改为不创建对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-2"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">基本类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E6%94%B9%E4%B8%BA%E4%B8%8D%E8%B5%8B%E5%80%BC-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">直接赋值改为不赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-3"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">修改bean配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%BD%A2%E5%8F%82%E5%90%8D%E5%8F%AF%E8%83%BD%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.2.2.2.1.</span> <span class="nav-text">解决形参名可能被修改的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%BD%A2%E5%8F%82%E7%B1%BB%E5%9E%8B%E5%8F%AF%E8%83%BD%E9%87%8D%E5%A4%8D%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.2.2.2.2.</span> <span class="nav-text">解决形参类型可能重复的问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87setter%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="nav-number">6.3.</span> <span class="nav-text">通过setter自动装配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">引用类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-1"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-4"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">修改bean配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="nav-number">6.3.1.2.1.</span> <span class="nav-text">按类型自动装配</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="nav-number">6.3.1.2.2.</span> <span class="nav-text">按名称自动装配</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87setter%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.</span> <span class="nav-text">通过setter多数据注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.1.</span> <span class="nav-text">数组类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">6.4.1.1.</span> <span class="nav-text">注入基本类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-2"><span class="nav-number">6.4.1.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-5"><span class="nav-number">6.4.1.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">6.4.1.2.</span> <span class="nav-text">注入引用类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-3"><span class="nav-number">6.4.1.2.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-6"><span class="nav-number">6.4.1.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.2.</span> <span class="nav-text">List集合类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-1"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">注入基本类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-4"><span class="nav-number">6.4.2.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-7"><span class="nav-number">6.4.2.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-1"><span class="nav-number">6.4.2.2.</span> <span class="nav-text">注入引用类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-5"><span class="nav-number">6.4.2.2.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-8"><span class="nav-number">6.4.2.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.3.</span> <span class="nav-text">Set集合类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-2"><span class="nav-number">6.4.3.1.</span> <span class="nav-text">注入基本类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-6"><span class="nav-number">6.4.3.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-9"><span class="nav-number">6.4.3.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-2"><span class="nav-number">6.4.3.2.</span> <span class="nav-text">注入引用类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-7"><span class="nav-number">6.4.3.2.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-10"><span class="nav-number">6.4.3.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.4.</span> <span class="nav-text">Map集合类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-3"><span class="nav-number">6.4.4.1.</span> <span class="nav-text">注入基本类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-8"><span class="nav-number">6.4.4.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-11"><span class="nav-number">6.4.4.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-3"><span class="nav-number">6.4.4.2.</span> <span class="nav-text">注入引用类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-9"><span class="nav-number">6.4.4.2.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-12"><span class="nav-number">6.4.4.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Properties%E7%B1%BB%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.5.</span> <span class="nav-text">Properties类型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-4"><span class="nav-number">6.4.5.1.</span> <span class="nav-text">注入基本类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-10"><span class="nav-number">6.4.5.1.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-13"><span class="nav-number">6.4.5.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE-4"><span class="nav-number">6.4.5.2.</span> <span class="nav-text">注入引用类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#new%E5%AF%B9%E8%B1%A1%E6%94%B9%E4%B8%BA%E4%B8%8D%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-11"><span class="nav-number">6.4.5.2.1.</span> <span class="nav-text">new对象改为不创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-14"><span class="nav-number">6.4.5.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9A%84bean"><span class="nav-number">6.5.</span> <span class="nav-text">管理第三方的bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="nav-number">6.5.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B1Spring%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.5.2.</span> <span class="nav-text">由Spring管理对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B9%B6%E4%BD%BF%E7%94%A8bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.5.3.</span> <span class="nav-text">获取并使用bean对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E5%AE%9E%E4%BE%8B%E5%8C%96bean%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">Spring实例化bean的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.1.</span> <span class="nav-text">手动配置静态工厂方式获取bean对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E7%B1%BB"><span class="nav-number">7.1.1.</span> <span class="nav-text">创建静态工厂类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-15"><span class="nav-number">7.1.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.2.</span> <span class="nav-text">手动配置实例工厂方式获取bean对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E7%B1%BB-1"><span class="nav-number">7.2.1.</span> <span class="nav-text">创建静态工厂类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-16"><span class="nav-number">7.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.3.</span> <span class="nav-text">自动配置实例工厂方式获取bean对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B7%A5%E5%8E%82%E7%B1%BB"><span class="nav-number">7.3.1.</span> <span class="nav-text">创建一个工厂类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E7%B1%BB%E5%88%9B%E5%BB%BA%E9%9D%9E%E5%8D%95%E4%BE%8B%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">7.3.1.1.</span> <span class="nav-text">工厂类创建非单例的实例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-17"><span class="nav-number">7.3.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">8.</span> <span class="nav-text">bean的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95"><span class="nav-number">8.1.</span> <span class="nav-text">手动配置生命周期方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95"><span class="nav-number">8.1.1.</span> <span class="nav-text">定义bean的生命周期方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-18"><span class="nav-number">8.1.2.</span> <span class="nav-text">修改bean配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%94%80%E6%AF%81%E6%96%B9%E6%B3%95%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">关于销毁方法遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E5%85%B3%E9%97%ADSpring%E5%AE%B9%E5%99%A8"><span class="nav-number">8.1.2.1.1.</span> <span class="nav-text">手动关闭Spring容器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%85%B3%E9%97%AD%E9%92%A9%E5%AD%90"><span class="nav-number">8.1.2.1.2.</span> <span class="nav-text">注册关闭钩子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95"><span class="nav-number">8.2.</span> <span class="nav-text">自动配置生命周期方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95-1"><span class="nav-number">8.2.1.</span> <span class="nav-text">定义bean的生命周期方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9bean%E9%85%8D%E7%BD%AE-19"><span class="nav-number">8.2.2.</span> <span class="nav-text">修改bean配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E8%AF%BB%E5%8F%96properties%E6%96%87%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text">Spring读取properties文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAproperties%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">9.1.</span> <span class="nav-text">创建properties配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAxml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">9.2.</span> <span class="nav-text">创建xml配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">10.</span> <span class="nav-text">容器的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">10.1.</span> <span class="nav-text">容器的加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E8%B7%AF%E5%BE%84%E5%8A%A0%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">10.1.1.</span> <span class="nav-text">通过类路径加载配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%B7%AF%E5%BE%84%E5%8A%A0%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">10.1.2.</span> <span class="nav-text">通过文件系统路径加载配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E4%B8%AD%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.2.</span> <span class="nav-text">容器中获取bean对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Object%E7%B1%BB%E5%9E%8Bbean%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.2.1.</span> <span class="nav-text">获取Object类型bean对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%B1%BB%E5%9E%8B%E7%9A%84bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.2.2.</span> <span class="nav-text">获取指定类型的bean对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E7%B1%BB%E5%9E%8B%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96bean%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.2.3.</span> <span class="nav-text">按照类型自动获取bean对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory"><span class="nav-number">10.3.</span> <span class="nav-text">BeanFactory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean%E7%9A%84%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">bean的相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">12.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">13.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">14.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/10/02/SpringFramework%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】SpringFramework学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】SpringFramework学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-02 20:44:15" itemprop="dateCreated datePublished" datetime="2022-10-02T20:44:15+08:00">2022-10-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SpringFramework学习笔记</p>
+<span id="more"></span>
+
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ul>
+<li>IoC（Inversion of Control）控制反转<ul>
+<li>使用对象时，由主动new产生对象转换为由<strong>外部</strong>提供对象，此过程中对象创建控制权由程序转移到<strong>外部</strong>，此思想称为控制反转</li>
+</ul>
+</li>
+<li>Spring技术对IoC思想进行了实现<ul>
+<li>Spring提供了一个容器，称为<strong>IoC容器</strong>，用来充当IoC思想中的<strong>外部</strong></li>
+<li>IoC容器负责对象的创建、初始化等一系列工作，被创建或被管理的对象在IoC容器中称为<strong>Bean</strong></li>
+</ul>
+</li>
+<li>DI（Dependency Injection）注入<ul>
+<li>在容器中建立bean与bean之间的依赖关系的整个过程，称为依赖注入</li>
+</ul>
+</li>
+</ul>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight xml"><figcaption><span>pox.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><figure class="highlight java"><figcaption><span>src/main/java/com/dao/UserDao.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userDao.method()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>src/main/java/com/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">UserDao</span> <span class="variable">userDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDao</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        userDao.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IoC容器快速入门"><a href="#IoC容器快速入门" class="headerlink" title="IoC容器快速入门"></a>IoC容器快速入门</h2><ul>
+<li>IoC容器的创建和bean对象的获取</li>
+</ul>
+<h3 id="配置bean"><a href="#配置bean" class="headerlink" title="配置bean"></a>配置bean</h3><ul>
+<li>创建<code>applicationContext.xml</code>配置文件并配置bean</li>
+</ul>
+<blockquote>
+<p><code>&lt;bean id=&quot;&quot; class=&quot;&quot; /&gt;</code>、<code>&lt;bean id=&quot;&quot; class=&quot;&quot;&gt;&lt;/bean&gt;</code>：一个bean标签表示一个配置</p>
+<blockquote>
+<p><code>id=&quot;&quot;</code>：自定义bean的名称，必须唯一不重复，通常首字母小写<br><code>class=&quot;&quot;</code>：指定交给Spring管理的Java类，填写类的全局限定名</p>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建IoC容器并获取bean对象"><a href="#创建IoC容器并获取bean对象" class="headerlink" title="创建IoC容器并获取bean对象"></a>创建IoC容器并获取bean对象</h3><ul>
+<li>在程序的入口创建IoC容器对象，传递配置文件名</li>
+<li>通过bean的id获取由Spring管理的bean对象，得到Object类型的对象，可以强制类型转换</li>
+</ul>
+<blockquote>
+<p><code>getBean(&quot;&quot;)</code>：指定bean的id</p>
+</blockquote>
+<figure class="highlight java"><figcaption><span>src/main/java/com/Application</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 获取IoC容器对象</span></span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="comment">// 获取bean对象</span></span><br><span class="line">        <span class="type">UserService</span> <span class="variable">obj</span> <span class="operator">=</span> (UserService) applicationContext.getBean(<span class="string">&quot;userService&quot;</span>);</span><br><span class="line">        obj.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DI依赖注入快速入门"><a href="#DI依赖注入快速入门" class="headerlink" title="DI依赖注入快速入门"></a>DI依赖注入快速入门</h2><h3 id="通过setter注入"><a href="#通过setter注入" class="headerlink" title="通过setter注入"></a>通过setter注入</h3><h4 id="引用类型注入"><a href="#引用类型注入" class="headerlink" title="引用类型注入"></a>引用类型注入</h4><h5 id="new对象改为不创建对象"><a href="#new对象改为不创建对象" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h5><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// UserDao userDao = new UserDao();</span></span><br><span class="line">    UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserDao</span><span class="params">(UserDao userDao)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        userDao.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改bean配置"><a href="#修改bean配置" class="headerlink" title="修改bean配置"></a>修改bean配置</h5><ul>
+<li>通过<code>&lt;property /&gt;</code>配置，实现setter注入</li>
+<li>可以指定多个<code>&lt;property /&gt;</code>配置，实现注入多个</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名（指定<code>UserService.java</code>中<code>UserDao userDao;</code>中的对象名）<br><code>ref=&quot;&quot;</code>：指定变量值（指定<code>applicationContext.xml</code>中的<code>&lt;bean id=&quot;userDao&quot; class=&quot;com.dao.UserDao&quot;/&gt;</code>中bean的id或name）</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="基本类型注入"><a href="#基本类型注入" class="headerlink" title="基本类型注入"></a>基本类型注入</h4><h5 id="直接赋值改为不赋值"><a href="#直接赋值改为不赋值" class="headerlink" title="直接赋值改为不赋值"></a>直接赋值改为不赋值</h5><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// private int id = 1;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改bean配置-1"><a href="#修改bean配置-1" class="headerlink" title="修改bean配置"></a>修改bean配置</h5><ul>
+<li>通过<code>&lt;property /&gt;</code>配置，实现注入</li>
+<li>可以指定多个<code>&lt;property /&gt;</code>配置，实现注入多个</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名<br><code>value=&quot;&quot;</code>：指定变量值</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过构造器注入"><a href="#通过构造器注入" class="headerlink" title="通过构造器注入"></a>通过构造器注入</h3><h4 id="引用类型注入-1"><a href="#引用类型注入-1" class="headerlink" title="引用类型注入"></a>引用类型注入</h4><h5 id="new创建对象改为不创建对象"><a href="#new创建对象改为不创建对象" class="headerlink" title="new创建对象改为不创建对象"></a>new创建对象改为不创建对象</h5><ul>
+<li>通过构造方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UserDao userDao = new UserDao();</span></span><br><span class="line">    UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserService</span><span class="params">(UserDao userDao)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        userDao.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改bean配置-2"><a href="#修改bean配置-2" class="headerlink" title="修改bean配置"></a>修改bean配置</h5><ul>
+<li>通过<code>&lt;constructor-arg /&gt;</code>配置，实现构造器注入</li>
+<li>可以指定多个<code>&lt;constructor-arg /&gt;</code>配置，实现注入多个</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名（指定<code>UserService.java</code>中构造方法 <code>public UserService(UserDao userDao) &#123;&#125;</code>中的形参名）<br><code>ref=&quot;&quot;</code>：指定变量值（指定<code>applicationContext.xml</code>中的<code>&lt;bean id=&quot;userDao&quot; class=&quot;com.dao.UserDao&quot;/&gt;</code>中bean的id或name）</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="基本类型注入-1"><a href="#基本类型注入-1" class="headerlink" title="基本类型注入"></a>基本类型注入</h4><h5 id="直接赋值改为不赋值-1"><a href="#直接赋值改为不赋值-1" class="headerlink" title="直接赋值改为不赋值"></a>直接赋值改为不赋值</h5><ul>
+<li>通过构造方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// private int id = 1;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserService</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改bean配置-3"><a href="#修改bean配置-3" class="headerlink" title="修改bean配置"></a>修改bean配置</h5><ul>
+<li>通过<code>&lt;constructor-arg /&gt;</code>配置，实现构造器注入</li>
+<li>可以指定多个<code>&lt;constructor-arg /&gt;</code>配置，实现注入多个</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名<br><code>value=&quot;&quot;</code>：指定变量值</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="解决形参名可能被修改的问题"><a href="#解决形参名可能被修改的问题" class="headerlink" title="解决形参名可能被修改的问题"></a>解决形参名可能被修改的问题</h6><ul>
+<li>如果所有形参的类型均不相同，可以采用指定变量类型的方式解耦</li>
+</ul>
+<blockquote>
+<p><code>type=&quot;&quot;</code>：指定变量类型<br><code>value=&quot;&quot;</code>：指定变量值</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">type</span>=<span class="string">&quot;java.lang.String&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="解决形参类型可能重复的问题"><a href="#解决形参类型可能重复的问题" class="headerlink" title="解决形参类型可能重复的问题"></a>解决形参类型可能重复的问题</h6><ul>
+<li>可以直接指定形参的顺序，从0开始</li>
+</ul>
+<blockquote>
+<p><code>index=&quot;&quot;</code>：指定形参顺序<br><code>value=&quot;&quot;</code>：指定变量值</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过setter自动装配"><a href="#通过setter自动装配" class="headerlink" title="通过setter自动装配"></a>通过setter自动装配</h3><ul>
+<li>自动装配只能为引用类型自动装配</li>
+<li>如果手动装配的配置和自动装配的配置同时出现，那么自动装配的配置会失效</li>
+</ul>
+<h4 id="引用类型注入-2"><a href="#引用类型注入-2" class="headerlink" title="引用类型注入"></a>引用类型注入</h4><h5 id="new对象改为不创建对象-1"><a href="#new对象改为不创建对象-1" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h5><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// UserDao userDao = new UserDao();</span></span><br><span class="line">    UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserDao</span><span class="params">(UserDao userDao)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        userDao.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改bean配置-4"><a href="#修改bean配置-4" class="headerlink" title="修改bean配置"></a>修改bean配置</h5><ul>
+<li>添加被自动装配的bean配置</li>
+<li>在需要自动装配的bean上添加<code>autowire=&quot;&quot;</code>属性</li>
+</ul>
+<blockquote>
+<p><code>autowire=&quot;&quot;</code>指定自动装配方式</p>
+<blockquote>
+<p><code>byType</code>：按类型<br><code>byName</code>：按名称<br><code>constructor</code>：使用构造方法<br><code>default</code>：默认<br><code>no</code>：不使用自动装配</p>
+</blockquote>
+</blockquote>
+<h6 id="按类型自动装配"><a href="#按类型自动装配" class="headerlink" title="按类型自动装配"></a>按类型自动装配</h6><ul>
+<li>在定义被自动装配的bean时，不能有多个相同类型的bean</li>
+<li>如果是按类型自动装配，被自动装配的bean甚至可以不定义id</li>
+</ul>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byType&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="按名称自动装配"><a href="#按名称自动装配" class="headerlink" title="按名称自动装配"></a>按名称自动装配</h6><ul>
+<li>被自动装配bean的id需要与set方法的属性名相同（setUserDao -&gt; dao）</li>
+</ul>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byName&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过setter多数据注入"><a href="#通过setter多数据注入" class="headerlink" title="通过setter多数据注入"></a>通过setter多数据注入</h3><h4 id="数组类型注入"><a href="#数组类型注入" class="headerlink" title="数组类型注入"></a>数组类型注入</h4><h5 id="注入基本类型数据"><a href="#注入基本类型数据" class="headerlink" title="注入基本类型数据"></a>注入基本类型数据</h5><h6 id="new对象改为不创建对象-2"><a href="#new对象改为不创建对象-2" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[] array;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setArray</span><span class="params">(<span class="type">int</span>[] array)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.array = array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-5"><a href="#修改bean配置-5" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;array&gt;&lt;/array&gt;</code>：数组类型注入</p>
+<blockquote>
+<p><code>&lt;value&gt;&lt;/value&gt;</code>：指定变量值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span><span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注入引用类型数据"><a href="#注入引用类型数据" class="headerlink" title="注入引用类型数据"></a>注入引用类型数据</h5><h6 id="new对象改为不创建对象-3"><a href="#new对象改为不创建对象-3" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    UserDao[] array;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setArray</span><span class="params">(UserDao[] array)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.array = array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-6"><a href="#修改bean配置-6" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;array&gt;&lt;/array&gt;</code>：数组类型注入</p>
+<blockquote>
+<p><code>&lt;ref bean=&quot;&quot;/&gt;</code>：指定bean对象的id</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="List集合类型注入"><a href="#List集合类型注入" class="headerlink" title="List集合类型注入"></a>List集合类型注入</h4><h5 id="注入基本类型数据-1"><a href="#注入基本类型数据-1" class="headerlink" title="注入基本类型数据"></a>注入基本类型数据</h5><h6 id="new对象改为不创建对象-4"><a href="#new对象改为不创建对象-4" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setList</span><span class="params">(List&lt;String&gt; list)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.list = list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-7"><a href="#修改bean配置-7" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;list&gt;&lt;/list&gt;</code>：List集合类型注入</p>
+<blockquote>
+<p><code>&lt;value&gt;&lt;/value&gt;</code>：指定变量值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span><span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注入引用类型数据-1"><a href="#注入引用类型数据-1" class="headerlink" title="注入引用类型数据"></a>注入引用类型数据</h5><h6 id="new对象改为不创建对象-5"><a href="#new对象改为不创建对象-5" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;UserDao&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setList</span><span class="params">(List&lt;UserDao&gt; list)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.list = list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-8"><a href="#修改bean配置-8" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;list&gt;&lt;/list&gt;</code>：List集合类型注入</p>
+<blockquote>
+<p><code>&lt;ref bean=&quot;&quot;/&gt;</code>：指定bean对象的id</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Set集合类型注入"><a href="#Set集合类型注入" class="headerlink" title="Set集合类型注入"></a>Set集合类型注入</h4><h5 id="注入基本类型数据-2"><a href="#注入基本类型数据-2" class="headerlink" title="注入基本类型数据"></a>注入基本类型数据</h5><h6 id="new对象改为不创建对象-6"><a href="#new对象改为不创建对象-6" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Set&lt;String&gt; set;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSet</span><span class="params">(Set&lt;String&gt; set)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.set = set;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-9"><a href="#修改bean配置-9" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;set&gt;&lt;/set&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;value&gt;&lt;/value&gt;</code>：指定变量值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span><span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注入引用类型数据-2"><a href="#注入引用类型数据-2" class="headerlink" title="注入引用类型数据"></a>注入引用类型数据</h5><h6 id="new对象改为不创建对象-7"><a href="#new对象改为不创建对象-7" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Set&lt;UserDao&gt; set;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSet</span><span class="params">(Set&lt;UserDao&gt; set)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.set = set;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-10"><a href="#修改bean配置-10" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;set&gt;&lt;/set&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;ref bean=&quot;&quot;/&gt;</code>：指定bean对象的id</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Map集合类型注入"><a href="#Map集合类型注入" class="headerlink" title="Map集合类型注入"></a>Map集合类型注入</h4><h5 id="注入基本类型数据-3"><a href="#注入基本类型数据-3" class="headerlink" title="注入基本类型数据"></a>注入基本类型数据</h5><h6 id="new对象改为不创建对象-8"><a href="#new对象改为不创建对象-8" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, String&gt; map;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMap</span><span class="params">(Map&lt;String, String&gt; map)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.map = map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-11"><a href="#修改bean配置-11" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;map&gt;&lt;/map&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;entry key=&quot;&quot; value=&quot;&quot;/&gt;</code>：指定键值对</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;k&quot;</span> <span class="attr">value</span>=<span class="string">&quot;v&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注入引用类型数据-3"><a href="#注入引用类型数据-3" class="headerlink" title="注入引用类型数据"></a>注入引用类型数据</h5><h6 id="new对象改为不创建对象-9"><a href="#new对象改为不创建对象-9" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, UserDao&gt; map;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMap</span><span class="params">(Map&lt;String, UserDao&gt; map)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.map = map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-12"><a href="#修改bean配置-12" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;map&gt;&lt;/map&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;entry key=&quot;&quot; value=&quot;&quot;/&gt;</code>：指定键值对，值为引用类型</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;k&quot;</span> <span class="attr">value</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Properties类型注入"><a href="#Properties类型注入" class="headerlink" title="Properties类型注入"></a>Properties类型注入</h4><h5 id="注入基本类型数据-4"><a href="#注入基本类型数据-4" class="headerlink" title="注入基本类型数据"></a>注入基本类型数据</h5><h6 id="new对象改为不创建对象-10"><a href="#new对象改为不创建对象-10" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Properties properties;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties properties)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.properties = properties;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-13"><a href="#修改bean配置-13" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;props&gt;&lt;/props&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;prop key=&quot;&quot;&gt;&lt;/prop&gt;</code>：指定键值对</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;k&quot;</span>&gt;</span>v<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注入引用类型数据-4"><a href="#注入引用类型数据-4" class="headerlink" title="注入引用类型数据"></a>注入引用类型数据</h5><h6 id="new对象改为不创建对象-11"><a href="#new对象改为不创建对象-11" class="headerlink" title="new对象改为不创建对象"></a>new对象改为不创建对象</h6><ul>
+<li>通过<code>set()</code>方法为属性赋值</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/service/UserService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    Properties properties;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties properties)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.properties = properties;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改bean配置-14"><a href="#修改bean配置-14" class="headerlink" title="修改bean配置"></a>修改bean配置</h6><ul>
+<li>通过<code>&lt;property&gt;&lt;/property&gt;</code>配置，实现setter注入</li>
+</ul>
+<blockquote>
+<p><code>name=&quot;&quot;</code>：指定变量名</p>
+<blockquote>
+<p><code>&lt;props&gt;&lt;/props&gt;</code>：Set集合类型注入</p>
+<blockquote>
+<p><code>&lt;prop key=&quot;&quot;&gt;&lt;/prop&gt;</code>：指定键值对，值为引用类型</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.service.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;k&quot;</span>&gt;</span>userDao<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="管理第三方的bean"><a href="#管理第三方的bean" class="headerlink" title="管理第三方的bean"></a>管理第三方的bean</h3><ul>
+<li>以Druid为例</li>
+</ul>
+<h4 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h4><figure class="highlight xml"><figcaption><span>pom.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="由Spring管理对象"><a href="#由Spring管理对象" class="headerlink" title="由Spring管理对象"></a>由Spring管理对象</h4><figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql:///&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取并使用bean对象"><a href="#获取并使用bean对象" class="headerlink" title="获取并使用bean对象"></a>获取并使用bean对象</h4><figure class="highlight java"><figcaption><span>src/main/java/com/Application.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="type">DataSource</span> <span class="variable">dataSource</span> <span class="operator">=</span> (DataSource) applicationContext.getBean(<span class="string">&quot;dataSource&quot;</span>);</span><br><span class="line">        System.out.println(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Spring实例化bean的方式"><a href="#Spring实例化bean的方式" class="headerlink" title="Spring实例化bean的方式"></a>Spring实例化bean的方式</h2><ul>
+<li>使用无参构造实例化bean对象</li>
+<li>使用静态工厂实例化bean对象</li>
+<li>使用实例工厂实例化bean对象</li>
+</ul>
+<h3 id="手动配置静态工厂方式获取bean对象"><a href="#手动配置静态工厂方式获取bean对象" class="headerlink" title="手动配置静态工厂方式获取bean对象"></a>手动配置静态工厂方式获取bean对象</h3><h4 id="创建静态工厂类"><a href="#创建静态工厂类" class="headerlink" title="创建静态工厂类"></a>创建静态工厂类</h4><figure class="highlight java"><figcaption><span>src/main/java/com/factory/UserDaoFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> UserDao <span class="title function_">getUserDao</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDao</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改bean配置-15"><a href="#修改bean配置-15" class="headerlink" title="修改bean配置"></a>修改bean配置</h4><blockquote>
+<p><code>class=&quot;&quot;</code>：指定工厂类的全局限定名<br><code>factory-method=&quot;&quot;</code>：指定工厂类中获取对象的方法名</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.factory.UserDaoFactory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;getUserDao&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="手动配置实例工厂方式获取bean对象"><a href="#手动配置实例工厂方式获取bean对象" class="headerlink" title="手动配置实例工厂方式获取bean对象"></a>手动配置实例工厂方式获取bean对象</h3><h4 id="创建静态工厂类-1"><a href="#创建静态工厂类-1" class="headerlink" title="创建静态工厂类"></a>创建静态工厂类</h4><figure class="highlight java"><figcaption><span>src/main/java/com/factory/UserDaoFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> UserDao <span class="title function_">getUserDao</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDao</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改bean配置-16"><a href="#修改bean配置-16" class="headerlink" title="修改bean配置"></a>修改bean配置</h4><blockquote>
+<p><code>factory-bean=&quot;&quot;</code>：指定工厂类bean的id<br><code>factory-method=&quot;&quot;</code>：指定工厂类中获取对象的方法名</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDaoFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.factory.UserDaoFactory&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">factory-bean</span>=<span class="string">&quot;userDaoFactory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;getUserDao&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="自动配置实例工厂方式获取bean对象"><a href="#自动配置实例工厂方式获取bean对象" class="headerlink" title="自动配置实例工厂方式获取bean对象"></a>自动配置实例工厂方式获取bean对象</h3><h4 id="创建一个工厂类"><a href="#创建一个工厂类" class="headerlink" title="创建一个工厂类"></a>创建一个工厂类</h4><ul>
+<li>创建一个工厂类，实现<code>FactoryBean&lt;&gt;</code>接口，在<code>getObject()</code>方法中返回创建的 对象，在<code>getObjectType()</code>方法中返回创建的对象的类型</li>
+</ul>
+<blockquote>
+<p><code>FactoryBean&lt;&gt;</code>：指定创建的对象的类型作为泛型</p>
+</blockquote>
+<figure class="highlight java"><figcaption><span>src/main/java/com/factory/UserDaoFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.FactoryBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoFactory</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span>&lt;UserDao&gt; &#123;</span><br><span class="line">    <span class="comment">// 创建对象</span></span><br><span class="line">    <span class="keyword">public</span> UserDao <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDao</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 创建对象的类型</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> UserDao.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="工厂类创建非单例的实例"><a href="#工厂类创建非单例的实例" class="headerlink" title="工厂类创建非单例的实例"></a>工厂类创建非单例的实例</h5><ul>
+<li>默认工厂类创建的实例是单例的，通过重写<code>isSingleton()</code>方法，将返回值改为false，就可以创建出非单例的实例</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/com/factory/UserDaoFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.FactoryBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoFactory</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span>&lt;UserDao&gt; &#123;</span><br><span class="line">    <span class="comment">// 创建对象</span></span><br><span class="line">    <span class="keyword">public</span> UserDao <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDao</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 创建对象的类型</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> UserDao.class;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 配置是否是单例的：true单例、false非单例</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改bean配置-17"><a href="#修改bean配置-17" class="headerlink" title="修改bean配置"></a>修改bean配置</h4><blockquote>
+<p><code>class=&quot;&quot;</code>：配置工厂类的全局限定名</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.factory.UserDaoFactory&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h2><ul>
+<li>初始化容器 -&gt; 使用bean -&gt; 关闭&#x2F;销毁容器<ul>
+<li>初始化容器：创建对象 -&gt; 执行构造方法 -&gt; 执行属性注入（执行<code>set()</code>方法）-&gt; 执行bean的初始化方法</li>
+<li>使用bean：执行业务操作</li>
+<li>关闭&#x2F;销毁容器：执行销毁方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="手动配置生命周期方法"><a href="#手动配置生命周期方法" class="headerlink" title="手动配置生命周期方法"></a>手动配置生命周期方法</h3><h4 id="定义bean的生命周期方法"><a href="#定义bean的生命周期方法" class="headerlink" title="定义bean的生命周期方法"></a>定义bean的生命周期方法</h4><ul>
+<li>在类中定义一个用于初始化的方法，方法名任意，这个方法期望在bean对象创建后执行</li>
+<li>在类中定义一个用于销毁的方法，方法名任意，这个方法期望在bean对象销毁前执行</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/com/dao/UserDao.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userDao.init()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userDao.destroy()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改bean配置-18"><a href="#修改bean配置-18" class="headerlink" title="修改bean配置"></a>修改bean配置</h4><blockquote>
+<p><code>init-method=&quot;&quot;</code>：指定初始化方法的方法名<br><code>destroy-method=&quot;&quot;</code>：指定销毁方法的方法名</p>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span> <span class="attr">init-method</span>=<span class="string">&quot;init&quot;</span> <span class="attr">destroy-method</span>=<span class="string">&quot;destroy&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="关于销毁方法遇到的问题"><a href="#关于销毁方法遇到的问题" class="headerlink" title="关于销毁方法遇到的问题"></a>关于销毁方法遇到的问题</h5><ul>
+<li>正常情况下，<code>destroy()</code>方法不会被执行，因为关闭程序时JVM会直接关闭，所以不会执行<code>destroy()</code>方法</li>
+<li>如果想要执行 <code>destroy()</code>方法&#96;，可以手动关闭Spring容器或注册关闭钩子</li>
+</ul>
+<h6 id="手动关闭Spring容器"><a href="#手动关闭Spring容器" class="headerlink" title="手动关闭Spring容器"></a>手动关闭Spring容器</h6><ul>
+<li>通过<code>ClassPathXmlApplicationContext</code>类中的<code>close()</code>方法关闭Spring容器，这种方式比较暴力</li>
+<li>手动关闭Spring容器的方法只能在程序运行结束的位置添加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        applicationContext.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="注册关闭钩子"><a href="#注册关闭钩子" class="headerlink" title="注册关闭钩子"></a>注册关闭钩子</h6><ul>
+<li>通过<code>ClassPathXmlApplicationContext</code>类中的<code>registerShutdownHook()</code>方法来注册关闭钩子</li>
+<li>注册关闭钩子的方法可以在任意位置添加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        applicationContext.registerShutdownHook();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动配置生命周期方法"><a href="#自动配置生命周期方法" class="headerlink" title="自动配置生命周期方法"></a>自动配置生命周期方法</h3><h4 id="定义bean的生命周期方法-1"><a href="#定义bean的生命周期方法-1" class="headerlink" title="定义bean的生命周期方法"></a>定义bean的生命周期方法</h4><ul>
+<li>在类中实现<code>InitializingBean</code>接口，并重写<code>afterPropertiesSet()</code>方法，在方法中定义bean对象<code>set()</code>方法执行之后执行的操作</li>
+<li>在类中实现<code>DisposableBean</code>接口，并重写<code>destroy()</code>方法，在方法中定义bean对象销毁前执行的操作</li>
+</ul>
+<figure class="highlight java"><figcaption><span>src/main/java/com/dao/UserDao.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.DisposableBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.InitializingBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDao</span> <span class="keyword">implements</span> <span class="title class_">InitializingBean</span>, DisposableBean &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userDao.afterPropertiesSet()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userDao.destroy()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改bean配置-19"><a href="#修改bean配置-19" class="headerlink" title="修改bean配置"></a>修改bean配置</h4><ul>
+<li>不需要额外配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.dao.UserDao&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Spring读取properties文件"><a href="#Spring读取properties文件" class="headerlink" title="Spring读取properties文件"></a>Spring读取properties文件</h2><ul>
+<li>以Druid为例</li>
+</ul>
+<h3 id="创建properties配置文件"><a href="#创建properties配置文件" class="headerlink" title="创建properties配置文件"></a>创建properties配置文件</h3><ul>
+<li>将抽离的变量存放在properties配置文件中</li>
+</ul>
+<figure class="highlight properties"><figcaption><span>src/main/resources/druid.properties</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url.driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">url.url</span>=<span class="string">jdbc:mysql:///demo</span></span><br><span class="line"><span class="attr">url.username</span>=<span class="string"></span></span><br><span class="line"><span class="attr">url.password</span>=<span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建xml配置文件"><a href="#创建xml配置文件" class="headerlink" title="创建xml配置文件"></a>创建xml配置文件</h3><ol>
+<li>创建Spring配置文件，并修改<code>&lt;beans&gt;&lt;/beans&gt;</code>中的属性，开启context命名空间</li>
+<li>使用context空间加载properties文件</li>
+<li>将Spring配置文件中定义的值改为属性占位符<code>$&#123;&#125;</code></li>
+</ol>
+<blockquote>
+<p><code>&lt;context:property-placeholder/&gt;</code></p>
+<blockquote>
+<p><code>location=&quot;&quot;</code>：指定properties的文件路径，相对路径的根目录是<code>src/main/resources</code></p>
+<blockquote>
+<p><code>location=&quot;&lt;properties_file_1&gt;,&lt;properties_file_2&gt;&quot;</code>：引入多个配置文件时，用逗号隔开<br><code>location=&quot;*.properties&quot;</code>：引入全部</p>
+<blockquote>
+<p><code>location=&quot;classpath:*.properties&quot;</code>：从当前项目中（缺省值），引入全部<br><code>location=&quot;classpath*:*.properties&quot;</code>：从当前项目和引入的jar包中，引入全部</p>
+</blockquote>
+</blockquote>
+<p><code>system-properties-mode=&quot;&quot;</code>：系统属性模式</p>
+<blockquote>
+<p><code>NEVER</code>：不加载系统属性</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">                      http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                      http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">                      http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath*:*.properties&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url.driverClassName&#125;&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url.url&#125;&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url.username&#125;&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url.password&#125;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="容器的操作"><a href="#容器的操作" class="headerlink" title="容器的操作"></a>容器的操作</h2><h3 id="容器的加载"><a href="#容器的加载" class="headerlink" title="容器的加载"></a>容器的加载</h3><h4 id="通过类路径加载配置文件"><a href="#通过类路径加载配置文件" class="headerlink" title="通过类路径加载配置文件"></a>通过类路径加载配置文件</h4><ul>
+<li>相对路径的根目录是<code>src/main/resources</code>，多个配置文件用逗号隔开</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>, <span class="string">&quot;applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过文件系统路径加载配置文件"><a href="#通过文件系统路径加载配置文件" class="headerlink" title="通过文件系统路径加载配置文件"></a>通过文件系统路径加载配置文件</h4><ul>
+<li>相对路径的根目录是项目的根目录，多个配置文件用逗号隔开</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;src/main/resources/applicationContext.xml&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;src/main/resources/applicationContext.xml&quot;</span>, <span class="string">&quot;src/main/resources/applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>也可以使用绝对路径引入</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;/root/applicationContext.xml&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;/root/applicationContext.xml&quot;</span>, <span class="string">&quot;/root/applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="容器中获取bean对象"><a href="#容器中获取bean对象" class="headerlink" title="容器中获取bean对象"></a>容器中获取bean对象</h3><h4 id="获取Object类型bean对象"><a href="#获取Object类型bean对象" class="headerlink" title="获取Object类型bean对象"></a>获取Object类型bean对象</h4><ul>
+<li>获取Object类型bean对象，可以强制类型转换</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DataSource</span> <span class="variable">dataSource</span> <span class="operator">=</span> (DataSource) applicationContext.getBean(<span class="string">&quot;dataSource&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取指定类型的bean对象"><a href="#获取指定类型的bean对象" class="headerlink" title="获取指定类型的bean对象"></a>获取指定类型的bean对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DataSource</span> <span class="variable">dataSource</span> <span class="operator">=</span> applicationContext.getBean(<span class="string">&quot;dataSource&quot;</span>, DataSource.class);</span><br></pre></td></tr></table></figure>
+
+<h4 id="按照类型自动获取bean对象"><a href="#按照类型自动获取bean对象" class="headerlink" title="按照类型自动获取bean对象"></a>按照类型自动获取bean对象</h4><ul>
+<li>指定的类型在容器中必须只有唯一的bean对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataSourc <span class="type">e</span> <span class="variable">dataSource</span> <span class="operator">=</span> applicationContext.getBean(DataSource.class);</span><br></pre></td></tr></table></figure>
+
+<h3 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><ul>
+<li>旧版本Spring容器使用的是BeanFactory类型的对象</li>
+</ul>
+<blockquote>
+<p><code>Object.class</code>：根据数据类型获取bean对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Resource</span> <span class="variable">resource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line"><span class="type">BeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XmlBeanFactory</span>(resource);</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> beanFactory.getBean(Object.class);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>区别<ul>
+<li>ApplicationContext默认是立即加载bean，立即执行构造方法</li>
+<li>BeanFactory默认是延迟加载bean，延迟执行构造方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="bean的相关配置"><a href="#bean的相关配置" class="headerlink" title="bean的相关配置"></a>bean的相关配置</h2><blockquote>
+<p><code>id=&quot;&quot;</code>：定义bean的名称<br><code>name=&quot;&quot;</code>：定义bean的别名，多个别名之间可以用逗号、分号、空格分隔<br><code>class=&quot;&quot;</code>：定义bean的类型<br><code>scope=&quot;&quot;</code>：定义bean的作用范围</p>
+<blockquote>
+<p><code>singleton</code>：缺省值，单例的<br><code>prototype</code>：非单例的</p>
+</blockquote>
+<p><code>init-method=&quot;&quot;</code>：指定生命周期的初始化方法的方法名<br><code>destory-method=&quot;&quot;</code>：指定生命周期的销毁方法的方法名<br><code>autowire=&quot;&quot;</code>：指定自动装配方式</p>
+<blockquote>
+<p><code>byType</code>：按类型<br><code>byName</code>：按名称<br><code>constructor</code>：使用构造方法<br><code>default</code>：默认<br><code>no</code>：不使用自动装配</p>
+</blockquote>
+<p><code>factory-bean=&quot;&quot;</code>：指定实例工厂bean的id<br><code>factory-method=&quot;&quot;</code>：指定bean工厂方法的方法名，通常用于静态工厂或实例工厂<br><code>lazy-init=&quot;&quot;</code>：ApplicationContext实现延迟加载</p>
+<blockquote>
+<p><code>true</code>：开启延迟加载<br><code>false</code>：缺省值，关闭延迟加载</p>
+</blockquote>
+</blockquote>
+<figure class="highlight xml"><figcaption><span>src/main/resources/applicationContext.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">    <span class="attr">id</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">scope</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">init-method</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">destroy-method</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">autowire</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">factory-method</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">factory-bean</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">lazy-init</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>No Such B ean Definition Exception</p>
+<ul>
+<li><code>NoSuchBeanDefinitionException</code>：没找到bean定义，获取bean对象时指定的bean名称与xml中配置的bean名称不相同</li>
+<li><code>BeanCreateException</code>：bean创建异常，无参构造不存在导致bean对象创建失败</li>
+</ul>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1Fi4y1S7ix/">哔哩哔哩——黑马程序员</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/02/%E7%BD%91%E9%A1%B5%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="prev" title="【代码】网页上添加快捷键">
+                  <i class="fa fa-angle-left"></i> 【代码】网页上添加快捷键
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/06/SpringFramework%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" rel="next" title="【笔记】SpringFramework注解开发">
+                  【笔记】SpringFramework注解开发 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

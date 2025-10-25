@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Java的文件和目录操作学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Java的文件和目录操作">
+<meta property="og:url" content="https://loli.fj.cn/2020/02/12/Java%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Java的文件和目录操作学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-12T02:34:05.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.882Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2020/02/12/Java%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2020/02/12/Java%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/","path":"2020/02/12/Java的文件和目录操作/","title":"【笔记】Java的文件和目录操作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Java的文件和目录操作 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">文件对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">创建对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">一个参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">两个参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.1.</span> <span class="nav-text">文件或文件夹属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">获取文件大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">获取文件名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%88%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">获取父目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%80%E5%90%8E%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">获取最后修改时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">判断是否是文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">判断是否是目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.2.1.7.</span> <span class="nav-text">判断是否存在</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.2.</span> <span class="nav-text">新建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.3.</span> <span class="nav-text">新建目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B1%82%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">创建多层目录</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E6%88%96%E7%A9%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.4.</span> <span class="nav-text">删除文件或空目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8"><span class="nav-number">2.2.5.</span> <span class="nav-text">目录列表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E6%B5%81"><span class="nav-number">3.</span> <span class="nav-text">IO流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E6%B5%81"><span class="nav-number">3.1.</span> <span class="nav-text">字节流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%AF%BB%E5%8F%96%E6%B5%81%EF%BC%88%E8%BE%93%E5%85%A5%E6%B5%81%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">字节读取流（输入流）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#InputStream"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">InputStream</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileInputStream"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">FileInputStream</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-1"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">读取</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BufferedInputStream"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">BufferedInputStream</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-2"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-1"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">读取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%86%99%E5%87%BA%E6%B5%81%EF%BC%88%E8%BE%93%E5%87%BA%E6%B5%81%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">字节写出流（输出流）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#OutputStream"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">OutputStream</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileOutputStream"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">FileOutputStream</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-3"><span class="nav-number">3.1.2.2.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%99%E5%87%BA"><span class="nav-number">3.1.2.2.2.</span> <span class="nav-text">写出</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">BufferedOutputStream</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-4"><span class="nav-number">3.1.2.3.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%99%E5%87%BA-1"><span class="nav-number">3.1.2.3.2.</span> <span class="nav-text">写出</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="nav-number">3.2.</span> <span class="nav-text">字符流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E8%AF%BB%E5%8F%96%E6%B5%81%EF%BC%88%E8%BE%93%E5%85%A5%E6%B5%81%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">字符读取流（输入流）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Reader"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">Reader</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileReader"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">FileReader</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-5"><span class="nav-number">3.2.1.2.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-2"><span class="nav-number">3.2.1.2.2.</span> <span class="nav-text">读取</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BufferedReader"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">BufferedReader</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-3"><span class="nav-number">3.2.1.3.1.</span> <span class="nav-text">读取</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-6"><span class="nav-number">3.2.1.3.2.</span> <span class="nav-text">创建对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%86%99%E5%87%BA%E6%B5%81%EF%BC%88%E8%BE%93%E5%87%BA%E6%B5%81%EF%BC%89"><span class="nav-number">3.2.2.</span> <span class="nav-text">字符写出流（输出流）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Writer"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Writer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FileWriter"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">FileWriter</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-7"><span class="nav-number">3.2.2.2.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%99%E5%87%BA-2"><span class="nav-number">3.2.2.2.2.</span> <span class="nav-text">写出</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BufferedWriter"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">BufferedWriter</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-8"><span class="nav-number">3.2.2.3.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%99%E5%87%BA-3"><span class="nav-number">3.2.2.3.2.</span> <span class="nav-text">写出</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8A%E6%94%BE%E8%B5%84%E6%BA%90"><span class="nav-number">3.3.</span> <span class="nav-text">释放资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8A%E6%94%BE%E8%B5%84%E6%BA%90%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.3.1.</span> <span class="nav-text">释放资源工具类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#try-with-resource"><span class="nav-number">3.3.2.</span> <span class="nav-text">try with resource</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">文件复制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E5%AD%97%E8%8A%82%E8%AF%BB%E5%86%99"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">单字节读写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99"><span class="nav-number">3.4.0.2.</span> <span class="nav-text">批量数据读写</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectInputStream-ObjectOutputStream"><span class="nav-number">4.</span> <span class="nav-text">ObjectInputStream&#x2F;ObjectOutputStream</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E8%BE%93%E5%87%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.</span> <span class="nav-text">序列化输出对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%81%A2%E5%A4%8D%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.2.</span> <span class="nav-text">反序列化恢复对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serializable%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.3.</span> <span class="nav-text">Serializable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%88%90%E5%91%98"><span class="nav-number">4.4.</span> <span class="nav-text">不序列化成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%89%88%E6%9C%AC"><span class="nav-number">4.5.</span> <span class="nav-text">序列化版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E3%80%81%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">字符集、字符编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ASC-II"><span class="nav-number">5.1.</span> <span class="nav-text">ASC-II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iso-8859-1%EF%BC%88Latin-1%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">iso-8859-1（Latin-1）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cjk%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">5.3.</span> <span class="nav-text">cjk字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GBK"><span class="nav-number">5.3.1.</span> <span class="nav-text">GBK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode%E7%BC%96%E7%A0%81"><span class="nav-number">5.4.</span> <span class="nav-text">Unicode编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unicode%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6"><span class="nav-number">5.4.1.</span> <span class="nav-text">Unicode中文字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8%EF%BC%88Unicode-Transfermation-Format%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">UTF-8（Unicode Transfermation Format）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.</span> <span class="nav-text">Java的字符编码转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode%E8%BD%AC%E5%85%B6%E4%BB%96%E7%BC%96%E7%A0%81"><span class="nav-number">6.1.</span> <span class="nav-text">Unicode转其他编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BC%96%E7%A0%81%E8%BD%ACUnicode"><span class="nav-number">6.2.</span> <span class="nav-text">其他编码转Unicode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reader-Writer"><span class="nav-number">7.</span> <span class="nav-text">Reader&#x2F;Writer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">7.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AAint%E5%8F%82%E6%95%B0"><span class="nav-number">7.1.1.</span> <span class="nav-text">一个int参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">7.1.2.</span> <span class="nav-text">三个参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AAString%E5%8F%82%E6%95%B0"><span class="nav-number">7.1.3.</span> <span class="nav-text">一个String参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InputStreamReader-OutputStreamWriter"><span class="nav-number">7.2.</span> <span class="nav-text">InputStreamReader&#x2F;OutputStreamWriter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InputStreamReader"><span class="nav-number">7.2.1.</span> <span class="nav-text">InputStreamReader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OutputStreamWriter"><span class="nav-number">7.2.2.</span> <span class="nav-text">OutputStreamWriter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">8.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2020/02/12/Java%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Java的文件和目录操作 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Java的文件和目录操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-12 10:34:05" itemprop="dateCreated datePublished" datetime="2020-02-12T10:34:05+08:00">2020-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">Java学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java的文件和目录操作学习笔记</p>
+<span id="more"></span>
+
+<h2 id="文件对象"><a href="#文件对象" class="headerlink" title="文件对象"></a>文件对象</h2><ul>
+<li>封装一个磁盘路径字符串</li>
+</ul>
+<blockquote>
+<p>字符串</p>
+<blockquote>
+<p>文件路径<br>文件夹路径<br>不存在路径</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>提供对文件或文件夹的一些操作方法</li>
+</ul>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><ul>
+<li>不管文件是否存在，都会新建空文件</li>
+<li>如果目录不存在，会出异常</li>
+</ul>
+<h4 id="一个参数"><a href="#一个参数" class="headerlink" title="一个参数"></a>一个参数</h4><blockquote>
+<p><code>&lt;directory&gt;</code>：目录名<br><code>&lt;file&gt;</code>：文件名</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;&lt;directory&gt;/&lt;file&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="两个参数"><a href="#两个参数" class="headerlink" title="两个参数"></a>两个参数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;&lt;directory&gt;&quot;</span>, <span class="string">&quot;&lt;file&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="文件或文件夹属性"><a href="#文件或文件夹属性" class="headerlink" title="文件或文件夹属性"></a>文件或文件夹属性</h4><h5 id="获取文件大小"><a href="#获取文件大小" class="headerlink" title="获取文件大小"></a>获取文件大小</h5><ul>
+<li>获取文件的字节量</li>
+<li>对目录无效</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">length()</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取文件名"><a href="#获取文件名" class="headerlink" title="获取文件名"></a>获取文件名</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getName()</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取父目录"><a href="#获取父目录" class="headerlink" title="获取父目录"></a>获取父目录</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getParent()</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取最后修改时间"><a href="#获取最后修改时间" class="headerlink" title="获取最后修改时间"></a>获取最后修改时间</h5><ul>
+<li>毫秒值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getLastModified()</span><br></pre></td></tr></table></figure>
+
+<h5 id="判断是否是文件"><a href="#判断是否是文件" class="headerlink" title="判断是否是文件"></a>判断是否是文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isFile()</span><br></pre></td></tr></table></figure>
+
+<h5 id="判断是否是目录"><a href="#判断是否是目录" class="headerlink" title="判断是否是目录"></a>判断是否是目录</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isDirectory()</span><br></pre></td></tr></table></figure>
+
+<h5 id="判断是否存在"><a href="#判断是否存在" class="headerlink" title="判断是否存在"></a>判断是否存在</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exists()</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h4><ul>
+<li>如果文件已存在，则不新建，返回false</li>
+<li>如果父目录不存在，会出现异常</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createNewFile()</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建目录"><a href="#新建目录" class="headerlink" title="新建目录"></a>新建目录</h4><ul>
+<li>创建单层目录</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir()</span><br></pre></td></tr></table></figure>
+
+<h5 id="创建多层目录"><a href="#创建多层目录" class="headerlink" title="创建多层目录"></a>创建多层目录</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdirs()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除文件或空目录"><a href="#删除文件或空目录" class="headerlink" title="删除文件或空目录"></a>删除文件或空目录</h4><ul>
+<li>删除成功返回true，删除失败返回false</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete()</span><br></pre></td></tr></table></figure>
+
+<h4 id="目录列表"><a href="#目录列表" class="headerlink" title="目录列表"></a>目录列表</h4><ul>
+<li>获得String[]数组，存放文件、目录名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获得File[]数组，存放文件、目录的封装对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listFiles()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对文件、不存在的路径、无权进入的目录，列表方法返回null</li>
+</ul>
+<h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><ul>
+<li>抽象成数据在管道中流动</li>
+<li>单方向</li>
+</ul>
+<blockquote>
+<p>输入流，只能用来读取数据<br>输出流，只能用来输出数据</p>
+</blockquote>
+<ul>
+<li>数据只能从头到尾顺序流动一次</li>
+</ul>
+<h3 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h3><h4 id="字节读取流（输入流）"><a href="#字节读取流（输入流）" class="headerlink" title="字节读取流（输入流）"></a>字节读取流（输入流）</h4><h5 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a>InputStream</h5><ul>
+<li>父类为抽象类，不能创建对象</li>
+<li>字节流可以处理任何数据的文件</li>
+</ul>
+<h5 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个字节一个字节的读取</li>
+</ul>
+<h6 id="创建对象-1"><a href="#创建对象-1" class="headerlink" title="创建对象"></a>创建对象</h6><blockquote>
+<p><code>&lt;str&gt;</code>：字符串类型的文件路径</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(&lt;str&gt;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&lt;file&gt;</code>：封装文件路径的File对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(&lt;file&gt;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">FIS</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="comment">// 1. 创建对象</span></span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;~/Downloads/1.txt&quot;</span>);</span><br><span class="line">    <span class="comment">// 2. 开始读取</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((b=fin.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">        System.out.println(b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 释放资源</span></span><br><span class="line">    fin.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BufferedInputStream"><a href="#BufferedInputStream" class="headerlink" title="BufferedInputStream"></a>BufferedInputStream</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个数组一个数组的读取</li>
+<li>缓冲数组长度默认为8192</li>
+</ul>
+<h6 id="创建对象-2"><a href="#创建对象-2" class="headerlink" title="创建对象"></a>创建对象</h6><ul>
+<li>可以将任何InputStream子类作为对象传入参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(&lt;file&gt;);</span><br><span class="line"><span class="type">InputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fin);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&lt;len&gt;</code>：直接给定数组长度</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(&lt;file&gt;);</span><br><span class="line"><span class="type">InputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fin, &lt;len&gt;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="读取-1"><a href="#读取-1" class="headerlink" title="读取"></a>读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">BIS</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="comment">// 1. 创建对象</span></span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;~/Downloads/1.txt&quot;</span>);</span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fin);</span><br><span class="line">    <span class="comment">// 2. 开始读取</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((b=bis.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">        System.out.println(b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 释放资源</span></span><br><span class="line">    fin.close();</span><br><span class="line">    bis.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字节写出流（输出流）"><a href="#字节写出流（输出流）" class="headerlink" title="字节写出流（输出流）"></a>字节写出流（输出流）</h4><h5 id="OutputStream"><a href="#OutputStream" class="headerlink" title="OutputStream"></a>OutputStream</h5><ul>
+<li>父类为抽象类，不能创建对象</li>
+<li>字节流可以处理任何数据的文件</li>
+</ul>
+<h5 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个字节一个字节的写出</li>
+</ul>
+<h6 id="创建对象-3"><a href="#创建对象-3" class="headerlink" title="创建对象"></a>创建对象</h6><ul>
+<li>默认数据覆盖模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;file&gt;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据追加模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;str&gt;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="写出"><a href="#写出" class="headerlink" title="写出"></a>写出</h6><blockquote>
+<p><code>&lt;char&gt;</code>：需要写入的字符</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fos.write(&lt;<span class="type">char</span>&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="BufferedOutputStream"><a href="#BufferedOutputStream" class="headerlink" title="BufferedOutputStream"></a>BufferedOutputStream</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个数组一个数组的写出</li>
+<li>缓冲数组长度默认为8192</li>
+</ul>
+<h6 id="创建对象-4"><a href="#创建对象-4" class="headerlink" title="创建对象"></a>创建对象</h6><ul>
+<li>默认数据覆盖模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">OutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">OutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos, &lt;len&gt;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据追加模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">OutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos, &lt;len&gt;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="写出-1"><a href="#写出-1" class="headerlink" title="写出"></a>写出</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bos.write(&lt;<span class="type">char</span>&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h3><h4 id="字符读取流（输入流）"><a href="#字符读取流（输入流）" class="headerlink" title="字符读取流（输入流）"></a>字符读取流（输入流）</h4><h5 id="Reader"><a href="#Reader" class="headerlink" title="Reader"></a>Reader</h5><ul>
+<li>父类为抽象类，不能创建对象</li>
+<li>字符流只能处理文本数据的文件</li>
+</ul>
+<h5 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个字节一个字节的读取</li>
+</ul>
+<h6 id="创建对象-5"><a href="#创建对象-5" class="headerlink" title="创建对象"></a>创建对象</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(&lt;str&gt;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(&lt;file&gt;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="读取-2"><a href="#读取-2" class="headerlink" title="读取"></a>读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fr.read();</span><br></pre></td></tr></table></figure>
+
+<h5 id="BufferedReader"><a href="#BufferedReader" class="headerlink" title="BufferedReader"></a>BufferedReader</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个数组一个数组的读取</li>
+<li>缓冲数组长度默认为8192</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">Reader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(fr);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">Reader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(fr);</span><br></pre></td></tr></table></figure>
+
+<h6 id="读取-3"><a href="#读取-3" class="headerlink" title="读取"></a>读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">br.read();</span><br></pre></td></tr></table></figure>
+
+<h6 id="创建对象-6"><a href="#创建对象-6" class="headerlink" title="创建对象"></a>创建对象</h6><h4 id="字符写出流（输出流）"><a href="#字符写出流（输出流）" class="headerlink" title="字符写出流（输出流）"></a>字符写出流（输出流）</h4><h5 id="Writer"><a href="#Writer" class="headerlink" title="Writer"></a>Writer</h5><ul>
+<li>父类为抽象类，不能创建对象</li>
+<li>字符流只能处理文本数据的文件</li>
+</ul>
+<h5 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个字节一个字节的写出</li>
+</ul>
+<h6 id="创建对象-7"><a href="#创建对象-7" class="headerlink" title="创建对象"></a>创建对象</h6><ul>
+<li>默认数据覆盖模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Writer</span> <span class="variable">fw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(&lt;str&gt;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Writer</span> <span class="variable">fw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(&lt;file&gt;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据追加模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Writer</span> <span class="variable">fw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(&lt;str&gt;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="写出-2"><a href="#写出-2" class="headerlink" title="写出"></a>写出</h6><blockquote>
+<p><code>&lt;char&gt;</code>：可以写出任何类型数据，例如字符串</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fw.writer(&lt;<span class="type">char</span>&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h5><ul>
+<li>子类继承父类，可以创建对象</li>
+<li>是一个数组一个数组的写出</li>
+<li>缓冲数组长度默认为8192</li>
+</ul>
+<h6 id="创建对象-8"><a href="#创建对象-8" class="headerlink" title="创建对象"></a>创建对象</h6><ul>
+<li>默认数据覆盖模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Writer</span> <span class="variable">fw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(&lt;str&gt;);</span><br><span class="line"><span class="type">Writer</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(fw);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据追加模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Writer</span> <span class="variable">fw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(&lt;str&gt;, <span class="literal">true</span>);</span><br><span class="line"><span class="type">Writer</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(fw);</span><br></pre></td></tr></table></figure>
+
+<h6 id="写出-3"><a href="#写出-3" class="headerlink" title="写出"></a>写出</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bw.writer(&lt;<span class="type">char</span>&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h3><blockquote>
+<p><code>&lt;io&gt;</code>：输入或输出流对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        &lt;io&gt;.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="释放资源工具类"><a href="#释放资源工具类" class="headerlink" title="释放资源工具类"></a>释放资源工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">(Closeable c)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="try-with-resource"><a href="#try-with-resource" class="headerlink" title="try with resource"></a>try with resource</h4><ul>
+<li>jdk1.7对于IO自动资源管理的优化</li>
+<li>将创建流的代码作为try的参数传入，实现自动释放资源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (</span><br><span class="line">    <span class="comment">//0,创建读取流和写出流--字节流/高级流/普通流/字符流</span></span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>( <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(from) );</span><br><span class="line">    <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>( <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(to) );</span><br><span class="line">) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件复制"><a href="#文件复制" class="headerlink" title="文件复制"></a>文件复制</h3><h5 id="单字节读写"><a href="#单字节读写" class="headerlink" title="单字节读写"></a>单字节读写</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">copy</span><span class="params">(File from, File to)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(from);</span><br><span class="line">    <span class="type">FileOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(to);</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">    <span class="keyword">while</span>((b = in.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">        out.write(b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="批量数据读写"><a href="#批量数据读写" class="headerlink" title="批量数据读写"></a>批量数据读写</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">copy</span><span class="params">(File from, File to)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(from);</span><br><span class="line">    <span class="type">FileOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(to);</span><br><span class="line">    <span class="type">byte</span>[] buff = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">8192</span>];  <span class="comment">// 8k长度的数组</span></span><br><span class="line">    <span class="type">int</span> n;  <span class="comment">// 用来保存一批的数量</span></span><br><span class="line">    <span class="keyword">while</span>((n = in.read(buff)) != -<span class="number">1</span>) &#123;</span><br><span class="line">        out.write(buff, <span class="number">0</span>, n);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ObjectInputStream-ObjectOutputStream"><a href="#ObjectInputStream-ObjectOutputStream" class="headerlink" title="ObjectInputStream&#x2F;ObjectOutputStream"></a>ObjectInputStream&#x2F;ObjectOutputStream</h2><ul>
+<li><p>对象的序列化、反序列化</p>
+</li>
+<li><p>把对象的信息，按照固定的字节格式，转成一串字节序列，输出</p>
+</li>
+<li><p>被序列化的对象，必须实现Serializable借口</p>
+</li>
+</ul>
+<h3 id="序列化输出对象"><a href="#序列化输出对象" class="headerlink" title="序列化输出对象"></a>序列化输出对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">writeObject(Object obj)</span><br></pre></td></tr></table></figure>
+
+<h3 id="反序列化恢复对象"><a href="#反序列化恢复对象" class="headerlink" title="反序列化恢复对象"></a>反序列化恢复对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readObject(Object obj)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Serializable接口"><a href="#Serializable接口" class="headerlink" title="Serializable接口"></a>Serializable接口</h3><ul>
+<li>空接口</li>
+<li>标识接口，标识一个类，可以被序列化</li>
+</ul>
+<h3 id="不序列化成员"><a href="#不序列化成员" class="headerlink" title="不序列化成员"></a>不序列化成员</h3><ul>
+<li>static</li>
+</ul>
+<p>静态属于类，不随对象一起被序列化输出</p>
+<ul>
+<li>transient</li>
+</ul>
+<p>只在程序运行期间，在内从中临时存在，不随对象一起被序列化持久保存</p>
+<h3 id="序列化版本"><a href="#序列化版本" class="headerlink" title="序列化版本"></a>序列化版本</h3><ul>
+<li>控制旧版本数据，不允许恢复成新版本的类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> serialVersionUID</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自己不定义，编译器会添加默认版本id</li>
+</ul>
+<p>根据类的定义信息，计算产生一个id值</p>
+<h2 id="字符集、字符编码"><a href="#字符集、字符编码" class="headerlink" title="字符集、字符编码"></a>字符集、字符编码</h2><h3 id="ASC-II"><a href="#ASC-II" class="headerlink" title="ASC-II"></a>ASC-II</h3><ul>
+<li>范围：0~127</li>
+<li>英文字符、标点、指令字符</li>
+</ul>
+<h3 id="iso-8859-1（Latin-1）"><a href="#iso-8859-1（Latin-1）" class="headerlink" title="iso-8859-1（Latin-1）"></a>iso-8859-1（Latin-1）</h3><ul>
+<li>范围：0~255</li>
+<li>西欧字符</li>
+</ul>
+<h3 id="cjk字符集"><a href="#cjk字符集" class="headerlink" title="cjk字符集"></a>cjk字符集</h3><ul>
+<li>中国、日本、韩国字符集统称</li>
+</ul>
+<h4 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h4><ul>
+<li>中国国标码</li>
+<li>双字节编码</li>
+<li>包含21003个中文字符</li>
+</ul>
+<h3 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h3><ul>
+<li>统一码（万国码）</li>
+<li>有100万以上编码位</li>
+<li>常用字符表（双字节）</li>
+<li>生僻字符表（三字节或以上）</li>
+</ul>
+<h4 id="Unicode中文字符"><a href="#Unicode中文字符" class="headerlink" title="Unicode中文字符"></a>Unicode中文字符</h4><ul>
+<li>范围：<code>\u4e00</code>～<code>\u9fa5</code></li>
+<li>个数：20902个</li>
+</ul>
+<h3 id="UTF-8（Unicode-Transfermation-Format）"><a href="#UTF-8（Unicode-Transfermation-Format）" class="headerlink" title="UTF-8（Unicode Transfermation Format）"></a>UTF-8（Unicode Transfermation Format）</h3><ul>
+<li>Unicode的传输格式</li>
+<li>英文（单字节）</li>
+<li>某些字符（双字节）</li>
+<li>中文（三字节）</li>
+<li>特殊符号（四字节）</li>
+</ul>
+<h2 id="Java的字符编码转换"><a href="#Java的字符编码转换" class="headerlink" title="Java的字符编码转换"></a>Java的字符编码转换</h2><h3 id="Unicode转其他编码"><a href="#Unicode转其他编码" class="headerlink" title="Unicode转其他编码"></a>Unicode转其他编码</h3><ul>
+<li>转成系统默认编码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getBytes()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转成指定编码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getBytes(<span class="string">&quot;UTF-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他编码转Unicode"><a href="#其他编码转Unicode" class="headerlink" title="其他编码转Unicode"></a>其他编码转Unicode</h3><ul>
+<li>把系统默认的一组字节值，转成Unicode</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">String</span>(<span class="type">byte</span>[])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把指定编码的一组字节值，转成Unicode</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">String</span>(<span class="type">byte</span>[], <span class="string">&quot;UTF-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reader-Writer"><a href="#Reader-Writer" class="headerlink" title="Reader&#x2F;Writer"></a>Reader&#x2F;Writer</h2><ul>
+<li>字符流的抽象父类</li>
+</ul>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><h4 id="一个int参数"><a href="#一个int参数" class="headerlink" title="一个int参数"></a>一个int参数</h4><ul>
+<li>int四个字节中，末尾两个字节是char类型字符数据，只处理末尾两个字节的输出</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write(<span class="type">int</span> c)</span><br></pre></td></tr></table></figure>
+
+<h4 id="三个参数"><a href="#三个参数" class="headerlink" title="三个参数"></a>三个参数</h4><ul>
+<li>输出from开始的length个字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write(<span class="type">char</span>[], from, length)</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个String参数"><a href="#一个String参数" class="headerlink" title="一个String参数"></a>一个String参数</h4><ul>
+<li>输出字符串的全部字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write(String s)</span><br></pre></td></tr></table></figure>
+
+<h3 id="InputStreamReader-OutputStreamWriter"><a href="#InputStreamReader-OutputStreamWriter" class="headerlink" title="InputStreamReader&#x2F;OutputStreamWriter"></a>InputStreamReader&#x2F;OutputStreamWriter</h3><ul>
+<li>字符编码转换流</li>
+</ul>
+<h4 id="InputStreamReader"><a href="#InputStreamReader" class="headerlink" title="InputStreamReader"></a>InputStreamReader</h4><ul>
+<li>读取其他编码转成Unicode</li>
+</ul>
+<h4 id="OutputStreamWriter"><a href="#OutputStreamWriter" class="headerlink" title="OutputStreamWriter"></a>OutputStreamWriter</h4><ul>
+<li>把Unicode转成其他编码输出</li>
+</ul>
+<blockquote>
+<p><code>&lt;path&gt;</code>：文件路径</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;&lt;path&gt;&quot;</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;&lt;path&gt;&quot;</span>), <span class="string">&quot;UTF-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/10/%E6%9B%B4%E6%8D%A2ArchLinux%E6%9B%B4%E6%96%B0%E6%BA%90/" rel="prev" title="【笔记】更换 Arch Linux 更新源">
+                  <i class="fa fa-angle-left"></i> 【笔记】更换 Arch Linux 更新源
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/12/%E4%B9%B0%E6%B1%BD%E6%B0%B4/" rel="next" title="【代码】买汽水">
+                  【代码】买汽水 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

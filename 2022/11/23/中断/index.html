@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言中断学习笔记注意：本文所有代码均按照sdcc编译器代码规范编写，如果使用的Keli编译器，需要自行修改代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】中断">
+<meta property="og:url" content="https://loli.fj.cn/2022/11/23/%E4%B8%AD%E6%96%AD/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言中断学习笔记注意：本文所有代码均按照sdcc编译器代码规范编写，如果使用的Keli编译器，需要自行修改代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-23T04:26:59.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.945Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Microcontroller">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/11/23/%E4%B8%AD%E6%96%AD/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/11/23/%E4%B8%AD%E6%96%AD/","path":"2022/11/23/中断/","title":"【笔记】中断"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】中断 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="nav-number">3.</span> <span class="nav-text">外部中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%884%E7%A7%8D-2%E7%B1%BB%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">数字信号的种类（4种&#x2F;2类）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">外部中断请求类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STC12C5A60S2%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="nav-number">3.3.</span> <span class="nav-text">STC12C5A60S2使用外部中断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E4%B8%AD%E6%96%AD"><span class="nav-number">3.3.1.</span> <span class="nav-text">开中断</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E6%89%80%E6%9C%89%E4%B8%AD%E6%96%AD"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">关闭所有中断</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%97%E8%8A%82%E5%AF%BB%E5%9D%80"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">通过字节寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BD%8D%E5%AF%BB%E5%9D%80"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">通过位寻址</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD0"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">开启外部中断0</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%97%E8%8A%82%E5%AF%BB%E5%9D%80-1"><span class="nav-number">3.3.1.2.1.</span> <span class="nav-text">通过字节寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BD%8D%E5%AF%BB%E5%9D%80-1"><span class="nav-number">3.3.1.2.2.</span> <span class="nav-text">通过位寻址</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD1"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">开启外部中断1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%97%E8%8A%82%E5%AF%BB%E5%9D%80-2"><span class="nav-number">3.3.1.3.1.</span> <span class="nav-text">通过字节寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BD%8D%E5%AF%BB%E5%9D%80-2"><span class="nav-number">3.3.1.3.2.</span> <span class="nav-text">通过位寻址</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E5%BC%80%E5%90%AF%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD0%E5%92%8C%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD1"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">同时开启外部中断0和外部中断1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%97%E8%8A%82%E5%AF%BB%E5%9D%80-3"><span class="nav-number">3.3.1.4.1.</span> <span class="nav-text">通过字节寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BD%8D%E5%AF%BB%E5%9D%80-3"><span class="nav-number">3.3.1.4.2.</span> <span class="nav-text">通过位寻址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">指定中断请求类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%BD%8E%E7%94%B5%E5%B9%B3%E8%AF%B7%E6%B1%82%EF%BC%88%E4%B8%80%E4%B8%AA%E6%97%B6%E5%88%BB%EF%BC%89"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">中断请求类型设置为低电平请求（一个时刻）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8B%E9%99%8D%E6%B2%BF%E8%AF%B7%E6%B1%82%EF%BC%88%E4%B8%80%E4%B8%AA%E7%9E%AC%E9%97%B4%EF%BC%89"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">中断请求类型设置为下降沿请求（一个瞬间）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.3.</span> <span class="nav-text">指定中断处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E4%B8%AD%E6%96%AD%E7%9A%84%E6%8E%A5%E6%94%B6"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">阻止中断的接收</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.4.</span> <span class="nav-text">完整代码示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6-%E8%AE%A1%E6%95%B0%E5%99%A8%E4%B8%AD%E6%96%AD"><span class="nav-number">4.</span> <span class="nav-text">定时&#x2F;计数器中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6-%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E8%AE%A1%E6%95%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">定时&#x2F;计数器的计数方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6-%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E8%AE%A1%E6%95%B0%E5%86%85%E5%AE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">定时&#x2F;计数器的计数内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6-%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E6%97%B6%E9%97%B4%E8%AE%A1%E7%AE%97"><span class="nav-number">4.3.</span> <span class="nav-text">定时&#x2F;计数器的时间计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STC12C5A60S2%E4%BD%BF%E7%94%A8%E8%AE%A1%E6%95%B0%E5%99%A8%E4%B8%AD%E6%96%AD"><span class="nav-number">4.4.</span> <span class="nav-text">STC12C5A60S2使用计数器中断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.4.1.</span> <span class="nav-text">指定模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E8%AE%A1%E6%95%B0%E5%88%9D%E5%80%BC"><span class="nav-number">4.4.2.</span> <span class="nav-text">写入计数初值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%AE%9A%E6%97%B6-%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">4.4.3.</span> <span class="nav-text">开启定时&#x2F;计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">4.4.4.</span> <span class="nav-text">完整代码示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STC12C5A60S2%E4%BD%BF%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD"><span class="nav-number">4.5.</span> <span class="nav-text">STC12C5A60S2使用定时器中断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-2"><span class="nav-number">4.5.1.</span> <span class="nav-text">完整代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E65536%CE%BCs%E7%9A%84%E5%AE%9A%E6%97%B6"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">小于等于65536μs的定时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E4%BA%8E65536%CE%BCs%E7%9A%84%E5%AE%9A%E6%97%B6"><span class="nav-number">4.5.1.2.</span> <span class="nav-text">大于65536μs的定时</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AA%E6%94%B9%E5%8F%98%E6%A0%87%E8%AF%86"><span class="nav-number">4.5.1.2.1.</span> <span class="nav-text">只改变标识</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E5%8F%B7%E6%80%BB%E7%BB%93"><span class="nav-number">5.1.</span> <span class="nav-text">中断函数的中断向量号总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E6%80%BB%E7%BB%93"><span class="nav-number">5.2.</span> <span class="nav-text">寄存器总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E8%AE%A1%E6%95%B0%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">5.3.</span> <span class="nav-text">定时计数器工作方式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/11/23/%E4%B8%AD%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】中断 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】中断
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-23 12:26:59" itemprop="dateCreated datePublished" datetime="2022-11-23T12:26:59+08:00">2022-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>中断学习笔记<br>注意：本文所有代码均按照sdcc编译器代码规范编写，如果使用的Keli编译器，需要自行修改代码</p>
+<span id="more"></span>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>中断：打断CPU当前工作的一种事件</li>
+<li>中断源：所有可以引发中断的事件的集合<ul>
+<li>标准51单片机的中断源（5种&#x2F;3类）<ul>
+<li>外部中断：由单片机引脚输入的中断<ul>
+<li>外部中断0</li>
+<li>外部中断1</li>
+</ul>
+</li>
+<li>定时&#x2F;计数器中断：由定时&#x2F;计数器引起的中断<ul>
+<li>定时&#x2F;计数器0中断</li>
+<li>定时&#x2F;计数器1中断</li>
+</ul>
+</li>
+<li>串行中断：由串行通讯（发送串行数据、接收串行数据）引起的中断<ul>
+<li>串行中断</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>中断向量：中断函数的入口地址<ul>
+<li>在C51代码中，通常不直接使用中断向量，而是根据头文件中指定的指针变量来使用中断向量</li>
+</ul>
+</li>
+</ul>
+<h2 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h2><h3 id="数字信号的种类（4种-2类）"><a href="#数字信号的种类（4种-2类）" class="headerlink" title="数字信号的种类（4种&#x2F;2类）"></a>数字信号的种类（4种&#x2F;2类）</h3><ul>
+<li>电平信号<ul>
+<li>高电平信号</li>
+<li>低电平信号</li>
+</ul>
+</li>
+<li>边沿信号<ul>
+<li>上升沿信号</li>
+<li>下降沿信号</li>
+</ul>
+</li>
+</ul>
+<h3 id="外部中断请求类型"><a href="#外部中断请求类型" class="headerlink" title="外部中断请求类型"></a>外部中断请求类型</h3><ul>
+<li>标准51单片机支持的外部中断请求类型<ul>
+<li>低电平请求</li>
+<li>下降沿请求</li>
+</ul>
+</li>
+</ul>
+<h3 id="STC12C5A60S2使用外部中断"><a href="#STC12C5A60S2使用外部中断" class="headerlink" title="STC12C5A60S2使用外部中断"></a>STC12C5A60S2使用外部中断</h3><ol>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%BC%80%E4%B8%AD%E6%96%AD">开中断</a>：STC12C5A60S2的12引脚默认为P3.2端口、13引脚默认为P3.3端口。如果需要开中断，需要将12引脚切换为INT0端口、将13引脚设置为INT1端口</li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B">指定中断请求类型</a>（低电平请求、下降沿请求）：虽然标准51单片机支持2种中断请求，但是使用时只能设置1种，每次需要中断时，通过这1种中断请求实现中断</li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0">指定中断处理函数</a>：当检测到中断请求后，立即执行中断处理函数</li>
+</ol>
+<h4 id="开中断"><a href="#开中断" class="headerlink" title="开中断"></a>开中断</h4><ul>
+<li>通过IE寄存器实现开中断</li>
+<li>IE寄存器是可以位寻址的</li>
+<li>IE寄存器从第8位（最高位）到第1位（最低位）分别是：<code>EA</code>、<code>空</code>、<code>空</code>、<code>ES</code>、<code>ET1</code>、<code>EX1</code>、<code>ET0</code>、<code>EX0</code><ul>
+<li><code>EA</code>：中断总开（1）关（0）</li>
+<li><code>EX0</code>：外部中断0的开（1）关（0）</li>
+<li><code>EX1</code>：外部中断1的开（1）关（0）</li>
+<li><code>ET0</code>：定时&#x2F;计数器0的开（1）关（0）</li>
+<li><code>ET1</code>：定时&#x2F;计数器1的开（1）关（0）</li>
+<li><code>ES</code>：串行中断的开（1）关（0）</li>
+</ul>
+</li>
+</ul>
+<h5 id="关闭所有中断"><a href="#关闭所有中断" class="headerlink" title="关闭所有中断"></a>关闭所有中断</h5><h6 id="通过字节寻址"><a href="#通过字节寻址" class="headerlink" title="通过字节寻址"></a>通过字节寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IE = <span class="number">0x00</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="通过位寻址"><a href="#通过位寻址" class="headerlink" title="通过位寻址"></a>通过位寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EA = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="开启外部中断0"><a href="#开启外部中断0" class="headerlink" title="开启外部中断0"></a>开启外部中断0</h5><h6 id="通过字节寻址-1"><a href="#通过字节寻址-1" class="headerlink" title="通过字节寻址"></a>通过字节寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IE = <span class="number">0x81</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="通过位寻址-1"><a href="#通过位寻址-1" class="headerlink" title="通过位寻址"></a>通过位寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EA = <span class="number">1</span>;</span><br><span class="line">EX0 = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="开启外部中断1"><a href="#开启外部中断1" class="headerlink" title="开启外部中断1"></a>开启外部中断1</h5><h6 id="通过字节寻址-2"><a href="#通过字节寻址-2" class="headerlink" title="通过字节寻址"></a>通过字节寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IE = <span class="number">0x84</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="通过位寻址-2"><a href="#通过位寻址-2" class="headerlink" title="通过位寻址"></a>通过位寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EA = <span class="number">1</span>;</span><br><span class="line">EX1 = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="同时开启外部中断0和外部中断1"><a href="#同时开启外部中断0和外部中断1" class="headerlink" title="同时开启外部中断0和外部中断1"></a>同时开启外部中断0和外部中断1</h5><h6 id="通过字节寻址-3"><a href="#通过字节寻址-3" class="headerlink" title="通过字节寻址"></a>通过字节寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IE = <span class="number">0x85</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="通过位寻址-3"><a href="#通过位寻址-3" class="headerlink" title="通过位寻址"></a>通过位寻址</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EA = <span class="number">1</span>;</span><br><span class="line">EX0 = <span class="number">1</span>;</span><br><span class="line">EX1 = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定中断请求类型"><a href="#指定中断请求类型" class="headerlink" title="指定中断请求类型"></a>指定中断请求类型</h4><ul>
+<li><p>通过TCON（Timer Config）寄存器的低4位指定中断请求的类型</p>
+</li>
+<li><p>TCON寄存器是可以位寻址的</p>
+</li>
+<li><p>TCON寄存器从第4位到第1位分别是：<code>IE1</code>、<code>IT1</code>、<code>IE0</code>、<code>IT0</code></p>
+<ul>
+<li><code>IT0</code>：设置外部中断0的请求类型为低电平请求（0）或下降沿请求（1）</li>
+<li><code>IT1</code>：设置外部中断1的请求类型为低电平请求（0）或下降沿请求（1）</li>
+<li><code>IE0</code>：外部中断0的使能信号。当外部中断0接收到中断信号后，CPU会自动将<code>IE0</code>设置为1；当外部中断0的中断信号处理结束后，CPU会自动将<code>IE0</code>设置为0</li>
+<li><code>IE1</code>：外部中断1的使能信号。当外部中断1接收到中断信号后，CPU会自动将<code>IE1</code>设置为1；当外部中断0的中断信号处理结束后，CPU会自动将<code>IE1</code>设置为0</li>
+</ul>
+</li>
+<li><p>中断按键：将一个普通按键，一端接GND，另一端接INT0或INT1</p>
+</li>
+</ul>
+<h5 id="中断请求类型设置为低电平请求（一个时刻）"><a href="#中断请求类型设置为低电平请求（一个时刻）" class="headerlink" title="中断请求类型设置为低电平请求（一个时刻）"></a>中断请求类型设置为低电平请求（一个时刻）</h5><ul>
+<li>这种方式如果中断按键按下时间过长，会导致中断处理函数执行多次</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IT0 = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="中断请求类型设置为下降沿请求（一个瞬间）"><a href="#中断请求类型设置为下降沿请求（一个瞬间）" class="headerlink" title="中断请求类型设置为下降沿请求（一个瞬间）"></a>中断请求类型设置为下降沿请求（一个瞬间）</h5><ul>
+<li>这种方式如果中断按键按下出现抖动，会导致中断处理函数执行多次</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IT0 = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定中断处理函数"><a href="#指定中断处理函数" class="headerlink" title="指定中断处理函数"></a>指定中断处理函数</h4><ul>
+<li>无参数列表</li>
+<li>无返回值</li>
+<li>无需声明，通常放在整个程序最后</li>
+<li>函数名自定义</li>
+<li>必须指定中断向量号</li>
+<li>中断处理函数不能手动调用</li>
+</ul>
+<p>中断向量：用于控制中断的内存地址<br>中断向量号：用于标记中断的编号，方便编程</p>
+<blockquote>
+<p><code>interrupt &lt;num&gt;</code>：指定中断向量号，取值范围为0~4</p>
+<blockquote>
+<p><code>0</code>：外部中断0<br><code>1</code>：定时&#x2F;计数器中断0<br><code>2</code>：外部中断1<br><code>3</code>：定时&#x2F;计数器中断1<br><code>4</code>：串行终端</p>
+</blockquote>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">int0</span><span class="params">(<span class="type">void</span>)</span> interrupt &lt;num&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="阻止中断的接收"><a href="#阻止中断的接收" class="headerlink" title="阻止中断的接收"></a>阻止中断的接收</h5><ul>
+<li>当一个中断处理函数正在执行时，阻止中断的接收</li>
+<li>阻止中断的接收可以用来消除抖动</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">int0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 阻止中断的接收</span></span><br><span class="line">    EX0 = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 业务代码</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 还原中断的接收</span></span><br><span class="line">    EX0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="完整代码示例"><a href="#完整代码示例" class="headerlink" title="完整代码示例"></a>完整代码示例</h4><ul>
+<li>利用外部中断0实现中断</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;8052.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 指定开启外部中断0</span></span><br><span class="line">    IE = <span class="number">0x81</span>;</span><br><span class="line">    <span class="comment">// 指定外部中断0的终端请求类型为下降沿请求</span></span><br><span class="line">    IT0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定外部中断0的中断函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">int0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 阻止中断的接收</span></span><br><span class="line">    EX0 = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 业务代码</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 还原中断的接收</span></span><br><span class="line">    EX0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定时-计数器中断"><a href="#定时-计数器中断" class="headerlink" title="定时&#x2F;计数器中断"></a>定时&#x2F;计数器中断</h2><ul>
+<li><p>在标准51单片机上有2个16位的定时&#x2F;计数器</p>
+</li>
+<li><p>计数值：计数的总次数</p>
+</li>
+<li><p>计数初值：开始计数的起点</p>
+</li>
+<li><p>计数最大值：可以计数的上限</p>
+<ul>
+<li>51单片机做多可以计16位的数</li>
+</ul>
+</li>
+</ul>
+<h3 id="定时-计数器的计数方式"><a href="#定时-计数器的计数方式" class="headerlink" title="定时&#x2F;计数器的计数方式"></a>定时&#x2F;计数器的计数方式</h3><ul>
+<li>减计数：从计数初值（计数值）开始减到0。x86的PC使用的就是减计数的计数器</li>
+<li>加计数：从计数初值（最大值-计数值）开始加到计数器能力最大值。标准51单片机使用的就是加计数的计数器</li>
+</ul>
+<h3 id="定时-计数器的计数内容"><a href="#定时-计数器的计数内容" class="headerlink" title="定时&#x2F;计数器的计数内容"></a>定时&#x2F;计数器的计数内容</h3><ul>
+<li>定时器：数内部的时基（时间基准）</li>
+<li>计数器：数外部的脉冲信号周期（每个周期一高一低）</li>
+</ul>
+<h3 id="定时-计数器的时间计算"><a href="#定时-计数器的时间计算" class="headerlink" title="定时&#x2F;计数器的时间计算"></a>定时&#x2F;计数器的时间计算</h3><ul>
+<li>时钟周期：1个时钟周期 &#x3D; 1 &#x2F; 晶振的频率<ul>
+<li>如果51单片机接了一个<code>12MHz</code>的晶振，那么时钟周期为<code>1/12μs</code></li>
+</ul>
+</li>
+<li>机器周期：1个机器周期 &#x3D; 12 * 时钟周期<ul>
+<li>如果51单片机接了一个<code>12MHz</code>的晶振，那么机器周期为<code>1μs</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="STC12C5A60S2使用计数器中断"><a href="#STC12C5A60S2使用计数器中断" class="headerlink" title="STC12C5A60S2使用计数器中断"></a>STC12C5A60S2使用计数器中断</h3><ol>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%BC%80%E4%B8%AD%E6%96%AD">开中断</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E6%A8%A1%E5%BC%8F">指定模式</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%86%99%E5%85%A5%E8%AE%A1%E6%95%B0%E5%88%9D%E5%80%BC">写入计数初值</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%BC%80%E5%90%AF%E5%AE%9A%E6%97%B6-x2F-%E8%AE%A1%E6%95%B0%E5%99%A8">开启定时&#x2F;计数器</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0">指定中断处理函数</a>：当检测到中断请求后，立即执行中断处理函数</li>
+</ol>
+<h4 id="指定模式"><a href="#指定模式" class="headerlink" title="指定模式"></a>指定模式</h4><ul>
+<li>通过TMOD（Timer Model）寄存器指定模式</li>
+<li>TMOD寄存器是不可以位寻址的</li>
+<li>TMOD寄存器从第4位到第1位是用来设置定时&#x2F;计数器0的，分别是：<code>GATE</code>、C&#x2F;<span style="text-decoration: overline">T</span>、<code>M1</code>、<code>M0</code></li>
+<li>TMOD寄存器从第8位到第5位是用来设置定时&#x2F;计数器1的，分别是：<code>GATE</code>、C&#x2F;<span style="text-decoration: overline">T</span>、<code>M1</code>、<code>M0</code><ul>
+<li><code>GATE</code>：门控信号，用来指定定时&#x2F;计数器的开关的方式，1表示硬件开启，0表示软件开启</li>
+<li>C&#x2F;<span style="text-decoration: overline">T</span>：1表示工作在计数模式，0表示工作在定时模式</li>
+<li><code>M1</code>：用来设置工作方式的高位</li>
+<li><code>M0</code>：用来设置工作方式的低位</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>M1</th>
+<th>M0</th>
+<th>寄存器位数</th>
+<th>TH寄存器功能</th>
+<th>TL寄存器功能</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工作方式0</td>
+<td>0</td>
+<td>0</td>
+<td>13位</td>
+<td>-</td>
+<td>-</td>
+<td>为了向下兼容</td>
+</tr>
+<tr>
+<td>工作方式1</td>
+<td>0</td>
+<td>1</td>
+<td>16位</td>
+<td>存放计数初值的高位</td>
+<td>存放计数初值的低位</td>
+<td>只能手动载入初值</td>
+</tr>
+<tr>
+<td>工作方式2</td>
+<td>1</td>
+<td>0</td>
+<td>8位</td>
+<td>存放计数初值的备份</td>
+<td>存放计数初值</td>
+<td>可以自动载入初值</td>
+</tr>
+<tr>
+<td>工作方式3</td>
+<td>1</td>
+<td>1</td>
+<td>8位</td>
+<td>作为定时器</td>
+<td>作为计数器</td>
+<td>可以同时作为定时器和计数器的寄存器</td>
+</tr>
+</tbody></table>
+<h4 id="写入计数初值"><a href="#写入计数初值" class="headerlink" title="写入计数初值"></a>写入计数初值</h4><ul>
+<li>用2个初值寄存器存放初值，最大可以存放16位<ul>
+<li>定时&#x2F;计数器0：高8位用<code>TH0</code>寄存器，低8位用<code>TL0</code>寄存器</li>
+<li>定时&#x2F;计数器1：高8位用<code>TH1</code>寄存器，低8位用<code>TL1</code>寄存器</li>
+</ul>
+</li>
+</ul>
+<h4 id="开启定时-计数器"><a href="#开启定时-计数器" class="headerlink" title="开启定时&#x2F;计数器"></a>开启定时&#x2F;计数器</h4><ul>
+<li>通过TCON（Timer Config）寄存器的高4位指定定时&#x2F;计数器的开启</li>
+<li>TCON寄存器从第8位到第5位分别是：<code>TF1</code>、<code>TR1</code>、<code>TF0</code>、<code>TR0</code><ul>
+<li><code>TR0</code>：定时&#x2F;计数器0的软开（1）关（0）</li>
+<li><code>TR1</code>：定时&#x2F;计数器1的软开（1）关（0）</li>
+<li><code>TF0</code>：定时&#x2F;计数器的计数溢出标识，标识计数是（1）否（0）已完成</li>
+<li><code>TF1</code>：定时&#x2F;计数器的计数溢出标识，标识计数是（1）否（0）已完成</li>
+</ul>
+</li>
+</ul>
+<h4 id="完整代码示例-1"><a href="#完整代码示例-1" class="headerlink" title="完整代码示例"></a>完整代码示例</h4><ul>
+<li><p>通过按键，接收脉冲信号，累计5次开始中断</p>
+<ul>
+<li>在计数模式下，需要利用<code>T0</code>和<code>T1</code>引脚来接收脉冲信号，初始是高电平</li>
+<li>可以将<code>T0</code>和<code>T1</code>引脚接按键，实现发出脉冲信号</li>
+</ul>
+</li>
+<li><p>定时&#x2F;计数器完成计数后自动中断</p>
+</li>
+<li><p>进入中断后溢出标识会自动置0</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;8052.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 指定开启定时计数器0中断</span></span><br><span class="line">    IE = <span class="number">0x82</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定模式</span></span><br><span class="line">    <span class="comment">// 指定门控信号为软件开启</span></span><br><span class="line">    <span class="comment">// 指定工作在计数模式</span></span><br><span class="line">    <span class="comment">// 指定工作方式1</span></span><br><span class="line">    TMOD = <span class="number">0x05</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定计数初值</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">5</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">5</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0开启计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">timer0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 阻止计数</span></span><br><span class="line">    TR0 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 业务代码</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指定计数初值</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">5</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">5</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 恢复计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="STC12C5A60S2使用定时器中断"><a href="#STC12C5A60S2使用定时器中断" class="headerlink" title="STC12C5A60S2使用定时器中断"></a>STC12C5A60S2使用定时器中断</h3><ol>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%BC%80%E4%B8%AD%E6%96%AD">开中断</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E6%A8%A1%E5%BC%8F">指定模式</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%86%99%E5%85%A5%E8%AE%A1%E6%95%B0%E5%88%9D%E5%80%BC">写入计数初值</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E5%BC%80%E5%90%AF%E5%AE%9A%E6%97%B6-x2F-%E8%AE%A1%E6%95%B0%E5%99%A8">开启定时&#x2F;计数器</a></li>
+<li><a href="/2022/11/23/%E4%B8%AD%E6%96%AD/#%E6%8C%87%E5%AE%9A%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0">指定中断处理函数</a>：当检测到中断请求后，立即执行中断处理函数</li>
+</ol>
+<h4 id="完整代码示例-2"><a href="#完整代码示例-2" class="headerlink" title="完整代码示例"></a>完整代码示例</h4><h5 id="小于等于65536μs的定时"><a href="#小于等于65536μs的定时" class="headerlink" title="小于等于65536μs的定时"></a>小于等于65536μs的定时</h5><ul>
+<li><p>在定时时实际上是通过晶振的振动频率来数数，以达到定时的效果，12MHz的晶振机器周期为<code>1μs</code></p>
+</li>
+<li><p>由于在标准51单片机上有2个16位的定时&#x2F;计数器，没个定时&#x2F;计数器最大只能存储65536个数，所以每次计时只能累计<code>65536μs</code></p>
+</li>
+<li><p>设置一个50ms的定时器</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;8052.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 指定开启定时计数器0中断</span></span><br><span class="line">    IE = <span class="number">0x82</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定模式</span></span><br><span class="line">    <span class="comment">// 指定门控信号为软件开启</span></span><br><span class="line">    <span class="comment">// 指定工作在定时模式</span></span><br><span class="line">    <span class="comment">// 指定工作方式1</span></span><br><span class="line">    TMOD = <span class="number">0x01</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定时间初值（1ms=1000次）</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0开启计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">timer0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 阻止计数</span></span><br><span class="line">    TR0 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 业务代码</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指定计数初值</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 恢复计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="大于65536μs的定时"><a href="#大于65536μs的定时" class="headerlink" title="大于65536μs的定时"></a>大于65536μs的定时</h5><ul>
+<li><p>虽然每次计时最多只能累计<code>65536μs</code>，但是通过多次计时能实现更多时间的累计，其中每次计时的时间为时间基值</p>
+</li>
+<li><p>设置一个1s的定时器</p>
+<ul>
+<li>通过在时间基值为50ms的定时器，累计定时20次，实现1s的定时器</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;8052.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 指定开启定时计数器0中断</span></span><br><span class="line">    IE = <span class="number">0x82</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定模式</span></span><br><span class="line">    <span class="comment">// 指定门控信号为软件开启</span></span><br><span class="line">    <span class="comment">// 指定工作在定时模式</span></span><br><span class="line">    <span class="comment">// 指定工作方式1</span></span><br><span class="line">    TMOD = <span class="number">0x01</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定时间初值（1ms=1000次）</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0开启计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">timer0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 累加器</span></span><br><span class="line">    <span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阻止计数</span></span><br><span class="line">    TR0 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (++i == <span class="number">20</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 业务代码</span></span><br><span class="line">        ...</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 累加器置0</span></span><br><span class="line">        i = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指定计数初值</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 恢复计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="只改变标识"><a href="#只改变标识" class="headerlink" title="只改变标识"></a>只改变标识</h6><ul>
+<li>如果一个定时器需要反复使用，在定时器完成定时后，不立即执行业务代码，而是改为只改变预先设定的标识，这样能减小定时器的误差</li>
+<li>通过<code>bit</code>关键字可以定义一个布尔值，只能存放1或0，<code>bit</code>不能用<code>unsigned</code>关键字修饰</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;8052.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">bit flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 指定开启定时计数器0中断</span></span><br><span class="line">    IE = <span class="number">0x82</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定模式</span></span><br><span class="line">    <span class="comment">// 指定门控信号为软件开启</span></span><br><span class="line">    <span class="comment">// 指定工作在定时模式</span></span><br><span class="line">    <span class="comment">// 指定工作方式1</span></span><br><span class="line">    TMOD = <span class="number">0x01</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0指定时间初值（1ms=1000次）</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 为定时/计数器0开启计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 当标识位为1时，表示定时器完成定时</span></span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 业务代码</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="comment">// 标识位置0</span></span><br><span class="line">            flag = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">timer0</span><span class="params">(<span class="type">void</span>)</span> __interrupt 1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 累加器</span></span><br><span class="line">    <span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阻止计数</span></span><br><span class="line">    TR0 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (++i == <span class="number">20</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 标识位置1 </span></span><br><span class="line">        flag = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 累加器置0</span></span><br><span class="line">        i = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指定计数初值</span></span><br><span class="line">    TH0 = (<span class="number">65536</span> - <span class="number">50000</span>) / <span class="number">256</span>;</span><br><span class="line">    TL0 = (<span class="number">65536</span> - <span class="number">50000</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="comment">// 恢复计数</span></span><br><span class="line">    TR0 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="中断函数的中断向量号总结"><a href="#中断函数的中断向量号总结" class="headerlink" title="中断函数的中断向量号总结"></a>中断函数的中断向量号总结</h3><table>
+<thead>
+<tr>
+<th>中断向量号</th>
+<th>中断类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>外部中断0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>定时&#x2F;计数器中断0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>外部中断1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>定时&#x2F;计数器中断1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>串行终端</td>
+</tr>
+</tbody></table>
+<h3 id="寄存器总结"><a href="#寄存器总结" class="headerlink" title="寄存器总结"></a>寄存器总结</h3><table>
+<thead>
+<tr>
+<th>寄存器名</th>
+<th>用来定义的功能</th>
+<th>第8位</th>
+<th>第7位</th>
+<th>第6位</th>
+<th>第5位</th>
+<th>第4位</th>
+<th>第3位</th>
+<th>第2位</th>
+<th>第1位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IE</code></td>
+<td>寄存器的总开关</td>
+<td><code>EA</code></td>
+<td>-</td>
+<td>-</td>
+<td><code>ES</code></td>
+<td><code>ET1</code></td>
+<td><code>EX1</code></td>
+<td><code>ET0</code></td>
+<td><code>EX0</code></td>
+</tr>
+<tr>
+<td><code>TCON</code></td>
+<td>外部中断的使能信号、请求类型</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><code>IE1</code></td>
+<td><code>IT1</code></td>
+<td><code>IE0</code></td>
+<td><code>IT0</code></td>
+</tr>
+<tr>
+<td><code>TCON</code></td>
+<td>定时计数器的溢出标识、软开关</td>
+<td><code>TF1</code></td>
+<td><code>TR1</code></td>
+<td><code>TF0</code></td>
+<td><code>TR0</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TMOD</code></td>
+<td>定时计数器0的开关方式、定时&#x2F;计数模式、工作方式</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><code>GATE</code></td>
+<td>C&#x2F;<span style="text-decoration: overline">T</span></td>
+<td><code>M1</code></td>
+<td><code>M0</code></td>
+</tr>
+<tr>
+<td><code>TMOD</code></td>
+<td>定时计数器1的开关方式、定时&#x2F;计数模式、工作方式</td>
+<td><code>GATE</code></td>
+<td>C&#x2F;<span style="text-decoration: overline">T</span></td>
+<td><code>M1</code></td>
+<td><code>M0</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TH1</code></td>
+<td>定时计数器1的计数初值高8位</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TL1</code></td>
+<td>定时计数器1的计数初值低8位</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TH0</code></td>
+<td>定时计数器0的计数初值高8位</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TL0</code></td>
+<td>定时计数器0的计数初值低8位</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p><code>EA</code>：中断总开（1）关（0）<br><code>ES</code>：串行中断的开（1）关（0）<br><code>ET1</code>：定时&#x2F;计数器1的开（1）关（0）<br><code>EX1</code>：外部中断1的开（1）关（0）<br><code>ET0</code>：定时&#x2F;计数器0的开（1）关（0）<br><code>EX0</code>：外部中断0的开（1）关（0）<br><code>IE1</code>：外部中断1的使能信号。当外部中断1接收到中断信号后，CPU会自动将<code>IE1</code>设置为1；当外部中断0的中断信号处理结束后，CPU会自动将<code>IE1</code>设置为0<br><code>IT1</code>：设置外部中断1的请求类型为低电平请求（0）或下降沿请求（1）<br><code>IE0</code>：外部中断0的使能信号。当外部中断0接收到中断信号后，CPU会自动将<code>IE0</code>设置为1；当外部中断0的中断信号处理结束后，CPU会自动将<code>IE0</code>设置为0<br><code>IT0</code>：设置外部中断0的请求类型为低电平请求（0）或下降沿请求（1）<br><code>TF1</code>：定时&#x2F;计数器的计数溢出标识，标识计数是（1）否（0）已完成<br><code>TR1</code>：定时&#x2F;计数器1的软开（1）关（0）<br><code>TF0</code>：定时&#x2F;计数器的计数溢出标识，标识计数是（1）否（0）已完成<br><code>TR0</code>：定时&#x2F;计数器0的软开（1）关（0）<br><code>GATE</code>：门控信号，用来指定定时&#x2F;计数器的开关的方式，1表示硬件开启，0表示软件开启<br>C&#x2F;<span style="text-decoration: overline">T</span>：1表示工作在计数模式，0表示工作在定时模式<br><code>M1</code>：用来设置工作方式的高位<br><code>M0</code>：用来设置工作方式的低位</p>
+<h3 id="定时计数器工作方式总结"><a href="#定时计数器工作方式总结" class="headerlink" title="定时计数器工作方式总结"></a>定时计数器工作方式总结</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>M1</th>
+<th>M0</th>
+<th>寄存器位数</th>
+<th>TH寄存器功能</th>
+<th>TL寄存器功能</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工作方式0</td>
+<td>0</td>
+<td>0</td>
+<td>13位</td>
+<td>-</td>
+<td>-</td>
+<td>为了向下兼容</td>
+</tr>
+<tr>
+<td>工作方式1</td>
+<td>0</td>
+<td>1</td>
+<td>16位</td>
+<td>存放计数初值的高位</td>
+<td>存放计数初值的低位</td>
+<td>只能手动载入初值</td>
+</tr>
+<tr>
+<td>工作方式2</td>
+<td>1</td>
+<td>0</td>
+<td>8位</td>
+<td>存放计数初值的备份</td>
+<td>存放计数初值</td>
+<td>可以自动载入初值</td>
+</tr>
+<tr>
+<td>工作方式3</td>
+<td>1</td>
+<td>1</td>
+<td>8位</td>
+<td>作为定时器</td>
+<td>作为计数器</td>
+<td>可以同时作为定时器和计数器的寄存器</td>
+</tr>
+</tbody></table>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Microcontroller/" rel="tag"># Microcontroller</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/22/%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE%E4%B8%8B%E8%BD%BD/" rel="prev" title="【笔记】钉钉回放下载">
+                  <i class="fa fa-angle-left"></i> 【笔记】钉钉回放下载
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/23/STC12C5A60S2%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89/" rel="next" title="【笔记】STC12C5A60S2引脚定义">
+                  【笔记】STC12C5A60S2引脚定义 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

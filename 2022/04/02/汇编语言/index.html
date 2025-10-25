@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言汇编语言学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】汇编语言">
+<meta property="og:url" content="https://loli.fj.cn/2022/04/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言汇编语言学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-02T00:11:42.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.963Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Assembly">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/04/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/04/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/","path":"2022/04/02/汇编语言/","title":"【笔记】汇编语言"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】汇编语言 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOSBox"><span class="nav-number">3.</span> <span class="nav-text">DOSBox</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E7%9C%9F%E5%AE%9E%E7%A3%81%E7%9B%98%E5%B9%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.1.</span> <span class="nav-text">挂载真实磁盘并跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E6%8C%82%E8%BD%BD%E5%92%8C%E8%B7%B3%E8%BD%AC%E5%8A%A0%E5%85%A5%E5%88%B0%E5%90%AF%E5%8A%A8%E9%80%89%E9%A1%B9"><span class="nav-number">3.2.</span> <span class="nav-text">将挂载和跳转加入到启动选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%8F"><span class="nav-number">3.3.</span> <span class="nav-text">全屏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edit-com%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">edit.com的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8edit"><span class="nav-number">4.1.</span> <span class="nav-text">启动edit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E7%9B%98"><span class="nav-number">4.2.</span> <span class="nav-text">存盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8edit%E6%97%B6%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">启动edit时编辑文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">编辑汇编程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">5.1.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E5%AE%9A%E4%B9%89"><span class="nav-number">5.2.</span> <span class="nav-text">段定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E5%85%B3%E8%81%94"><span class="nav-number">5.3.</span> <span class="nav-text">段关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%81"><span class="nav-number">5.4.</span> <span class="nav-text">段地址传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%9C%B0%E5%9D%80"><span class="nav-number">5.5.</span> <span class="nav-text">符号地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">5.6.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%AE%B5"><span class="nav-number">5.7.</span> <span class="nav-text">代码段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%AE%B5"><span class="nav-number">5.8.</span> <span class="nav-text">数据段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="nav-number">5.8.1.</span> <span class="nav-text">定义数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E8%BE%9F%E7%A9%BA%E9%97%B4%E5%B9%B6%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">5.8.1.1.</span> <span class="nav-text">开辟空间并存入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%98%E5%85%A5%E5%AD%97%E7%AC%A6%E6%95%B0%E6%8D%AE"><span class="nav-number">5.8.1.1.1.</span> <span class="nav-text">存入字符数据</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AA%E5%BC%80%E8%BE%9F%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">5.8.1.2.</span> <span class="nav-text">只开辟空间不存入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E9%87%8D%E5%A4%8D%E4%BC%AA%E6%8C%87%E4%BB%A4%E5%BC%80%E8%BE%9F%E6%9B%B4%E5%A4%9A%E7%A9%BA%E9%97%B4"><span class="nav-number">5.8.1.3.</span> <span class="nav-text">利用重复伪指令开辟更多空间</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">5.8.2.</span> <span class="nav-text">获取数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">编译的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96"><span class="nav-number">6.1.</span> <span class="nav-text">汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">6.2.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">6.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug-exe%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">debug.exe的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8debug%E5%B0%86%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%BD%BD%E5%85%A5%E5%86%85%E5%AD%98"><span class="nav-number">7.1.</span> <span class="nav-text">使用debug将可执行程序载入内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">7.2.</span> <span class="nav-text">debug的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%80%E5%87%BA"><span class="nav-number">7.2.1.</span> <span class="nav-text">退出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E5%80%BC"><span class="nav-number">7.2.2.</span> <span class="nav-text">查看寄存器的值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%97%E5%88%B0%E7%9A%84%E5%80%BC"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">得到的值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%BD%93%E5%89%8D%E4%BB%A3%E7%A0%81%E6%AE%B5%E5%BC%80%E5%A7%8B%E5%90%91%E4%B8%8B%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="nav-number">7.2.3.</span> <span class="nav-text">从当前代码段开始向下反汇编</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.2.4.</span> <span class="nav-text">执行一条语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%88%B0%E6%96%AD%E7%82%B9%E5%9C%B0%E5%9D%80"><span class="nav-number">7.2.4.1.</span> <span class="nav-text">执行到断点地址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="nav-number">7.2.5.</span> <span class="nav-text">查看内存空间</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E6%AE%B5"><span class="nav-number">7.2.5.1.</span> <span class="nav-text">当前数据段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="nav-number">7.2.5.2.</span> <span class="nav-text">查看指定内存地址</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">8.1.</span> <span class="nav-text">直接寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%AF%BB%E5%9D%80"><span class="nav-number">8.2.</span> <span class="nav-text">寄存器寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%EF%BC%88%E5%AF%84%E5%AD%98%E5%99%A8%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%EF%BC%89"><span class="nav-number">8.3.</span> <span class="nav-text">间接寻址（寄存器间接寻址）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E6%95%B0%E5%AF%BB%E5%9D%80"><span class="nav-number">8.4.</span> <span class="nav-text">立即数寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="nav-number">9.</span> <span class="nav-text">汇编指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E6%95%B0"><span class="nav-number">9.1.</span> <span class="nav-text">存数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%AC%A6%E5%8F%B7%E5%9C%B0%E5%9D%80"><span class="nav-number">9.1.1.</span> <span class="nav-text">通过符号地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%AC%A6%E5%8F%B7%E5%9C%B0%E5%9D%80-%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-number">9.1.2.</span> <span class="nav-text">通过符号地址+偏移量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%9D%80"><span class="nav-number">9.1.3.</span> <span class="nav-text">通过真实地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E4%BC%AA%E6%8C%87%E4%BB%A4"><span class="nav-number">9.2.</span> <span class="nav-text">重复伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">9.3.</span> <span class="nav-text">加法指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">9.4.</span> <span class="nav-text">减法指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%9C%B0%E5%9D%80%E5%AD%98%E5%88%B0%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">9.5.</span> <span class="nav-text">将地址存到寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD"><span class="nav-number">9.6.</span> <span class="nav-text">中断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84DOS%E4%B8%AD%E6%96%AD"><span class="nav-number">9.6.1.</span> <span class="nav-text">常见的DOS中断</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EDOS"><span class="nav-number">9.6.1.1.</span> <span class="nav-text">返回DOS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOS%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">9.6.1.2.</span> <span class="nav-text">DOS键盘输入</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%A6%E5%9B%9E%E6%98%BE%E7%9A%84%E8%BE%93%E5%85%A5"><span class="nav-number">9.6.1.2.1.</span> <span class="nav-text">带回显的输入</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6%E5%9B%9E%E6%98%BE%E7%9A%84%E8%BE%93%E5%85%A5"><span class="nav-number">9.6.1.2.2.</span> <span class="nav-text">不带回显的输入</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOS%E5%B1%8F%E5%B9%95%E8%BE%93%E5%87%BA"><span class="nav-number">9.6.1.3.</span> <span class="nav-text">DOS屏幕输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E4%BB%BB%E6%84%8F%E9%94%AE%E9%80%80%E5%87%BA%E7%A8%8B%E5%BA%8F"><span class="nav-number">9.6.1.4.</span> <span class="nav-text">按任意键退出程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%9C%A8%E7%B3%BB%E7%BB%9F%E5%A0%86%E6%A0%88%E6%AE%B5"><span class="nav-number">9.7.</span> <span class="nav-text">将数据保存在系统堆栈段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%8B%E6%A0%88"><span class="nav-number">9.7.1.</span> <span class="nav-text">压栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E6%A0%88"><span class="nav-number">9.7.2.</span> <span class="nav-text">弹栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">9.8.</span> <span class="nav-text">交换数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F"><span class="nav-number">9.9.</span> <span class="nav-text">自增自减</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E1"><span class="nav-number">9.9.1.</span> <span class="nav-text">自增1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%87%8F1"><span class="nav-number">9.9.2.</span> <span class="nav-text">自减1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">9.10.</span> <span class="nav-text">逻辑运算指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">9.10.1.</span> <span class="nav-text">逻辑移位指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB"><span class="nav-number">9.10.1.1.</span> <span class="nav-text">循环左移</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB"><span class="nav-number">9.10.1.2.</span> <span class="nav-text">循环右移</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">9.11.</span> <span class="nav-text">控制转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B7%B3%E8%BD%AC%E7%82%B9"><span class="nav-number">9.11.1.</span> <span class="nav-text">设置跳转点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">9.11.2.</span> <span class="nav-text">无条件跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%EF%BC%88jump%EF%BC%89"><span class="nav-number">9.11.3.</span> <span class="nav-text">条件跳转（jump）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E7%9A%84%E5%88%A4%E6%96%AD"><span class="nav-number">9.11.3.1.</span> <span class="nav-text">有符号数的判断</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%EF%BC%9A%E5%88%A4%E6%96%AD%E7%9B%B8%E7%AD%89"><span class="nav-number">9.11.3.1.1.</span> <span class="nav-text">举例：判断相等</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%EF%BC%88loop%EF%BC%89"><span class="nav-number">9.11.4.</span> <span class="nav-text">条件跳转（loop）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#loop%E5%BE%AA%E7%8E%AF%E4%B8%8Edec-jnz%E5%BE%AA%E7%8E%AF"><span class="nav-number">9.11.4.1.</span> <span class="nav-text">loop循环与dec+jnz循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-number">9.12.</span> <span class="nav-text">按位逻辑运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">9.12.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E7%9B%B8%E4%B8%8E"><span class="nav-number">9.12.2.</span> <span class="nav-text">按位相与</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E7%9B%B8%E6%88%96"><span class="nav-number">9.12.3.</span> <span class="nav-text">按位相或</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E7%9B%B8%E9%9D%9E"><span class="nav-number">9.12.4.</span> <span class="nav-text">按位相非</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E7%9B%B8%E5%BC%82%E6%88%96"><span class="nav-number">9.12.5.</span> <span class="nav-text">按位相异或</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B"><span class="nav-number">9.13.</span> <span class="nav-text">接口编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E6%8E%A5%E5%8F%A3%E8%8A%AF%E7%89%87%E5%86%99%E5%85%A5B%E5%8F%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">9.13.1.</span> <span class="nav-text">向接口芯片写入B口数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E6%8E%A5%E5%8F%A3%E8%8A%AF%E7%89%87A%E5%8F%A3%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">9.13.2.</span> <span class="nav-text">从接口芯片A口读取数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF"><span class="nav-number">9.14.</span> <span class="nav-text">无限循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%AC%A6%E5%8F%B7%E5%9C%B0%E5%9D%80-1"><span class="nav-number">9.14.1.</span> <span class="nav-text">通过符号地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%86%99"><span class="nav-number">9.14.2.</span> <span class="nav-text">简写</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E5%87%8F%E9%80%9F"><span class="nav-number">10.</span> <span class="nav-text">软件方式实现减速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">11.</span> <span class="nav-text">子程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">11.1.</span> <span class="nav-text">定义子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">11.2.</span> <span class="nav-text">调用子程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/04/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】汇编语言 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】汇编语言
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-02 08:11:42" itemprop="dateCreated datePublished" datetime="2022-04-02T08:11:42+08:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>汇编语言学习笔记</p>
+<span id="more"></span>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li><code>edit.com</code>：编辑器</li>
+<li><code>masm.exe</code>：汇编程序</li>
+<li><code>link.exe</code>：链接程序</li>
+<li><code>debug.exe</code>：调试程序</li>
+</ul>
+<h2 id="DOSBox"><a href="#DOSBox" class="headerlink" title="DOSBox"></a>DOSBox</h2><ul>
+<li>虚拟的16位8086环境</li>
+</ul>
+<h3 id="挂载真实磁盘并跳转"><a href="#挂载真实磁盘并跳转" class="headerlink" title="挂载真实磁盘并跳转"></a>挂载真实磁盘并跳转</h3><ul>
+<li>在DOSBox中直接操作</li>
+</ul>
+<blockquote>
+<p><code>c</code>：挂在后的虚拟盘符<br><code>&lt;dir&gt;</code>：真实环境中的目录路径，不能包含中文</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount c &lt;<span class="built_in">dir</span>&gt;</span><br><span class="line"><span class="function">c:</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将挂载和跳转加入到启动选项"><a href="#将挂载和跳转加入到启动选项" class="headerlink" title="将挂载和跳转加入到启动选项"></a>将挂载和跳转加入到启动选项</h3><ul>
+<li>Windows上配置文件在软件根目录下（<code>C:\Program Files (x86)\DOSBox-0.74-3\</code>），双击启动选项批处理文件（<code>DOSBox 0.74-3 Options.bat</code>）后，会自动使用记事本打开配置文件（<code>%LocalAppData%\DOSBox\dosbox-0.74-3.conf</code>），在文件末尾追加配置</li>
+</ul>
+<figure class="highlight text"><figcaption><span>%LocalAppData%\DOSBox\dosbox-0.74-3.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount c &lt;dir&gt;</span><br><span class="line">c:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MacOS上的配置文件路径：<code>~/Library/Preferences/DOSBox 0.74-3 Preferences</code></li>
+</ul>
+<h3 id="全屏"><a href="#全屏" class="headerlink" title="全屏"></a>全屏</h3><ul>
+<li>Windows：<code>alt</code>+<code>enter</code></li>
+<li>MacOS：<code>option</code>+<code>return</code></li>
+</ul>
+<h2 id="edit-com的使用"><a href="#edit-com的使用" class="headerlink" title="edit.com的使用"></a>edit.com的使用</h2><h3 id="启动edit"><a href="#启动edit" class="headerlink" title="启动edit"></a>启动edit</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit</span><br></pre></td></tr></table></figure>
+
+<h3 id="存盘"><a href="#存盘" class="headerlink" title="存盘"></a>存盘</h3><ul>
+<li><code>alt</code>+<code>f</code>-&gt;<code>save</code></li>
+</ul>
+<h3 id="启动edit时编辑文件"><a href="#启动edit时编辑文件" class="headerlink" title="启动edit时编辑文件"></a>启动edit时编辑文件</h3><ul>
+<li>如果问价存在，则直接编辑</li>
+<li>如果文件不存在，则创建新文件开始编辑</li>
+</ul>
+<blockquote>
+<p><code>&lt;name&gt;</code>：文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编辑汇编程序"><a href="#编辑汇编程序" class="headerlink" title="编辑汇编程序"></a>编辑汇编程序</h2><ul>
+<li>创建一个.asm汇编源文件</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li>在<code>;</code>后写注释</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;注释</span><br></pre></td></tr></table></figure>
+
+<h3 id="段定义"><a href="#段定义" class="headerlink" title="段定义"></a>段定义</h3><ul>
+<li><p>创建汇编程序第一步是段定义，告诉操作系统程序需要几个段（最多只能定义4个段）</p>
+</li>
+<li><p>段定义时需要指明段名，段名实际上就是段地址的符号地址</p>
+<ul>
+<li>段的类型是由<strong>段关联</strong>和<strong>段地址传送</strong>决定的，而不是段名本身</li>
+</ul>
+</li>
+<li><p>段名命名规则</p>
+<ul>
+<li>只能存在字母、数字、下划线</li>
+<li>不能以数字开头</li>
+<li>字符不能超过8个，超过8个末尾将被舍去</li>
+</ul>
+</li>
+<li><p>段名命名习惯</p>
+<ul>
+<li>只要符合命名规则，段名可以任意定义</li>
+<li>通常将<strong>代码段</strong>命名为<code>code</code></li>
+<li>通常将<strong>数据段</strong>命名为<code>data</code></li>
+<li>通常将<strong>堆栈段</strong>命名为<code>stack</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">段名 segment</span><br><span class="line">    ...</span><br><span class="line">段名 ends</span><br></pre></td></tr></table></figure>
+
+<h3 id="段关联"><a href="#段关联" class="headerlink" title="段关联"></a>段关联</h3><ul>
+<li>段关联语句必须打在段定义指令后的第一行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">段名 segment</span><br><span class="line">    assume 寄存器:段名</span><br><span class="line"></span><br><span class="line">段名 ends</span><br></pre></td></tr></table></figure>
+
+<h3 id="段地址传送"><a href="#段地址传送" class="headerlink" title="段地址传送"></a>段地址传送</h3><ul>
+<li><p>除了代码段，其他段都需要段传送后，才可以决定段的类型</p>
+</li>
+<li><p>通过<code>mov</code>指令实现段地址传送，但是<code>mov</code>不允许将立即数存放到寄存器，所以需要借助通用寄存器</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">段名 segment</span><br><span class="line">    assume 寄存器:段名</span><br><span class="line">    </span><br><span class="line">    mov ax,data</span><br><span class="line">    mov ds,ax</span><br><span class="line">    </span><br><span class="line">段名 ends</span><br></pre></td></tr></table></figure>
+
+<h3 id="符号地址"><a href="#符号地址" class="headerlink" title="符号地址"></a>符号地址</h3><ul>
+<li>在指令之前写标号，标号是用于指向该指令所存放的地址的符号，被称作符号地址</li>
+<li>标号可以卸载指令正前方，也可以写在指令正上方</li>
+<li>不是每一个指令前都需要写标号，只有在需要获取其内存地址时才写标号，程序的第一个指令前一定要有标号</li>
+<li>代码执行之前需要书写开始标号，执行结束需要书写结束标号，开始标号通常使用<code>start</code>命名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">段名 segment</span><br><span class="line">    assume 寄存器名:段名</span><br><span class="line">    </span><br><span class="line">    标号1:</span><br><span class="line">    指令 目的操作数,源操作数</span><br><span class="line">    </span><br><span class="line">    标号2:指令 目的操作数,源操作数</span><br><span class="line">    </span><br><span class="line">段名 ends</span><br><span class="line"></span><br><span class="line">    end 标号1</span><br><span class="line">    end 标号2</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>伪指令：除了具体操作数的指令</li>
+<li>指令：具体操作数的指令<ul>
+<li>双操作指令<ul>
+<li><code>指令 目的操作数,源操作数</code></li>
+</ul>
+</li>
+<li>单操作指令<ul>
+<li><code>指令 目的操作数</code></li>
+<li><code>指令 源操作数</code></li>
+</ul>
+</li>
+<li>无操作数指令<ul>
+<li><code>指令</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><ul>
+<li>代码段通常放在所有段之后</li>
+<li>代码段不需要段地址传送</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">code segment</span><br><span class="line">    assume cs:code</span><br><span class="line">    </span><br><span class="line">    start:</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">    end start</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><ul>
+<li>数据段需要在代码段中定义<strong>段关联</strong>和<strong>段地址传送</strong></li>
+<li>当需要存储数据时，可以定义数据段</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">data segment</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">    assume cs:code,ds:data</span><br><span class="line">    </span><br><span class="line">    start:</span><br><span class="line">    mov ax,data</span><br><span class="line">    mov ds,ax</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">    end start</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义数据"><a href="#定义数据" class="headerlink" title="定义数据"></a>定义数据</h4><ul>
+<li><p>数据定义伪指令</p>
+<ul>
+<li>字节数据定义伪指令<ul>
+<li>字节数据伪指令使用<code>db</code>关键字，每次开辟1个字节的空间</li>
+</ul>
+</li>
+<li>字数据定义伪指令<ul>
+<li>字数据定义伪指令使用<code>dw</code>关键字，每次开辟2个字节的空间</li>
+</ul>
+</li>
+<li>双字数据定义定义伪指令<ul>
+<li>字数据定义伪指令使用<code>dd</code>关键字，每次开辟4个字节的空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多字节数据存储原则</p>
+<ul>
+<li>高字节存放在高地址</li>
+<li>低字节存放在低地址</li>
+</ul>
+</li>
+</ul>
+<h5 id="开辟空间并存入数据"><a href="#开辟空间并存入数据" class="headerlink" title="开辟空间并存入数据"></a>开辟空间并存入数据</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db 0,0,0</span><br><span class="line">dw 0,0,0</span><br><span class="line">dd 0,0,0</span><br></pre></td></tr></table></figure>
+
+<h6 id="存入字符数据"><a href="#存入字符数据" class="headerlink" title="存入字符数据"></a>存入字符数据</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dw &#x27;a&#x27;</span><br></pre></td></tr></table></figure>
+
+<h5 id="只开辟空间不存入数据"><a href="#只开辟空间不存入数据" class="headerlink" title="只开辟空间不存入数据"></a>只开辟空间不存入数据</h5><ul>
+<li>只开辟空间不存入数据，使用<code>?</code>作为占位符</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db ?,?,?</span><br><span class="line">dw ?,?,?</span><br><span class="line">dd ?,?,?</span><br></pre></td></tr></table></figure>
+
+<h5 id="利用重复伪指令开辟更多空间"><a href="#利用重复伪指令开辟更多空间" class="headerlink" title="利用重复伪指令开辟更多空间"></a>利用重复伪指令开辟更多空间</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db 重复次数 dup(?)</span><br><span class="line">dw 重复次数 dup(?)</span><br><span class="line">dd 重复次数 dup(?)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h4><ul>
+<li>定义数据前加上符号地址，通过符号地址即可获取数据，符号地址可以自定义名称</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">data segment</span><br><span class="line">    </span><br><span class="line">    符号地址 db 重复次数 dup(?)</span><br><span class="line">    符号地址 dw 重复次数 dup(?)</span><br><span class="line">    符号地址 dd 重复次数 dup(?)</span><br><span class="line">    </span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">    assume cs:code,ds:data</span><br><span class="line">    </span><br><span class="line">    start:</span><br><span class="line">    mov ax,data</span><br><span class="line">    mov ds,ax</span><br><span class="line">    </span><br><span class="line">    mov ax,符号地址</span><br><span class="line">    </span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">    end start</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译的过程"><a href="#编译的过程" class="headerlink" title="编译的过程"></a>编译的过程</h2><ul>
+<li>源文件 -汇编&gt; 目标文件 -链接&gt; 可执行文件</li>
+</ul>
+<h3 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h3><ul>
+<li>把.asm源文件汇编成.obj目标文件</li>
+</ul>
+<blockquote>
+<p><code>&lt;file&gt;</code>：.asm汇编源文件，<code>.asm</code>可省略</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">masm &lt;file&gt;</span><br><span class="line"></span><br><span class="line">Object filename:</span><br><span class="line">Source listing:</span><br><span class="line">Cross-reference:</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Object filename:</code>：询问生成的.obj文件名，如果直接回车不指定，则使用默认文件名<br><code>Source listing:</code>：询问生成的列表文件名，如果直接回车不指定，则不会生成列表文件<br><code>Cross-reference:</code>：询问生成的调试文件名，如果直接回车不指定，则不会生成调试文件</p>
+</blockquote>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><ul>
+<li>把.obj目标文件链接成.exe可执行文件</li>
+</ul>
+<blockquote>
+<p><code>&lt;file&gt;</code>：.obj目标文件，<code>.obj</code>可省略</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">link &lt;file&gt;</span><br><span class="line"></span><br><span class="line">Run File:</span><br><span class="line">List File:</span><br><span class="line">Libraries:</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Run File:</code>：询问生成的.exe文件名，如果直接回车不指定，则使用默认文件名</p>
+</blockquote>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><blockquote>
+<p><code>&lt;file&gt;</code>：.exe可执行文件，<code>.exe</code>可省略</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="debug-exe的使用"><a href="#debug-exe的使用" class="headerlink" title="debug.exe的使用"></a>debug.exe的使用</h2><h3 id="使用debug将可执行程序载入内存"><a href="#使用debug将可执行程序载入内存" class="headerlink" title="使用debug将可执行程序载入内存"></a>使用debug将可执行程序载入内存</h3><blockquote>
+<p><code>&lt;file&gt;</code>：.exe可执行文件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="debug的命令"><a href="#debug的命令" class="headerlink" title="debug的命令"></a>debug的命令</h3><h4 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-q</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看寄存器的值"><a href="#查看寄存器的值" class="headerlink" title="查看寄存器的值"></a>查看寄存器的值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r</span><br></pre></td></tr></table></figure>
+
+<h5 id="得到的值"><a href="#得到的值" class="headerlink" title="得到的值"></a>得到的值</h5><ul>
+<li>得到的除了所有寄存器的值，还有CPU下一条将要执行的指令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">段地址:偏移地址 代码的机器语言代码对应        指令 目的操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="从当前代码段开始向下反汇编"><a href="#从当前代码段开始向下反汇编" class="headerlink" title="从当前代码段开始向下反汇编"></a>从当前代码段开始向下反汇编</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-u</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行一条语句"><a href="#执行一条语句" class="headerlink" title="执行一条语句"></a>执行一条语句</h4><ul>
+<li>从下一条将要执行的语句执行一条语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-g</span><br></pre></td></tr></table></figure>
+
+<h5 id="执行到断点地址"><a href="#执行到断点地址" class="headerlink" title="执行到断点地址"></a>执行到断点地址</h5><ul>
+<li>从下一条将要执行的与执行到断点地址之前</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-g偏移地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看内存空间"><a href="#查看内存空间" class="headerlink" title="查看内存空间"></a>查看内存空间</h4><ul>
+<li>多次输入<code>d</code>，每次只显示一段</li>
+</ul>
+<h5 id="当前数据段"><a href="#当前数据段" class="headerlink" title="当前数据段"></a>当前数据段</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-d</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看指定内存地址"><a href="#查看指定内存地址" class="headerlink" title="查看指定内存地址"></a>查看指定内存地址</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-d偏移地址</span><br><span class="line"></span><br><span class="line">-d物理地址:偏移地址</span><br></pre></td></tr></table></figure>
+
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><ul>
+<li>寻找数据的方式</li>
+</ul>
+<h3 id="直接寻址"><a href="#直接寻址" class="headerlink" title="直接寻址"></a>直接寻址</h3><ul>
+<li>直接通过内存中的地址，从内存中寻找数据</li>
+</ul>
+<h3 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h3><ul>
+<li>直接通过寄存器名，从寄存器中寻找数据</li>
+</ul>
+<h3 id="间接寻址（寄存器间接寻址）"><a href="#间接寻址（寄存器间接寻址）" class="headerlink" title="间接寻址（寄存器间接寻址）"></a>间接寻址（寄存器间接寻址）</h3><ul>
+<li><p>将内存中地址值存放到寄存器，通过寄存器中存放的地址值间接寻找内存地址</p>
+</li>
+<li><p>可以存放地址的寄存器有：BX、BP、SI、DI</p>
+</li>
+</ul>
+<h3 id="立即数寻址"><a href="#立即数寻址" class="headerlink" title="立即数寻址"></a>立即数寻址</h3><ul>
+<li>直接通过立即数获取数据</li>
+</ul>
+<hr>
+<h2 id="汇编指令"><a href="#汇编指令" class="headerlink" title="汇编指令"></a>汇编指令</h2><ul>
+<li>汇编指令实质上就是机器语言的助记符，与机器语言没有本质区别，只不过程序员编程不需要记住复杂的二进制代码</li>
+<li>汇编指令不区分大小写</li>
+</ul>
+<h3 id="存数"><a href="#存数" class="headerlink" title="存数"></a>存数</h3><ul>
+<li>将源操作数放到目录操作数</li>
+</ul>
+<h4 id="通过符号地址"><a href="#通过符号地址" class="headerlink" title="通过符号地址"></a>通过符号地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov 目的操作数,源操作数符号地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过符号地址-偏移量"><a href="#通过符号地址-偏移量" class="headerlink" title="通过符号地址+偏移量"></a>通过符号地址+偏移量</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov 目的操作数,源操作数符号地址+偏移量</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过真实地址"><a href="#通过真实地址" class="headerlink" title="通过真实地址"></a>通过真实地址</h4><blockquote>
+<p><code>源操作数真实地址</code>：可以是真实地址值，也可以是寄存器中存储的内存真实地址</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov 目的操作数,[源操作数真实地址]</span><br><span class="line"></span><br><span class="line">mov 目的操作数,[DS:0000]</span><br></pre></td></tr></table></figure>
+
+<h3 id="重复伪指令"><a href="#重复伪指令" class="headerlink" title="重复伪指令"></a>重复伪指令</h3><ul>
+<li>将一部分代码重复执行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重复次数  dup (需要重复的代码)</span><br></pre></td></tr></table></figure>
+
+<h3 id="加法指令"><a href="#加法指令" class="headerlink" title="加法指令"></a>加法指令</h3><ul>
+<li>把源操作数与目的操作数相加，得到的结果放到目的操作数中</li>
+<li>源操作数可以是立即数，目的操作数不可以是立即数</li>
+<li>目的操作数是寄存器的时候，最好给寄存器初始化（<code>mov 寄存器,0</code>）</li>
+<li>不可以在两个存储器间直接操作，必须借助寄存器，将立即数存到内存除外</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add 目的操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h3 id="减法指令"><a href="#减法指令" class="headerlink" title="减法指令"></a>减法指令</h3><ul>
+<li>目的操作数减源操作数，得到的结果放到目的操作数中</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub 目的操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>目的操作数减源操作数，得到的结果不放到目的操作数中，结果只用作影响寄存器标识位</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmp 目的操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h3 id="将地址存到寄存器"><a href="#将地址存到寄存器" class="headerlink" title="将地址存到寄存器"></a>将地址存到寄存器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lea 可以存放地址的寄存器,符号地址</span><br><span class="line"></span><br><span class="line">;获取地址所指向的数</span><br><span class="line">mov 寄存器,[可以存放地址的寄存器]</span><br></pre></td></tr></table></figure>
+
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><ul>
+<li>中断号只能向AH寄存器中存放</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov AH,中断号</span><br><span class="line">int 中断地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见的DOS中断"><a href="#常见的DOS中断" class="headerlink" title="常见的DOS中断"></a>常见的DOS中断</h4><blockquote>
+<p><code>21H</code>：DOS功能中断</p>
+</blockquote>
+<h5 id="返回DOS"><a href="#返回DOS" class="headerlink" title="返回DOS"></a>返回DOS</h5><ul>
+<li>在Windows平台下，写完8086汇编代码后，需要返回DOS，如果不写返回DOS的代码，DOS将中止</li>
+<li>仿真环境下不需要返回DOS</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,4ch</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<h5 id="DOS键盘输入"><a href="#DOS键盘输入" class="headerlink" title="DOS键盘输入"></a>DOS键盘输入</h5><ul>
+<li>获取键盘输入的一个字符，将ASCII码值存到AL寄存器中</li>
+<li>ASCII码转数字：<code>-30H</code>，数字转ASCII码：<code>+30H</code></li>
+</ul>
+<h6 id="带回显的输入"><a href="#带回显的输入" class="headerlink" title="带回显的输入"></a>带回显的输入</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,01h</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<h6 id="不带回显的输入"><a href="#不带回显的输入" class="headerlink" title="不带回显的输入"></a>不带回显的输入</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,07h</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<h5 id="DOS屏幕输出"><a href="#DOS屏幕输出" class="headerlink" title="DOS屏幕输出"></a>DOS屏幕输出</h5><ul>
+<li>在屏幕上显示DL寄存器中存的数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,02h</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<h5 id="按任意键退出程序"><a href="#按任意键退出程序" class="headerlink" title="按任意键退出程序"></a>按任意键退出程序</h5><ul>
+<li>无阻塞中断，不会打断程序运行</li>
+<li>如果按下任意键，al的值为FF，如果没按下，al的值为00</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah 0bh</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<h3 id="将数据保存在系统堆栈段"><a href="#将数据保存在系统堆栈段" class="headerlink" title="将数据保存在系统堆栈段"></a>将数据保存在系统堆栈段</h3><ul>
+<li>想堆栈段存取，必须是1字节（16位）的数据</li>
+</ul>
+<h4 id="压栈"><a href="#压栈" class="headerlink" title="压栈"></a>压栈</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">push 源操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="弹栈"><a href="#弹栈" class="headerlink" title="弹栈"></a>弹栈</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pop 目标作数</span><br></pre></td></tr></table></figure>
+
+<h3 id="交换数据"><a href="#交换数据" class="headerlink" title="交换数据"></a>交换数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XCHG 操作数1,操作数2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push 操作数1</span><br><span class="line">push 操作数2</span><br><span class="line">pop 操作数1</span><br><span class="line">pop 操作数2</span><br></pre></td></tr></table></figure>
+
+<h3 id="自增自减"><a href="#自增自减" class="headerlink" title="自增自减"></a>自增自减</h3><h4 id="自增1"><a href="#自增1" class="headerlink" title="自增1"></a>自增1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inc 操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="自减1"><a href="#自减1" class="headerlink" title="自减1"></a>自减1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dec 操作数</span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h3><h4 id="逻辑移位指令"><a href="#逻辑移位指令" class="headerlink" title="逻辑移位指令"></a>逻辑移位指令</h4><h5 id="循环左移"><a href="#循环左移" class="headerlink" title="循环左移"></a>循环左移</h5><ul>
+<li>最高位移到最低位，其他各位左移一位<ul>
+<li>例如<code>10000001</code>左移后为<code>00000011</code></li>
+</ul>
+</li>
+<li>先将移动次数存储在cl寄存器，再根据次数向左移</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov cl,移动次数</span><br><span class="line">rol 目的操作数,存储次数的寄存器</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果只循环一次可以简写</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rol 目的操作数,1</span><br></pre></td></tr></table></figure>
+
+<h5 id="循环右移"><a href="#循环右移" class="headerlink" title="循环右移"></a>循环右移</h5><ul>
+<li>最低位移到最高位，其他各位右移一位<ul>
+<li>例如<code>10000001</code>左移后为<code>11000000</code></li>
+</ul>
+</li>
+<li>先将移动次数存储在cl寄存器，再根据次数向右移</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov cl,移动次数</span><br><span class="line">ror 目的操作数,存储次数的寄存器</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果只循环一次可以简写</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ror 目的操作数,1</span><br></pre></td></tr></table></figure>
+
+<h3 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h3><h4 id="设置跳转点"><a href="#设置跳转点" class="headerlink" title="设置跳转点"></a>设置跳转点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">符号地址:</span><br><span class="line"></span><br><span class="line">代码</span><br><span class="line">代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="无条件跳转"><a href="#无条件跳转" class="headerlink" title="无条件跳转"></a>无条件跳转</h4><ul>
+<li>直接跳转到符号地址处代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp 跳转点符号地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="条件跳转（jump）"><a href="#条件跳转（jump）" class="headerlink" title="条件跳转（jump）"></a>条件跳转（jump）</h4><ul>
+<li>通过判断标识位，实现比较数值，然后跳转<ul>
+<li><code>z</code>：等于判断，通常用于有符号数，也可用于无符号数</li>
+<li><code>g</code>：有符号数的大于判断</li>
+<li><code>l</code>：有符号数的小于判断</li>
+<li><code>e</code>：等于判断，通常用于无符号数，也可用于有符号数</li>
+<li><code>a</code>：有符号数的大于判断</li>
+<li><code>b</code>：有符号数的小于判断</li>
+<li><code>n</code>：非判断</li>
+</ul>
+</li>
+</ul>
+<h5 id="有符号数的判断"><a href="#有符号数的判断" class="headerlink" title="有符号数的判断"></a>有符号数的判断</h5><blockquote>
+<p>有符号数</p>
+<blockquote>
+<p><code>jz</code>：等于<br><code>jg</code>：大于<br><code>jl</code>：小于<br><code>jnz</code>：不等于<br><code>jng</code>：不大于<br><code>jnl</code>：不小于<br><code>jgz</code>：大于等于<br><code>jlz</code>：小于等于<br><code>jngz</code>：不大于等于、小于等于<br><code>jnlz</code>：不小于等于、大于等于</p>
+</blockquote>
+<p>无符号数</p>
+<blockquote>
+<p><code>je</code>：等于<br><code>ja</code>：大于<br><code>jb</code>：小于<br><code>jne</code>：不等于<br><code>jna</code>：不大于<br><code>jnb</code>：不小于<br><code>jaz</code>：大于等于<br><code>jbz</code>：小于等于<br><code>jnaz</code>：不大于等于、小于等于<br><code>jnbz</code>：不小于等于、大于等于</p>
+</blockquote>
+</blockquote>
+<h6 id="举例：判断相等"><a href="#举例：判断相等" class="headerlink" title="举例：判断相等"></a>举例：判断相等</h6><ul>
+<li>cmp在这里的目的只是用于改变寄存器标识位</li>
+<li>判断标识位中</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp 操作数1,操作数2</span><br><span class="line">jz 跳转点符号地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="条件跳转（loop）"><a href="#条件跳转（loop）" class="headerlink" title="条件跳转（loop）"></a>条件跳转（loop）</h4><ul>
+<li>在进入循环之前，在<code>cx</code>寄存器设置一个循环初值（只能用<code>cx</code>寄存器存循环初值），每次循环cx自减1，直到cx寄存器值为0时，跳出循环</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov cx,源操作数</span><br><span class="line">loop 跳转点符号地址</span><br></pre></td></tr></table></figure>
+
+<h5 id="loop循环与dec-jnz循环"><a href="#loop循环与dec-jnz循环" class="headerlink" title="loop循环与dec+jnz循环"></a>loop循环与dec+jnz循环</h5><ul>
+<li>loop循环完全等价于dec+jnz循环</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dec cx</span><br><span class="line">jnz 跳转点符号地址</span><br></pre></td></tr></table></figure>
+
+<h3 id="按位逻辑运算"><a href="#按位逻辑运算" class="headerlink" title="按位逻辑运算"></a>按位逻辑运算</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>任意数，和0相与，都变为0<br>任意数，和1相与，数字不变</p>
+<p>任意数，和1相或，都变为1<br>任意数，和0相或，数字不变</p>
+<h4 id="按位相与"><a href="#按位相与" class="headerlink" title="按位相与"></a>按位相与</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and 目标操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="按位相或"><a href="#按位相或" class="headerlink" title="按位相或"></a>按位相或</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">or 目标操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="按位相非"><a href="#按位相非" class="headerlink" title="按位相非"></a>按位相非</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">not 目标操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h4 id="按位相异或"><a href="#按位相异或" class="headerlink" title="按位相异或"></a>按位相异或</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xor 目标操作数,源操作数</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h3><h4 id="向接口芯片写入B口数据"><a href="#向接口芯片写入B口数据" class="headerlink" title="向接口芯片写入B口数据"></a>向接口芯片写入B口数据</h4><ul>
+<li>如果写入的数据大于FFH，那么需要用寄存器传递</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,数据</span><br><span class="line">mov dx,接口地址</span><br><span class="line">out dx,al</span><br></pre></td></tr></table></figure>
+
+<h4 id="从接口芯片A口读取数据"><a href="#从接口芯片A口读取数据" class="headerlink" title="从接口芯片A口读取数据"></a>从接口芯片A口读取数据</h4><ul>
+<li>将读取的数据存储到dx寄存器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,接口地址</span><br><span class="line">in dx,al</span><br></pre></td></tr></table></figure>
+
+<h3 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a>无限循环</h3><h4 id="通过符号地址-1"><a href="#通过符号地址-1" class="headerlink" title="通过符号地址"></a>通过符号地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">符号地址: jmp 符号地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp $</span><br></pre></td></tr></table></figure>
+
+<h2 id="软件方式实现减速"><a href="#软件方式实现减速" class="headerlink" title="软件方式实现减速"></a>软件方式实现减速</h2><ul>
+<li>利用空循环实现减速</li>
+<li>如果减速速度不够，可以使用多层嵌套循环</li>
+<li>这种方法只能实现不精确的减速</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ax,100</span><br><span class="line">a:</span><br><span class="line">dcc ax</span><br><span class="line">cmp ax,0</span><br><span class="line">jnz a</span><br></pre></td></tr></table></figure>
+
+<h2 id="子程序"><a href="#子程序" class="headerlink" title="子程序"></a>子程序</h2><ul>
+<li>封装常用的代码块，如果需要反复使用相同的代码，可以直接调用子程序</li>
+</ul>
+<h3 id="定义子程序"><a href="#定义子程序" class="headerlink" title="定义子程序"></a>定义子程序</h3><ul>
+<li>子程序定义需要在代码段内定义，可以放在代码段内的任意位置，通常放在代码段末尾（返回DOS之后）</li>
+</ul>
+<blockquote>
+<p><code>属性</code></p>
+<blockquote>
+<p><code>far</code>：远属性，允许跨段调用<br><code>near</code>：近属性，只允许在相同段内调用</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">子程序名 proc 属性</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    ret</span><br><span class="line">子程序名 endp</span><br></pre></td></tr></table></figure>
+
+<h3 id="调用子程序"><a href="#调用子程序" class="headerlink" title="调用子程序"></a>调用子程序</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call 子程序名</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Assembly/" rel="tag"># Assembly</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/31/Android%E5%B9%BF%E6%92%ADReceiver/" rel="prev" title="【笔记】Android广播Receiver">
+                  <i class="fa fa-angle-left"></i> 【笔记】Android广播Receiver
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/03/Android%E9%AB%98%E6%95%88%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93Glide/" rel="next" title="【笔记】Android高效图片加载库Glide">
+                  【笔记】Android高效图片加载库Glide <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

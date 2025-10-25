@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Go（又称Golang）是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Go语言学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2023/01/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Go（又称Golang）是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-13T06:55:12.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.864Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/01/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/01/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2023/01/13/Go语言学习笔记/","title":"【笔记】Go语言学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Go语言学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BGo%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">查看Go环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%BA%90%E7%A0%81%E4%B8%BA%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">编译源码为可执行文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%88%B0%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E5%92%8C%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">3.1.</span> <span class="nav-text">输出到指定位置和指定文件名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%B9%B6%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAGo%E6%BA%90%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">编译并运行一个Go源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">4.1.</span> <span class="nav-text">踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.1.</span> <span class="nav-text">解决问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AAGo%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">初始化一个Go项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%BB%E6%A8%A1%E5%9D%97"><span class="nav-number">5.1.</span> <span class="nav-text">新建一个主模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">5.2.</span> <span class="nav-text">创建一个子模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">6.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E5%8F%A5%E5%88%86%E9%9A%94%E7%AC%A6"><span class="nav-number">7.</span> <span class="nav-text">语句分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.</span> <span class="nav-text">输出语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%8D%A2%E8%A1%8C%E7%9A%84%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.1.</span> <span class="nav-text">带换行的输出语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.1.1.</span> <span class="nav-text">输出数据类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6%E6%8D%A2%E8%A1%8C%E7%9A%84%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.2.</span> <span class="nav-text">不带换行的输出语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-number">8.3.</span> <span class="nav-text">格式化输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.3.1.</span> <span class="nav-text">输出数据的类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">8.4.</span> <span class="nav-text">格式化拼接字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.</span> <span class="nav-text">输入语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE"><span class="nav-number">9.1.</span> <span class="nav-text">输入单个数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE"><span class="nav-number">9.2.</span> <span class="nav-text">输入多个数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E6%8D%A2%E8%A1%8C%E7%BB%93%E6%9D%9F"><span class="nav-number">9.2.1.</span> <span class="nav-text">强制换行结束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%85%A5"><span class="nav-number">9.3.</span> <span class="nav-text">格式化输入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">10.</span> <span class="nav-text">变量名命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">11.</span> <span class="nav-text">Go命名规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">12.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="nav-number">12.1.</span> <span class="nav-text">声明一个变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%A4%9A%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="nav-number">12.2.</span> <span class="nav-text">声明多个变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="nav-number">12.3.</span> <span class="nav-text">为变量赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">12.4.</span> <span class="nav-text">变量的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD"><span class="nav-number">12.5.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%AD%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">12.6.</span> <span class="nav-text">短变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">12.7.</span> <span class="nav-text">批量初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC"><span class="nav-number">12.7.1.</span> <span class="nav-text">交换变量的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%8F%98%E9%87%8F"><span class="nav-number">12.8.</span> <span class="nav-text">匿名变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">13.</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%B8%B8%E9%87%8F"><span class="nav-number">13.1.</span> <span class="nav-text">定义一个常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F"><span class="nav-number">13.2.</span> <span class="nav-text">字面常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC"><span class="nav-number">13.3.</span> <span class="nav-text">类型推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B8%B8%E9%87%8F"><span class="nav-number">13.4.</span> <span class="nav-text">定义多个常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iota%E6%9E%9A%E4%B8%BE"><span class="nav-number">14.</span> <span class="nav-text">iota枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%81%E7%95%A5"><span class="nav-number">14.1.</span> <span class="nav-text">省略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E5%B8%B8%E9%87%8F%E5%80%BC"><span class="nav-number">14.2.</span> <span class="nav-text">相同常量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%B3%E8%BF%87"><span class="nav-number">14.3.</span> <span class="nav-text">跳过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E6%8F%92%E9%98%9F"><span class="nav-number">14.4.</span> <span class="nav-text">中间插队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE"><span class="nav-number">14.5.</span> <span class="nav-text">重置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%9E%8B"><span class="nav-number">15.1.</span> <span class="nav-text">数值型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B"><span class="nav-number">15.1.1.</span> <span class="nav-text">整型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">15.1.1.1.</span> <span class="nav-text">二进制数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%AB%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">15.1.1.2.</span> <span class="nav-text">八进制数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="nav-number">15.1.1.3.</span> <span class="nav-text">十六进制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-number">15.1.2.</span> <span class="nav-text">浮点型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%95%B0%E5%80%BC"><span class="nav-number">15.1.3.</span> <span class="nav-text">其他数值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="nav-number">15.2.</span> <span class="nav-text">布尔型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.3.</span> <span class="nav-text">字符类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.4.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.5.</span> <span class="nav-text">派生类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.5.1.</span> <span class="nav-text">指针类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.5.2.</span> <span class="nav-text">数组类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.5.3.</span> <span class="nav-text">切片类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.5.4.</span> <span class="nav-text">函数类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">16.</span> <span class="nav-text">分支语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E8%AF%AD%E5%8F%A5"><span class="nav-number">16.1.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch%E8%AF%AD%E5%8F%A5"><span class="nav-number">16.2.</span> <span class="nav-text">switch语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">17.</span> <span class="nav-text">循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="nav-number">17.1.</span> <span class="nav-text">for语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%8F%AF%E9%81%8D%E5%8E%86%E6%95%B0%E6%8D%AE"><span class="nav-number">17.1.1.</span> <span class="nav-text">遍历可遍历数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8A%E7%9A%84while"><span class="nav-number">17.1.2.</span> <span class="nav-text">逻辑上的while</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF"><span class="nav-number">17.1.3.</span> <span class="nav-text">无限循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#continue%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">18.</span> <span class="nav-text">continue关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">19.</span> <span class="nav-text">break关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="nav-number">20.</span> <span class="nav-text">跳转语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E8%B7%B3%E8%BD%AC%E7%82%B9"><span class="nav-number">20.1.</span> <span class="nav-text">定义一个跳转点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%8C%87%E5%AE%9A%E8%B7%B3%E8%BD%AC%E7%82%B9"><span class="nav-number">20.2.</span> <span class="nav-text">立即跳转到指定跳转点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6"><span class="nav-number">21.</span> <span class="nav-text">获取字符串长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.2.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.3.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.4.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.5.</span> <span class="nav-text">特殊运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">22.6.</span> <span class="nav-text">按位运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">23.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">24.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/01/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Go语言学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Go语言学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-13 14:55:12" itemprop="dateCreated datePublished" datetime="2023-01-13T14:55:12+08:00">2023-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">Go语言学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Go（又称Golang）是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/Go">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="查看Go环境"><a href="#查看Go环境" class="headerlink" title="查看Go环境"></a>查看Go环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译源码为可执行文件"><a href="#编译源码为可执行文件" class="headerlink" title="编译源码为可执行文件"></a>编译源码为可执行文件</h2><blockquote>
+<p><code>&lt;file&gt;.go</code>：Go语言源代码文件，如果省略，go会自动寻找当前目录下的main函数执行</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build &lt;file&gt;.go</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编译后会产生可执行文件，Linux&#x2F;MacOS可执行文件为<code>&lt;file_name&gt;</code>，Windows可执行文件为<code>&lt;file_name&gt;.exe</code></li>
+</ul>
+<h3 id="输出到指定位置和指定文件名"><a href="#输出到指定位置和指定文件名" class="headerlink" title="输出到指定位置和指定文件名"></a>输出到指定位置和指定文件名</h3><blockquote>
+<p><code>&lt;file_out&gt;</code>：输出的文件名及文件路径</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -o &lt;file_out&gt; &lt;file&gt;.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译并运行一个Go源码"><a href="#编译并运行一个Go源码" class="headerlink" title="编译并运行一个Go源码"></a>编译并运行一个Go源码</h2><blockquote>
+<p><code>&lt;file&gt;.go</code>：Go语言源代码文件，如果省略，go会自动寻找当前所有go源码进行编译</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go run &lt;file&gt;.go</span><br></pre></td></tr></table></figure>
+
+<h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><ul>
+<li>报错：<code>package command-line-arguments is not a main package</code></li>
+</ul>
+<h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><ul>
+<li>将包名改为<code>package main</code>即可</li>
+</ul>
+<h2 id="初始化一个Go项目"><a href="#初始化一个Go项目" class="headerlink" title="初始化一个Go项目"></a>初始化一个Go项目</h2><h3 id="新建一个主模块"><a href="#新建一个主模块" class="headerlink" title="新建一个主模块"></a>新建一个主模块</h3><ul>
+<li>新建一个目录用于存放Go项目，并初始化项目，作为主模块</li>
+<li><code>main()</code>主函数是程序的入口，一个程序有且只有一个主函数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir &lt;project_name&gt;</span><br><span class="line">cd &lt;project_name&gt;</span><br><span class="line">go mod init &lt;project_name&gt;</span><br><span class="line">touch main.go</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><figcaption><span>main.go</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个子模块"><a href="#创建一个子模块" class="headerlink" title="创建一个子模块"></a>创建一个子模块</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir app</span><br><span class="line">touch app/app.go</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><figcaption><span>app/app.go</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> app</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">App</span><span class="params">()</span></span> <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"><span class="comment">/* 多行注释 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="语句分隔符"><a href="#语句分隔符" class="headerlink" title="语句分隔符"></a>语句分隔符</h2><ul>
+<li>通过<code>;</code>和换行符作为语句分隔符</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语句;语句</span><br><span class="line"></span><br><span class="line">语句</span><br><span class="line">语句</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h2><h3 id="带换行的输出语句"><a href="#带换行的输出语句" class="headerlink" title="带换行的输出语句"></a>带换行的输出语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出数据类型"><a href="#输出数据类型" class="headerlink" title="输出数据类型"></a>输出数据类型</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(reflect(<span class="string">&quot;&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="不带换行的输出语句"><a href="#不带换行的输出语句" class="headerlink" title="不带换行的输出语句"></a>不带换行的输出语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line">fmt.Print(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">&quot;%d&quot;</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>格式说明符</th>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%v</code></td>
+<td>任何类型</td>
+<td>默认格式输出值，对于结构体，输出字段值</td>
+</tr>
+<tr>
+<td><code>%+v</code></td>
+<td>任何类型</td>
+<td>默认格式输出值，对于结构体，输出字段名和值</td>
+</tr>
+<tr>
+<td><code>%#v</code></td>
+<td>任何类型</td>
+<td>默认格式输出值，对于结构体，输出字段名和值，并且对于基本类型，输出Go语法表示</td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td><code>Int</code></td>
+<td>十进制整型数据</td>
+</tr>
+<tr>
+<td><code>%3d</code></td>
+<td><code>Int</code></td>
+<td>十进制整型数据，如果不满足3位，用空格补齐空位，从前面补齐</td>
+</tr>
+<tr>
+<td><code>%-3d</code></td>
+<td><code>Int</code></td>
+<td>十进制整型数据，如果不满足3位，用空格补齐空位，从后面补齐</td>
+</tr>
+<tr>
+<td><code>%03d</code></td>
+<td><code>Int</code></td>
+<td>十进制整型数据，如果不满足3位，用<code>0</code>补齐空位，从前面补齐</td>
+</tr>
+<tr>
+<td><code>%-03d</code></td>
+<td><code>Int</code></td>
+<td>十进制整型数据，如果不满足3位，用<code>0</code>补齐空位，从后面补齐</td>
+</tr>
+<tr>
+<td><code>%b</code></td>
+<td><code>Int</code></td>
+<td>二进制整型数据</td>
+</tr>
+<tr>
+<td><code>%o</code></td>
+<td><code>Int</code></td>
+<td>八进制整型数据</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td><code>Int</code></td>
+<td>十六进制整型数据，字母小写</td>
+</tr>
+<tr>
+<td><code>%X</code></td>
+<td><code>Int</code></td>
+<td>十六进制整型数据，字母大写</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td><code>Float</code></td>
+<td>浮点型数据，默认保留6位小数，自动四舍五入</td>
+</tr>
+<tr>
+<td><code>%.3f</code></td>
+<td><code>Float</code></td>
+<td>浮点型数据，保留小数点后3位小数，自动四舍五入</td>
+</tr>
+<tr>
+<td><code>%t</code></td>
+<td><code>Bool</code></td>
+<td>布尔型数据</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td><code>Char</code></td>
+<td>字符型数据</td>
+</tr>
+<tr>
+<td><code>%s</code></td>
+<td><code>String</code></td>
+<td>字符串型数据</td>
+</tr>
+<tr>
+<td><code>%q</code></td>
+<td><code>String</code></td>
+<td>字符串型数据，输出Go语法表示</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td><code>interface&#123;&#125;</code></td>
+<td>十六进制指针数据</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>-</td>
+<td>输出一个百分号</td>
+</tr>
+</tbody></table>
+<h4 id="输出数据的类型"><a href="#输出数据的类型" class="headerlink" title="输出数据的类型"></a>输出数据的类型</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">&quot;%T&quot;</span>, 变量名)</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化拼接字符串"><a href="#格式化拼接字符串" class="headerlink" title="格式化拼接字符串"></a>格式化拼接字符串</h3><ul>
+<li>将格式化后的字符串作为返回值赋值给变量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str := fmt.Sprintf(<span class="string">&quot;%d&quot;</span>, 变量名)</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入语句"><a href="#输入语句" class="headerlink" title="输入语句"></a>输入语句</h2><ul>
+<li>如果指定接收数据的类型是整型，那么从获取的字符串开始，一直截取到第一次遇到非数字字符之前结束，如果没有数字，则为0</li>
+<li>如果指定接收数据的类型是字符串，那么从获取的字符串开始，一直截取到第一次遇到非空格字符之前结束</li>
+<li>如果指定接收数据的类型是整形，且对于接收的变量移除，最终变量得到的结果为0</li>
+</ul>
+<h3 id="输入单个数据"><a href="#输入单个数据" class="headerlink" title="输入单个数据"></a>输入单个数据</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> 变量名 数据类型</span><br><span class="line">    fmt.Scan(&amp;变量名)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入多个数据"><a href="#输入多个数据" class="headerlink" title="输入多个数据"></a>输入多个数据</h3><ul>
+<li>通过空格分隔，获取多个输入的数据</li>
+<li>通过换行符也可以继续输入</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> 变量名<span class="number">1</span> 数据类型</span><br><span class="line">    <span class="keyword">var</span> 变量名<span class="number">2</span> 数据类型</span><br><span class="line">    fmt.Scan(&amp;变量名<span class="number">1</span>, &amp;变量名<span class="number">2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="强制换行结束"><a href="#强制换行结束" class="headerlink" title="强制换行结束"></a>强制换行结束</h4><ul>
+<li>通过空格分隔，获取多个输入的数据</li>
+<li>在输入换行符的时候，会立即结束输入的接收</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> 变量名<span class="number">1</span> 数据类型</span><br><span class="line">    <span class="keyword">var</span> 变量名<span class="number">2</span> 数据类型</span><br><span class="line">    fmt.Scanln(&amp;变量名<span class="number">1</span>, &amp;变量名<span class="number">2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化输入"><a href="#格式化输入" class="headerlink" title="格式化输入"></a>格式化输入</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> 变量名 数据类型</span><br><span class="line">    fmt.Scanf(<span class="string">&quot;%d&quot;</span>, &amp;变量名)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量名命名规则"><a href="#变量名命名规则" class="headerlink" title="变量名命名规则"></a>变量名命名规则</h2><ul>
+<li>变量名由数字、字母、下划线组成</li>
+<li>变量名只能以字母、下划线开头</li>
+<li>变量名区分大小写</li>
+<li>不能使用关键字作为变量名</li>
+</ul>
+<h2 id="Go命名规范"><a href="#Go命名规范" class="headerlink" title="Go命名规范"></a>Go命名规范</h2><ul>
+<li>Go中所有命名区分大小写</li>
+<li>任何需要对外暴露的名称都需要首字母大写，不需要对外暴露的名称都需要首字母小写</li>
+<li>包命名规则：保持package包名称定义与目录名相同</li>
+<li>文件命名规则：所有单词小写，使用下划线分割各个单词</li>
+<li>结构体命名规则：首字母大写，采用驼峰命名</li>
+<li>接口命名规则：首字母大写，采用驼峰命名，以<code>er</code>结尾</li>
+<li>变量命名规则：首字母小写，采用驼峰命名</li>
+<li>常量命名规则：所有单词大写，使用下划线分割各个单词</li>
+<li>单元测试命名规则<ul>
+<li>单元测试的文件名命名规则：所有单词小写，使用下划线分割各个单词，最后一个单词以<code>test</code>结尾</li>
+<li>单元测试的函数名命名规则：首字母大写，采用驼峰命名，第一个单词以<code>Test</code>开头</li>
+</ul>
+</li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="声明一个变量"><a href="#声明一个变量" class="headerlink" title="声明一个变量"></a>声明一个变量</h3><ul>
+<li>通过<code>var</code>关键字定义一个变量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 数据类型</span><br></pre></td></tr></table></figure>
+
+<h3 id="声明多个变量"><a href="#声明多个变量" class="headerlink" title="声明多个变量"></a>声明多个变量</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    变量名 数据类型</span><br><span class="line">    变量名 数据类型</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="为变量赋值"><a href="#为变量赋值" class="headerlink" title="为变量赋值"></a>为变量赋值</h3><ul>
+<li>Go中声明变量后必须使用，否则会报错</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量名 = 变量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量的初始化"><a href="#变量的初始化" class="headerlink" title="变量的初始化"></a>变量的初始化</h3><ul>
+<li>在声明变量时直接赋值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 数据类型 = 变量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><ul>
+<li>在初始化变量时，可以省略数据类型的定义，通过变量值自动推断数据类型</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = 变量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="短变量声明"><a href="#短变量声明" class="headerlink" title="短变量声明"></a>短变量声明</h3><ul>
+<li>短变量只能声明，不能用作赋值</li>
+<li>短变量声明会自动类型推断</li>
+<li>短变量声明的变量只能在函数内部声明和使用</li>
+<li>短变量声明不需要var关键字和数据类型</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量名 := 变量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量初始化"><a href="#批量初始化" class="headerlink" title="批量初始化"></a>批量初始化</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名<span class="number">1</span>, 变量名<span class="number">2</span>, 变量名<span class="number">3</span> = 变量值<span class="number">1</span>, 变量值<span class="number">2</span>, 变量值<span class="number">3</span></span><br><span class="line">变量名<span class="number">1</span>, 变量名<span class="number">2</span>, 变量名<span class="number">3</span> := 变量值<span class="number">1</span>, 变量值<span class="number">2</span>, 变量值<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="交换变量的值"><a href="#交换变量的值" class="headerlink" title="交换变量的值"></a>交换变量的值</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量名<span class="number">1</span>, 变量名<span class="number">2</span> = 变量名<span class="number">2</span>, 变量名<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名变量"><a href="#匿名变量" class="headerlink" title="匿名变量"></a>匿名变量</h3><ul>
+<li>在函数返回值只指定返回值类型而不指定变量名，此时的变量是一个匿名变量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> 函数名<span class="params">()</span></span> (<span class="type">string</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果一个变量不被使用，为了防止报错也可以使用匿名变量进行定义</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_ := 变量值</span><br></pre></td></tr></table></figure>
+
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><h3 id="定义一个常量"><a href="#定义一个常量" class="headerlink" title="定义一个常量"></a>定义一个常量</h3><ul>
+<li>常量在定义时必须赋值</li>
+<li>常量的数据类型只能是string、int、float、bool类型</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 常量名 数据类型 = 常量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="字面常量"><a href="#字面常量" class="headerlink" title="字面常量"></a>字面常量</h3><ul>
+<li>没有定义常量名而直接使用的常量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 常量名 = 常量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义多个常量"><a href="#定义多个常量" class="headerlink" title="定义多个常量"></a>定义多个常量</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 常量名<span class="number">1</span>, 常量名<span class="number">2</span> = 常量值<span class="number">1</span>, 常量值<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名<span class="number">1</span> = 常量值<span class="number">1</span></span><br><span class="line">    常量名<span class="number">2</span> = 常量值<span class="number">2</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果多个常量的常量值相同，可以省略常量值，表示常量值与上一行相同</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名<span class="number">1</span> = 常量值<span class="number">1</span></span><br><span class="line">    常量名<span class="number">2</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="iota枚举"><a href="#iota枚举" class="headerlink" title="iota枚举"></a>iota枚举</h2><ul>
+<li><code>iota</code>关键字是一个特殊的常量值，初始值是0，每次被赋值，都会自增1</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="省略"><a href="#省略" class="headerlink" title="省略"></a>省略</h3><ul>
+<li>如果定义常量时省略了赋值，将会自动按照上一次赋值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名</span><br><span class="line">    常量名</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="相同常量值"><a href="#相同常量值" class="headerlink" title="相同常量值"></a>相同常量值</h3><ul>
+<li>在同一行定义的常量，iota的常量值相同</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名, 常量名 = <span class="literal">iota</span>, <span class="literal">iota</span></span><br><span class="line">    常量名, 常量名</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="跳过"><a href="#跳过" class="headerlink" title="跳过"></a>跳过</h3><ul>
+<li>如果想跳过当前值，可以使用匿名接收，以达到跳过常量值的效果</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    _ = <span class="literal">iota</span></span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="中间插队"><a href="#中间插队" class="headerlink" title="中间插队"></a>中间插队</h3><ul>
+<li>如果在使用<code>iota</code>作为常量值的期间有其他常量值被赋值，此时也会达到跳过常量值的效果</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名 = 常量值</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="重置"><a href="#重置" class="headerlink" title="重置"></a>重置</h3><ul>
+<li>遇到<code>const</code>关键字时重置为0</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">    常量名 = 常量值</span><br><span class="line">    常量名 = <span class="literal">iota</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> 常量名 = <span class="literal">iota</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h3><h4 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h4><ul>
+<li>默认值为<code>0</code></li>
+<li>默认直接指定<code>int</code>，则跟随操作系统<ul>
+<li>32位操作系统采用32个位</li>
+<li>64位操作系统采用64个位</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">int</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>uint8</code></td>
+<td>无符号8位整数</td>
+<td>0~255</td>
+</tr>
+<tr>
+<td><code>uint16</code></td>
+<td>无符号16位整数</td>
+<td>0~65535</td>
+</tr>
+<tr>
+<td><code>uint32</code></td>
+<td>无符号32位整数</td>
+<td>0~4294967295</td>
+</tr>
+<tr>
+<td><code>uint64</code></td>
+<td>无符号64位整数</td>
+<td>0~18446744073709551615</td>
+</tr>
+<tr>
+<td><code>int8</code></td>
+<td>有符号8位整数</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td><code>int16</code></td>
+<td>有符号16位整数</td>
+<td>-32768~32767</td>
+</tr>
+<tr>
+<td><code>int32</code></td>
+<td>有符号32位整数</td>
+<td>-2147483648~2147483647</td>
+</tr>
+<tr>
+<td><code>int64</code></td>
+<td>有符号64位整数</td>
+<td>-9223372036854775808~9223372036854775807</td>
+</tr>
+</tbody></table>
+<h5 id="二进制数"><a href="#二进制数" class="headerlink" title="二进制数"></a>二进制数</h5><ul>
+<li>在go语言中不能直接表示二进制数据</li>
+</ul>
+<h5 id="八进制数"><a href="#八进制数" class="headerlink" title="八进制数"></a>八进制数</h5><ul>
+<li>以<code>0</code>开头</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num := <span class="number">07</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="十六进制"><a href="#十六进制" class="headerlink" title="十六进制"></a>十六进制</h5><ul>
+<li>以<code>0x</code>开头</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num := <span class="number">0xF</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h4><ul>
+<li>默认值为<code>0</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">float64</span> = <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>float32</code></td>
+<td>IEEE-754 32位浮点型数</td>
+</tr>
+<tr>
+<td><code>float64</code></td>
+<td>IEEE-754 64位浮点型数</td>
+</tr>
+<tr>
+<td><code>complex64</code></td>
+<td>32位实数和虚数</td>
+</tr>
+<tr>
+<td><code>complex128</code></td>
+<td>64位实数和虚数</td>
+</tr>
+</tbody></table>
+<h4 id="其他数值"><a href="#其他数值" class="headerlink" title="其他数值"></a>其他数值</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>rune</code></td>
+<td>类似<code>int32</code></td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td>32位或64位</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>与<code>uint</code>一样大小</td>
+</tr>
+<tr>
+<td><code>uintptr</code></td>
+<td>用于存放指针，无符号整型</td>
+</tr>
+</tbody></table>
+<h3 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h3><ul>
+<li>默认值为<code>false</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">bool</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">bool</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">byte</span> = <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>byte</code></td>
+<td><code>uint8</code>类型的别名</td>
+</tr>
+</tbody></table>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
+<li>字符串结尾由编译器自动追加<code>\0</code>作为字符串结尾标识符</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">string</span> = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="派生类型"><a href="#派生类型" class="headerlink" title="派生类型"></a>派生类型</h3><h4 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 <span class="type">int</span> = <span class="number">0</span></span><br><span class="line">p := &amp;变量名</span><br></pre></td></tr></table></figure>
+
+<h4 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组名 := [数组长度]数据类型&#123;值, 值&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="切片类型"><a href="#切片类型" class="headerlink" title="切片类型"></a>切片类型</h4><ul>
+<li>实际上是动态数组</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组名 := []数据类型&#123;值, 值&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> 函数名<span class="params">()</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">    <span class="keyword">if</span> 逻辑表达式 &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><ul>
+<li>默认只执行当前分之的代码</li>
+<li>如果某一分之包含<code>fallthrough</code>语句，则自动执行下一分之代码</li>
+<li>不符合所有条件时，执行<code>default</code>的代码</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> 变量 &#123;</span><br><span class="line"><span class="keyword">case</span> 值:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">fallthrough</span></span><br><span class="line"><span class="keyword">case</span> 值:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1</span>; i++ &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1</span>; i++ &#123;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">1</span>; j++ &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历可遍历数据"><a href="#遍历可遍历数据" class="headerlink" title="遍历可遍历数据"></a>遍历可遍历数据</h4><ul>
+<li>可遍历数据：<code>字符串</code>、<code>切片</code>、<code>数组</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index,value := <span class="keyword">range</span> 被遍历的变量 &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;下标: &quot;</span>, index)</span><br><span class="line">    fmt.Println(<span class="string">&quot;数据: &quot;</span>, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="逻辑上的while"><a href="#逻辑上的while" class="headerlink" title="逻辑上的while"></a>逻辑上的while</h4><ul>
+<li>Go语言中没有while循环，但是可以通过for语句逻辑上当作while循环使用</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="type">int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i &lt; <span class="number">100</span> &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    i++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a>无限循环</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="literal">true</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ;; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="continue关键字"><a href="#continue关键字" class="headerlink" title="continue关键字"></a>continue关键字</h2><ul>
+<li>结束当前循环，继续下次循环</li>
+</ul>
+<h2 id="break关键字"><a href="#break关键字" class="headerlink" title="break关键字"></a>break关键字</h2><ul>
+<li>结束所有循环</li>
+</ul>
+<h2 id="跳转语句"><a href="#跳转语句" class="headerlink" title="跳转语句"></a>跳转语句</h2><ul>
+<li>无条件跳转到指定位置</li>
+</ul>
+<h3 id="定义一个跳转点"><a href="#定义一个跳转点" class="headerlink" title="定义一个跳转点"></a>定义一个跳转点</h3><blockquote>
+<p><code>label</code>：跳转点名称</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label:</span><br></pre></td></tr></table></figure>
+
+<h3 id="立即跳转到指定跳转点"><a href="#立即跳转到指定跳转点" class="headerlink" title="立即跳转到指定跳转点"></a>立即跳转到指定跳转点</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">goto</span> label</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h2><ul>
+<li>一个英文字符的长度为1</li>
+<li>一个中文字符的长度为3</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：字符串</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(&lt;str&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><ul>
+<li><code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>（整除）、<code>%</code>（取余）、<code>++</code>（自增）、<code>--</code>（自减）</li>
+</ul>
+<p>整除运算符和取余运算符除数都不能为0<br>取余运算符除数不能为浮点数<br>自增运算符和自减运算符只能用于变量之后<br>自增运算符和自减运算符只能单独使用，不能用在表达式中</p>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><ul>
+<li><p><code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code></p>
+</li>
+<li><p>Go语言也支持自增和自减运算，但是不允许将自增结果或自减结果赋值给其他变量</p>
+</li>
+</ul>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><ul>
+<li>关系运算符得到的结果都是布尔值</li>
+<li><code>==</code>、<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>、<code>!=</code></li>
+</ul>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li>逻辑运算符只能对布尔类型表达式或布尔类型值使用</li>
+<li><code>&amp;&amp;</code>、<code>||</code>、<code>!</code></li>
+</ul>
+<h3 id="特殊运算符"><a href="#特殊运算符" class="headerlink" title="特殊运算符"></a>特殊运算符</h3><ul>
+<li><code>&amp;</code>（取址符）、<code>*</code>（取值符）</li>
+</ul>
+<h3 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a>按位运算符</h3><ul>
+<li><code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>&amp;</code>、<code>|</code>、<code>^</code></li>
+</ul>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zR4y1t7Wj/">哔哩哔哩——郭宏志-老郭</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_java_c/article/details/120006213">CSDN——一个大泥球</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EV411t745/">哔哩哔哩——喔咔咔耶耶</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mY411Z7Bd/">哔哩哔哩——Python路飞</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ME411Y71o/">哔哩哔哩——尚硅谷</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1919729">腾讯云开发者社区——IT工作者</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EV411t745/">哔哩哔哩——喔咔咔耶耶</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/12/Django%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%BF%9E%E6%8E%A5MongoDB/" rel="prev" title="【笔记】Django项目中连接MongoDB">
+                  <i class="fa fa-angle-left"></i> 【笔记】Django项目中连接MongoDB
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0/" rel="next" title="【笔记】Go语言的函数">
+                  【笔记】Go语言的函数 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

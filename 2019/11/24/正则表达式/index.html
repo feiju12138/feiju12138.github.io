@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言正则表达式，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。维基百科">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】正则表达式">
+<meta property="og:url" content="https://loli.fj.cn/2019/11/24/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言正则表达式，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。维基百科">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-24T07:51:46.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.963Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2019/11/24/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2019/11/24/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/","path":"2019/11/24/正则表达式/","title":"【笔记】正则表达式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】正则表达式 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%88Flag%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">修饰符（Flag）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%EF%BC%88Pattern%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">模式（Pattern）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%B1%BB%EF%BC%88Character-Class%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">字符类（Character Class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%9A%E7%82%B9%EF%BC%88Anchor%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">锚点（Anchor）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%EF%BC%88Escape-Character%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">转义字符（Escape Character）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E5%8C%B9%E9%85%8D%EF%BC%88Boundary-Matching%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">边界匹配（Boundary Matching）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%EF%BC%88Character-Set%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">集合（Character Set）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%EF%BC%88Character-Range%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">范围（Character Range）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8F%E8%AF%8D%EF%BC%88Quantifier%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">量词（Quantifier）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%88%87%E7%9A%84%E4%BD%8D%E6%95%B0"><span class="nav-number">3.7.1.</span> <span class="nav-text">确切的位数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4"><span class="nav-number">3.7.2.</span> <span class="nav-text">范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%83%B0%E6%80%A7%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.7.3.</span> <span class="nav-text">贪婪模式和惰性模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.7.3.1.</span> <span class="nav-text">贪婪模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%83%B0%E6%80%A7%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.7.3.2.</span> <span class="nav-text">惰性模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E7%BB%84%EF%BC%88Capturing-Group%EF%BC%89"><span class="nav-number">3.8.</span> <span class="nav-text">捕获组（Capturing Group）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E6%8D%95%E8%8E%B7%E7%BB%84%E5%AE%9A%E4%B9%89%E7%BB%84%E5%90%8D"><span class="nav-number">3.8.1.</span> <span class="nav-text">为捕获组定义组名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E6%8D%95%E8%8E%B7%E7%BB%84%E5%AE%9A%E4%B9%89%E9%87%8F%E8%AF%8D"><span class="nav-number">3.8.2.</span> <span class="nav-text">为捕获组定义量词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E6%88%96"><span class="nav-number">3.8.3.</span> <span class="nav-text">捕获组中的逻辑或</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E9%9D%9E"><span class="nav-number">3.8.4.</span> <span class="nav-text">捕获组中的逻辑非</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E7%AC%A6"><span class="nav-number">4.1.</span> <span class="nav-text">边界符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%BC%80%E5%A7%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">匹配字符串的开始</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%BB%93%E6%9D%9F"><span class="nav-number">4.1.2.</span> <span class="nav-text">匹配字符串的结束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D"><span class="nav-number">4.2.</span> <span class="nav-text">定义符合条件的字符匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%A1%AE%E5%AE%9A%E7%9A%84%E5%AD%97%E7%AC%A6%E6%88%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.2.1.</span> <span class="nav-text">指定一个确定的字符或字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8C%B9%E9%85%8D"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">完全匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%96%E5%8C%B9%E9%85%8D"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">或匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%B8%8D%E7%A1%AE%E5%AE%9A%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">4.2.2.</span> <span class="nav-text">指定一个不确定的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">指定字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">指定范围</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8D%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D%EF%BC%88%E5%8F%96%E5%8F%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">定义不符合条件的字符匹配（取反）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%8D%95%E8%8E%B7%E7%BB%84"><span class="nav-number">4.4.</span> <span class="nav-text">定义捕获组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%91%BD%E5%90%8D%E6%8D%95%E8%8E%B7%E7%BB%84"><span class="nav-number">4.4.0.1.</span> <span class="nav-text">定义命名捕获组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%9D%9E%E6%8D%95%E8%8E%B7%E7%BB%84"><span class="nav-number">4.4.0.2.</span> <span class="nav-text">定义非捕获组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%8D%95%E8%8E%B7%E7%BB%84"><span class="nav-number">4.4.1.</span> <span class="nav-text">引用捕获组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%89%8D%E7%9E%BB%E6%95%B0%E6%8D%AE"><span class="nav-number">4.5.</span> <span class="nav-text">定义前瞻数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0"><span class="nav-number">4.6.</span> <span class="nav-text">指定次数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%A1%AE%E5%AE%9A%E7%9A%84%E6%AC%A1%E6%95%B0"><span class="nav-number">4.6.1.</span> <span class="nav-text">指定一个确定的次数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%A1%AE%E5%AE%9A%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">4.6.2.</span> <span class="nav-text">不指定一个确定的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0%E4%B8%BA%E4%B8%80%E4%B8%AA%E8%8C%83%E5%9B%B4"><span class="nav-number">4.6.2.1.</span> <span class="nav-text">指定次数为一个范围</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4"><span class="nav-number">4.6.2.1.1.</span> <span class="nav-text">区间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E"><span class="nav-number">4.6.2.1.2.</span> <span class="nav-text">大于等于</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0%E4%B8%BA1%E6%AC%A1%E6%88%960%E6%AC%A1"><span class="nav-number">4.6.2.2.</span> <span class="nav-text">指定次数为1次或0次</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0%E4%B8%BA1%E6%AC%A1%E5%8F%8A%E4%BB%A5%E4%B8%8A"><span class="nav-number">4.6.2.3.</span> <span class="nav-text">指定次数为1次及以上</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0%E4%B8%BA0%E6%AC%A1%E5%8F%8A%E4%BB%A5%E4%B8%8A"><span class="nav-number">4.6.2.4.</span> <span class="nav-text">指定次数为0次及以上</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">4.7.</span> <span class="nav-text">通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E4%BD%95%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.1.</span> <span class="nav-text">任何空白字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E4%BD%95%E9%9D%9E%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.2.</span> <span class="nav-text">任何非空白字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.3.</span> <span class="nav-text">一个数字字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%9D%9E%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.4.</span> <span class="nav-text">一个非数字字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E3%80%81%E5%AD%97%E6%AF%8D%E3%80%81%E4%B8%8B%E5%88%92%E7%BA%BF%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.5.</span> <span class="nav-text">一个数字、字母、下划线字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%9D%9E%E6%95%B0%E5%AD%97%E3%80%81%E5%AD%97%E6%AF%8D%E3%80%81%E4%B8%8B%E5%88%92%E7%BA%BF%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.6.</span> <span class="nav-text">一个非数字、字母、下划线字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%A4%E4%BA%86%E6%8D%A2%E8%A1%8C%E7%AC%A6%E4%BB%A5%E5%A4%96%E7%9A%84%E4%BB%BB%E6%84%8F%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">4.7.7.</span> <span class="nav-text">除了换行符以外的任意一个字符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">常用的正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E6%95%B0%E5%AD%97%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">校验数字的表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.1.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#n%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.2.</span> <span class="nav-text">n位的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%B3%E5%B0%91n%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.3.</span> <span class="nav-text">至少n位的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m-n%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.4.</span> <span class="nav-text">m~n位的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0%E5%92%8C%E9%9D%9E0%E5%BC%80%E5%A4%B4%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.5.</span> <span class="nav-text">0和非0开头的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E0%E5%BC%80%E5%A4%B4%E7%9A%84%E6%9C%80%E5%A4%9A%E5%B8%A6%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.6.</span> <span class="nav-text">非0开头的最多带两位小数的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A61-2%E4%BD%8D%E5%B0%8F%E6%95%B0%E7%9A%84%E6%AD%A3%E6%95%B0%E6%88%96%E8%B4%9F%E6%95%B0"><span class="nav-number">5.1.7.</span> <span class="nav-text">带1~2位小数的正数或负数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%95%B0%E3%80%81%E8%B4%9F%E6%95%B0%E3%80%81%E5%B0%8F%E6%95%B0"><span class="nav-number">5.1.8.</span> <span class="nav-text">正数、负数、小数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0%E7%9A%84%E6%AD%A3%E5%AE%9E%E6%95%B0"><span class="nav-number">5.1.9.</span> <span class="nav-text">有两位小数的正实数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%891-3%E4%BD%8D%E5%B0%8F%E6%95%B0%E7%9A%84%E6%AD%A3%E5%AE%9E%E6%95%B0"><span class="nav-number">5.1.10.</span> <span class="nav-text">有1~3位小数的正实数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E0%E7%9A%84%E6%AD%A3%E6%95%B4%E6%95%B0"><span class="nav-number">5.1.11.</span> <span class="nav-text">非0的正整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E0%E7%9A%84%E8%B4%9F%E6%95%B4%E6%95%B0"><span class="nav-number">5.1.12.</span> <span class="nav-text">非0的负整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E8%B4%9F%E6%95%B4%E6%95%B0"><span class="nav-number">5.1.13.</span> <span class="nav-text">非负整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%AD%A3%E6%95%B4%E6%95%B0"><span class="nav-number">5.1.14.</span> <span class="nav-text">非正整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E8%B4%9F%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">5.1.15.</span> <span class="nav-text">非负浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%AD%A3%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">5.1.16.</span> <span class="nav-text">非正浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">5.1.17.</span> <span class="nav-text">正浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9F%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">5.1.18.</span> <span class="nav-text">负浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">5.1.19.</span> <span class="nav-text">浮点数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">校验字符的表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%89%E5%AD%97"><span class="nav-number">5.2.1.</span> <span class="nav-text">汉字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8B%B1%E6%96%87%E5%92%8C%E6%95%B0%E5%AD%97"><span class="nav-number">5.2.2.</span> <span class="nav-text">英文和数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E4%B8%BA3-20%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%97%E7%AC%A6"><span class="nav-number">5.2.3.</span> <span class="nav-text">长度为3~20的所有字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B126%E4%B8%AA%E8%8B%B1%E6%96%87%E5%AD%97%E6%AF%8D%E7%BB%84%E6%88%90%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.4.</span> <span class="nav-text">由26个英文字母组成的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B126%E4%B8%AA%E5%A4%A7%E5%86%99%E8%8B%B1%E6%96%87%E5%AD%97%E6%AF%8D%E7%BB%84%E6%88%90%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.5.</span> <span class="nav-text">由26个大写英文字母组成的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B126%E4%B8%AA%E5%B0%8F%E5%86%99%E8%8B%B1%E6%96%87%E5%AD%97%E6%AF%8D%E7%BB%84%E6%88%90%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.6.</span> <span class="nav-text">由26个小写英文字母组成的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B1%E6%95%B0%E5%AD%97%E5%92%8C26%E4%B8%AA%E8%8B%B1%E6%96%87%E5%AD%97%E6%AF%8D%E7%BB%84%E6%88%90%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.7.</span> <span class="nav-text">由数字和26个英文字母组成的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B1%E6%95%B0%E5%AD%97%E3%80%8126%E4%B8%AA%E8%8B%B1%E6%96%87%E5%AD%97%E6%AF%8D%E6%88%96%E8%80%85%E4%B8%8B%E5%88%92%E7%BA%BF%E7%BB%84%E6%88%90%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.8.</span> <span class="nav-text">由数字、26个英文字母或者下划线组成的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E3%80%81%E8%8B%B1%E6%96%87%E3%80%81%E6%95%B0%E5%AD%97%E3%80%81%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="nav-number">5.2.9.</span> <span class="nav-text">中文、英文、数字、下划线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E3%80%81%E8%8B%B1%E6%96%87%E3%80%81%E6%95%B0%E5%AD%97%EF%BC%8C%E4%B8%8D%E5%8C%85%E6%8B%AC%E4%B8%8B%E5%88%92%E7%BA%BF%E7%AD%89%E7%AC%A6%E5%8F%B7"><span class="nav-number">5.2.10.</span> <span class="nav-text">中文、英文、数字，不包括下划线等符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%BE%93%E5%85%A5%E5%90%AB%E6%9C%89-%E2%80%99-%E7%AD%89%E5%AD%97%E7%AC%A6"><span class="nav-number">5.2.11.</span> <span class="nav-text">可以输入含有^%&amp;’,;&#x3D;?$&quot;等字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E5%90%AB%E6%9C%89-%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">5.2.12.</span> <span class="nav-text">禁止输入含有~的字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E9%9C%80%E6%B1%82%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">特殊需求表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Email%E5%9C%B0%E5%9D%80"><span class="nav-number">5.3.1.</span> <span class="nav-text">Email地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D"><span class="nav-number">5.3.2.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InternetURL"><span class="nav-number">5.3.3.</span> <span class="nav-text">InternetURL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81"><span class="nav-number">5.3.4.</span> <span class="nav-text">手机号码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81"><span class="nav-number">5.3.5.</span> <span class="nav-text">电话号码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81"><span class="nav-number">5.3.6.</span> <span class="nav-text">国内电话号码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7"><span class="nav-number">5.3.7.</span> <span class="nav-text">身份证号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%AD%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%E7%A0%81"><span class="nav-number">5.3.8.</span> <span class="nav-text">短身份证号码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%90%E5%8F%B7%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95"><span class="nav-number">5.3.9.</span> <span class="nav-text">帐号是否合法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%86%E7%A0%81"><span class="nav-number">5.3.10.</span> <span class="nav-text">密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%AF%86%E7%A0%81"><span class="nav-number">5.3.11.</span> <span class="nav-text">强密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.3.12.</span> <span class="nav-text">日期格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E5%B9%B4%E7%9A%8412%E4%B8%AA%E6%9C%88"><span class="nav-number">5.3.13.</span> <span class="nav-text">一年的12个月</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%9C%88%E7%9A%8431%E5%A4%A9"><span class="nav-number">5.3.14.</span> <span class="nav-text">一个月的31天</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%92%B1%E7%9A%84%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.3.15.</span> <span class="nav-text">钱的输入格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml%E6%96%87%E4%BB%B6"><span class="nav-number">5.3.16.</span> <span class="nav-text">xml文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.17.</span> <span class="nav-text">中文字符的正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%AD%97%E8%8A%82%E5%AD%97%E7%AC%A6"><span class="nav-number">5.3.18.</span> <span class="nav-text">双字节字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E7%99%BD%E8%A1%8C%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.19.</span> <span class="nav-text">空白行的正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML%E6%A0%87%E8%AE%B0%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.20.</span> <span class="nav-text">HTML标记的正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E5%B0%BE%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.21.</span> <span class="nav-text">首尾空白字符的正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%85%BE%E8%AE%AFQQ%E5%8F%B7"><span class="nav-number">5.3.22.</span> <span class="nav-text">腾讯QQ号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E5%9B%BD%E9%82%AE%E6%94%BF%E7%BC%96%E7%A0%81"><span class="nav-number">5.3.23.</span> <span class="nav-text">中国邮政编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="nav-number">5.3.24.</span> <span class="nav-text">IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.4.</span> <span class="nav-text">创建正则表达式对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.4.1.</span> <span class="nav-text">直接创建正则表达式对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87new%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%9B%E5%BB%BA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.4.2.</span> <span class="nav-text">通过new关键字创建正则表达式对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.5.</span> <span class="nav-text">获取匹配的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.6.</span> <span class="nav-text">验证正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2019/11/24/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】正则表达式 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】正则表达式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-11-24 15:51:46" itemprop="dateCreated datePublished" datetime="2019-11-24T15:51:46+08:00">2019-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>正则表达式，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。<a href="/302.html?target=https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">维基百科</a></p>
+<span id="more"></span>
+
+<h2 id="修饰符（Flag）"><a href="#修饰符（Flag）" class="headerlink" title="修饰符（Flag）"></a>修饰符（Flag）</h2><ul>
+<li>用于定义匹配的方式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code></td>
+<td>ignore，忽略大小写</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>global，全局匹配</td>
+</tr>
+<tr>
+<td><code>m</code></td>
+<td>multiple，匹配多行</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>single，匹配单行</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>sticky，粘性匹配</td>
+</tr>
+</tbody></table>
+<h2 id="模式（Pattern）"><a href="#模式（Pattern）" class="headerlink" title="模式（Pattern）"></a>模式（Pattern）</h2><h3 id="字符类（Character-Class）"><a href="#字符类（Character-Class）" class="headerlink" title="字符类（Character Class）"></a>字符类（Character Class）</h3><ul>
+<li>描述一组字符集合的简写</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code></td>
+<td>匹配任意字符</td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>匹配数字0~9，相当于<code>[0-9]</code></td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>匹配非数字0~9，相当于<code>[^0-9]</code></td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>匹配空白字符（空格、制表符<code>\t</code>、换行符<code>\n</code>、回车符<code>\r</code>、垂直制表符<code>\v</code>、换页符<code>\f</code>）</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>匹配非空白字符</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>匹配大写英文A<del>Z、小写英文a</del>z、数字0~9、下划线<code>_</code>，相当于<code>[A-Za-z0-9_]</code></td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>匹配非大写英文A<del>Z、小写英文a</del>z、数字0~9、下划线<code>_</code>，相当于<code>[^A-Za-z0-9_]</code></td>
+</tr>
+</tbody></table>
+<h3 id="锚点（Anchor）"><a href="#锚点（Anchor）" class="headerlink" title="锚点（Anchor）"></a>锚点（Anchor）</h3><ul>
+<li>规定开始位置和结束位置的匹配要求</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>锚点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>^</code></td>
+<td>开始锚点</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>结束锚点</td>
+</tr>
+</tbody></table>
+<h3 id="转义字符（Escape-Character）"><a href="#转义字符（Escape-Character）" class="headerlink" title="转义字符（Escape Character）"></a>转义字符（Escape Character）</h3><ul>
+<li>描述具有特殊含义的字符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>转义字符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\[</code></td>
+<td>左方括号</td>
+</tr>
+<tr>
+<td><code>\]</code></td>
+<td>右方括号</td>
+</tr>
+<tr>
+<td><code>\/</code></td>
+<td>正斜线</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>反斜线</td>
+</tr>
+<tr>
+<td><code>\^</code></td>
+<td>脱字符</td>
+</tr>
+<tr>
+<td><code>\$</code></td>
+<td>美元符</td>
+</tr>
+<tr>
+<td><code>\.</code></td>
+<td>点</td>
+</tr>
+<tr>
+<td>\&#124;</td>
+<td>竖线</td>
+</tr>
+<tr>
+<td><code>\?</code></td>
+<td>问号</td>
+</tr>
+<tr>
+<td><code>\*</code></td>
+<td>星号</td>
+</tr>
+<tr>
+<td><code>\+</code></td>
+<td>加号</td>
+</tr>
+<tr>
+<td><code>(</code></td>
+<td>左圆括号</td>
+</tr>
+<tr>
+<td><code>)</code></td>
+<td>右圆括号</td>
+</tr>
+</tbody></table>
+<h3 id="边界匹配（Boundary-Matching）"><a href="#边界匹配（Boundary-Matching）" class="headerlink" title="边界匹配（Boundary Matching）"></a>边界匹配（Boundary Matching）</h3><ul>
+<li>描述由空格包裹的字符边界</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>边界</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\b</code></td>
+<td>单词边界</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>非单词边界</td>
+</tr>
+</tbody></table>
+<h3 id="集合（Character-Set）"><a href="#集合（Character-Set）" class="headerlink" title="集合（Character Set）"></a>集合（Character Set）</h3><ul>
+<li>描述一个序列中的任意字符</li>
+</ul>
+<p><code>a</code>、<code>b</code>、<code>c</code>中的任意一个可以被正确匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[abc]</span><br></pre></td></tr></table></figure>
+
+<h3 id="范围（Character-Range）"><a href="#范围（Character-Range）" class="headerlink" title="范围（Character Range）"></a>范围（Character Range）</h3><ul>
+<li>描述一个范围内的任意字符</li>
+</ul>
+<p>从<code>a</code>到<code>c</code>中的任意一个可以被正确匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-c]</span><br></pre></td></tr></table></figure>
+
+<h3 id="量词（Quantifier）"><a href="#量词（Quantifier）" class="headerlink" title="量词（Quantifier）"></a>量词（Quantifier）</h3><ul>
+<li>描述前一个字符出现的次数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>量词</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>一个或多个，相当于<code>&#123;1,&#125;</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>零个或一个，相当于<code>&#123;0,1&#125;</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>零个或多个，相当于<code>&#123;0,&#125;</code></td>
+</tr>
+</tbody></table>
+<h4 id="确切的位数"><a href="#确切的位数" class="headerlink" title="确切的位数"></a>确切的位数</h4><p>只能出现1次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;1&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h4><p>最少出现1次，最大出现3次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;1,3&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最少出现1次，不限制最大次数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;1,&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最少出现1次，最大次出现3次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;,3&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="贪婪模式和惰性模式"><a href="#贪婪模式和惰性模式" class="headerlink" title="贪婪模式和惰性模式"></a>贪婪模式和惰性模式</h4><h5 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式"></a>贪婪模式</h5><ul>
+<li>最后一次遇到匹配结果才会完成匹配</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《.+》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《1》《2》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《1》《2》</span><br></pre></td></tr></table></figure>
+
+<h5 id="惰性模式"><a href="#惰性模式" class="headerlink" title="惰性模式"></a>惰性模式</h5><ul>
+<li>第一次遇到匹配结果就会完成匹配</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《.+?》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《1》《2》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《1》</span><br></pre></td></tr></table></figure>
+
+<h3 id="捕获组（Capturing-Group）"><a href="#捕获组（Capturing-Group）" class="headerlink" title="捕获组（Capturing Group）"></a>捕获组（Capturing Group）</h3><ul>
+<li>将数据分组，提取匹配结果</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《(.+?)》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《1》</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">《1》</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h4 id="为捕获组定义组名"><a href="#为捕获组定义组名" class="headerlink" title="为捕获组定义组名"></a>为捕获组定义组名</h4><ul>
+<li>通过<code>?&lt;&gt;</code>定义组名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《(?&lt;key&gt;.+?)》</span><br></pre></td></tr></table></figure>
+
+<h4 id="为捕获组定义量词"><a href="#为捕获组定义量词" class="headerlink" title="为捕获组定义量词"></a>为捕获组定义量词</h4><p><code>ab</code>出现2次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ab)&#123;2&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ababb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abab</span><br></pre></td></tr></table></figure>
+
+<h4 id="捕获组中的逻辑或"><a href="#捕获组中的逻辑或" class="headerlink" title="捕获组中的逻辑或"></a>捕获组中的逻辑或</h4><p><code>a</code>或<code>b</code>出现2次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a|b)&#123;2&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab</span><br></pre></td></tr></table></figure>
+
+<h4 id="捕获组中的逻辑非"><a href="#捕获组中的逻辑非" class="headerlink" title="捕获组中的逻辑非"></a>捕获组中的逻辑非</h4><p>非<code>a</code>出现2次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?:a)&#123;2&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>input</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><figcaption><span>output</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="边界符"><a href="#边界符" class="headerlink" title="边界符"></a>边界符</h3><h4 id="匹配字符串的开始"><a href="#匹配字符串的开始" class="headerlink" title="匹配字符串的开始"></a>匹配字符串的开始</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^</span><br></pre></td></tr></table></figure>
+
+<h4 id="匹配字符串的结束"><a href="#匹配字符串的结束" class="headerlink" title="匹配字符串的结束"></a>匹配字符串的结束</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义符合条件的字符匹配"><a href="#定义符合条件的字符匹配" class="headerlink" title="定义符合条件的字符匹配"></a>定义符合条件的字符匹配</h3><h4 id="指定一个确定的字符或字符串"><a href="#指定一个确定的字符或字符串" class="headerlink" title="指定一个确定的字符或字符串"></a>指定一个确定的字符或字符串</h4><h5 id="完全匹配"><a href="#完全匹配" class="headerlink" title="完全匹配"></a>完全匹配</h5><ul>
+<li>必须是<code>a</code>字符</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a)</span><br></pre></td></tr></table></figure>
+
+<h5 id="或匹配"><a href="#或匹配" class="headerlink" title="或匹配"></a>或匹配</h5><ul>
+<li>必须是字符串<code>ab</code>或者<code>ac</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab|ac</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ab|ac)</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定一个不确定的字符"><a href="#指定一个不确定的字符" class="headerlink" title="指定一个不确定的字符"></a>指定一个不确定的字符</h4><ul>
+<li>只要包含<code>a</code>、<code>b</code>、<code>c</code>中的任何一种即可</li>
+</ul>
+<h5 id="指定字符"><a href="#指定字符" class="headerlink" title="指定字符"></a>指定字符</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[abc]</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定范围"><a href="#指定范围" class="headerlink" title="指定范围"></a>指定范围</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-c]</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义不符合条件的字符匹配（取反）"><a href="#定义不符合条件的字符匹配（取反）" class="headerlink" title="定义不符合条件的字符匹配（取反）"></a>定义不符合条件的字符匹配（取反）</h3><ul>
+<li>只要不包含<code>a</code>、<code>b</code>、<code>c</code>中的任何一种即可</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[^abc]</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义捕获组"><a href="#定义捕获组" class="headerlink" title="定义捕获组"></a>定义捕获组</h3><ul>
+<li><p>通过<code>()</code>定义捕获组</p>
+</li>
+<li><p>需要匹配的数据</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2012-12-12</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>得到的匹配数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">full match: 2012-12-12</span><br><span class="line">group 1: 2012</span><br><span class="line">group 2: 12</span><br><span class="line">group 3: 12</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义命名捕获组"><a href="#定义命名捕获组" class="headerlink" title="定义命名捕获组"></a>定义命名捕获组</h5><ul>
+<li>在括号最前面添加<code>?&lt;name&gt;</code>或<code>?&#39;&lt;name&gt;&#39;</code>为捕获组命名</li>
+</ul>
+<p>捕获组名最好不要重名，虽然有的编程语言（C#、Perl）支持重名捕获组，但是还有的编程语言（Java、Python）不支持重名捕获组</p>
+<ul>
+<li>需要匹配的数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2012-12-12</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;year&gt;\d&#123;4&#125;)-(?&lt;month&gt;\d&#123;2&#125;)-(?&lt;day&gt;\d&#123;2&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?&#x27;&lt;year&gt;&#x27;\d&#123;4&#125;)-(?&#x27;&lt;month&gt;&#x27;\d&#123;2&#125;)-(?&#x27;&lt;day&gt;&#x27;\d&#123;2&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>得到的匹配数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">full match: 2012-12-12</span><br><span class="line">group year: 2012</span><br><span class="line">group month: 12</span><br><span class="line">group day: 12</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义非捕获组"><a href="#定义非捕获组" class="headerlink" title="定义非捕获组"></a>定义非捕获组</h5><ul>
+<li><p>非捕获组用于在不得不需要括号但不希望数据分组的时候，在括号内最前面添加<code>?:</code>，则该括号不会进行分组</p>
+</li>
+<li><p>需要匹配的数据</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">red</span><br><span class="line">green</span><br><span class="line">blue</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?:red|green|blue)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>得到的匹配数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">full match: red</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">full match: green</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">full match: blue</span><br></pre></td></tr></table></figure>
+
+<h4 id="引用捕获组"><a href="#引用捕获组" class="headerlink" title="引用捕获组"></a>引用捕获组</h4><ul>
+<li><p>通过<code>\k&lt;name&gt;</code>引用捕获组</p>
+</li>
+<li><p>需要匹配的数据</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">112</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;one&gt;1)\k&lt;one&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>得到的匹配数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">full match: 11</span><br><span class="line">group one: 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义前瞻数据"><a href="#定义前瞻数据" class="headerlink" title="定义前瞻数据"></a>定义前瞻数据</h3><ul>
+<li>前瞻数据不会被获取，但是会被用于筛选数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?=a)</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定次数"><a href="#指定次数" class="headerlink" title="指定次数"></a>指定次数</h3><ul>
+<li>紧跟字符，表示前一个字符允许出现的次数</li>
+</ul>
+<h4 id="指定一个确定的次数"><a href="#指定一个确定的次数" class="headerlink" title="指定一个确定的次数"></a>指定一个确定的次数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#123;1&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="不指定一个确定的字符"><a href="#不指定一个确定的字符" class="headerlink" title="不指定一个确定的字符"></a>不指定一个确定的字符</h4><h5 id="指定次数为一个范围"><a href="#指定次数为一个范围" class="headerlink" title="指定次数为一个范围"></a>指定次数为一个范围</h5><h6 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h6><ul>
+<li>1~2次</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#123;1,2&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="大于等于"><a href="#大于等于" class="headerlink" title="大于等于"></a>大于等于</h6><ul>
+<li>1次及以上</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#123;1,&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定次数为1次或0次"><a href="#指定次数为1次或0次" class="headerlink" title="指定次数为1次或0次"></a>指定次数为1次或0次</h5><ul>
+<li>有或者没有都可以，等价于<code>&#123;0,1&#125;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a?</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定次数为1次及以上"><a href="#指定次数为1次及以上" class="headerlink" title="指定次数为1次及以上"></a>指定次数为1次及以上</h5><ul>
+<li>等价于<code>&#123;1,&#125;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a+</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定次数为0次及以上"><a href="#指定次数为0次及以上" class="headerlink" title="指定次数为0次及以上"></a>指定次数为0次及以上</h5><ul>
+<li>任意次匹配，等价于<code>&#123;0,&#125;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a*</span><br></pre></td></tr></table></figure>
+
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><h4 id="任何空白字符"><a href="#任何空白字符" class="headerlink" title="任何空白字符"></a>任何空白字符</h4><ul>
+<li>包括换行符、空格、制表符</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\s</span><br></pre></td></tr></table></figure>
+
+<h4 id="任何非空白字符"><a href="#任何非空白字符" class="headerlink" title="任何非空白字符"></a>任何非空白字符</h4><ul>
+<li>除了换行符、空格、制表符</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\S</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个数字字符"><a href="#一个数字字符" class="headerlink" title="一个数字字符"></a>一个数字字符</h4><ul>
+<li>等价于<code>[0-9]</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个非数字字符"><a href="#一个非数字字符" class="headerlink" title="一个非数字字符"></a>一个非数字字符</h4><ul>
+<li>等价于<code>[^0-9]</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\D</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个数字、字母、下划线字符"><a href="#一个数字、字母、下划线字符" class="headerlink" title="一个数字、字母、下划线字符"></a>一个数字、字母、下划线字符</h4><ul>
+<li>等价于<code>[0-9a-zA-Z_]</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\w</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个非数字、字母、下划线字符"><a href="#一个非数字、字母、下划线字符" class="headerlink" title="一个非数字、字母、下划线字符"></a>一个非数字、字母、下划线字符</h4><ul>
+<li>等价于<code>[^0-9a-zA-Z_]</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\W</span><br></pre></td></tr></table></figure>
+
+<h4 id="除了换行符以外的任意一个字符"><a href="#除了换行符以外的任意一个字符" class="headerlink" title="除了换行符以外的任意一个字符"></a>除了换行符以外的任意一个字符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h2><h3 id="校验数字的表达式"><a href="#校验数字的表达式" class="headerlink" title="校验数字的表达式"></a>校验数字的表达式</h3><h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[0-9]*$</span><br></pre></td></tr></table></figure>
+
+<h4 id="n位的数字"><a href="#n位的数字" class="headerlink" title="n位的数字"></a>n位的数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;n&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="至少n位的数字"><a href="#至少n位的数字" class="headerlink" title="至少n位的数字"></a>至少n位的数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;n,&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="m-n位的数字"><a href="#m-n位的数字" class="headerlink" title="m~n位的数字"></a>m~n位的数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;m,n&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="0和非0开头的数字"><a href="#0和非0开头的数字" class="headerlink" title="0和非0开头的数字"></a>0和非0开头的数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(0|[1-9][0-9]*)$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非0开头的最多带两位小数的数字"><a href="#非0开头的最多带两位小数的数字" class="headerlink" title="非0开头的最多带两位小数的数字"></a>非0开头的最多带两位小数的数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([1-9][0-9]*)+(.[0-9]&#123;1,2&#125;)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="带1-2位小数的正数或负数"><a href="#带1-2位小数的正数或负数" class="headerlink" title="带1~2位小数的正数或负数"></a>带1~2位小数的正数或负数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(\-)?\d+(\.\d&#123;1,2&#125;)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="正数、负数、小数"><a href="#正数、负数、小数" class="headerlink" title="正数、负数、小数"></a>正数、负数、小数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(\-|\+)?\d+(\.\d+)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="有两位小数的正实数"><a href="#有两位小数的正实数" class="headerlink" title="有两位小数的正实数"></a>有两位小数的正实数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[0-9]+(.[0-9]&#123;2&#125;)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="有1-3位小数的正实数"><a href="#有1-3位小数的正实数" class="headerlink" title="有1~3位小数的正实数"></a>有1~3位小数的正实数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[0-9]+(.[0-9]&#123;1,3&#125;)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非0的正整数"><a href="#非0的正整数" class="headerlink" title="非0的正整数"></a>非0的正整数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">^[1-9]\d*$</span><br><span class="line">^([1-9][0-9]*)&#123;1,3&#125;$</span><br><span class="line">^\+?[1-9][0-9]*$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非0的负整数"><a href="#非0的负整数" class="headerlink" title="非0的负整数"></a>非0的负整数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^\-[1-9][]0-9&quot;*$</span><br><span class="line">^-[1-9]\d*$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非负整数"><a href="#非负整数" class="headerlink" title="非负整数"></a>非负整数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^\d+$</span><br><span class="line">^[1-9]\d*|0$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非正整数"><a href="#非正整数" class="headerlink" title="非正整数"></a>非正整数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^-[1-9]\d*|0$</span><br><span class="line">^((-\d+)|(0+))$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非负浮点数"><a href="#非负浮点数" class="headerlink" title="非负浮点数"></a>非负浮点数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^\d+(\.\d+)?$</span><br><span class="line">^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</span><br></pre></td></tr></table></figure>
+
+<h4 id="非正浮点数"><a href="#非正浮点数" class="headerlink" title="非正浮点数"></a>非正浮点数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^((-\d+(\.\d+)?)|(0+(\.0+)?))$</span><br><span class="line">^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</span><br></pre></td></tr></table></figure>
+
+<h4 id="正浮点数"><a href="#正浮点数" class="headerlink" title="正浮点数"></a>正浮点数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</span><br><span class="line">^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$</span><br></pre></td></tr></table></figure>
+
+<h4 id="负浮点数"><a href="#负浮点数" class="headerlink" title="负浮点数"></a>负浮点数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</span><br><span class="line">^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$</span><br></pre></td></tr></table></figure>
+
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^(-?\d+)(\.\d+)?$</span><br><span class="line">^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</span><br></pre></td></tr></table></figure>
+
+<h3 id="校验字符的表达式"><a href="#校验字符的表达式" class="headerlink" title="校验字符的表达式"></a>校验字符的表达式</h3><h4 id="汉字"><a href="#汉字" class="headerlink" title="汉字"></a>汉字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\u4e00-\u9fa5]&#123;0,&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="英文和数字"><a href="#英文和数字" class="headerlink" title="英文和数字"></a>英文和数字</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z0-9]+$</span><br><span class="line">^[A-Za-z0-9]&#123;4,40&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="长度为3-20的所有字符"><a href="#长度为3-20的所有字符" class="headerlink" title="长度为3~20的所有字符"></a>长度为3~20的所有字符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^.&#123;3,20&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="由26个英文字母组成的字符串"><a href="#由26个英文字母组成的字符串" class="headerlink" title="由26个英文字母组成的字符串"></a>由26个英文字母组成的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z]+$</span><br></pre></td></tr></table></figure>
+
+<h4 id="由26个大写英文字母组成的字符串"><a href="#由26个大写英文字母组成的字符串" class="headerlink" title="由26个大写英文字母组成的字符串"></a>由26个大写英文字母组成的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Z]+$</span><br></pre></td></tr></table></figure>
+
+<h4 id="由26个小写英文字母组成的字符串"><a href="#由26个小写英文字母组成的字符串" class="headerlink" title="由26个小写英文字母组成的字符串"></a>由26个小写英文字母组成的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-z]+$</span><br></pre></td></tr></table></figure>
+
+<h4 id="由数字和26个英文字母组成的字符串"><a href="#由数字和26个英文字母组成的字符串" class="headerlink" title="由数字和26个英文字母组成的字符串"></a>由数字和26个英文字母组成的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z0-9]+$</span><br></pre></td></tr></table></figure>
+
+<h4 id="由数字、26个英文字母或者下划线组成的字符串"><a href="#由数字、26个英文字母或者下划线组成的字符串" class="headerlink" title="由数字、26个英文字母或者下划线组成的字符串"></a>由数字、26个英文字母或者下划线组成的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^\w+$</span><br><span class="line">^\w&#123;3,20&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="中文、英文、数字、下划线"><a href="#中文、英文、数字、下划线" class="headerlink" title="中文、英文、数字、下划线"></a>中文、英文、数字、下划线</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\u4E00-\u9FA5A-Za-z0-9_]+$</span><br></pre></td></tr></table></figure>
+
+<h4 id="中文、英文、数字，不包括下划线等符号"><a href="#中文、英文、数字，不包括下划线等符号" class="headerlink" title="中文、英文、数字，不包括下划线等符号"></a>中文、英文、数字，不包括下划线等符号</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^[\u4E00-\u9FA5A-Za-z0-9]+$</span><br><span class="line">^[\u4E00-\u9FA5A-Za-z0-9]&#123;2,20&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以输入含有-’-等字符"><a href="#可以输入含有-’-等字符" class="headerlink" title="可以输入含有^%&amp;’,;&#x3D;?$&quot;等字符"></a>可以输入含有^%&amp;’,;&#x3D;?$&quot;等字符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[^%&amp;&#x27;,;=?$\x22]+</span><br></pre></td></tr></table></figure>
+
+<h4 id="禁止输入含有-的字符"><a href="#禁止输入含有-的字符" class="headerlink" title="禁止输入含有~的字符"></a>禁止输入含有~的字符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[^~\x22]+</span><br></pre></td></tr></table></figure>
+
+<h3 id="特殊需求表达式"><a href="#特殊需求表达式" class="headerlink" title="特殊需求表达式"></a>特殊需求表达式</h3><h4 id="Email地址"><a href="#Email地址" class="headerlink" title="Email地址"></a>Email地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</span><br></pre></td></tr></table></figure>
+
+<h4 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;(/.[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;)+/.?</span><br></pre></td></tr></table></figure>
+
+<h4 id="InternetURL"><a href="#InternetURL" class="headerlink" title="InternetURL"></a>InternetURL</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^[a-zA-z]+://[^\s]*&amp;</span><br><span class="line">^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="手机号码"><a href="#手机号码" class="headerlink" title="手机号码"></a>手机号码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="电话号码"><a href="#电话号码" class="headerlink" title="电话号码"></a>电话号码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="国内电话号码"><a href="#国内电话号码" class="headerlink" title="国内电话号码"></a>国内电话号码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="身份证号"><a href="#身份证号" class="headerlink" title="身份证号"></a>身份证号</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;15&#125;|\d&#123;18&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="短身份证号码"><a href="#短身份证号码" class="headerlink" title="短身份证号码"></a>短身份证号码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^([0-9])&#123;7,18&#125;(x|X)?$</span><br><span class="line">^\d&#123;8,18&#125;|[0-9x]&#123;8,18&#125;|[0-9X]&#123;8,18&#125;?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="帐号是否合法"><a href="#帐号是否合法" class="headerlink" title="帐号是否合法"></a>帐号是否合法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-zA-Z][a-zA-Z0-9_]&#123;4,15&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-zA-Z]\w&#123;5,17&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="强密码"><a href="#强密码" class="headerlink" title="强密码"></a>强密码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$</span><br></pre></td></tr></table></figure>
+
+<h4 id="日期格式"><a href="#日期格式" class="headerlink" title="日期格式"></a>日期格式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="一年的12个月"><a href="#一年的12个月" class="headerlink" title="一年的12个月"></a>一年的12个月</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^(0?[1-9]|1[0-2])$</span><br><span class="line">&gt;=1 &amp;&amp; &lt;=12</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个月的31天"><a href="#一个月的31天" class="headerlink" title="一个月的31天"></a>一个月的31天</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^((0?[1-9])|((1|2)[0-9])|30|31)$</span><br></pre></td></tr></table></figure>
+
+<h4 id="钱的输入格式"><a href="#钱的输入格式" class="headerlink" title="钱的输入格式"></a>钱的输入格式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">^[1-9][0-9]*$</span><br><span class="line">^(0|[1-9][0-9]*)$</span><br><span class="line">^(0|-?[1-9][0-9]*)$</span><br><span class="line">^[0-9]+(.[0-9]+)?$</span><br><span class="line">^[0-9]+(.[0-9]&#123;2&#125;)?$</span><br><span class="line">^[0-9]+(.[0-9]&#123;1,2&#125;)?$</span><br><span class="line">^[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*(.[0-9]&#123;1,2&#125;)?$</span><br><span class="line">^([0-9]+|[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*)(.[0-9]&#123;1,2&#125;)?$</span><br></pre></td></tr></table></figure>
+
+<h4 id="xml文件"><a href="#xml文件" class="headerlink" title="xml文件"></a>xml文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$</span><br></pre></td></tr></table></figure>
+
+<h4 id="中文字符的正则表达式"><a href="#中文字符的正则表达式" class="headerlink" title="中文字符的正则表达式"></a>中文字符的正则表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[\u4e00-\u9fa5]</span><br></pre></td></tr></table></figure>
+
+<h4 id="双字节字符"><a href="#双字节字符" class="headerlink" title="双字节字符"></a>双字节字符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\x00-\xff]$</span><br></pre></td></tr></table></figure>
+
+<h4 id="空白行的正则表达式"><a href="#空白行的正则表达式" class="headerlink" title="空白行的正则表达式"></a>空白行的正则表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\n\s*\r</span><br></pre></td></tr></table></figure>
+
+<h4 id="HTML标记的正则表达式"><a href="#HTML标记的正则表达式" class="headerlink" title="HTML标记的正则表达式"></a>HTML标记的正则表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="首尾空白字符的正则表达式"><a href="#首尾空白字符的正则表达式" class="headerlink" title="首尾空白字符的正则表达式"></a>首尾空白字符的正则表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">^\s*|\s*$</span><br><span class="line">(^\s*)|(\s*$)</span><br></pre></td></tr></table></figure>
+
+<h4 id="腾讯QQ号"><a href="#腾讯QQ号" class="headerlink" title="腾讯QQ号"></a>腾讯QQ号</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1-9][0-9]&#123;4,&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="中国邮政编码"><a href="#中国邮政编码" class="headerlink" title="中国邮政编码"></a>中国邮政编码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1-9]\d&#123;5&#125;(?!\d)</span><br></pre></td></tr></table></figure>
+
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\d+\.\d+\.\d+\.\d+</span><br><span class="line">((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.)&#123;3&#125;(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))</span><br></pre></td></tr></table></figure>
+
+<p>##中的正则表达式</p>
+<h3 id="创建正则表达式对象"><a href="#创建正则表达式对象" class="headerlink" title="创建正则表达式对象"></a>创建正则表达式对象</h3><h4 id="直接创建正则表达式对象"><a href="#直接创建正则表达式对象" class="headerlink" title="直接创建正则表达式对象"></a>直接创建正则表达式对象</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let reg = /正则表达式/;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过new关键字创建正则表达式对象"><a href="#通过new关键字创建正则表达式对象" class="headerlink" title="通过new关键字创建正则表达式对象"></a>通过new关键字创建正则表达式对象</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let reg = new RegExp(&quot;正则表达式&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取匹配的字符串"><a href="#获取匹配的字符串" class="headerlink" title="获取匹配的字符串"></a>获取匹配的字符串</h3><ul>
+<li>如果匹配成功，则返回匹配成功后截取的子字符串</li>
+<li>如果匹配失败，则返回null</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：参与匹配的字符串</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg.exec(&quot;&lt;str&gt;&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="验证正则表达式"><a href="#验证正则表达式" class="headerlink" title="验证正则表达式"></a>验证正则表达式</h3><ul>
+<li>如果验证正确返回true；如果验证错误返回false</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：需要验证的字符串</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg.test(&quot;&lt;str&gt;&quot;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://jq.qq.com/?_wv=1027&k=5cLzPAH">QQ群——DT课堂 - 辛末 - 11月新群</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qf4y1T7Hx/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a34y167AZ/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DY41177dM/">哔哩哔哩——黑马前端</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18S4y1H7Bg/">哔哩哔哩——骆昊jackfrued</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021043947">segmentfault——老鼠拧刀满街找猫</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/23/LineageOS%E5%8E%BB%E9%99%A4wifi%E5%8F%89%E5%8F%B7/" rel="prev" title="【踩坑】原生Android去除wifi叉号">
+                  <i class="fa fa-angle-left"></i> 【踩坑】原生Android去除wifi叉号
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/11/24/%E9%94%AE%E7%9B%98%E7%BC%96%E7%A0%81%E5%80%BC/" rel="next" title="【速查表】键盘编码值">
+                  【速查表】键盘编码值 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言C++的类和对象学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】C++的类和对象">
+<meta property="og:url" content="https://loli.fj.cn/2022/08/14/CPP%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言C++的类和对象学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-14T07:55:53.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.844Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="CPP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/08/14/CPP%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/08/14/CPP%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/","path":"2022/08/14/CPP的类和对象/","title":"【笔记】C++的类和对象"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】C++的类和对象 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">定义类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">创建对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">获取对象的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%B5%8B%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">为对象的属性赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A1%8C%E4%B8%BA"><span class="nav-number">3.3.</span> <span class="nav-text">调用对象的行为</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">权限修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct%E5%92%8Cclass"><span class="nav-number">5.</span> <span class="nav-text">struct和class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">6.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%B8%85%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">对象的初始化和清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">7.1.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">7.1.1.</span> <span class="nav-text">定义构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">定义无参构造</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9C%89%E5%8F%82%E6%9E%84%E9%80%A0"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">定义有参构造</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0"><span class="nav-number">7.1.1.2.1.</span> <span class="nav-text">定义拷贝构造</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">7.1.2.</span> <span class="nav-text">调用构造函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.2.</span> <span class="nav-text">析构函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA"><span class="nav-number">8.</span> <span class="nav-text">拷贝构造函数的调用时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">10.</span> <span class="nav-text">深拷贝与浅拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">10.1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">10.2.</span> <span class="nav-text">深拷贝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">11.</span> <span class="nav-text">初始化列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E7%B1%BB%E6%88%90%E5%91%98"><span class="nav-number">12.</span> <span class="nav-text">类对象作为类成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-number">13.</span> <span class="nav-text">静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">13.1.</span> <span class="nav-text">静态成员变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">13.1.1.</span> <span class="nav-text">静态成员变量的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE"><span class="nav-number">13.1.1.1.</span> <span class="nav-text">通过对象访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E5%90%8D%E8%AE%BF%E9%97%AE"><span class="nav-number">13.1.1.2.</span> <span class="nav-text">通过类名访问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">13.2.</span> <span class="nav-text">静态成员函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">13.2.1.</span> <span class="nav-text">静态成员函数的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE-1"><span class="nav-number">13.2.1.1.</span> <span class="nav-text">通过对象访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E5%90%8D%E8%AE%BF%E9%97%AE-1"><span class="nav-number">13.2.1.2.</span> <span class="nav-text">通过类名访问</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">14.</span> <span class="nav-text">this指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E5%87%BD%E6%95%B0%E4%B8%8E%E5%B8%B8%E5%AF%B9%E8%B1%A1"><span class="nav-number">15.</span> <span class="nav-text">常函数与常对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E5%87%BD%E6%95%B0"><span class="nav-number">15.1.</span> <span class="nav-text">常函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E5%AF%B9%E8%B1%A1"><span class="nav-number">15.2.</span> <span class="nav-text">常对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E5%87%BD%E6%95%B0%E5%92%8C%E5%B8%B8%E5%AF%B9%E8%B1%A1%E9%83%BD%E8%83%BD%E4%BF%AE%E6%94%B9%E7%9A%84%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7"><span class="nav-number">15.3.</span> <span class="nav-text">常函数和常对象都能修改的成员属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%A4%96%E5%AE%9A%E4%B9%89%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">16.</span> <span class="nav-text">类外定义成员函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0"><span class="nav-number">16.1.</span> <span class="nav-text">定义普通函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-1"><span class="nav-number">16.2.</span> <span class="nav-text">定义构造函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8B%E5%85%83"><span class="nav-number">17.</span> <span class="nav-text">友元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%81%9A%E5%8F%8B%E5%85%83"><span class="nav-number">17.1.</span> <span class="nav-text">成员函数做友元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%81%9A%E5%8F%8B%E5%85%83"><span class="nav-number">17.2.</span> <span class="nav-text">类做友元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%81%9A%E5%8F%8B%E5%85%83-1"><span class="nav-number">17.3.</span> <span class="nav-text">成员函数做友元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.</span> <span class="nav-text">运算符重载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.1.</span> <span class="nav-text">算数运算符重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">18.1.1.</span> <span class="nav-text">通过成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0"><span class="nav-number">18.1.2.</span> <span class="nav-text">通过全局函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E7%A7%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.2.</span> <span class="nav-text">左移运算符重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0-1"><span class="nav-number">18.2.1.</span> <span class="nav-text">通过全局函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%A2%9E%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.3.</span> <span class="nav-text">递增运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.4.</span> <span class="nav-text">赋值运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.5.</span> <span class="nav-text">关系运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">18.6.</span> <span class="nav-text">函数调用运算符重载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">19.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">19.1.</span> <span class="nav-text">继承的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%85%B1%E7%BB%A7%E6%89%BF"><span class="nav-number">19.1.1.</span> <span class="nav-text">公共继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E7%BB%A7%E6%89%BF"><span class="nav-number">19.1.2.</span> <span class="nav-text">保护继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E7%BB%A7%E6%89%BF"><span class="nav-number">19.1.3.</span> <span class="nav-text">私有继承</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E5%91%8A%E5%8D%95%E4%B8%AA%E7%B1%BB%E5%B8%83%E5%B1%80"><span class="nav-number">19.2.</span> <span class="nav-text">报告单个类布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E7%88%B6%E5%AD%90%E7%B1%BB%E5%90%8C%E5%90%8D%E5%B1%9E%E6%80%A7%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-number">19.3.</span> <span class="nav-text">访问父子类同名属性和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-number">19.3.1.</span> <span class="nav-text">非静态成员属性和函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-number">19.3.2.</span> <span class="nav-text">静态成员属性和函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">19.4.</span> <span class="nav-text">多继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF"><span class="nav-number">19.5.</span> <span class="nav-text">菱形继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">19.5.1.</span> <span class="nav-text">虚继承</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%82%BD"><span class="nav-number">20.</span> <span class="nav-text">多肽</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%82%BD%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">20.1.</span> <span class="nav-text">多肽的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">20.2.</span> <span class="nav-text">虚函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">20.3.</span> <span class="nav-text">纯虚函数和抽象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">20.4.</span> <span class="nav-text">虚析构函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">20.5.</span> <span class="nav-text">纯虚析构函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">21.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">22.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/08/14/CPP%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】C++的类和对象 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】C++的类和对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-14 15:55:53" itemprop="dateCreated datePublished" datetime="2022-08-14T15:55:53+08:00">2022-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CPP%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">CPP学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>C++的类和对象学习笔记</p>
+<span id="more"></span>
+
+<h2 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="comment">// 属性的权限</span></span><br><span class="line">权限修饰符:</span><br><span class="line">    <span class="comment">// 定义属性</span></span><br><span class="line">    数据类型 属性名;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 行为的权限</span></span><br><span class="line">权限修饰符:</span><br><span class="line">    <span class="comment">// 定义行为</span></span><br><span class="line">    返回值类型 函数名(参数列表)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> 返回值;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名 对象名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取对象的属性"><a href="#获取对象的属性" class="headerlink" title="获取对象的属性"></a>获取对象的属性</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.属性名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为对象的属性赋值"><a href="#为对象的属性赋值" class="headerlink" title="为对象的属性赋值"></a>为对象的属性赋值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.属性名 = 值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="调用对象的行为"><a href="#调用对象的行为" class="headerlink" title="调用对象的行为"></a>调用对象的行为</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.方法名(参数列表);</span><br></pre></td></tr></table></figure>
+
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h2><ul>
+<li>权限修饰符可以加在属性前或方法前</li>
+<li>权限修饰符定义一次后，权限修饰符之后的所有属性和函数都被修饰</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>权限</th>
+<th>类内是否可以访问成员</th>
+<th>类外是否可以访问成员变量</th>
+<th>是否可以被继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>public</code></td>
+<td>公共权限</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code>protected</code></td>
+<td>保护权限</td>
+<td>✓</td>
+<td>×</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code>private</code></td>
+<td>私有权限</td>
+<td>✓</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    数据类型 公共权限的变量名;</span><br><span class="line">    数据类型 公共权限的变量名;</span><br><span class="line">protected:</span><br><span class="line">    数据类型 保护权限的变量名;</span><br><span class="line">    数据类型 保护权限的变量名;</span><br><span class="line">private:</span><br><span class="line">    数据类型 私有权限的变量名;</span><br><span class="line">    数据类型 私有权限的变量名;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="struct和class"><a href="#struct和class" class="headerlink" title="struct和class"></a>struct和class</h2><ul>
+<li>struct和class的默认访问权限不同<ul>
+<li>struct的默认访问权限是public公共权限</li>
+<li>class的默认访问权限是private私有权限</li>
+</ul>
+</li>
+</ul>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
+<li>将成员属性私有化，成员函数公有化</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> global_id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> global_id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">void</span> <span class="title function_">setName</span><span class="params">(<span class="type">int</span> id)</span></span><br><span class="line">    &#123;</span><br><span class="line">        global_id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的初始化和清理"><a href="#对象的初始化和清理" class="headerlink" title="对象的初始化和清理"></a>对象的初始化和清理</h2><ul>
+<li>在类中定义构造函数用来对象的初始化</li>
+<li>在类中定义析构函数用来对象的清理</li>
+<li>如果定义类的时候没有定义构造函数和析构函数，那么编译器会提供空的构造方法和析构方法</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="定义构造函数"><a href="#定义构造函数" class="headerlink" title="定义构造函数"></a>定义构造函数</h4><ul>
+<li>在创建对象时自动执行构造方法</li>
+<li>构造函数没有返回值也不写void</li>
+<li>构造函数的方法名与类名相同</li>
+<li>构造函数可以有参数列表，所以可以有重载方法</li>
+</ul>
+<h5 id="定义无参构造"><a href="#定义无参构造" class="headerlink" title="定义无参构造"></a>定义无参构造</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    类名()</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义有参构造"><a href="#定义有参构造" class="headerlink" title="定义有参构造"></a>定义有参构造</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    类名(参数列表)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h6 id="定义拷贝构造"><a href="#定义拷贝构造" class="headerlink" title="定义拷贝构造"></a>定义拷贝构造</h6><ul>
+<li>定义有惨构造，参数是本类的对象</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    数据类型 属性名;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    类名(<span class="type">const</span> 类名 &amp; 对象名)</span><br><span class="line">    &#123;</span><br><span class="line">        属性名 = 对象名.属性名;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="调用构造函数"><a href="#调用构造函数" class="headerlink" title="调用构造函数"></a>调用构造函数</h4><ul>
+<li><p>由于创建对象时，会自动调用构造函数，调用构造函数的操作实际上是创建对象的操作</p>
+</li>
+<li><p>注意事项</p>
+<ul>
+<li>括号法不要加空括号，会被误认为是函数的声明</li>
+<li>匿名对象在当前行执行结束后，系统会立即回收。不能用拷贝函数初始化匿名对象，因为编译器会把<code>类名(对象名)</code>转换成<code>类名 对象名</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 调用无参构造（默认构造） */</span></span><br><span class="line">类名 对象名;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 调用有惨构造 */</span></span><br><span class="line"><span class="comment">// 括号法</span></span><br><span class="line">类名 对象名(参数列表);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显式法</span></span><br><span class="line">类名 对象名 = 类名(参数列表);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 隐式法，相当于`类名 对象名 = 类名(参数);`</span></span><br><span class="line">类名 对象名 = 参数;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 匿名对象 */</span></span><br><span class="line">类名(参数列表);</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><ul>
+<li>在对象销毁前自动执行析构方法</li>
+<li>析构函数没有返回值也不写void</li>
+<li>析构函数的方法名在类名前加<code>~</code></li>
+<li>析构函数没有参数列表，所以没有重载方法</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    ~类名()</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拷贝构造函数的调用时机"><a href="#拷贝构造函数的调用时机" class="headerlink" title="拷贝构造函数的调用时机"></a>拷贝构造函数的调用时机</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个有拷贝构造函数的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    Persion(<span class="type">int</span> i)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    Persion(<span class="type">const</span> 类名 &amp; 对象名)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Persion <span class="title function_">method</span><span class="params">(Persion p)</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">10</span>)</span>;</span><br><span class="line">    <span class="keyword">return</span> p1; <span class="comment">// 当函数的返回值为局部对象时，此时会调用拷贝构造函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">10</span>)</span>;</span><br><span class="line">    Persion <span class="title function_">p2</span><span class="params">(p1)</span>; <span class="comment">// 用已创建的对象创建新对象时，此时会调用拷贝构造函数</span></span><br><span class="line">    method(p1); <span class="comment">// 当函数的参数为值传递时，此时会调用拷贝构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h2><ul>
+<li>只要定义一个类，就默认存在的函数：<ul>
+<li>默认构造函数，无参且函数体为空</li>
+<li>默认析构函数，函数体为空</li>
+<li>默认拷贝构造函数，函数体中对属性值进行拷贝</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// 默认构造函数</span></span><br><span class="line">    类名() &#123;&#125;</span><br><span class="line">    <span class="comment">// 默认拷贝构造函数（值拷贝）</span></span><br><span class="line">    类名(类名 对象名)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 对属性值进行拷贝</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 默认析构函数</span></span><br><span class="line">    ~类名() &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果自定义了有参构造函数，C++不会提供无参构造函数，但是会提供拷贝构造函数</li>
+<li>如果自定义了拷贝构造函数，C++不会提供无参构造函数和其他构造函数</li>
+</ul>
+<h2 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h2><ul>
+<li>如果拷贝的属性没有指针，那么使用浅拷贝即可</li>
+<li>如果拷贝的属性有指针，那么需要手动定义深拷贝来使用</li>
+</ul>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><ul>
+<li>编译器默认提供的拷贝构造函数是浅拷贝，浅拷贝的实质是把成员属性的值拷贝一份</li>
+<li>当拷贝的成员属性是指针的时候，浅拷贝只会拷贝一份指针数据，不会在堆内存中创建新的空间，所带来的问题是，释放指针时会出现堆区内存重复释放的错误</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> * id;</span><br><span class="line"></span><br><span class="line">    Persion(<span class="type">const</span> Persion &amp; p)</span><br><span class="line">    &#123;</span><br><span class="line">        id = p.id;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Persion()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (id != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            delete id;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><ul>
+<li>深拷贝需要自定义一个新的拷贝函数，深拷贝会在堆区开辟一块新的空间</li>
+<li>当拷贝的成员属性是指针的时候，深拷贝会堆区开辟一块新的空间，所以存放的是一个新的指针</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> * id;</span><br><span class="line"></span><br><span class="line">    Persion(<span class="type">const</span> Persion &amp; p)</span><br><span class="line">    &#123;</span><br><span class="line">        id = new <span class="type">int</span>(*p.id);</span><br><span class="line">    &#125;</span><br><span class="line">    ~Persion()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (id != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            delete id;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><ul>
+<li>初始化列表是另一种为成员属性赋初值的方式</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> global_id</span><br><span class="line">    <span class="type">int</span> global_num</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 传统的构造函数赋初值</span></span><br><span class="line">    Persion(<span class="type">int</span> id, <span class="type">int</span> num)</span><br><span class="line">    &#123;</span><br><span class="line">        global_id = id;</span><br><span class="line">        global_num = num;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化列表赋初值</span></span><br><span class="line">    Persion(<span class="type">int</span> id, <span class="type">int</span> num): global_id(id), global_num(num)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类对象作为类成员"><a href="#类对象作为类成员" class="headerlink" title="类对象作为类成员"></a>类对象作为类成员</h2><ul>
+<li>将一个类的对象作为另一个类的成员属性</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Son son;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><ul>
+<li>在成员属性和成员函数前添加<code>static</code>关键字，就构成了静态成员</li>
+<li>静态成员变量也受访问权限的制约</li>
+</ul>
+<h3 id="静态成员变量"><a href="#静态成员变量" class="headerlink" title="静态成员变量"></a>静态成员变量</h3><ul>
+<li>所有对象共享一份数据</li>
+<li>在编译阶段分配内存</li>
+<li>类内声明，类外初始化</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">static</span> 数据类型 属性名;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">数据类型 Persion::属性名 = 值;</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态成员变量的访问"><a href="#静态成员变量的访问" class="headerlink" title="静态成员变量的访问"></a>静态成员变量的访问</h4><h5 id="通过对象访问"><a href="#通过对象访问" class="headerlink" title="通过对象访问"></a>通过对象访问</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">类名 对象名;</span><br><span class="line">对象名.属性名;</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过类名访问"><a href="#通过类名访问" class="headerlink" title="通过类名访问"></a>通过类名访问</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名.属性名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数"></a>静态成员函数</h3><ul>
+<li>所有对象共享同一个函数</li>
+<li>静态成员函数只能访问静态成员变量，非静态成员变量无法访问</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">static</span> 返回值类型 函数名()</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态成员函数的访问"><a href="#静态成员函数的访问" class="headerlink" title="静态成员函数的访问"></a>静态成员函数的访问</h4><h5 id="通过对象访问-1"><a href="#通过对象访问-1" class="headerlink" title="通过对象访问"></a>通过对象访问</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">类名 对象名;</span><br><span class="line">对象名.函数名();</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过类名访问-1"><a href="#通过类名访问-1" class="headerlink" title="通过类名访问"></a>通过类名访问</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名::函数名();</span><br></pre></td></tr></table></figure>
+
+<h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><ul>
+<li>this指针是隐含每一个非静态成员函数内的一种指针，this指针不需要定义可以直接使用</li>
+<li>当形参和成员变量同名时，可用this指针来区分</li>
+<li>在类的非静态函数中返回对象本身，可用<code>*this</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Persion&amp; <span class="title function_">method</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> *this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常函数与常对象"><a href="#常函数与常对象" class="headerlink" title="常函数与常对象"></a>常函数与常对象</h2><h3 id="常函数"><a href="#常函数" class="headerlink" title="常函数"></a>常函数</h3><ul>
+<li>声明函数时添加<code>const</code>关键字</li>
+<li>常函数内不可修改成员属性（相当于this指针改为了常量）</li>
+<li>常函数内只能调用常函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">返回值类型 函数名 <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    retuen 返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常对象"><a href="#常对象" class="headerlink" title="常对象"></a>常对象</h3><ul>
+<li>声明对象时添加<code>const</code>关键字</li>
+<li>常对象只能调用常函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> 数据类型 对象名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常函数和常对象都能修改的成员属性"><a href="#常函数和常对象都能修改的成员属性" class="headerlink" title="常函数和常对象都能修改的成员属性"></a>常函数和常对象都能修改的成员属性</h3><ul>
+<li>如果需要修改成员属性，可以在成员属性声明时添加<code>mutable</code>关键字，使得常含数内的成员属性可以被修改</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mutable 数据类型 成员属性;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类外定义成员函数"><a href="#类外定义成员函数" class="headerlink" title="类外定义成员函数"></a>类外定义成员函数</h2><h3 id="定义普通函数"><a href="#定义普通函数" class="headerlink" title="定义普通函数"></a>定义普通函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Persion::method</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义构造函数-1"><a href="#定义构造函数-1" class="headerlink" title="定义构造函数"></a>定义构造函数</h3><ul>
+<li>在类内声明成员函数，类外定义成员函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Persion();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Persion::Persion()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><ul>
+<li>友元的目的是让一个函数或者类访问另一个类的私有成员</li>
+</ul>
+<h3 id="成员函数做友元"><a href="#成员函数做友元" class="headerlink" title="成员函数做友元"></a>成员函数做友元</h3><ul>
+<li>通过<code>friend</code>关键字在类中定义其他函数作为友元</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    friend 返回值类型 函数名(类名 &amp;对象名);</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">返回值类型 函数名(类名 &amp;对象名)</span><br><span class="line">&#123;</span><br><span class="line">    对象名.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类做友元"><a href="#类做友元" class="headerlink" title="类做友元"></a>类做友元</h3><ul>
+<li>通过<code>friend</code>关键字在类中定义其他类作为友元</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    friend <span class="class"><span class="keyword">class</span> <span class="title">Friend</span>;</span></span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Friend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="成员函数做友元-1"><a href="#成员函数做友元-1" class="headerlink" title="成员函数做友元"></a>成员函数做友元</h3><ul>
+<li>通过<code>friend</code>关键字在类中定义其他类中的函数作为友元</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    friend class <span class="title function_">Friend::method</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Friend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><h3 id="算数运算符重载"><a href="#算数运算符重载" class="headerlink" title="算数运算符重载"></a>算数运算符重载</h3><ul>
+<li>此处以加法的运算符重载为例</li>
+<li>为了能实现连续运算，返回值类型为类对象</li>
+</ul>
+<blockquote>
+<p><code>+</code>：指定被重载的运算符，这里重载的运算符是加法</p>
+</blockquote>
+<h4 id="通过成员函数"><a href="#通过成员函数" class="headerlink" title="通过成员函数"></a>通过成员函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    Persion() &#123;&#125;</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Persion operator+(Persion &amp;persion)</span><br><span class="line">    &#123;</span><br><span class="line">        Persion temp;</span><br><span class="line">        temp.id = this-&gt;id + persion.id;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    Persion <span class="title function_">p2</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 简化前</span></span><br><span class="line">    <span class="comment">//Persion p3 = p1.operator+(p2);</span></span><br><span class="line">    <span class="comment">// 简化后</span></span><br><span class="line">    Persion p3 = p1 + p2;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过全局函数"><a href="#通过全局函数" class="headerlink" title="通过全局函数"></a>通过全局函数</h4><ul>
+<li>直接在运算符重载函数的参数列表制定两个类型的参数，可以是不同类型的数据（例如自定义数据类型与int数据类型） </li>
+<li>内置的数据类型是不可以改变的（例如两个int类型数据相加）</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    friend Persion operator+(Persion &amp;persion1, Persion &amp;persion2);</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    Persion() &#123;&#125;</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Persion operator+(Persion &amp;persion1, Persion &amp;persion2)</span><br><span class="line">&#123;</span><br><span class="line">    Persion temp;</span><br><span class="line">    temp.id = persion1.id + persion2.id;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    Persion <span class="title function_">p2</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 简化前</span></span><br><span class="line">    <span class="comment">//Persion p3 = operator+(p1, p2);</span></span><br><span class="line">    <span class="comment">// 简化后</span></span><br><span class="line">    Persion p3 = p1 + p2;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="左移运算符重载"><a href="#左移运算符重载" class="headerlink" title="左移运算符重载"></a>左移运算符重载</h3><ul>
+<li>可以实现输出任意自定义数据类型的数据</li>
+<li>左移运算符重载的函数返回值为空，函数体内拼接需要输出的内容</li>
+</ul>
+<h4 id="通过全局函数-1"><a href="#通过全局函数-1" class="headerlink" title="通过全局函数"></a>通过全局函数</h4><ul>
+<li>因为封装的时候通常将成员变量私有化，所以为了能让左移运算符重载函数可以访问私有成员变量，通常在类内定义友元</li>
+<li>为了能实现连续左移，返回值类型为ostream类型</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    friend ostream &amp; operator&lt;&lt;(ostream &amp;<span class="built_in">cout</span>, Persion &amp;persion);</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ostream&amp; operator&lt;&lt;(ostream &amp;<span class="built_in">cout</span>, Persion &amp;persion)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;id=&quot;</span> &lt;&lt; persion.id;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">cout</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="递增运算符重载"><a href="#递增运算符重载" class="headerlink" title="递增运算符重载"></a>递增运算符重载</h3><ul>
+<li>前置递增<ul>
+<li>为了能实现递增的嵌套，返回值类型需要设置为引用类型</li>
+</ul>
+</li>
+<li>后置递增<ul>
+<li>返回值类型需要设置为值</li>
+<li>为了能实现递增的嵌套，后置递增运算符重载函数的参数需要用int作为占位参数，且只能是int，用于区分前置运算符</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 前置自增运算符重载</span></span><br><span class="line">    Persion&amp; operator++()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 先递增</span></span><br><span class="line">        this-&gt;id++;</span><br><span class="line">        <span class="comment">// 后返回</span></span><br><span class="line">        <span class="keyword">return</span> *this;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 后置自增运算符重载</span></span><br><span class="line">    Persion operator++(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 先记录</span></span><br><span class="line">        Persion temp = *this;</span><br><span class="line">        <span class="comment">// 然后递增</span></span><br><span class="line">        this-&gt;id++;</span><br><span class="line">        <span class="comment">// 最后返回</span></span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    p++;</span><br><span class="line">    ++p;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值运算符重载"><a href="#赋值运算符重载" class="headerlink" title="赋值运算符重载"></a>赋值运算符重载</h3><ul>
+<li>默认的赋值运算符是浅拷贝数据，重载赋值运算符</li>
+<li>为了能实现连等，返回值类型为类对象的引用</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> *id;</span><br><span class="line">public:</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = new <span class="type">int</span>(id); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Persion&amp; operator=(Persion &amp;persion)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (this-&gt;id != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            delete this-&gt;id;</span><br><span class="line">            this-&gt;id = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        this-&gt;id = new <span class="type">int</span>(*persion.id); </span><br><span class="line">        <span class="keyword">return</span> *this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    Persion p2 = p1;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关系运算符重载"><a href="#关系运算符重载" class="headerlink" title="关系运算符重载"></a>关系运算符重载</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    </span><br><span class="line">public:</span><br><span class="line">    Persion(<span class="type">int</span> id)</span><br><span class="line">    &#123;</span><br><span class="line">        this-&gt;id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">bool</span> operator==(Persion &amp;persion)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> this-&gt;id == persion.id ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion <span class="title function_">p1</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    Persion <span class="title function_">p2</span><span class="params">(<span class="number">1</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    p1==p2;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数调用运算符重载"><a href="#函数调用运算符重载" class="headerlink" title="函数调用运算符重载"></a>函数调用运算符重载</h3><ul>
+<li>函数调用运算符（<code>()</code>）也可以重载，由于重载后使用的方式非常像函数的调用，因此称为仿函数，仿函数没有固定写法，非常灵活</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Persion</span></span></span><br><span class="line"><span class="class">&#123;</span>   </span><br><span class="line">public:</span><br><span class="line">    Persion() &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    返回值类型 operator()(参数列表)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> 返回值;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Persion persion;</span><br><span class="line">    persion(参数);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 匿名函数对象</span></span><br><span class="line">    Persion()(参数);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>将重复的代码定义为父类（基类），子类（派生类）继承父类，减少重复的代码</li>
+<li>父类中所有非静态的成员属性都会被子类继承</li>
+<li>父类中的私有成员属性无法被子类访问，但是确实被继承了，只是被编译器所隐藏了</li>
+</ul>
+<blockquote>
+<p>权限修饰符</p>
+<blockquote>
+<p><code>public</code>：公共继承<br><code>pritected</code>：保护继承<br><code>private</code>：私有继承</p>
+</blockquote>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> :</span> 权限修饰符 Father</span><br><span class="line">&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="继承的分类"><a href="#继承的分类" class="headerlink" title="继承的分类"></a>继承的分类</h3><h4 id="公共继承"><a href="#公共继承" class="headerlink" title="公共继承"></a>公共继承</h4><ul>
+<li>公共继承的子类，无法继承父类的private成员属性</li>
+<li>公共继承的子类，继承到的public成员属性还是public权限</li>
+<li>公共继承的子类，继承到的protected成员属性还是protected权限</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">protected:</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">protected:</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="保护继承"><a href="#保护继承" class="headerlink" title="保护继承"></a>保护继承</h4><ul>
+<li>保护继承的子类，无法继承父类的private成员属性</li>
+<li>保护继承的子类，继承到的public成员属性和protected成员属性都变为protected权限</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">protected:</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> :</span> protected Father</span><br><span class="line">&#123;</span><br><span class="line">protected:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="私有继承"><a href="#私有继承" class="headerlink" title="私有继承"></a>私有继承</h4><ul>
+<li>保护继承的子类，无法继承父类的private成员属性</li>
+<li>保护继承的子类，继承到的public成员属性和protected成员属性都变为private权限</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">protected:</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> :</span> private Father</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="报告单个类布局"><a href="#报告单个类布局" class="headerlink" title="报告单个类布局"></a>报告单个类布局</h3><ul>
+<li><p>利用Visual Studio开发人员命令提示符报告单个类布局</p>
+</li>
+<li><p>打开Visual Studio开发人员命令提示符</p>
+</li>
+</ul>
+<blockquote>
+<p><code>&lt;class&gt;</code>：类名<br><code>&lt;file&gt;</code>：C++源码文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl /d1 reportSimgleClassLayout&lt;class&gt; &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="访问父子类同名属性和函数"><a href="#访问父子类同名属性和函数" class="headerlink" title="访问父子类同名属性和函数"></a>访问父子类同名属性和函数</h3><ul>
+<li>子类对象可以直接访问到之类中同名成员</li>
+<li>子类对象加作用域可以访问到父类同名成员</li>
+<li>子类中出现和父类同名的成员函数，子类的同名成员会隐藏掉父类中所有同名成员函数（无论是否是重载的成员函数），如果想访问到父类中被隐藏的同名成员函数，需要强制加作用域</li>
+</ul>
+<h4 id="非静态成员属性和函数"><a href="#非静态成员属性和函数" class="headerlink" title="非静态成员属性和函数"></a>非静态成员属性和函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">(<span class="type">int</span>)</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Son son;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类访问成员属性 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类属性</span></span><br><span class="line">    son.id;</span><br><span class="line">    <span class="comment">// 子类访问父类属性</span></span><br><span class="line">    son.Father::id;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类访问成员函数 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类函数</span></span><br><span class="line">    son.method();</span><br><span class="line">    <span class="comment">// 子类访问父类函数</span></span><br><span class="line">    son.Father::method();</span><br><span class="line">    son.Father::method(<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态成员属性和函数"><a href="#静态成员属性和函数" class="headerlink" title="静态成员属性和函数"></a>静态成员属性和函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> Father::id =<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> Son::id =<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Son son;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类通过类对象访问成员属性 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类属性</span></span><br><span class="line">    son.id;</span><br><span class="line">    <span class="comment">// 子类访问父类属性</span></span><br><span class="line">    son.Father::id;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类通过类名访问成员属性 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类属性</span></span><br><span class="line">    Son::id;</span><br><span class="line">    <span class="comment">// 子类访问父类属性</span></span><br><span class="line">    Son::Father::id;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类通过对象访问成员函数 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类属性</span></span><br><span class="line">    son.method();</span><br><span class="line">    <span class="comment">// 子类访问父类属性</span></span><br><span class="line">    son.Father::method();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 子类通过类名访问成员函数 */</span></span><br><span class="line">    <span class="comment">// 子类访问子类属性</span></span><br><span class="line">    Son::method();</span><br><span class="line">    <span class="comment">// 子类访问父类属性</span></span><br><span class="line">    Son::method();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mother</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father, public Mother</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="菱形继承"><a href="#菱形继承" class="headerlink" title="菱形继承"></a>菱形继承</h3><ul>
+<li>菱形继承，又称钻石继承</li>
+<li>两个子类继承同一个父类，一个孙子类又继承这两个子类</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GrandFather</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> :</span> public GrandFather</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mother</span> :</span> public GrandFather</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father, public Mother</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Son son;</span><br><span class="line">    son.Father::id;</span><br><span class="line">    son.Method::id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h4><ul>
+<li>为了解决菱形继承遇到的问题，引出了虚继承<ul>
+<li>菱形继承遇到的问题：孙子类中包含了重复的同名成员属性，出自于两个父类，这两个父类由于继承自相同的爷爷类，所以同名成员属性传递给孙子类的时候，造成了资源的浪费</li>
+</ul>
+</li>
+<li>虚继承采用virtual关键字修饰基类，这种基类成为虚基类</li>
+<li>虚继承能解决资源的浪费，采用了虚继承，继承时重复的同名成员属性会变成共享的成员属性</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GrandFather</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> :</span> virtual public GrandFather</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mother</span> :</span> virtual public GrandFather</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father, public Mother</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Son son;</span><br><span class="line">    son.Father::id;</span><br><span class="line">    son.Method::id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多肽"><a href="#多肽" class="headerlink" title="多肽"></a>多肽</h2><h3 id="多肽的分类"><a href="#多肽的分类" class="headerlink" title="多肽的分类"></a>多肽的分类</h3><ul>
+<li><p>静态多肽：函数重载和运算符重载都属于静态多肽</p>
+</li>
+<li><p>动态多肽：派生类和虚函数实现运行时多肽</p>
+</li>
+<li><p>静态多肽和动态多肽的区别：静态多肽的函数地址在编译阶段确定；动态多台的函数地址在运行阶段确定</p>
+</li>
+</ul>
+<h3 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h3><ul>
+<li><p>父类引用（指针）指向子类对象</p>
+</li>
+<li><p>利用virtual关键字修饰函数，被称之为<strong>虚函数</strong>，虚函数可以实现多肽</p>
+</li>
+<li><p>动态多肽的条件</p>
+<ul>
+<li>有继承关系</li>
+<li>子类需要重写父类的虚函数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    virtual <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Father father = new Son();</span><br><span class="line">    father.method();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h3><ul>
+<li>通常父类中虚函数的实现是无意义的，主要都是调用子类重写的内容，因此可以将虚函数改为<strong>纯虚函数</strong></li>
+<li>包含纯虚函数的类，就是<strong>抽象类</strong>，抽象类无法实例化对象，继承抽象类的子类必须重写纯虚函数，如果不重写纯虚函数，那么子类也是抽象类</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    virtual <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Father father = new Son();</span><br><span class="line">    father.method();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h3><ul>
+<li>如果子类中有属性开辟堆区，父类指针无法在释放时调用到子类的析构函数，如果想通过父类调用子类虚构函数，需要采用<strong>虚析构函数</strong></li>
+<li>虚析构函数与普通的析构函数不同，父类的虚析构函数在被子类调用时，父类的虚析构函数和子类的析构函数都会被调用</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    vertial ~Father() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    ~Son() &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Father *father = new Son();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="纯虚析构函数"><a href="#纯虚析构函数" class="headerlink" title="纯虚析构函数"></a>纯虚析构函数</h3><ul>
+<li>如果只是用父类释放子类堆中的属性，那么父类的虚析构不需要函数体，此时可以使用<strong>纯虚析构函数</strong></li>
+<li>虽然父类析构函数有时只是释放子类堆中的属性，不需要函数体，但是父类的虚析构函数仍然有可能释放父类堆中的属性，所以仍然要定义父类析构函数的函数体</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    vertial ~Father() = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Father::~Father()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> public Father</span><br><span class="line">&#123;</span><br><span class="line">    ~Son() &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Father *father = new Son();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1et411b73Z/">哔哩哔哩——黑马程序员</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CPP/" rel="tag"># CPP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/14/CPP%E7%9A%84%E5%BC%95%E7%94%A8/" rel="prev" title="【笔记】C++的引用">
+                  <i class="fa fa-angle-left"></i> 【笔记】C++的引用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/14/Windows%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%AE%A1%E7%90%86%E5%91%98%E7%94%A8%E6%88%B7%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/" rel="next" title="【笔记】Windows修改默认管理员用户的用户名">
+                  【笔记】Windows修改默认管理员用户的用户名 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

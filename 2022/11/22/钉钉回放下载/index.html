@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言本文介绍了钉钉回放提取m3u8链接和m3u8文件内容通过m3u8下载视频的方式需要根据自己的情况选择">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】钉钉回放下载">
+<meta property="og:url" content="https://loli.fj.cn/2022/11/22/%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE%E4%B8%8B%E8%BD%BD/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言本文介绍了钉钉回放提取m3u8链接和m3u8文件内容通过m3u8下载视频的方式需要根据自己的情况选择">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://loli.fj.cn/images/20221122193338/01.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20221122193338/02.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20221122193338/03.webp">
+<meta property="article:published_time" content="2022-11-22T11:33:38.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.984Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://loli.fj.cn/images/20221122193338/01.webp">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/11/22/%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE%E4%B8%8B%E8%BD%BD/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/11/22/%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE%E4%B8%8B%E8%BD%BD/","path":"2022/11/22/钉钉回放下载/","title":"【笔记】钉钉回放下载"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】钉钉回放下载 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiddler4%E6%B7%BB%E5%8A%A0FiddlerScript%E6%8A%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">Fiddler4添加FiddlerScript抓包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE"><span class="nav-number">3.</span> <span class="nav-text">钉钉回放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/11/22/%E9%92%89%E9%92%89%E5%9B%9E%E6%94%BE%E4%B8%8B%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】钉钉回放下载 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】钉钉回放下载
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-22 19:33:38" itemprop="dateCreated datePublished" datetime="2022-11-22T19:33:38+08:00">2022-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文介绍了钉钉回放提取m3u8链接和m3u8文件内容<br>通过m3u8下载视频的方式需要根据自己的情况选择</p>
+<span id="more"></span>
+
+<h2 id="Fiddler4添加FiddlerScript抓包"><a href="#Fiddler4添加FiddlerScript抓包" class="headerlink" title="Fiddler4添加FiddlerScript抓包"></a>Fiddler4添加FiddlerScript抓包</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">System</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">System</span>.<span class="property">Windows</span>.<span class="property">Forms</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Fiddler</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Handlers</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;Hide 304s&quot;</span>)</span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.rules.Hide304s&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_Hide304s</span>: boolean = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;Request &amp;Japanese Content&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_Japanese</span>: boolean = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;&amp;Automatically Authenticate&quot;</span>)</span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.rules.AutoAuth&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_AutoAuth</span>: boolean = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">RulesString</span>(<span class="string">&quot;&amp;User-Agents&quot;</span>, <span class="literal">true</span>) </span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.ephemeral.UserAgentString&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">0</span>,<span class="string">&quot;Netscape &amp;3&quot;</span>, <span class="string">&quot;Mozilla/3.0 (Win95; I)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">1</span>,<span class="string">&quot;WinPhone8.1&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 520) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">2</span>,<span class="string">&quot;&amp;Safari5 (Win7)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">3</span>,<span class="string">&quot;Safari9 (Mac)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11) AppleWebKit/601.1.56 (KHTML, like Gecko) Version/9.0 Safari/601.1.56&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">4</span>,<span class="string">&quot;iPad&quot;</span>, <span class="string">&quot;Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F5027d Safari/600.1.4&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">5</span>,<span class="string">&quot;iPhone6&quot;</span>, <span class="string">&quot;Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F70 Safari/600.1.4&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">6</span>,<span class="string">&quot;IE &amp;6 (XPSP2)&quot;</span>, <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">7</span>,<span class="string">&quot;IE &amp;7 (Vista)&quot;</span>, <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">8</span>,<span class="string">&quot;IE 8 (Win2k3 x64)&quot;</span>, <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.2; WOW64; Trident/4.0)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">9</span>,<span class="string">&quot;IE &amp;8 (Win7)&quot;</span>, <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">10</span>,<span class="string">&quot;IE 9 (Win7)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">11</span>,<span class="string">&quot;IE 10 (Win8)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">12</span>,<span class="string">&quot;IE 11 (Surface2)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows NT 6.3; ARM; Trident/7.0; Touch; rv:11.0) like Gecko&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">13</span>,<span class="string">&quot;IE 11 (Win8.1)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">14</span>,<span class="string">&quot;Edge (Win10)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.11082&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">15</span>,<span class="string">&quot;&amp;Opera&quot;</span>, <span class="string">&quot;Opera/9.80 (Windows NT 6.2; WOW64) Presto/2.12.388 Version/12.17&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">16</span>,<span class="string">&quot;&amp;Firefox 3.6&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.7) Gecko/20100625 Firefox/3.6.7&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">17</span>,<span class="string">&quot;&amp;Firefox 43&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">18</span>,<span class="string">&quot;&amp;Firefox Phone&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Mobile; rv:18.0) Gecko/18.0 Firefox/18.0&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">19</span>,<span class="string">&quot;&amp;Firefox (Mac)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:24.0) Gecko/20100101 Firefox/24.0&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">20</span>,<span class="string">&quot;Chrome (Win)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.48 Safari/537.36&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">21</span>,<span class="string">&quot;Chrome (Android)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.78 Mobile Safari/537.36&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">22</span>,<span class="string">&quot;ChromeBook&quot;</span>, <span class="string">&quot;Mozilla/5.0 (X11; CrOS x86_64 6680.52.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.74 Safari/537.36&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">23</span>,<span class="string">&quot;GoogleBot Crawler&quot;</span>, <span class="string">&quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">24</span>,<span class="string">&quot;Kindle Fire (Silk)&quot;</span>, <span class="string">&quot;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.0.22.79_10013310) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true&quot;</span>)</span><br><span class="line">    <span class="title class_">RulesStringValue</span>(<span class="number">25</span>,<span class="string">&quot;&amp;Custom...&quot;</span>, <span class="string">&quot;%CUSTOM%&quot;</span>)</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">sUA</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;Simulate &amp;Modem Speeds&quot;</span>, <span class="string">&quot;Per&amp;formance&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_SimulateModem</span>: boolean = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;&amp;Disable Caching&quot;</span>, <span class="string">&quot;Per&amp;formance&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_DisableCaching</span>: boolean = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">RulesOption</span>(<span class="string">&quot;Cache Always &amp;Fresh&quot;</span>, <span class="string">&quot;Per&amp;formance&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="attr">m_AlwaysFresh</span>: boolean = <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">ToolsAction</span>(<span class="string">&quot;Reset Script&quot;</span>)</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">DoManualReload</span>(<span class="params"></span>) &#123; </span><br><span class="line">        <span class="title class_">FiddlerObject</span>.<span class="title class_">ReloadScript</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="title class_">ContextAction</span>(<span class="string">&quot;Decode Selected Sessions&quot;</span>)</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">DoRemoveEncoding</span>(<span class="params">oSessions: Session[]</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> <span class="attr">x</span>:int = <span class="number">0</span>; x &lt; oSessions.<span class="property">Length</span>; x++)&#123;</span><br><span class="line">            oSessions[x].<span class="title function_">utilDecodeRequest</span>();</span><br><span class="line">            oSessions[x].<span class="title function_">utilDecodeResponse</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable constant_">UI</span>.<span class="title function_">actUpdateInspector</span>(<span class="literal">true</span>,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="title function_">OnBeforeRequest</span>(<span class="params">oSession: Session</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span> != gs_ReplaceToken) &amp;&amp; (oSession.<span class="property">url</span>.<span class="title function_">indexOf</span>(gs_ReplaceToken)&gt;-<span class="number">1</span>)) &#123;   <span class="comment">// Case sensitive</span></span><br><span class="line">            oSession.<span class="property">url</span> = oSession.<span class="property">url</span>.<span class="title class_">Replace</span>(gs_ReplaceToken, gs_ReplaceTokenWith); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span> != gs_OverridenHost) &amp;&amp; (oSession.<span class="property">host</span>.<span class="title function_">toLowerCase</span>() == gs_OverridenHost)) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;x-overridehost&quot;</span>] = gs_OverrideHostWith; </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span>!=bpRequestURI) &amp;&amp; oSession.<span class="title function_">uriContains</span>(bpRequestURI)) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;x-breakrequest&quot;</span>]=<span class="string">&quot;uri&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span>!=bpMethod) &amp;&amp; (oSession.<span class="title class_">HTTPMethodIs</span>(bpMethod))) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;x-breakrequest&quot;</span>]=<span class="string">&quot;method&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span>!=uiBoldURI) &amp;&amp; oSession.<span class="title function_">uriContains</span>(uiBoldURI)) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;ui-bold&quot;</span>]=<span class="string">&quot;QuickExec&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_SimulateModem) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;request-trickle-delay&quot;</span>] = <span class="string">&quot;300&quot;</span>; </span><br><span class="line">            oSession[<span class="string">&quot;response-trickle-delay&quot;</span>] = <span class="string">&quot;150&quot;</span>; </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_DisableCaching) &#123;</span><br><span class="line">            oSession.<span class="property">oRequest</span>.<span class="property">headers</span>.<span class="title class_">Remove</span>(<span class="string">&quot;If-None-Match&quot;</span>);</span><br><span class="line">            oSession.<span class="property">oRequest</span>.<span class="property">headers</span>.<span class="title class_">Remove</span>(<span class="string">&quot;If-Modified-Since&quot;</span>);</span><br><span class="line">            oSession.<span class="property">oRequest</span>[<span class="string">&quot;Pragma&quot;</span>] = <span class="string">&quot;no-cache&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">null</span> != sUA) &#123;</span><br><span class="line">            oSession.<span class="property">oRequest</span>[<span class="string">&quot;User-Agent&quot;</span>] = sUA; </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_Japanese) &#123;</span><br><span class="line">            oSession.<span class="property">oRequest</span>[<span class="string">&quot;Accept-Language&quot;</span>] = <span class="string">&quot;ja&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_AutoAuth) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;X-AutoAuth&quot;</span>] = <span class="string">&quot;(default)&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_AlwaysFresh &amp;&amp; (oSession.<span class="property">oRequest</span>.<span class="property">headers</span>.<span class="title class_">Exists</span>(<span class="string">&quot;If-Modified-Since&quot;</span>) || oSession.<span class="property">oRequest</span>.<span class="property">headers</span>.<span class="title class_">Exists</span>(<span class="string">&quot;If-None-Match&quot;</span>)))</span><br><span class="line">        &#123;</span><br><span class="line">            oSession.<span class="title function_">utilCreateResponseAndBypassServer</span>();</span><br><span class="line">            oSession.<span class="property">responseCode</span> = <span class="number">304</span>;</span><br><span class="line">            oSession[<span class="string">&quot;ui-backcolor&quot;</span>] = <span class="string">&quot;Lavender&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (oSession.<span class="property">host</span>.<span class="title function_">toLowerCase</span>() == <span class="string">&quot;webserver:8888&quot;</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            oSession.<span class="property">host</span> = <span class="string">&quot;webserver:80&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="title function_">OnPeekAtResponseHeaders</span>(<span class="params">oSession: Session</span>) &#123;</span><br><span class="line">        <span class="comment">//FiddlerApplication.Log.LogFormat(&quot;Session &#123;0&#125;: Response header peek shows status is &#123;1&#125;&quot;, oSession.id, oSession.responseCode);</span></span><br><span class="line">        <span class="keyword">if</span> (m_DisableCaching) &#123;</span><br><span class="line">            oSession.<span class="property">oResponse</span>.<span class="property">headers</span>.<span class="title class_">Remove</span>(<span class="string">&quot;Expires&quot;</span>);</span><br><span class="line">            oSession.<span class="property">oResponse</span>[<span class="string">&quot;Cache-Control&quot;</span>] = <span class="string">&quot;no-cache&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((bpStatus&gt;<span class="number">0</span>) &amp;&amp; (oSession.<span class="property">responseCode</span> == bpStatus)) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;x-breakresponse&quot;</span>]=<span class="string">&quot;status&quot;</span>;</span><br><span class="line">            oSession.<span class="property">bBufferResponse</span> = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> ((<span class="literal">null</span>!=bpResponseURI) &amp;&amp; oSession.<span class="title function_">uriContains</span>(bpResponseURI)) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;x-breakresponse&quot;</span>]=<span class="string">&quot;uri&quot;</span>;</span><br><span class="line">            oSession.<span class="property">bBufferResponse</span> = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="title function_">OnBeforeResponse</span>(<span class="params">oSession: Session</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m_Hide304s &amp;&amp; oSession.<span class="property">responseCode</span> == <span class="number">304</span>) &#123;</span><br><span class="line">            oSession[<span class="string">&quot;ui-hide&quot;</span>] = <span class="string">&quot;true&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> sToInsert = <span class="string">&quot;&lt;script src=&#x27;https://cdn.jsdelivr.net/gh/Tencent/vConsole@3.8.1/dist/vconsole.min.js&#x27;&gt;&lt;/script&gt;&lt;script&gt;var vConsole = new VConsole();&lt;/script&gt;&quot;</span></span><br><span class="line">        oSession.<span class="title function_">utilDecodeResponse</span>();</span><br><span class="line">        oSession.<span class="title function_">utilReplaceOnceInResponse</span>(<span class="string">&#x27;&lt;/head&gt;&#x27;</span>, sToInsert + <span class="string">&#x27;&lt;/head&gt;&#x27;</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="title function_">Main</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="attr">today</span>: <span class="title class_">Date</span> = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span> = <span class="string">&quot; CustomRules.js was loaded at: &quot;</span> + today;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.ephemeral.bpRequestURI&quot;</span>)</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">bpRequestURI</span>:<span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.ephemeral.bpResponseURI&quot;</span>)</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">bpResponseURI</span>:<span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">BindPref</span>(<span class="string">&quot;fiddlerscript.ephemeral.bpMethod&quot;</span>)</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">bpMethod</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">bpStatus</span>:int = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">uiBoldURI</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">gs_ReplaceToken</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">gs_ReplaceTokenWith</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">gs_OverridenHost</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> <span class="attr">gs_OverrideHostWith</span>: <span class="title class_">String</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="title function_">OnExecAction</span>(<span class="params">sParams: <span class="built_in">String</span>[]</span>): <span class="title class_">Boolean</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span> = <span class="string">&quot;ExecAction: &quot;</span> + sParams[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> sAction = sParams[<span class="number">0</span>].<span class="title function_">toLowerCase</span>();</span><br><span class="line">        <span class="keyword">switch</span> (sAction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bold&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123;uiBoldURI=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Bolding cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            uiBoldURI = sParams[<span class="number">1</span>]; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Bolding requests for &quot;</span> + uiBoldURI;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bp&quot;</span>:</span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="title function_">alert</span>(<span class="string">&quot;bpu = breakpoint request for uri\nbpm = breakpoint request method\nbps=breakpoint response status\nbpafter = breakpoint response for URI&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bps&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123;bpStatus=-<span class="number">1</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Response Status breakpoint cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            bpStatus = <span class="built_in">parseInt</span>(sParams[<span class="number">1</span>]); <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Response status breakpoint for &quot;</span> + sParams[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bpv&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bpm&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123;bpMethod=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Request Method breakpoint cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            bpMethod = sParams[<span class="number">1</span>].<span class="title function_">toUpperCase</span>(); <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Request Method breakpoint for &quot;</span> + bpMethod;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bpu&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123;bpRequestURI=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;RequestURI breakpoint cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            bpRequestURI = sParams[<span class="number">1</span>]; </span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;RequestURI breakpoint for &quot;</span>+sParams[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bpa&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;bpafter&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123;bpResponseURI=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;ResponseURI breakpoint cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            bpResponseURI = sParams[<span class="number">1</span>]; </span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;ResponseURI breakpoint for &quot;</span>+sParams[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;overridehost&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">3</span>) &#123;gs_OverridenHost=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Host Override cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            gs_OverridenHost = sParams[<span class="number">1</span>].<span class="title function_">toLowerCase</span>();</span><br><span class="line">            gs_OverrideHostWith = sParams[<span class="number">2</span>];</span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Connecting to [&quot;</span> + gs_OverrideHostWith + <span class="string">&quot;] for requests to [&quot;</span> + gs_OverridenHost + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;urlreplace&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">3</span>) &#123;gs_ReplaceToken=<span class="literal">null</span>; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;URL Replacement cleared&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            gs_ReplaceToken = sParams[<span class="number">1</span>];</span><br><span class="line">            gs_ReplaceTokenWith = sParams[<span class="number">2</span>].<span class="title class_">Replace</span>(<span class="string">&quot; &quot;</span>, <span class="string">&quot;%20&quot;</span>);  <span class="comment">// Simple helper</span></span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Replacing [&quot;</span> + gs_ReplaceToken + <span class="string">&quot;] in URIs with [&quot;</span> + gs_ReplaceTokenWith + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;allbut&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;keeponly&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Please specify Content-Type to retain during wipe.&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actSelectSessionsWithResponseHeaderValue</span>(<span class="string">&quot;Content-Type&quot;</span>, sParams[<span class="number">1</span>]);</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actRemoveUnselectedSessions</span>();</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="property">lvSessions</span>.<span class="property">SelectedItems</span>.<span class="title class_">Clear</span>();</span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Removed all but Content-Type: &quot;</span> + sParams[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;stop&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actDetachProxy</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;start&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actAttachProxy</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;cls&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;clear&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actRemoveAllSessions</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;g&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;go&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actResumeAllSessions</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;goto&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span> != <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="title class_">Utilities</span>.<span class="title class_">LaunchHyperlink</span>(<span class="string">&quot;http://www.google.com/search?hl=en&amp;btnI=I%27m+Feeling+Lucky&amp;q=&quot;</span> + <span class="title class_">Utilities</span>.<span class="title class_">UrlEncode</span>(sParams[<span class="number">1</span>]));</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;help&quot;</span>:</span><br><span class="line">            <span class="title class_">Utilities</span>.<span class="title class_">LaunchHyperlink</span>(<span class="string">&quot;http://fiddler2.com/r/?quickexec&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;hide&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actMinimizeToTray</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;log&quot;</span>:</span><br><span class="line">            <span class="title class_">FiddlerApplication</span>.<span class="property">Log</span>.<span class="title class_">LogString</span>((sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) ? <span class="string">&quot;User couldn&#x27;t think of anything to say...&quot;</span> : sParams[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;nuke&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actClearWinINETCache</span>();</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actClearWinINETCookies</span>(); </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;screenshot&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actCaptureScreenshot</span>(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;show&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actRestoreWindow</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;tail&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (sParams.<span class="property">Length</span>&lt;<span class="number">2</span>) &#123; <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span>=<span class="string">&quot;Please specify # of sessions to trim the session list to.&quot;</span>; <span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title class_">TrimSessionList</span>(int.<span class="title class_">Parse</span>(sParams[<span class="number">1</span>]));</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;quit&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actExit</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;dump&quot;</span>:</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actSelectAll</span>();</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actSaveSessionsToZip</span>(<span class="variable constant_">CONFIG</span>.<span class="title class_">GetPath</span>(<span class="string">&quot;Captures&quot;</span>) + <span class="string">&quot;dump.saz&quot;</span>);</span><br><span class="line">            <span class="variable constant_">UI</span>.<span class="title function_">actRemoveAllSessions</span>();</span><br><span class="line">            <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span> = <span class="string">&quot;Dumped all sessions to &quot;</span> + <span class="variable constant_">CONFIG</span>.<span class="title class_">GetPath</span>(<span class="string">&quot;Captures&quot;</span>) + <span class="string">&quot;dump.saz&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">if</span> (sAction.<span class="title class_">StartsWith</span>(<span class="string">&quot;http&quot;</span>) || sAction.<span class="title class_">StartsWith</span>(<span class="string">&quot;www.&quot;</span>)) &#123;</span><br><span class="line">                <span class="title class_">System</span>.<span class="property">Diagnostics</span>.<span class="property">Process</span>.<span class="title class_">Start</span>(sParams[<span class="number">0</span>]);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title class_">FiddlerObject</span>.<span class="property">StatusText</span> = <span class="string">&quot;Requested ExecAction: &#x27;&quot;</span> + sAction + <span class="string">&quot;&#x27; not found. Type HELP to learn more.&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="钉钉回放"><a href="#钉钉回放" class="headerlink" title="钉钉回放"></a>钉钉回放</h2><ul>
+<li>打开vConsole</li>
+</ul>
+<p><img src="/images/20221122193338/01.webp"></p>
+<ul>
+<li>通过<code>vConsole.showTab(&quot;network&quot;);</code>命令调取网络调试-&gt;<code>OK</code></li>
+</ul>
+<p><img src="/images/20221122193338/02.webp"></p>
+<ul>
+<li>点击请求，展开查看请求详细信息，获取m3u8的链接或文件内容</li>
+</ul>
+<p><img src="/images/20221122193338/03.webp"></p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.ixigua.com/7019859882861920781">西瓜视频——博尔鲁文</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/18/Windows%E5%BF%AB%E9%80%9F%E5%9C%A8%E5%BD%93%E5%89%8D%E4%BD%8D%E7%BD%AE%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="prev" title="【笔记】Windows快速在当前位置打开命令行">
+                  <i class="fa fa-angle-left"></i> 【笔记】Windows快速在当前位置打开命令行
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/23/%E4%B8%AD%E6%96%AD/" rel="next" title="【笔记】中断">
+                  【笔记】中断 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

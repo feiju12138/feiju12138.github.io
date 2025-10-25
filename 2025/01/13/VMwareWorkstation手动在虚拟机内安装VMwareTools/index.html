@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言VMwareWorkstation手动在虚拟机内安装VMwareTools解决重新安装 Vmware Tools按钮为灰色的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】VMwareWorkstation手动在虚拟机内安装VMwareTools">
+<meta property="og:url" content="https://loli.fj.cn/2025/01/13/VMwareWorkstation%E6%89%8B%E5%8A%A8%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AE%89%E8%A3%85VMwareTools/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言VMwareWorkstation手动在虚拟机内安装VMwareTools解决重新安装 Vmware Tools按钮为灰色的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/01.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/02.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/03.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/05.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/06.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/07.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/08.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/09.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/10.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/11.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/12.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/13.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/14.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/10.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/11.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/02.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20250113125815/04.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20191103201219/15.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20191103201219/16.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20191103201219/17.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20191103201219/18.webp">
+<meta property="article:published_time" content="2025-01-13T04:58:15.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.930Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Kali">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="VMware">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://loli.fj.cn/images/20250113125815/01.webp">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2025/01/13/VMwareWorkstation%E6%89%8B%E5%8A%A8%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AE%89%E8%A3%85VMwareTools/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2025/01/13/VMwareWorkstation%E6%89%8B%E5%8A%A8%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AE%89%E8%A3%85VMwareTools/","path":"2025/01/13/VMwareWorkstation手动在虚拟机内安装VMwareTools/","title":"【笔记】VMwareWorkstation手动在虚拟机内安装VMwareTools"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】VMwareWorkstation手动在虚拟机内安装VMwareTools | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%BAWindows"><span class="nav-number">2.</span> <span class="nav-text">虚拟机为Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BDVMwareTools"><span class="nav-number">2.2.</span> <span class="nav-text">挂载VMwareTools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85VMwareTools"><span class="nav-number">2.3.</span> <span class="nav-text">安装VMwareTools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BDVMwareTools"><span class="nav-number">2.4.</span> <span class="nav-text">卸载VMwareTools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%BALinux"><span class="nav-number">3.</span> <span class="nav-text">虚拟机为Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">通用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BDVMwareTools-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">挂载VMwareTools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85VMwareTools-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">安装VMwareTools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E7%90%86%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">3.1.4.</span> <span class="nav-text">清理（可选）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%BAUbuntu"><span class="nav-number">3.2.</span> <span class="nav-text">虚拟机为Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%BAKali"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟机为Kali</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BDVMwareTools-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">挂载VMwareTools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85VMwareTools-2"><span class="nav-number">3.3.2.</span> <span class="nav-text">安装VMwareTools</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2025/01/13/VMwareWorkstation%E6%89%8B%E5%8A%A8%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AE%89%E8%A3%85VMwareTools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】VMwareWorkstation手动在虚拟机内安装VMwareTools | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】VMwareWorkstation手动在虚拟机内安装VMwareTools
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-13 12:58:15" itemprop="dateCreated datePublished" datetime="2025-01-13T12:58:15+08:00">2025-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>VMwareWorkstation手动在虚拟机内安装VMwareTools<br>解决<code>重新安装 Vmware Tools</code>按钮为灰色的问题</p>
+<span id="more"></span>
+
+<h2 id="虚拟机为Windows"><a href="#虚拟机为Windows" class="headerlink" title="虚拟机为Windows"></a>虚拟机为Windows</h2><h3 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h3><ul>
+<li>从<a target="_blank" rel="noopener" href="https://softwareupdate.vmware.com/cds/vmw-desktop/ws/">https://softwareupdate.vmware.com/cds/vmw-desktop/ws/</a>下载对应VMwareWorkstation版本的VMwareTools</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.6.1/24319023/windows/packages/tools-windows.tar</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解压<code>tools-windows.tar</code>文件得到<code>.iso</code>文件</li>
+</ul>
+<p><img src="/images/20250113125815/01.webp"></p>
+<h3 id="挂载VMwareTools"><a href="#挂载VMwareTools" class="headerlink" title="挂载VMwareTools"></a>挂载VMwareTools</h3><ul>
+<li><code>虚拟机</code>-&gt;<code>设置</code></li>
+</ul>
+<p><img src="/images/20250113125815/02.webp"></p>
+<ul>
+<li><code>CD/DVD</code>-&gt;勾选<code>已连接</code>-&gt;勾选<code>使用ISO映像文件</code>-&gt;<code>确定</code></li>
+</ul>
+<p><img src="/images/20250113125815/03.webp"></p>
+<h3 id="安装VMwareTools"><a href="#安装VMwareTools" class="headerlink" title="安装VMwareTools"></a>安装VMwareTools</h3><ul>
+<li><code>此电脑</code>-&gt;右键<code>DVD 驱动器 VMware Tools</code>-&gt;<code>从媒体安装或运行程序</code></li>
+</ul>
+<p><img src="/images/20250113125815/05.webp"></p>
+<ul>
+<li><code>是</code></li>
+</ul>
+<p><img src="/images/20250113125815/06.webp"></p>
+<ul>
+<li><code>下一步</code></li>
+</ul>
+<p><img src="/images/20250113125815/07.webp"></p>
+<ul>
+<li><code>下一步</code></li>
+</ul>
+<p><img src="/images/20250113125815/08.webp"></p>
+<ul>
+<li><code>安装</code></li>
+</ul>
+<p><img src="/images/20250113125815/09.webp"></p>
+<ul>
+<li><code>完成</code></li>
+</ul>
+<p><img src="/images/20250113125815/10.webp"></p>
+<ul>
+<li><code>是</code></li>
+</ul>
+<p><img src="/images/20250113125815/11.webp"></p>
+<h3 id="卸载VMwareTools"><a href="#卸载VMwareTools" class="headerlink" title="卸载VMwareTools"></a>卸载VMwareTools</h3><ul>
+<li><code>下一步</code></li>
+</ul>
+<p><img src="/images/20250113125815/12.webp"></p>
+<ul>
+<li>勾选<code>删除</code>-&gt;<code>下一步</code></li>
+</ul>
+<p><img src="/images/20250113125815/13.webp"></p>
+<ul>
+<li><code>删除</code></li>
+</ul>
+<p><img src="/images/20250113125815/14.webp"></p>
+<ul>
+<li><code>完成</code></li>
+</ul>
+<p><img src="/images/20250113125815/10.webp"></p>
+<ul>
+<li><code>是</code></li>
+</ul>
+<p><img src="/images/20250113125815/11.webp"></p>
+<h2 id="虚拟机为Linux"><a href="#虚拟机为Linux" class="headerlink" title="虚拟机为Linux"></a>虚拟机为Linux</h2><h3 id="通用方法"><a href="#通用方法" class="headerlink" title="通用方法"></a>通用方法</h3><h4 id="下载依赖-1"><a href="#下载依赖-1" class="headerlink" title="下载依赖"></a>下载依赖</h4><ul>
+<li>从<a target="_blank" rel="noopener" href="https://packages-prod.broadcom.com/tools/frozen/linux/linux.iso">https://packages-prod.broadcom.com/tools/frozen/linux/linux.iso</a>下载<code>linux.iso</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://packages-prod.broadcom.com/tools/frozen/linux/linux.iso</span><br></pre></td></tr></table></figure>
+
+<h4 id="挂载VMwareTools-1"><a href="#挂载VMwareTools-1" class="headerlink" title="挂载VMwareTools"></a>挂载VMwareTools</h4><ul>
+<li><code>虚拟机</code>-&gt;<code>设置</code></li>
+</ul>
+<p><img src="/images/20250113125815/02.webp"></p>
+<ul>
+<li><code>CD/DVD</code>-&gt;勾选<code>已连接</code>-&gt;勾选<code>使用ISO映像文件</code>-&gt;<code>确定</code></li>
+</ul>
+<p><img src="/images/20250113125815/04.webp"></p>
+<ul>
+<li>在虚拟机中挂在目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/cdrom</span><br><span class="line">mount /dev/cdrom /mnt/cdrom</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装VMwareTools-1"><a href="#安装VMwareTools-1" class="headerlink" title="安装VMwareTools"></a>安装VMwareTools</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/vmware-tools</span><br><span class="line">cp /mnt/cdrom/VMwareTools-*.tar.gz /root/vmware-tools</span><br><span class="line">cd /root/vmware-tools</span><br><span class="line">tar -xzf VMwareTools-*.tar.gz</span><br><span class="line">cd vmware-tools-distrib</span><br><span class="line">./vmware-install.pl</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line">open-vm-tools packages are available from the OS vendor and VMware recommends </span><br><span class="line">using open-vm-tools packages. See http://kb.vmware.com/kb/2073803 for more </span><br><span class="line">information.</span><br><span class="line">Do you still want to proceed with this installation? [no] yes</span><br><span class="line"></span><br><span class="line">INPUT: [yes]</span><br><span class="line"></span><br><span class="line">Creating a new VMware Tools installer database using the tar4 format.</span><br><span class="line"></span><br><span class="line">Installing VMware Tools.</span><br><span class="line"></span><br><span class="line">In which directory do you want to install the binary files? </span><br><span class="line">[/usr/bin] </span><br><span class="line"></span><br><span class="line">INPUT: [/usr/bin]  default</span><br><span class="line"></span><br><span class="line">What is the directory that contains the init directories (rc0.d/ to rc6.d/)? </span><br><span class="line">[/etc] </span><br><span class="line"></span><br><span class="line">INPUT: [/etc]  default</span><br><span class="line"></span><br><span class="line">What is the directory that contains the init scripts? </span><br><span class="line">[/etc/init.d] </span><br><span class="line"></span><br><span class="line">INPUT: [/etc/init.d]  default</span><br><span class="line"></span><br><span class="line">In which directory do you want to install the daemon files? </span><br><span class="line">[/usr/sbin] </span><br><span class="line"></span><br><span class="line">INPUT: [/usr/sbin]  default</span><br><span class="line"></span><br><span class="line">In which directory do you want to install the library files? </span><br><span class="line">[/usr/lib/vmware-tools] </span><br><span class="line"></span><br><span class="line">INPUT: [/usr/lib/vmware-tools]  default</span><br><span class="line"></span><br><span class="line">The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program is </span><br><span class="line">going to create it, including needed parent directories. Is this what you want?</span><br><span class="line">[yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line">In which directory do you want to install the documentation files? </span><br><span class="line">[/usr/share/doc/vmware-tools] </span><br><span class="line"></span><br><span class="line">INPUT: [/usr/share/doc/vmware-tools]  default</span><br><span class="line"></span><br><span class="line">The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This program </span><br><span class="line">is going to create it, including needed parent directories. Is this what you </span><br><span class="line">want? [yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line">The installation of VMware Tools 10.3.26 build-22085142 for Linux completed </span><br><span class="line">successfully. You can decide to remove this software from your system at any </span><br><span class="line">time by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.</span><br><span class="line"></span><br><span class="line">Before running VMware Tools for the first time, you need to configure it by </span><br><span class="line">invoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you want </span><br><span class="line">this program to invoke the command for you now? [yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line">Initializing...</span><br><span class="line"></span><br><span class="line">Segmentation fault (core dumped)</span><br><span class="line"></span><br><span class="line">Making sure services for VMware Tools are stopped.</span><br><span class="line"></span><br><span class="line">Stopping VMware Tools services in the virtual machine:</span><br><span class="line">   Guest operating system daemon:                                      done</span><br><span class="line">   VMware User Agent (vmware-user):                                    done</span><br><span class="line">   Unmounting HGFS shares:                                             done</span><br><span class="line">   Guest filesystem driver:                                            done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The installation status of vmsync could not be determined. </span><br><span class="line">Skippinginstallation.</span><br><span class="line"></span><br><span class="line">The installation status of vmci could not be determined. Skippinginstallation.</span><br><span class="line"></span><br><span class="line">The installation status of vsock could not be determined. Skippinginstallation.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The installation status of vmxnet3 could not be determined. </span><br><span class="line">Skippinginstallation.</span><br><span class="line"></span><br><span class="line">The installation status of pvscsi could not be determined. </span><br><span class="line">Skippinginstallation.</span><br><span class="line"></span><br><span class="line">The installation status of vmmemctl could not be determined. </span><br><span class="line">Skippinginstallation.</span><br><span class="line"></span><br><span class="line">The VMware Host-Guest Filesystem allows for shared folders between the host OS </span><br><span class="line">and the guest OS in a Fusion or Workstation virtual environment.  Do you wish </span><br><span class="line">to enable this feature? [yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line">The vmxnet driver is no longer supported on kernels 3.3 and greater. Please </span><br><span class="line">upgrade to a newer virtual NIC. (e.g., vmxnet3 or e1000e)</span><br><span class="line"></span><br><span class="line">The vmblock enables dragging or copying files between host and guest in a </span><br><span class="line">Fusion or Workstation virtual environment.  Do you wish to enable this feature?</span><br><span class="line">[yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Skipping configuring automatic kernel modules as no drivers were installed by </span><br><span class="line">this installer.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disabling timer-based audio scheduling in pulseaudio.</span><br><span class="line"></span><br><span class="line">Do you want to enable Guest Authentication (vgauth)? [yes] </span><br><span class="line"></span><br><span class="line">INPUT: [yes]  default</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Detected X server version 1.20.13</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Distribution provided drivers for Xorg X server are used.</span><br><span class="line"></span><br><span class="line">Skipping X configuration because X drivers are not included.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Skipping rebuilding initrd boot image for kernel as no drivers to be included </span><br><span class="line">in boot image were installed by this installer.</span><br><span class="line"></span><br><span class="line">The configuration of VMware Tools 10.3.26 build-22085142 for Linux for this </span><br><span class="line">running kernel completed successfully.</span><br><span class="line"></span><br><span class="line">You must restart your X session before any mouse or graphics changes take </span><br><span class="line">effect.</span><br><span class="line"></span><br><span class="line">To enable advanced X features (e.g., guest resolution fit, drag and drop, and </span><br><span class="line">file and text copy/paste), you will need to do one (or more) of the following:</span><br><span class="line">1. Manually start /usr/bin/vmware-user</span><br><span class="line">2. Log out and log back into your desktop session</span><br><span class="line">3. Restart your X session.</span><br><span class="line"></span><br><span class="line">Enjoy,</span><br><span class="line"></span><br><span class="line">--the VMware team</span><br></pre></td></tr></table></figure>
+
+<h4 id="清理（可选）"><a href="#清理（可选）" class="headerlink" title="清理（可选）"></a>清理（可选）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">umount /mnt/cdrom</span><br><span class="line">rmdir /mnt/cdrom</span><br><span class="line">rm -rf /root/vmware-tools</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟机为Ubuntu"><a href="#虚拟机为Ubuntu" class="headerlink" title="虚拟机为Ubuntu"></a>虚拟机为Ubuntu</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install open-vm-tools open-vm-tools-desktop</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟机为Kali"><a href="#虚拟机为Kali" class="headerlink" title="虚拟机为Kali"></a>虚拟机为Kali</h3><h4 id="挂载VMwareTools-2"><a href="#挂载VMwareTools-2" class="headerlink" title="挂载VMwareTools"></a>挂载VMwareTools</h4><ul>
+<li>VMware菜单-&gt; 虚拟机-&gt;安装 VMware Tools（因为我的已经安装成功，所以这里显示重新安装 VMware Tools）</li>
+</ul>
+<p><img src="/images/20191103201219/15.webp"></p>
+<ul>
+<li>挂载成功后，kali系统会提示有光盘插入</li>
+</ul>
+<p><img src="/images/20191103201219/16.webp"></p>
+<h4 id="安装VMwareTools-2"><a href="#安装VMwareTools-2" class="headerlink" title="安装VMwareTools"></a>安装VMwareTools</h4><ul>
+<li>复制虚拟光盘映像中的安装压缩包到本地Home目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /media/cdrom/VMwareTools-10.3.10-13959562.tar.gz ~</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解压压缩包</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf VMwareTools-10.3.10-13959562.tar.gz vmware-tools-distrib/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行安装命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vmware-tools-distrib/vmware-install.pl</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191103201219/17.webp"></p>
+<p>执行安装命令后，会遇到停顿，脚本会自动向你询问安装的具体配置，你可以根据需要在”()”内选择一项输入，也可以直接按回车键使用默认配置</p>
+<ul>
+<li>显示”Enjoy,”表示安装成功</li>
+</ul>
+<p><img src="/images/20191103201219/18.webp"></p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://zhuanlan.zhihu.com/p/687568730">知乎——fRee</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/Kali/" rel="tag"># Kali</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/VMware/" rel="tag"># VMware</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/13/Ubuntu%E9%80%9A%E8%BF%87%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%8B%96%E6%8B%BD%E7%AA%97%E5%8F%A3/" rel="prev" title="【笔记】Ubuntu通过快捷键拖拽窗口">
+                  <i class="fa fa-angle-left"></i> 【笔记】Ubuntu通过快捷键拖拽窗口
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/13/Ubuntu%E5%85%81%E8%AE%B8%E7%99%BB%E5%BD%95GUI%E6%97%B6%E4%BB%A5root%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" rel="next" title="【笔记】Ubuntu允许登录GUI时以root用户登录">
+                  【笔记】Ubuntu允许登录GUI时以root用户登录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

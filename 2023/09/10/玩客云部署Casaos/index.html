@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Community-based open source software focused on delivering simple personal cloud experience around Docker ecosystem.（官网）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】玩客云部署Casaos">
+<meta property="og:url" content="https://loli.fj.cn/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E9%83%A8%E7%BD%B2Casaos/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Community-based open source software focused on delivering simple personal cloud experience around Docker ecosystem.（官网）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://loli.fj.cn/images/20230910155930/01.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20230910155930/02.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20230910155930/03.webp">
+<meta property="og:image" content="https://loli.fj.cn/images/20230910155930/04.webp">
+<meta property="article:published_time" content="2023-09-10T07:59:30.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.965Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="SoftRouting">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://loli.fj.cn/images/20230910155930/01.webp">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E9%83%A8%E7%BD%B2Casaos/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E9%83%A8%E7%BD%B2Casaos/","path":"2023/09/10/玩客云部署Casaos/","title":"【笔记】玩客云部署Casaos"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】玩客云部署Casaos | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2Casaos"><span class="nav-number">3.</span> <span class="nav-text">部署Casaos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">解决问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E9%83%A8%E7%BD%B2Casaos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】玩客云部署Casaos | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】玩客云部署Casaos
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-10 15:59:30" itemprop="dateCreated datePublished" datetime="2023-09-10T15:59:30+08:00">2023-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Community-based open source software focused on delivering simple personal cloud experience around Docker ecosystem.（<a href="/302.html?target=https://casaos.io">官网</a>）</p>
+<span id="more"></span>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>玩客云刷Armbian</li>
+</ul>
+<p><a href="/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E5%88%B7Armbian/">传送门</a></p>
+<h2 id="部署Casaos"><a href="#部署Casaos" class="headerlink" title="部署Casaos"></a>部署Casaos</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://get.casaos.io | bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   _____                 ____   _____ </span><br><span class="line">  / ____|               / __ \ / ____|</span><br><span class="line"> | |     __ _ ___  __ _| |  | | (___  </span><br><span class="line"> | |    / _` / __|/ _` | |  | |\___ \ </span><br><span class="line"> | |___| (_| \__ \ (_| | |__| |____) |</span><br><span class="line">  \_____\__,_|___/\__,_|\____/|_____/ </span><br><span class="line">                                      </span><br><span class="line">   --- Made by IceWhale with YOU ---</span><br><span class="line"></span><br><span class="line">[  OK  ] Your hardware architecture is : armv7l</span><br><span class="line">[  OK  ] Your System is : Linux</span><br><span class="line">[  OK  ] Your Linux Distribution is : debian </span><br><span class="line">[  OK  ] Memory capacity check passed.</span><br><span class="line">[  OK  ] Disk capacity check passed.</span><br><span class="line">Hit:1 http://deb.debian.org/debian bullseye InRelease</span><br><span class="line">Hit:2 http://security.debian.org bullseye-security InRelease</span><br><span class="line">Hit:3 http://fi.mirror.armbian.de/apt bullseye InRelease</span><br><span class="line">Hit:4 http://deb.debian.org/debian bullseye-updates InRelease</span><br><span class="line">Hit:5 http://deb.debian.org/debian bullseye-backports InRelease</span><br><span class="line">Reading package lists... Done                  </span><br><span class="line">[ INFO ] Install the necessary dependencies: samba </span><br><span class="line">Reading package lists...</span><br><span class="line">Building dependency tree...</span><br><span class="line">Reading state information...</span><br><span class="line">The following additional packages will be installed:</span><br><span class="line">  libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libicu67</span><br><span class="line">  libldb2 libpython3.9 libtalloc2 libtdb1 libtevent0 libwbclient0</span><br><span class="line">  python3-dnspython python3-ldb python3-samba python3-talloc python3-tdb</span><br><span class="line">  samba-common samba-common-bin samba-libs tdb-tools</span><br><span class="line">Suggested packages:</span><br><span class="line">  cups-common python3-sniffio python3-trio bind9 bind9utils ctdb ldb-tools</span><br><span class="line">  smbldap-tools ufw winbind heimdal-clients python3-markdown</span><br><span class="line">Recommended packages:</span><br><span class="line">  python3-cryptography python3-idna python3-requests python3-requests-toolbelt</span><br><span class="line">  python3-gpg attr python3-markdown samba-dsdb-modules samba-vfs-modules</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libicu67</span><br><span class="line">  libldb2 libpython3.9 libtalloc2 libtdb1 libtevent0 libwbclient0</span><br><span class="line">  python3-dnspython python3-ldb python3-samba python3-talloc python3-tdb samba</span><br><span class="line">  samba-common samba-common-bin samba-libs tdb-tools</span><br><span class="line">0 upgraded, 21 newly installed, 0 to remove and 38 not upgraded.</span><br><span class="line">Need to get 19.6 kB/20.5 MB of archives.</span><br><span class="line">After this operation, 91.2 MB of additional disk space will be used.</span><br><span class="line">Get:1 http://deb.debian.org/debian bullseye/main armhf python3-tdb armhf 1.4.3-1+b1 [19.6 kB]</span><br><span class="line">Fetched 19.6 kB in 0s (67.7 kB/s)</span><br><span class="line">Preconfiguring packages ...</span><br><span class="line">Selecting previously unselected package libicu67:armhf.</span><br><span class="line">(Reading database ... 25956 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../00-libicu67_67.1-7_armhf.deb ...</span><br><span class="line">Unpacking libicu67:armhf (67.1-7) ...</span><br><span class="line">Selecting previously unselected package libtalloc2:armhf.</span><br><span class="line">Preparing to unpack .../01-libtalloc2_2.3.1-2+b1_armhf.deb ...</span><br><span class="line">Unpacking libtalloc2:armhf (2.3.1-2+b1) ...</span><br><span class="line">Selecting previously unselected package libtevent0:armhf.</span><br><span class="line">Preparing to unpack .../02-libtevent0_0.10.2-1_armhf.deb ...</span><br><span class="line">Unpacking libtevent0:armhf (0.10.2-1) ...</span><br><span class="line">Selecting previously unselected package libwbclient0:armhf.</span><br><span class="line">Preparing to unpack .../03-libwbclient0_2%3a4.13.13+dfsg-1~deb11u5_armhf.deb ...</span><br><span class="line">Unpacking libwbclient0:armhf (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Selecting previously unselected package python3-dnspython.</span><br><span class="line">Preparing to unpack .../04-python3-dnspython_2.0.0-1_all.deb ...</span><br><span class="line">Unpacking python3-dnspython (2.0.0-1) ...</span><br><span class="line">Selecting previously unselected package libtdb1:armhf.</span><br><span class="line">Preparing to unpack .../05-libtdb1_1.4.3-1+b1_armhf.deb ...</span><br><span class="line">Unpacking libtdb1:armhf (1.4.3-1+b1) ...</span><br><span class="line">Selecting previously unselected package libldb2:armhf.</span><br><span class="line">Preparing to unpack .../06-libldb2_2%3a2.2.3-2~deb11u2_armhf.deb ...</span><br><span class="line">Unpacking libldb2:armhf (2:2.2.3-2~deb11u2) ...</span><br><span class="line">Selecting previously unselected package libpython3.9:armhf.</span><br><span class="line">Preparing to unpack .../07-libpython3.9_3.9.2-1_armhf.deb ...</span><br><span class="line">Unpacking libpython3.9:armhf (3.9.2-1) ...</span><br><span class="line">Selecting previously unselected package python3-ldb.</span><br><span class="line">Preparing to unpack .../08-python3-ldb_2%3a2.2.3-2~deb11u2_armhf.deb ...</span><br><span class="line">Unpacking python3-ldb (2:2.2.3-2~deb11u2) ...</span><br><span class="line">Selecting previously unselected package python3-tdb.</span><br><span class="line">Preparing to unpack .../09-python3-tdb_1.4.3-1+b1_armhf.deb ...</span><br><span class="line">Unpacking python3-tdb (1.4.3-1+b1) ...</span><br><span class="line">Selecting previously unselected package libavahi-common-data:armhf.</span><br><span class="line">Preparing to unpack .../10-libavahi-common-data_0.8-5+deb11u2_armhf.deb ...</span><br><span class="line">Unpacking libavahi-common-data:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Selecting previously unselected package libavahi-common3:armhf.</span><br><span class="line">Preparing to unpack .../11-libavahi-common3_0.8-5+deb11u2_armhf.deb ...</span><br><span class="line">Unpacking libavahi-common3:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Selecting previously unselected package libavahi-client3:armhf.</span><br><span class="line">Preparing to unpack .../12-libavahi-client3_0.8-5+deb11u2_armhf.deb ...</span><br><span class="line">Unpacking libavahi-client3:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Selecting previously unselected package libcups2:armhf.</span><br><span class="line">Preparing to unpack .../13-libcups2_2.3.3op2-3+deb11u2_armhf.deb ...</span><br><span class="line">Unpacking libcups2:armhf (2.3.3op2-3+deb11u2) ...</span><br><span class="line">Selecting previously unselected package python3-talloc:armhf.</span><br><span class="line">Preparing to unpack .../14-python3-talloc_2.3.1-2+b1_armhf.deb ...</span><br><span class="line">Unpacking python3-talloc:armhf (2.3.1-2+b1) ...</span><br><span class="line">Selecting previously unselected package samba-libs:armhf.</span><br><span class="line">Preparing to unpack .../15-samba-libs_2%3a4.13.13+dfsg-1~deb11u5_armhf.deb ...</span><br><span class="line">Unpacking samba-libs:armhf (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Selecting previously unselected package python3-samba.</span><br><span class="line">Preparing to unpack .../16-python3-samba_2%3a4.13.13+dfsg-1~deb11u5_armhf.deb ...</span><br><span class="line">Unpacking python3-samba (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Selecting previously unselected package samba-common.</span><br><span class="line">Preparing to unpack .../17-samba-common_2%3a4.13.13+dfsg-1~deb11u5_all.deb ...</span><br><span class="line">Unpacking samba-common (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Selecting previously unselected package samba-common-bin.</span><br><span class="line">Preparing to unpack .../18-samba-common-bin_2%3a4.13.13+dfsg-1~deb11u5_armhf.deb ...</span><br><span class="line">Unpacking samba-common-bin (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Selecting previously unselected package tdb-tools.</span><br><span class="line">Preparing to unpack .../19-tdb-tools_1.4.3-1+b1_armhf.deb ...</span><br><span class="line">Unpacking tdb-tools (1.4.3-1+b1) ...</span><br><span class="line">Selecting previously unselected package samba.</span><br><span class="line">Preparing to unpack .../20-samba_2%3a4.13.13+dfsg-1~deb11u5_armhf.deb ...</span><br><span class="line">Unpacking samba (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Setting up libicu67:armhf (67.1-7) ...</span><br><span class="line">Setting up libtdb1:armhf (1.4.3-1+b1) ...</span><br><span class="line">Setting up samba-common (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line"></span><br><span class="line">Creating config file /etc/samba/smb.conf with new version</span><br><span class="line">Setting up libtalloc2:armhf (2.3.1-2+b1) ...</span><br><span class="line">Setting up python3-tdb (1.4.3-1+b1) ...</span><br><span class="line">Setting up libpython3.9:armhf (3.9.2-1) ...</span><br><span class="line">Setting up libtevent0:armhf (0.10.2-1) ...</span><br><span class="line">Setting up libavahi-common-data:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Setting up tdb-tools (1.4.3-1+b1) ...</span><br><span class="line">update-alternatives: using /usr/bin/tdbbackup.tdbtools to provide /usr/bin/tdbbackup (tdbbackup) in auto mode</span><br><span class="line">Setting up python3-dnspython (2.0.0-1) ...</span><br><span class="line">Setting up libldb2:armhf (2:2.2.3-2~deb11u2) ...</span><br><span class="line">Setting up python3-talloc:armhf (2.3.1-2+b1) ...</span><br><span class="line">Setting up libavahi-common3:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Setting up libwbclient0:armhf (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Setting up python3-ldb (2:2.2.3-2~deb11u2) ...</span><br><span class="line">Setting up libavahi-client3:armhf (0.8-5+deb11u2) ...</span><br><span class="line">Setting up libcups2:armhf (2.3.3op2-3+deb11u2) ...</span><br><span class="line">Setting up samba-libs:armhf (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Setting up python3-samba (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Setting up samba-common-bin (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Checking smb.conf with testparm</span><br><span class="line">Load smb config files from /etc/samba/smb.conf</span><br><span class="line">Loaded services file OK.</span><br><span class="line">Weak crypto is allowed</span><br><span class="line">Server role: ROLE_STANDALONE</span><br><span class="line"></span><br><span class="line">Done</span><br><span class="line">Setting up samba (2:4.13.13+dfsg-1~deb11u5) ...</span><br><span class="line">Adding group `sambashare&#x27; (GID 115) ...</span><br><span class="line">Done.</span><br><span class="line">Samba is not being run as an AD Domain Controller: Masking samba-ad-dc.service</span><br><span class="line">Please ignore the following error about deb-systemd-helper not finding those services.</span><br><span class="line">(samba-ad-dc.service masked)</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/nmbd.service → /lib/systemd/system/nmbd.service.</span><br><span class="line">Failed to preset unit: Unit file /etc/systemd/system/samba-ad-dc.service is masked.</span><br><span class="line">/usr/bin/deb-systemd-helper: error: systemctl preset failed on samba-ad-dc.service: No such file or directory</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/smbd.service → /lib/systemd/system/smbd.service.</span><br><span class="line">samba-ad-dc.service is a disabled or a static unit, not starting it.</span><br><span class="line">Processing triggers for libc-bin (2.31-13+deb11u5) ...</span><br><span class="line">[ INFO ] Install the necessary dependencies: cifs-utils </span><br><span class="line">Reading package lists...</span><br><span class="line">Building dependency tree...</span><br><span class="line">Reading state information...</span><br><span class="line">Suggested packages:</span><br><span class="line">  smbclient winbind bash-completion</span><br><span class="line">Recommended packages:</span><br><span class="line">  keyutils</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  cifs-utils</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 38 not upgraded.</span><br><span class="line">Need to get 85.6 kB of archives.</span><br><span class="line">After this operation, 242 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://deb.debian.org/debian bullseye/main armhf cifs-utils armhf 2:6.11-3.1+deb11u1 [85.6 kB]</span><br><span class="line">Fetched 85.6 kB in 0s (237 kB/s)</span><br><span class="line">Selecting previously unselected package cifs-utils.</span><br><span class="line">(Reading database ... 27100 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../cifs-utils_2%3a6.11-3.1+deb11u1_armhf.deb ...</span><br><span class="line">Unpacking cifs-utils (2:6.11-3.1+deb11u1) ...</span><br><span class="line">Setting up cifs-utils (2:6.11-3.1+deb11u1) ...</span><br><span class="line">update-alternatives: using /usr/lib/arm-linux-gnueabihf/cifs-utils/idmapwb.so to provide /etc/cifs-utils/idmap-plugin (idmap-plugin) in auto mode</span><br><span class="line">[ INFO ] Install the necessary dependencies: mergerfs </span><br><span class="line">Reading package lists...</span><br><span class="line">Building dependency tree...</span><br><span class="line">Reading state information...</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  mergerfs</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 38 not upgraded.</span><br><span class="line">Need to get 229 kB of archives.</span><br><span class="line">After this operation, 412 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://deb.debian.org/debian bullseye/main armhf mergerfs armhf 2.31.0-1 [229 kB]</span><br><span class="line">Fetched 229 kB in 1s (279 kB/s)</span><br><span class="line">Selecting previously unselected package mergerfs.</span><br><span class="line">(Reading database ... 27134 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../mergerfs_2.31.0-1_armhf.deb ...</span><br><span class="line">Unpacking mergerfs (2.31.0-1) ...</span><br><span class="line">Setting up mergerfs (2.31.0-1) ...</span><br><span class="line">[ INFO ] Install the necessary dependencies: unzip </span><br><span class="line">Reading package lists...</span><br><span class="line">Building dependency tree...</span><br><span class="line">Reading state information...</span><br><span class="line">Suggested packages:</span><br><span class="line">  zip</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  unzip</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 38 not upgraded.</span><br><span class="line">Need to get 157 kB of archives.</span><br><span class="line">After this operation, 305 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://deb.debian.org/debian bullseye/main armhf unzip armhf 6.0-26+deb11u1 [157 kB]</span><br><span class="line">Fetched 157 kB in 1s (188 kB/s)</span><br><span class="line">Selecting previously unselected package unzip.</span><br><span class="line">(Reading database ... 27144 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../unzip_6.0-26+deb11u1_armhf.deb ...</span><br><span class="line">Unpacking unzip (6.0-26+deb11u1) ...</span><br><span class="line">Setting up unzip (6.0-26+deb11u1) ...</span><br><span class="line">[  OK  ] Current Docker verison is 20.10.5+dfsg1.</span><br><span class="line">[ INFO ] Configuration CasaOS Addons</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/devmon@devmon.service → /lib/systemd/system/devmon@.service.</span><br><span class="line">Created symlink /etc/systemd/system/default.target.wants/devmon@devmon.service → /lib/systemd/system/devmon@.service.</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB ~</span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-Gateway/releases/download/v0.4.4-1/linux-arm-7-casaos-gateway-v0.4.4-1.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]   2.80M   146KB/s    in 19s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-MessageBus/releases/download/v0.4.4/linux-arm-7-casaos-message-bus-v0.4.4.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]   4.34M   142KB/s    in 32s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-UserService/releases/download/v0.4.4/linux-arm-7-casaos-user-service-v0.4.4.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]   4.29M   136KB/s    in 31s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-LocalStorage/releases/download/v0.4.4/linux-arm-7-casaos-local-storage-v0.4.4.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]  10.35M   143KB/s    in 76s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-AppManagement/releases/download/v0.4.4-3-alpha2/linux-arm-7-casaos-app-management-v0.4.4-3-alpha2.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]  22.04M   136KB/s    in 2m 53s  </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS/releases/download/v0.4.4-alpha7/linux-arm-7-casaos-v0.4.4-alpha7.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]   5.61M   148KB/s    in 40s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-CLI/releases/download/v0.4.4/linux-arm-7-casaos-cli-v0.4.4.tar.gz...</span><br><span class="line">linux-arm-7-casaos- 100%[===================&gt;]   3.25M   154KB/s    in 22s     </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-UI/releases/download/v0.4.4-4/linux-all-casaos-v0.4.4-4.tar.gz...</span><br><span class="line">linux-all-casaos-v0 100%[===================&gt;]  13.59M   137KB/s    in 1m 42s  </span><br><span class="line">[ INFO ] Downloading https://github.com/IceWhaleTech/CasaOS-AppStore/releases/download/v0.4.4/linux-all-appstore-v0.4.4.tar.gz...</span><br><span class="line">linux-all-appstore- 100%[===================&gt;]   2.70M   140KB/s    in 18s     </span><br><span class="line">[ INFO ] Extracting linux-all-appstore-v0.4.4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-all-casaos-v0.4.4-4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-app-management-v0.4.4-3-alpha2.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-cli-v0.4.4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-gateway-v0.4.4-1.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-local-storage-v0.4.4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-message-bus-v0.4.4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-user-service-v0.4.4.tar.gz...</span><br><span class="line">[ INFO ] Extracting linux-arm-7-casaos-v0.4.4-alpha7.tar.gz...</span><br><span class="line">~</span><br><span class="line">[ INFO ] Stopping casaos-gateway.service...</span><br><span class="line">Failed to stop casaos-gateway.service: Unit casaos-gateway.service not loaded.</span><br><span class="line">[NOTICE] Service casaos-gateway.service does not exist.</span><br><span class="line">[ INFO ] Stopping casaos-message-bus.service...</span><br><span class="line">Failed to stop casaos-message-bus.service: Unit casaos-message-bus.service not loaded.</span><br><span class="line">[NOTICE] Service casaos-message-bus.service does not exist.</span><br><span class="line">[ INFO ] Stopping casaos-user-service.service...</span><br><span class="line">Failed to stop casaos-user-service.service: Unit casaos-user-service.service not loaded.</span><br><span class="line">[NOTICE] Service casaos-user-service.service does not exist.</span><br><span class="line">[ INFO ] Stopping casaos-local-storage.service...</span><br><span class="line">Failed to stop casaos-local-storage.service: Unit casaos-local-storage.service not loaded.</span><br><span class="line">[NOTICE] Service casaos-local-storage.service does not exist.</span><br><span class="line">[ INFO ] Stopping casaos-app-management.service...</span><br><span class="line">Failed to stop casaos-app-management.service: Unit casaos-app-management.service not loaded.</span><br><span class="line">[NOTICE] Service casaos-app-management.service does not exist.</span><br><span class="line">[ INFO ] Stopping rclone.service...</span><br><span class="line">Failed to stop rclone.service: Unit rclone.service not loaded.</span><br><span class="line">[NOTICE] Service rclone.service does not exist.</span><br><span class="line">[ INFO ] Stopping casaos.service...</span><br><span class="line">Failed to stop casaos.service: Unit casaos.service not loaded.</span><br><span class="line">[NOTICE] Service casaos.service does not exist.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/01-migrate-gateway.sh...</span><br><span class="line">realpath: /usr/bin/casaos: No such file or directory</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/01-migrate-gateway.sh: line 99: /usr/bin/casaos-gateway: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/01-migrate-gateway.sh: line 99: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/02-migrate-user-service.sh...</span><br><span class="line">realpath: /usr/bin/casaos: No such file or directory</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/02-migrate-user-service.sh: line 98: /usr/bin/casaos-user-service: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/02-migrate-user-service.sh: line 98: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/03-migrate-casaos.sh...</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/03-migrate-casaos.sh: line 90: /usr/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/03-migrate-casaos.sh: line 90: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4.2</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/04-migrate-local-storage.sh...</span><br><span class="line">realpath: /usr/bin/casaos: No such file or directory</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/04-migrate-local-storage.sh: line 99: /usr/bin/casaos-local-storage: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/04-migrate-local-storage.sh: line 99: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/05-migrate-message-bus.sh...</span><br><span class="line">realpath: /usr/bin/casaos: No such file or directory</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/05-migrate-message-bus.sh: line 83: /usr/bin/casaos-message-bus: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/05-migrate-message-bus.sh: line 83: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/06-migrate-app-management.sh...</span><br><span class="line">realpath: /usr/bin/casaos: No such file or directory</span><br><span class="line">realpath: /usr/local/bin/casaos: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/06-migrate-app-management.sh: line 97: /usr/bin/casaos-app-management: No such file or directory</span><br><span class="line">/tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/migration/script.d/06-migrate-app-management.sh: line 97: CURRENT_BIN_FILE_LEGACY_NOT_FOUND: command not found</span><br><span class="line">stat: cannot statx &#x27;CURRENT_BIN_FILE_LEGACY_NOT_FOUND&#x27;: No such file or directory</span><br><span class="line">✅ CURRENT_VERSION: CURRENT_VERSION_NOT_FOUND</span><br><span class="line">✅ SOURCE_VERSION: v0.4.4</span><br><span class="line">✅ Migration is not needed.</span><br><span class="line">[ INFO ] Installing CasaOS...</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/01-setup-gateway.sh...</span><br><span class="line">🟩 Running setup-gateway.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/gateway.ini.sample&#x27; -&gt; &#x27;/etc/casaos/gateway.ini&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos-gateway.service → /lib/systemd/system/casaos-gateway.service.</span><br><span class="line">✅ setup-gateway.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/02-setup-user-service.sh...</span><br><span class="line">🟩 Running setup-user-service.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/user-service.conf.sample&#x27; -&gt; &#x27;/etc/casaos/user-service.conf&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos-user-service.service → /lib/systemd/system/casaos-user-service.service.</span><br><span class="line">✅ setup-user-service.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/03-setup-casaos.sh...</span><br><span class="line">🟩 Running setup-casaos.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/casaos.conf.sample&#x27; -&gt; &#x27;/etc/casaos/casaos.conf&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos.service → /lib/systemd/system/casaos.service.</span><br><span class="line">✅ setup-casaos.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/04-setup-local-storage.sh...</span><br><span class="line">🟩 Running setup-local-storage.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/local-storage.conf.sample&#x27; -&gt; &#x27;/etc/casaos/local-storage.conf&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos-local-storage.service → /lib/systemd/system/casaos-local-storage.service.</span><br><span class="line">✅ setup-local-storage.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/05-setup-message-bus.sh...</span><br><span class="line">🟩 Running setup-message-bus.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/message-bus.conf.sample&#x27; -&gt; &#x27;/etc/casaos/message-bus.conf&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos-message-bus.service → /lib/systemd/system/casaos-message-bus.service.</span><br><span class="line">✅ setup-message-bus.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/06-setup-app-management.sh...</span><br><span class="line">🟩 Running setup-app-management.sh...</span><br><span class="line">Initializing config file...</span><br><span class="line">&#x27;/etc/casaos/app-management.conf.sample&#x27; -&gt; &#x27;/etc/casaos/app-management.conf&#x27;</span><br><span class="line">Enabling service...</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/casaos-app-management.service → /lib/systemd/system/casaos-app-management.service.</span><br><span class="line">✅ setup-app-management.sh finished.</span><br><span class="line">[ INFO ] Running /tmp/casaos-installer/tmp.PDEdSX6ERB/build/scripts/setup/script.d/99-setup-appstore.sh...</span><br><span class="line">🟩 Updating default appstore...</span><br><span class="line">renamed &#x27;/var/lib/casaos/appstore/default.new&#x27; -&gt; &#x27;/var/lib/casaos/appstore/default&#x27;</span><br><span class="line">[ INFO ] Install the necessary dependencies: Rclone</span><br><span class="line">Archive:  rclone-current-linux-arm-v7.zip</span><br><span class="line">   creating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/</span><br><span class="line">  inflating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/README.html  [text]  </span><br><span class="line">  inflating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/rclone  [binary]</span><br><span class="line">  inflating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/README.txt  [text]  </span><br><span class="line">  inflating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/rclone.1  [text]  </span><br><span class="line">  inflating: tmp_unzip_dir_for_rclone/rclone-v1.61.1-linux-arm-v7/git-log.txt  [text]  </span><br><span class="line">mandb not found. The rclone man docs will not be installed.</span><br><span class="line"></span><br><span class="line">rclone v1.61.1 has successfully installed.</span><br><span class="line">Now run &quot;rclone config&quot; for setup. Check https://rclone.org/docs/ for more details.</span><br><span class="line"></span><br><span class="line">[  OK  ] Rclone v1.61.1 installed successfully.</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/rclone.service → /lib/systemd/system/rclone.service.</span><br><span class="line">[ INFO ] Starting casaos-gateway.service...</span><br><span class="line">[ INFO ] Starting casaos-message-bus.service...</span><br><span class="line">[ INFO ] Starting casaos-user-service.service...</span><br><span class="line">[ INFO ] Starting casaos-local-storage.service...</span><br><span class="line">[ INFO ] Starting casaos-app-management.service...</span><br><span class="line">[ INFO ] Starting rclone.service...</span><br><span class="line">[ INFO ] Starting casaos.service...</span><br><span class="line">[ INFO ] Checking casaos-gateway.service...</span><br><span class="line">[  OK  ] casaos-gateway.service is running.</span><br><span class="line">[ INFO ] Checking casaos-message-bus.service...</span><br><span class="line">[  OK  ] casaos-message-bus.service is running.</span><br><span class="line">[ INFO ] Checking casaos-user-service.service...</span><br><span class="line">[  OK  ] casaos-user-service.service is running.</span><br><span class="line">[ INFO ] Checking casaos-local-storage.service...</span><br><span class="line">[  OK  ] casaos-local-storage.service is running.</span><br><span class="line">[ INFO ] Checking casaos-app-management.service...</span><br><span class="line">[  OK  ] casaos-app-management.service is running.</span><br><span class="line">[ INFO ] Checking rclone.service...</span><br><span class="line">[  OK  ] rclone.service is running.</span><br><span class="line">[ INFO ] Checking casaos.service...</span><br><span class="line">[  OK  ] casaos.service is running.</span><br><span class="line"> ─────────────────────────────────────────────────────</span><br><span class="line"> CasaOS v0.4.4.2 is running at:</span><br><span class="line"> ─────────────────────────────────────────────────────</span><br><span class="line"> - http://192.168.200.104 (eth0)</span><br><span class="line"> Open your browser and visit the above address.</span><br><span class="line"> ─────────────────────────────────────────────────────</span><br><span class="line"></span><br><span class="line"> CasaOS Project  : https://github.com/IceWhaleTech/CasaOS</span><br><span class="line"> CasaOS Team     : https://github.com/IceWhaleTech/CasaOS#maintainers</span><br><span class="line"> CasaOS Discord  : https://discord.gg/knqAbbBbeX</span><br><span class="line"> Website         : https://www.casaos.io</span><br><span class="line"> Online Demo     : http://demo.casaos.io</span><br><span class="line"></span><br><span class="line"> Uninstall       : casaos-uninstall</span><br><span class="line"></span><br><span class="line">root@onecloud:~# </span><br></pre></td></tr></table></figure>
+
+<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
+<li>docker安装失败</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">================================================================================</span><br><span class="line"></span><br><span class="line">To run Docker as a non-privileged user, consider setting up the</span><br><span class="line">Docker daemon in rootless mode for your user:</span><br><span class="line"></span><br><span class="line">    dockerd-rootless-setuptool.sh install</span><br><span class="line"></span><br><span class="line">Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To run the Docker daemon as a fully privileged service, but granting non-root</span><br><span class="line">users access, refer to https://docs.docker.com/go/daemon-access/</span><br><span class="line"></span><br><span class="line">WARNING: Access to the remote API on a privileged Docker daemon is equivalent</span><br><span class="line">         to root access on the host. Refer to the &#x27;Docker daemon attack surface&#x27;</span><br><span class="line">         documentation for details: https://docs.docker.com/go/attack-surface/</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line"></span><br><span class="line">Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><ul>
+<li>玩客云刷完Armbian后不要通过<code>apt update &amp;&amp; apt upgrade</code>命令更新软件，直接进行Casaos的安装</li>
+</ul>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ul>
+<li>访问<a target="_blank" rel="noopener" href="http://localhost/">http://localhost:80</a>-&gt;<code>开始</code></li>
+</ul>
+<p><img src="/images/20230910155930/01.webp"></p>
+<ul>
+<li>设置管理员用户名和密码</li>
+</ul>
+<p><img src="/images/20230910155930/02.webp"></p>
+<ul>
+<li>完成</li>
+</ul>
+<p><img src="/images/20230910155930/03.webp"></p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><ul>
+<li>截图留念</li>
+</ul>
+<p><img src="/images/20230910155930/04.webp"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14s4y1L7Gd/">哔哩哔哩——乌客wuke</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Moelimoe/article/details/105292219">CSDN——Moelimoe</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7064751914524606471">CSDN——realmadrid_juejin</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1927619">腾讯云开发者社区——Se7en258</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SoftRouting/" rel="tag"># SoftRouting</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/10/%E7%8E%A9%E5%AE%A2%E4%BA%91%E5%88%B7%E5%85%A5Armbian/" rel="prev" title="【笔记】玩客云刷入Armbian">
+                  <i class="fa fa-angle-left"></i> 【笔记】玩客云刷入Armbian
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/11/%E6%BF%80%E6%B4%BBIDM/" rel="next" title="【笔记】激活IDM">
+                  【笔记】激活IDM <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

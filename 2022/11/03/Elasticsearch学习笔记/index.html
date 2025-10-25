@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Elasticsearch学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Elasticsearch学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Elasticsearch学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T06:48:53.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.856Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2022/11/03/Elasticsearch学习笔记/","title":"【笔记】Elasticsearch学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Elasticsearch学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch%E4%B8%AD%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Elasticsearch中的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ik%E5%88%86%E8%AF%8D%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">ik分词器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%89%A9%E5%B1%95%E8%AF%8D"><span class="nav-number">4.1.</span> <span class="nav-text">添加扩展词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%81%9C%E6%AD%A2%E8%AF%8D"><span class="nav-number">4.2.</span> <span class="nav-text">添加停止词</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%AF%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">分词操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%88%86%E8%AF%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">5.1.</span> <span class="nav-text">在指定索引库中进行分词操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%B4%A2%E5%BC%95%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">对索引库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%B4%A2%E5%BC%95%E5%BA%93"><span class="nav-number">6.1.</span> <span class="nav-text">新增索引库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E8%AF%8D%E5%99%A8"><span class="nav-number">6.1.1.</span> <span class="nav-text">指定自定义分词器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%B4%A2%E5%BC%95%E5%BA%93"><span class="nav-number">6.2.</span> <span class="nav-text">查询索引库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95%E5%BA%93"><span class="nav-number">6.3.</span> <span class="nav-text">删除索引库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%B4%A2%E5%BC%95%E5%BA%93"><span class="nav-number">6.4.</span> <span class="nav-text">修改索引库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">对文档操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3"><span class="nav-number">7.1.</span> <span class="nav-text">新增文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">7.2.</span> <span class="nav-text">删除文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E6%96%87%E6%A1%A3"><span class="nav-number">7.2.1.</span> <span class="nav-text">删除所有文档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%A1%A3"><span class="nav-number">7.3.</span> <span class="nav-text">修改文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E9%87%8F%E4%BF%AE%E6%94%B9"><span class="nav-number">7.3.1.</span> <span class="nav-text">全量修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E4%BF%AE%E6%94%B9"><span class="nav-number">7.3.2.</span> <span class="nav-text">局部修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-number">7.4.</span> <span class="nav-text">查询文档</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">8.</span> <span class="nav-text">搜索文档的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.1.</span> <span class="nav-text">简单查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89"><span class="nav-number">8.1.1.</span> <span class="nav-text">查询所有</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E7%89%87%E4%BF%A1%E6%81%AF"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">查看分片信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="nav-number">8.1.2.</span> <span class="nav-text">全文检索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E7%9A%84%E5%8D%95%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">根据指定的单个字段全文检索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E7%9A%84%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="nav-number">8.1.2.2.</span> <span class="nav-text">根据指定的多个字段全文检索</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.1.3.</span> <span class="nav-text">精确查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8C%B9%E9%85%8D"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">完全匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">匹配数值范围</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.1.4.</span> <span class="nav-text">地理查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9F%A9%E5%BD%A2%E8%8C%83%E5%9B%B4"><span class="nav-number">8.1.4.1.</span> <span class="nav-text">矩形范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%86%E5%BD%A2%E8%8C%83%E5%9B%B4"><span class="nav-number">8.1.4.2.</span> <span class="nav-text">圆形范围</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.2.</span> <span class="nav-text">复合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.2.1.</span> <span class="nav-text">布尔查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E5%88%86%E5%87%BD%E6%95%B0%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.2.2.</span> <span class="nav-text">算分函数查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%8A%A0%E5%88%86%E8%A7%84%E5%88%99"><span class="nav-number">8.2.2.1.</span> <span class="nav-text">有加分规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%8A%A0%E5%88%86%E8%A7%84%E5%88%99"><span class="nav-number">8.2.2.2.</span> <span class="nav-text">没有加分规则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86"><span class="nav-number">8.3.</span> <span class="nav-text">搜索结果处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">8.3.1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E7%B1%BB%E5%9E%8B%E6%8E%92%E5%BA%8F"><span class="nav-number">8.3.1.1.</span> <span class="nav-text">地理类型排序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E5%86%99%E6%B3%95"><span class="nav-number">8.3.1.1.1.</span> <span class="nav-text">简化写法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">8.3.2.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E4%BA%AE"><span class="nav-number">8.3.3.</span> <span class="nav-text">高亮</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.4.</span> <span class="nav-text">聚合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%B6%E8%81%9A%E5%90%88%EF%BC%88Bucket%EF%BC%89"><span class="nav-number">8.4.1.</span> <span class="nav-text">桶聚合（Bucket）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E8%81%9A%E5%90%88%EF%BC%88Metric%EF%BC%89"><span class="nav-number">8.4.2.</span> <span class="nav-text">度量聚合（Metric）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">8.5.</span> <span class="nav-text">自动补全搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch%E9%9B%86%E7%BE%A4"><span class="nav-number">9.</span> <span class="nav-text">Elasticsearch集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E4%B8%AD%E8%8A%82%E7%82%B9%E7%9A%84%E8%81%8C%E8%B4%A3"><span class="nav-number">9.1.</span> <span class="nav-text">集群中节点的职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%91%E8%A3%82%E7%8E%B0%E8%B1%A1"><span class="nav-number">9.2.</span> <span class="nav-text">脑裂现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%B0%E5%A2%9E"><span class="nav-number">9.3.</span> <span class="nav-text">分布式新增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="nav-number">9.4.</span> <span class="nav-text">分布式查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="nav-number">9.5.</span> <span class="nav-text">故障转移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">10.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">11.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Elasticsearch学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Elasticsearch学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-03 14:48:53" itemprop="dateCreated datePublished" datetime="2022-11-03T14:48:53+08:00">2022-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Elasticsearch学习笔记</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>文档（document）：每条数据就是一个文档</li>
+<li>词条（term）：文档中按照语意分开后的词语</li>
+<li>索引（index）：相同类型文档的集合</li>
+<li>映射（mapping）：索引对文档字段的约束，类似于数据表的结构约束</li>
+</ul>
+<h2 id="Elasticsearch中的概念"><a href="#Elasticsearch中的概念" class="headerlink" title="Elasticsearch中的概念"></a>Elasticsearch中的概念</h2><p>MySQL与Elasticsearch的概念对比</p>
+<table>
+<thead>
+<tr>
+<th>Elasticsearch中的概念</th>
+<th>说明</th>
+<th>MySQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Index</td>
+<td>索引，相同类型文档的集合。类似于MySQL的数据表</td>
+<td>Table</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>文档，每条数据就是一个文档，文档都是JSON格式字符串。类似于与MySQL的行</td>
+<td>Row</td>
+</tr>
+<tr>
+<td>Field</td>
+<td>字段，JSON文档中的各个key。类似于MySQL的列</td>
+<td>Column</td>
+</tr>
+<tr>
+<td>Mapping</td>
+<td>映射，JSON文档中各个value的约束。类似于MySQL的表结构</td>
+<td>Schema</td>
+</tr>
+<tr>
+<td>DSL</td>
+<td>JSON风格的请求语句，用来操作Elasticsearch实现CRUD的语句。类似于MySQL的SQL语句</td>
+<td>SQL</td>
+</tr>
+</tbody></table>
+<h2 id="ik分词器"><a href="#ik分词器" class="headerlink" title="ik分词器"></a>ik分词器</h2><ul>
+<li>The IK Analysis plugin integrates Lucene IK analyzer (&#x2F;302.html?target&#x3D;<a target="_blank" rel="noopener" href="http://code.google.com/p/ik-analyzer/">http://code.google.com/p/ik-analyzer/</a>) into elasticsearch, support customized dictionary.（<a href="/302.html?target=https://github.com/medcl/elasticsearch-analysis-ik">Github</a>）</li>
+</ul>
+<h3 id="添加扩展词"><a href="#添加扩展词" class="headerlink" title="添加扩展词"></a>添加扩展词</h3><ul>
+<li><p>除了内置的词库，ik分词器还可以根据扩展词库进行分词</p>
+</li>
+<li><p>创建<code>/plugins/ik/config/ext.dic</code>文件，文件内每行指定一条扩展词</p>
+</li>
+</ul>
+<h3 id="添加停止词"><a href="#添加停止词" class="headerlink" title="添加停止词"></a>添加停止词</h3><ul>
+<li><p>如果定义了停止词库，ik分词器在遇到扩展词时将不会分词</p>
+</li>
+<li><p>创建<code>/plugins/ik/config/stopword.dic</code>文件，文件内每行指定一条停止词</p>
+</li>
+</ul>
+<h2 id="分词操作"><a href="#分词操作" class="headerlink" title="分词操作"></a>分词操作</h2><blockquote>
+<p><code>&quot;analyzer&quot;: &quot;&quot;</code>：指定分词的方式</p>
+<blockquote>
+<p><code>standard</code>：标准方式。逐字分词<br><code>chinese</code>：内置的中文分词。逐字分词<br><code>ik_smart</code>：ik分词器最少词<br><code>ik_max_word</code>：ik分词器最多词</p>
+</blockquote>
+<p><code>&quot;text&quot;: &quot;&quot;</code>：指定分词的内容</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/_analyze</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在指定索引库中进行分词操作"><a href="#在指定索引库中进行分词操作" class="headerlink" title="在指定索引库中进行分词操作"></a>在指定索引库中进行分词操作</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_analyze</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对索引库的操作"><a href="#对索引库的操作" class="headerlink" title="对索引库的操作"></a>对索引库的操作</h2><h3 id="新增索引库"><a href="#新增索引库" class="headerlink" title="新增索引库"></a>新增索引库</h3><ul>
+<li>在Elasticsearch中id通常定义为<code>keyword</code>类型</li>
+</ul>
+<blockquote>
+<p><code>type: &quot;&quot;</code>：字段数据类型</p>
+<blockquote>
+<p>字符串</p>
+<blockquote>
+<p><code>text</code>：可分词的文本<br><code>keyword</code>：精确值，不能被拆开的词</p>
+</blockquote>
+<p>数值</p>
+<blockquote>
+<p><code>long</code><br><code>integer</code><br><code>short</code><br><code>byte</code><br><code>double</code><br><code>float</code></p>
+</blockquote>
+<p>布尔</p>
+<blockquote>
+<p><code>boolean</code></p>
+</blockquote>
+<p>日期</p>
+<blockquote>
+<p><code>date</code></p>
+</blockquote>
+<p>数组</p>
+<blockquote>
+<p>elasticsearch中没有数组类型，但是任何数据类型都可以指定多个值</p>
+</blockquote>
+<p>地理坐标</p>
+<blockquote>
+<p><code>geo_point: &quot;3.1415926, 3.1415926&quot;</code>：地理上的一个点<br><code>geo_shape: &quot;LINESTARING(第一个点经度 第一个点纬度, 第二个点经度 第二个点纬度)&quot;</code>：地理上由多个点组成的一个范围</p>
+</blockquote>
+<p>自动补全</p>
+<blockquote>
+<p><code>completion</code>：允许通过前缀关键字模糊搜索</p>
+</blockquote>
+</blockquote>
+<p><code>index: &quot;&quot;</code>：是否创建倒排索引。如果字段参与搜索，才需要创建倒排索引；如果不需要搜索，就不用创建倒排索引</p>
+<blockquote>
+<p><code>true</code>：缺省值，创建倒排索引<br><code>false</code>：不创建倒排索引</p>
+</blockquote>
+<p><code>analyzer: &quot;&quot;</code>：指定使用哪种分词器</p>
+<blockquote>
+<p><code>standard</code>：标准方式。逐字分词<br><code>chinese</code>：内置的中文分词。逐字分词<br><code>ik_smart</code>：ik分词器最少词<br><code>ik_max_word</code>：ik分词器最多词</p>
+</blockquote>
+<p><code>properties: &#123;&quot;&quot;: &quot;&quot;, &quot;&quot;: &quot;&quot;&#125;</code>：字段的子字段<br><code>copy_to: &quot;其他字段名&quot;</code>：将当前字段的值拷贝到其他字段（底层只是创建了一个索引，并不是真的拷贝了一份），这样当搜索其他字段时，当前字段的值也会被搜索到</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">PUT http://127.0.0.1:9200/索引库名</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;mappings&quot;: &#123;</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;字段类型&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;id&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;keyword&quot;,</span><br><span class="line">        &quot;index&quot;: false</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;name&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;analyzer&quot;: &quot;ik_smart&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;engilshname&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;copy_to&quot;: &quot;name&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;father&quot;: &#123;</span><br><span class="line">        &quot;properties&quot;: &#123;</span><br><span class="line">          &quot;son&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定自定义分词器"><a href="#指定自定义分词器" class="headerlink" title="指定自定义分词器"></a>指定自定义分词器</h4><ul>
+<li>将pinyin分词器重新配置后，作为过滤器，与ik分词器组合成新的自定义分词器</li>
+<li>创建索引库时，指定新增文档时使用的分词器为自定义分词器，指定查询文档时使用的分词器为ik分词器</li>
+</ul>
+<blockquote>
+<p>character filter：在分词之间对原文档做处理<br><code>tokenizer</code>：将文本按照指定的规则或分词器切成词条term，如果不分词就指定为<code>keyword</code><br><code>filter</code>：将tokenizer输出的词条交给指定过滤器或分词器作进一步处理</p>
+</blockquote>
+<blockquote>
+<p><code>&quot;analyzer&quot;: &quot;&quot;</code>：指定创建时使用的分词器<br><code>&quot;search_analyzer&quot;: &quot;&quot;</code>：指定搜索时使用的分词器</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">PUT http://127.0.0.1:9200/索引库名</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;: &#123;</span><br><span class="line">    &quot;analysis&quot;: &#123;</span><br><span class="line">      &quot;analyzer&quot;: &#123;</span><br><span class="line">        &quot;自定义分词器名&quot;: &#123;</span><br><span class="line">          &quot;tokenizer&quot;: &quot;ik_max_word&quot;,</span><br><span class="line">          &quot;filter&quot;: &quot;过滤器名&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;过滤器名&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;pinyin&quot;,</span><br><span class="line">          &quot;keep_full_pinyin&quot;: false,</span><br><span class="line">          &quot;keep_joined_full_pinyin&quot;: true,</span><br><span class="line">          &quot;keep_original&quot;: true,</span><br><span class="line">          &quot;limit_first_letter_length&quot;: 16,</span><br><span class="line">          &quot;remove_duplicated_term&quot;: true,</span><br><span class="line">          &quot;none_chinese_pinyin_tokenize&quot;: false</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;mappings&quot;: &#123;</span><br><span class="line">        &quot;properties&quot;: &#123;</span><br><span class="line">          &quot;字段名&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;字段类型&quot;,</span><br><span class="line">            &quot;analyzer&quot;: &quot;自定义分词器名&quot;,</span><br><span class="line">            &quot;search_analyzer&quot;: &quot;ik_smart&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询索引库"><a href="#查询索引库" class="headerlink" title="查询索引库"></a>查询索引库</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET http://127.0.0.1:9200/索引库名</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除索引库"><a href="#删除索引库" class="headerlink" title="删除索引库"></a>删除索引库</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE http://127.0.0.1:9200/索引库名</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改索引库"><a href="#修改索引库" class="headerlink" title="修改索引库"></a>修改索引库</h3><ul>
+<li>索引库不允许修改旧字段，只能添加新字段</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PUT http://127.0.0.1:9200/索引库名/_mapping</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;properties&quot;: &#123;</span><br><span class="line">    &quot;新字段名&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;字段类型&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对文档操作"><a href="#对文档操作" class="headerlink" title="对文档操作"></a>对文档操作</h2><h3 id="新增文档"><a href="#新增文档" class="headerlink" title="新增文档"></a>新增文档</h3><blockquote>
+<p><code>文档id</code>：如果不指定文档id，则索引库会自动随机生成一个id</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_doc/文档id</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;key&quot;: &quot;value&quot;,</span><br><span class="line">  &quot;key&quot;: &#123;</span><br><span class="line">    &quot;key&quot;: &quot;value&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果中<code>result</code>如果为<code>created</code>表示新增成功</li>
+<li>每次写操作都会导致<code>version</code>自增</li>
+</ul>
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE http://127.0.0.1:9200/索引库名/_doc/文档id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果中<code>result</code>如果为<code>deleted</code>表示删除成功</li>
+</ul>
+<h4 id="删除所有文档"><a href="#删除所有文档" class="headerlink" title="删除所有文档"></a>删除所有文档</h4><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_delete_by_query</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h3><h4 id="全量修改"><a href="#全量修改" class="headerlink" title="全量修改"></a>全量修改</h4><ul>
+<li>先通过文档id查询旧文档<ul>
+<li>如果查询到了旧文档，就删除旧文档，新增新文档</li>
+<li>如果没有查询到旧文档，就直接新增文档</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PUT http://127.0.0.1:9200/索引库名/_doc/文档id</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;key&quot;: &quot;value&quot;</span><br><span class="line">  &quot;key&quot;: &#123;</span><br><span class="line">    &quot;key&quot;: &quot;value&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果中<code>result</code>如果为<code>updated</code>表示全量修改成功</li>
+<li>结果中<code>result</code>如果为<code>created</code>表示新增成功</li>
+</ul>
+<h4 id="局部修改"><a href="#局部修改" class="headerlink" title="局部修改"></a>局部修改</h4><ul>
+<li>只修改某个字段的值</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_update/文档id</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;: &#123;</span><br><span class="line">    &quot;字段名&quot;: &quot;字段值&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果中<code>result</code>如果为<code>updated</code>表示局部修改成功</li>
+</ul>
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET http://127.0.0.1:9200/索引库名/_doc/文档id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果中<code>found</code>如果为<code>true</code>表示查询成功，如果为<code>false</code>表示查询失败</li>
+<li>如果查询成功，数据会存在<code>_source</code>中</li>
+</ul>
+<h2 id="搜索文档的操作"><a href="#搜索文档的操作" class="headerlink" title="搜索文档的操作"></a>搜索文档的操作</h2><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;查询类型&quot;: &#123;</span><br><span class="line">      &quot;查询条件&quot;: &quot;查询值&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><h4 id="查询所有"><a href="#查询所有" class="headerlink" title="查询所有"></a>查询所有</h4><ul>
+<li>查询所有默认返回的结果并不是全部结果，只会返回部分结果</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看分片信息"><a href="#查看分片信息" class="headerlink" title="查看分片信息"></a>查看分片信息</h5><blockquote>
+<p><code>&quot;explain&quot;: true</code>：列出信息存储的节点位置</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;explain&quot;: true,</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h4><h5 id="根据指定的单个字段全文检索"><a href="#根据指定的单个字段全文检索" class="headerlink" title="根据指定的单个字段全文检索"></a>根据指定的单个字段全文检索</h5><ul>
+<li>只要指定字段的关键字中，任意子关键字满足条件，即可查询出</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &quot;关键字&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="根据指定的多个字段全文检索"><a href="#根据指定的多个字段全文检索" class="headerlink" title="根据指定的多个字段全文检索"></a>根据指定的多个字段全文检索</h5><ul>
+<li>只要多个字段的关键字中，任意子关键字满足条件，即可查询出</li>
+<li>多个字段全文检索比单个字段全文检索效率更低，推荐将字段的集合复制为一个单独字段<code>all</code>进行单字段检索</li>
+</ul>
+<blockquote>
+<p><code>&quot;query&quot;: &quot;&quot;</code>：指定关键字<br><code>&quot;fields&quot;: [&quot;&quot;, &quot;&quot;]</code>：指定字段名</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;multi_match&quot;: &#123;</span><br><span class="line">      &quot;query&quot;: &quot;关键字&quot;,</span><br><span class="line">      &quot;fields&quot;: [&quot;字段名&quot;, &quot;字段名&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="精确查询"><a href="#精确查询" class="headerlink" title="精确查询"></a>精确查询</h4><h5 id="完全匹配"><a href="#完全匹配" class="headerlink" title="完全匹配"></a>完全匹配</h5><ul>
+<li>指定字段的值必须与关键字完全匹配时，才能查询出</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;term&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &#123;</span><br><span class="line">        &quot;value&quot;: &quot;关键字&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="匹配数值范围"><a href="#匹配数值范围" class="headerlink" title="匹配数值范围"></a>匹配数值范围</h5><ul>
+<li>指定字段的值必须属于范围内时，才能查询出</li>
+</ul>
+<blockquote>
+<p><code>gt</code>：大于<br><code>gte</code>：大于等于<br><code>lt</code>：小于<br><code>lte</code>：小于等于</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &#123;</span><br><span class="line">        &quot;gte&quot;: &quot;最小值&quot;,</span><br><span class="line">        &quot;lte&quot;: &quot;最大值&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="地理查询"><a href="#地理查询" class="headerlink" title="地理查询"></a>地理查询</h4><h5 id="矩形范围"><a href="#矩形范围" class="headerlink" title="矩形范围"></a>矩形范围</h5><ul>
+<li>指定矩形左上角和右下角的坐标，查询矩形范围内的所有文档</li>
+</ul>
+<blockquote>
+<p><code>top_left</code>：矩形左上角的坐标</p>
+<blockquote>
+<p><code>lat</code>：经度<br><code>lon</code>：纬度</p>
+</blockquote>
+<p><code>bottom_right</code>：矩形右下角的坐标</p>
+<blockquote>
+<p><code>lat</code>：经度<br><code>lon</code>：纬度</p>
+</blockquote>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;geo_bounding_box&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &#123;</span><br><span class="line">        &quot;top_left&quot;: &#123;</span><br><span class="line">          &quot;lat&quot;: 1.1,</span><br><span class="line">          &quot;lon&quot;: 1.1</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;bottom_rignt&quot;: &#123;</span><br><span class="line">          &quot;lat&quot;: 1.1,</span><br><span class="line">          &quot;lon&quot;: 1.1</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="圆形范围"><a href="#圆形范围" class="headerlink" title="圆形范围"></a>圆形范围</h5><ul>
+<li>指定圆心和半径，查询圆形范围内的所有文档</li>
+</ul>
+<blockquote>
+<p><code>&quot;distance&quot;: &quot;&quot;</code>：指定半径距离<br><code>&quot;中心点坐标&quot;: &quot;经度,纬度&quot;</code>：指定中心点坐标</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;geo_distance&quot;: &#123;</span><br><span class="line">      &quot;distance&quot;: &quot;15km&quot;,</span><br><span class="line">      &quot;中心点坐标&quot;: &quot;经度,纬度&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h3><h4 id="布尔查询"><a href="#布尔查询" class="headerlink" title="布尔查询"></a>布尔查询</h4><ul>
+<li>布尔查询是把多个简单查询语句进行组合，形成复合查询语句</li>
+</ul>
+<blockquote>
+<p><code>must</code>：（与）必须匹配所有子查询<br><code>should</code>：（或）选择性匹配子查询<br><code>must_not</code>：（非）必须不匹配所有子查询，不参与算分<br><code>filter</code>：必须匹配，不参与算分</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line">        &#123;&#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;should&quot;: [</span><br><span class="line">        &#123;&#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;must_not&quot;: [</span><br><span class="line">        &#123;&#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;filter&quot;: [</span><br><span class="line">        &#123;&#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="算分函数查询"><a href="#算分函数查询" class="headerlink" title="算分函数查询"></a>算分函数查询</h4><ul>
+<li><code>Elasticsearch 5.0</code>之前默认采用<code>TF-IDF</code>算法，会随着词频增加而无限增加</li>
+<li><code>Elasticsearch 5.0</code>之后默认采用<code>BM25</code>算法，会随着词频增加而趋于水平</li>
+</ul>
+<h5 id="有加分规则"><a href="#有加分规则" class="headerlink" title="有加分规则"></a>有加分规则</h5><ul>
+<li>为了能人工干预算法默认的分数，可以采用<code>Function Score Query</code><ul>
+<li>通过<code>query</code>获取查询的文档</li>
+<li>通过<code>filter</code>过滤，得到需要加分的文档</li>
+<li>通过运算函数，将运算函数的结果与原始的分进行组合运算</li>
+<li>通过<code>boost_mode</code>指定运算的方式</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>function_score</code>：通过算分函数重新算分</p>
+<blockquote>
+<p><code>&quot;query&quot;: &#123;&#125;</code>：初始条件，通过简单查询添加条件，得到原始得分</p>
+</blockquote>
+<p><code>&quot;filter&quot;: &#123;&#125;</code>：过滤条件，通过简单查询添加条件<br><code>运算函数</code></p>
+<blockquote>
+<p><code>weight</code>：给定一个常量值作为函数结果<br><code>field_value_factor</code>：用文档的某个字段作为函数结果<br><code>random_score</code>：用一个随机数作为函数结果<br><code>script_score</code>：自定义一个公式，公式结果作为函数结果</p>
+</blockquote>
+<p><code>boost_mode</code>：指定算分方式</p>
+<blockquote>
+<p><code>multiply</code>：缺省值，将原始得分和额外分相乘<br><code>add</code>：将原始得分和额外分相加<br><code>avg</code>：将原始得分和额外分取平均值<br><code>max</code>：将原始得分和额外分取最大值<br><code>min</code>：将原始得分和额外分取最小值<br><code>replace</code>：将额外分数替换原始分数</p>
+</blockquote>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;function_score&quot;: &#123;</span><br><span class="line">      &quot;query&quot;: &#123;&#125;,</span><br><span class="line">      &quot;functions&quot;: [</span><br><span class="line">        &quot;filter&quot;: &#123;&#125;</span><br><span class="line">        &quot;weight&quot;: 10</span><br><span class="line">      ],</span><br><span class="line">      &quot;boost_mode&quot;: &quot;multiply&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回的数据中，<code>_score</code>表示最终分数，分数越高排名越靠前</li>
+</ul>
+<h5 id="没有加分规则"><a href="#没有加分规则" class="headerlink" title="没有加分规则"></a>没有加分规则</h5><ul>
+<li>没有加分规则实际上就是不进行加分</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;function_score&quot;: &#123;</span><br><span class="line">      &quot;query&quot;: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索结果处理"><a href="#搜索结果处理" class="headerlink" title="搜索结果处理"></a>搜索结果处理</h3><h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><ul>
+<li>默认排序规则是按照相关度算分排序</li>
+</ul>
+<blockquote>
+<p><code>order</code>：指定排序规则</p>
+<blockquote>
+<p><code>asc</code>：升序<br><code>desc</code>：降序</p>
+</blockquote>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;sort&quot;: [</span><br><span class="line">    &quot;字段名&quot;: &#123;</span><br><span class="line">      &quot;order&quot;: &quot;asc&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;字段名&quot;: &#123;</span><br><span class="line">      &quot;order&quot;: &quot;desc&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简化写法</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;sort&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;字段名&quot;: &quot;asc&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;字段名&quot;: &quot;desc&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="地理类型排序"><a href="#地理类型排序" class="headerlink" title="地理类型排序"></a>地理类型排序</h5><ul>
+<li>不会参与打分</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;sort&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_geo_distance&quot;: &#123;</span><br><span class="line">        &quot;地理字段名&quot;: &#123;</span><br><span class="line">          &quot;lat&quot;: 纬度,</span><br><span class="line">          &quot;lon&quot;：经度</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;order&quot;: &quot;asc&quot;,</span><br><span class="line">        &quot;unit&quot;: &quot;km&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="简化写法"><a href="#简化写法" class="headerlink" title="简化写法"></a>简化写法</h6><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;sort&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_geo_distance&quot;: &#123;</span><br><span class="line">        &quot;地理字段名&quot;: &quot;纬度, 经度&quot;,</span><br><span class="line">        &quot;order&quot;: &quot;asc&quot;,</span><br><span class="line">        &quot;unit&quot;: &quot;km&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><ul>
+<li><code>form</code>+<code>size</code>的值不能大于10000</li>
+</ul>
+<blockquote>
+<p><code>from</code>：分页起始下标位置，默认为0<br><code>size</code>：每页的数据数，默认为10</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;sort&quot;: [],</span><br><span class="line">  &quot;from&quot;: 0,</span><br><span class="line">  &quot;size&quot;: 10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a>高亮</h4><ul>
+<li>原理：后端得到数据后，先将关键字添加标签，再返回给前端；前端添加指定标签的样式，实现高亮</li>
+</ul>
+<blockquote>
+<p><code>require_field_match</code>：是否开启搜索字段与高亮字段匹配</p>
+<blockquote>
+<p><code>true</code>：缺省值，开启搜索字段与高亮字段匹配。如果匹配才会实现高亮，如果不匹配就无法实现高亮<br><code>false</code>：关闭搜索字段与高亮字段匹配。即便是不匹配也能实现高亮</p>
+</blockquote>
+<p><code>pre_tags</code>：添加标签前缀，如果没有指定，缺省值是<code>&lt;em&gt;</code><br><code>post_tags</code>：添加标签后缀，如果没有指定，缺省值是<code>&lt;/em&gt;</code></p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;highlight&quot;: &#123;</span><br><span class="line">    &quot;fields&quot;: &#123;</span><br><span class="line">      &quot;字段名&quot;: &#123;</span><br><span class="line">        &quot;require_field_match&quot;: &quot;true&quot;,</span><br><span class="line">        &quot;pre_tags&quot;: &quot;&lt;em&gt;&quot;,</span><br><span class="line">        &quot;post_tags&quot;: &quot;&lt;/em&gt;&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html">官方文档</a></li>
+<li>聚合可以实现对文档数据的统计、分析、运算</li>
+<li>聚合可以嵌套，在一个聚合的结果上继续做聚合</li>
+</ul>
+<blockquote>
+<p><code>query</code>：限定聚合条件，可以不指定聚合条件<br><code>size</code>：展示的原数文档的个数，0表示不展示原文档<br><code>aggs</code>：定义聚合，可以指定多个聚合</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;size&quot;: 0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;聚合名&quot;: &#123;</span><br><span class="line">      &quot;聚合类型&quot;: &#123;&#125;,</span><br><span class="line">      &quot;聚合类型&quot;: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回的数据中，<code>aggregations.聚合名</code>表示聚合的结果</li>
+</ul>
+<h4 id="桶聚合（Bucket）"><a href="#桶聚合（Bucket）" class="headerlink" title="桶聚合（Bucket）"></a>桶聚合（Bucket）</h4><ul>
+<li><code>Term Aggregation</code>方式桶聚合：按照文档字段值分组，统计指定字段相同的文档的数量。类似于MySQL中的分组（Group By）</li>
+</ul>
+<blockquote>
+<p><code>terms</code>：Term方式的桶聚合<br><code>field</code>：指定参与聚合的字段名<br><code>size</code>：指定聚合结果数量，默认值为10<br><code>_count</code>：返回数据按照文档数量的排序规则</p>
+<blockquote>
+<p><code>desc</code>：缺省值,按照文档数量的降序排序<br><code>asc</code>：按照文档数量的降序升序</p>
+</blockquote>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;size&quot;: 0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;聚合名&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;字段名&quot;,</span><br><span class="line">        &quot;size&quot;: 10,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>aggregations.聚合名.buckets.key</code>：文档的字段名<br><code>aggregations.聚合名.buckets.doc_count</code>：文档的个数</p>
+</blockquote>
+<h4 id="度量聚合（Metric）"><a href="#度量聚合（Metric）" class="headerlink" title="度量聚合（Metric）"></a>度量聚合（Metric）</h4><ul>
+<li>在桶聚合的基础上，用于计算数据的值，包括文档个数、文档评分最小值、文档评分最大值、文档评分平均值、文档评分总和</li>
+<li>如果没有在桶聚合的基础上，则将所有数据参与分值计算</li>
+</ul>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">POST http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">  &quot;size&quot;: 0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;聚合名&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;桶聚合字段名&quot;,</span><br><span class="line">        &quot;size&quot;: 10,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &quot;aggs&quot;: &#123;</span><br><span class="line">        &quot;度量聚合名&quot;: &#123;</span><br><span class="line">          &quot;stats&quot;: &#123;</span><br><span class="line">            &quot;field&quot;: &quot;度量聚合字段名&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>aggregations.聚合名.buckets.度量聚合名.count</code>：文档的个数<br><code>aggregations.聚合名.buckets.度量聚合名.min</code>：文档评分最小值<br><code>aggregations.聚合名.buckets.度量聚合名.max</code>：文档评分最大值<br><code>aggregations.聚合名.buckets.度量聚合名.avg</code>：文档评分平均值<br><code>aggregations.聚合名.buckets.度量聚合名.sum</code>：文档评分总和</p>
+</blockquote>
+<h3 id="自动补全搜索"><a href="#自动补全搜索" class="headerlink" title="自动补全搜索"></a>自动补全搜索</h3><ul>
+<li><a href="/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%B0%E5%A2%9E%E7%B4%A2%E5%BC%95%E5%BA%93">创建索引库</a>时，将需要自动补全的字段的类型设置为<code>completion</code>类型</li>
+<li><a href="/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%B0%E5%A2%9E%E7%B4%A2%E5%BC%95%E5%BA%93">创建索引库</a>时，需要使用<a href="/2022/11/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%8C%87%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E8%AF%8D%E5%99%A8">自定义分词器</a></li>
+</ul>
+<blockquote>
+<p>自动补全类型</p>
+<blockquote>
+<p><code>completion</code>：通过前缀关键字模糊搜索</p>
+</blockquote>
+<p><code>field</code>：指定需要补全查询的字段名<br><code>skip_duplicates</code>：跳过重复项<br><code>size</code>：查询结果的个数</p>
+</blockquote>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET http://127.0.0.1:9200/索引库名/_search</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;suggest&quot;: &#123;</span><br><span class="line">    &quot;查询名称&quot;: &#123;</span><br><span class="line">      &quot;text&quot;: &quot;前缀关键字&quot;,</span><br><span class="line">      &quot;completion&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;字段名&quot;,</span><br><span class="line">        &quot;skip_duplicates&quot;: true,</span><br><span class="line">        &quot;size&quot;: 10</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Elasticsearch集群"><a href="#Elasticsearch集群" class="headerlink" title="Elasticsearch集群"></a>Elasticsearch集群</h2><h3 id="集群中节点的职责"><a href="#集群中节点的职责" class="headerlink" title="集群中节点的职责"></a>集群中节点的职责</h3><ul>
+<li>默认情况下每个节点同时具有这4种职责</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>节点类型</th>
+<th>配置参数</th>
+<th>默认值</th>
+<th>节点职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>master eligible</td>
+<td>node.master</td>
+<td>true</td>
+<td>备选主节点：主节点可以管理和记录集群状态、决定分片在哪个节点、处理创建和删除索引库的请求</td>
+</tr>
+<tr>
+<td>data</td>
+<td>node.data</td>
+<td>true</td>
+<td>数据节点：存储数据、搜索、聚合、CRUD</td>
+</tr>
+<tr>
+<td>ingest</td>
+<td>node.ingest</td>
+<td>true</td>
+<td>数据预处理节点：数据存储之前的预处理</td>
+</tr>
+<tr>
+<td>coordinating</td>
+<td>以上节点如果都为false，则coordinating为true</td>
+<td>无</td>
+<td>协调节点：路由请求到其他节点，合并其他节点处理的结果，返回给用户</td>
+</tr>
+</tbody></table>
+<h3 id="脑裂现象"><a href="#脑裂现象" class="headerlink" title="脑裂现象"></a>脑裂现象</h3><ul>
+<li>主节点由于网络原因导致与其他节点失联，此时其他节点会重新选举出新的主节点，当旧的主节点恢复连接时，集群中会出现多个主节点，这种现象就是脑裂现象</li>
+<li>当<code>选举票数 &gt; (所有节点个数 + 1) / 2</code>时，可以避免脑裂现象</li>
+<li>Elasticsearch7.x版本以上，选举算法直接作为了配置的缺省值，所以不需要任何配置即可解决脑裂现象</li>
+</ul>
+<h3 id="分布式新增"><a href="#分布式新增" class="headerlink" title="分布式新增"></a>分布式新增</h3><ol>
+<li>将得到的数据交给主节点，主节点通过计算<code>hash(文档id) % 所有节点个数</code>的值，可以得到将数据存储到哪个分片</li>
+<li>将数据交给指定节点进行存储</li>
+<li>将数据交给其他节点进行备份</li>
+</ol>
+<h3 id="分布式查询"><a href="#分布式查询" class="headerlink" title="分布式查询"></a>分布式查询</h3><ol>
+<li>分散阶段（scatter phase）：coordinating节点会把请求分发给集群中的每一个节点</li>
+<li>聚集阶段（gather phase）：coordinating节点会将从所有data节点中搜索到的结果进行汇总后返回给用户</li>
+</ol>
+<h3 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h3><ul>
+<li><p>主节点会监控集群中所有节点的健康状态，当集群中其中一个节点宕机，会立即将宕机节点的数据重新备份给其他健康的节点，这就是故障转移</p>
+<ul>
+<li>如果是数据节点宕机，直接进行转移数据</li>
+<li>如果是主节点宕机，先进行主节点选举，再进行转移数据</li>
+</ul>
+</li>
+<li><p>如果宕机的节点恢复健康，则新的主节点会将备份数据重新从其他节点转移给恢复健康的节点</p>
+</li>
+</ul>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangcuican/p/13896973.html">博客园——只会玩辅助</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47452239/article/details/120551698">CSDN——qq_47452239</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/02/JUnit%E6%8A%A5%E9%94%99/" rel="prev" title="【踩坑】JUnit报错">
+                  <i class="fa fa-angle-left"></i> 【踩坑】JUnit报错
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/03/%E4%BD%BF%E7%94%A8docker-machine%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%B6%E6%8A%A5%E9%94%99/" rel="next" title="【笔记】使用docker-machine创建虚拟机时报错">
+                  【笔记】使用docker-machine创建虚拟机时报错 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Windows命令提示符（cmd.exe）是Windows NT下的一个用于运行Windows控制台程序或某些DOS程序的壳层程序；或在Windows CE下只用于运行控制台程序的壳层程序。它被用于替代Windows 9x系统中所提供的COMMAND.COM和“MS-DOS提示符”。命令提示符的最初版本由Therese Stowell开发。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】CMD学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2021/05/11/CMD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Windows命令提示符（cmd.exe）是Windows NT下的一个用于运行Windows控制台程序或某些DOS程序的壳层程序；或在Windows CE下只用于运行控制台程序的壳层程序。它被用于替代Windows 9x系统中所提供的COMMAND.COM和“MS-DOS提示符”。命令提示符的最初版本由Therese Stowell开发。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-11T13:29:11.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.842Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2021/05/11/CMD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2021/05/11/CMD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/05/11/CMD学习笔记/","title":"【笔记】CMD学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】CMD学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AA%97%E5%8F%A3%E6%B8%85%E5%B1%8F"><span class="nav-number">3.</span> <span class="nav-text">命令行窗口清屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BE%93%E5%87%BA%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="nav-number">4.</span> <span class="nav-text">在命令行输出一句话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">查看基本信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">5.1.</span> <span class="nav-text">查看系统版本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E7%AA%97%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">5.1.1.</span> <span class="nav-text">弹窗查看系统版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">5.2.</span> <span class="nav-text">查看系统基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7"><span class="nav-number">5.3.</span> <span class="nav-text">查看当前用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E9%99%90"><span class="nav-number">5.3.1.</span> <span class="nav-text">查看当前用户的所有权限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8F%B7%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">5.4.</span> <span class="nav-text">查看端口号占用情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-number">6.1.</span> <span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%80%E6%AD%BB%E6%8C%87%E5%AE%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">杀死指定进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2"><span class="nav-number">7.</span> <span class="nav-text">切换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E7%A3%81%E7%9B%98"><span class="nav-number">7.1.</span> <span class="nav-text">切换磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">7.2.</span> <span class="nav-text">切换文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E5%88%87%E6%8D%A2%E5%85%A8%E5%B1%80%E8%B7%AF%E5%BE%84"><span class="nav-number">7.2.1.</span> <span class="nav-text">强制切换全局路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B"><span class="nav-number">8.</span> <span class="nav-text">查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">8.1.</span> <span class="nav-text">查看当前文件夹下的所有文件和文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">8.2.</span> <span class="nav-text">查看文件内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%A4%A7%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">8.2.1.</span> <span class="nav-text">查看大文件内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">9.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">9.1.</span> <span class="nav-text">创建文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">9.2.</span> <span class="nav-text">创建文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C"><span class="nav-number">9.2.1.</span> <span class="nav-text">单行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">9.2.1.1.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%BD%E5%8A%A0%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">9.2.1.2.</span> <span class="nav-text">追加重定向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C"><span class="nav-number">9.2.2.</span> <span class="nav-text">多行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">9.2.2.1.</span> <span class="nav-text">直接创建文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">10.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">10.1.</span> <span class="nav-text">删除文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%85%E5%88%A0%E9%99%A4%E7%A9%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">10.1.1.</span> <span class="nav-text">仅删除空文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%A9%BA%E6%88%96%E9%9D%9E%E7%A9%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">10.1.2.</span> <span class="nav-text">删除空或非空文件夹</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">10.2.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">11.</span> <span class="nav-text">修改属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%8C%87%E5%AE%9A%E5%A4%A7%E5%B0%8F%E7%9A%84%E7%A9%BA%E6%96%87%E4%BB%B6"><span class="nav-number">12.</span> <span class="nav-text">创建一个指定大小的空文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E6%9C%BA"><span class="nav-number">13.</span> <span class="nav-text">关机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%94%80%E7%94%A8%E6%88%B7"><span class="nav-number">13.1.</span> <span class="nav-text">注销用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6"><span class="nav-number">14.</span> <span class="nav-text">复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%AA%E5%88%87"><span class="nav-number">15.</span> <span class="nav-text">剪切</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">16.</span> <span class="nav-text">重命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F"><span class="nav-number">17.</span> <span class="nav-text">创建快捷方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%89%80%E6%9C%89%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%A2%9C%E8%89%B2"><span class="nav-number">18.</span> <span class="nav-text">显示所有命令行颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%A2%9C%E8%89%B2"><span class="nav-number">18.1.</span> <span class="nav-text">改变命令行颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80"><span class="nav-number">19.</span> <span class="nav-text">打开</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84CMD%E7%AA%97%E5%8F%A3"><span class="nav-number">19.1.</span> <span class="nav-text">打开一个新的CMD窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%96%B0%E7%9A%84CMD%E7%AA%97%E5%8F%A3%E6%89%A7%E8%A1%8CCMD%E5%91%BD%E4%BB%A4"><span class="nav-number">19.1.1.</span> <span class="nav-text">在新的CMD窗口执行CMD命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">19.2.</span> <span class="nav-text">打开指定文件或可执行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">19.3.</span> <span class="nav-text">通过文件资源管理器打开文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E9%BB%98%E8%AE%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%BC%80URL"><span class="nav-number">19.4.</span> <span class="nav-text">通过默认浏览器打开URL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F"><span class="nav-number">20.</span> <span class="nav-text">延迟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WindowsXP-WindowsServer2003%E8%93%9D%E5%B1%8F"><span class="nav-number">21.</span> <span class="nav-text">WindowsXP&#x2F;WindowsServer2003蓝屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">22.</span> <span class="nav-text">用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="nav-number">22.1.</span> <span class="nav-text">查看所有用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7"><span class="nav-number">22.2.</span> <span class="nav-text">查看指定用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%90%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E5%AF%86%E7%A0%81"><span class="nav-number">22.3.</span> <span class="nav-text">创建用户同时指定密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">22.4.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB-%E7%A6%81%E7%94%A8%E7%94%A8%E6%88%B7"><span class="nav-number">22.5.</span> <span class="nav-text">激活&#x2F;禁用用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">22.6.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84"><span class="nav-number">23.</span> <span class="nav-text">组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E7%BB%84"><span class="nav-number">23.1.</span> <span class="nav-text">内置组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E7%BD%AE%E7%BB%84"><span class="nav-number">23.1.1.</span> <span class="nav-text">常见的内置组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%9C%AC%E5%9C%B0%E7%BB%84"><span class="nav-number">23.2.</span> <span class="nav-text">查看所有本地组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E7%BB%84%E7%9A%84%E6%88%90%E5%91%98"><span class="nav-number">23.3.</span> <span class="nav-text">查看指定组的成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%BB%84"><span class="nav-number">23.4.</span> <span class="nav-text">将用户添加到组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E7%BB%84%E4%B8%AD%E7%A7%BB%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">23.5.</span> <span class="nav-text">从组中移除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84"><span class="nav-number">23.6.</span> <span class="nav-text">创建自定义组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84"><span class="nav-number">23.7.</span> <span class="nav-text">删除自定义组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">24.</span> <span class="nav-text">查看端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7-1"><span class="nav-number">25.</span> <span class="nav-text">查看当前用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB"><span class="nav-number">26.</span> <span class="nav-text">共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%85%B1%E4%BA%AB"><span class="nav-number">26.1.</span> <span class="nav-text">查看所有共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%85%B1%E4%BA%AB"><span class="nav-number">26.2.</span> <span class="nav-text">创建共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%B1%E4%BA%AB"><span class="nav-number">26.3.</span> <span class="nav-text">删除共享</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90"><span class="nav-number">27.</span> <span class="nav-text">DNS解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90%E6%A8%A1%E5%BC%8F"><span class="nav-number">27.1.</span> <span class="nav-text">DNS解析模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E6%8C%87%E5%AE%9ADNS%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">27.1.1.</span> <span class="nav-text">临时指定DNS服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">28.</span> <span class="nav-text">计划任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">28.1.</span> <span class="nav-text">查看所有计划任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%AB%AF%E6%89%80%E6%9C%89%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">28.1.1.</span> <span class="nav-text">查看远端所有计划任务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%AB%AF%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">28.2.</span> <span class="nav-text">创建远端计划任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">29.</span> <span class="nav-text">时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E6%97%B6%E9%97%B4"><span class="nav-number">29.1.</span> <span class="nav-text">查看本地时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%AB%AF%E6%97%B6%E9%97%B4"><span class="nav-number">29.2.</span> <span class="nav-text">查看远端时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E8%B8%AA%E7%BB%8F%E8%BF%87%E7%9A%84%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">29.3.</span> <span class="nav-text">跟踪经过的路由器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">29.4.</span> <span class="nav-text">查看路由表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">30.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">31.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2021/05/11/CMD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】CMD学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】CMD学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-11 21:29:11" itemprop="dateCreated datePublished" datetime="2021-05-11T21:29:11+08:00">2021-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Windows命令提示符（cmd.exe）是Windows NT下的一个用于运行Windows控制台程序或某些DOS程序的壳层程序；或在Windows CE下只用于运行控制台程序的壳层程序。它被用于替代Windows 9x系统中所提供的COMMAND.COM和“MS-DOS提示符”。命令提示符的最初版本由Therese Stowell开发。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E5%AD%97%E5%85%83">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::注释内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="命令行窗口清屏"><a href="#命令行窗口清屏" class="headerlink" title="命令行窗口清屏"></a>命令行窗口清屏</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cls</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在命令行输出一句话"><a href="#在命令行输出一句话" class="headerlink" title="在命令行输出一句话"></a>在命令行输出一句话</h2><blockquote>
+<p><code>&lt;text&gt;</code>：文本</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> &lt;text&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看基本信息"><a href="#查看基本信息" class="headerlink" title="查看基本信息"></a>查看基本信息</h2><h3 id="查看系统版本"><a href="#查看系统版本" class="headerlink" title="查看系统版本"></a>查看系统版本</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ver</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="弹窗查看系统版本"><a href="#弹窗查看系统版本" class="headerlink" title="弹窗查看系统版本"></a>弹窗查看系统版本</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winver</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看系统基本信息"><a href="#查看系统基本信息" class="headerlink" title="查看系统基本信息"></a>查看系统基本信息</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看当前用户"><a href="#查看当前用户" class="headerlink" title="查看当前用户"></a>查看当前用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看当前用户的所有权限"><a href="#查看当前用户的所有权限" class="headerlink" title="查看当前用户的所有权限"></a>查看当前用户的所有权限</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami /all</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看端口号占用情况"><a href="#查看端口号占用情况" class="headerlink" title="查看端口号占用情况"></a>查看端口号占用情况</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure>
+
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /svc</span><br></pre></td></tr></table></figure>
+
+<h3 id="杀死指定进程"><a href="#杀死指定进程" class="headerlink" title="杀死指定进程"></a>杀死指定进程</h3><ul>
+<li>强制杀死桌面进程</li>
+</ul>
+<blockquote>
+<p><code>/f</code>：强制<br><code>/im &lt;task&gt;</code>：指定进程</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">taskkill</span> /im explorer.exe /f</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换"><a href="#切换" class="headerlink" title="切换"></a>切换</h2><h3 id="切换磁盘"><a href="#切换磁盘" class="headerlink" title="切换磁盘"></a>切换磁盘</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">d:</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="切换文件夹"><a href="#切换文件夹" class="headerlink" title="切换文件夹"></a>切换文件夹</h3><blockquote>
+<p><code>&lt;dir&gt;</code>：文件夹名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;<span class="built_in">dir</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="强制切换全局路径"><a href="#强制切换全局路径" class="headerlink" title="强制切换全局路径"></a>强制切换全局路径</h4><ul>
+<li>如果指定的路径不在当前磁盘下，正常情况下应该先切换磁盘，再切换文件夹</li>
+<li>如果使用<code>/d</code>参数，就可以强制切换磁盘的同时切换文件夹</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &lt;<span class="built_in">dir</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><h3 id="查看当前文件夹下的所有文件和文件夹"><a href="#查看当前文件夹下的所有文件和文件夹" class="headerlink" title="查看当前文件夹下的所有文件和文件夹"></a>查看当前文件夹下的所有文件和文件夹</h3><blockquote>
+<p><code>/a</code>：包括受系统保护的文件或文件夹</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看大文件内容"><a href="#查看大文件内容" class="headerlink" title="查看大文件内容"></a>查看大文件内容</h4><ul>
+<li><p>通过管道符将文件分页查看</p>
+</li>
+<li><p>按<code>空格</code>翻页</p>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> &lt;file&gt; | <span class="built_in">more</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h3><ul>
+<li>可以通过相对路径创建文件夹</li>
+<li>可以通过绝对路径创建文件夹</li>
+<li>可以创建多层级的文件夹</li>
+<li>可以在当前层级创建多个文件夹</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">md</span> &lt;<span class="built_in">dir</span>&gt;</span><br><span class="line"><span class="built_in">md</span> c:\&lt;<span class="built_in">dir</span>&gt;</span><br><span class="line"><span class="built_in">md</span> &lt;dir_1&gt;\&lt;dir_2&gt;</span><br><span class="line"><span class="built_in">md</span> &lt;dir_1&gt; &lt;dir_2&gt;</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> &lt;<span class="built_in">dir</span>&gt;</span><br><span class="line"><span class="built_in">mkdir</span> c:\&lt;<span class="built_in">dir</span>&gt;</span><br><span class="line"><span class="built_in">mkdir</span> &lt;dir_1&gt;\&lt;dir_2&gt;</span><br><span class="line"><span class="built_in">mkdir</span> &lt;dir_1&gt; &lt;dir_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><h4 id="单行"><a href="#单行" class="headerlink" title="单行"></a>单行</h4><h5 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h5><ul>
+<li><p>通过输出重定向创建一个文件</p>
+</li>
+<li><p>将文本覆盖写入文件</p>
+</li>
+</ul>
+<blockquote>
+<p><code>&lt;file&gt;</code>：文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> &lt;text&gt; &gt; &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<h5 id="追加重定向"><a href="#追加重定向" class="headerlink" title="追加重定向"></a>追加重定向</h5><ul>
+<li>在文件末尾追加文本</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> &lt;text&gt; &gt;&gt; &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="多行"><a href="#多行" class="headerlink" title="多行"></a>多行</h4><h5 id="直接创建文件"><a href="#直接创建文件" class="headerlink" title="直接创建文件"></a>直接创建文件</h5><blockquote>
+<p><code>&lt;file&gt;</code>：文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span> <span class="built_in">con</span> &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<p>回车后开始编辑需要写入文件的内容，按<code>ctrl</code>+<code>z</code>然后按<code>回车</code>结束编写</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h3><h4 id="仅删除空文件夹"><a href="#仅删除空文件夹" class="headerlink" title="仅删除空文件夹"></a>仅删除空文件夹</h4><blockquote>
+<p><code>&lt;dir&gt;</code>：文件夹</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rmdir</span> &lt;<span class="built_in">dir</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除空或非空文件夹"><a href="#删除空或非空文件夹" class="headerlink" title="删除空或非空文件夹"></a>删除空或非空文件夹</h4><blockquote>
+<p><code>/s</code>：递归操作<br><code>/q</code>：不提示确认</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rd</span> &lt;file&gt; /s /q</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><ul>
+<li>只删除文件，不删除文件夹，在递归操作时保留空文件夹</li>
+</ul>
+<blockquote>
+<p><code>&lt;file&gt;</code>：文件</p>
+<blockquote>
+<p><code>*.*</code>：通配符，表示任意文件名任意扩展名的文件</p>
+</blockquote>
+<p><code>/s</code>：递归操作<br><code>/q</code>：不提示确认</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">del</span> &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改属性"><a href="#修改属性" class="headerlink" title="修改属性"></a>修改属性</h2><blockquote>
+<p><code>&lt;file&gt;</code>：文件或文件夹</p>
+</blockquote>
+<blockquote>
+<p><code>+</code>、<code>-</code>：<code>+</code>增加权限，<code>-</code>减少权限</p>
+<blockquote>
+<p><code>+h</code>：增加隐藏属性<br><code>+a</code>：增加只读属性<br><code>+s</code>：提升为受保护的系统级权限</p>
+</blockquote>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">attrib</span> +h &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建一个指定大小的空文件"><a href="#创建一个指定大小的空文件" class="headerlink" title="创建一个指定大小的空文件"></a>创建一个指定大小的空文件</h2><blockquote>
+<p><code>&lt;file&gt;</code>：文件路径及文件名<br><code>&lt;num&gt;</code>：文件大小，单位字节</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsutil file createnew &lt;file&gt; &lt;num&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><p><a href="/2021/10/10/Shutdown%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">传送门</a></p>
+<h3 id="注销用户"><a href="#注销用户" class="headerlink" title="注销用户"></a>注销用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logoff</span><br></pre></td></tr></table></figure>
+
+<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><blockquote>
+<p><code>&lt;file_1&gt;</code>：指定需要复制的文件<br><code>&lt;file_2&gt;</code>：指定复制后文件的路径和文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span> &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h2><blockquote>
+<p><code>&lt;file_1&gt;</code>：指定需要剪切的文件<br><code>&lt;file_2&gt;</code>：指定剪切后文件的路径和文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">move</span> &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><blockquote>
+<p><code>&lt;file_1&gt;</code>：需要重命名的旧文件<br><code>&lt;file_2&gt;</code>：重命名的新文件名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ren</span> &lt;file_1&gt; &lt;file_2&gt;</span><br><span class="line"></span><br><span class="line"><span class="built_in">rename</span> &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h2><blockquote>
+<p><code>&lt;file_source&gt;</code>：源文件<br><code>&lt;file_target&gt;</code>：目标文件</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklink &lt;file_target&gt; &lt;file_source&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示所有命令行颜色"><a href="#显示所有命令行颜色" class="headerlink" title="显示所有命令行颜色"></a>显示所有命令行颜色</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">color</span> ?</span><br></pre></td></tr></table></figure>
+
+<h3 id="改变命令行颜色"><a href="#改变命令行颜色" class="headerlink" title="改变命令行颜色"></a>改变命令行颜色</h3><blockquote>
+<p><code>0</code>：第一个数字表示背景颜色<br><code>a</code>：第二个字母表示文字颜色</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">color</span> <span class="number">0</span>a</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开"><a href="#打开" class="headerlink" title="打开"></a>打开</h2><h3 id="打开一个新的CMD窗口"><a href="#打开一个新的CMD窗口" class="headerlink" title="打开一个新的CMD窗口"></a>打开一个新的CMD窗口</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span> <span class="built_in">cmd</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="在新的CMD窗口执行CMD命令"><a href="#在新的CMD窗口执行CMD命令" class="headerlink" title="在新的CMD窗口执行CMD命令"></a>在新的CMD窗口执行CMD命令</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span> <span class="built_in">cmd</span> &lt;<span class="built_in">cmd</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="打开指定文件或可执行程序"><a href="#打开指定文件或可执行程序" class="headerlink" title="打开指定文件或可执行程序"></a>打开指定文件或可执行程序</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span> &lt;exe&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过文件资源管理器打开文件夹"><a href="#通过文件资源管理器打开文件夹" class="headerlink" title="通过文件资源管理器打开文件夹"></a>通过文件资源管理器打开文件夹</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span> &lt;<span class="built_in">dir</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过默认浏览器打开URL"><a href="#通过默认浏览器打开URL" class="headerlink" title="通过默认浏览器打开URL"></a>通过默认浏览器打开URL</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">start</span> &lt;url&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h2><ul>
+<li>单位秒</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeout /t &lt;num&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WindowsXP-WindowsServer2003蓝屏"><a href="#WindowsXP-WindowsServer2003蓝屏" class="headerlink" title="WindowsXP&#x2F;WindowsServer2003蓝屏"></a>WindowsXP&#x2F;WindowsServer2003蓝屏</h2><ul>
+<li>强制杀死winlogon.exe进程</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntsd -c q -pn winlogon.exe</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h3 id="查看所有用户"><a href="#查看所有用户" class="headerlink" title="查看所有用户"></a>查看所有用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看指定用户"><a href="#查看指定用户" class="headerlink" title="查看指定用户"></a>查看指定用户</h3><blockquote>
+<p><code>&lt;name&gt;</code>：用户</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建用户同时指定密码"><a href="#创建用户同时指定密码" class="headerlink" title="创建用户同时指定密码"></a>创建用户同时指定密码</h3><blockquote>
+<p><code>&lt;pwd&gt;</code>：密码</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user &lt;name&gt; &lt;pwd&gt; /add</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user &lt;name&gt; &lt;pwd&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="激活-禁用用户"><a href="#激活-禁用用户" class="headerlink" title="激活&#x2F;禁用用户"></a>激活&#x2F;禁用用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user &lt;name&gt; /active:yes</span><br><span class="line"><span class="built_in">net</span> user &lt;name&gt; /active:no</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user &lt;name&gt; /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="组"><a href="#组" class="headerlink" title="组"></a>组</h2><ul>
+<li>简化权限的赋予</li>
+</ul>
+<h3 id="内置组"><a href="#内置组" class="headerlink" title="内置组"></a>内置组</h3><ul>
+<li>内置组的权限默认已经被系统赋予</li>
+</ul>
+<h4 id="常见的内置组"><a href="#常见的内置组" class="headerlink" title="常见的内置组"></a>常见的内置组</h4><table>
+<thead>
+<tr>
+<th>组名</th>
+<th>组权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Administrators</td>
+<td>管理员组</td>
+</tr>
+<tr>
+<td>Guests</td>
+<td>来宾组</td>
+</tr>
+<tr>
+<td>Users</td>
+<td>普通用户组，新用户创建的缺省值</td>
+</tr>
+<tr>
+<td>Network Configuration Operators</td>
+<td>网络配置组</td>
+</tr>
+<tr>
+<td>Print Operators</td>
+<td>打印机组</td>
+</tr>
+<tr>
+<td>Remote Desktop Users</td>
+<td>远程桌面组</td>
+</tr>
+</tbody></table>
+<h3 id="查看所有本地组"><a href="#查看所有本地组" class="headerlink" title="查看所有本地组"></a>查看所有本地组</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看指定组的成员"><a href="#查看指定组的成员" class="headerlink" title="查看指定组的成员"></a>查看指定组的成员</h3><blockquote>
+<p><code>&lt;group&gt;</code>：组名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup &lt;group&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将用户添加到组"><a href="#将用户添加到组" class="headerlink" title="将用户添加到组"></a>将用户添加到组</h3><blockquote>
+<p><code>&lt;name&gt;</code>：用户</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup &lt;group&gt; &lt;name&gt; /add</span><br></pre></td></tr></table></figure>
+
+<h3 id="从组中移除用户"><a href="#从组中移除用户" class="headerlink" title="从组中移除用户"></a>从组中移除用户</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup &lt;group&gt; &lt;name&gt; /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建自定义组"><a href="#创建自定义组" class="headerlink" title="创建自定义组"></a>创建自定义组</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup &lt;group&gt; /add</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除自定义组"><a href="#删除自定义组" class="headerlink" title="删除自定义组"></a>删除自定义组</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> localgroup &lt;group&gt; /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a>查看端口号</h2><ul>
+<li>查看本地所有开放的端口号</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看当前用户-1"><a href="#查看当前用户-1" class="headerlink" title="查看当前用户"></a>查看当前用户</h2><blockquote>
+<p><code>/user</code>：展示SID</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+<h2 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h2><h3 id="查看所有共享"><a href="#查看所有共享" class="headerlink" title="查看所有共享"></a>查看所有共享</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> share</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建共享"><a href="#创建共享" class="headerlink" title="创建共享"></a>创建共享</h3><blockquote>
+<p><code>&lt;name&gt;</code>：指定共享名<br><code>&lt;dir&gt;</code>：指定共享的文件夹路径</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> share &lt;name&gt;=&lt;<span class="built_in">dir</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除共享"><a href="#删除共享" class="headerlink" title="删除共享"></a>删除共享</h3><blockquote>
+<p><code>&lt;name&gt;</code>：共享名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> share &lt;name&gt; /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h2><blockquote>
+<p><code>&lt;domain&gt;</code>：需要解析的域名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup &lt;domain&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DNS解析模式"><a href="#DNS解析模式" class="headerlink" title="DNS解析模式"></a>DNS解析模式</h3><ul>
+<li>在DNS模式下可以反复解析需要解析的域名</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup</span><br></pre></td></tr></table></figure>
+
+<h4 id="临时指定DNS服务器"><a href="#临时指定DNS服务器" class="headerlink" title="临时指定DNS服务器"></a>临时指定DNS服务器</h4><ul>
+<li>在进入<code>nslookup</code>后执行命令</li>
+</ul>
+<blockquote>
+<p><code>192.168.0.1</code>：DNS服务器的IP地址</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; server <span class="number">192</span>.<span class="number">168</span>.<span class="number">0</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2><h3 id="查看所有计划任务"><a href="#查看所有计划任务" class="headerlink" title="查看所有计划任务"></a>查看所有计划任务</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">at</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看远端所有计划任务"><a href="#查看远端所有计划任务" class="headerlink" title="查看远端所有计划任务"></a>查看远端所有计划任务</h4><blockquote>
+<p><code>&lt;ip&gt;</code>：远端IP地址</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">at</span> \\&lt;ip&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建远端计划任务"><a href="#创建远端计划任务" class="headerlink" title="创建远端计划任务"></a>创建远端计划任务</h3><blockquote>
+<p><code>&lt;time&gt;</code>：时间<br><code>&lt;command&gt;</code>：脚本</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">at</span> \\&lt;ip&gt; &lt;<span class="built_in">time</span>&gt; &quot;&lt;command&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><h3 id="查看本地时间"><a href="#查看本地时间" class="headerlink" title="查看本地时间"></a>查看本地时间</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">time</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看远端时间"><a href="#查看远端时间" class="headerlink" title="查看远端时间"></a>查看远端时间</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> <span class="built_in">time</span> \\&lt;ip&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="跟踪经过的路由器"><a href="#跟踪经过的路由器" class="headerlink" title="跟踪经过的路由器"></a>跟踪经过的路由器</h3><blockquote>
+<p><code>&lt;domain&gt;</code>：域名或IP地址</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tracert &lt;domain&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看路由表"><a href="#查看路由表" class="headerlink" title="查看路由表"></a>查看路由表</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route <span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Lf4y1t7Mc/">哔哩哔哩——千锋教育网络安全学院</a><br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/6079ad0ed73e4828ff86dbae.html">百度经验——hare</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aq4y1X7oE/">哔哩哔哩——5号黯区红队攻防</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangmiaoping23/article/details/56839106">CSDN——双刃剑客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wag2765/article/details/84795812">CSDN——玄冬Wong</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/11/Ipconfig%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】Ipconfig学习笔记">
+                  <i class="fa fa-angle-left"></i> 【笔记】Ipconfig学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/12/bat%E6%89%B9%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】bat批处理文件学习笔记">
+                  【笔记】bat批处理文件学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

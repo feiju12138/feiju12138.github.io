@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Python3的NumPy学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】NumPy学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2024/08/23/NumPy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Python3的NumPy学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-23T02:15:20.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.903Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/08/23/NumPy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/08/23/NumPy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2024/08/23/NumPy学习笔记/","title":"【笔记】NumPy学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】NumPy学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAndarray%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">创建ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.</span> <span class="nav-text">生成一维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86Python%E5%88%97%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BD%8D%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.1.</span> <span class="nav-text">将Python列表转换位数组对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E5%88%97%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.2.</span> <span class="nav-text">生成一个有序数列数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E6%8C%87%E5%AE%9A%E6%95%B0%E7%BB%84%E5%86%85%E5%85%83%E7%B4%A0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">手动指定数组内元素数据类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E6%9C%89%E5%BA%8F%E6%95%B0%E5%88%97%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.3.</span> <span class="nav-text">生成一个指定范围的有序数列数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.4.</span> <span class="nav-text">生成随机数数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%8C%83%E5%9B%B4%E4%B8%BA-0-1-%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">4.1.4.1.</span> <span class="nav-text">生成范围为[0,1)的随机数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B4%E6%95%B0"><span class="nav-number">4.1.4.2.</span> <span class="nav-text">生成指定范围的随机整数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9B%B8%E5%90%8C%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.5.</span> <span class="nav-text">生成相同数据填充的数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF0%E7%9A%84%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.5.1.</span> <span class="nav-text">生成元素全是0的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF0%E7%9A%84%E6%95%B0%E7%BB%84-1"><span class="nav-number">4.1.5.2.</span> <span class="nav-text">生成元素全是0的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF%E6%8C%87%E5%AE%9A%E5%80%BC%E7%9A%84%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.5.3.</span> <span class="nav-text">生成元素全是指定值的数组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E6%95%B0%E6%8D%AE%E7%9A%84%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.6.</span> <span class="nav-text">生成正态分布数据的数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.7.</span> <span class="nav-text">从迭代器对象创建数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BB%8E%E6%96%87%E6%9C%AC%E4%B8%AD%E6%8A%BD%E5%8F%96%E6%95%B0%E6%8D%AE%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.8.</span> <span class="nav-text">利用正则表达式从文本中抽取数据创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%95%B0%E6%8D%AE%E7%9A%84key%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.8.1.</span> <span class="nav-text">利用数据的key获取指定数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.</span> <span class="nav-text">生成二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86Python%E5%88%97%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.2.1.</span> <span class="nav-text">将Python列表转换为数组对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.2.</span> <span class="nav-text">将一维数组转换为二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">将二维数组转换为一维数组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%95%B0%E7%BB%84-1"><span class="nav-number">4.2.3.</span> <span class="nav-text">生成随机数数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9B%B8%E5%90%8C%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84%E6%95%B0%E7%BB%84-1"><span class="nav-number">4.2.4.</span> <span class="nav-text">生成相同数据填充的数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF0%E7%9A%84%E6%95%B0%E7%BB%84-2"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">生成元素全是0的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF0%E7%9A%84%E6%95%B0%E7%BB%84-3"><span class="nav-number">4.2.4.2.</span> <span class="nav-text">生成元素全是0的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%E5%85%A8%E6%98%AF%E6%8C%87%E5%AE%9A%E5%80%BC%E7%9A%84%E6%95%B0%E7%BB%84-1"><span class="nav-number">4.2.4.3.</span> <span class="nav-text">生成元素全是指定值的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9F%A9%E9%98%B5%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.4.4.</span> <span class="nav-text">生成矩阵数组</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%96%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">数组对象的取值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E5%8F%96%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">普通取值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">6.1.1.</span> <span class="nav-text">一维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%80%BC"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">获取一个值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E7%BB%84%E5%80%BC"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">获取一组值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">6.1.2.</span> <span class="nav-text">二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%80%BC-1"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">获取一个值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E7%BB%84%E5%80%BC-1"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">获取一组值</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E4%B8%BA%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">6.1.2.2.1.</span> <span class="nav-text">返回为二维数组的一维数组</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%B1%E5%BC%8F%E7%B4%A2%E5%BC%95%E5%8F%96%E5%80%BC%EF%BC%88Fancy-Index%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">花式索引取值（Fancy Index）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">二维数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E7%B4%A2%E5%BC%95"><span class="nav-number">6.3.</span> <span class="nav-text">布尔索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E"><span class="nav-number">6.3.1.</span> <span class="nav-text">与</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%96"><span class="nav-number">6.3.2.</span> <span class="nav-text">或</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E"><span class="nav-number">6.3.3.</span> <span class="nav-text">非</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">数组对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="nav-number">7.1.</span> <span class="nav-text">数组长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%BD%A2%E7%8A%B6"><span class="nav-number">7.2.</span> <span class="nav-text">数组形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E7%BB%B4%E5%BA%A6"><span class="nav-number">7.3.</span> <span class="nav-text">数组的维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%86%85%E5%85%83%E7%B4%A0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.4.</span> <span class="nav-text">数组内元素数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%86%85%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E5%8D%A0%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="nav-number">7.5.</span> <span class="nav-text">数组内每个元素占用的内存空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E6%80%BB%E8%AE%A1%E5%8D%A0%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="nav-number">7.6.</span> <span class="nav-text">数组所有元素总计占用的内存空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">数组对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E5%B0%8F%E6%95%B0"><span class="nav-number">8.1.</span> <span class="nav-text">保留小数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%92%8C"><span class="nav-number">8.2.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%B9%B3%E5%9D%87%E6%95%B0"><span class="nav-number">8.3.</span> <span class="nav-text">求平均数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="nav-number">8.4.</span> <span class="nav-text">求最大值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="nav-number">8.5.</span> <span class="nav-text">求最小值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">8.6.</span> <span class="nav-text">求标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%96%B9%E5%B7%AE"><span class="nav-number">8.7.</span> <span class="nav-text">求方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%92%8C"><span class="nav-number">8.8.</span> <span class="nav-text">求累计和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">8.9.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E7%BB%84%E6%95%B0%E5%85%83%E7%B4%A0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.10.</span> <span class="nav-text">转换组数元素的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A1%AB%E5%85%85"><span class="nav-number">8.11.</span> <span class="nav-text">填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E9%9D%9E0%E5%85%83%E7%B4%A0%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.12.</span> <span class="nav-text">返回非0元素的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%88%E6%89%81%E5%B9%B3%E5%8C%96%EF%BC%89"><span class="nav-number">8.13.</span> <span class="nav-text">多维数组转换为一维数组（扁平化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E4%BC%98%E5%85%88"><span class="nav-number">8.13.1.</span> <span class="nav-text">行优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E4%BC%98%E5%85%88"><span class="nav-number">8.13.2.</span> <span class="nav-text">列优先</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE"><span class="nav-number">8.14.</span> <span class="nav-text">矩阵的转置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E8%BD%B4"><span class="nav-number">8.15.</span> <span class="nav-text">交换轴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BA%A4%E6%8D%A2%E8%BD%B4%E5%AE%9E%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE"><span class="nav-number">8.15.1.</span> <span class="nav-text">通过交换轴实现矩阵的转置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E4%B8%BAPython%E5%88%97%E8%A1%A8"><span class="nav-number">8.16.</span> <span class="nav-text">还原数组对象为Python列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E5%8E%BB%E9%87%8D"><span class="nav-number">8.17.</span> <span class="nav-text">数组元素的去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%95%B0%E7%BB%84"><span class="nav-number">8.18.</span> <span class="nav-text">拷贝数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%8F%A0%E6%95%B0%E7%BB%84"><span class="nav-number">8.19.</span> <span class="nav-text">堆叠数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%B0%B4%E5%B9%B3%E6%96%B9%E5%90%91%E5%A0%86%E5%8F%A0%EF%BC%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E6%B7%B1%E5%BA%A6"><span class="nav-number">8.19.1.</span> <span class="nav-text">在水平方向堆叠，不改变深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E5%A0%86%E5%8F%A0%EF%BC%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E6%B7%B1%E5%BA%A6"><span class="nav-number">8.19.2.</span> <span class="nav-text">在垂直方向堆叠，不改变深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%B0%B4%E5%B9%B3%E6%96%B9%E5%90%91%E5%A0%86%E5%8F%A0%EF%BC%8C%E6%94%B9%E5%8F%98%E6%B7%B1%E5%BA%A6"><span class="nav-number">8.19.3.</span> <span class="nav-text">在水平方向堆叠，改变深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E5%A0%86%E5%8F%A0%EF%BC%8C%E6%94%B9%E5%8F%98%E6%B7%B1%E5%BA%A6"><span class="nav-number">8.19.4.</span> <span class="nav-text">在垂直方向堆叠，改变深度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%86%E5%88%86%E6%95%B0%E7%BB%84"><span class="nav-number">8.20.</span> <span class="nav-text">拆分数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%B0%B4%E5%B9%B3%E6%96%B9%E5%90%91%E6%8B%86%E5%88%86"><span class="nav-number">8.20.1.</span> <span class="nav-text">在水平方向拆分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E6%8B%86%E5%88%86"><span class="nav-number">8.20.2.</span> <span class="nav-text">在垂直方向拆分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">9.</span> <span class="nav-text">NumPy类的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BE"><span class="nav-number">9.1.</span> <span class="nav-text">派</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">NumPy类的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%92%8C-1"><span class="nav-number">10.1.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%B9%B3%E5%9D%87%E6%95%B0-1"><span class="nav-number">10.2.</span> <span class="nav-text">求平均数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC-1"><span class="nav-number">10.3.</span> <span class="nav-text">求最大值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC-1"><span class="nav-number">10.4.</span> <span class="nav-text">求最小值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%A0%87%E5%87%86%E5%B7%AE-1"><span class="nav-number">10.5.</span> <span class="nav-text">求标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%96%B9%E5%B7%AE-1"><span class="nav-number">10.6.</span> <span class="nav-text">求方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="nav-number">10.7.</span> <span class="nav-text">求中位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%92%8C-1"><span class="nav-number">10.8.</span> <span class="nav-text">求累计和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F-1"><span class="nav-number">10.9.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%824%E5%88%86%E4%BD%8D%E6%95%B0"><span class="nav-number">10.10.</span> <span class="nav-text">求4分位数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%821-4%E4%BD%8D%E6%95%B0"><span class="nav-number">10.10.1.</span> <span class="nav-text">求1&#x2F;4位数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%823-4%E4%BD%8D%E6%95%B0"><span class="nav-number">10.10.2.</span> <span class="nav-text">求3&#x2F;4位数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E5%9B%9B%E5%88%86%E4%BD%8D%E8%B7%9D%E7%A6%BB"><span class="nav-number">10.10.3.</span> <span class="nav-text">求四分位距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E7%96%91%E4%BC%BC%E5%BC%82%E5%B8%B8%E5%80%BC%EF%BC%88%E7%A6%BB%E7%BE%A4%E7%82%B9%EF%BC%89"><span class="nav-number">10.10.4.</span> <span class="nav-text">求疑似异常值（离群点）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%95%B0%E5%80%BC%E5%88%A4%E5%AE%9A%E6%B3%95%E6%B1%82%E7%96%91%E4%BC%BC%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="nav-number">10.10.4.1.</span> <span class="nav-text">通过数值判定法求疑似异常值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Z-score%E5%88%A4%E5%AE%9A%E6%B3%95%E6%B1%82%E7%96%91%E4%BC%BC%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="nav-number">10.10.4.2.</span> <span class="nav-text">通过Z-score判定法求疑似异常值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D"><span class="nav-number">10.11.</span> <span class="nav-text">重复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E9%87%8D%E5%A4%8D%E7%94%9F%E6%88%90%E7%BB%84%E6%88%90%E6%96%B0%E6%95%B0%E7%BB%84"><span class="nav-number">10.11.1.</span> <span class="nav-text">每个元素重复生成组成新数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E7%BB%84%E5%85%83%E7%B4%A0%E9%87%8D%E5%A4%8D%E7%94%9F%E6%88%90%E7%BB%84%E6%88%90%E6%96%B0%E6%95%B0%E7%BB%84"><span class="nav-number">10.11.2.</span> <span class="nav-text">整组元素重复生成组成新数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">10.12.</span> <span class="nav-text">添加元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">10.12.1.</span> <span class="nav-text">数组末尾追加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0"><span class="nav-number">10.12.2.</span> <span class="nav-text">数组指定位置插入元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">10.13.</span> <span class="nav-text">判定布尔值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A%E6%95%B0%E7%BB%84%E4%B8%AD%E6%98%AF%E5%90%A6%E5%85%A8%E6%98%AFTrue"><span class="nav-number">10.13.1.</span> <span class="nav-text">判定数组中是否全是True</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A%E6%95%B0%E7%BB%84%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89True"><span class="nav-number">10.13.2.</span> <span class="nav-text">判定数组中是否有True</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%9D%A1%E4%BB%B6%E6%91%98%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">10.14.</span> <span class="nav-text">根据条件摘取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E5%8D%95%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="nav-number">10.14.1.</span> <span class="nav-text">根据单个条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E5%A4%9A%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="nav-number">10.14.2.</span> <span class="nav-text">根据多个条件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="nav-number">10.15.</span> <span class="nav-text">调整数组长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E8%A7%A3"><span class="nav-number">10.16.</span> <span class="nav-text">求最小二乘解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">11.</span> <span class="nav-text">数组的运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%A0%87%E5%87%86%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97"><span class="nav-number">11.1.</span> <span class="nav-text">数组对象与标准数值运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E8%BF%90%E7%AE%97"><span class="nav-number">11.2.</span> <span class="nav-text">数组对象与数组对象运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0"><span class="nav-number">11.3.</span> <span class="nav-text">一元函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0"><span class="nav-number">11.4.</span> <span class="nav-text">二元函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="nav-number">11.5.</span> <span class="nav-text">广播机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E7%A7%AF%E8%BF%90%E7%AE%97"><span class="nav-number">12.</span> <span class="nav-text">点积运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5"><span class="nav-number">13.</span> <span class="nav-text">矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%9F%A9%E9%98%B5"><span class="nav-number">13.1.</span> <span class="nav-text">定义矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9F%A9%E9%98%B5"><span class="nav-number">13.2.</span> <span class="nav-text">数组转换为矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">13.3.</span> <span class="nav-text">矩阵对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%9F%A9%E9%98%B5%E7%9A%84%E6%95%B0%E7%BB%84"><span class="nav-number">13.3.1.</span> <span class="nav-text">获取矩阵的数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">13.3.2.</span> <span class="nav-text">获取矩阵的一维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE"><span class="nav-number">13.3.3.</span> <span class="nav-text">获取矩阵的转置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">13.3.4.</span> <span class="nav-text">获取逆矩阵</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">13.4.</span> <span class="nav-text">矩阵对象的矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">13.4.1.</span> <span class="nav-text">矩阵乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5"><span class="nav-number">13.4.1.1.</span> <span class="nav-text">计算单位矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">13.5.</span> <span class="nav-text">数组对象的矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-1"><span class="nav-number">13.5.1.</span> <span class="nav-text">矩阵乘法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">13.5.2.</span> <span class="nav-text">求逆矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">13.5.3.</span> <span class="nav-text">解线性方程组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">13.6.</span> <span class="nav-text">矩阵对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%9F%A9%E9%98%B5%E7%9A%84%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">13.6.1.</span> <span class="nav-text">计算矩阵的行列式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9"><span class="nav-number">13.6.2.</span> <span class="nav-text">计算矩阵的秩</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">14.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">15.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/08/23/NumPy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】NumPy学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】NumPy学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-23 10:15:20" itemprop="dateCreated datePublished" datetime="2024-08-23T10:15:20+08:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python3的NumPy学习笔记</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install numpy</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建ndarray对象"><a href="#创建ndarray对象" class="headerlink" title="创建ndarray对象"></a>创建ndarray对象</h2><h3 id="生成一维数组"><a href="#生成一维数组" class="headerlink" title="生成一维数组"></a>生成一维数组</h3><h4 id="将Python列表转换位数组对象"><a href="#将Python列表转换位数组对象" class="headerlink" title="将Python列表转换位数组对象"></a>将Python列表转换位数组对象</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = []</span><br><span class="line"></span><br><span class="line">ndarray_object = np.array(arr)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成一个有序数列数组"><a href="#生成一个有序数列数组" class="headerlink" title="生成一个有序数列数组"></a>生成一个有序数列数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.arange(&lt;start&gt;, &lt;end&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.arange(&lt;start&gt;, &lt;end&gt;, &lt;step&gt;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="手动指定数组内元素数据类型"><a href="#手动指定数组内元素数据类型" class="headerlink" title="手动指定数组内元素数据类型"></a>手动指定数组内元素数据类型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.arange(&lt;start&gt;, &lt;end&gt;, dtype=np.int64)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.arange(&lt;start&gt;, &lt;end&gt;, dtype=<span class="string">&quot;i8&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成一个指定范围的有序数列数组"><a href="#生成一个指定范围的有序数列数组" class="headerlink" title="生成一个指定范围的有序数列数组"></a>生成一个指定范围的有序数列数组</h4><ul>
+<li>步长会自动根据数据个数和范围确定</li>
+</ul>
+<blockquote>
+<p><code>&lt;num_start&gt;</code>：生成数据的起始值<br><code>&lt;num_end&gt;</code>：生成数据的结束值<br><code>&lt;num_count&gt;</code>：生成数据的个数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.linspace(&lt;num_start&gt;, &lt;num_end&gt;, &lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成随机数数组"><a href="#生成随机数数组" class="headerlink" title="生成随机数数组"></a>生成随机数数组</h4><h5 id="生成范围为-0-1-的随机数"><a href="#生成范围为-0-1-的随机数" class="headerlink" title="生成范围为[0,1)的随机数"></a>生成范围为[0,1)的随机数</h5><blockquote>
+<p><code>&lt;num_count&gt;</code>：生成数据的个数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.random.random(&lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成指定范围的随机整数"><a href="#生成指定范围的随机整数" class="headerlink" title="生成指定范围的随机整数"></a>生成指定范围的随机整数</h5><ul>
+<li>生成范围为[<num_start>,<num_end>)的随机数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.random.randint(&lt;num_start&gt;, &lt;num_end&gt;, &lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成相同数据填充的数组"><a href="#生成相同数据填充的数组" class="headerlink" title="生成相同数据填充的数组"></a>生成相同数据填充的数组</h4><h5 id="生成元素全是0的数组"><a href="#生成元素全是0的数组" class="headerlink" title="生成元素全是0的数组"></a>生成元素全是0的数组</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.zeros(&lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成元素全是0的数组-1"><a href="#生成元素全是0的数组-1" class="headerlink" title="生成元素全是0的数组"></a>生成元素全是0的数组</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.ones(&lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成元素全是指定值的数组"><a href="#生成元素全是指定值的数组" class="headerlink" title="生成元素全是指定值的数组"></a>生成元素全是指定值的数组</h5><blockquote>
+<p><code>&lt;num&gt;</code>：被填充的值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.full(&lt;num&gt;, &lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成正态分布数据的数组"><a href="#生成正态分布数据的数组" class="headerlink" title="生成正态分布数据的数组"></a>生成正态分布数据的数组</h4><blockquote>
+<p><code>&lt;mu&gt;</code>：μ<br><code>&lt;sigma&gt;</code>：σ<br><code>&lt;num_count&gt;</code>：生成数据的个数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.random.normal(&lt;mu&gt;, &lt;sigma&gt;, &lt;num_count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="从迭代器对象创建数组"><a href="#从迭代器对象创建数组" class="headerlink" title="从迭代器对象创建数组"></a>从迭代器对象创建数组</h4><blockquote>
+<p><code>&lt;generator_object&gt;</code>：迭代器对象<br><code>dtype=np.int64</code>：定义数据类型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.fromiter(&lt;generator_object&gt;, dtype=np.int64)</span><br></pre></td></tr></table></figure>
+
+<h4 id="利用正则表达式从文本中抽取数据创建数组"><a href="#利用正则表达式从文本中抽取数据创建数组" class="headerlink" title="利用正则表达式从文本中抽取数据创建数组"></a>利用正则表达式从文本中抽取数据创建数组</h4><blockquote>
+<p><code>r&quot;\d+&quot;</code>：定义正则表达式<br><code>&lt;key&gt;</code>：为这个数据定义key</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.fromregex(&lt;text&gt;, <span class="string">r&quot;\d+&quot;</span>, dtype=[(<span class="string">&quot;&lt;key&gt;&quot;</span>, np.int64)])</span><br></pre></td></tr></table></figure>
+
+<h5 id="利用数据的key获取指定数据"><a href="#利用数据的key获取指定数据" class="headerlink" title="利用数据的key获取指定数据"></a>利用数据的key获取指定数据</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[<span class="string">&quot;&lt;key&gt;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成二维数组"><a href="#生成二维数组" class="headerlink" title="生成二维数组"></a>生成二维数组</h3><h4 id="将Python列表转换为数组对象"><a href="#将Python列表转换为数组对象" class="headerlink" title="将Python列表转换为数组对象"></a>将Python列表转换为数组对象</h4><ul>
+<li>在ndarray对象中，如果是二维数组<ul>
+<li>对最外层数组的计算作为针对于0轴计算</li>
+<li>对最内层数组的计算作为针对于1轴计算</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = [[], [], []]</span><br><span class="line"></span><br><span class="line">ndarray_object = np.array(arr)</span><br></pre></td></tr></table></figure>
+
+<h4 id="将一维数组转换为二维数组"><a href="#将一维数组转换为二维数组" class="headerlink" title="将一维数组转换为二维数组"></a>将一维数组转换为二维数组</h4><ul>
+<li>转换形状转换前后数据数必须保持一致，无论超出还是不足都会报错</li>
+</ul>
+<blockquote>
+<p><code>2</code>：行<br><code>3</code>：列</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line">ndarray_object = ndarray_object.reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="将二维数组转换为一维数组"><a href="#将二维数组转换为一维数组" class="headerlink" title="将二维数组转换为一维数组"></a>将二维数组转换为一维数组</h5><blockquote>
+<p><code>6</code>：列</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"></span><br><span class="line">ndarray_object = ndarray_object.reshape(<span class="number">6</span>,)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成随机数数组-1"><a href="#生成随机数数组-1" class="headerlink" title="生成随机数数组"></a>生成随机数数组</h4><blockquote>
+<p><code>&lt;num_start&gt;</code>：生成数据的起始值<br><code>&lt;num_end&gt;</code>：生成数据的结束值<br><code>&lt;num_row&gt;</code>：行数<br><code>&lt;num_col&gt;</code>：列数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object = np.random.randint(&lt;num_start&gt;, &lt;num_end&gt;, (&lt;num_row&gt;, &lt;num_col&gt;))</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成相同数据填充的数组-1"><a href="#生成相同数据填充的数组-1" class="headerlink" title="生成相同数据填充的数组"></a>生成相同数据填充的数组</h4><h5 id="生成元素全是0的数组-2"><a href="#生成元素全是0的数组-2" class="headerlink" title="生成元素全是0的数组"></a>生成元素全是0的数组</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.zeros((&lt;num_row&gt;, &lt;num_col&gt;))</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成元素全是0的数组-3"><a href="#生成元素全是0的数组-3" class="headerlink" title="生成元素全是0的数组"></a>生成元素全是0的数组</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.ones((&lt;num_row&gt;, &lt;num_col&gt;))</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成元素全是指定值的数组-1"><a href="#生成元素全是指定值的数组-1" class="headerlink" title="生成元素全是指定值的数组"></a>生成元素全是指定值的数组</h5><blockquote>
+<p><code>&lt;num&gt;</code>：被填充的值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.full(&lt;num&gt;, (&lt;num_row&gt;, &lt;num_col&gt;))</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成矩阵数组"><a href="#生成矩阵数组" class="headerlink" title="生成矩阵数组"></a>生成矩阵数组</h5><ul>
+<li>矩阵的行和列的长度是相同的</li>
+<li>对角线是1，其他位置全是0</li>
+</ul>
+<blockquote>
+<p><code>&lt;num&gt;</code>：指定行和列的长度</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.eye(&lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>数据类型代码</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int8</code></td>
+<td><code>i1</code></td>
+<td>8位有符号整数</td>
+</tr>
+<tr>
+<td><code>uint8</code></td>
+<td><code>u1</code></td>
+<td>8位有符号整数</td>
+</tr>
+<tr>
+<td><code>int16</code></td>
+<td><code>i2</code></td>
+<td>16位有符号整数</td>
+</tr>
+<tr>
+<td><code>uint16</code></td>
+<td><code>u2</code></td>
+<td>16位有符号整数</td>
+</tr>
+<tr>
+<td><code>int32</code></td>
+<td><code>i4</code></td>
+<td>32位有符号整数</td>
+</tr>
+<tr>
+<td><code>uint32</code></td>
+<td><code>u4</code></td>
+<td>32位有符号整数</td>
+</tr>
+<tr>
+<td><code>int64</code></td>
+<td><code>i8</code></td>
+<td>64位有符号整数</td>
+</tr>
+<tr>
+<td><code>uint64</code></td>
+<td><code>u8</code></td>
+<td>64位有符号整数</td>
+</tr>
+<tr>
+<td><code>float16</code></td>
+<td><code>f2</code></td>
+<td>16位浮点数</td>
+</tr>
+<tr>
+<td><code>float32</code></td>
+<td><code>f4</code>、<code>f</code></td>
+<td>32位浮点数</td>
+</tr>
+<tr>
+<td><code>float64</code></td>
+<td><code>f8</code>、<code>d</code></td>
+<td>64位浮点数</td>
+</tr>
+<tr>
+<td><code>float128</code></td>
+<td><code>f16</code>、<code>g</code></td>
+<td>128位浮点数</td>
+</tr>
+<tr>
+<td><code>complex64</code></td>
+<td><code>c8</code>、<code>c16</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>complex128</code></td>
+<td><code>c32</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>complex256</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td><code>?</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td><code>O</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>string_</code></td>
+<td><code>S</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>unicode_</code></td>
+<td><code>U</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="数组对象的取值"><a href="#数组对象的取值" class="headerlink" title="数组对象的取值"></a>数组对象的取值</h2><h3 id="普通取值"><a href="#普通取值" class="headerlink" title="普通取值"></a>普通取值</h3><h4 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h4><h5 id="获取一个值"><a href="#获取一个值" class="headerlink" title="获取一个值"></a>获取一个值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[&lt;index&gt;]</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取一组值"><a href="#获取一组值" class="headerlink" title="获取一组值"></a>获取一组值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[&lt;index_start&gt;:&lt;index_end&gt;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><h5 id="获取一个值-1"><a href="#获取一个值-1" class="headerlink" title="获取一个值"></a>获取一个值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[&lt;index_row&gt;, &lt;index_col&gt;]</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取一组值-1"><a href="#获取一组值-1" class="headerlink" title="获取一组值"></a>获取一组值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[&lt;index_row_start&gt;:&lt;index_row_end&gt;, &lt;index_col_start&gt;:&lt;index_col_end&gt;]</span><br></pre></td></tr></table></figure>
+
+<h6 id="返回为二维数组的一维数组"><a href="#返回为二维数组的一维数组" class="headerlink" title="返回为二维数组的一维数组"></a>返回为二维数组的一维数组</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object[&lt;index_row&gt;,:]</span><br></pre></td></tr></table></figure>
+
+<h3 id="花式索引取值（Fancy-Index）"><a href="#花式索引取值（Fancy-Index）" class="headerlink" title="花式索引取值（Fancy Index）"></a>花式索引取值（Fancy Index）</h3><ul>
+<li>返回一个新的数组对象</li>
+<li>可以反复取指定下标的值</li>
+</ul>
+<h4 id="一维数组-1"><a href="#一维数组-1" class="headerlink" title="一维数组"></a>一维数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[[&lt;index_1&gt;, &lt;index_2&gt;, &lt;index_1&gt;]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="二维数组-1"><a href="#二维数组-1" class="headerlink" title="二维数组"></a>二维数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[[&lt;index_row_start&gt;, &lt;index_col_start&gt;], [&lt;index_row_end&gt;, &lt;index_col_end&gt;]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔索引"><a href="#布尔索引" class="headerlink" title="布尔索引"></a>布尔索引</h3><ul>
+<li>筛选出满足条件的值返回一个新的数组对象</li>
+<li>使用布尔索引时维度会坍塌，只能返回一维的数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[[<span class="literal">True</span>, <span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">False</span>]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[ndarray_object % <span class="number">2</span> != <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="与"><a href="#与" class="headerlink" title="与"></a>与</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[(ndarray_object % <span class="number">2</span> != <span class="number">0</span>) &amp; (ndarray_object % <span class="number">3</span> != <span class="number">0</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="或"><a href="#或" class="headerlink" title="或"></a>或</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[(ndarray_object % <span class="number">2</span> != <span class="number">0</span>) | (ndarray_object % <span class="number">3</span> != <span class="number">0</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="非"><a href="#非" class="headerlink" title="非"></a>非</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[~(ndarray_object % <span class="number">2</span> != <span class="number">0</span>)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组对象的属性"><a href="#数组对象的属性" class="headerlink" title="数组对象的属性"></a>数组对象的属性</h2><h3 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.size</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组形状"><a href="#数组形状" class="headerlink" title="数组形状"></a>数组形状</h3><ul>
+<li>可以判断是一维数组还是二维数组</li>
+<li>可以得到每一个维度的数组的数组长度</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.shape</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组的维度"><a href="#数组的维度" class="headerlink" title="数组的维度"></a>数组的维度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.ndim</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组内元素数据类型"><a href="#数组内元素数据类型" class="headerlink" title="数组内元素数据类型"></a>数组内元素数据类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.dtype</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组内每个元素占用的内存空间"><a href="#数组内每个元素占用的内存空间" class="headerlink" title="数组内每个元素占用的内存空间"></a>数组内每个元素占用的内存空间</h3><ul>
+<li>单位字节</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.itemsize</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组所有元素总计占用的内存空间"><a href="#数组所有元素总计占用的内存空间" class="headerlink" title="数组所有元素总计占用的内存空间"></a>数组所有元素总计占用的内存空间</h3><ul>
+<li>单位字节</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.nbytes</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组对象的方法"><a href="#数组对象的方法" class="headerlink" title="数组对象的方法"></a>数组对象的方法</h2><h3 id="保留小数"><a href="#保留小数" class="headerlink" title="保留小数"></a>保留小数</h3><ul>
+<li>四舍五入保留小数</li>
+</ul>
+<blockquote>
+<p><code>&lt;num&gt;</code>：保留的小数位数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">round</span>(ndarray_object, &lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求平均数"><a href="#求平均数" class="headerlink" title="求平均数"></a>求平均数</h3><blockquote>
+<p><code>axis=&lt;num&gt;</code>：指定轴编号</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.mean()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最大值"><a href="#求最大值" class="headerlink" title="求最大值"></a>求最大值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.<span class="built_in">max</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最小值"><a href="#求最小值" class="headerlink" title="求最小值"></a>求最小值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.<span class="built_in">min</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求标准差"><a href="#求标准差" class="headerlink" title="求标准差"></a>求标准差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.std()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求方差"><a href="#求方差" class="headerlink" title="求方差"></a>求方差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.var()</span><br></pre></td></tr></table></figure>
+
+<h3 id="求累计和"><a href="#求累计和" class="headerlink" title="求累计和"></a>求累计和</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.cumsum()</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><ul>
+<li>直接在原数组中重新排序</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.sort()</span><br></pre></td></tr></table></figure>
+
+<h3 id="转换组数元素的数据类型"><a href="#转换组数元素的数据类型" class="headerlink" title="转换组数元素的数据类型"></a>转换组数元素的数据类型</h3><ul>
+<li>返回新的数组对象</li>
+</ul>
+<blockquote>
+<p><code>np.float64</code>：转换后的数据类型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.astype(np.float64)</span><br></pre></td></tr></table></figure>
+
+<h3 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h3><ul>
+<li>直接在原数组中填充</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.fill(&lt;data&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="返回非0元素的位置"><a href="#返回非0元素的位置" class="headerlink" title="返回非0元素的位置"></a>返回非0元素的位置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.nonzero()</span><br></pre></td></tr></table></figure>
+
+<h3 id="多维数组转换为一维数组（扁平化）"><a href="#多维数组转换为一维数组（扁平化）" class="headerlink" title="多维数组转换为一维数组（扁平化）"></a>多维数组转换为一维数组（扁平化）</h3><ul>
+<li>返回新的数组对象</li>
+</ul>
+<h4 id="行优先"><a href="#行优先" class="headerlink" title="行优先"></a>行优先</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.flatten()</span><br></pre></td></tr></table></figure>
+
+<h4 id="列优先"><a href="#列优先" class="headerlink" title="列优先"></a>列优先</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.flatten(<span class="string">&#x27;F&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵的转置"><a href="#矩阵的转置" class="headerlink" title="矩阵的转置"></a>矩阵的转置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.transpose()</span><br></pre></td></tr></table></figure>
+
+<h3 id="交换轴"><a href="#交换轴" class="headerlink" title="交换轴"></a>交换轴</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.swapaxes(&lt;num_1&gt;, &lt;num_2&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过交换轴实现矩阵的转置"><a href="#通过交换轴实现矩阵的转置" class="headerlink" title="通过交换轴实现矩阵的转置"></a>通过交换轴实现矩阵的转置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.swapaxes(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="还原数组对象为Python列表"><a href="#还原数组对象为Python列表" class="headerlink" title="还原数组对象为Python列表"></a>还原数组对象为Python列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.tolist()</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组元素的去重"><a href="#数组元素的去重" class="headerlink" title="数组元素的去重"></a>数组元素的去重</h3><ul>
+<li>直接在原数组中去除重复元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object.unique()</span><br></pre></td></tr></table></figure>
+
+<h3 id="拷贝数组"><a href="#拷贝数组" class="headerlink" title="拷贝数组"></a>拷贝数组</h3><ul>
+<li>返回新的数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object.copy()</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆叠数组"><a href="#堆叠数组" class="headerlink" title="堆叠数组"></a>堆叠数组</h3><h4 id="在水平方向堆叠，不改变深度"><a href="#在水平方向堆叠，不改变深度" class="headerlink" title="在水平方向堆叠，不改变深度"></a>在水平方向堆叠，不改变深度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.hstack((ndarray_object_1, ndarray_object_2))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.concatenate((ndarray_object_1, ndarray_object_2), axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在垂直方向堆叠，不改变深度"><a href="#在垂直方向堆叠，不改变深度" class="headerlink" title="在垂直方向堆叠，不改变深度"></a>在垂直方向堆叠，不改变深度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.vstack((ndarray_object_1, ndarray_object_2))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.concatenate((ndarray_object_1, ndarray_object_2), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在水平方向堆叠，改变深度"><a href="#在水平方向堆叠，改变深度" class="headerlink" title="在水平方向堆叠，改变深度"></a>在水平方向堆叠，改变深度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.stack((ndarray_object_1, ndarray_object_2), axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在垂直方向堆叠，改变深度"><a href="#在垂直方向堆叠，改变深度" class="headerlink" title="在垂直方向堆叠，改变深度"></a>在垂直方向堆叠，改变深度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.stack((ndarray_object_1, ndarray_object_2), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="拆分数组"><a href="#拆分数组" class="headerlink" title="拆分数组"></a>拆分数组</h3><h4 id="在水平方向拆分"><a href="#在水平方向拆分" class="headerlink" title="在水平方向拆分"></a>在水平方向拆分</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.vsplit(ndarray_object, &lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.split(ndarray_object, &lt;num&gt;, axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在垂直方向拆分"><a href="#在垂直方向拆分" class="headerlink" title="在垂直方向拆分"></a>在垂直方向拆分</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.hsplit(ndarray_object, &lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.split(ndarray_object, &lt;num&gt;, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="NumPy类的属性"><a href="#NumPy类的属性" class="headerlink" title="NumPy类的属性"></a>NumPy类的属性</h2><h3 id="派"><a href="#派" class="headerlink" title="派"></a>派</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.pi</span><br></pre></td></tr></table></figure>
+
+<h2 id="NumPy类的方法"><a href="#NumPy类的方法" class="headerlink" title="NumPy类的方法"></a>NumPy类的方法</h2><h3 id="求和-1"><a href="#求和-1" class="headerlink" title="求和"></a>求和</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">sum</span>(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求平均数-1"><a href="#求平均数-1" class="headerlink" title="求平均数"></a>求平均数</h3><blockquote>
+<p><code>axis=&lt;num&gt;</code>：指定轴编号</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.mean(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最大值-1"><a href="#求最大值-1" class="headerlink" title="求最大值"></a>求最大值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.amax(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最小值-1"><a href="#求最小值-1" class="headerlink" title="求最小值"></a>求最小值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.amin(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求标准差-1"><a href="#求标准差-1" class="headerlink" title="求标准差"></a>求标准差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.std(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求方差-1"><a href="#求方差-1" class="headerlink" title="求方差"></a>求方差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.var(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求中位数"><a href="#求中位数" class="headerlink" title="求中位数"></a>求中位数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.median(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求累计和-1"><a href="#求累计和-1" class="headerlink" title="求累计和"></a>求累计和</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.cumsum(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h3><ul>
+<li>返回重新排序的新数组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.sort(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求4分位数"><a href="#求4分位数" class="headerlink" title="求4分位数"></a>求4分位数</h3><h4 id="求1-4位数"><a href="#求1-4位数" class="headerlink" title="求1&#x2F;4位数"></a>求1&#x2F;4位数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q1 = np.percentile(ndarray_object, <span class="number">0.25</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="求3-4位数"><a href="#求3-4位数" class="headerlink" title="求3&#x2F;4位数"></a>求3&#x2F;4位数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q3 = np.percentile(ndarray_object, <span class="number">0.75</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="求四分位距离"><a href="#求四分位距离" class="headerlink" title="求四分位距离"></a>求四分位距离</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iqr = q3 - q1</span><br></pre></td></tr></table></figure>
+
+<h4 id="求疑似异常值（离群点）"><a href="#求疑似异常值（离群点）" class="headerlink" title="求疑似异常值（离群点）"></a>求疑似异常值（离群点）</h4><h5 id="通过数值判定法求疑似异常值"><a href="#通过数值判定法求疑似异常值" class="headerlink" title="通过数值判定法求疑似异常值"></a>通过数值判定法求疑似异常值</h5><p>$ data &lt; Q_1 - 1.5 \times IQR $</p>
+<p>$ data &lt; Q_3 + 1.5 \times IQR $</p>
+<blockquote>
+<p><code>whis</code>：判定异常值范围的系数</p>
+<blockquote>
+<p><code>1.5</code>：默认值</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">q1, q3 = np.percentile(ndarray_object, [<span class="number">0.25</span>, <span class="number">0.75</span>])</span><br><span class="line">iqr = q3 - q1</span><br><span class="line">outliers = ndarray_object[(ndarray_object &lt; q1 - whis * iqr) | (ndarray_object &gt; q3 + whis * iqr)]</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过Z-score判定法求疑似异常值"><a href="#通过Z-score判定法求疑似异常值" class="headerlink" title="通过Z-score判定法求疑似异常值"></a>通过Z-score判定法求疑似异常值</h5><blockquote>
+<p><code>threshold</code>：判定异常值范围的系数</p>
+<blockquote>
+<p><code>3</code>：默认值</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mu, sigma = np.mean(ndarray_object), np.std(ndarray_object)</span><br><span class="line">outliers = ndarray_object[np.<span class="built_in">abs</span>((ndarray_object - mu) / sigma) &gt; threshold]</span><br></pre></td></tr></table></figure>
+
+<h3 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h3><blockquote>
+<p><code>&lt;num&gt;</code>：重复次数</p>
+</blockquote>
+<h4 id="每个元素重复生成组成新数组"><a href="#每个元素重复生成组成新数组" class="headerlink" title="每个元素重复生成组成新数组"></a>每个元素重复生成组成新数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.repeat(ndarray_object, &lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([1, 1, 2, 2, 3, 3])</span><br></pre></td></tr></table></figure>
+
+<h4 id="整组元素重复生成组成新数组"><a href="#整组元素重复生成组成新数组" class="headerlink" title="整组元素重复生成组成新数组"></a>整组元素重复生成组成新数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.tile(ndarray_object, &lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([1, 2, 3, 1, 2, 3])</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><h4 id="数组末尾追加元素"><a href="#数组末尾追加元素" class="headerlink" title="数组末尾追加元素"></a>数组末尾追加元素</h4><ul>
+<li>返回新的数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.append(ndarray_object, &lt;data&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数组指定位置插入元素"><a href="#数组指定位置插入元素" class="headerlink" title="数组指定位置插入元素"></a>数组指定位置插入元素</h4><ul>
+<li>返回新的数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.insert(ndarray_object, &lt;index&gt;, &lt;data&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="判定布尔值"><a href="#判定布尔值" class="headerlink" title="判定布尔值"></a>判定布尔值</h3><h4 id="判定数组中是否全是True"><a href="#判定数组中是否全是True" class="headerlink" title="判定数组中是否全是True"></a>判定数组中是否全是True</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">all</span>(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h4 id="判定数组中是否有True"><a href="#判定数组中是否有True" class="headerlink" title="判定数组中是否有True"></a>判定数组中是否有True</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">any</span>(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据条件摘取数据"><a href="#根据条件摘取数据" class="headerlink" title="根据条件摘取数据"></a>根据条件摘取数据</h3><ul>
+<li>返回新的数组对象</li>
+</ul>
+<h4 id="根据单个条件"><a href="#根据单个条件" class="headerlink" title="根据单个条件"></a>根据单个条件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object[筛选条件]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.extract(筛选条件, ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.where(筛选条件, 满足筛选条件的操作, 没有满足筛选条件的操作)</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据多个条件"><a href="#根据多个条件" class="headerlink" title="根据多个条件"></a>根据多个条件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = np.select([筛选条件<span class="number">1</span>, 筛选条件<span class="number">2</span>], [满足第<span class="number">1</span>个筛选条件后执行的操作, 满足第<span class="number">2</span>个筛选条件后执行的操作], 没有满足任何条件执行的操作)</span><br></pre></td></tr></table></figure>
+
+<h3 id="调整数组长度"><a href="#调整数组长度" class="headerlink" title="调整数组长度"></a>调整数组长度</h3><ul>
+<li>调整数组形状的同时调整数组长度</li>
+<li>返回新的数组对象</li>
+</ul>
+<blockquote>
+<p><code>&lt;shape&gt;</code>：新的形状，如果新的形状的长度大于旧的数组长度，则超出部分会重复使用原数组元素补齐</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.resize(ndarray_object, &lt;shape&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最小二乘解"><a href="#求最小二乘解" class="headerlink" title="求最小二乘解"></a>求最小二乘解</h3><ul>
+<li>最小二乘解，得到斜率和截距</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = np.linalg.lstsq(ndarray_object_1, ndarray_object_2)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多项式最小二乘拟合</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = np.polyfit(ndarray_object_1, ndarray_object_2, &lt;degree&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组的运算"><a href="#数组的运算" class="headerlink" title="数组的运算"></a>数组的运算</h2><h3 id="数组对象与标准数值运算"><a href="#数组对象与标准数值运算" class="headerlink" title="数组对象与标准数值运算"></a>数组对象与标准数值运算</h3><ul>
+<li>将所有元素与标准数值运算，得到新数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object + &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object - &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object * &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object / &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object % &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object ** &lt;data&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组对象与数组对象运算"><a href="#数组对象与数组对象运算" class="headerlink" title="数组对象与数组对象运算"></a>数组对象与数组对象运算</h3><ul>
+<li>将当前数组的所有元素与另一个数组的所有元素运算，得到新数组对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 + ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 - ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 * ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 / ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 % ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_ndarray_object = ndarray_object_1 ** ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<h3 id="一元函数"><a href="#一元函数" class="headerlink" title="一元函数"></a>一元函数</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>abs</code>、<code>fabs</code></td>
+<td>求绝对值</td>
+</tr>
+<tr>
+<td><code>sqrt</code></td>
+<td>求平方根</td>
+</tr>
+<tr>
+<td><code>square</code></td>
+<td>求平方</td>
+</tr>
+<tr>
+<td><code>exp</code></td>
+<td>计算e的指数</td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td>计算以e为底的对数</td>
+</tr>
+<tr>
+<td><code>log10</code></td>
+<td>计算以10为底的对数</td>
+</tr>
+<tr>
+<td><code>log2</code></td>
+<td>计算以2为底的对数</td>
+</tr>
+<tr>
+<td><code>sign</code></td>
+<td>符号函数，1正数，0零，-1负数</td>
+</tr>
+<tr>
+<td><code>ceil</code></td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td><code>floor</code></td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td><code>rint</code>、<code>rount</code></td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td><code>isnan</code></td>
+<td>判断是否不为数值，True是NaN，False是非NaN</td>
+</tr>
+<tr>
+<td><code>isfinite</code>、<code>isinf</code></td>
+<td>判断是否为无穷大</td>
+</tr>
+<tr>
+<td><code>cos</code>、<code>cosh</code>、<code>sin</code></td>
+<td>三角函数</td>
+</tr>
+<tr>
+<td><code>sinh</code>、<code>tan</code>、<code>tanh</code></td>
+<td>三角函数</td>
+</tr>
+<tr>
+<td><code>arccos</code>、<code>arccosh</code>、<code>arcsin</code></td>
+<td>反三角函数</td>
+</tr>
+<tr>
+<td><code>arcsinh</code>、<code>arctan</code>、<code>arctanh</code></td>
+<td>反三角函数</td>
+</tr>
+</tbody></table>
+<h3 id="二元函数"><a href="#二元函数" class="headerlink" title="二元函数"></a>二元函数</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>add</code></td>
+<td>求和</td>
+</tr>
+<tr>
+<td><code>subtract</code></td>
+<td>求差</td>
+</tr>
+<tr>
+<td><code>multiply</code></td>
+<td>求积</td>
+</tr>
+<tr>
+<td><code>divide</code></td>
+<td>求商</td>
+</tr>
+<tr>
+<td><code>floor_divide</code></td>
+<td>整除</td>
+</tr>
+<tr>
+<td><code>mod</code></td>
+<td>求模</td>
+</tr>
+<tr>
+<td><code>allclose</code></td>
+<td>两个数组是否相等</td>
+</tr>
+<tr>
+<td><code>power</code></td>
+<td>求x的y次幂</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td>求最大值</td>
+</tr>
+<tr>
+<td><code>fmum</code></td>
+<td>求最大值，忽略NaN</td>
+</tr>
+<tr>
+<td><code>minimum</code></td>
+<td>求最小值</td>
+</tr>
+<tr>
+<td><code>fmin</code></td>
+<td>求最小值，忽略NaN</td>
+</tr>
+<tr>
+<td><code>dot</code></td>
+<td>点积运算</td>
+</tr>
+<tr>
+<td><code>inner</code></td>
+<td>内积运算</td>
+</tr>
+<tr>
+<td><code>cross</code></td>
+<td>叉积运算</td>
+</tr>
+<tr>
+<td><code>outer</code></td>
+<td>外积运算</td>
+</tr>
+<tr>
+<td><code>intersect1d</code></td>
+<td>计算交集</td>
+</tr>
+<tr>
+<td><code>union1d</code></td>
+<td>计算并集</td>
+</tr>
+<tr>
+<td><code>setdiff1d</code></td>
+<td>计算差集</td>
+</tr>
+<tr>
+<td><code>setxor1d</code></td>
+<td>计算对称差集</td>
+</tr>
+<tr>
+<td><code>in1d</code></td>
+<td>返回x的值在y中是否存在，返回布尔值</td>
+</tr>
+</tbody></table>
+<h3 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h3><ul>
+<li>两个数组作运算需要保证形状相同</li>
+<li>如果两个数组的后缘维度相同，也可以正常运算，其他维度广播</li>
+<li>如果两个数组的后缘维度不同，但其中一方后缘维度为1，也可以正常运算，沿着为1的维度广播</li>
+</ul>
+<h2 id="点积运算"><a href="#点积运算" class="headerlink" title="点积运算"></a>点积运算</h2><ul>
+<li>计算向量的夹角，用于判定数据相似度</li>
+</ul>
+<p>$$<br>A \cdot B &#x3D; \sum a_ib_i<br>$$</p>
+<p>$$<br>A \cdot B &#x3D; |A||B|cos\theta<br>$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算向量夹角余弦值</span></span><br><span class="line">result = np.dot(x, y) / np.linalg.norm(x) / np.linalg.norm(y)</span><br><span class="line"><span class="comment"># 计算向量夹角弧度</span></span><br><span class="line">np.arccos(result)</span><br><span class="line"><span class="comment"># 计算向量夹角角度</span></span><br><span class="line">np.rad2deg(np.arccos(result))</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><ul>
+<li>官方不再建议使用矩阵对象，可能会在将来的版本删除矩阵对象，推荐使用二维数组表示矩阵</li>
+</ul>
+<h3 id="定义矩阵"><a href="#定义矩阵" class="headerlink" title="定义矩阵"></a>定义矩阵</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = np.matrix(<span class="string">&quot;1 2; 3 4&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组转换为矩阵"><a href="#数组转换为矩阵" class="headerlink" title="数组转换为矩阵"></a>数组转换为矩阵</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.mat(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = np.asmatrix(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵对象的属性"><a href="#矩阵对象的属性" class="headerlink" title="矩阵对象的属性"></a>矩阵对象的属性</h3><h4 id="获取矩阵的数组"><a href="#获取矩阵的数组" class="headerlink" title="获取矩阵的数组"></a>获取矩阵的数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.A</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取矩阵的一维数组"><a href="#获取矩阵的一维数组" class="headerlink" title="获取矩阵的一维数组"></a>获取矩阵的一维数组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.A1</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取矩阵的转置"><a href="#获取矩阵的转置" class="headerlink" title="获取矩阵的转置"></a>获取矩阵的转置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.T</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取逆矩阵"><a href="#获取逆矩阵" class="headerlink" title="获取逆矩阵"></a>获取逆矩阵</h4><ul>
+<li>逆矩阵：对角线是1，其他位置是0</li>
+<li>奇异矩阵：没有逆矩阵的矩阵，奇异矩阵的行列式的值为0</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.I</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵对象的矩阵运算"><a href="#矩阵对象的矩阵运算" class="headerlink" title="矩阵对象的矩阵运算"></a>矩阵对象的矩阵运算</h3><h4 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h4><ul>
+<li>m1的列数等于m2的行数才能进行矩阵乘法运算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">m1 = np.matrix(<span class="string">&quot;1 2; 3 4; 5 6&quot;</span>)</span><br><span class="line">m2 = np.matrix(<span class="string">&quot;1 2 3; 4 5 6&quot;</span>)</span><br><span class="line"></span><br><span class="line">m = m1 * m2</span><br></pre></td></tr></table></figure>
+
+<h5 id="计算单位矩阵"><a href="#计算单位矩阵" class="headerlink" title="计算单位矩阵"></a>计算单位矩阵</h5><ul>
+<li>单位矩阵：矩阵的逆矩阵与矩阵相乘</li>
+</ul>
+<p>$$<br>A \cdot A^{-1} &#x3D; I<br>$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = m * m.I</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组对象的矩阵运算"><a href="#数组对象的矩阵运算" class="headerlink" title="数组对象的矩阵运算"></a>数组对象的矩阵运算</h3><h4 id="矩阵乘法-1"><a href="#矩阵乘法-1" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ndarray_object_1 = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">ndarray_object_2 = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"></span><br><span class="line">result = ndarray_object_1 @ ndarray_object_2</span><br></pre></td></tr></table></figure>
+
+<h4 id="求逆矩阵"><a href="#求逆矩阵" class="headerlink" title="求逆矩阵"></a>求逆矩阵</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = np.linalg.inv(ndarray_object)</span><br></pre></td></tr></table></figure>
+
+<h4 id="解线性方程组"><a href="#解线性方程组" class="headerlink" title="解线性方程组"></a>解线性方程组</h4><blockquote>
+<p><code>A</code>：系数矩阵<br><code>Ab</code>：增广矩阵</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = np.linalg.solve(A, b)</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵对象的方法"><a href="#矩阵对象的方法" class="headerlink" title="矩阵对象的方法"></a>矩阵对象的方法</h3><h4 id="计算矩阵的行列式"><a href="#计算矩阵的行列式" class="headerlink" title="计算矩阵的行列式"></a>计算矩阵的行列式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.det(m)</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算矩阵的秩"><a href="#计算矩阵的秩" class="headerlink" title="计算矩阵的秩"></a>计算矩阵的秩</h4><ul>
+<li>秩：线性无关的向量的个数</li>
+<li>满秩：矩阵行数等于秩</li>
+<li>非满秩：矩阵行数不等于秩</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.matrix_rank(m)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV18S4y1H7Bg/">哔哩哔哩——骆昊jackfrued</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/22/Python3%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/" rel="prev" title="【笔记】Python3的自定义排序">
+                  <i class="fa fa-angle-left"></i> 【笔记】Python3的自定义排序
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/23/WindowsTerminal%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】WindowsTerminal安装笔记">
+                  【笔记】WindowsTerminal安装笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

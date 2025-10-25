@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言VB的控件学习笔记 控件的属性既可以通过图形化界面修改，也可以通过代码修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】VB的控件">
+<meta property="og:url" content="https://loli.fj.cn/2022/06/28/VB%E7%9A%84%E6%8E%A7%E4%BB%B6/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言VB的控件学习笔记 控件的属性既可以通过图形化界面修改，也可以通过代码修改">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-28T02:27:52.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.929Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="VisualBasic">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/06/28/VB%E7%9A%84%E6%8E%A7%E4%BB%B6/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/06/28/VB%E7%9A%84%E6%8E%A7%E4%BB%B6/","path":"2022/06/28/VB的控件/","title":"【笔记】VB的控件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】VB的控件 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9A%E7%94%A8%E5%B1%9E%E6%80%A7%E5%92%8C%E9%BB%98%E8%AE%A4%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">控件对象的通用属性和默认属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9A%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">对象的通用属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%BB%98%E8%AE%A4%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">对象的默认属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E4%BD%93%EF%BC%88Form%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">窗体（Form）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AA%97%E4%BD%93%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.3.1.</span> <span class="nav-text">移动窗体的位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%88Label%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">标签（Label）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-1"><span class="nav-number">4.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6-1"><span class="nav-number">4.2.</span> <span class="nav-text">事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8%EF%BC%88Timer%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">计时器（Timer）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-2"><span class="nav-number">5.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6-2"><span class="nav-number">5.2.</span> <span class="nav-text">事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86%EF%BC%88Text%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">文本框（Text）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-3"><span class="nav-number">6.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6-3"><span class="nav-number">6.2.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">6.3.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%8C%89%E9%92%AE%EF%BC%88Command-Button%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">命令按钮（Command Button）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-4"><span class="nav-number">7.1.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%EF%BC%88Image%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">图片（Image）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-5"><span class="nav-number">8.1.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%A1%86%EF%BC%88Picture-Box%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">图片框（Picture Box）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-6"><span class="nav-number">9.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">9.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Print"><span class="nav-number">9.2.1.</span> <span class="nav-text">Print</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C%E6%98%BE%E7%A4%BA"><span class="nav-number">9.2.1.1.</span> <span class="nav-text">自动换行显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E6%8D%A2%E8%A1%8C%E6%98%BE%E7%A4%BA"><span class="nav-number">9.2.1.2.</span> <span class="nav-text">不换行显示</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E6%8D%A2%E8%A1%8C%E6%98%BE%E7%A4%BA"><span class="nav-number">9.2.1.2.1.</span> <span class="nav-text">手动换行显示</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%A1%86-%EF%BC%88ListBox%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">列表框 （ListBox）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-7"><span class="nav-number">10.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-3"><span class="nav-number">10.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E5%88%97%E8%A1%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%88%97%E8%A1%A8%E9%A1%B9"><span class="nav-number">10.2.1.</span> <span class="nav-text">向列表中添加列表项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%91%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0"><span class="nav-number">10.2.1.1.</span> <span class="nav-text">向列表末尾追加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E5%A4%84%E6%8F%92%E5%85%A5"><span class="nav-number">10.2.1.2.</span> <span class="nav-text">在指定索引处插入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E7%9A%84%E6%89%80%E6%9C%89%E5%88%97%E8%A1%A8%E9%A1%B9"><span class="nav-number">10.2.2.</span> <span class="nav-text">删除列表的所有列表项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%88%97%E8%A1%A8%E9%A1%B9"><span class="nav-number">10.2.3.</span> <span class="nav-text">删除指定列表项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%80%89%E4%B8%AD%E7%9A%84%E5%88%97%E8%A1%A8%E7%AE%B1"><span class="nav-number">10.2.3.1.</span> <span class="nav-text">删除选中的列表箱</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%A1%86%EF%BC%88ComboBox%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">组合框（ComboBox）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-8"><span class="nav-number">11.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6-4"><span class="nav-number">11.2.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E6%8B%89%E7%BB%84%E5%90%88%E6%A1%86"><span class="nav-number">11.2.1.</span> <span class="nav-text">下拉组合框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%BB%84%E5%90%88%E6%A1%86"><span class="nav-number">11.2.2.</span> <span class="nav-text">简单组合框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8%E6%A1%86"><span class="nav-number">11.2.3.</span> <span class="nav-text">下拉列表框</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-4"><span class="nav-number">11.3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E5%88%97%E8%A1%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%88%97%E8%A1%A8%E9%A1%B9-1"><span class="nav-number">11.3.1.</span> <span class="nav-text">向列表中添加列表项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%91%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0-1"><span class="nav-number">11.3.1.1.</span> <span class="nav-text">向列表末尾追加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E5%A4%84%E6%8F%92%E5%85%A5-1"><span class="nav-number">11.3.1.2.</span> <span class="nav-text">在指定索引处插入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E7%9A%84%E6%89%80%E6%9C%89%E5%88%97%E8%A1%A8%E9%A1%B9-1"><span class="nav-number">11.3.2.</span> <span class="nav-text">删除列表的所有列表项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%88%97%E8%A1%A8%E9%A1%B9-1"><span class="nav-number">11.3.3.</span> <span class="nav-text">删除指定列表项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%80%89%E4%B8%AD%E7%9A%84%E5%88%97%E8%A1%A8%E7%AE%B1-1"><span class="nav-number">11.3.3.1.</span> <span class="nav-text">删除选中的列表箱</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/06/28/VB%E7%9A%84%E6%8E%A7%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】VB的控件 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】VB的控件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-28 10:27:52" itemprop="dateCreated datePublished" datetime="2022-06-28T10:27:52+08:00">2022-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/VisualBasic%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">VisualBasic学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>VB的控件学习笔记</p>
+<p>控件的属性既可以通过图形化界面修改，也可以通过代码修改</p>
+<span id="more"></span>
+
+<h2 id="控件对象的通用属性和默认属性"><a href="#控件对象的通用属性和默认属性" class="headerlink" title="控件对象的通用属性和默认属性"></a>控件对象的通用属性和默认属性</h2><h3 id="对象的通用属性"><a href="#对象的通用属性" class="headerlink" title="对象的通用属性"></a>对象的通用属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+<th>数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name</td>
+<td>对象的名称。在建立对象时由系统为对象提供一个默认的名称，名称作为对象的标识在程序中引用</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>Caption</td>
+<td>对象的标题</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>对象的宽</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>对象的高</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>Top</td>
+<td>顶边距</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>Left</td>
+<td>左边距</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>Enabled</td>
+<td>可用性</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>Visible</td>
+<td>可见性</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>ForeColor</td>
+<td>前景色。指的是对象中文字的颜色</td>
+<td>颜色</td>
+</tr>
+<tr>
+<td>BackColor</td>
+<td>前景色。指的是对象中非文字的颜色</td>
+<td>颜色</td>
+</tr>
+<tr>
+<td>TabIndex</td>
+<td>Tab的切换顺序，索引从0开始</td>
+<td>整数型</td>
+</tr>
+<tr>
+<td>Font</td>
+<td>字体。有以下6个具体属性</td>
+<td></td>
+</tr>
+<tr>
+<td>FontName</td>
+<td>字体</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>FontSize</td>
+<td>字号</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>FontBold</td>
+<td>粗体</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>FontItalic</td>
+<td>斜体</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>FontStrikethru</td>
+<td>删除线</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>FontUnderline</td>
+<td>下划线</td>
+<td>布尔型</td>
+</tr>
+</tbody></table>
+<h3 id="对象的默认属性"><a href="#对象的默认属性" class="headerlink" title="对象的默认属性"></a>对象的默认属性</h3><ul>
+<li>对象的默认属性指的是，直接调用对象实际上是调用了对象的默认属性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>默认属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文本框</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>标签</td>
+<td>Caption</td>
+</tr>
+<tr>
+<td>命令按钮</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>单选框</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>复选框</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>图像框</td>
+<td>Picture</td>
+</tr>
+</tbody></table>
+<h2 id="窗体（Form）"><a href="#窗体（Form）" class="headerlink" title="窗体（Form）"></a>窗体（Form）</h2><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Caption</td>
+<td>窗体的标题</td>
+</tr>
+<tr>
+<td>BackColor</td>
+<td>背景色</td>
+</tr>
+<tr>
+<td>ForeColor</td>
+<td>前景色</td>
+</tr>
+<tr>
+<td>MaxButton</td>
+<td>值为True时（缺省值），有最大化按钮；值为False时，无最大化按钮</td>
+</tr>
+<tr>
+<td>MinButton</td>
+<td>值为True时（缺省值），有最小化按钮；值为False时，无最小化按钮</td>
+</tr>
+<tr>
+<td>ControlBox</td>
+<td>值为True时（缺省值），可以打开左上角控制菜单；值为False时，不可以打开左上角控制菜单</td>
+</tr>
+<tr>
+<td>Picture</td>
+<td>设置窗体背景图</td>
+</tr>
+<tr>
+<td>BorderStyle</td>
+<td>值为0时，不可以移动，不可以改变大小；值为1时，可以移动，不可以改变大小；值为2时（缺省值），可以移动，可以改变大小；值为3时，可以移动，不可以改变大小</td>
+</tr>
+<tr>
+<td>WindowState</td>
+<td>值为0时（缺省值），正常窗口；值为1时，最大化窗口；值为2时，最小化窗口</td>
+</tr>
+</tbody></table>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Click</td>
+<td>单击事件</td>
+</tr>
+<tr>
+<td>DblClick</td>
+<td>双击事件</td>
+</tr>
+<tr>
+<td>Load</td>
+<td>载入事件。启动窗体会自动触发</td>
+</tr>
+<tr>
+<td>Activate</td>
+<td>活动事件。窗体变为活动窗体会自动触发</td>
+</tr>
+</tbody></table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Print</td>
+<td>显示文本内容</td>
+</tr>
+<tr>
+<td>Cls</td>
+<td>清除窗体内容</td>
+</tr>
+<tr>
+<td>Move()</td>
+<td>移动窗体位置</td>
+</tr>
+</tbody></table>
+<h4 id="移动窗体的位置"><a href="#移动窗体的位置" class="headerlink" title="移动窗体的位置"></a>移动窗体的位置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对象名.Move(左边距)</span><br><span class="line"></span><br><span class="line">对象名.Move(左边距, 上边距, 宽, 高)</span><br></pre></td></tr></table></figure>
+
+<h2 id="标签（Label）"><a href="#标签（Label）" class="headerlink" title="标签（Label）"></a>标签（Label）</h2><ul>
+<li>展示一个标签，在标签上展示文字</li>
+</ul>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Caption</td>
+<td>标签的标题</td>
+</tr>
+<tr>
+<td>AutoSize</td>
+<td>值为False时（缺省值），不自动调整；值为True时，自动调整大小</td>
+</tr>
+<tr>
+<td>BackColor</td>
+<td>背景色</td>
+</tr>
+<tr>
+<td>ForeColor</td>
+<td>前景色</td>
+</tr>
+<tr>
+<td>Font</td>
+<td>字体属性，缺省值为宋体、常规、小五</td>
+</tr>
+<tr>
+<td>BackStyle</td>
+<td>值为1时（缺省值），不透明；值为0时，透明</td>
+</tr>
+<tr>
+<td>BorderStyle</td>
+<td>值为0时（缺省值），无边框；值为1时，有边框</td>
+</tr>
+</tbody></table>
+<h3 id="事件-1"><a href="#事件-1" class="headerlink" title="事件"></a>事件</h3><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Click</td>
+<td>单击事件</td>
+</tr>
+<tr>
+<td>DblClick</td>
+<td>双击事件</td>
+</tr>
+</tbody></table>
+<h2 id="计时器（Timer）"><a href="#计时器（Timer）" class="headerlink" title="计时器（Timer）"></a>计时器（Timer）</h2><ul>
+<li>有规律的定时执行指定的代码</li>
+</ul>
+<h3 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Interval</td>
+<td>时间间隔，单位毫秒</td>
+</tr>
+<tr>
+<td>Enabled</td>
+<td>值为True时（缺省值），计时器开始工作；值为False时，计时器停止工作</td>
+</tr>
+</tbody></table>
+<h3 id="事件-2"><a href="#事件-2" class="headerlink" title="事件"></a>事件</h3><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Timer</td>
+<td>单位时间间隔指定的操作</td>
+</tr>
+</tbody></table>
+<h2 id="文本框（Text）"><a href="#文本框（Text）" class="headerlink" title="文本框（Text）"></a>文本框（Text）</h2><ul>
+<li>可以编辑文字的文本框</li>
+</ul>
+<h3 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text</td>
+<td>文本内容</td>
+</tr>
+<tr>
+<td>Enabled</td>
+<td>值为True时（缺省值），启动文本框；值为False时，关闭文本框</td>
+</tr>
+<tr>
+<td>Font</td>
+<td>设置字体</td>
+</tr>
+<tr>
+<td>MultiLine</td>
+<td>值为False时（缺省值），单行显示；值为True时，多行显示</td>
+</tr>
+<tr>
+<td>ScrollBars</td>
+<td>在启动多行属性之后可以设置滚动条。值为0时（缺省值），不显示滚动条；值为1时，显示水平滚动条；值为2时，显示垂直滚动条；值为3时，同时显示水平滚动条和垂直滚动条</td>
+</tr>
+<tr>
+<td>Locked</td>
+<td>值为False时（确定值），文本框的内容允许修改；值为True时，文本框的内容不允许修改</td>
+</tr>
+<tr>
+<td>PasswordChar</td>
+<td>如果这是密码框，可以设置字符替代符，通常设置为<code>*</code></td>
+</tr>
+</tbody></table>
+<h3 id="事件-3"><a href="#事件-3" class="headerlink" title="事件"></a>事件</h3><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>KeyPress</td>
+<td>键盘按下事件，传递键码值作为参数</td>
+</tr>
+<tr>
+<td>GetFocus</td>
+<td>获取焦点事件</td>
+</tr>
+<tr>
+<td>LostFocus</td>
+<td>失去焦点事件</td>
+</tr>
+</tbody></table>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SetFocus</td>
+<td>将当前对象立即设置为焦点</td>
+</tr>
+</tbody></table>
+<h2 id="命令按钮（Command-Button）"><a href="#命令按钮（Command-Button）" class="headerlink" title="命令按钮（Command Button）"></a>命令按钮（Command Button）</h2><h3 id="属性-4"><a href="#属性-4" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Caption</td>
+<td>标签的内容。如果在某个英文字母前加关键字<code>&amp;</code>，则这个英文字母就成为了这个按钮的快捷键，按<code>alt</code>+<code>这个英文字母</code>相当于按下这个按钮</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>值为0时（缺省值），标准样式；值为1时，图形样式</td>
+</tr>
+<tr>
+<td>Picture</td>
+<td>按钮的背景图片</td>
+</tr>
+<tr>
+<td>ToolTipText</td>
+<td>提示文本。在鼠标放在这个按钮上时会显示提示文本</td>
+</tr>
+</tbody></table>
+<h2 id="图片（Image）"><a href="#图片（Image）" class="headerlink" title="图片（Image）"></a>图片（Image）</h2><h3 id="属性-5"><a href="#属性-5" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Picture</td>
+<td>设置图片</td>
+</tr>
+<tr>
+<td>Stretch</td>
+<td>值为False时（缺省值），不自动调整大小；值为True时，跟随图片的大小自动调整控件大小</td>
+</tr>
+</tbody></table>
+<h2 id="图片框（Picture-Box）"><a href="#图片框（Picture-Box）" class="headerlink" title="图片框（Picture Box）"></a>图片框（Picture Box）</h2><h3 id="属性-6"><a href="#属性-6" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Picture</td>
+<td>设置图片</td>
+</tr>
+<tr>
+<td>AutoSize</td>
+<td>值为False时（缺省值），不自动调整大小；值为True时，跟随图片的大小自动调整控件大小</td>
+</tr>
+</tbody></table>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Print()</td>
+<td>在图片框内输出文字</td>
+</tr>
+</tbody></table>
+<h4 id="Print"><a href="#Print" class="headerlink" title="Print"></a>Print</h4><h5 id="自动换行显示"><a href="#自动换行显示" class="headerlink" title="自动换行显示"></a>自动换行显示</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对象名.Print(输出的文字)</span><br><span class="line">对象名.Print(输出的文字)</span><br></pre></td></tr></table></figure>
+
+<h5 id="不换行显示"><a href="#不换行显示" class="headerlink" title="不换行显示"></a>不换行显示</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.Print(输出的文字); 对象名.Print(输出的文字)</span><br></pre></td></tr></table></figure>
+
+<h6 id="手动换行显示"><a href="#手动换行显示" class="headerlink" title="手动换行显示"></a>手动换行显示</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.Print(输出的文字); &amp; vbCrLf &amp; 对象名.Print(输出的文字)</span><br></pre></td></tr></table></figure>
+
+<h2 id="列表框-（ListBox）"><a href="#列表框-（ListBox）" class="headerlink" title="列表框 （ListBox）"></a>列表框 （ListBox）</h2><h3 id="属性-7"><a href="#属性-7" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text</td>
+<td>当前被选中项的文本内容</td>
+</tr>
+<tr>
+<td>List</td>
+<td>所有列表项数组</td>
+</tr>
+<tr>
+<td>ListIndex</td>
+<td>当前被选中项的索引，如果没有被选中项则返回-1</td>
+</tr>
+<tr>
+<td>ListCount</td>
+<td>所有列表项的总个数</td>
+</tr>
+</tbody></table>
+<h3 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h3><h4 id="向列表中添加列表项"><a href="#向列表中添加列表项" class="headerlink" title="向列表中添加列表项"></a>向列表中添加列表项</h4><h5 id="向列表末尾追加"><a href="#向列表末尾追加" class="headerlink" title="向列表末尾追加"></a>向列表末尾追加</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.AddItem(文本内容)</span><br></pre></td></tr></table></figure>
+
+<h5 id="在指定索引处插入"><a href="#在指定索引处插入" class="headerlink" title="在指定索引处插入"></a>在指定索引处插入</h5><ul>
+<li>索引从0开始</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.AddItem(文本内容, 索引)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除列表的所有列表项"><a href="#删除列表的所有列表项" class="headerlink" title="删除列表的所有列表项"></a>删除列表的所有列表项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.Clear()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除指定列表项"><a href="#删除指定列表项" class="headerlink" title="删除指定列表项"></a>删除指定列表项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.RemoveItem(索引)</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除选中的列表箱"><a href="#删除选中的列表箱" class="headerlink" title="删除选中的列表箱"></a>删除选中的列表箱</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.RemoveItem(对象名.ListIndex)</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合框（ComboBox）"><a href="#组合框（ComboBox）" class="headerlink" title="组合框（ComboBox）"></a>组合框（ComboBox）</h2><h3 id="属性-8"><a href="#属性-8" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text</td>
+<td>当前被选中项的文本内容</td>
+</tr>
+<tr>
+<td>List</td>
+<td>所有列表项数组</td>
+</tr>
+<tr>
+<td>ListIndex</td>
+<td>当前被选中项的索引，如果没有被选中项则返回-1</td>
+</tr>
+<tr>
+<td>ListCount</td>
+<td>所有列表项的总个数</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>值为0时（缺省值），下拉组合框，可以输入文本，同时可以选择选项；值为1时，简单组合框，可以输入文本，同时可以选择选项；值为2时，下拉列表框，不可以输入文本，只能选择选项</td>
+</tr>
+</tbody></table>
+<h3 id="事件-4"><a href="#事件-4" class="headerlink" title="事件"></a>事件</h3><h4 id="下拉组合框"><a href="#下拉组合框" class="headerlink" title="下拉组合框"></a>下拉组合框</h4><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Change</td>
+<td>改变数据</td>
+</tr>
+<tr>
+<td>DropDown</td>
+<td>展开列表</td>
+</tr>
+</tbody></table>
+<h4 id="简单组合框"><a href="#简单组合框" class="headerlink" title="简单组合框"></a>简单组合框</h4><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DbClick</td>
+<td>点击元素</td>
+</tr>
+<tr>
+<td>Change</td>
+<td>改变数据</td>
+</tr>
+</tbody></table>
+<h4 id="下拉列表框"><a href="#下拉列表框" class="headerlink" title="下拉列表框"></a>下拉列表框</h4><table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DropDown</td>
+<td>展开列表</td>
+</tr>
+</tbody></table>
+<h3 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h3><h4 id="向列表中添加列表项-1"><a href="#向列表中添加列表项-1" class="headerlink" title="向列表中添加列表项"></a>向列表中添加列表项</h4><h5 id="向列表末尾追加-1"><a href="#向列表末尾追加-1" class="headerlink" title="向列表末尾追加"></a>向列表末尾追加</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.AddItem(文本内容)</span><br></pre></td></tr></table></figure>
+
+<h5 id="在指定索引处插入-1"><a href="#在指定索引处插入-1" class="headerlink" title="在指定索引处插入"></a>在指定索引处插入</h5><ul>
+<li>索引从0开始</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.AddItem(文本内容, 索引)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除列表的所有列表项-1"><a href="#删除列表的所有列表项-1" class="headerlink" title="删除列表的所有列表项"></a>删除列表的所有列表项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.Clear()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除指定列表项-1"><a href="#删除指定列表项-1" class="headerlink" title="删除指定列表项"></a>删除指定列表项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.RemoveItem(索引)</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除选中的列表箱-1"><a href="#删除选中的列表箱-1" class="headerlink" title="删除选中的列表箱"></a>删除选中的列表箱</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.RemoveItem(对象名.ListIndex)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1364y1u7XX/">哔哩哔哩——教达优</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VisualBasic/" rel="tag"># VisualBasic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/28/VB%E7%9A%84%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/" rel="prev" title="【笔记】VB的分支语句">
+                  <i class="fa fa-angle-left"></i> 【笔记】VB的分支语句
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/28/VB%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="next" title="【笔记】VB的数据类型">
+                  【笔记】VB的数据类型 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

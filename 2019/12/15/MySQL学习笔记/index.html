@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言MySQL原本是一个开放源码的关系数据库管理系统，原开发者为瑞典的MySQL AB公司，该公司于2008年被昇阳微系统（Sun Microsystems）收购。2009年，甲骨文公司（Oracle）收购昇阳微系统公司，MySQL成为Oracle旗下产品。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】MySQL学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2019/12/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言MySQL原本是一个开放源码的关系数据库管理系统，原开发者为瑞典的MySQL AB公司，该公司于2008年被昇阳微系统（Sun Microsystems）收购。2009年，甲骨文公司（Oracle）收购昇阳微系统公司，MySQL成为Oracle旗下产品。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-15T01:06:01.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.898Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2019/12/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2019/12/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2019/12/15/MySQL学习笔记/","title":"【笔记】MySQL学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】MySQL学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">2.1.</span> <span class="nav-text">单行注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">2.2.</span> <span class="nav-text">多行注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9"><span class="nav-number">3.</span> <span class="nav-text">帮助</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%B8%AE%E5%8A%A9"><span class="nav-number">3.1.</span> <span class="nav-text">查看所有帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%87%BD%E6%95%B0%E5%B8%AE%E5%8A%A9"><span class="nav-number">3.2.</span> <span class="nav-text">查看所有函数帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E5%86%85%E5%AE%B9%E7%9A%84%E5%B8%AE%E5%8A%A9"><span class="nav-number">3.3.</span> <span class="nav-text">查看指定内容的帮助</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">查看数据库状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">对数据库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">查询所有数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.2.</span> <span class="nav-text">创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">5.2.1.</span> <span class="nav-text">同时指定字符集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">5.2.2.</span> <span class="nav-text">同时指定数据库和数据表的字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#utf8"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">utf8</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#utf8mb4"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">utf8mb4</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="nav-number">5.2.3.</span> <span class="nav-text">如果不存在</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.2.4.</span> <span class="nav-text">查看创建数据库语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.3.</span> <span class="nav-text">进入数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E8%BF%9B%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.3.1.</span> <span class="nav-text">查看当前进入的数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.4.</span> <span class="nav-text">删除数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%AD%98%E5%9C%A8"><span class="nav-number">5.4.1.</span> <span class="nav-text">如果存在</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%BB%98%E8%AE%A4%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">5.5.</span> <span class="nav-text">修改数据库的默认字符集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E6%A0%A1%E5%AF%B9%E8%A7%84%E5%88%99"><span class="nav-number">5.6.</span> <span class="nav-text">修改默认校对规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">对数据表的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">6.1.</span> <span class="nav-text">创建数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">6.2.</span> <span class="nav-text">查询所有数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">6.3.</span> <span class="nav-text">查询数据表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89"><span class="nav-number">6.4.</span> <span class="nav-text">查询数据表结构（详细）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%8D"><span class="nav-number">6.5.</span> <span class="nav-text">修改数据表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">6.6.</span> <span class="nav-text">删除数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E8%A1%A8"><span class="nav-number">6.7.</span> <span class="nav-text">复制表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E5%A4%8D%E5%88%B6%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">6.7.1.</span> <span class="nav-text">只复制表结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E8%A1%A8%E7%BB%93%E6%9E%84%E5%92%8C%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">6.7.2.</span> <span class="nav-text">复制表结构和所有数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%AD%97%E6%AE%B5%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">对字段的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%AD%97%E6%AE%B5"><span class="nav-number">7.1.</span> <span class="nav-text">增加字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5"><span class="nav-number">7.2.</span> <span class="nav-text">删除字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.3.</span> <span class="nav-text">修改数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5"><span class="nav-number">7.4.</span> <span class="nav-text">修改字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="nav-number">7.4.1.</span> <span class="nav-text">修改字段名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E6%8E%92%E5%88%97%E4%BD%8D%E7%BD%AE"><span class="nav-number">7.4.2.</span> <span class="nav-text">修改字段排列位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">8.</span> <span class="nav-text">对数据的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">8.1.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%88%E5%A4%9A%E6%9D%A1%EF%BC%89"><span class="nav-number">8.2.</span> <span class="nav-text">插入数据（多条）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%88%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5%EF%BC%89"><span class="nav-number">8.3.</span> <span class="nav-text">插入数据（所有字段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">8.4.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E6%8F%92%E5%85%A5"><span class="nav-number">8.5.</span> <span class="nav-text">覆盖插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">8.6.</span> <span class="nav-text">删除所有数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">8.7.</span> <span class="nav-text">删除指定数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">8.8.</span> <span class="nav-text">查询所有数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE"><span class="nav-number">8.9.</span> <span class="nav-text">查询部分数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E6%9F%A5%E8%AF%A2%E5%88%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%A4%B4%E5%88%AB%E5%90%8D"><span class="nav-number">8.10.</span> <span class="nav-text">为查询到的数据定义表头别名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%86%99"><span class="nav-number">8.10.1.</span> <span class="nav-text">简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%90%8D%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D"><span class="nav-number">8.10.2.</span> <span class="nav-text">表名也可以设置别名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%9C%80%E6%B1%82%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">8.11.</span> <span class="nav-text">按需求查看数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.11.1.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="nav-number">8.11.1.1.</span> <span class="nav-text">比较运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E6%9D%A1%E4%BB%B6"><span class="nav-number">8.11.1.2.</span> <span class="nav-text">多重条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E8%8C%83%E5%9B%B4"><span class="nav-number">8.11.1.3.</span> <span class="nav-text">确定范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E9%9B%86%E5%90%88"><span class="nav-number">8.11.1.4.</span> <span class="nav-text">确定集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D"><span class="nav-number">8.11.1.5.</span> <span class="nav-text">字符匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%A9%BA%E5%80%BC"><span class="nav-number">8.11.1.6.</span> <span class="nav-text">测试空值</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A9%BA%E5%80%BC%E6%9B%BF%E6%8D%A2"><span class="nav-number">8.11.1.6.1.</span> <span class="nav-text">空值替换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">8.11.2.</span> <span class="nav-text">运算符的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E8%A7%84%E5%88%99%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">8.11.2.1.</span> <span class="nav-text">按规则查询数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E8%A7%84%E5%88%99%E6%9B%BF%E6%8D%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">8.11.2.2.</span> <span class="nav-text">按规则替换数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%87%8D%E6%96%B0%E8%AE%A1%E7%AE%97%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">8.11.2.3.</span> <span class="nav-text">查询重新计算后的数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%87%8D%E5%A4%8D%E7%BB%93%E6%9E%9C"><span class="nav-number">8.11.2.4.</span> <span class="nav-text">不显示重复结果</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%88%E5%A4%9A%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">8.11.3.</span> <span class="nav-text">聚合函数（多行函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E5%92%8C"><span class="nav-number">8.11.3.1.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-number">8.11.3.2.</span> <span class="nav-text">求平均值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="nav-number">8.11.3.3.</span> <span class="nav-text">求最大值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="nav-number">8.11.3.4.</span> <span class="nav-text">求最小值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%80%BB%E6%95%B0"><span class="nav-number">8.11.3.5.</span> <span class="nav-text">计算总数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E6%80%BB%E8%A1%8C%E6%95%B0"><span class="nav-number">8.11.3.5.1.</span> <span class="nav-text">计算所有数据总行数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">8.11.4.</span> <span class="nav-text">聚合函数的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%AE%A1%E7%AE%97%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">8.11.4.1.</span> <span class="nav-text">查询计算后的数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.11.4.2.</span> <span class="nav-text">分组查询</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AD%9B%E9%80%89"><span class="nav-number">8.11.4.2.1.</span> <span class="nav-text">筛选</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">8.11.4.3.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%87%E5%BA%8F%EF%BC%88%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%EF%BC%89"><span class="nav-number">8.11.4.3.1.</span> <span class="nav-text">升序（从小到大）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%99%8D%E5%BA%8F%EF%BC%88%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%EF%BC%89"><span class="nav-number">8.11.4.3.2.</span> <span class="nav-text">降序（从大到小）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">8.11.4.3.3.</span> <span class="nav-text">多重排序</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">8.12.</span> <span class="nav-text">多表查询（连接查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">8.12.1.</span> <span class="nav-text">内连接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%98%BE%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">8.12.1.1.</span> <span class="nav-text">显式内连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">8.12.1.2.</span> <span class="nav-text">隐式内连接</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9C%81%E7%95%A5INNER%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">8.12.1.2.1.</span> <span class="nav-text">省略INNER关键字</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">8.12.2.</span> <span class="nav-text">外连接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.12.2.1.</span> <span class="nav-text">左外连接查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.12.2.2.</span> <span class="nav-text">右外连接查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89%E5%85%A8%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.12.3.</span> <span class="nav-text">（模拟）全外连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D%EF%BC%88%E5%8F%96%E4%BA%A4%E9%9B%86%EF%BC%89"><span class="nav-number">8.12.3.1.</span> <span class="nav-text">去重（取交集）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E5%8E%BB%E9%87%8D%EF%BC%88%E5%8F%96%E5%B9%B6%E9%9B%86%EF%BC%89"><span class="nav-number">8.12.3.2.</span> <span class="nav-text">不去重（取并集）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.13.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.14.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%98%AF%E4%B8%80%E8%A1%8C%E4%B8%80%E5%88%97"><span class="nav-number">8.15.</span> <span class="nav-text">子查询结果是一行一列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E6%98%AF%E5%A4%9A%E8%A1%8C%E4%B8%80%E5%88%97"><span class="nav-number">8.16.</span> <span class="nav-text">子查询的结果是多行一列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%98%AF%E5%A4%9A%E8%A1%8C%E5%A4%9A%E5%88%97"><span class="nav-number">8.17.</span> <span class="nav-text">子查询结果是多行多列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%A7%86%E5%9B%BE%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">9.</span> <span class="nav-text">对视图的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%86%E5%9B%BE"><span class="nav-number">9.1.</span> <span class="nav-text">创建视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E8%A7%86%E5%9B%BE"><span class="nav-number">9.2.</span> <span class="nav-text">重建视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%86%E5%9B%BE%EF%BC%88%E5%BC%BA%E5%88%B6%EF%BC%89"><span class="nav-number">9.3.</span> <span class="nav-text">创建视图（强制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E8%A7%86%E5%9B%BE"><span class="nav-number">9.4.</span> <span class="nav-text">查询所有视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A7%86%E5%9B%BE%E7%BB%93%E6%9E%84"><span class="nav-number">9.5.</span> <span class="nav-text">查询视图结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A7%86%E5%9B%BE"><span class="nav-number">9.6.</span> <span class="nav-text">修改视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A7%86%E5%9B%BE"><span class="nav-number">9.7.</span> <span class="nav-text">删除视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A7%86%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.8.</span> <span class="nav-text">查询视图中的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE-1"><span class="nav-number">9.9.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE-1"><span class="nav-number">9.10.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">9.11.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%B4%A2%E5%BC%95%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">10.</span> <span class="nav-text">对索引的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%B4%A2%E5%BC%95"><span class="nav-number">10.1.</span> <span class="nav-text">查看所有索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">10.2.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">10.3.</span> <span class="nav-text">删除索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">11.</span> <span class="nav-text">对约束的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">11.1.</span> <span class="nav-text">操作约束的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%BB%BA%E8%A1%A8%E6%97%B6%E6%B7%BB%E5%8A%A0%E7%BA%A6%E6%9D%9F%EF%BC%88%E7%9B%B4%E6%8E%A5%E5%8A%A0%E5%88%B0%E5%AD%97%E6%AE%B5%E5%AE%9A%E4%B9%89%E7%9A%84%E5%90%8E%E9%9D%A2%EF%BC%89"><span class="nav-number">11.1.1.</span> <span class="nav-text">在建表时添加约束（直接加到字段定义的后面）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%BB%BA%E8%A1%A8%E6%97%B6%E6%B7%BB%E5%8A%A0%E7%BA%A6%E6%9D%9F%EF%BC%88%E5%AE%9A%E4%B9%89%E5%9C%A8%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5%E5%AE%9A%E4%B9%89%E7%9A%84%E5%90%8E%E9%9D%A2%EF%BC%89"><span class="nav-number">11.1.2.</span> <span class="nav-text">在建表时添加约束（定义在所有字段定义的后面）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%BA%A6%E6%9D%9F%EF%BC%88%E5%88%A0%E9%99%A4%E7%BA%A6%E6%9D%9F%EF%BC%89"><span class="nav-number">11.1.3.</span> <span class="nav-text">修改约束（删除约束）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-number">11.2.</span> <span class="nav-text">外键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="nav-number">11.2.1.</span> <span class="nav-text">一对多</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%94%AE"><span class="nav-number">11.2.1.1.</span> <span class="nav-text">创建表时直接添加外键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E5%B7%B2%E5%88%9B%E5%BB%BA%E7%9A%84%E8%A1%A8%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%94%AE"><span class="nav-number">11.2.1.2.</span> <span class="nav-text">对已创建的表添加外键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%96%E9%94%AE"><span class="nav-number">11.2.1.3.</span> <span class="nav-text">删除外键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">11.2.2.</span> <span class="nav-text">多对多</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%94%AE-1"><span class="nav-number">11.2.2.1.</span> <span class="nav-text">创建表时直接添加外键</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">其他函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">13.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">14.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2019/12/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】MySQL学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】MySQL学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-15 09:06:01" itemprop="dateCreated datePublished" datetime="2019-12-15T09:06:01+08:00">2019-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>MySQL</code>原本是一个开放源码的关系数据库管理系统，原开发者为瑞典的<code>MySQL AB</code>公司，该公司于2008年被昇阳微系统（Sun Microsystems）收购。2009年，甲骨文公司（Oracle）收购昇阳微系统公司，MySQL成为Oracle旗下产品。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/MySQL">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><h3 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 注释内容</span><br><span class="line"># 注释内容</span><br><span class="line">/* 注释内容 */</span><br><span class="line">/*! 注释内容 */</span><br></pre></td></tr></table></figure>
+
+<h3 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/* 注释内容 */</span><br></pre></td></tr></table></figure>
+
+<h2 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h2><h3 id="查看所有帮助"><a href="#查看所有帮助" class="headerlink" title="查看所有帮助"></a>查看所有帮助</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HELP contents;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? contents;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有函数帮助"><a href="#查看所有函数帮助" class="headerlink" title="查看所有函数帮助"></a>查看所有函数帮助</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HELP functions;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看指定内容的帮助"><a href="#查看指定内容的帮助" class="headerlink" title="查看指定内容的帮助"></a>查看指定内容的帮助</h3><blockquote>
+<p><code>&lt;msg&gt;</code>：指定内容</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HELP &lt;msg&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看数据库状态"><a href="#查看数据库状态" class="headerlink" title="查看数据库状态"></a>查看数据库状态</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATUS</span><br></pre></td></tr></table></figure>
+
+<h2 id="对数据库的操作"><a href="#对数据库的操作" class="headerlink" title="对数据库的操作"></a>对数据库的操作</h2><h3 id="查询所有数据库"><a href="#查询所有数据库" class="headerlink" title="查询所有数据库"></a>查询所有数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="同时指定字符集"><a href="#同时指定字符集" class="headerlink" title="同时指定字符集"></a>同时指定字符集</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;database_name&gt; CHARSET utf8;</span><br></pre></td></tr></table></figure>
+
+<h4 id="同时指定数据库和数据表的字符集"><a href="#同时指定数据库和数据表的字符集" class="headerlink" title="同时指定数据库和数据表的字符集"></a>同时指定数据库和数据表的字符集</h4><h5 id="utf8"><a href="#utf8" class="headerlink" title="utf8"></a>utf8</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;database_name&gt; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<h5 id="utf8mb4"><a href="#utf8mb4" class="headerlink" title="utf8mb4"></a>utf8mb4</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;database_name&gt; DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
+
+<h4 id="如果不存在"><a href="#如果不存在" class="headerlink" title="如果不存在"></a>如果不存在</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE IF NOT EXISTS &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看创建数据库语句"><a href="#查看创建数据库语句" class="headerlink" title="查看创建数据库语句"></a>查看创建数据库语句</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW CREATE DATABASE &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入数据库"><a href="#进入数据库" class="headerlink" title="进入数据库"></a>进入数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看当前进入的数据库"><a href="#查看当前进入的数据库" class="headerlink" title="查看当前进入的数据库"></a>查看当前进入的数据库</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT database();</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="如果存在"><a href="#如果存在" class="headerlink" title="如果存在"></a>如果存在</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE IF EXISTS &lt;database_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据库的默认字符集"><a href="#修改数据库的默认字符集" class="headerlink" title="修改数据库的默认字符集"></a>修改数据库的默认字符集</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;database_name&gt; DEFAULT CHARACTER SET &lt;character_set&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改默认校对规则"><a href="#修改默认校对规则" class="headerlink" title="修改默认校对规则"></a>修改默认校对规则</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;database_name&gt; DEFAULT COLLATE &lt;proofreading_rules&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对数据表的操作"><a href="#对数据表的操作" class="headerlink" title="对数据表的操作"></a>对数据表的操作</h2><h3 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h3><blockquote>
+<p><code>&lt;table_name&gt;</code>：数据表名，通过添加``可以避免与关键字重复<br><code>&lt;field_name&gt;</code>：字段名，通过添加``可以避免与关键字重复<br><code>&lt;type_of_data&gt;</code>：数据类型<br><code>&lt;length&gt;</code>：长度（根据需求添加）<br><code>&lt;constraint&gt;</code>：约束（根据需求添加）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;table_name&gt;(</span><br><span class="line">    &lt;field_name_1&gt; &lt;type_of_data&gt;(&lt;length&gt;) &lt;constraint&gt;,</span><br><span class="line">    &lt;field_name_2&gt; &lt;type_of_data&gt;(&lt;length&gt;) &lt;constraint&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询所有数据表"><a href="#查询所有数据表" class="headerlink" title="查询所有数据表"></a>查询所有数据表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据表结构"><a href="#查询数据表结构" class="headerlink" title="查询数据表结构"></a>查询数据表结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC &lt;table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据表结构（详细）"><a href="#查询数据表结构（详细）" class="headerlink" title="查询数据表结构（详细）"></a>查询数据表结构（详细）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW CREATE TABLE &lt;table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据表名"><a href="#修改数据表名" class="headerlink" title="修改数据表名"></a>修改数据表名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;old_table_name&gt; RENAME TO &lt;new_table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据表"><a href="#删除数据表" class="headerlink" title="删除数据表"></a>删除数据表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h3><ul>
+<li>复制一张副本表</li>
+</ul>
+<h4 id="只复制表结构"><a href="#只复制表结构" class="headerlink" title="只复制表结构"></a>只复制表结构</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE &lt;new_table_name&gt; like &lt;old_table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="复制表结构和所有数据"><a href="#复制表结构和所有数据" class="headerlink" title="复制表结构和所有数据"></a>复制表结构和所有数据</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;new_table_name&gt; AS (SELECT * FROM &lt;old_table_name&gt;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对字段的操作"><a href="#对字段的操作" class="headerlink" title="对字段的操作"></a>对字段的操作</h2><h3 id="增加字段"><a href="#增加字段" class="headerlink" title="增加字段"></a>增加字段</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; ADD &lt;new_filed_name&gt; &lt;new_type_of_data&gt;(&lt;length&gt;) &lt;constraint&gt;;</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; ADD &lt;new_filed_name&gt; &lt;new_type_of_data&gt;(&lt;length&gt;) &lt;constraint&gt; first;</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; ADD &lt;new_filed_name&gt; &lt;new_type_of_data&gt;(&lt;length&gt;) &lt;constraint&gt; after &lt;old_field_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; DROP COLUMN &lt;filed_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据类型"><a href="#修改数据类型" class="headerlink" title="修改数据类型"></a>修改数据类型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; MODIFY &lt;field_name&gt; &lt;new_type_of_data&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改字段"><a href="#修改字段" class="headerlink" title="修改字段"></a>修改字段</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; CHANGE &lt;old_field_name&gt; &lt;new_field_name&gt; &lt;new_type_of_data&gt;(&lt;new_length&gt;) &lt;new_constraint&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改字段名"><a href="#修改字段名" class="headerlink" title="修改字段名"></a>修改字段名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; CHANGE &lt;old_field_name&gt; &lt;new_field_name&gt; &lt;new_type_of_data&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改字段排列位置"><a href="#修改字段排列位置" class="headerlink" title="修改字段排列位置"></a>修改字段排列位置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; MODIFY &lt;field_name_1&gt; &lt;type_of_data_1&gt; first &lt;field_name_2&gt;;</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; MODIFY &lt;field_name_2&gt; &lt;type_of_data_1&gt; after &lt;field_name_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对数据的操作"><a href="#对数据的操作" class="headerlink" title="对数据的操作"></a>对数据的操作</h2><h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO &lt;table_name&gt;(&lt;field_name_1&gt;, &lt;field_name_2&gt;) VALUES(&lt;value_1&gt;, &lt;value_2&gt;);</span><br><span class="line"></span><br><span class="line">INSERT INTO &lt;table_name&gt; SET &lt;field_name_1&gt;=&lt;value_1&gt;, &lt;field_name_2&gt;=&lt;value_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入数据（多条）"><a href="#插入数据（多条）" class="headerlink" title="插入数据（多条）"></a>插入数据（多条）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO &lt;table_name&gt;(&lt;field_name_1&gt;, &lt;field_name_2&gt;) VALUES(value_1_1, value_1_2),(value_2_1, value_2_2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入数据（所有字段）"><a href="#插入数据（所有字段）" class="headerlink" title="插入数据（所有字段）"></a>插入数据（所有字段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO &lt;table_name&gt; VALUES(&lt;value_1&gt;, &lt;value_2&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;table_name&gt; SET &lt;field_name_1&gt;=&lt;value_1&gt;, &lt;field_name_2&gt;=&lt;value_2&gt; WHERE &lt;field_name&gt;&lt;operator&gt;&lt;value&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="覆盖插入"><a href="#覆盖插入" class="headerlink" title="覆盖插入"></a>覆盖插入</h3><ul>
+<li>删除原有数据创建新数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPLACE INTO &lt;table_name&gt; (&lt;field_name_1&gt;,&lt;field_name_2&gt;) VALUES(&lt;value_1&gt;,&lt;value_2&gt;);</span><br><span class="line"></span><br><span class="line">REPLACE INTO &lt;table_name&gt; SET &lt;field_name_1&gt;=&lt;value_1&gt;, &lt;field_name_2&gt;=&lt;value_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除所有数据"><a href="#删除所有数据" class="headerlink" title="删除所有数据"></a>删除所有数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM &lt;table_name&gt;;</span><br><span class="line"></span><br><span class="line">TRUNCATE TABLE &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除指定数据"><a href="#删除指定数据" class="headerlink" title="删除指定数据"></a>删除指定数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM &lt;table_name&gt; WHERE &lt;field_name&gt;&lt;operator&gt;&lt;value&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询所有数据"><a href="#查询所有数据" class="headerlink" title="查询所有数据"></a>查询所有数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询部分数据"><a href="#查询部分数据" class="headerlink" title="查询部分数据"></a>查询部分数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name_1&gt;,&lt;field_name&gt; FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为查询到的数据定义表头别名"><a href="#为查询到的数据定义表头别名" class="headerlink" title="为查询到的数据定义表头别名"></a>为查询到的数据定义表头别名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;old_field_name_1&gt; AS &lt;new_field_name_1&gt; FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;old_field_name_1&gt; &lt;new_field_name_1&gt; FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表名也可以设置别名"><a href="#表名也可以设置别名" class="headerlink" title="表名也可以设置别名"></a>表名也可以设置别名</h4><ul>
+<li>表名也可以设置别名，也可以简写</li>
+<li>但是指定表名别名后，后面只能使用别名，不能再使用原表名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;old_table_name&gt; AS &lt;old_table_name&gt;;</span><br><span class="line"></span><br><span class="line">SELECT * FROM &lt;old_table_name&gt; &lt;old_table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按需求查看数据"><a href="#按需求查看数据" class="headerlink" title="按需求查看数据"></a>按需求查看数据</h3><h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h5 id="比较运算"><a href="#比较运算" class="headerlink" title="比较运算"></a>比较运算</h5><ul>
+<li>比较两个表达式的大小</li>
+</ul>
+<p><code>=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>&lt;&gt;</code>、<code>!=</code>、<code>!&lt;</code>、<code>!&gt;</code></p>
+<h5 id="多重条件"><a href="#多重条件" class="headerlink" title="多重条件"></a>多重条件</h5><ul>
+<li>对两个表达式进行<code>与或非</code>的运算</li>
+</ul>
+<p><code>AND</code>、<code>OR</code>、<code>NOT</code></p>
+<h5 id="确定范围"><a href="#确定范围" class="headerlink" title="确定范围"></a>确定范围</h5><ul>
+<li>判断值是否在指定的范围内</li>
+</ul>
+<p><code>BETWEEN...AND...</code>、<code>NOT BETWEEN...AND...</code></p>
+<h5 id="确定集合"><a href="#确定集合" class="headerlink" title="确定集合"></a>确定集合</h5><ul>
+<li>查询值是否属于列表值之一</li>
+</ul>
+<p><code>IN</code>、<code>NOT IN</code></p>
+<h5 id="字符匹配"><a href="#字符匹配" class="headerlink" title="字符匹配"></a>字符匹配</h5><ul>
+<li>用于模糊查询</li>
+</ul>
+<p><code>LIKE</code>、<code>NOT LIKE</code></p>
+<ul>
+<li>配合通配符使用</li>
+</ul>
+<blockquote>
+<p><code>%</code>：表示0或多个任意的字符<br><code>_</code>：表示1个任意的字符</p>
+</blockquote>
+<h5 id="测试空值"><a href="#测试空值" class="headerlink" title="测试空值"></a>测试空值</h5><ul>
+<li>判断值是否为空</li>
+</ul>
+<p><code>IS NULL</code>、<code>IS NOT NULL</code></p>
+<h6 id="空值替换"><a href="#空值替换" class="headerlink" title="空值替换"></a>空值替换</h6><ul>
+<li>一些数据存在NULL值时，参与运算结果为NULL，不准确，为了解决问题，将NULL值替换为<code>0</code></li>
+</ul>
+<blockquote>
+<p><code>&lt;field_name&gt;</code>：可能会出现NULL值的字段</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT IFNULL(&lt;field_name&gt;, 0) FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="运算符的应用"><a href="#运算符的应用" class="headerlink" title="运算符的应用"></a>运算符的应用</h4><h5 id="按规则查询数据"><a href="#按规则查询数据" class="headerlink" title="按规则查询数据"></a>按规则查询数据</h5><blockquote>
+<p><code>&lt;operator&gt;</code>：运算符</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name&gt; WHERE &lt;field_name&gt;&lt;operator&gt;&lt;value&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="按规则替换数据"><a href="#按规则替换数据" class="headerlink" title="按规则替换数据"></a>按规则替换数据</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CASE WHEN &lt;field_name&gt;&lt;operator&gt;&lt;old_value&gt; THEN &lt;new_value&gt; END FROM &lt;table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询重新计算后的数据"><a href="#查询重新计算后的数据" class="headerlink" title="查询重新计算后的数据"></a>查询重新计算后的数据</h5><blockquote>
+<p><code>&lt;operator&gt;</code>：这里的运算符，指的是<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt;&lt;operator&gt; FROM &lt;table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="不显示重复结果"><a href="#不显示重复结果" class="headerlink" title="不显示重复结果"></a>不显示重复结果</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT &lt;field_name&gt; FROM &lt;table_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="聚合函数（多行函数）"><a href="#聚合函数（多行函数）" class="headerlink" title="聚合函数（多行函数）"></a>聚合函数（多行函数）</h4><ul>
+<li>不能用在WHERE子句中</li>
+<li>会默认直接丢弃NULL值</li>
+</ul>
+<h5 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h5><ul>
+<li>计算一个数值列的总和</li>
+</ul>
+<p><code>SUM()</code></p>
+<h5 id="求平均值"><a href="#求平均值" class="headerlink" title="求平均值"></a>求平均值</h5><ul>
+<li>计算一个数值列的平均值</li>
+</ul>
+<p><code>AVG()</code></p>
+<h5 id="求最大值"><a href="#求最大值" class="headerlink" title="求最大值"></a>求最大值</h5><ul>
+<li>返回指定列中的最大值</li>
+</ul>
+<p><code>MAX()</code></p>
+<h5 id="求最小值"><a href="#求最小值" class="headerlink" title="求最小值"></a>求最小值</h5><ul>
+<li>返回指定列中的最小值</li>
+</ul>
+<p><code>MIN()</code></p>
+<h5 id="计算总数"><a href="#计算总数" class="headerlink" title="计算总数"></a>计算总数</h5><ul>
+<li>计算符合查询条件的总行数</li>
+</ul>
+<p><code>COUNT()</code></p>
+<h6 id="计算所有数据总行数"><a href="#计算所有数据总行数" class="headerlink" title="计算所有数据总行数"></a>计算所有数据总行数</h6><p><code>COUNT(*)</code></p>
+<h4 id="聚合函数的应用"><a href="#聚合函数的应用" class="headerlink" title="聚合函数的应用"></a>聚合函数的应用</h4><h5 id="查询计算后的数据"><a href="#查询计算后的数据" class="headerlink" title="查询计算后的数据"></a>查询计算后的数据</h5><blockquote>
+<p><code>&lt;function&gt;</code>：函数名</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;function&gt;(&lt;field_name&gt;) FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h5><ul>
+<li>将查询到的数据根据字段进行分组</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; GROUP BY &lt;field_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h6 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h6><ul>
+<li>查询分组后筛选符合条件的数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; GROUP BY &lt;filed_name&gt; HAVING &lt;field_name&gt;&lt;operator&gt;&lt;value&gt;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>WHERE和HAVING的区别</strong></p>
+<p>WHERE是在分组之前,对记录进行筛选过滤，HAVING是在分组之后,对记录进行筛选过滤<br>WHERE子句中不能使用多行函数以及列别名，HAVING子句中可以使用多行函数以及列别名、表别名</p>
+<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><ul>
+<li>默认为升序</li>
+</ul>
+<h6 id="升序（从小到大）"><a href="#升序（从小到大）" class="headerlink" title="升序（从小到大）"></a>升序（从小到大）</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; ORDER BY &lt;field_name&gt;;</span><br><span class="line"></span><br><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; ORDER BY &lt;field_name&gt; ASC;</span><br></pre></td></tr></table></figure>
+
+<h6 id="降序（从大到小）"><a href="#降序（从大到小）" class="headerlink" title="降序（从大到小）"></a>降序（从大到小）</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; ORDER BY &lt;field_name&gt; DESC;</span><br></pre></td></tr></table></figure>
+
+<h6 id="多重排序"><a href="#多重排序" class="headerlink" title="多重排序"></a>多重排序</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; ORDER BY &lt;field_name_1&gt; ASC, &lt;field_name_2&gt; DESC;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表查询（连接查询）"><a href="#多表查询（连接查询）" class="headerlink" title="多表查询（连接查询）"></a>多表查询（连接查询）</h3><ul>
+<li>可以两个表，也可以多个表</li>
+</ul>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><h5 id="显式内连接"><a href="#显式内连接" class="headerlink" title="显式内连接"></a>显式内连接</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;table_name_x&gt;.&lt;field_name_x&gt; FROM &lt;table_name_1&gt;,&lt;table_name_2&gt;,&lt;table_name_3&gt; WHERE &lt;table_name_1&gt;.&lt;field_name_1&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt; AND &lt;table_name_2&gt;.&lt;field_name_2&gt;=&lt;table_name_3&gt;.&lt;field_name_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="隐式内连接"><a href="#隐式内连接" class="headerlink" title="隐式内连接"></a>隐式内连接</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;table_name_x&gt;.&lt;field_name_x&gt; FROM &lt;table_name_2&gt; INNER JOIN &lt;table_name_1&gt; ON &lt;table_name_2&gt;.&lt;field_name_1&gt;=&lt;table_name_1&gt;.&lt;field_name_1&gt; JOIN &lt;table_name_3&gt; ON &lt;table_name_2&gt;.&lt;field_name_2&gt;=&lt;table_name_3&gt;&lt;field_name_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h6 id="省略INNER关键字"><a href="#省略INNER关键字" class="headerlink" title="省略INNER关键字"></a>省略INNER关键字</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;table_name_x&gt;.&lt;field_name_x&gt; FROM &lt;table_name_2&gt; JOIN &lt;table_name_1&gt; ON &lt;table_name_2&gt;.&lt;field_name_1&gt;=&lt;table_name_1&gt;.&lt;field_name_1&gt; JOIN &lt;table_name_3&gt; ON &lt;table_name_2&gt;.&lt;field_name_2&gt;=&lt;table_name_3&gt;&lt;field_name_2&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><h5 id="左外连接查询"><a href="#左外连接查询" class="headerlink" title="左外连接查询"></a>左外连接查询</h5><ul>
+<li>左侧显示所有数据，右侧如果没有对应关系则显示为null</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name_1&gt; LEFT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="右外连接查询"><a href="#右外连接查询" class="headerlink" title="右外连接查询"></a>右外连接查询</h5><ul>
+<li>右侧显示所有数据，左侧如果没有对应关系则显示为null</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name_1&gt; RIGHT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（模拟）全外连接查询"><a href="#（模拟）全外连接查询" class="headerlink" title="（模拟）全外连接查询"></a>（模拟）全外连接查询</h4><h5 id="去重（取交集）"><a href="#去重（取交集）" class="headerlink" title="去重（取交集）"></a>去重（取交集）</h5><ul>
+<li>通过<code>UNION</code>关键字将左外连接和右外连接取<code>交集</code>，模拟全外连接查询</li>
+<li>两表展示出的列数必须相同</li>
+<li>两表展示的表头名如果不同，可以用<code>AS</code>关键字为表头添加别名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,name FROM &lt;table_name_1&gt; LEFT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;</span><br><span class="line">UNION</span><br><span class="line">SELECT id,name FROM &lt;table_name_2&gt; RIGHT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="不去重（取并集）"><a href="#不去重（取并集）" class="headerlink" title="不去重（取并集）"></a>不去重（取并集）</h5><ul>
+<li>通过<code>UNION ALL</code>关键字将左外连接和右外连接取<code>并集</code>，模拟全外连接查询</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,name FROM &lt;table_name_1&gt; LEFT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;</span><br><span class="line">UNION ALL</span><br><span class="line">SELECT id,name FROM &lt;table_name_2&gt; RIGHT JOIN &lt;table_name_2&gt; ON &lt;table_name_1&gt;.&lt;field_name_2&gt;=&lt;table_name_2&gt;.&lt;field_name_1&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><blockquote>
+<p><code>&lt;index_first&gt;</code>：每页的第一条数据在总数据中的下标（下标从0开始），所以公式为<code>(当前页码数-1)*每页显示的数据总数</code><br><code>&lt;index_all&gt;</code>：每页显示的数据总数</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_name&gt; FROM &lt;table_name&gt; LIMIT &lt;index_first&gt;,&lt;index_all&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><ul>
+<li>将一个sql语句查询的结果作为条件完成另一个sql语句查询</li>
+</ul>
+<h3 id="子查询结果是一行一列"><a href="#子查询结果是一行一列" class="headerlink" title="子查询结果是一行一列"></a>子查询结果是一行一列</h3><ul>
+<li>直接用做判断</li>
+</ul>
+<blockquote>
+<p><code>&lt;select&gt;</code>：子查询的SQL语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name&gt; WHERE &lt;field_name&gt;&lt;operator&gt;(&lt;select&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="子查询的结果是多行一列"><a href="#子查询的结果是多行一列" class="headerlink" title="子查询的结果是多行一列"></a>子查询的结果是多行一列</h3><ul>
+<li>可以采用IN关键字</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name&gt; WHERE &lt;field_name&gt; IN (&lt;select&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="子查询结果是多行多列"><a href="#子查询结果是多行多列" class="headerlink" title="子查询结果是多行多列"></a>子查询结果是多行多列</h3><ul>
+<li>可以将子查询语句作为虚拟表放到WHERE关键字后</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;table_name&gt;,(&lt;select&gt;) WHERE &lt;field_name&gt;&lt;operator&gt;&lt;field_value&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对视图的操作"><a href="#对视图的操作" class="headerlink" title="对视图的操作"></a>对视图的操作</h2><ul>
+<li>将特定条件下的查询结果创建为视图，可以通过对视图的操作简便查询</li>
+</ul>
+<h3 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h3><blockquote>
+<p><code>&lt;select&gt;</code>：select语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;view_name&gt; AS &lt;select&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重建视图"><a href="#重建视图" class="headerlink" title="重建视图"></a>重建视图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REPLACE VIEW &lt;view_name&gt; AS &lt;select&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建视图（强制）"><a href="#创建视图（强制）" class="headerlink" title="创建视图（强制）"></a>创建视图（强制）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE OR REPLACE VIEW &lt;view_name&gt; AS &lt;select&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询所有视图"><a href="#查询所有视图" class="headerlink" title="查询所有视图"></a>查询所有视图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询视图结构"><a href="#查询视图结构" class="headerlink" title="查询视图结构"></a>查询视图结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC &lt;view_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改视图"><a href="#修改视图" class="headerlink" title="修改视图"></a>修改视图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER VIEW &lt;view_name&gt; AS &lt;select&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;view_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询视图中的数据"><a href="#查询视图中的数据" class="headerlink" title="查询视图中的数据"></a>查询视图中的数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &lt;view_name&gt;;</span><br><span class="line"></span><br><span class="line">SELECT &lt;field_name&gt; FROM &lt;view_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入数据-1"><a href="#插入数据-1" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO &lt;view_name&gt; VALUES(&lt;value_1&gt;, &lt;value_2&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据-1"><a href="#修改数据-1" class="headerlink" title="修改数据"></a>修改数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;view_name&gt; SET &lt;field_name&gt;=&lt;value&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM &lt;view_name&gt; WHERE &lt;field_name&gt;=&lt;value&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对索引的操作"><a href="#对索引的操作" class="headerlink" title="对索引的操作"></a>对索引的操作</h2><h3 id="查看所有索引"><a href="#查看所有索引" class="headerlink" title="查看所有索引"></a>查看所有索引</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM &lt;table_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX &lt;index_name&gt; ON &lt;table_name&gt;(&lt;field_name&gt;);</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; ADD INDEX &lt;index_name&gt;(&lt;field_name_1&gt;, &lt;field_name_2&gt;);</span><br><span class="line"></span><br><span class="line">CREATE TABLE &lt;table_name&gt;(&lt;field_name&gt; &lt;operator&gt;(&lt;length&gt;), INDEX &lt;index_name&gt;(field_name));</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX &lt;index_name&gt; &lt;table_name&gt;;</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; DROP INDEX &lt;index_name&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对约束的操作"><a href="#对约束的操作" class="headerlink" title="对约束的操作"></a>对约束的操作</h2><h3 id="操作约束的方式"><a href="#操作约束的方式" class="headerlink" title="操作约束的方式"></a>操作约束的方式</h3><h4 id="在建表时添加约束（直接加到字段定义的后面）"><a href="#在建表时添加约束（直接加到字段定义的后面）" class="headerlink" title="在建表时添加约束（直接加到字段定义的后面）"></a>在建表时添加约束（直接加到字段定义的后面）</h4><blockquote>
+<p><code>&lt;constraint&gt;</code>：约束（同时指定多个约束时，用空格分隔）</p>
+<blockquote>
+<p><code>NULL</code>：可以为空，缺省值<br><code>NOT NULL</code>：非空约束，定义这个字段不允许为空<br><code>PRIMARY KEY</code>：主键约束，必须为非空，必须不重复</p>
+<blockquote>
+<p><code>AUTO_INCREMENT</code>：如果是数值型主键，可以定义逐渐自增<br><code>UNIQUE</code>：唯一约束，定义这个列的值必须是唯一的、不能重复的，但可以为空<br><code>DEFAULT 默认值</code>：默认约束，当没有为字段赋值时的默认值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;table_name&gt;(&lt;field_name&gt; &lt;operator&gt;(length) &lt;constraint&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="在建表时添加约束（定义在所有字段定义的后面）"><a href="#在建表时添加约束（定义在所有字段定义的后面）" class="headerlink" title="在建表时添加约束（定义在所有字段定义的后面）"></a>在建表时添加约束（定义在所有字段定义的后面）</h4><blockquote>
+<p><code>&lt;constraint&gt;</code>：约束（同时指定多个约束时，每行一种约束的定义）</p>
+<blockquote>
+<p><code>PRIMARY(&lt;field_name_1&gt;)</code>：定义主键约束，必须为非空，必须不重复<br><code>PRIMARY(&lt;field_name_1&gt;, &lt;field_name_2&gt;)</code>：定义联合主键约束，每个主键字段的数值可以重复，但是多个联合主键的数值的并集不可以重复<br><code>UNIQUE(&lt;field_name&gt;)</code>：定义唯一约束，定义这个列的值必须是唯一的、不能重复的，但可以为空<br><code>CHECK(&lt;field_name&gt;&lt;operator&gt;&lt;value&gt;)</code>：定义完整性约束，为字段定义范围</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;table_name&gt;(</span><br><span class="line">    &lt;field_name_1&gt; &lt;operator&gt;(length),</span><br><span class="line">    &lt;field_name_2&gt; &lt;operator&gt;(length),</span><br><span class="line">    &lt;constraint&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改约束（删除约束）"><a href="#修改约束（删除约束）" class="headerlink" title="修改约束（删除约束）"></a>修改约束（删除约束）</h4><blockquote>
+<p><code>&lt;constraint&gt;</code>：修改后的约束（同时指定多个约束时，用空格分隔），如果修改后不添加约束，相当于删除已有约束</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table_name&gt; MODIFY &lt;field_name&gt; &lt;operator&gt;(length) &lt;constraint&gt;;</span><br><span class="line"></span><br><span class="line">ALTER TABLE &lt;table_name&gt; MODIFY &lt;field_name&gt; &lt;operator&gt;(length);</span><br></pre></td></tr></table></figure>
+
+<h3 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h3><ul>
+<li>通过外键约束将表与表建立联系，当出现有损表的完整性操作时，外键约束会对表进行保护</li>
+</ul>
+<h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><h5 id="创建表时直接添加外键"><a href="#创建表时直接添加外键" class="headerlink" title="创建表时直接添加外键"></a>创建表时直接添加外键</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 职位表(</span><br><span class="line">    职位编号 &lt;type_of_data&gt;,</span><br><span class="line">    职位名称 &lt;type_of_data&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">CREATE TABLE 员工表(</span><br><span class="line">    员工编号 &lt;type_of_data&gt;,</span><br><span class="line">    员工名称 &lt;type_of_data&gt;,</span><br><span class="line">    员工表_职位编号 &lt;type_of_data&gt;,</span><br><span class="line">    FOREIGN KEY(员工表_职位编号) REFERENCES 职位表(职位编号)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="对已创建的表添加外键"><a href="#对已创建的表添加外键" class="headerlink" title="对已创建的表添加外键"></a>对已创建的表添加外键</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 职位表(</span><br><span class="line">    职位编号 &lt;type_of_data&gt;,</span><br><span class="line">    职位名称 &lt;type_of_data&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">CREATE TABLE 员工表(</span><br><span class="line">    员工编号 &lt;type_of_data&gt;,</span><br><span class="line">    员工名称 &lt;type_of_data&gt;,</span><br><span class="line">    员工表_职位编号 &lt;type_of_data&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">ALTER TABLE 员工表 ADD CONSTRAINT 外键名 FOREIGN KEY(员工表_职位编号) REFERENCES 职位表(职位编号);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以省略外键名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 员工表 ADD CONSTRAINT FOREIGN KEY(员工表_职位编号) REFERENCES 职位表(职位编号);</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除外键"><a href="#删除外键" class="headerlink" title="删除外键"></a>删除外键</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 员工表 DROP FOREIGN KEY 外键名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><h5 id="创建表时直接添加外键-1"><a href="#创建表时直接添加外键-1" class="headerlink" title="创建表时直接添加外键"></a>创建表时直接添加外键</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 职位表(</span><br><span class="line">    职位编号 &lt;type_of_data&gt;,</span><br><span class="line">    职位名称 &lt;type_of_data&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">CREATE TABLE 等级表(</span><br><span class="line">    等级编号 &lt;type_of_data&gt;,</span><br><span class="line">    等级名称 &lt;type_of_data&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">CREATE TABLE 员工表(</span><br><span class="line">    员工编号 &lt;type_of_data&gt;,</span><br><span class="line">    员工名称 &lt;type_of_data&gt;,</span><br><span class="line">    员工表_职位编号 &lt;type_of_data&gt;,</span><br><span class="line">    员工表_等级编号 &lt;type_of_data&gt;,</span><br><span class="line">    FOREIGN KEY(员工表_职位编号) REFERENCES 职位表(职位编号),</span><br><span class="line">    FOREIGN KEY(员工表_等级编号) REFERENCES 等级表(等级编号)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>curdate()</td>
+<td>获取当前日期，格式是：年月日</td>
+</tr>
+<tr>
+<td>curtime()</td>
+<td>获取当前时间 ，格式是：时分秒</td>
+</tr>
+<tr>
+<td>sysdate()&#x2F;now()</td>
+<td>获取当前日期+时间，格式是：年月日 时分秒</td>
+</tr>
+<tr>
+<td>year(date)</td>
+<td>返回date中的年份</td>
+</tr>
+<tr>
+<td>month(date)</td>
+<td>返回date中的月份</td>
+</tr>
+<tr>
+<td>day(date)</td>
+<td>返回date中的天数</td>
+</tr>
+<tr>
+<td>hour(date)</td>
+<td>返回date中的小时</td>
+</tr>
+<tr>
+<td>minute(date)</td>
+<td>返回date中的分钟</td>
+</tr>
+<tr>
+<td>second(date)</td>
+<td>返回date中的秒</td>
+</tr>
+<tr>
+<td>CONCAT(s1,s2..)</td>
+<td>将s1,s2 等多个字符串合并为一个字符串</td>
+</tr>
+<tr>
+<td>CONCAT_WS(x,s1,s2..)</td>
+<td>同CONCAT(s1,s2,..)函数，但是每个字符串之间要加上x，x是分隔符</td>
+</tr>
+</tbody></table>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bigben0123/p/10997962.html">博客园——Bigben</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zxf100/p/10882138.html">博客园——下页、再停留</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41573234/article/details/80328281">CSDN——时光·漫步zth</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qf4y1T7Hx/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a34y167AZ/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/panda_8/article/details/112148018">CSDN——念去去千里烟波</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/cm777/article/details/122946764">CSDN——辛丑年正月十五</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/Database/" rel="tag"># Database</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/12/14/HTML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" rel="prev" title="【速查表】HTML转义字符">
+                  <i class="fa fa-angle-left"></i> 【速查表】HTML转义字符
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/17/%E8%B0%83%E6%95%99%E5%88%9D%E9%9F%B3%E6%9C%AA%E6%9D%A5/" rel="next" title="【教程】调教初音未来">
+                  【教程】调教初音未来 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

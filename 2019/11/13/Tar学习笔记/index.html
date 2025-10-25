@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言各种操作系统上常见压缩包的压缩与解压方法学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Tar学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2019/11/13/Tar%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言各种操作系统上常见压缩包的压缩与解压方法学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-13T15:57:08.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.927Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MacOS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2019/11/13/Tar%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2019/11/13/Tar%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2019/11/13/Tar学习笔记/","title":"【笔记】Tar学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Tar学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tar"><span class="nav-number">2.</span> <span class="nav-text">Tar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-1"><span class="nav-number">2.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">基本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">压缩.tar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">解压.tar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-gz%EF%BC%88-tgz%EF%BC%89%E6%96%87%E4%BB%B6"><span class="nav-number">2.5.</span> <span class="nav-text">压缩.tar.gz（.tgz）文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-gz%EF%BC%88-tgz%EF%BC%89%E6%96%87%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">解压.tar.gz（.tgz）文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-bz2%E6%96%87%E4%BB%B6"><span class="nav-number">2.7.</span> <span class="nav-text">压缩.tar.bz2文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-bz2%E6%96%87%E4%BB%B6"><span class="nav-number">2.8.</span> <span class="nav-text">解压.tar.bz2文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-Z%E6%96%87%E4%BB%B6"><span class="nav-number">2.9.</span> <span class="nav-text">压缩.tar.Z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-Z%E6%96%87%E4%BB%B6"><span class="nav-number">2.10.</span> <span class="nav-text">解压.tar.Z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%80%E6%AD%A5%EF%BC%89"><span class="nav-number">2.11.</span> <span class="nav-text">压缩.tar.xz文件（一步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%80%E6%AD%A5%EF%BC%89"><span class="nav-number">2.12.</span> <span class="nav-text">解压.tar.xz文件（一步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%A4%E6%AD%A5%EF%BC%89"><span class="nav-number">2.13.</span> <span class="nav-text">压缩.tar.xz文件（两步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%A4%E6%AD%A5%EF%BC%89"><span class="nav-number">2.14.</span> <span class="nav-text">解压.tar.xz文件（两步）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XZ"><span class="nav-number">3.</span> <span class="nav-text">XZ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-2"><span class="nav-number">3.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%8D%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">压缩.xz文件（不保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%8D%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">解压.xz文件（不保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">压缩.xz文件（保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-xz%E6%96%87%E4%BB%B6%EF%BC%88%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">解压.xz文件（保留原文件）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GunZip"><span class="nav-number">4.</span> <span class="nav-text">GunZip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-3"><span class="nav-number">4.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-gz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%8D%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">压缩.gz文件（不保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-gz%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%8D%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">解压.gz文件（不保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-gz%E6%96%87%E4%BB%B6%EF%BC%88%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">压缩.gz文件（保留原文件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-gz%E6%96%87%E4%BB%B6%EF%BC%88%E4%BF%9D%E7%95%99%E5%8E%9F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">解压.gz文件（保留原文件）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zip"><span class="nav-number">5.</span> <span class="nav-text">Zip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-4"><span class="nav-number">5.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">5.2.</span> <span class="nav-text">下载依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MacOS"><span class="nav-number">5.2.1.</span> <span class="nav-text">MacOS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%82%E6%95%B0-1"><span class="nav-number">5.3.</span> <span class="nav-text">基本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-zip%E6%96%87%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">压缩.zip文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-zip%E6%96%87%E4%BB%B6"><span class="nav-number">5.5.</span> <span class="nav-text">解压.zip文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8D%B7%E5%8E%8B%E7%BC%A9-zip%E6%96%87%E4%BB%B6"><span class="nav-number">5.6.</span> <span class="nav-text">分卷压缩.zip文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8D%B7%E8%A7%A3%E5%8E%8B-zip%E6%96%87%E4%BB%B6"><span class="nav-number">5.7.</span> <span class="nav-text">分卷解压.zip文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAR"><span class="nav-number">6.</span> <span class="nav-text">RAR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-5"><span class="nav-number">6.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-1"><span class="nav-number">6.2.</span> <span class="nav-text">下载依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux"><span class="nav-number">6.2.1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Debian"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">Debian</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MacOS-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">MacOS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%82%E6%95%B0-2"><span class="nav-number">6.3.</span> <span class="nav-text">基本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-rar%E6%96%87%E4%BB%B6"><span class="nav-number">6.4.</span> <span class="nav-text">压缩.rar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-rar%E6%96%87%E4%BB%B6"><span class="nav-number">6.5.</span> <span class="nav-text">解压.rar文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Zip"><span class="nav-number">7.</span> <span class="nav-text">7-Zip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-6"><span class="nav-number">7.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-2"><span class="nav-number">7.2.</span> <span class="nav-text">下载依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MacOS-2"><span class="nav-number">7.2.1.</span> <span class="nav-text">MacOS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-7z%E6%96%87%E4%BB%B6"><span class="nav-number">7.3.</span> <span class="nav-text">压缩.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-7z%E6%96%87%E4%BB%B6"><span class="nav-number">7.4.</span> <span class="nav-text">解压.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-zip%E6%96%87%E4%BB%B6-1"><span class="nav-number">7.5.</span> <span class="nav-text">压缩.zip文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p7zip"><span class="nav-number">8.</span> <span class="nav-text">p7zip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-7"><span class="nav-number">8.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-3"><span class="nav-number">8.2.</span> <span class="nav-text">下载依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-1"><span class="nav-number">8.2.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MacOS-3"><span class="nav-number">8.2.2.</span> <span class="nav-text">MacOS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-7z%E6%96%87%E4%BB%B6-1"><span class="nav-number">8.3.</span> <span class="nav-text">压缩.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-7z%E6%96%87%E4%BB%B6-1"><span class="nav-number">8.4.</span> <span class="nav-text">解压.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-zip%E6%96%87%E4%BB%B6-2"><span class="nav-number">8.5.</span> <span class="nav-text">压缩.zip文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Tar"><span class="nav-number">9.</span> <span class="nav-text">Windows Tar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-8"><span class="nav-number">9.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar%E6%96%87%E4%BB%B6-1"><span class="nav-number">9.2.</span> <span class="nav-text">压缩.tar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar%E6%96%87%E4%BB%B6-1"><span class="nav-number">9.3.</span> <span class="nav-text">解压.tar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-gz%E6%96%87%E4%BB%B6"><span class="nav-number">9.4.</span> <span class="nav-text">压缩.tar.gz文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-gz%E6%96%87%E4%BB%B6"><span class="nav-number">9.5.</span> <span class="nav-text">解压.tar.gz文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-tar-gz%E6%96%87%E4%BB%B6-1"><span class="nav-number">9.6.</span> <span class="nav-text">压缩.tar.gz文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-tar-gz%E6%96%87%E4%BB%B6-1"><span class="nav-number">9.7.</span> <span class="nav-text">解压.tar.gz文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-zip%E6%96%87%E4%BB%B6-1"><span class="nav-number">9.8.</span> <span class="nav-text">解压.zip文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-7-Zip"><span class="nav-number">10.</span> <span class="nav-text">Windows 7-Zip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-9"><span class="nav-number">10.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96-4"><span class="nav-number">10.2.</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-7z%E6%96%87%E4%BB%B6-2"><span class="nav-number">10.3.</span> <span class="nav-text">压缩.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-7z%E6%96%87%E4%BB%B6-2"><span class="nav-number">10.4.</span> <span class="nav-text">解压.7z文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9-zip%E6%96%87%E4%BB%B6-3"><span class="nav-number">10.5.</span> <span class="nav-text">压缩.zip文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">11.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">12.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2019/11/13/Tar%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Tar学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Tar学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-11-13 23:57:08" itemprop="dateCreated datePublished" datetime="2019-11-13T23:57:08+08:00">2019-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各种操作系统上常见压缩包的压缩与解压方法学习笔记</p>
+<span id="more"></span>
+
+<h2 id="Tar"><a href="#Tar" class="headerlink" title="Tar"></a>Tar</h2><h3 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>tar是Unix和类Unix系统上的归档打包工具，可以将多个文件合并为一个文件，打包后的文件名亦为<code>tar</code>。目前，tar文件格式已经成为POSIX标准，最初是POSIX.1-1988，目前是POSIX.1-2001。<a href="/302.html?target=https://zh.wikipedia.org/wiki/Tar">维基百科</a></li>
+</ul>
+<h3 id="基本参数"><a href="#基本参数" class="headerlink" title="基本参数"></a>基本参数</h3><blockquote>
+<p><code>-c</code>、<code>--create</code>：建立新的备份文件<br><code>-x</code>、<code>--extract</code>、<code>--get</code>：从备份文件中还原文件<br><code>-v</code>、<code>--verbose</code>：显示指令执行过程<br><code>-f &lt;file&gt;</code>、<code>--file &lt;file&gt;</code>：指定备份文件。必须放在所有选项之后，因为这个选项后面要加参数<br><code>-t</code>：显示归档中的文件清单<br><code>-C &lt;file&gt;</code>：指定解压路径<br><code>-z</code>、<code>--gzip</code>、<code>--ungzip</code>：通过<code>gzip</code>指令压缩&#x2F;解压缩文件，文件名最好为<code>*.tar.gz</code></p>
+<blockquote>
+<p>Gzip是一种压缩文件格式并且也是一个在类 Unix 上的一种文件解压缩的软件，通常指GNU计划的实现，此处的gzip代表GNU zip。也经常用来表示gzip这种文件格式。软件的作者是Jean-loup Gailly和Mark Adler。在1992年10月31日第一次公开发布，版本号0.1，1993年2月，发布了1.0版本。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Gzip">维基百科</a></p>
+</blockquote>
+<p><code>-Z</code>、<code>--compress</code>、<code>--uncompress</code>：通过<code>compress</code>指令处理备份文件</p>
+<blockquote>
+<p>Linux compress命令是一个相当古老的 unix 档案压缩指令，压缩后的档案会加上一个 .Z 延伸档名以区别未压缩的档案，压缩后的档案可以以 uncompress 解压。若要将数个档案压成一个压缩档，必须先将档案 tar 起来再压缩。由于 gzip 可以产生更理想的压缩比例，一般人多已改用 gzip 为档案压缩工具。<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-compress.html">菜鸟笔记</a></p>
+</blockquote>
+<p><code>-j</code>：通过<code>bzip2</code>指令压缩&#x2F;解压缩文件，文件名最好为<code>*.tar.bz2</code></p>
+<blockquote>
+<p>bzip2是Julian Seward开发并按照自由软件／开源软件协议发布的数据压缩算法及程序。Seward在1996年7月第一次公开发布了bzip2 0.15版，在随后几年中这个压缩工具稳定性得到改善并且日渐流行，Seward在2000年晚些时候发布了1.0版。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Bzip2">维基百科</a></p>
+</blockquote>
+<p><code>-J</code>：通过<code>xz</code>指令压缩&#x2F;解压缩文件</p>
+<blockquote>
+<p>xz是一个使用LZMA&#x2F;LZMA2压缩算法的无损数据压缩文件格式。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xz">维基百科</a></p>
+</blockquote>
+</blockquote>
+<h3 id="压缩-tar文件"><a href="#压缩-tar文件" class="headerlink" title="压缩.tar文件"></a>压缩<code>.tar</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cf &lt;file_archive&gt;.tar &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar文件"><a href="#解压-tar文件" class="headerlink" title="解压.tar文件"></a>解压<code>.tar</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf &lt;file_archive&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-gz（-tgz）文件"><a href="#压缩-tar-gz（-tgz）文件" class="headerlink" title="压缩.tar.gz（.tgz）文件"></a>压缩<code>.tar.gz</code>（<code>.tgz</code>）文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcf &lt;file_archive&gt;.tar.gz &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-gz（-tgz）文件"><a href="#解压-tar-gz（-tgz）文件" class="headerlink" title="解压.tar.gz（.tgz）文件"></a>解压<code>.tar.gz</code>（<code>.tgz</code>）文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf &lt;file_archive&gt;.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-bz2文件"><a href="#压缩-tar-bz2文件" class="headerlink" title="压缩.tar.bz2文件"></a>压缩<code>.tar.bz2</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jcf &lt;file_archive&gt;.tar.bz2 &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-bz2文件"><a href="#解压-tar-bz2文件" class="headerlink" title="解压.tar.bz2文件"></a>解压<code>.tar.bz2</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jxf &lt;file_archive&gt;.tar.bz2</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-Z文件"><a href="#压缩-tar-Z文件" class="headerlink" title="压缩.tar.Z文件"></a>压缩<code>.tar.Z</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -Zcf &lt;file_archive&gt;.tar.Z &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-Z文件"><a href="#解压-tar-Z文件" class="headerlink" title="解压.tar.Z文件"></a>解压<code>.tar.Z</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -Zxf &lt;file_archive&gt;.tar.Z</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-xz文件（一步）"><a href="#压缩-tar-xz文件（一步）" class="headerlink" title="压缩.tar.xz文件（一步）"></a>压缩<code>.tar.xz</code>文件（一步）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -Jcf &lt;file_archive&gt;.tar.xz &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-xz文件（一步）"><a href="#解压-tar-xz文件（一步）" class="headerlink" title="解压.tar.xz文件（一步）"></a>解压<code>.tar.xz</code>文件（一步）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -Jxf &lt;file_archive&gt;.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-xz文件（两步）"><a href="#压缩-tar-xz文件（两步）" class="headerlink" title="压缩.tar.xz文件（两步）"></a>压缩<code>.tar.xz</code>文件（两步）</h3><ul>
+<li>先建立<code>.tar</code>归档，再压缩为<code>.tar.xz</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -cf &lt;file_archive&gt;.tar &lt;file_1&gt; &lt;file_2&gt;</span><br><span class="line">xz -z &lt;file_archive&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-xz文件（两步）"><a href="#解压-tar-xz文件（两步）" class="headerlink" title="解压.tar.xz文件（两步）"></a>解压<code>.tar.xz</code>文件（两步）</h3><ul>
+<li>先解压<code>.tar.xz</code>文件，再还原<code>.tar</code>归档</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xz -d &lt;file_archive&gt;.tar.xz</span><br><span class="line">tar -xf &lt;file_archive&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h2 id="XZ"><a href="#XZ" class="headerlink" title="XZ"></a>XZ</h2><h3 id="前言-2"><a href="#前言-2" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>xz是一个使用LZMA&#x2F;LZMA2压缩算法的无损数据压缩文件格式。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xz">维基百科</a>）</li>
+</ul>
+<h3 id="压缩-xz文件（不保留原文件）"><a href="#压缩-xz文件（不保留原文件）" class="headerlink" title="压缩.xz文件（不保留原文件）"></a>压缩<code>.xz</code>文件（不保留原文件）</h3><ul>
+<li>每次只能将一个文件压缩为<code>.xz</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xz -z &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-xz文件（不保留原文件）"><a href="#解压-xz文件（不保留原文件）" class="headerlink" title="解压.xz文件（不保留原文件）"></a>解压<code>.xz</code>文件（不保留原文件）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xz -d &lt;file_archive_1&gt;.xz &lt;file_archive_2&gt;.xz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-xz文件（保留原文件）"><a href="#压缩-xz文件（保留原文件）" class="headerlink" title="压缩.xz文件（保留原文件）"></a>压缩<code>.xz</code>文件（保留原文件）</h3><ul>
+<li>每次只能将一个文件压缩为<code>.xz</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xz -zk &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-xz文件（保留原文件）"><a href="#解压-xz文件（保留原文件）" class="headerlink" title="解压.xz文件（保留原文件）"></a>解压<code>.xz</code>文件（保留原文件）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xz -dk &lt;file_archive_1&gt;.xz &lt;file_archive_2&gt;.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="GunZip"><a href="#GunZip" class="headerlink" title="GunZip"></a>GunZip</h2><h3 id="前言-3"><a href="#前言-3" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>gzip是一种压缩文件格式并且也是一个在类 Unix 上的一种文件解压缩的软件，通常指GNU计划的实现，此处的gzip代表GNU zip。也经常用来表示gzip这种文件格式。软件的作者是Jean-loup Gailly和Mark Adler。在1992年10月31日第一次公开发布，版本号0.1，1993年2月，发布了1.0版本。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Gzip">维基百科</a>）</li>
+</ul>
+<h3 id="压缩-gz文件（不保留原文件）"><a href="#压缩-gz文件（不保留原文件）" class="headerlink" title="压缩.gz文件（不保留原文件）"></a>压缩<code>.gz</code>文件（不保留原文件）</h3><ul>
+<li>每次只能将一个文件压缩为<code>.gz</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-gz文件（不保留原文件）"><a href="#解压-gz文件（不保留原文件）" class="headerlink" title="解压.gz文件（不保留原文件）"></a>解压<code>.gz</code>文件（不保留原文件）</h3><blockquote>
+<p><code>-f</code>：强制覆盖同名文件<br><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip &lt;file_archive&gt;.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-gz文件（保留原文件）"><a href="#压缩-gz文件（保留原文件）" class="headerlink" title="压缩.gz文件（保留原文件）"></a>压缩<code>.gz</code>文件（保留原文件）</h3><ul>
+<li>每次只能将一个文件压缩为<code>.gz</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -c &lt;file_1&gt; &gt; &lt;file_archive&gt;.gz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果传递了多个文件，则解压时只能得到一个被合并的文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -c &lt;file_1&gt; &lt;file_2&gt; &gt; &lt;file_archive&gt;.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-gz文件（保留原文件）"><a href="#解压-gz文件（保留原文件）" class="headerlink" title="解压.gz文件（保留原文件）"></a>解压<code>.gz</code>文件（保留原文件）</h3><blockquote>
+<p><code>-f</code>：强制覆盖同名文件<br><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip -c &lt;file_archive&gt;.gz &gt; &lt;file_1&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h2><h3 id="前言-4"><a href="#前言-4" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>ZIP文件格式是一种数据压缩和文档储存的文件格式，原名Deflate，发明者为菲尔·卡茨，他于1989年1月公布了该格式的资料。ZIP通常使用后缀名“.zip”，它的MIME格式为application&#x2F;zip。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ZIP%E6%A0%BC%E5%BC%8F">维基百科</a></li>
+</ul>
+<h3 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h3><h4 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install zip</span><br><span class="line">brew install unzip</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本参数-1"><a href="#基本参数-1" class="headerlink" title="基本参数"></a>基本参数</h3><blockquote>
+<p><code>-n</code>：解压缩时不覆盖原有的文件<br><code>-o</code>：解压缩时覆盖原有的文件<br><code>-d</code>：指定文件解压后存储的目录<br><code>-v</code>：显示详细信息<br><code>-r</code>：递归操作</p>
+</blockquote>
+<h3 id="压缩-zip文件"><a href="#压缩-zip文件" class="headerlink" title="压缩.zip文件"></a>压缩<code>.zip</code>文件</h3><blockquote>
+<p><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip &lt;file_archive&gt;.zip &lt;file_1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-zip文件"><a href="#解压-zip文件" class="headerlink" title="解压.zip文件"></a>解压<code>.zip</code>文件</h3><blockquote>
+<p><code>-d</code>：指定解压后文件存放目录<br><code>-n</code>：不会覆盖同名文件<br><code>-o</code>：强制覆盖同名文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;file_archive&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="分卷压缩-zip文件"><a href="#分卷压缩-zip文件" class="headerlink" title="分卷压缩.zip文件"></a>分卷压缩<code>.zip</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r -s 10m &lt;file_archive&gt;.zip &lt;dir&gt;/</span><br></pre></td></tr></table></figure>
+
+<h3 id="分卷解压-zip文件"><a href="#分卷解压-zip文件" class="headerlink" title="分卷解压.zip文件"></a>分卷解压<code>.zip</code>文件</h3><blockquote>
+<p><code>&lt;file_archive_part&gt;</code>：指定分卷的某一部分，自动识别当前目录的其他部分</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;file_archive_part&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAR"><a href="#RAR" class="headerlink" title="RAR"></a>RAR</h2><h3 id="前言-5"><a href="#前言-5" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>RAR是一种专利文件格式，用于数据压缩与归档打包，开发者为尤金·罗谢尔，RAR的全名是”Roshal ARchive”，即”罗谢尔的归档”之意。首个公开版本RAR 1.3发布于1993年。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/RAR">维基百科</a></li>
+</ul>
+<h3 id="下载依赖-1"><a href="#下载依赖-1" class="headerlink" title="下载依赖"></a>下载依赖</h3><h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><h5 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install rar unrar</span><br></pre></td></tr></table></figure>
+
+<h4 id="MacOS-1"><a href="#MacOS-1" class="headerlink" title="MacOS"></a>MacOS</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install rar</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本参数-2"><a href="#基本参数-2" class="headerlink" title="基本参数"></a>基本参数</h3><blockquote>
+<p><code>-a</code>：添加文件到压缩档案<br><code>-e</code>：将文件解压到当前目录<br><code>-x</code>：使用完整路径提取文件<br><code>-l</code>：列出存档内容<br><code>-v</code>：详细列出存档</p>
+</blockquote>
+<h3 id="压缩-rar文件"><a href="#压缩-rar文件" class="headerlink" title="压缩.rar文件"></a>压缩<code>.rar</code>文件</h3><blockquote>
+<p><code>&lt;new_file_name&gt;</code>：生成的压缩文件名<br><code>&lt;file_name&gt;</code>：需要被压缩的文件名</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rar a &lt;file_archive&gt;.rar &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-rar文件"><a href="#解压-rar文件" class="headerlink" title="解压.rar文件"></a>解压<code>.rar</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unrar x &lt;file_archive&gt;.rar &lt;dir&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-Zip"><a href="#7-Zip" class="headerlink" title="7-Zip"></a>7-Zip</h2><h3 id="前言-6"><a href="#前言-6" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>7-Zip预设的格式是其自行开发的7z格式，扩展名为.7z。7z格式包含多种算法，最常使用的就是Bzip2以及作者伊戈尔·帕夫洛夫开发的LZMA。LZMA算法比起其他常见的传统压缩算法，如Zip、RAR来说相对较新，压缩率也比较高。7z格式支持Unicode，且将其默认用于存储文件名称，可以避免不同系统、语言环境间压缩解压乱码的问题。除7-Zip外，目前流行的压缩程序也大多支持此格式，如WinRAR、Peazip等。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/7-Zip">维基百科</a>）</li>
+</ul>
+<h3 id="下载依赖-2"><a href="#下载依赖-2" class="headerlink" title="下载依赖"></a>下载依赖</h3><h4 id="MacOS-2"><a href="#MacOS-2" class="headerlink" title="MacOS"></a>MacOS</h4><ul>
+<li>MacOS上安装<code>sevenzip</code>软件包后，得到的是<code>7zz</code>命令，且<code>sevenzip</code>、<code>7zip</code>、<code>7-zip</code>是相同的软件包</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install sevenzip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install 7zip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install 7-zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-7z文件"><a href="#压缩-7z文件" class="headerlink" title="压缩.7z文件"></a>压缩<code>.7z</code>文件</h3><blockquote>
+<p><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7zz a &lt;file_archive&gt;.7z &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-7z文件"><a href="#解压-7z文件" class="headerlink" title="解压.7z文件"></a>解压<code>.7z</code>文件</h3><blockquote>
+<p><code>-o&lt;dir&gt;</code>：指定解压后的文件存放路径<br><code>-y</code>：强制覆盖同名文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7zz x &lt;file_archive&gt;.7z</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-zip文件-1"><a href="#压缩-zip文件-1" class="headerlink" title="压缩.zip文件"></a>压缩<code>.zip</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7zz a -tzip &lt;file_archive&gt;.zip &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="p7zip"><a href="#p7zip" class="headerlink" title="p7zip"></a>p7zip</h2><h3 id="前言-7"><a href="#前言-7" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>p7zip是移植到POSIX&#x2F;Unix-like系统的7-Zip软件，可以压缩解压7z格式的文件。常用命令包括7z和7za，通过参数调整压缩解压设置。其支持的系统包括但不限于Linux内核的Debian、Fedora、Gentoo Linux、AltLinux.org，非Linux内核的FreeBSD、Mac OS X、iOS（越狱后可安装）、BeOS、FreeDOS、AmigaOS等。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/7-Zip#p7zip">维基百科</a>）</li>
+</ul>
+<h3 id="下载依赖-3"><a href="#下载依赖-3" class="headerlink" title="下载依赖"></a>下载依赖</h3><h4 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h4><ul>
+<li><code>p7zip</code>只能处理<code>.7z</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install p7zip</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>p7zip-full</code>包含了p7zip的所有功能，并且额外支持其他压缩格式</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install p7zip-full</span><br></pre></td></tr></table></figure>
+
+<h4 id="MacOS-3"><a href="#MacOS-3" class="headerlink" title="MacOS"></a>MacOS</h4><ul>
+<li>MacOS上安装<code>p7zip</code>软件包后，得到的是<code>7z</code>、<code>7za</code>、<code>7zr</code>三个命令，且<code>7z</code>、<code>7za</code>、<code>7zr</code>是相同的命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install p7zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-7z文件-1"><a href="#压缩-7z文件-1" class="headerlink" title="压缩.7z文件"></a>压缩<code>.7z</code>文件</h3><blockquote>
+<p><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7za a &lt;file_archive&gt;.7z &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-7z文件-1"><a href="#解压-7z文件-1" class="headerlink" title="解压.7z文件"></a>解压<code>.7z</code>文件</h3><blockquote>
+<p><code>-o&lt;dir&gt;</code>：指定解压后的文件存放路径<br><code>-y</code>：强制覆盖同名文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7za x &lt;file_archive&gt;.7z</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-zip文件-2"><a href="#压缩-zip文件-2" class="headerlink" title="压缩.zip文件"></a>压缩<code>.zip</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7za a -tzip &lt;file_archive&gt;.zip &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows-Tar"><a href="#Windows-Tar" class="headerlink" title="Windows Tar"></a>Windows Tar</h2><h3 id="前言-8"><a href="#前言-8" class="headerlink" title="前言"></a>前言</h3><ul>
+<li><p>Windows上的tar命令是来自于基于libarchive的bsdtar软件包</p>
+</li>
+<li><p>bsdtar has been included in Windows since Windows 10 April 2018 Update. In May 2023, Microsoft announced Windows 11 will natively support additional archive formats such as 7z and RAR via libarchive.（<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Libarchive">维基百科</a>）</p>
+</li>
+</ul>
+<h3 id="压缩-tar文件-1"><a href="#压缩-tar文件-1" class="headerlink" title="压缩.tar文件"></a>压缩<code>.tar</code>文件</h3><ul>
+<li>每次只能将一个文件压缩为<code>.tar</code>文件</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cf &lt;file_archive&gt;.tar &lt;file_1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar文件-1"><a href="#解压-tar文件-1" class="headerlink" title="解压.tar文件"></a>解压<code>.tar</code>文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf &lt;file_archive&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-gz文件"><a href="#压缩-tar-gz文件" class="headerlink" title="压缩.tar.gz文件"></a>压缩<code>.tar.gz</code>文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcf &lt;file_archive&gt;.tar.gz &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-gz文件"><a href="#解压-tar-gz文件" class="headerlink" title="解压.tar.gz文件"></a>解压<code>.tar.gz</code>文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf &lt;file_archive&gt;.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-tar-gz文件-1"><a href="#压缩-tar-gz文件-1" class="headerlink" title="压缩.tar.gz文件"></a>压缩<code>.tar.gz</code>文件</h3><ul>
+<li>需要提前下载Windows的bzip2软件包，否则会报错：<code>tar: Error exit delayed from previous errors.</code></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install bzip2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jcf &lt;file_archive&gt;.tar.gz &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-tar-gz文件-1"><a href="#解压-tar-gz文件-1" class="headerlink" title="解压.tar.gz文件"></a>解压<code>.tar.gz</code>文件</h3><ul>
+<li>需要提前下载Windows的bzip2软件包，否则会报错：<code>tar: Error exit delayed from previous errors.</code></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install bzip2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jxf &lt;file_archive&gt;.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-zip文件-1"><a href="#解压-zip文件-1" class="headerlink" title="解压.zip文件"></a>解压<code>.zip</code>文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jxf &lt;file_archive&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows-7-Zip"><a href="#Windows-7-Zip" class="headerlink" title="Windows 7-Zip"></a>Windows 7-Zip</h2><h3 id="前言-9"><a href="#前言-9" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>7-Zip是一个开放源码的数据压缩程序，主要在Microsoft Windows操作系统，Unix-like的操作系统（如Linux与FreeBSD）可以使用7-zip的移植版本p7zip。它提供命令行接口的程序与图形用户界面的程序，而且可以与资源管理器结合。7-Zip是自由软件，由伊戈尔·帕夫洛夫于1999年开始开发，并把主体在GNU LGPL下发布；加密部分，使用高级加密标准（AES）的代码，使用BSD许可证发布；解压RAR部分，使用RAR特定的许可协议。在2007年获得SourceForge.net的社区票选为“最佳技术设计”及“最佳项目”两个奖项。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/7-Zip#p7zip">维基百科</a>）</li>
+</ul>
+<h3 id="下载依赖-4"><a href="#下载依赖-4" class="headerlink" title="下载依赖"></a>下载依赖</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install <span class="number">7</span>zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-7z文件-2"><a href="#压缩-7z文件-2" class="headerlink" title="压缩.7z文件"></a>压缩<code>.7z</code>文件</h3><blockquote>
+<p><code>-r</code>：递归操作</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot; a &lt;file_archive&gt;.<span class="number">7</span>z &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压-7z文件-2"><a href="#解压-7z文件-2" class="headerlink" title="解压.7z文件"></a>解压<code>.7z</code>文件</h3><blockquote>
+<p><code>-o&lt;dir&gt;</code>：指定解压后的文件存放路径<br><code>-y</code>：强制覆盖同名文件</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot; x &lt;file_archive&gt;.<span class="number">7</span>z</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩-zip文件-3"><a href="#压缩-zip文件-3" class="headerlink" title="压缩.zip文件"></a>压缩<code>.zip</code>文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot; a -tzip &lt;file_archive&gt;.zip &lt;file_1&gt; &lt;file_2&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://wangchujiang.com/linux-command/c/tar.html">开源中国</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/iot_song/article/details/80169662">CSDN——一个从入门到放弃再到改行的工程师</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tar.html">菜鸟教程</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjk13703623757/article/details/79848878">CSDN——Locutus</a><br><a href="/302.html?target=http://velep.com/archives/389.html">REILLET的博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyliyongblue/article/details/48519261">CSDN——霸王凯旋</a><br><a target="_blank" rel="noopener" href="https://www.idcbuy.net/it/linux/2433.html">IDC严选</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lh155136/article/details/110950060">CSDN——菜鸟fox</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/634435955">知乎——小卖部坑我们滴钱</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/MacOS/" rel="tag"># MacOS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/11/Linux%E7%9A%84Shell%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】Linux的Shell命令">
+                  <i class="fa fa-angle-left"></i> 【笔记】Linux的Shell命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/11/14/%E5%9C%A8MacOS%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%88%B6%E4%BD%9CWindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%9B%98/" rel="next" title="【笔记】在MacOS系统上制作Windows系统安装盘">
+                  【笔记】在MacOS系统上制作Windows系统安装盘 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

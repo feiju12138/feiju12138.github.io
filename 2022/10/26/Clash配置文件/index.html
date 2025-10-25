@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Clash配置文件学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Clash配置文件">
+<meta property="og:url" content="https://loli.fj.cn/2022/10/26/Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Clash配置文件学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-26T02:32:30.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.849Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/10/26/Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/10/26/Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/","path":"2022/10/26/Clash配置文件/","title":"【笔记】Clash配置文件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Clash配置文件 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置文件位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-MacOS"><span class="nav-number">2.1.</span> <span class="nav-text">Linux &amp; MacOS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">配置代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">配置示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">配置代理组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-number">6.</span> <span class="nav-text">配置规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEWebUI"><span class="nav-number">7.</span> <span class="nav-text">配置WebUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E5%9C%B0%E5%9D%80"><span class="nav-number">8.</span> <span class="nav-text">配置静态地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E4%B8%BADNS%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">9.</span> <span class="nav-text">作为DNS服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E9%9B%86%E8%AE%A2%E9%98%85%E9%85%8D%E7%BD%AE"><span class="nav-number">10.</span> <span class="nav-text">规则集订阅配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E9%9B%86%E8%AE%A2%E9%98%85%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">代理集订阅配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/10/26/Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Clash配置文件 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Clash配置文件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-26 10:32:30" itemprop="dateCreated datePublished" datetime="2022-10-26T10:32:30+08:00">2022-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Clash配置文件学习笔记</p>
+<span id="more"></span>
+
+<h2 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h2><h3 id="Linux-MacOS"><a href="#Linux-MacOS" class="headerlink" title="Linux &amp; MacOS"></a>Linux &amp; MacOS</h3><ul>
+<li><code>~/.config/clash/config.yaml</code></li>
+</ul>
+<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><blockquote>
+<p><code>port: 7890</code>：指定HTTP代理的监听端口<br><code>socks-port: 7891</code>：指定SOCKS5代理的监听端口<br><code>redir-port: 7892</code>：Linux 和 MacOS 的透明代理服务端口（TCP 和 TProxy UDP 重定向）<br><code>tproxy-port: 7893</code>：Linux 的透明代理服务端口（TProxy TCP 和 TProxy UDP）<br><code>mixed-port: 7890</code>：混合代理的监听端口，自动切换<code>http_proxy</code>、<code>https_proxy</code>、<code>sock5_proxy</code>代理</p>
+<p><code>allow-lan</code>：是否允许局域网访问，如果为true表示所有局域网都可以将当前设备作为代理服务器，如果为false表示除了本机可以使用局域网的其他设备都不能将当前设备作为代理服务器<br><code>mode</code>：代理模式</p>
+<blockquote>
+<p><code>rule</code>：缺省值，规则模式<br><code>global</code>：全局模式<br><code>direct</code>：直连模式</p>
+</blockquote>
+<p><code>log-level</code>：日志打印级别</p>
+<blockquote>
+<p><code>info</code>：信息<br><code>warning</code>：警告<br><code>error</code>：报错<br><code>debug</code>：测试<br><code>silent</code>：不显示</p>
+</blockquote>
+<p><code>authentication</code>：如果配置了身份认证，当连接clash作为代理服务器时，需要提供账号密码才能代理，如果不配置则此过程不需要提供账号密码<br><code>interface-name: en0</code>：出站接口名<br><code>routing-mark: 6666</code>：Linux 的 fwmark</p>
+</blockquote>
+<figure class="highlight yaml"><figcaption><span>~/.config/clash/config.yaml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">port:</span> <span class="number">7890</span></span><br><span class="line"><span class="attr">socks-port:</span> <span class="number">7891</span></span><br><span class="line"><span class="attr">redir-port:</span> <span class="number">7892</span></span><br><span class="line"><span class="attr">tproxy-port:</span> <span class="number">7893</span></span><br><span class="line"><span class="attr">allow-lan:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">mode:</span> <span class="string">global</span></span><br><span class="line"><span class="attr">log-level:</span> <span class="string">info</span></span><br><span class="line"><span class="attr">authentication:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&lt;username&gt;:&lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h2><blockquote>
+<p><code>name: &lt;proxy_name&gt;</code>：节点名称<br><code>type: &lt;type&gt;</code>：代理类型</p>
+<blockquote>
+<p><code>ss</code>、<code>vmess</code>、<code>socks5</code>、<code>http</code>、<code>snell</code>、<code>trojan</code>、<code>ssr</code></p>
+</blockquote>
+<p><code>server: &lt;ip&gt;</code>：服务器域名或IP地址<br><code>port: &lt;port&gt;</code>：端口号<br><code>cipher: &lt;cipher&gt;</code>：加密方式</p>
+<blockquote>
+<p><code>ss</code>类型和<code>ssr</code>类型的加密方式：<code>aes-128-gcm</code>、<code>aes-192-gcm</code>、<code>aes-256-gcm</code>、<code>aes-128-cfb</code>、<code>aes-192-cfb</code>、<code>aes-256-cfb</code>、<code>aes-128-ctr</code>、<code>aes-192-ctr</code>、<code>aes-256-ctr</code>、<code>rc4-md5</code>、<code>chacha20-ietf</code>、<code>xchacha20</code>、<code>chacha20-ietf-poly1305</code>、<code>xchacha20-ietf-poly1305</code><br><code>vmess</code>类型的加密方式：<code>auto</code>、<code>none</code>、<code>aes-128-gcm</code>、<code>chacha20-poly1305</code></p>
+</blockquote>
+<p><code>password: &lt;password&gt;</code>：密码</p>
+</blockquote>
+<blockquote>
+<p><code>obfs: &lt;obfs&gt;</code>：混淆方式</p>
+<blockquote>
+<p><code>plain</code>、<code>http_simple</code>、<code>http_post</code>、<code>random_head</code>、<code>tls1.2_ticket_auth</code>、<code>tls1.2_ticket_fastauth</code></p>
+</blockquote>
+<p><code>obfs-param: &lt;obfs-param&gt;</code>：混淆参数</p>
+</blockquote>
+<blockquote>
+<p><code>protocol: &lt;protocol&gt;</code>：协议</p>
+<blockquote>
+<p><code>origin</code>、<code>auth_sha1_v4</code>、<code>auth_aes128_md5</code>、<code>auth_aes128_sha1</code>、<code>auth_chain_a</code>、<code>auth_chain_b</code></p>
+</blockquote>
+<p><code>protocol-param: &lt;protocol-param&gt;</code>：协议参数</p>
+</blockquote>
+<blockquote>
+<p><code>udp: &lt;bool&gt;</code>：是否开启UDP转发</p>
+<blockquote>
+<p><code>true</code>：开启<br><code>false</code>：关闭</p>
+</blockquote>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&#x27;&lt;proxy_name&gt;&#x27;</span>, <span class="attr">type:</span> <span class="string">ss</span>, <span class="attr">server:</span> <span class="string">&lt;ip&gt;</span>, <span class="attr">port:</span> <span class="string">&lt;port&gt;</span>, <span class="attr">cipher:</span> <span class="string">&lt;cipher&gt;</span>, <span class="attr">password:</span> <span class="string">&lt;password&gt;</span>, <span class="attr">udp:</span> <span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置示例"><a href="#配置示例" class="headerlink" title="配置示例"></a>配置示例</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="comment"># Shadowsocks</span></span><br><span class="line">  <span class="comment"># 支持的加密方法:</span></span><br><span class="line">  <span class="comment">#   aes-128-gcm aes-192-gcm aes-256-gcm</span></span><br><span class="line">  <span class="comment">#   aes-128-cfb aes-192-cfb aes-256-cfb</span></span><br><span class="line">  <span class="comment">#   aes-128-ctr aes-192-ctr aes-256-ctr</span></span><br><span class="line">  <span class="comment">#   rc4-md5 chacha20-ietf xchacha20</span></span><br><span class="line">  <span class="comment">#   chacha20-ietf-poly1305 xchacha20-ietf-poly1305</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;ss1&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">ss</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">chacha20-ietf-poly1305</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;ss2&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">ss</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">chacha20-ietf-poly1305</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">    <span class="attr">plugin:</span> <span class="string">obfs</span></span><br><span class="line">    <span class="attr">plugin-opts:</span></span><br><span class="line">      <span class="attr">mode:</span> <span class="string">tls</span> <span class="comment"># or http</span></span><br><span class="line">      <span class="comment"># host: bing.com</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;ss3&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">ss</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">chacha20-ietf-poly1305</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">    <span class="attr">plugin:</span> <span class="string">v2ray-plugin</span></span><br><span class="line">    <span class="attr">plugin-opts:</span></span><br><span class="line">      <span class="attr">mode:</span> <span class="string">websocket</span> <span class="comment"># 暂不支持 QUIC</span></span><br><span class="line">      <span class="comment"># tls: true # wss</span></span><br><span class="line">      <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">      <span class="comment"># host: bing.com</span></span><br><span class="line">      <span class="comment"># path: &quot;/&quot;</span></span><br><span class="line">      <span class="comment"># mux: true</span></span><br><span class="line">      <span class="comment"># headers:</span></span><br><span class="line">      <span class="comment">#   custom: value</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># vmess</span></span><br><span class="line">  <span class="comment"># 支持的加密方法:</span></span><br><span class="line">  <span class="comment">#  auto/aes-128-gcm/chacha20-poly1305/none</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;vmess&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">vmess</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">uuid:</span> <span class="string">uuid</span></span><br><span class="line">    <span class="attr">alterId:</span> <span class="number">32</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">auto</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br><span class="line">    <span class="comment"># tls: true</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="comment"># servername: example.com # 优先于 wss 主机</span></span><br><span class="line">    <span class="comment"># network: ws</span></span><br><span class="line">    <span class="comment"># ws-opts:</span></span><br><span class="line">    <span class="comment">#   path: /path</span></span><br><span class="line">    <span class="comment">#   headers:</span></span><br><span class="line">    <span class="comment">#     Host: v2ray.com</span></span><br><span class="line">    <span class="comment">#   max-early-data: 2048</span></span><br><span class="line">    <span class="comment">#   early-data-header-name: Sec-WebSocket-Protocol</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;vmess-h2&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">vmess</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">uuid:</span> <span class="string">uuid</span></span><br><span class="line">    <span class="attr">alterId:</span> <span class="number">32</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">auto</span></span><br><span class="line">    <span class="attr">network:</span> <span class="string">h2</span></span><br><span class="line">    <span class="attr">tls:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">h2-opts:</span></span><br><span class="line">      <span class="attr">host:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">http.example.com</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">http-alt.example.com</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;vmess-http&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">vmess</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">uuid:</span> <span class="string">uuid</span></span><br><span class="line">    <span class="attr">alterId:</span> <span class="number">32</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">auto</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br><span class="line">    <span class="comment"># network: http</span></span><br><span class="line">    <span class="comment"># http-opts:</span></span><br><span class="line">    <span class="comment">#   # method: &quot;GET&quot;</span></span><br><span class="line">    <span class="comment">#   # path:</span></span><br><span class="line">    <span class="comment">#   #   - &#x27;/&#x27;</span></span><br><span class="line">    <span class="comment">#   #   - &#x27;/video&#x27;</span></span><br><span class="line">    <span class="comment">#   # headers:</span></span><br><span class="line">    <span class="comment">#   #   Connection:</span></span><br><span class="line">    <span class="comment">#   #     - keep-alive</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">vmess-grpc</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">vmess</span></span><br><span class="line">    <span class="attr">uuid:</span> <span class="string">uuid</span></span><br><span class="line">    <span class="attr">alterId:</span> <span class="number">32</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">auto</span></span><br><span class="line">    <span class="attr">network:</span> <span class="string">grpc</span></span><br><span class="line">    <span class="attr">tls:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">servername:</span> <span class="string">example.com</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="attr">grpc-opts:</span></span><br><span class="line">      <span class="attr">grpc-service-name:</span> <span class="string">&quot;example&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># socks5</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;socks&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">socks5</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="comment"># username: username</span></span><br><span class="line">    <span class="comment"># password: password</span></span><br><span class="line">    <span class="comment"># tls: true</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># http</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;http&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="comment"># username: username</span></span><br><span class="line">    <span class="comment"># password: password</span></span><br><span class="line">    <span class="comment"># tls: true # https</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="comment"># sni: custom.com</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Snell</span></span><br><span class="line">  <span class="comment"># 请注意, 目前还没有UDP支持.</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;snell&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">snell</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">44046</span></span><br><span class="line">    <span class="attr">psk:</span> <span class="string">yourpsk</span></span><br><span class="line">    <span class="comment"># version: 2</span></span><br><span class="line">    <span class="comment"># obfs-opts:</span></span><br><span class="line">      <span class="comment"># mode: http # or tls</span></span><br><span class="line">      <span class="comment"># host: bing.com</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Trojan</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;trojan&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">trojan</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">yourpsk</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br><span class="line">    <span class="comment"># sni: example.com # aka 服务器名称</span></span><br><span class="line">    <span class="comment"># alpn:</span></span><br><span class="line">    <span class="comment">#   - h2</span></span><br><span class="line">    <span class="comment">#   - http/1.1</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">trojan-grpc</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">trojan</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;example&quot;</span></span><br><span class="line">    <span class="attr">network:</span> <span class="string">grpc</span></span><br><span class="line">    <span class="attr">sni:</span> <span class="string">example.com</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="attr">udp:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">grpc-opts:</span></span><br><span class="line">      <span class="attr">grpc-service-name:</span> <span class="string">&quot;example&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">trojan-ws</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">trojan</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;example&quot;</span></span><br><span class="line">    <span class="attr">network:</span> <span class="string">ws</span></span><br><span class="line">    <span class="attr">sni:</span> <span class="string">example.com</span></span><br><span class="line">    <span class="comment"># skip-cert-verify: true</span></span><br><span class="line">    <span class="attr">udp:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># ws-opts:</span></span><br><span class="line">      <span class="comment"># path: /path</span></span><br><span class="line">      <span class="comment"># headers:</span></span><br><span class="line">      <span class="comment">#   Host: example.com</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ShadowsocksR</span></span><br><span class="line">  <span class="comment"># 支持的加密方法: ss 中的所有流加密方法</span></span><br><span class="line">  <span class="comment"># 支持的混淆方式:</span></span><br><span class="line">  <span class="comment">#   plain http_simple http_post</span></span><br><span class="line">  <span class="comment">#   random_head tls1.2_ticket_auth tls1.2_ticket_fastauth</span></span><br><span class="line">  <span class="comment"># 支持的协议:</span></span><br><span class="line">  <span class="comment">#   origin auth_sha1_v4 auth_aes128_md5</span></span><br><span class="line">  <span class="comment">#   auth_aes128_sha1 auth_chain_a auth_chain_b</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;ssr&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">ssr</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">    <span class="attr">cipher:</span> <span class="string">chacha20-ietf</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">    <span class="attr">obfs:</span> <span class="string">tls1.2_ticket_auth</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">auth_sha1_v4</span></span><br><span class="line">    <span class="comment"># obfs-param: domain.tld</span></span><br><span class="line">    <span class="comment"># protocol-param: &quot;#&quot;</span></span><br><span class="line">    <span class="comment"># udp: true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置代理组"><a href="#配置代理组" class="headerlink" title="配置代理组"></a>配置代理组</h2><blockquote>
+<p><code>name: &lt;group_name&gt;</code>：组名<br><code>type</code>：组类型</p>
+<blockquote>
+<p><code>select</code>：手动选择<br><code>url-test</code>：自动测试<br><code>fallback</code>：故障切换<br><code>load-balance</code>：负载均衡</p>
+</blockquote>
+<p><code>proxies</code>：组内代理服务器列表，可以指定节点名，也可以指定组名</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy-groups:</span></span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&#x27;&lt;proxy_name&gt;&#x27;</span>, <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">proxies:</span> [<span class="string">&#x27;&lt;proxies_name&gt;&#x27;</span>, <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>], <span class="attr">url:</span> <span class="string">&quot;https://www.google.com.hk/&quot;</span>, <span class="string">interval</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>, <span class="attr">type:</span> <span class="string">fallback</span>, <span class="attr">proxies:</span> [<span class="string">&#x27;&lt;proxies_name&gt;&#x27;</span>, <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>], <span class="attr">url:</span> <span class="string">&quot;https://www.google.com.hk/&quot;</span>, <span class="string">interval</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>, <span class="attr">type:</span> <span class="string">load-balance</span>, <span class="attr">proxies:</span> [<span class="string">&#x27;&lt;proxy_name&gt;&#x27;</span>, <span class="string">&#x27;&lt;group_name&gt;&#x27;</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置规则"><a href="#配置规则" class="headerlink" title="配置规则"></a>配置规则</h2><blockquote>
+<p><code>&lt;type&gt;</code>：规则类型</p>
+<blockquote>
+<p><code>DOMAIN-SUFFIX</code>：匹配指定域名，参数在第二部分传递<br><code>IP-CIDR</code>：匹配IPV4和网段，参数在第二部分传递<br><code>IP-CIDR6</code>：匹配IPV6和网段，参数在第二部分传递<br><code>GEOIP</code>：匹配国家，参数在第二部分传递<br><code>MATCH</code>：任何情况，无需指定第二部分</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><code>&lt;param&gt;</code>：参数</p>
+</blockquote>
+<blockquote>
+<p><code>&lt;rule&gt;</code>：规则，可以是组名</p>
+<blockquote>
+<p><code>DIRECT</code>：直连<br><code>PROXY</code>：使用代理<br><code>&lt;group_name&gt;</code>：根据指定组选择代理服务器</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><code>no-resolve</code>：无规则</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,local,&lt;rule&gt;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,192.168.0.0/16,&lt;rule&gt;,no-resolve</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR6,::1/128,&lt;rule&gt;,no-resolve</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">GEOIP,CN,&lt;rule&gt;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">MATCH,&lt;rule&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置WebUI"><a href="#配置WebUI" class="headerlink" title="配置WebUI"></a>配置WebUI</h2><blockquote>
+<p><code>external-controller</code>：API的监听端口，缺省值为9090，可以使用WebUI来操作Clash<br><code>external-ui</code>：WebUI目录路径，通过<a target="_blank" rel="noopener" href="http://localhost:9090/ui">http://localhost:9090/ui</a>来访问<br><code>secret</code>：如果配置了秘密，当使用WebUI来操作Clash时，需要提供秘密才能操作，如果不配置则此过程不需要提供秘密</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">external-controller:</span> <span class="string">:9090</span></span><br><span class="line"><span class="attr">external-ui:</span> <span class="string">&quot;/usr/share/openclash/ui&quot;</span></span><br><span class="line"><span class="attr">secret:</span> <span class="string">&quot;&lt;secret&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置静态地址"><a href="#配置静态地址" class="headerlink" title="配置静态地址"></a>配置静态地址</h2><ul>
+<li>静态地址永不会经过代理</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hosts:</span></span><br><span class="line">  <span class="attr">&#x27;alpha.clash.dev&#x27;:</span> <span class="string">&#x27;::1&#x27;</span></span><br><span class="line">  <span class="attr">&#x27;*.clash.dev&#x27;:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">  <span class="string">&#x27;.dev&#x27;</span><span class="string">:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="作为DNS服务器"><a href="#作为DNS服务器" class="headerlink" title="作为DNS服务器"></a>作为DNS服务器</h2><ul>
+<li>开启了DNS配置后可以直接将Clash作为DNS服务器</li>
+<li>Clash支持不加密和加密的DNS协议<ul>
+<li>加密的DNS协议只支持DoH和DoT，不支持DoQ</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>dns</code>：作为DNS服务器</p>
+<blockquote>
+<p><code>enable</code>：将当前设备作为ipv4的DNS服务器<br><code>ipv6</code>：将当前设备作为ipv6的DNS服务器<br><code>listen</code>：DNS服务器坚挺的IP地址和端口号<br><code>default-nameserver</code>：用来解析上游DNS服务器域名的IP地址，仅可指定IP地址<br><code>nameserver</code>：上游DNS服务器的IP地址，可指定IP地址或域名<br><code>nameserver-policy</code>：为指定域名配置指定DNS服务器</p>
+</blockquote>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dns:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">ipv6:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">listen:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:53</span></span><br><span class="line">  <span class="attr">default-nameserver:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">223.6</span><span class="number">.6</span><span class="number">.6</span></span><br><span class="line">  <span class="attr">nameserver:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://dns.alidns.com/dns-query</span></span><br><span class="line">  <span class="attr">nameserver-policy:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">&#x27;baidu.com&#x27;:</span> <span class="string">&#x27;114.114.114.114&#x27;</span></span><br><span class="line">  <span class="attr">fallback:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://dns.cloudflare.com/dns-query</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://dns.google/dns-query</span></span><br><span class="line">  <span class="attr">fallback-filter:</span></span><br><span class="line">    <span class="attr">geoip:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">geoip-code:</span> <span class="string">CN</span></span><br><span class="line">    <span class="attr">ipcidr:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">240.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">/4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="规则集订阅配置"><a href="#规则集订阅配置" class="headerlink" title="规则集订阅配置"></a>规则集订阅配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 规则集</span></span><br><span class="line"><span class="attr">rule-providers:</span></span><br><span class="line">  <span class="attr">Adobe:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Adobe.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Adobe.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Amazon:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Amazon.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Amazon.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">GitHub:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/GitHub.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/GitHub.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Microsoft:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Microsoft.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Microsoft.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Netflix:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Netflix.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Netflix.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Spotify:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Spotify.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Spotify.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Speedtest:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Speedtest.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Speedtest.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Steam:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Steam.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Steam.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">Tencent:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Tencent.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/Tencent.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">YouTube:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/YouTube.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://cdn.jsdelivr.net/gh/Semporia/Clash@master/Rule/YouTube.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">reject:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/reject.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">icloud:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/icloud.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">apple:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/apple.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">google:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/google.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">proxy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/proxy.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">direct:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/direct.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">private:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/private.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">gfw:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/gfw.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">greatfire:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/greatfire.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">tld-not-cn:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">domain</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/tld-not-cn.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">telegramcidr:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">ipcidr</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/telegramcidr.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">cncidr:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">ipcidr</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/cncidr.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">lancidr:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">ipcidr</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/lancidr.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">Whitelist:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://gitee.com/myisafei/script/raw/master/clash/rule/Whitelist.yaml&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Whitelist.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">  <span class="attr">ME:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://gitee.com/myisafei/script/raw/master/clash/rule/Other.yaml&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Other.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line">  <span class="attr">TW:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">behavior:</span> <span class="string">classical</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&quot;https://gitee.com/myisafei/script/raw/master/clash/rule/Tw.yaml&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./ruleset/Tw.yaml</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">3600</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分流规则</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="comment"># Area</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,local,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,192.168.0.0/16,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,10.0.0.0/8,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,172.16.0.0/12,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,127.0.0.0/8,DIRECT</span></span><br><span class="line">  <span class="comment"># BT,PT 规则</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,tracker,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,announce.php?passkey=,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,torrent,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,peer_id=,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,info_hash,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,get_peers,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,find_node,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,BitTorrent,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,announce_peer,DIRECT</span></span><br><span class="line">  <span class="comment"># bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,biliapi.com,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,biliapi.net,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,bilibili.com,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,bilibili.tv,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,bilivideo.com,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,biligame.com,bilibili</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,biligame.net,bilibili</span></span><br><span class="line">  <span class="comment"># Adobe</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Adobe,Adobe</span></span><br><span class="line">  <span class="comment"># 亚马逊</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Amazon,Amazon</span></span><br><span class="line">  <span class="comment"># GitHub</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,GitHub,GitHub</span></span><br><span class="line">  <span class="comment"># Microsoft</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Microsoft,Microsoft</span></span><br><span class="line">  <span class="comment"># 奈飞</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Netflix,Netflix</span> </span><br><span class="line">  <span class="comment"># 测速</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Speedtest,Speedtest</span></span><br><span class="line">  <span class="comment"># Steam</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Steam,Steam</span></span><br><span class="line">  <span class="comment"># Spotify</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Spotify,Spotify</span></span><br><span class="line">  <span class="comment"># 腾讯</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,Tencent,Tencent</span></span><br><span class="line">  <span class="comment"># 油管</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,YouTube,YouTube</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,live.cn,China</span></span><br><span class="line">  <span class="comment"># 广告域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,reject,REJECT</span></span><br><span class="line">  <span class="comment"># Apple域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,apple,Apple</span></span><br><span class="line">  <span class="comment"># iCloud域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,icloud,Apple</span></span><br><span class="line">  <span class="comment"># Google域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,google,Google</span></span><br><span class="line">  <span class="comment"># 代理域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,proxy,Proxy</span></span><br><span class="line">  <span class="comment"># 直连域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,direct,China</span></span><br><span class="line">  <span class="comment"># 私有网络专用域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,private,China</span></span><br><span class="line">  <span class="comment"># 长城防火墙域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,gfw,MATCH</span></span><br><span class="line">  <span class="comment"># GreatFire域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,greatfire,REJECT</span></span><br><span class="line">  <span class="comment"># 非中国大陆使用的顶级域名列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,tld-not-cn,MATCH</span></span><br><span class="line">  <span class="comment"># 电报地址列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,telegramcidr,Telegram</span></span><br><span class="line">  <span class="comment"># 中国大陆IPv4地址列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,cncidr,China</span></span><br><span class="line">  <span class="comment"># 局域网IP及保留IP地址列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">RULE-SET,lancidr,China</span></span><br><span class="line">  <span class="comment"># GeoIP China</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">GEOIP,CN,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">MATCH,MATCH</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="代理集订阅配置"><a href="#代理集订阅配置" class="headerlink" title="代理集订阅配置"></a>代理集订阅配置</h2><ul>
+<li>可以配置多个订阅</li>
+</ul>
+<blockquote>
+<p><code>type</code>：订阅类型</p>
+<blockquote>
+<p><code>http</code>：通过链接获取订阅<br><code>file</code>：通过本地配置订阅</p>
+</blockquote>
+<p><code>interval</code>：更新订阅间隔<br><code>filter</code>：包含指定关键字的代理将会被删除<br><code>health-check</code>：健康检查</p>
+<blockquote>
+<p><code>enable</code>：是否开启健康检查<br><code>url</code>：健康检查依据的URL<br><code>interval</code>：健康检查时间间隔</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><code>&lt;name&gt;</code>：订阅名<br><code>&lt;file&gt;</code>：配置文件名，通常是订阅提供商名<br><code>&lt;url&gt;</code>：订阅链接</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代理集</span></span><br><span class="line"><span class="attr">proxy-providers:</span></span><br><span class="line"></span><br><span class="line">  <span class="string">&lt;name&gt;:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./&lt;file&gt;.yaml</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&lt;url&gt;</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="number">86400</span></span><br><span class="line">    <span class="attr">filter:</span> <span class="string">&quot;Japan&quot;</span></span><br><span class="line">    <span class="attr">health-check:</span></span><br><span class="line">      <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">http://www.gstatic.com/generate_204</span></span><br><span class="line">      <span class="attr">interval:</span> <span class="number">300</span></span><br><span class="line"></span><br><span class="line">  <span class="string">&lt;name&gt;:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">file</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">./&lt;file&gt;.yaml</span></span><br><span class="line">    <span class="attr">health-check:</span></span><br><span class="line">      <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">http://www.gstatic.com/generate_204</span></span><br><span class="line">      <span class="attr">interval:</span> <span class="number">300</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 代理组</span></span><br><span class="line"><span class="attr">proxy-groups:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">PROXY</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">url-test</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">http://www.gstatic.com/generate_204</span></span><br><span class="line">    <span class="attr">nterval:</span> <span class="number">86400</span></span><br><span class="line">    <span class="attr">use:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&lt;name&gt;</span></span><br><span class="line">    <span class="attr">proxies:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;MATCH&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;Proxy&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Apple&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>], <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Adobe&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Amazon&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;China&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;GitHub&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Google&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Microsoft&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>], <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Netflix&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Speedtest&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Steam&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Spotify&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Telegram&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Tencent&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;YouTube&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;Proxy&quot;</span>, <span class="attr">type:</span> <span class="string">url-test</span>, <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">&quot;bilibili&quot;</span>, <span class="attr">type:</span> <span class="string">select</span>, <span class="attr">proxies:</span> [<span class="string">&quot;DIRECT&quot;</span>], <span class="attr">use:</span> [<span class="string">&quot;&lt;name&gt;&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://registry.hub.docker.com/r/dreamacro/clash">DockerHub——dreamacro&#x2F;clash</a><br><a target="_blank" rel="noopener" href="https://blog.fillpit.cn/shi-yong-docker-da-jian-tu-xing-hua-clash-fu-wu-duan-zhi-chi-zi-dong-geng-xin-ding-yue/">坑飞小屋</a><br><a target="_blank" rel="noopener" href="https://www.jamesdailylife.com/rule-proxy-provider">詹姆斯的日常</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IVlnvBQXEgE">Youtube——James Daily Life 詹姆斯的日常</a><br><a target="_blank" rel="noopener" href="https://github.com/Loyalsoldier/clash-rules">Loyalsoldier&#x2F;clash-rules</a><br><a target="_blank" rel="noopener" href="https://github.com/Semporia/Clash">Semporia&#x2F;Clash</a><br><a target="_blank" rel="noopener" href="https://a76yyyy.github.io/clash/zh_CN/configuration/configuration-reference.html">a76yyyy的博客</a><br><a target="_blank" rel="noopener" href="https://www.xkww3n.cyou/2022/02/08/use-clash-dns-anti-dns-hijacking/">xkww3n的博客</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/26/Git%E4%BB%93%E5%BA%93%E5%BC%BA%E5%88%B6%E4%BB%8E%E8%BF%9C%E7%AB%AF%E8%A6%86%E7%9B%96%E6%9C%AC%E5%9C%B0/" rel="prev" title="【笔记】Git仓库强制从远端覆盖本地">
+                  <i class="fa fa-angle-left"></i> 【笔记】Git仓库强制从远端覆盖本地
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/28/STC12C5A60S2%E5%A4%B4%E6%96%87%E4%BB%B6%E6%BA%90%E4%BB%A3%E7%A0%81/" rel="next" title="【笔记】STC12C5A60S2头文件源代码">
+                  【笔记】STC12C5A60S2头文件源代码 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

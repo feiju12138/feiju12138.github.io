@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言防火墙学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】防火墙学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2021/08/21/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言防火墙学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-21T08:57:38.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.985Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2021/08/21/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2021/08/21/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/08/21/防火墙学习笔记/","title":"【笔记】防火墙学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】防火墙学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">防火墙的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">防火墙的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8C%BA%E5%9F%9F%E6%A6%82%E5%BF%B5"><span class="nav-number">4.</span> <span class="nav-text">防火墙的区域概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">5.</span> <span class="nav-text">Web应用防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E4%BE%B5%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.</span> <span class="nav-text">入侵防御系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F"><span class="nav-number">7.</span> <span class="nav-text">入侵检测系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">8.</span> <span class="nav-text">防火墙的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A1%E9%87%8F%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E6%8C%87%E6%A0%87"><span class="nav-number">9.</span> <span class="nav-text">衡量防火墙的指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">防火墙的工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E6%98%8E%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.1.</span> <span class="nav-text">透明模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.2.</span> <span class="nav-text">路由模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.3.</span> <span class="nav-text">混杂模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">防火墙的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE"><span class="nav-number">11.1.</span> <span class="nav-text">在网页配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8C%BA%E5%9F%9F%E9%9A%94%E7%A6%BB"><span class="nav-number">11.1.1.</span> <span class="nav-text">创建区域隔离</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAinside%E5%8C%BA%E5%9F%9F"><span class="nav-number">11.1.1.1.</span> <span class="nav-text">创建inside区域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAoutside%E5%8C%BA%E5%9F%9F"><span class="nav-number">11.1.1.2.</span> <span class="nav-text">创建outside区域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BADMZ%E5%8C%BA%E5%9F%9F"><span class="nav-number">11.1.1.3.</span> <span class="nav-text">创建DMZ区域</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8C%BA%E5%9F%9FIP"><span class="nav-number">11.1.2.</span> <span class="nav-text">配置区域IP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEinside%E7%9A%84%E5%8C%BA%E5%9F%9FIP"><span class="nav-number">11.1.2.1.</span> <span class="nav-text">配置inside的区域IP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEoutside%E7%9A%84%E5%8C%BA%E5%9F%9FIP"><span class="nav-number">11.1.2.2.</span> <span class="nav-text">配置outside的区域IP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEDMZ%E7%9A%84%E5%8C%BA%E5%9F%9FIP"><span class="nav-number">11.1.2.3.</span> <span class="nav-text">配置DMZ的区域IP</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1"><span class="nav-number">11.1.3.</span> <span class="nav-text">配置路由</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E4%B8%8B%E4%B8%80%E8%B7%B3"><span class="nav-number">11.1.3.1.</span> <span class="nav-text">配置连接互联网的下一跳</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%AD%96%E7%95%A5%EF%BC%88%E4%BB%8E%E5%86%85%E5%88%B0%E5%A4%96%EF%BC%89"><span class="nav-number">11.1.4.</span> <span class="nav-text">配置策略（从内到外）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#inside-outside-%E5%92%8C-inside-DMZ"><span class="nav-number">11.1.4.1.</span> <span class="nav-text">inside-&gt;outside 和 inside-&gt;DMZ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DMZ-outside"><span class="nav-number">11.1.4.2.</span> <span class="nav-text">DMZ-&gt;outside</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88SNAT%EF%BC%89"><span class="nav-number">11.1.5.</span> <span class="nav-text">源地址转换（SNAT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88DNAT%EF%BC%89"><span class="nav-number">11.1.6.</span> <span class="nav-text">目标地址转换（DNAT）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E8%B5%84%E6%BA%90"><span class="nav-number">11.1.6.1.</span> <span class="nav-text">定义一个地址资源</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80"><span class="nav-number">11.1.6.1.1.</span> <span class="nav-text">定义虚拟地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%9D%80"><span class="nav-number">11.1.6.1.2.</span> <span class="nav-text">定义真实地址</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">11.1.6.2.</span> <span class="nav-text">添加地址转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%AD%96%E7%95%A5%EF%BC%88%E4%BB%8E%E5%A4%96%E5%88%B0%E5%86%85%EF%BC%89"><span class="nav-number">11.1.7.</span> <span class="nav-text">配置策略（从外到内）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C%E4%BA%94%E5%B1%82%E8%BF%87%E6%BB%A4"><span class="nav-number">11.2.</span> <span class="nav-text">进行五层过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E8%BF%87%E6%BB%A4"><span class="nav-number">11.2.1.</span> <span class="nav-text">添加内容安全过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%AD%96%E7%95%A5"><span class="nav-number">11.2.2.</span> <span class="nav-text">应用策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%B7%E4%BD%93%E8%BF%87%E6%BB%A4%E5%86%85%E5%AE%B9%E5%90%8D%E5%8D%95"><span class="nav-number">11.2.3.</span> <span class="nav-text">添加具体过滤内容名单</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#URL%E8%BF%87%E6%BB%A4"><span class="nav-number">11.2.3.1.</span> <span class="nav-text">URL过滤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E8%BF%87%E6%BB%A4"><span class="nav-number">11.2.3.2.</span> <span class="nav-text">内容过滤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%85%B7%E4%BD%93%E8%BF%87%E6%BB%A4%E5%86%85%E5%AE%B9%E5%90%8D%E5%8D%95"><span class="nav-number">11.2.4.</span> <span class="nav-text">应用具体过滤内容名单</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2021/08/21/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】防火墙学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】防火墙学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-21 16:57:38" itemprop="dateCreated datePublished" datetime="2021-08-21T16:57:38+08:00">2021-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">计算机网络学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>防火墙学习笔记</p>
+<span id="more"></span>
+
+<h2 id="防火墙的作用"><a href="#防火墙的作用" class="headerlink" title="防火墙的作用"></a>防火墙的作用</h2><ul>
+<li>将需要保护的网络与不可信任网络进行隔离，隐藏信息并进行安全防护</li>
+</ul>
+<h2 id="防火墙的功能"><a href="#防火墙的功能" class="headerlink" title="防火墙的功能"></a>防火墙的功能</h2><ul>
+<li>访问控制</li>
+<li>攻击保护（三层和四层的攻击）</li>
+<li>冗余设计</li>
+<li>路由、交换</li>
+<li>日志记录</li>
+<li>虚拟专网VPN</li>
+<li>NAT</li>
+</ul>
+<h2 id="防火墙的区域概念"><a href="#防火墙的区域概念" class="headerlink" title="防火墙的区域概念"></a>防火墙的区域概念</h2><ul>
+<li>内部区域（高区域）：<code>Inside</code>、<code>trust</code></li>
+</ul>
+<p>内网用户</p>
+<ul>
+<li>外部区域（低区域）：<code>Outside</code>、<code>untrust</code></li>
+</ul>
+<p>公网用户和服务器</p>
+<ul>
+<li>隔离区&#x2F;非军事化区&#x2F;停火区（中区域）：<code>DMZ</code></li>
+</ul>
+<p>内网服务器</p>
+<h2 id="Web应用防火墙"><a href="#Web应用防火墙" class="headerlink" title="Web应用防火墙"></a>Web应用防火墙</h2><ul>
+<li>Web应用防火墙（WAF）只用来防御DMZ区域内部</li>
+</ul>
+<h2 id="入侵防御系统"><a href="#入侵防御系统" class="headerlink" title="入侵防御系统"></a>入侵防御系统</h2><ul>
+<li>入侵防御系统（IPS）用来串联审核，通过特征库，牺牲性能，进行流量过滤</li>
+</ul>
+<h2 id="入侵检测系统"><a href="#入侵检测系统" class="headerlink" title="入侵检测系统"></a>入侵检测系统</h2><ul>
+<li>入侵检测系统（IDS）用来旁路审核，通过特征库，生成报告，不影响网络性能，但是不能拦截流量</li>
+</ul>
+<h2 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h2><ul>
+<li>按防火墙形态分类<ul>
+<li>软件防火墙</li>
+<li>硬件防火墙</li>
+</ul>
+</li>
+<li>按技术实现分类<ul>
+<li>包过滤防火墙<br>最早的防火墙之一，功能简单，配置复杂</li>
+<li>状态检测包过滤防火墙<br>现代主流防火墙，速度快，配置方便，功能较多</li>
+<li>应用网关&#x2F;应用代理防火墙<br>最早的防火墙之二，连接效率低，速度慢</li>
+<li>WAF防火墙</li>
+<li>应用层防火墙</li>
+</ul>
+</li>
+</ul>
+<h2 id="衡量防火墙的指标"><a href="#衡量防火墙的指标" class="headerlink" title="衡量防火墙的指标"></a>衡量防火墙的指标</h2><ul>
+<li>吞吐量：在不丢包的情况下单位时间内通过的数据包数量</li>
+<li>时延：数据包第一个比特进入防火墙到最后一比特从防火墙输出的时间间隔</li>
+<li>丢包率：通过防火墙传送时所丢失数据包数量占所发送数据包的比率</li>
+<li>并发连接数：防火墙能够同时处理的点对点连接的最大数目</li>
+<li>新建连接数：在不丢包的情况下每秒可以建立的最大连接数</li>
+</ul>
+<h2 id="防火墙的工作模式"><a href="#防火墙的工作模式" class="headerlink" title="防火墙的工作模式"></a>防火墙的工作模式</h2><h3 id="透明模式"><a href="#透明模式" class="headerlink" title="透明模式"></a>透明模式</h3><ul>
+<li>又称为桥模式</li>
+<li>工作在二层，不影响当前网络结构</li>
+</ul>
+<h3 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h3><ul>
+<li>工作在三层</li>
+</ul>
+<h3 id="混杂模式"><a href="#混杂模式" class="headerlink" title="混杂模式"></a>混杂模式</h3><ul>
+<li>透明模式和路由模式的结合</li>
+<li>既工作在二层，同时也工作在三层</li>
+</ul>
+<h2 id="防火墙的配置"><a href="#防火墙的配置" class="headerlink" title="防火墙的配置"></a>防火墙的配置</h2><ul>
+<li><p>中国的防火墙出厂时默认已经配置了第一个网口，IP地址是192.168.1.254，端口是80（HTTP）或443（HTTPS）</p>
+</li>
+<li><p>天融信的防火墙系统（Linux）的初始用户名</p>
+</li>
+</ul>
+<blockquote>
+<p>用户名：<code>superman</code><br>密码：<code>talent</code></p>
+</blockquote>
+<ul>
+<li>天融信的防火墙默认有一个区域，是内网区域</li>
+</ul>
+<h3 id="在网页配置"><a href="#在网页配置" class="headerlink" title="在网页配置"></a>在网页配置</h3><h4 id="创建区域隔离"><a href="#创建区域隔离" class="headerlink" title="创建区域隔离"></a>创建区域隔离</h4><ul>
+<li><code>资源管理</code>-&gt;<code>区域</code></li>
+</ul>
+<h5 id="创建inside区域"><a href="#创建inside区域" class="headerlink" title="创建inside区域"></a>创建inside区域</h5><ul>
+<li><code>添加</code></li>
+</ul>
+<blockquote>
+<p>名称：inside<br>访问权限：禁止</p>
+</blockquote>
+<ul>
+<li><p><code>可用属性</code>选择属于inside区域的防火墙网卡<code>eth0</code>-&gt;添加到<code>成员</code></p>
+</li>
+<li><p><code>确定</code></p>
+</li>
+</ul>
+<h5 id="创建outside区域"><a href="#创建outside区域" class="headerlink" title="创建outside区域"></a>创建outside区域</h5><ul>
+<li><code>添加</code></li>
+</ul>
+<blockquote>
+<p>名称：outside<br>访问权限：禁止</p>
+</blockquote>
+<ul>
+<li><p><code>可用属性</code>选择属于inside区域的防火墙网卡<code>eth1</code>-&gt;添加到<code>成员</code></p>
+</li>
+<li><p><code>确定</code></p>
+</li>
+</ul>
+<h5 id="创建DMZ区域"><a href="#创建DMZ区域" class="headerlink" title="创建DMZ区域"></a>创建DMZ区域</h5><ul>
+<li><code>添加</code></li>
+</ul>
+<blockquote>
+<p>名称：DMZ<br>访问权限：禁止</p>
+</blockquote>
+<ul>
+<li><p><code>可用属性</code>选择属于DMZ区域的防火墙网卡<code>eth2</code>-&gt;添加到<code>成员</code></p>
+</li>
+<li><p><code>确定</code></p>
+</li>
+</ul>
+<h4 id="配置区域IP"><a href="#配置区域IP" class="headerlink" title="配置区域IP"></a>配置区域IP</h4><ul>
+<li><code>网络管理</code>-&gt;<code>接口</code></li>
+</ul>
+<h5 id="配置inside的区域IP"><a href="#配置inside的区域IP" class="headerlink" title="配置inside的区域IP"></a>配置inside的区域IP</h5><ul>
+<li>选择属于inside区域的防火墙网卡<code>eth0</code>-&gt;<code>编辑</code></li>
+</ul>
+<blockquote>
+<p>描述：inside<br>模式：路由<br>地址：防火墙上连接外网区域的网卡的IP地址<br>掩码：子网掩码</p>
+</blockquote>
+<ul>
+<li><code>添加</code>-&gt;<code>确定</code></li>
+</ul>
+<h5 id="配置outside的区域IP"><a href="#配置outside的区域IP" class="headerlink" title="配置outside的区域IP"></a>配置outside的区域IP</h5><ul>
+<li>选择属于ooutside区域的防火墙网卡<code>eth1</code>-&gt;<code>编辑</code></li>
+</ul>
+<blockquote>
+<p>描述：outside<br>模式：路由<br>地址：防火墙上连接外网区域的网卡的IP地址<br>掩码：子网掩码</p>
+</blockquote>
+<ul>
+<li><code>添加</code>-&gt;<code>确定</code></li>
+</ul>
+<h5 id="配置DMZ的区域IP"><a href="#配置DMZ的区域IP" class="headerlink" title="配置DMZ的区域IP"></a>配置DMZ的区域IP</h5><ul>
+<li>选择属于DMZ区域的防火墙网卡eth2-&gt;<code>编辑</code></li>
+</ul>
+<blockquote>
+<p>描述：DMZ<br>模式：路由<br>地址：防火墙上连接外网区域的网卡的IP地址<br>掩码：子网掩码</p>
+</blockquote>
+<ul>
+<li><code>添加</code>-&gt;<code>确定</code></li>
+</ul>
+<h4 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h4><ul>
+<li><code>网络管理</code>-&gt;<code>路由</code></li>
+</ul>
+<h5 id="配置连接互联网的下一跳"><a href="#配置连接互联网的下一跳" class="headerlink" title="配置连接互联网的下一跳"></a>配置连接互联网的下一跳</h5><ul>
+<li><code>添加</code></li>
+</ul>
+<blockquote>
+<p>目的地址：0.0.0.0<br>目的掩码：0.0.0.0<br>网关：（指定下一跳的路由器的IP地址）<br>接口：（指定出接口的网卡）</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h4 id="配置策略（从内到外）"><a href="#配置策略（从内到外）" class="headerlink" title="配置策略（从内到外）"></a>配置策略（从内到外）</h4><ul>
+<li><code>防火墙</code>-&gt;<code>访问控制</code></li>
+</ul>
+<h5 id="inside-outside-和-inside-DMZ"><a href="#inside-outside-和-inside-DMZ" class="headerlink" title="inside-&gt;outside 和 inside-&gt;DMZ"></a>inside-&gt;outside 和 inside-&gt;DMZ</h5><ul>
+<li><code>添加策略</code></li>
+</ul>
+<blockquote>
+<p>源</p>
+<blockquote>
+<p>区域：inside<br>地址：任意</p>
+</blockquote>
+<p>目的</p>
+<blockquote>
+<p>区域：outside、DMZ<br>地址：任意</p>
+</blockquote>
+<p>服务：任意<br>动作：允许</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h5 id="DMZ-outside"><a href="#DMZ-outside" class="headerlink" title="DMZ-&gt;outside"></a>DMZ-&gt;outside</h5><ul>
+<li><code>添加策略</code></li>
+</ul>
+<blockquote>
+<p>源</p>
+<blockquote>
+<p>区域：DMZ<br>地址：任意</p>
+</blockquote>
+<p>目的</p>
+<blockquote>
+<p>区域：outside<br>地址：任意</p>
+</blockquote>
+<p>服务：任意<br>动作：允许</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h4 id="源地址转换（SNAT）"><a href="#源地址转换（SNAT）" class="headerlink" title="源地址转换（SNAT）"></a>源地址转换（SNAT）</h4><ul>
+<li><p>为了实现内网访问外网时的回包能正确指向IP地址</p>
+</li>
+<li><p><code>防火墙</code>-&gt;<code>地址转换</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>模式：源转换<br>源</p>
+<blockquote>
+<p>地址：任意<br>其他：勾选<br>区域</p>
+<blockquote>
+<p>inside<br>DMZ</p>
+</blockquote>
+</blockquote>
+<p>目的</p>
+<blockquote>
+<p>地址：任意<br>其他：勾选<br>区域</p>
+<blockquote>
+<p>outside</p>
+</blockquote>
+</blockquote>
+<p>源地址转换为：（填写防火墙上的连接外网的接口网卡）eth1</p>
+</blockquote>
+<h4 id="目标地址转换（DNAT）"><a href="#目标地址转换（DNAT）" class="headerlink" title="目标地址转换（DNAT）"></a>目标地址转换（DNAT）</h4><ul>
+<li>为了实现外网访问内网的服务器时能正确指向IP地址</li>
+</ul>
+<h5 id="定义一个地址资源"><a href="#定义一个地址资源" class="headerlink" title="定义一个地址资源"></a>定义一个地址资源</h5><h6 id="定义虚拟地址"><a href="#定义虚拟地址" class="headerlink" title="定义虚拟地址"></a>定义虚拟地址</h6><ul>
+<li><p><code>资源管理</code>-&gt;<code>地址</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>名称：vip-web-hello（定义一个名字）<br>IP地址：（站点服务器的虚拟IP地址，应该是外网的网段）</p>
+</blockquote>
+<ul>
+<li><p><code>&lt;-</code></p>
+</li>
+<li><p>确定</p>
+</li>
+</ul>
+<h6 id="定义真实地址"><a href="#定义真实地址" class="headerlink" title="定义真实地址"></a>定义真实地址</h6><ul>
+<li><p><code>资源管理</code>-&gt;<code>地址</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>名称：dmz-web-hello（定义一个名字）<br>IP地址：（站点服务器的真实IP地址，应该是内网的网段）</p>
+</blockquote>
+<ul>
+<li><p><code>&lt;-</code></p>
+</li>
+<li><p>确定</p>
+</li>
+</ul>
+<h5 id="添加地址转换"><a href="#添加地址转换" class="headerlink" title="添加地址转换"></a>添加地址转换</h5><ul>
+<li><p><code>防火墙</code>-&gt;<code>地址转换</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>模式：目的转换<br>源</p>
+<blockquote>
+<p>地址：任意<br>其他：勾选<br>区域：outside</p>
+</blockquote>
+<p>目的</p>
+<blockquote>
+<p>地址：vip-web-hello</p>
+</blockquote>
+<p>服务：HTTP（根据对外发布的服务选择，如果没有默认的端口号，需要在<code>资源管理</code>中定义一个自定义端口号）<br>目的地址转换为：dmz-web-hello<br>目的端口转换为：（如果真实访问的端口号与对外发布的端口号不相同，需要在这里定义）</p>
+</blockquote>
+<h4 id="配置策略（从外到内）"><a href="#配置策略（从外到内）" class="headerlink" title="配置策略（从外到内）"></a>配置策略（从外到内）</h4><ul>
+<li><p><code>防火墙</code>-&gt;<code>访问控制</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>源</p>
+<blockquote>
+<p>区域：outside</p>
+</blockquote>
+<p>目的</p>
+<blockquote>
+<p>区域：dmz<br>地址：（天融信配置<code>dmz-web-hello</code>）（思科配置<code>vip-web-hello</code>）</p>
+</blockquote>
+</blockquote>
+<h3 id="进行五层过滤"><a href="#进行五层过滤" class="headerlink" title="进行五层过滤"></a>进行五层过滤</h3><h4 id="添加内容安全过滤"><a href="#添加内容安全过滤" class="headerlink" title="添加内容安全过滤"></a>添加内容安全过滤</h4><ul>
+<li><p><code>防火墙</code>-&gt;<code>内容安全策略</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>策略名称：in-to-out<br>注释信息：此策略用户inside与dmz通往outside的策略上</p>
+</blockquote>
+<ul>
+<li><p>根据需要添加应用层过滤</p>
+</li>
+<li><p><code>确定</code></p>
+</li>
+</ul>
+<h4 id="应用策略"><a href="#应用策略" class="headerlink" title="应用策略"></a>应用策略</h4><ul>
+<li>在<code>防火墙</code>的<code>访问控制</code>下，在需要添加内容安全策略的策略点击<code>编辑</code></li>
+</ul>
+<blockquote>
+<p>内容安全策略：in-to-out</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h4 id="添加具体过滤内容名单"><a href="#添加具体过滤内容名单" class="headerlink" title="添加具体过滤内容名单"></a>添加具体过滤内容名单</h4><h5 id="URL过滤"><a href="#URL过滤" class="headerlink" title="URL过滤"></a>URL过滤</h5><ul>
+<li><p><code>内容过滤</code>-&gt;<code>HTTP过滤</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>名称：黑名单<br>URL：（添加需要过滤的网站）</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h5 id="内容过滤"><a href="#内容过滤" class="headerlink" title="内容过滤"></a>内容过滤</h5><ul>
+<li><p><code>内容过滤</code>-&gt;<code>HTTP过滤</code></p>
+</li>
+<li><p><code>添加</code></p>
+</li>
+</ul>
+<blockquote>
+<p>名称：敏感词<br>关键词：（添加需要过滤的网站中出现的关键词）</p>
+</blockquote>
+<ul>
+<li><code>确定</code></li>
+</ul>
+<h4 id="应用具体过滤内容名单"><a href="#应用具体过滤内容名单" class="headerlink" title="应用具体过滤内容名单"></a>应用具体过滤内容名单</h4><ul>
+<li><p>在<code>防火墙</code>的<code>内容安全策略</code>下，在需要添加具体过滤内容的策略点击<code>编辑</code></p>
+</li>
+<li><p>选取过滤的应用</p>
+</li>
+</ul>
+<blockquote>
+<p>HTTP过滤</p>
+<blockquote>
+<p>内容过滤</p>
+<blockquote>
+<p>URL过滤：黑名单<br>网页内容过滤：敏感词</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1Lf4y1t7Mc/">哔哩哔哩——千锋教育网络安全学院</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/21/%E5%9C%A8WindowsServer2003%E9%83%A8%E7%BD%B2VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="【笔记】在WindowsServer2003部署VPN服务">
+                  <i class="fa fa-angle-left"></i> 【笔记】在WindowsServer2003部署VPN服务
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/07/Rustcat%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】Rustcat学习笔记">
+                  【笔记】Rustcat学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

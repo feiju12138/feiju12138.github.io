@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言JS的浏览器应用程序编程接口（Application Programming Interface, API）的文档对象模型（Document Object Model, DOM）学习笔记文档对象模型（英语：Document Object Model，缩写DOM），是W3C组织推荐的处理可扩展置标语言和超文本标记语言的标准编程接口。（维基百科）浏览器将HTML元素树（HTML Tree）抽象称为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】JS的浏览器API的DOM学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2025/05/09/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API%E7%9A%84DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言JS的浏览器应用程序编程接口（Application Programming Interface, API）的文档对象模型（Document Object Model, DOM）学习笔记文档对象模型（英语：Document Object Model，缩写DOM），是W3C组织推荐的处理可扩展置标语言和超文本标记语言的标准编程接口。（维基百科）浏览器将HTML元素树（HTML Tree）抽象称为">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-09T07:21:45.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.879Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2025/05/09/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API%E7%9A%84DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2025/05/09/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API%E7%9A%84DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2025/05/09/JS的浏览器API的DOM学习笔记/","title":"【笔记】JS的浏览器API的DOM学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】JS的浏览器API的DOM学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">获取元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%A1%A3"><span class="nav-number">2.1.</span> <span class="nav-text">获取文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E6%96%87%E6%A1%A3"><span class="nav-number">2.2.</span> <span class="nav-text">写入文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87document%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96body"><span class="nav-number">2.3.</span> <span class="nav-text">通过document对象获取body</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87document%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96head"><span class="nav-number">2.4.</span> <span class="nav-text">通过document对象获取head</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87document%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E4%BB%BB%E6%84%8F%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.</span> <span class="nav-text">通过document对象获取任意元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%A0%87%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.1.</span> <span class="nav-text">根据标签名获取元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%A0%87%E7%AD%BE%E5%90%8D"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">获取所有标签名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AEid%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.2.</span> <span class="nav-text">根据id获取元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AEclass%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.3.</span> <span class="nav-text">根据class获取元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AEname%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.4.</span> <span class="nav-text">根据name获取元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87CSS%E9%80%89%E6%8B%A9%E5%99%A8%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.5.5.</span> <span class="nav-text">通过CSS选择器获取元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">继承结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%8A%82%E7%82%B9%E7%9B%B8%E5%85%B3%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">对节点相关的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%88%B6%E8%8A%82%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">获取父节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">获取兄弟节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%A5%E5%93%A5%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.1.</span> <span class="nav-text">获取哥哥节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BC%9F%E5%BC%9F%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.2.</span> <span class="nav-text">获取弟弟节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-number">4.3.</span> <span class="nav-text">获取子节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-number">4.3.1.</span> <span class="nav-text">获取所有子节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-number">4.3.2.</span> <span class="nav-text">获取第一个子节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-number">4.3.3.</span> <span class="nav-text">获取最后一个子节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%8A%82%E7%82%B9%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">获取节点的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%8A%82%E7%82%B9%E7%9A%84%E5%90%8D%E7%A7%B0"><span class="nav-number">4.5.</span> <span class="nav-text">获取节点的名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%9D%9E%E5%85%83%E7%B4%A0%E7%9A%84%E8%8A%82%E7%82%B9%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">4.6.</span> <span class="nav-text">获取非元素的节点的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%85%83%E7%B4%A0%E7%9B%B8%E5%85%B3%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">对元素相关的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%88%B6%E5%85%83%E7%B4%A0"><span class="nav-number">5.1.</span> <span class="nav-text">获取父元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0"><span class="nav-number">5.2.</span> <span class="nav-text">获取兄弟元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%A5%E5%93%A5%E5%85%83%E7%B4%A0"><span class="nav-number">5.2.1.</span> <span class="nav-text">获取哥哥元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BC%9F%E5%BC%9F%E5%85%83%E7%B4%A0"><span class="nav-number">5.2.2.</span> <span class="nav-text">获取弟弟元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.</span> <span class="nav-text">获取子元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.1.</span> <span class="nav-text">获取所有子元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.2.</span> <span class="nav-text">获取第一个子元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.3.</span> <span class="nav-text">获取最后一个子元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.4.</span> <span class="nav-text">获取指定的子元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%A0%87%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0-1"><span class="nav-number">5.3.4.1.</span> <span class="nav-text">根据标签名获取元素</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%A0%87%E7%AD%BE%E5%90%8D-1"><span class="nav-number">5.3.4.1.1.</span> <span class="nav-text">获取所有标签名</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AEclass%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0-1"><span class="nav-number">5.3.4.2.</span> <span class="nav-text">根据class获取元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87CSS%E9%80%89%E6%8B%A9%E5%99%A8%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0-1"><span class="nav-number">5.3.4.3.</span> <span class="nav-text">通过CSS选择器获取元素</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.4.3.1.</span> <span class="nav-text">获取单个元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.4.3.2.</span> <span class="nav-text">获取多个元素</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%90%8D%E7%A7%B0"><span class="nav-number">5.4.</span> <span class="nav-text">获取元素的名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">5.5.</span> <span class="nav-text">元素的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.1.</span> <span class="nav-text">元素内部的HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.1.1.</span> <span class="nav-text">获取元素内部的HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.1.2.</span> <span class="nav-text">修改元素内部的HTML</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E5%A4%96%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.2.</span> <span class="nav-text">元素外部的HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%A4%96%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.2.1.</span> <span class="nav-text">获取元素外部的HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E5%A4%96%E9%83%A8%E7%9A%84HTML"><span class="nav-number">5.5.2.2.</span> <span class="nav-text">修改元素外部的HTML</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">5.5.3.</span> <span class="nav-text">元素内部的文本内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">5.5.3.1.</span> <span class="nav-text">获取元素内部的文本内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E5%86%85%E9%83%A8%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">5.5.3.2.</span> <span class="nav-text">修改元素内部的文本内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%EF%BC%88Attribute%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">操作元素的HTML标签属性（Attribute）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%EF%BC%88Attribute%EF%BC%89"><span class="nav-number">5.6.1.</span> <span class="nav-text">直接操作元素的HTML标签属性（Attribute）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%8C%87%E5%AE%9A%E5%B1%9E%E6%80%A7%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">5.6.1.1.</span> <span class="nav-text">判断指定属性是否存在</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">5.6.1.2.</span> <span class="nav-text">获取指定属性值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%87%E5%AE%9A%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.1.3.</span> <span class="nav-text">修改指定属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.1.4.</span> <span class="nav-text">删除指定属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.1.5.</span> <span class="nav-text">获取所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87JS%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%EF%BC%88Property%EF%BC%89%E6%93%8D%E4%BD%9CHTML%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%EF%BC%88Attribute%EF%BC%89"><span class="nav-number">5.6.2.</span> <span class="nav-text">通过JS对象属性（Property）操作HTML元素属性（Attribute）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%86%85%E7%BD%AE%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.2.1.</span> <span class="nav-text">操作内置的HTML标签属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E5%86%85%E7%BD%AE%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">5.6.2.1.1.</span> <span class="nav-text">获取指定的内置的HTML标签属性值</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.2.2.</span> <span class="nav-text">操作自定义的HTML标签属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.2.2.1.</span> <span class="nav-text">获取指定的自定义的HTML标签属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%87%E5%AE%9A%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84HTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7"><span class="nav-number">5.6.2.2.2.</span> <span class="nav-text">修改指定的自定义的HTML标签属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CHTML%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%EF%BC%88Attribute%EF%BC%89%E7%9A%84%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.6.3.</span> <span class="nav-text">操作HTML标签属性（Attribute）的样式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9Cstyle"><span class="nav-number">5.6.3.1.</span> <span class="nav-text">操作style</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%8D%95%E4%B8%AA%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.6.3.1.1.</span> <span class="nav-text">设置单个样式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%A4%9A%E4%B8%AA%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.6.3.1.2.</span> <span class="nav-text">设置多个样式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E5%86%85%E8%81%94%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.6.3.1.3.</span> <span class="nav-text">获取单个内联样式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.6.3.1.4.</span> <span class="nav-text">获取单个样式</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CclassName"><span class="nav-number">5.6.3.2.</span> <span class="nav-text">操作className</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%96%E8%A6%86%E7%9B%96class"><span class="nav-number">5.6.3.2.1.</span> <span class="nav-text">添加或覆盖class</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CclassList"><span class="nav-number">5.6.3.3.</span> <span class="nav-text">操作classList</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%91classList%E6%B7%BB%E5%8A%A0class"><span class="nav-number">5.6.3.3.1.</span> <span class="nav-text">向classList添加class</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%8EclassList%E5%88%A0%E9%99%A4class"><span class="nav-number">5.6.3.3.2.</span> <span class="nav-text">从classList删除class</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%8EclassList%E5%88%87%E6%8D%A2class"><span class="nav-number">5.6.3.3.3.</span> <span class="nav-text">从classList切换class</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%A4%E6%96%ADclassList%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8class"><span class="nav-number">5.6.3.3.4.</span> <span class="nav-text">判断classList是否存在class</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%81%8D%E5%8E%86classList"><span class="nav-number">5.6.3.3.5.</span> <span class="nav-text">遍历classList</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%85%83%E7%B4%A0"><span class="nav-number">5.7.</span> <span class="nav-text">创建元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0"><span class="nav-number">5.8.</span> <span class="nav-text">插入元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%90%E5%85%83%E7%B4%A0%E6%9C%80%E5%89%8D%E9%9D%A2%E6%8F%92%E5%85%A5"><span class="nav-number">5.8.1.</span> <span class="nav-text">在指定元素的所有子元素最前面插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%90%E5%85%83%E7%B4%A0%E6%9C%80%E5%90%8E%E9%9D%A2%E6%8F%92%E5%85%A5"><span class="nav-number">5.8.2.</span> <span class="nav-text">在指定元素的所有子元素最后面插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E4%B9%8B%E5%89%8D%E6%8F%92%E5%85%A5"><span class="nav-number">5.8.3.</span> <span class="nav-text">在指定元素之前插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E4%B9%8B%E5%90%8E%E6%8F%92%E5%85%A5"><span class="nav-number">5.8.4.</span> <span class="nav-text">在指定元素之后插入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E5%85%83%E7%B4%A0"><span class="nav-number">5.9.</span> <span class="nav-text">替换元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">5.10.</span> <span class="nav-text">移除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E5%85%83%E7%B4%A0"><span class="nav-number">5.11.</span> <span class="nav-text">克隆元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%85%E5%85%8B%E9%9A%86"><span class="nav-number">5.11.1.</span> <span class="nav-text">浅克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%85%8B%E9%9A%86"><span class="nav-number">5.11.2.</span> <span class="nav-text">深克隆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84CSS%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.12.</span> <span class="nav-text">元素的CSS样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96CSS%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.12.1.</span> <span class="nav-text">获取CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9CSS%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.12.2.</span> <span class="nav-text">修改CSS样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%B0%BA%E5%AF%B8%E3%80%81%E8%B7%9D%E7%A6%BB%E3%80%81%E6%BB%9A%E5%8A%A8"><span class="nav-number">5.13.</span> <span class="nav-text">元素的尺寸、距离、滚动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%BA%E5%9F%9F%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.13.1.</span> <span class="nav-text">获取元素的可视区域尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%BA%E5%9F%9F%E5%AE%8C%E6%95%B4%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.13.2.</span> <span class="nav-text">获取元素的可视区域完整尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E8%BE%B9%E6%A1%86%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.13.3.</span> <span class="nav-text">获取元素的边框尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%B7%A6%E4%B8%8A%E8%A7%92%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="nav-number">5.13.4.</span> <span class="nav-text">获取元素的左上角的距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%AE%8C%E6%95%B4%E5%86%85%E5%AE%B9%E9%AB%98%E5%BA%A6"><span class="nav-number">5.13.5.</span> <span class="nav-text">获取元素的完整内容高度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E6%BB%9A%E5%8A%A8%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.13.6.</span> <span class="nav-text">获取元素的滚动位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window%E7%9A%84%E5%B0%BA%E5%AF%B8%E3%80%81%E8%B7%9D%E7%A6%BB%E3%80%81%E6%BB%9A%E5%8A%A8"><span class="nav-number">5.14.</span> <span class="nav-text">window的尺寸、距离、滚动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96window%E7%9A%84%E5%86%85%E5%AE%B9%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.14.1.</span> <span class="nav-text">获取window的内容尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96window%E7%9A%84%E5%86%85%E5%AE%B9%E5%AE%8C%E6%95%B4%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.14.2.</span> <span class="nav-text">获取window的内容完整尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96window%E7%9A%84%E7%AA%97%E5%8F%A3%E5%AE%8C%E6%95%B4%E5%B0%BA%E5%AF%B8"><span class="nav-number">5.14.3.</span> <span class="nav-text">获取window的窗口完整尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96window%E7%9A%84%E6%BB%9A%E5%8A%A8%E8%B7%9D%E7%A6%BB"><span class="nav-number">5.14.4.</span> <span class="nav-text">获取window的滚动距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#window%E7%9A%84%E6%BB%9A%E5%8A%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">5.14.5.</span> <span class="nav-text">window的滚动操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E8%87%B3%E7%BB%9D%E5%AF%B9%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.14.5.1.</span> <span class="nav-text">滚动至绝对位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E8%87%B3%E7%9B%B8%E5%AF%B9%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.14.5.2.</span> <span class="nav-text">滚动至相对位置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%A1%A8%E6%A0%BC%E7%9A%84%E9%A2%9D%E5%A4%96%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">对表格的额外操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E4%B8%80%E9%83%A8%E5%88%86"><span class="nav-number">6.1.</span> <span class="nav-text">获取表格一部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E6%A0%87%E9%A2%98%E9%83%A8%E5%88%86"><span class="nav-number">6.1.1.</span> <span class="nav-text">获取表格标题部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%A4%B4%E9%83%A8%E5%88%86"><span class="nav-number">6.1.2.</span> <span class="nav-text">获取表格的头部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E7%9A%84%E4%BD%93%E9%83%A8%E5%88%86"><span class="nav-number">6.1.3.</span> <span class="nav-text">获取表格的体部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%B0%BE%E9%83%A8%E5%88%86"><span class="nav-number">6.1.4.</span> <span class="nav-text">获取表格的尾部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E9%83%A8%E5%88%86%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%8C"><span class="nav-number">6.2.</span> <span class="nav-text">获取当前部分的所有行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E8%A1%8C%E7%9A%84%E6%89%80%E6%9C%89%E6%A0%BC%E5%AD%90"><span class="nav-number">6.3.</span> <span class="nav-text">获取当前行的所有格子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%8C%E5%9C%A8%E9%83%A8%E5%88%86%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">6.4.</span> <span class="nav-text">获取行在部分中的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%8C%E5%9C%A8%E8%A1%A8%E6%A0%BC%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">6.5.</span> <span class="nav-text">获取行在表格中的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC%E5%9C%A8%E8%A1%8C%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">6.6.</span> <span class="nav-text">获取单元格在行中的索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E9%A2%9D%E5%A4%96%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">对表单的额外操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%A1%A3%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%A8%E5%8D%95"><span class="nav-number">7.1.</span> <span class="nav-text">获取文档中的所有表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%8D%95%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">7.2.</span> <span class="nav-text">获取表单中的所有子元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%90%E5%85%83%E7%B4%A0name%E8%8E%B7%E5%8F%96%E5%AD%90%E5%85%83%E7%B4%A0"><span class="nav-number">7.3.</span> <span class="nav-text">通过子元素name获取子元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.1.</span> <span class="nav-text">定义事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%9C%A8HTML%E6%A0%87%E7%AD%BE%E4%B8%8A%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.1.1.</span> <span class="nav-text">直接在HTML标签上定义事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87JS%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.1.2.</span> <span class="nav-text">通过JS对象的属性定义事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87JS%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.1.3.</span> <span class="nav-text">通过JS对象的事件监听器定义事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E9%98%B6%E6%AE%B5%E6%89%A7%E8%A1%8C"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">冒泡阶段执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E9%98%B6%E6%AE%B5%E6%89%A7%E8%A1%8C"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">捕获阶段执行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82event%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">8.2.</span> <span class="nav-text">形参event的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.2.1.</span> <span class="nav-text">事件的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">8.2.2.</span> <span class="nav-text">发生事件的元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">8.2.3.</span> <span class="nav-text">处理事件的元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%89%80%E5%A4%84%E7%9A%84%E9%98%B6%E6%AE%B5"><span class="nav-number">8.2.4.</span> <span class="nav-text">事件所处的阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E7%94%9F%E4%BA%8B%E4%BB%B6%E6%97%B6%E5%85%89%E6%A0%87%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.2.5.</span> <span class="nav-text">发生事件时光标的位置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%85%83%E7%B4%A0%E5%86%85%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.2.5.1.</span> <span class="nav-text">在元素内的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.2.5.2.</span> <span class="nav-text">在客户端的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%96%87%E6%A1%A3document%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.2.5.3.</span> <span class="nav-text">在文档document中的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%B1%8F%E5%B9%95screen%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.2.5.4.</span> <span class="nav-text">在屏幕screen中的位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2HTML%E5%85%83%E7%B4%A0%E9%BB%98%E8%AE%A4%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.3.</span> <span class="nav-text">阻止HTML元素默认的事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%A0%E9%80%92"><span class="nav-number">8.4.</span> <span class="nav-text">阻止事件的传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventTarget"><span class="nav-number">8.5.</span> <span class="nav-text">EventTarget</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="nav-number">8.5.1.</span> <span class="nav-text">添加事件监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="nav-number">8.5.2.</span> <span class="nav-text">移除事件监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B4%BE%E5%8F%91%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.5.3.</span> <span class="nav-text">派发事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">8.5.3.1.</span> <span class="nav-text">创建事件对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.5.3.2.</span> <span class="nav-text">立即触发事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE"><span class="nav-number">8.6.</span> <span class="nav-text">事件委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.7.</span> <span class="nav-text">自定义事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6-1"><span class="nav-number">8.7.1.</span> <span class="nav-text">定义事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">8.7.2.</span> <span class="nav-text">定义监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B4%BE%E5%8F%91%E4%BA%8B%E4%BB%B6-1"><span class="nav-number">8.7.3.</span> <span class="nav-text">派发事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.</span> <span class="nav-text">内置事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.1.</span> <span class="nav-text">鼠标事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A6%E9%94%AE%E5%8D%95%E5%87%BB"><span class="nav-number">8.8.1.1.</span> <span class="nav-text">左键单击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%B3%E9%94%AE%E5%8D%95%E5%87%BB"><span class="nav-number">8.8.1.2.</span> <span class="nav-text">右键单击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A6%E9%94%AE%E5%8F%8C%E5%87%BB"><span class="nav-number">8.8.1.3.</span> <span class="nav-text">左键双击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B"><span class="nav-number">8.8.1.4.</span> <span class="nav-text">按键按下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E6%9D%BE%E5%BC%80"><span class="nav-number">8.8.1.5.</span> <span class="nav-text">按键松开</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8"><span class="nav-number">8.8.1.6.</span> <span class="nav-text">鼠标移动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%85%A5%EF%BC%88%E6%94%AF%E6%8C%81%E5%86%92%E6%B3%A1%EF%BC%89"><span class="nav-number">8.8.1.7.</span> <span class="nav-text">鼠标移入（支持冒泡）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%87%BA%EF%BC%88%E6%94%AF%E6%8C%81%E5%86%92%E6%B3%A1%EF%BC%89"><span class="nav-number">8.8.1.8.</span> <span class="nav-text">鼠标移出（支持冒泡）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%85%A5%EF%BC%88%E4%B8%8D%E6%94%AF%E6%8C%81%E5%86%92%E6%B3%A1%EF%BC%89"><span class="nav-number">8.8.1.9.</span> <span class="nav-text">鼠标移入（不支持冒泡）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%87%BA%EF%BC%88%E4%B8%8D%E6%94%AF%E6%8C%81%E5%86%92%E6%B3%A1%EF%BC%89"><span class="nav-number">8.8.1.10.</span> <span class="nav-text">鼠标移出（不支持冒泡）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.2.</span> <span class="nav-text">键盘事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E4%BA%8B%E4%BB%B6%E5%88%A4%E5%AE%9A"><span class="nav-number">8.8.2.1.</span> <span class="nav-text">按键事件判定</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B%EF%BC%88%E7%89%A9%E7%90%86%E9%94%AE%E8%A2%AB%E6%8C%89%E4%B8%8B%EF%BC%89"><span class="nav-number">8.8.2.1.1.</span> <span class="nav-text">按键按下（物理键被按下）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B%EF%BC%88%E5%AD%97%E7%AC%A6%E8%A2%AB%E8%BE%93%E5%85%A5%EF%BC%89"><span class="nav-number">8.8.2.1.2.</span> <span class="nav-text">按键按下（字符被输入）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E6%9D%BE%E5%BC%80%EF%BC%88%E5%AD%97%E7%AC%A6%E8%BE%93%E5%85%A5%E7%BB%93%E6%9D%9F%EF%BC%89"><span class="nav-number">8.8.2.1.3.</span> <span class="nav-text">按键松开（字符输入结束）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E6%8C%89%E9%94%AE%E5%88%A4%E5%AE%9A"><span class="nav-number">8.8.2.2.</span> <span class="nav-text">物理按键判定</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E9%94%AE%E7%A0%81%E5%80%BC%E5%88%A4%E5%AE%9A"><span class="nav-number">8.8.2.2.1.</span> <span class="nav-text">通过键码值判定</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AD%97%E7%AC%A6%E5%88%A4%E5%AE%9A"><span class="nav-number">8.8.2.2.2.</span> <span class="nav-text">通过字符判定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E4%B8%AD%E7%9A%84%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.3.</span> <span class="nav-text">表单中的按钮事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95"><span class="nav-number">8.8.3.1.</span> <span class="nav-text">提交表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E8%A1%A8%E5%8D%95"><span class="nav-number">8.8.3.2.</span> <span class="nav-text">重置表单</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%9D%A1%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.4.</span> <span class="nav-text">滚动条事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%9D%A1%E4%BD%8D%E7%BD%AE%E5%8F%91%E7%94%9F%E6%94%B9%E5%8F%98"><span class="nav-number">8.8.4.1.</span> <span class="nav-text">滚动条位置发生改变</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#window%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.8.5.</span> <span class="nav-text">window事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">9.</span> <span class="nav-text">定时器和计时器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">9.1.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">9.2.</span> <span class="nav-text">计时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%9A%E6%97%B6%E5%99%A8%E6%88%96%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">9.3.</span> <span class="nav-text">停止定时器或计时器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">10.</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2025/05/09/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API%E7%9A%84DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】JS的浏览器API的DOM学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】JS的浏览器API的DOM学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-09 15:21:45" itemprop="dateCreated datePublished" datetime="2025-05-09T15:21:45+08:00">2025-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">JavaScript学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS的浏览器应用程序编程接口（Application Programming Interface, API）的文档对象模型（Document Object Model, DOM）学习笔记<br>文档对象模型（英语：Document Object Model，缩写DOM），是W3C组织推荐的处理可扩展置标语言和超文本标记语言的标准编程接口。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">维基百科</a>）<br>浏览器将HTML元素树（HTML Tree）抽象称为了JS对象树（DOM Tree），浏览器提供了通过JS操作HTML元素的API</p>
+<span id="more"></span>
+
+<h2 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h2><h3 id="获取文档"><a href="#获取文档" class="headerlink" title="获取文档"></a>获取文档</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="写入文档"><a href="#写入文档" class="headerlink" title="写入文档"></a>写入文档</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过document对象获取body"><a href="#通过document对象获取body" class="headerlink" title="通过document对象获取body"></a>通过document对象获取body</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过document对象获取head"><a href="#通过document对象获取head" class="headerlink" title="通过document对象获取head"></a>通过document对象获取head</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">head</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过document对象获取任意元素"><a href="#通过document对象获取任意元素" class="headerlink" title="通过document对象获取任意元素"></a>通过document对象获取任意元素</h3><h4 id="根据标签名获取元素"><a href="#根据标签名获取元素" class="headerlink" title="根据标签名获取元素"></a>根据标签名获取元素</h4><ul>
+<li>可以在元素上调用</li>
+<li>增删元素会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取所有标签名"><a href="#获取所有标签名" class="headerlink" title="获取所有标签名"></a>获取所有标签名</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;*&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据id获取元素"><a href="#根据id获取元素" class="headerlink" title="根据id获取元素"></a>根据id获取元素</h4><ul>
+<li>不能在元素上调用</li>
+<li>增删元素不会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据class获取元素"><a href="#根据class获取元素" class="headerlink" title="根据class获取元素"></a>根据class获取元素</h4><ul>
+<li>可以在元素上调用</li>
+<li>增删元素会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据name获取元素"><a href="#根据name获取元素" class="headerlink" title="根据name获取元素"></a>根据name获取元素</h4><ul>
+<li>不能在元素上调用</li>
+<li>增删元素会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = <span class="variable language_">document</span>.<span class="title function_">getElementsByName</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过CSS选择器获取元素"><a href="#通过CSS选择器获取元素" class="headerlink" title="通过CSS选择器获取元素"></a>通过CSS选择器获取元素</h4><ul>
+<li><p>可以在元素上调用</p>
+</li>
+<li><p>增删元素不会实时更新</p>
+</li>
+<li><p>获取单个元素</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取多个元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>遍历可迭代对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elementList.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(elementList[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> elementList) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="继承结构"><a href="#继承结构" class="headerlink" title="继承结构"></a>继承结构</h2><pre><code class="highlight mermaid">graph TD
+    EventTarget[EventTarget] --&gt; Node[Node]
+    Node --&gt; Document[Document]
+    Node --&gt; Element[Element]
+    Node --&gt; CharacterData[CharacterData]
+    Node --&gt; DocumentFragment[DocumentFragment]
+    Node --&gt; Attr[Attr]
+    Node --&gt; CDATASection[CDATASection]
+    Node --&gt; ProcessingInstruction[ProcessingInstruction]
+    Node --&gt; DocumentType[DocumentType]
+    Node --&gt; ShadowRoot[ShadowRoot]
+    Document --&gt; HTMLDocument[HTMLDocument]
+    Document --&gt; XMLDocument[XMLDocument]
+    Element --&gt; HTMLElement[HTMLElement]
+    HTMLElement --&gt; HTMLDivElement[HTMLDivElement]
+    HTMLElement --&gt; HTMLImageElement[HTMLImageElement]
+    CharacterData --&gt; Text[Text]
+    CharacterData --&gt; Comment[Comment]
+    EventTarget --&gt; Event[Event]
+    Event --&gt; CustomEvent[CustomEvent]</code></pre>
+
+<h2 id="对节点相关的操作"><a href="#对节点相关的操作" class="headerlink" title="对节点相关的操作"></a>对节点相关的操作</h2><h3 id="获取父节点"><a href="#获取父节点" class="headerlink" title="获取父节点"></a>获取父节点</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">parentNode</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取兄弟节点"><a href="#获取兄弟节点" class="headerlink" title="获取兄弟节点"></a>获取兄弟节点</h3><h4 id="获取哥哥节点"><a href="#获取哥哥节点" class="headerlink" title="获取哥哥节点"></a>获取哥哥节点</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">previousSibling</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取弟弟节点"><a href="#获取弟弟节点" class="headerlink" title="获取弟弟节点"></a>获取弟弟节点</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">nextSibling</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取子节点"><a href="#获取子节点" class="headerlink" title="获取子节点"></a>获取子节点</h3><h4 id="获取所有子节点"><a href="#获取所有子节点" class="headerlink" title="获取所有子节点"></a>获取所有子节点</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">childNodes</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取第一个子节点"><a href="#获取第一个子节点" class="headerlink" title="获取第一个子节点"></a>获取第一个子节点</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">firstChild</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取最后一个子节点"><a href="#获取最后一个子节点" class="headerlink" title="获取最后一个子节点"></a>获取最后一个子节点</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">lastChild</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取节点的类型"><a href="#获取节点的类型" class="headerlink" title="获取节点的类型"></a>获取节点的类型</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.<span class="property">nodeType</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>1</code>、<code>Node.ELEMENT_NODE</code>：元素<br><code>3</code>、<code>Node.TEXT_NODE</code>：文本内容<br><code>8</code>、<code>Node.COMMENT_NODE</code>：注释<br><code>9</code>、<code>Node.DOCUMENT_NODE</code>：文档<br><code>10</code>、<code>Node.DOCUMENT_TYPE_NODE</code>：文档声明</p>
+</blockquote>
+<h3 id="获取节点的名称"><a href="#获取节点的名称" class="headerlink" title="获取节点的名称"></a>获取节点的名称</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.<span class="property">nodeName</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>DIV</code>：具体元素<br><code>#text</code>：文本内容<br><code>#comment</code>：注释</p>
+</blockquote>
+<h3 id="获取非元素的节点的数据"><a href="#获取非元素的节点的数据" class="headerlink" title="获取非元素的节点的数据"></a>获取非元素的节点的数据</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.<span class="property">data</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对元素相关的操作"><a href="#对元素相关的操作" class="headerlink" title="对元素相关的操作"></a>对元素相关的操作</h2><h3 id="获取父元素"><a href="#获取父元素" class="headerlink" title="获取父元素"></a>获取父元素</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">parentElement</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取兄弟元素"><a href="#获取兄弟元素" class="headerlink" title="获取兄弟元素"></a>获取兄弟元素</h3><h4 id="获取哥哥元素"><a href="#获取哥哥元素" class="headerlink" title="获取哥哥元素"></a>获取哥哥元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">previousElementSibling</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取弟弟元素"><a href="#获取弟弟元素" class="headerlink" title="获取弟弟元素"></a>获取弟弟元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">nextElementSibling</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取子元素"><a href="#获取子元素" class="headerlink" title="获取子元素"></a>获取子元素</h3><h4 id="获取所有子元素"><a href="#获取所有子元素" class="headerlink" title="获取所有子元素"></a>获取所有子元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">children</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取第一个子元素"><a href="#获取第一个子元素" class="headerlink" title="获取第一个子元素"></a>获取第一个子元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">firstElementChild</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取最后一个子元素"><a href="#获取最后一个子元素" class="headerlink" title="获取最后一个子元素"></a>获取最后一个子元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">lastElementChild</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取指定的子元素"><a href="#获取指定的子元素" class="headerlink" title="获取指定的子元素"></a>获取指定的子元素</h4><h5 id="根据标签名获取元素-1"><a href="#根据标签名获取元素-1" class="headerlink" title="根据标签名获取元素"></a>根据标签名获取元素</h5><ul>
+<li>可以在元素上调用</li>
+<li>增删元素会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = element.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取所有标签名-1"><a href="#获取所有标签名-1" class="headerlink" title="获取所有标签名"></a>获取所有标签名</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = element.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;*&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="根据class获取元素-1"><a href="#根据class获取元素-1" class="headerlink" title="根据class获取元素"></a>根据class获取元素</h5><ul>
+<li>可以在元素上调用</li>
+<li>增删元素会实时更新</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = element.<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过CSS选择器获取元素-1"><a href="#通过CSS选择器获取元素-1" class="headerlink" title="通过CSS选择器获取元素"></a>通过CSS选择器获取元素</h5><ul>
+<li>可以在元素上调用</li>
+<li>增删元素不会实时更新</li>
+</ul>
+<h6 id="获取单个元素"><a href="#获取单个元素" class="headerlink" title="获取单个元素"></a>获取单个元素</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = element.<span class="title function_">querySelector</span>(<span class="string">&quot;#key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取多个元素"><a href="#获取多个元素" class="headerlink" title="获取多个元素"></a>获取多个元素</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementList = element.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>#####¥ 遍历可迭代对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elementList.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(elementList[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> elementList) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取元素的名称"><a href="#获取元素的名称" class="headerlink" title="获取元素的名称"></a>获取元素的名称</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">tagName</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&quot;DIV&quot;</code>：具体元素名称</p>
+</blockquote>
+<h3 id="元素的内容"><a href="#元素的内容" class="headerlink" title="元素的内容"></a>元素的内容</h3><h4 id="元素内部的HTML"><a href="#元素内部的HTML" class="headerlink" title="元素内部的HTML"></a>元素内部的HTML</h4><h5 id="获取元素内部的HTML"><a href="#获取元素内部的HTML" class="headerlink" title="获取元素内部的HTML"></a>获取元素内部的HTML</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">innerHTML</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改元素内部的HTML"><a href="#修改元素内部的HTML" class="headerlink" title="修改元素内部的HTML"></a>修改元素内部的HTML</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">innerHTML</span> = <span class="string">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="元素外部的HTML"><a href="#元素外部的HTML" class="headerlink" title="元素外部的HTML"></a>元素外部的HTML</h4><ul>
+<li>元素自身及元素内部的HTML</li>
+</ul>
+<h5 id="获取元素外部的HTML"><a href="#获取元素外部的HTML" class="headerlink" title="获取元素外部的HTML"></a>获取元素外部的HTML</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">outerHTML</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改元素外部的HTML"><a href="#修改元素外部的HTML" class="headerlink" title="修改元素外部的HTML"></a>修改元素外部的HTML</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">outerHTML</span> = <span class="string">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="元素内部的文本内容"><a href="#元素内部的文本内容" class="headerlink" title="元素内部的文本内容"></a>元素内部的文本内容</h4><h5 id="获取元素内部的文本内容"><a href="#获取元素内部的文本内容" class="headerlink" title="获取元素内部的文本内容"></a>获取元素内部的文本内容</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">innerText</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">textContent</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改元素内部的文本内容"><a href="#修改元素内部的文本内容" class="headerlink" title="修改元素内部的文本内容"></a>修改元素内部的文本内容</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">innerText</span> = <span class="string">&quot;文本内容&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">textContent</span> = <span class="string">&quot;文本内容&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作元素的HTML标签属性（Attribute）"><a href="#操作元素的HTML标签属性（Attribute）" class="headerlink" title="操作元素的HTML标签属性（Attribute）"></a>操作元素的HTML标签属性（Attribute）</h3><ul>
+<li><p>标准HTML标签属性：由浏览器定义的内置属性</p>
+</li>
+<li><p>非标准HTML标签属性：由开发者自定义的属性</p>
+</li>
+<li><p>HTML标签属性大小写不敏感</p>
+</li>
+</ul>
+<h4 id="直接操作元素的HTML标签属性（Attribute）"><a href="#直接操作元素的HTML标签属性（Attribute）" class="headerlink" title="直接操作元素的HTML标签属性（Attribute）"></a>直接操作元素的HTML标签属性（Attribute）</h4><ul>
+<li><p>无论是否是标准HTML标签属性，都可以直接操作元素的HTML标签属性</p>
+</li>
+<li><p>直接通过Attribute方式修改属性时，通过Property方式查询的属性值会随之改变</p>
+</li>
+</ul>
+<h5 id="判断指定属性是否存在"><a href="#判断指定属性是否存在" class="headerlink" title="判断指定属性是否存在"></a>判断指定属性是否存在</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = element.<span class="title function_">hasAttribute</span>(<span class="string">&quot;属性名&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取指定属性值"><a href="#获取指定属性值" class="headerlink" title="获取指定属性值"></a>获取指定属性值</h5><ul>
+<li>返回的值一定是字符串</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = element.<span class="title function_">getAttribute</span>(<span class="string">&quot;属性名&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果不存在，则返回null</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="title function_">getAttribute</span>(<span class="string">&quot;hidden&quot;</span>); <span class="comment">// null</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是布尔属性，并且没有指定值，则返回空字符串</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span> <span class="attr">hidden</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="title function_">getAttribute</span>(<span class="string">&quot;hidden&quot;</span>); <span class="comment">// &quot;&quot;</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是布尔属性，并且有指定值，则返回对应字符串</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span> <span class="attr">hidden</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="title function_">getAttribute</span>(<span class="string">&quot;hidden&quot;</span>); <span class="comment">// &quot;hidden&quot;</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="修改指定属性"><a href="#修改指定属性" class="headerlink" title="修改指定属性"></a>修改指定属性</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">setAttribute</span>(<span class="string">&quot;属性名&quot;</span>, <span class="string">&quot;值&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除指定属性"><a href="#删除指定属性" class="headerlink" title="删除指定属性"></a>删除指定属性</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">removeAttribute</span>(<span class="string">&quot;属性名&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取所有属性"><a href="#获取所有属性" class="headerlink" title="获取所有属性"></a>获取所有属性</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = element.<span class="property">attributes</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过JS对象属性（Property）操作HTML元素属性（Attribute）"><a href="#通过JS对象属性（Property）操作HTML元素属性（Attribute）" class="headerlink" title="通过JS对象属性（Property）操作HTML元素属性（Attribute）"></a>通过JS对象属性（Property）操作HTML元素属性（Attribute）</h4><ul>
+<li><p>通过Property方式修改属性时，直接通过Attribute方式查询的属性值会随之改变</p>
+<ul>
+<li>同时利用Property和Attribute修改属性时，Property优先级会更高</li>
+</ul>
+</li>
+<li><p>只有标准HTML标签属性可以通过JS对象属性操作HTML元素属性</p>
+</li>
+</ul>
+<h5 id="操作内置的HTML标签属性"><a href="#操作内置的HTML标签属性" class="headerlink" title="操作内置的HTML标签属性"></a>操作内置的HTML标签属性</h5><h6 id="获取指定的内置的HTML标签属性值"><a href="#获取指定的内置的HTML标签属性值" class="headerlink" title="获取指定的内置的HTML标签属性值"></a>获取指定的内置的HTML标签属性值</h6><ul>
+<li>如果不存在，则返回undefined</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="property">hidden</span>; <span class="comment">// undefined</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是布尔属性，并且没有指定值，则返回true</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span> <span class="attr">hidden</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="property">hidden</span>; <span class="comment">// true</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是布尔属性，并且有指定值，则返回true</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span> <span class="attr">hidden</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;key&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  element.<span class="property">hidden</span>; <span class="comment">// true</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="操作自定义的HTML标签属性"><a href="#操作自定义的HTML标签属性" class="headerlink" title="操作自定义的HTML标签属性"></a>操作自定义的HTML标签属性</h5><ul>
+<li>通过<code>data-</code>作为前缀的自定义属性在映射为JS对象时会放到<code>dataset</code>属性中</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;key&quot;</span> <span class="attr">data-key</span>=<span class="string">&quot;value&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="获取指定的自定义的HTML标签属性"><a href="#获取指定的自定义的HTML标签属性" class="headerlink" title="获取指定的自定义的HTML标签属性"></a>获取指定的自定义的HTML标签属性</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">dataset</span>.<span class="property">key</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改指定的自定义的HTML标签属性"><a href="#修改指定的自定义的HTML标签属性" class="headerlink" title="修改指定的自定义的HTML标签属性"></a>修改指定的自定义的HTML标签属性</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">dataset</span>.<span class="property">key</span> = <span class="string">&quot;value&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="操作HTML标签属性（Attribute）的样式"><a href="#操作HTML标签属性（Attribute）的样式" class="headerlink" title="操作HTML标签属性（Attribute）的样式"></a>操作HTML标签属性（Attribute）的样式</h4><ul>
+<li>操作HTML标签属性（Attribute）的class属性和style属性</li>
+</ul>
+<h5 id="操作style"><a href="#操作style" class="headerlink" title="操作style"></a>操作style</h5><h6 id="设置单个样式"><a href="#设置单个样式" class="headerlink" title="设置单个样式"></a>设置单个样式</h6><ul>
+<li>CSS中的属性名通常是以横线命名，映射为JS对象后，JS对象中style的属性是以小驼峰命名</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;red&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果将属性值设置为空字符串，此时这个属性的值被设置为浏览器默认样式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置多个样式"><a href="#设置多个样式" class="headerlink" title="设置多个样式"></a>设置多个样式</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">cssText</span> = <span class="string">&quot;background-color: red; color: red;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取单个内联样式"><a href="#获取单个内联样式" class="headerlink" title="获取单个内联样式"></a>获取单个内联样式</h6><ul>
+<li>如果内联样式中没有定义则不能获取</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">backgroundColor</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取单个样式"><a href="#获取单个样式" class="headerlink" title="获取单个样式"></a>获取单个样式</h6><ul>
+<li>可以获取任何地方定义的样式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getComputedStyle</span>(element).<span class="property">backgroundColor</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="操作className"><a href="#操作className" class="headerlink" title="操作className"></a>操作className</h5><h6 id="添加或覆盖class"><a href="#添加或覆盖class" class="headerlink" title="添加或覆盖class"></a>添加或覆盖class</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">className</span> = <span class="string">&quot;key&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="操作classList"><a href="#操作classList" class="headerlink" title="操作classList"></a>操作classList</h5><h6 id="向classList添加class"><a href="#向classList添加class" class="headerlink" title="向classList添加class"></a>向classList添加class</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="从classList删除class"><a href="#从classList删除class" class="headerlink" title="从classList删除class"></a>从classList删除class</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="从classList切换class"><a href="#从classList切换class" class="headerlink" title="从classList切换class"></a>从classList切换class</h6><ul>
+<li>如果classList中存在class，就删除class</li>
+<li>如果classList中不存在class，就添加class</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">classList</span>.<span class="title function_">toggle</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="判断classList是否存在class"><a href="#判断classList是否存在class" class="headerlink" title="判断classList是否存在class"></a>判断classList是否存在class</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="遍历classList"><a href="#遍历classList" class="headerlink" title="遍历classList"></a>遍历classList</h6><ul>
+<li>遍历可迭代对象classList</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; element.<span class="property">classList</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(element.<span class="property">classList</span>[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> classItem <span class="keyword">of</span> element.<span class="property">classList</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(classItem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h3><blockquote>
+<p><code>div</code>：定义标签名</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h3><ul>
+<li>在指定元素附近插入元素或字符串<ul>
+<li>可以插入单个也可以插入多个</li>
+<li>可以插入元素或字符串</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>element</code>：在这个元素附近插入元素<br><code>otherElement</code>：被插入的元素</p>
+</blockquote>
+<h4 id="在指定元素的所有子元素最前面插入"><a href="#在指定元素的所有子元素最前面插入" class="headerlink" title="在指定元素的所有子元素最前面插入"></a>在指定元素的所有子元素最前面插入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">prepend</span>(otherElement);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">prepend</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">prepend</span>(otherElement, <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="在指定元素的所有子元素最后面插入"><a href="#在指定元素的所有子元素最后面插入" class="headerlink" title="在指定元素的所有子元素最后面插入"></a>在指定元素的所有子元素最后面插入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">append</span>(otherElement);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">append</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">append</span>(otherElement, <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="在指定元素之前插入"><a href="#在指定元素之前插入" class="headerlink" title="在指定元素之前插入"></a>在指定元素之前插入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">before</span>(otherElement);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">before</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">before</span>(otherElement, <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="在指定元素之后插入"><a href="#在指定元素之后插入" class="headerlink" title="在指定元素之后插入"></a>在指定元素之后插入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">after</span>(otherElement);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">after</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">after</span>(otherElement, <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="替换元素"><a href="#替换元素" class="headerlink" title="替换元素"></a>替换元素</h3><ul>
+<li>用元素或字符串替换元素</li>
+</ul>
+<blockquote>
+<p><code>otherElement</code>：被替换的元素</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">replaceWith</span>(otherElement);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">replaceWith</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">replaceWith</span>(otherElement, <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h3><ul>
+<li>移除当前元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">remove</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="克隆元素"><a href="#克隆元素" class="headerlink" title="克隆元素"></a>克隆元素</h3><h4 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementNew = element.<span class="title function_">cloneNode</span>();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementNew = element.<span class="title function_">cloneNode</span>(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="深克隆"><a href="#深克隆" class="headerlink" title="深克隆"></a>深克隆</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elementNew = element.<span class="title function_">cloneNode</span>(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="元素的CSS样式"><a href="#元素的CSS样式" class="headerlink" title="元素的CSS样式"></a>元素的CSS样式</h3><ul>
+<li>将<code>-</code>命名改为小驼峰命名</li>
+</ul>
+<h4 id="获取CSS样式"><a href="#获取CSS样式" class="headerlink" title="获取CSS样式"></a>获取CSS样式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">backgroundColor</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改CSS样式"><a href="#修改CSS样式" class="headerlink" title="修改CSS样式"></a>修改CSS样式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;red&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="元素的尺寸、距离、滚动"><a href="#元素的尺寸、距离、滚动" class="headerlink" title="元素的尺寸、距离、滚动"></a>元素的尺寸、距离、滚动</h3><h4 id="获取元素的可视区域尺寸"><a href="#获取元素的可视区域尺寸" class="headerlink" title="获取元素的可视区域尺寸"></a>获取元素的可视区域尺寸</h4><ul>
+<li>不包含滚动条，不包含边框尺寸</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">clientWidth</span>;</span><br><span class="line">element.<span class="property">clientHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素的可视区域完整尺寸"><a href="#获取元素的可视区域完整尺寸" class="headerlink" title="获取元素的可视区域完整尺寸"></a>获取元素的可视区域完整尺寸</h4><ul>
+<li>不包含滚动条，包含边框尺寸</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">offsetWidth</span>;</span><br><span class="line">element.<span class="property">offsetHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素的边框尺寸"><a href="#获取元素的边框尺寸" class="headerlink" title="获取元素的边框尺寸"></a>获取元素的边框尺寸</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">clientTop</span>;</span><br><span class="line">element.<span class="property">clientLeft</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素的左上角的距离"><a href="#获取元素的左上角的距离" class="headerlink" title="获取元素的左上角的距离"></a>获取元素的左上角的距离</h4><ul>
+<li>包含边框的元素的左上角的距离</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">offsetTop</span>;</span><br><span class="line">element.<span class="property">offsetLeft</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素的完整内容高度"><a href="#获取元素的完整内容高度" class="headerlink" title="获取元素的完整内容高度"></a>获取元素的完整内容高度</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">scrollHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素的滚动位置"><a href="#获取元素的滚动位置" class="headerlink" title="获取元素的滚动位置"></a>获取元素的滚动位置</h4><ul>
+<li>不包含边框的元素的上边缘距离元素的完整内容起始位置的偏移量</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">scrollTop</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="window的尺寸、距离、滚动"><a href="#window的尺寸、距离、滚动" class="headerlink" title="window的尺寸、距离、滚动"></a>window的尺寸、距离、滚动</h3><h4 id="获取window的内容尺寸"><a href="#获取window的内容尺寸" class="headerlink" title="获取window的内容尺寸"></a>获取window的内容尺寸</h4><ul>
+<li>不包含滚动条</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取window的内容完整尺寸"><a href="#获取window的内容完整尺寸" class="headerlink" title="获取window的内容完整尺寸"></a>获取window的内容完整尺寸</h4><ul>
+<li>包含滚动条</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">innerWidth</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">innerHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取window的窗口完整尺寸"><a href="#获取window的窗口完整尺寸" class="headerlink" title="获取window的窗口完整尺寸"></a>获取window的窗口完整尺寸</h4><ul>
+<li>包含工具栏和调试工具</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">outerWidth</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">outerHeight</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取window的滚动距离"><a href="#获取window的滚动距离" class="headerlink" title="获取window的滚动距离"></a>获取window的滚动距离</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">scrollX</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">scrollY</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">pageXOffset</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">pageYOffset</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="window的滚动操作"><a href="#window的滚动操作" class="headerlink" title="window的滚动操作"></a>window的滚动操作</h4><h5 id="滚动至绝对位置"><a href="#滚动至绝对位置" class="headerlink" title="滚动至绝对位置"></a>滚动至绝对位置</h5><blockquote>
+<p><code>&lt;num_x&gt;</code>：横坐标<br><code>&lt;num_y&gt;</code>：纵坐标</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(&lt;num_x&gt;, &lt;num_y&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="滚动至相对位置"><a href="#滚动至相对位置" class="headerlink" title="滚动至相对位置"></a>滚动至相对位置</h5><blockquote>
+<p><code>&lt;num_x&gt;</code>：相对于当前元素的横向偏移量<br><code>&lt;num_y&gt;</code>：相对于当前元素的纵向偏移量</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">scrollBy</span>(&lt;num_x&gt;, &lt;num_y&gt;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对表格的额外操作"><a href="#对表格的额外操作" class="headerlink" title="对表格的额外操作"></a>对表格的额外操作</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tableElement = <span class="variable language_">document</span>.<span class="title function_">getElementByTagName</span>(<span class="string">&quot;table&quot;</span>)[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取表格一部分"><a href="#获取表格一部分" class="headerlink" title="获取表格一部分"></a>获取表格一部分</h3><h4 id="获取表格标题部分"><a href="#获取表格标题部分" class="headerlink" title="获取表格标题部分"></a>获取表格标题部分</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableElement.<span class="property">caption</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取表格的头部分"><a href="#获取表格的头部分" class="headerlink" title="获取表格的头部分"></a>获取表格的头部分</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableElement.<span class="property">tHead</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取表格的体部分"><a href="#获取表格的体部分" class="headerlink" title="获取表格的体部分"></a>获取表格的体部分</h4><ul>
+<li>获取表格<code>&lt;tbody&gt;&lt;/tbody&gt;</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableElement.<span class="property">tBodies</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取表格的尾部分"><a href="#获取表格的尾部分" class="headerlink" title="获取表格的尾部分"></a>获取表格的尾部分</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableElement.<span class="property">tFoot</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前部分的所有行"><a href="#获取当前部分的所有行" class="headerlink" title="获取当前部分的所有行"></a>获取当前部分的所有行</h3><ul>
+<li>获取当前部分的所有<code>&lt;tr&gt;&lt;/tr&gt;</code>元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trElementList = tableElement.<span class="property">rows</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trElementList = table.<span class="property">tHead</span>.<span class="property">rows</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trElementList = tablet.<span class="property">Bodies</span>[<span class="number">0</span>].<span class="property">rows</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trElementList = table.<span class="property">tFoot</span>.<span class="property">rows</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前行的所有格子"><a href="#获取当前行的所有格子" class="headerlink" title="获取当前行的所有格子"></a>获取当前行的所有格子</h3><ul>
+<li>获取当前行的所有<code>&lt;th&gt;&lt;/th&gt;</code>元素和<code>&lt;td&gt;&lt;/td&gt;</code>元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trElementList[<span class="number">0</span>].<span class="property">cells</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取行在部分中的索引"><a href="#获取行在部分中的索引" class="headerlink" title="获取行在部分中的索引"></a>获取行在部分中的索引</h3><ul>
+<li>获取<code>&lt;tr&gt;&lt;/tr&gt;</code>元素在<code>&lt;thead&gt;&lt;/thead&gt;</code>、<code>&lt;tbody&gt;&lt;/tbody&gt;</code>、<code>&lt;tfoot&gt;&lt;/tfoot&gt;</code>中的索引</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trElementList[<span class="number">0</span>].<span class="property">sectionRowIndex</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取行在表格中的索引"><a href="#获取行在表格中的索引" class="headerlink" title="获取行在表格中的索引"></a>获取行在表格中的索引</h3><ul>
+<li>获取当前<code>&lt;tr&gt;&lt;/tr&gt;</code>元素在<code>&lt;table&gt;&lt;/table&gt;</code>的中所有<code>&lt;tr&gt;&lt;/tr&gt;</code>列表中的索引</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trElementList[<span class="number">0</span>].<span class="property">rowIndex</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取单元格在行中的索引"><a href="#获取单元格在行中的索引" class="headerlink" title="获取单元格在行中的索引"></a>获取单元格在行中的索引</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trElementList[<span class="number">0</span>].<span class="property">cells</span>[<span class="number">0</span>].<span class="property">cellIndex</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对表单的额外操作"><a href="#对表单的额外操作" class="headerlink" title="对表单的额外操作"></a>对表单的额外操作</h2><h3 id="获取文档中的所有表单"><a href="#获取文档中的所有表单" class="headerlink" title="获取文档中的所有表单"></a>获取文档中的所有表单</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formElementList = <span class="variable language_">document</span>.<span class="property">forms</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取表单中的所有子元素"><a href="#获取表单中的所有子元素" class="headerlink" title="获取表单中的所有子元素"></a>获取表单中的所有子元素</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formSonElementList = formElementList.<span class="property">elements</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过子元素name获取子元素"><a href="#通过子元素name获取子元素" class="headerlink" title="通过子元素name获取子元素"></a>通过子元素name获取子元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;key&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formSonElement = formElementList.<span class="property">elements</span>[<span class="string">&quot;key&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><h3 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a>定义事件</h3><h4 id="直接在HTML标签上定义事件"><a href="#直接在HTML标签上定义事件" class="headerlink" title="直接在HTML标签上定义事件"></a>直接在HTML标签上定义事件</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">&quot;fn&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">event</span>) &#123;&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过JS对象的属性定义事件"><a href="#通过JS对象的属性定义事件" class="headerlink" title="通过JS对象的属性定义事件"></a>通过JS对象的属性定义事件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">event</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过JS对象的事件监听器定义事件"><a href="#通过JS对象的事件监听器定义事件" class="headerlink" title="通过JS对象的事件监听器定义事件"></a>通过JS对象的事件监听器定义事件</h4><h5 id="冒泡阶段执行"><a href="#冒泡阶段执行" class="headerlink" title="冒泡阶段执行"></a>冒泡阶段执行</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="捕获阶段执行"><a href="#捕获阶段执行" class="headerlink" title="捕获阶段执行"></a>捕获阶段执行</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;&#125;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="形参event的属性"><a href="#形参event的属性" class="headerlink" title="形参event的属性"></a>形参event的属性</h3><h4 id="事件的类型"><a href="#事件的类型" class="headerlink" title="事件的类型"></a>事件的类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">type</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="发生事件的元素"><a href="#发生事件的元素" class="headerlink" title="发生事件的元素"></a>发生事件的元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">target</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理事件的元素"><a href="#处理事件的元素" class="headerlink" title="处理事件的元素"></a>处理事件的元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">currentTarget</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件所处的阶段"><a href="#事件所处的阶段" class="headerlink" title="事件所处的阶段"></a>事件所处的阶段</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">eventPhase</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结果</p>
+<blockquote>
+<p><code>1</code>：捕获阶段（Capturing Phase）<br><code>2</code>：目标阶段（Target Phase）<br><code>3</code>：冒泡阶段（Bubbling Phase）</p>
+</blockquote>
+</blockquote>
+<h4 id="发生事件时光标的位置"><a href="#发生事件时光标的位置" class="headerlink" title="发生事件时光标的位置"></a>发生事件时光标的位置</h4><h5 id="在元素内的位置"><a href="#在元素内的位置" class="headerlink" title="在元素内的位置"></a>在元素内的位置</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">offsetX</span>;</span><br><span class="line"><span class="keyword">var</span> result = event.<span class="property">offsetY</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="在客户端的位置"><a href="#在客户端的位置" class="headerlink" title="在客户端的位置"></a>在客户端的位置</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">clientX</span>;</span><br><span class="line"><span class="keyword">var</span> result = event.<span class="property">clientY</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="在文档document中的位置"><a href="#在文档document中的位置" class="headerlink" title="在文档document中的位置"></a>在文档document中的位置</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">pageX</span>;</span><br><span class="line"><span class="keyword">var</span> result = event.<span class="property">pageY</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="在屏幕screen中的位置"><a href="#在屏幕screen中的位置" class="headerlink" title="在屏幕screen中的位置"></a>在屏幕screen中的位置</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = event.<span class="property">screenX</span>;</span><br><span class="line"><span class="keyword">var</span> result = event.<span class="property">screenY</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="阻止HTML元素默认的事件"><a href="#阻止HTML元素默认的事件" class="headerlink" title="阻止HTML元素默认的事件"></a>阻止HTML元素默认的事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.<span class="title function_">preventDefault</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="阻止事件的传递"><a href="#阻止事件的传递" class="headerlink" title="阻止事件的传递"></a>阻止事件的传递</h3><ul>
+<li>阻止事件冒泡和传递</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.<span class="title function_">stopPropagation</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="EventTarget"><a href="#EventTarget" class="headerlink" title="EventTarget"></a>EventTarget</h3><ul>
+<li>EventTarget是一个DOM接口，用于新增、删除、派发Event事件</li>
+</ul>
+<h4 id="添加事件监听"><a href="#添加事件监听" class="headerlink" title="添加事件监听"></a>添加事件监听</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, fn);</span><br></pre></td></tr></table></figure>
+
+<h4 id="移除事件监听"><a href="#移除事件监听" class="headerlink" title="移除事件监听"></a>移除事件监听</h4><ul>
+<li>通过<code>removeEventListener()</code>方法移除之前添加的事件，传入的函数需要与添加时定义的一致</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, fn);</span><br><span class="line">element.<span class="title function_">removeEventListener</span>(<span class="string">&quot;click&quot;</span>, fn);</span><br></pre></td></tr></table></figure>
+
+<h4 id="派发事件"><a href="#派发事件" class="headerlink" title="派发事件"></a>派发事件</h4><h5 id="创建事件对象"><a href="#创建事件对象" class="headerlink" title="创建事件对象"></a>创建事件对象</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> e = <span class="keyword">new</span> <span class="title class_">Event</span>(<span class="string">&quot;事件名&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="立即触发事件"><a href="#立即触发事件" class="headerlink" title="立即触发事件"></a>立即触发事件</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">dispatchEvent</span>(e);</span><br></pre></td></tr></table></figure>
+
+<h3 id="事件委派"><a href="#事件委派" class="headerlink" title="事件委派"></a>事件委派</h3><ul>
+<li>在父元素中统一处理子元素触发的事件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">elementFather.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">target</span> === elementSon) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h3><h4 id="定义事件-1"><a href="#定义事件-1" class="headerlink" title="定义事件"></a>定义事件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> e = <span class="keyword">new</span> <span class="title class_">Event</span>(<span class="string">&quot;事件名&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义监听器"><a href="#定义监听器" class="headerlink" title="定义监听器"></a>定义监听器</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;事件名&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="派发事件-1"><a href="#派发事件-1" class="headerlink" title="派发事件"></a>派发事件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">dispatchEvent</span>(e);</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置事件"><a href="#内置事件" class="headerlink" title="内置事件"></a>内置事件</h3><ul>
+<li>所有元素都有对应事件名的on方法<ul>
+<li>如click事件的方法名为onclick</li>
+</ul>
+</li>
+</ul>
+<h4 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h4><h5 id="左键单击"><a href="#左键单击" class="headerlink" title="左键单击"></a>左键单击</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="右键单击"><a href="#右键单击" class="headerlink" title="右键单击"></a>右键单击</h5><ul>
+<li>右键打开上下文菜单时触发</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;contextmenu&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="左键双击"><a href="#左键双击" class="headerlink" title="左键双击"></a>左键双击</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;dblclick&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="按键按下"><a href="#按键按下" class="headerlink" title="按键按下"></a>按键按下</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousedown&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="按键松开"><a href="#按键松开" class="headerlink" title="按键松开"></a>按键松开</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseup&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="鼠标移动"><a href="#鼠标移动" class="headerlink" title="鼠标移动"></a>鼠标移动</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousemove&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="鼠标移入（支持冒泡）"><a href="#鼠标移入（支持冒泡）" class="headerlink" title="鼠标移入（支持冒泡）"></a>鼠标移入（支持冒泡）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseover&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="鼠标移出（支持冒泡）"><a href="#鼠标移出（支持冒泡）" class="headerlink" title="鼠标移出（支持冒泡）"></a>鼠标移出（支持冒泡）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseout&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="鼠标移入（不支持冒泡）"><a href="#鼠标移入（不支持冒泡）" class="headerlink" title="鼠标移入（不支持冒泡）"></a>鼠标移入（不支持冒泡）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseenter&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="鼠标移出（不支持冒泡）"><a href="#鼠标移出（不支持冒泡）" class="headerlink" title="鼠标移出（不支持冒泡）"></a>鼠标移出（不支持冒泡）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseleave&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h4><h5 id="按键事件判定"><a href="#按键事件判定" class="headerlink" title="按键事件判定"></a>按键事件判定</h5><h6 id="按键按下（物理键被按下）"><a href="#按键按下（物理键被按下）" class="headerlink" title="按键按下（物理键被按下）"></a>按键按下（物理键被按下）</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="按键按下（字符被输入）"><a href="#按键按下（字符被输入）" class="headerlink" title="按键按下（字符被输入）"></a>按键按下（字符被输入）</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;keypress&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="按键松开（字符输入结束）"><a href="#按键松开（字符输入结束）" class="headerlink" title="按键松开（字符输入结束）"></a>按键松开（字符输入结束）</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;keyup&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="物理按键判定"><a href="#物理按键判定" class="headerlink" title="物理按键判定"></a>物理按键判定</h5><h6 id="通过键码值判定"><a href="#通过键码值判定" class="headerlink" title="通过键码值判定"></a>通过键码值判定</h6><ul>
+<li><a href="/2019/11/24/%E9%94%AE%E7%9B%98%E7%BC%96%E7%A0%81%E5%80%BC/">传送门</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (event.<span class="property">keyCode</span> === <span class="number">13</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="通过字符判定"><a href="#通过字符判定" class="headerlink" title="通过字符判定"></a>通过字符判定</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (event.<span class="property">key</span> === <span class="string">&quot;Enter&quot;</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表单中的按钮事件"><a href="#表单中的按钮事件" class="headerlink" title="表单中的按钮事件"></a>表单中的按钮事件</h4><h5 id="提交表单"><a href="#提交表单" class="headerlink" title="提交表单"></a>提交表单</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;submit&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="重置表单"><a href="#重置表单" class="headerlink" title="重置表单"></a>重置表单</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;reset&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="滚动条事件"><a href="#滚动条事件" class="headerlink" title="滚动条事件"></a>滚动条事件</h4><h5 id="滚动条位置发生改变"><a href="#滚动条位置发生改变" class="headerlink" title="滚动条位置发生改变"></a>滚动条位置发生改变</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&quot;scroll&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="window事件"><a href="#window事件" class="headerlink" title="window事件"></a>window事件</h4><h2 id="定时器和计时器"><a href="#定时器和计时器" class="headerlink" title="定时器和计时器"></a>定时器和计时器</h2><h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><ul>
+<li>延迟一段时间后执行函数</li>
+</ul>
+<blockquote>
+<p><code>1000</code>：延迟事件，单位毫秒</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timeoutId = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>arg1</code>、<code>arg2</code>：传递参数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timeoutId = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params">arg1, arg2</span>) &#123;&#125;, <span class="number">1000</span>, arg1, arg2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h3><ul>
+<li>每间隔一段时间就执行一次函数</li>
+</ul>
+<blockquote>
+<p><code>1000</code>：延迟事件，单位毫秒</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timeoutId = <span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>arg1</code>、<code>arg2</code>：传递参数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timeoutId = <span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params">arg1, arg2</span>) &#123;&#125;, <span class="number">1000</span>, arg1, arg2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="停止定时器或计时器"><a href="#停止定时器或计时器" class="headerlink" title="停止定时器或计时器"></a>停止定时器或计时器</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">clearTimeout</span>(timeoutId);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/09/JS%E7%9A%84%E6%95%B0%E7%BB%84/" rel="prev" title="【笔记】JS的数组">
+                  <i class="fa fa-angle-left"></i> 【笔记】JS的数组
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/09/SRT%E5%AD%97%E5%B9%95%E6%96%87%E4%BB%B6/" rel="next" title="【笔记】SRT字幕文件">
+                  【笔记】SRT字幕文件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言MongoDB是一种面向文档的数据库管理系统，用C++等语言撰写而成，以解决应用程序开发社区中的大量现实问题。MongoDB由MongoDB Inc.（当时是10gen团队）于2007年10月开发，2009年2月首度推出，现以服务器端公共许可（SSPL）分发。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】MongoDB学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2020/07/05/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言MongoDB是一种面向文档的数据库管理系统，用C++等语言撰写而成，以解决应用程序开发社区中的大量现实问题。MongoDB由MongoDB Inc.（当时是10gen团队）于2007年10月开发，2009年2月首度推出，现以服务器端公共许可（SSPL）分发。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-05T04:43:55.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.896Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2020/07/05/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2020/07/05/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2020/07/05/MongoDB学习笔记/","title":"【笔记】MongoDB学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】MongoDB学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E5%92%8C%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">MongoDB和其他数据库的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">对数据库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%EF%BC%88%E5%88%9B%E5%BB%BA-%E4%BD%BF%E7%94%A8%EF%BC%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.1.</span> <span class="nav-text">切换（创建&#x2F;使用）数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">4.1.1.</span> <span class="nav-text">数据库的命名规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.1.2.</span> <span class="nav-text">默认数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.2.</span> <span class="nav-text">删除当前数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.3.</span> <span class="nav-text">查看当前数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.4.</span> <span class="nav-text">查看所有数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E9%9B%86%E5%90%88%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">对集合的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88"><span class="nav-number">5.1.</span> <span class="nav-text">创建集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E5%BC%8F%E5%88%9B%E5%BB%BA"><span class="nav-number">5.1.1.</span> <span class="nav-text">显式创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%88%9B%E5%BB%BA"><span class="nav-number">5.1.2.</span> <span class="nav-text">隐式创建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88"><span class="nav-number">5.2.</span> <span class="nav-text">删除集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E9%9B%86%E5%90%88"><span class="nav-number">5.3.</span> <span class="nav-text">查看所有集合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%96%87%E6%A1%A3%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">对文档的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3"><span class="nav-number">6.1.</span> <span class="nav-text">新增文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E5%8D%95%E6%9D%A1%E6%96%87%E6%A1%A3"><span class="nav-number">6.1.1.</span> <span class="nav-text">新增单条文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">通过变量新增文档</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E5%A4%9A%E6%9D%A1%E6%96%87%E6%A1%A3"><span class="nav-number">6.1.2.</span> <span class="nav-text">新增多条文档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">6.2.</span> <span class="nav-text">删除文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.2.1.</span> <span class="nav-text">删除所有符合条件的文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%A8%E9%83%A8%E6%96%87%E6%A1%A3"><span class="nav-number">6.2.2.</span> <span class="nav-text">删除全部文档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%A1%A3"><span class="nav-number">6.3.</span> <span class="nav-text">修改文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8D%95%E6%9D%A1%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.3.1.</span> <span class="nav-text">修改单条符合条件的文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E4%BF%AE%E6%94%B9"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">覆盖修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E4%BF%AE%E6%94%B9"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">局部修改</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%80%BC%E8%87%AA%E5%A2%9E"><span class="nav-number">6.3.1.2.1.</span> <span class="nav-text">字段值自增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%A4%9A%E6%9D%A1%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.3.2.</span> <span class="nav-text">修改多条符合条件的文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E4%BF%AE%E6%94%B9-1"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">覆盖修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E4%BF%AE%E6%94%B9-1"><span class="nav-number">6.3.2.2.</span> <span class="nav-text">局部修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.</span> <span class="nav-text">查询文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.1.</span> <span class="nav-text">查询所有文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.2.</span> <span class="nav-text">查询符合条件的文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8C%B9%E9%85%8D"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">完全匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3%E7%9A%84%E5%A4%9A%E6%9D%A1%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.2.1.1.</span> <span class="nav-text">查询符合条件的文档的多条文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3%E7%9A%84%E5%8D%95%E6%9D%A1%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.2.1.2.</span> <span class="nav-text">查询符合条件的文档的单条文档</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="nav-number">6.4.2.2.</span> <span class="nav-text">正则匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">6.4.2.3.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">6.4.2.4.</span> <span class="nav-text">成员运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">6.4.2.5.</span> <span class="nav-text">逻辑运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E7%AD%9B%E9%80%89%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.4.3.</span> <span class="nav-text">查询结果的筛选条件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E7%AD%9B%E9%80%89%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.4.3.1.</span> <span class="nav-text">添加查询结果的筛选条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%92%E9%99%A4%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E7%AD%9B%E9%80%89%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.4.3.2.</span> <span class="nav-text">排除查询结果的筛选条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.4.3.3.</span> <span class="nav-text">混合条件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3%E6%80%BB%E6%95%B0"><span class="nav-number">6.4.4.</span> <span class="nav-text">查询文档总数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%96%87%E6%A1%A3%E6%80%BB%E6%95%B0"><span class="nav-number">6.4.4.1.</span> <span class="nav-text">查询所有文档总数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3%E6%80%BB%E6%95%B0"><span class="nav-number">6.4.4.2.</span> <span class="nav-text">查询符合条件的文档总数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E6%95%B0%E9%87%8F%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.5.</span> <span class="nav-text">查询指定数量的文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%95%B0%E9%87%8F%E7%9A%84%E6%96%87%E6%A1%A3"><span class="nav-number">6.4.6.</span> <span class="nav-text">跳过指定数量的文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.4.7.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C"><span class="nav-number">6.4.8.</span> <span class="nav-text">排序查询结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%87%E5%BA%8F"><span class="nav-number">6.4.8.1.</span> <span class="nav-text">升序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%8D%E5%BA%8F"><span class="nav-number">6.4.8.2.</span> <span class="nav-text">降序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E6%8E%92%E5%BA%8F"><span class="nav-number">6.4.8.3.</span> <span class="nav-text">混合排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BAJSON"><span class="nav-number">6.4.9.</span> <span class="nav-text">查询结果转换为JSON</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.5.</span> <span class="nav-text">高级查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2%EF%BC%88GroupBy%EF%BC%89"><span class="nav-number">6.5.1.</span> <span class="nav-text">分组查询（GroupBy）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8"><span class="nav-number">7.</span> <span class="nav-text">捕获异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%B4%A2%E5%BC%95%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">8.</span> <span class="nav-text">对索引的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%B4%A2%E5%BC%95"><span class="nav-number">8.1.</span> <span class="nav-text">查询索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%B4%A2%E5%BC%95"><span class="nav-number">8.2.</span> <span class="nav-text">新增索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%AD%97%E6%AE%B5%E7%B4%A2%E5%BC%95"><span class="nav-number">8.2.1.</span> <span class="nav-text">单字段索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%AD%97%E6%AE%B5%E7%B4%A2%E5%BC%95%EF%BC%88%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%89"><span class="nav-number">8.2.2.</span> <span class="nav-text">多字段索引（复合索引）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">8.3.</span> <span class="nav-text">删除索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%8D%95%E4%B8%AA%E7%B4%A2%E5%BC%95"><span class="nav-number">8.3.1.</span> <span class="nav-text">删除单个索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B4%A2%E5%BC%95%E5%90%8D%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">8.3.1.1.</span> <span class="nav-text">通过索引名删除索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%A7%84%E5%88%99%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">8.3.1.2.</span> <span class="nav-text">通过规则删除索引</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E7%B4%A2%E5%BC%95"><span class="nav-number">8.3.2.</span> <span class="nav-text">删除所有索引</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD"><span class="nav-number">9.</span> <span class="nav-text">查询性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">10.</span> <span class="nav-text">用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%94%A8%E6%88%B7"><span class="nav-number">10.1.</span> <span class="nav-text">新增用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-number">10.1.1.</span> <span class="nav-text">创建超级管理员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-number">10.1.2.</span> <span class="nav-text">创建普通管理员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="nav-number">10.1.3.</span> <span class="nav-text">创建普通用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">10.2.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7"><span class="nav-number">11.</span> <span class="nav-text">修改用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="nav-number">11.1.</span> <span class="nav-text">修改用户密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7"><span class="nav-number">11.2.</span> <span class="nav-text">查看用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="nav-number">11.2.1.</span> <span class="nav-text">查看所有用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95"><span class="nav-number">11.3.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFMongoDB%E7%9A%84%E8%AE%A4%E8%AF%81"><span class="nav-number">11.4.</span> <span class="nav-text">开启MongoDB的认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">12.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">13.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2020/07/05/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】MongoDB学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】MongoDB学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-05 12:43:55" itemprop="dateCreated datePublished" datetime="2020-07-05T12:43:55+08:00">2020-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>MongoDB是一种面向文档的数据库管理系统，用C++等语言撰写而成，以解决应用程序开发社区中的大量现实问题。MongoDB由MongoDB Inc.（当时是10gen团队）于2007年10月开发，2009年2月首度推出，现以服务器端公共许可（SSPL）分发。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/MongoDB">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="MongoDB和其他数据库的区别"><a href="#MongoDB和其他数据库的区别" class="headerlink" title="MongoDB和其他数据库的区别"></a>MongoDB和其他数据库的区别</h2><ul>
+<li>数据库用<code>database</code>表示</li>
+<li>集合（也就是其他数据库的数据表<code>table</code>）用<code>collection</code>表示</li>
+<li>字段（也就是其他数据库的字段<code>column</code>）用<code>field</code>表示</li>
+<li>MongoDB的命令区分大小写</li>
+<li>MongoDB的命令末尾不需要分号</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li>MongoDB通过BSON（一种二进制的JSON）来存储数据</li>
+<li>BSON数据类型<ul>
+<li>可以在Shell中使用的数据类型<ul>
+<li>字符串</li>
+<li>对象id</li>
+<li>布尔值</li>
+<li>数组</li>
+<li>32位整数</li>
+<li>64位整数</li>
+<li>64位浮点数</li>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>//i</code>正则表达式</li>
+<li><code>function()&#123;&#125;</code>函数</li>
+</ul>
+</li>
+<li>不可以在Shell中使用的数据类型<ul>
+<li>符号</li>
+<li>二进制数</li>
+<li>最大&#x2F;小值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="对数据库的操作"><a href="#对数据库的操作" class="headerlink" title="对数据库的操作"></a>对数据库的操作</h2><h3 id="切换（创建-使用）数据库"><a href="#切换（创建-使用）数据库" class="headerlink" title="切换（创建&#x2F;使用）数据库"></a>切换（创建&#x2F;使用）数据库</h3><ul>
+<li>无论是否存在指定数据库名的数据库，在执行<code>use</code>命令后都会进入到指定数据库名的数据库<ul>
+<li>如果数据库名已存在，就进入到一个已存在的数据库进行操作</li>
+<li>如果数据库名不存在，在创建集合后会自动创建这个数据库，在没有创建集合之前仍然不会出现在所有数据库列表中</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>&lt;database_name&gt;</code>：数据库名</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use <span class="operator">&lt;</span>database_name<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库的命名规则"><a href="#数据库的命名规则" class="headerlink" title="数据库的命名规则"></a>数据库的命名规则</h4><ul>
+<li>不能是空字符串</li>
+<li>不能包含空字符（<code>\0</code>）</li>
+<li>不能包含空格（<code> </code>）</li>
+<li>不能包含特殊字符：<code>.</code>、<code>\</code>、<code>/</code>、<code>$</code></li>
+<li>必须全部是小写字母</li>
+<li>最长为64字节</li>
+</ul>
+<h4 id="默认数据库"><a href="#默认数据库" class="headerlink" title="默认数据库"></a>默认数据库</h4><ul>
+<li>admin：存放所有用户和权限</li>
+<li>local：在这个数据库中存储的数据在部署集群后不会被同步</li>
+<li>config：存放分片的信息</li>
+</ul>
+<h3 id="删除当前数据库"><a href="#删除当前数据库" class="headerlink" title="删除当前数据库"></a>删除当前数据库</h3><ul>
+<li>删除当前use的数据库</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看当前数据库"><a href="#查看当前数据库" class="headerlink" title="查看当前数据库"></a>查看当前数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有数据库"><a href="#查看所有数据库" class="headerlink" title="查看所有数据库"></a>查看所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure>
+
+<h2 id="对集合的操作"><a href="#对集合的操作" class="headerlink" title="对集合的操作"></a>对集合的操作</h2><h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><h4 id="显式创建"><a href="#显式创建" class="headerlink" title="显式创建"></a>显式创建</h4><blockquote>
+<p><code>&lt;collection_name&gt;</code>：集合名</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&lt;collection_name&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="隐式创建"><a href="#隐式创建" class="headerlink" title="隐式创建"></a>隐式创建</h4><ul>
+<li>直接在指定集合新增文档，集合就会自动被创建</li>
+</ul>
+<blockquote>
+<p><code>&lt;collection_name&gt;</code>：集合名<br><code>&lt;key&gt;</code>：键<br><code>&lt;value&gt;</code>：值</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.insert(&#123;&quot;&lt;key&gt;&quot;: &quot;&lt;value&gt;&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.insert(&#123;&quot;&lt;key_1&gt;&quot;: &quot;&lt;value_1&gt;&quot;, &quot;&lt;key_2&gt;&quot;: &quot;&lt;value_2&gt;&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.drop()</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有集合"><a href="#查看所有集合" class="headerlink" title="查看所有集合"></a>查看所有集合</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables</span><br></pre></td></tr></table></figure>
+
+<h2 id="对文档的操作"><a href="#对文档的操作" class="headerlink" title="对文档的操作"></a>对文档的操作</h2><h3 id="新增文档"><a href="#新增文档" class="headerlink" title="新增文档"></a>新增文档</h3><ul>
+<li><p>向指定集合中新增文档</p>
+</li>
+<li><p>文档的内容是类似于JSON的BSON</p>
+</li>
+<li><p>在新增文档时，<code>_id</code>字段是mongodb的默认主键，会自增，可以省略，也可以手动指定</p>
+<ul>
+<li><code>_id</code>字段虽然是从1开始自增的数值，但是数据类型是字符串类型的</li>
+</ul>
+</li>
+</ul>
+<h4 id="新增单条文档"><a href="#新增单条文档" class="headerlink" title="新增单条文档"></a>新增单条文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.insert(&#123;字段名: 字段值&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过变量新增文档"><a href="#通过变量新增文档" class="headerlink" title="通过变量新增文档"></a>通过变量新增文档</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量名 = &#123;字段名: 字段值&#125;</span><br><span class="line">db.&lt;collection_name&gt;.insert(变量名)</span><br></pre></td></tr></table></figure>
+
+<h4 id="新增多条文档"><a href="#新增多条文档" class="headerlink" title="新增多条文档"></a>新增多条文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.insertMany([&#123;字段名1: 字段值1&#125;, &#123;字段名2: 字段值2&#125;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><h4 id="删除所有符合条件的文档"><a href="#删除所有符合条件的文档" class="headerlink" title="删除所有符合条件的文档"></a>删除所有符合条件的文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.remove(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除全部文档"><a href="#删除全部文档" class="headerlink" title="删除全部文档"></a>删除全部文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h3><ul>
+<li>修改操作的第一个参数是查询条件</li>
+<li>修改操作的第二个参数是修改后的文档</li>
+<li>修改操作的第三个参数是其他参数，没有其他参数时可以省略</li>
+</ul>
+<h4 id="修改单条符合条件的文档"><a href="#修改单条符合条件的文档" class="headerlink" title="修改单条符合条件的文档"></a>修改单条符合条件的文档</h4><ul>
+<li>当查询到多条文档符合条件时，默认情况下只修改第一次符合条件的文档</li>
+</ul>
+<h5 id="覆盖修改"><a href="#覆盖修改" class="headerlink" title="覆盖修改"></a>覆盖修改</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;需要被修改的字段名: &quot;修改后的字段值&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="局部修改"><a href="#局部修改" class="headerlink" title="局部修改"></a>局部修改</h5><ul>
+<li>通过<code>$set:</code>指定单独修改字段</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;$set: &#123;需要被修改的字段名: &quot;修改后的字段值&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;$set: &#123;需要被修改的字段名1: &quot;修改后的字段值1&quot;&#125;， $set: &#123;需要被修改的字段名2: &quot;修改后的字段值2&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="字段值自增"><a href="#字段值自增" class="headerlink" title="字段值自增"></a>字段值自增</h6><blockquote>
+<p><code>1</code>：自增步长</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;$inc: &#123;需要被修改的字段名: NumberInt(1)&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改多条符合条件的文档"><a href="#修改多条符合条件的文档" class="headerlink" title="修改多条符合条件的文档"></a>修改多条符合条件的文档</h4><ul>
+<li>通过<code>&#123;multi:true&#125;</code>修改全部匹配到的文档</li>
+</ul>
+<h5 id="覆盖修改-1"><a href="#覆盖修改-1" class="headerlink" title="覆盖修改"></a>覆盖修改</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;需要被修改的字段名: &quot;修改后的字段值&quot;&#125;, &#123;multi: true&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="局部修改-1"><a href="#局部修改-1" class="headerlink" title="局部修改"></a>局部修改</h5><ul>
+<li>通过<code>$set:</code>指定单独修改字段</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;$set: &#123;需要被修改的字段名: &quot;修改后的字段值&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.update(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;, &#123;$set: &#123;需要被修改的字段名1: &quot;修改后的字段值1&quot;&#125;, $set: &#123;需要被修改的字段名2: &quot;修改后的字段值2&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><h4 id="查询所有文档"><a href="#查询所有文档" class="headerlink" title="查询所有文档"></a>查询所有文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询符合条件的文档"><a href="#查询符合条件的文档" class="headerlink" title="查询符合条件的文档"></a>查询符合条件的文档</h4><h5 id="完全匹配"><a href="#完全匹配" class="headerlink" title="完全匹配"></a>完全匹配</h5><ul>
+<li>查询操作的第一个参数表示查询的条件</li>
+</ul>
+<h6 id="查询符合条件的文档的多条文档"><a href="#查询符合条件的文档的多条文档" class="headerlink" title="查询符合条件的文档的多条文档"></a>查询符合条件的文档的多条文档</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;查询条件字段名1: &quot;查询条件字段值1&quot;, 查询条件字段名2: &quot;查询条件字段值2&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="查询符合条件的文档的单条文档"><a href="#查询符合条件的文档的单条文档" class="headerlink" title="查询符合条件的文档的单条文档"></a>查询符合条件的文档的单条文档</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.findOne(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.findOne(&#123;查询条件字段名1: &quot;查询条件字段值1&quot;, 查询条件字段名2: &quot;查询条件字段值2&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;查询条件字段名: /正则表达式/&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h5><blockquote>
+<p><code>&lt;num&gt;</code>：数值</p>
+</blockquote>
+<blockquote>
+<p><code>$gt</code>：大于<br><code>$gte</code>：大于等于<br><code>$lt</code>：小于<br><code>$lte</code>：小于等于<br><code>$eq</code>：等于<br><code>$ne</code>：不等于</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$gt: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$gte: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$lt: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$lte: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$eq: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$ne: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$lt: NumberInt(&lt;num&gt;),$gte: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$gt: NumberInt(&lt;num&gt;),$lte: NumberInt(&lt;num&gt;)&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><blockquote>
+<p><code>$in</code>：包含<br><code>$nin</code>：不包含</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$in: [&quot;查询条件字段值1&quot;, &quot;查询条件字段值2&quot;]&#125;&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;&quot;查询条件字段名&quot;: &#123;$nin: [&quot;查询条件字段值1&quot;, &quot;查询条件字段值2&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><blockquote>
+<p><code>$and</code>：并且<br><code>$or</code>：或者</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;$and: [&#123;&quot;查询条件字段名&quot;: &quot;查询条件字段值&quot;&#125;]&#125;)</span><br><span class="line">db.&lt;collection_name&gt;.find(&#123;or: [&#123;&quot;查询条件字段名&quot;: &quot;查询条件字段值&quot;&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询结果的筛选条件"><a href="#查询结果的筛选条件" class="headerlink" title="查询结果的筛选条件"></a>查询结果的筛选条件</h4><ul>
+<li>查询操作的第二个参数表示查询结果的筛选条件</li>
+</ul>
+<h5 id="添加查询结果的筛选条件"><a href="#添加查询结果的筛选条件" class="headerlink" title="添加查询结果的筛选条件"></a>添加查询结果的筛选条件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;, &#123;查询结果字段名: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;, &#123;查询结果字段名1: 1, 查询结果字段名2: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="排除查询结果的筛选条件"><a href="#排除查询结果的筛选条件" class="headerlink" title="排除查询结果的筛选条件"></a>排除查询结果的筛选条件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;, &#123;查询结果字段名: 0&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;, &#123;查询结果字段名1: 0, 查询结果字段名2: 0&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="混合条件"><a href="#混合条件" class="headerlink" title="混合条件"></a>混合条件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find(&#123;&#125;, &#123;查询结果字段名1: 1, 查询结果字段名2: 0&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询文档总数"><a href="#查询文档总数" class="headerlink" title="查询文档总数"></a>查询文档总数</h4><h5 id="查询所有文档总数"><a href="#查询所有文档总数" class="headerlink" title="查询所有文档总数"></a>查询所有文档总数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.count()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.count(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询符合条件的文档总数"><a href="#查询符合条件的文档总数" class="headerlink" title="查询符合条件的文档总数"></a>查询符合条件的文档总数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.count(&#123;查询条件字段名: &quot;查询条件字段值&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询指定数量的文档"><a href="#查询指定数量的文档" class="headerlink" title="查询指定数量的文档"></a>查询指定数量的文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().limit(1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="跳过指定数量的文档"><a href="#跳过指定数量的文档" class="headerlink" title="跳过指定数量的文档"></a>跳过指定数量的文档</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().skip(1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><ul>
+<li>通过查询指定数量和跳过指定数量的文档实现分页</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().skip((页数-1)*页内数据总数).limit(页内数据总数)</span><br></pre></td></tr></table></figure>
+
+<h4 id="排序查询结果"><a href="#排序查询结果" class="headerlink" title="排序查询结果"></a>排序查询结果</h4><h5 id="升序"><a href="#升序" class="headerlink" title="升序"></a>升序</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().sort(&#123;需要排序的字段名: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().sort(&#123;需要排序的字段名1: 1, 需要排序的字段名2: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="降序"><a href="#降序" class="headerlink" title="降序"></a>降序</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().sort(&#123;需要排序的字段名: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().sort(&#123;需要排序的字段名1: -1, 需要排序的字段名2: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="混合排序"><a href="#混合排序" class="headerlink" title="混合排序"></a>混合排序</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().sort(&#123;需要排序的字段名1: 1, 需要排序的字段名2: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询结果转换为JSON"><a href="#查询结果转换为JSON" class="headerlink" title="查询结果转换为JSON"></a>查询结果转换为JSON</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="operator">&lt;</span>collection_name<span class="operator">&gt;</span>.find().pretty()</span><br></pre></td></tr></table></figure>
+
+<h3 id="高级查询"><a href="#高级查询" class="headerlink" title="高级查询"></a>高级查询</h3><ul>
+<li>将查询的结果重新整理为新的数据格式</li>
+</ul>
+<h4 id="分组查询（GroupBy）"><a href="#分组查询（GroupBy）" class="headerlink" title="分组查询（GroupBy）"></a>分组查询（GroupBy）</h4><p>将<code>输入表的字段名</code>的字段去重，得到新的一组数据，数据的字段名被定义为<code>输出表中的字段名</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.aggregate(&#123;&quot;$group&quot;: &#123;&quot;_id&quot;: &#123;&quot;输出表中的字段名&quot;: &quot;$输入表的字段名&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果是嵌套的字段作为<code>输入表的字段名</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.aggregate(&#123;&quot;$group&quot;: &#123;&quot;_id&quot;: &#123;&quot;输出表中的字段名&quot;: &quot;$输入表的字段名.输入表的子字段名&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>将<code>输入表的字段名1</code>与<code>输入表的字段名2</code>作为联合唯一键，得到新的一组数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.aggregate(&#123;&quot;$group&quot;: &#123;&quot;_id&quot;: &#123;&quot;输出表中的字段名1&quot;: &quot;$输入表的字段名1&quot;, &quot;输出表中的字段名2&quot;: &quot;$输入表的字段名2&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h2><ul>
+<li>mongodb在执行批量操作时不会因为单条数据的操作失败而回滚，只能通过捕获异常来判断是否有执行失败的操作</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  db.&lt;collection_name&gt;.insert(&#123;...&#125;)</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">  print(e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对索引的操作"><a href="#对索引的操作" class="headerlink" title="对索引的操作"></a>对索引的操作</h2><ul>
+<li>通过已经创建了索引的字段进行查询时，效率会更高</li>
+<li>如果查询的结果字段只有已经创建了索引的字段，那么MongoDB就直接从索引中获取数据，而不会再从集合中获取数据</li>
+</ul>
+<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3><ul>
+<li>查询当前数据库的指定集合的索引</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.getIndexes()</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增索引"><a href="#新增索引" class="headerlink" title="新增索引"></a>新增索引</h3><ul>
+<li>在当前数据库的指定集合上创建索引</li>
+<li>每个集合中的<code>_id</code>字段默认就有升序索引，这个索引既不需要手动创建，也不会被删除</li>
+</ul>
+<h4 id="单字段索引"><a href="#单字段索引" class="headerlink" title="单字段索引"></a>单字段索引</h4><blockquote>
+<p><code>1</code>：升序索引<br><code>-1</code>：降序索引</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.createIndex(&#123;需要创建索引的字段名: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>升序索引名默认为<code>被创建索引的字段名_1</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.createIndex(&#123;需要创建索引的字段名: -1&#125;)</span><br></pre></td></tr></table></figure>
+<p>降序索引名默认为<code>被创建索引的字段名_-1</code></p>
+<h4 id="多字段索引（复合索引）"><a href="#多字段索引（复合索引）" class="headerlink" title="多字段索引（复合索引）"></a>多字段索引（复合索引）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.createIndex(&#123;需要创建索引的字段名1: 1, 需要创建索引的字段名2: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>索引名默认为<code>被创建索引的字段名1_1_被创建索引的字段名2_-1</code></p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><h4 id="删除单个索引"><a href="#删除单个索引" class="headerlink" title="删除单个索引"></a>删除单个索引</h4><h5 id="通过索引名删除索引"><a href="#通过索引名删除索引" class="headerlink" title="通过索引名删除索引"></a>通过索引名删除索引</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.dropIndex(索引名)</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过规则删除索引"><a href="#通过规则删除索引" class="headerlink" title="通过规则删除索引"></a>通过规则删除索引</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.dropIndex(&#123;需要删除索引的字段名: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有索引"><a href="#删除所有索引" class="headerlink" title="删除所有索引"></a>删除所有索引</h4><ul>
+<li>删除除了<code>_id</code>以外的所有字段的索引</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.dropIndexes()</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询性能"><a href="#查询性能" class="headerlink" title="查询性能"></a>查询性能</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection_name&gt;.find().explain()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>queryPlainner.winningPlain.stage</code></p>
+<blockquote>
+<p><code>COLLSCAN</code>：全局扫描，没有使用索引<br><code>FETCH</code>：抓取，使用索引扫描</p>
+</blockquote>
+</blockquote>
+<h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><ul>
+<li>不同的角色有不同的权限</li>
+<li>在创建用户时，通过为用户赋予角色，而控制用户权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>角色名</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read</td>
+<td>可以读取指定数据库中的任何数据</td>
+</tr>
+<tr>
+<td>readWrite</td>
+<td>可以读写指定数据库中的任何数据</td>
+</tr>
+<tr>
+<td>readAnyDatabase</td>
+<td>可以读取所有数据库中的任何数据</td>
+</tr>
+<tr>
+<td>readWriteAnyDatabase</td>
+<td>可以读写所有数据库中的任何数据</td>
+</tr>
+<tr>
+<td>userAdmin</td>
+<td>可以在指定数据库创建和修改用户</td>
+</tr>
+<tr>
+<td>userAdminAnyDatabase</td>
+<td>可以在任何数据库创建和修改用户</td>
+</tr>
+<tr>
+<td>dbAdmin</td>
+<td>可以读取指定数据库，以及对数据库进行清理、压缩、获取统计信息、执行检查等操作</td>
+</tr>
+<tr>
+<td>dbAdminAnyDatabase</td>
+<td>可以读取所有数据库，以及对数据库进行清理、压缩、获取统计信息、执行检查等操作</td>
+</tr>
+<tr>
+<td>clusterAdmin</td>
+<td>可以对整个集群进行管理操作</td>
+</tr>
+<tr>
+<td>restore</td>
+<td>可以还原数据库的数据</td>
+</tr>
+<tr>
+<td>backup</td>
+<td>可以备份和还原数据库的数据</td>
+</tr>
+<tr>
+<td>root</td>
+<td>拥有所有权限</td>
+</tr>
+</tbody></table>
+<h3 id="新增用户"><a href="#新增用户" class="headerlink" title="新增用户"></a>新增用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user:&quot;用户名&quot;,pwd:&quot;密码&quot;,roles:[&quot;角色名1&quot;, &quot;角色名2&quot;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建超级管理员"><a href="#创建超级管理员" class="headerlink" title="创建超级管理员"></a>创建超级管理员</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user:&quot;用户名&quot;,pwd:&quot;密码&quot;,roles:[&quot;root&quot;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建普通管理员"><a href="#创建普通管理员" class="headerlink" title="创建普通管理员"></a>创建普通管理员</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user: &quot;用户名&quot;, pwd: &quot;密码&quot;, roles: &#123;role: &quot;userAdminAnyDatabase&quot;,db: &quot;admin&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建普通用户"><a href="#创建普通用户" class="headerlink" title="创建普通用户"></a>创建普通用户</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use 用户可以操作的数据库</span><br><span class="line">db.createUser(&#123;user: &quot;用户名&quot;, pwd: &quot;密码&quot;, roles: &#123;role: &quot;readWrite&quot;, db: &quot;用户可以操作的数据库&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropuser(&quot;用户名&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改用户"><a href="#修改用户" class="headerlink" title="修改用户"></a>修改用户</h2><h3 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.changeUserPassword(&quot;用户名&quot;, &quot;新密码&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h3><h4 id="查看所有用户"><a href="#查看所有用户" class="headerlink" title="查看所有用户"></a>查看所有用户</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.system.users.find()</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.auth(&quot;用户名&quot;, &quot;密码&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>验证成功返回<code>1</code><br>验证失败返回<code>0</code>，提示：<code>Error: Authentication failed</code></p>
+<h3 id="开启MongoDB的认证"><a href="#开启MongoDB的认证" class="headerlink" title="开启MongoDB的认证"></a>开启MongoDB的认证</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodb --auth</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>程序媛<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5d9d7ad66fb9a04e373163c3">掘金——古拉里</a><br><a target="_blank" rel="noopener" href="https://juejin.im/post/5e4cbcd66fb9a07c7c2d5a1c">掘金——六个周</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45406712/article/details/121235190">CSDN——kalrry</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gg411U7Rp/">哔哩哔哩——图灵学院教程</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bJ411x7mq/">哔哩哔哩——黑马程序员</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lff0305/article/details/50034735">CSDN——lff0305</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/05/SQLite%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】SQLite学习笔记">
+                  <i class="fa fa-angle-left"></i> 【笔记】SQLite学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/06/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/" rel="next" title="【代码】二进制求和">
+                  【代码】二进制求和 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

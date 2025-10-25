@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Python3利用Xlwings模块实现Excel的办公自动化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Xlwings学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2022/09/20/Xlwings%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言Python3利用Xlwings模块实现Excel的办公自动化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-20T12:01:42.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.940Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Office">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2022/09/20/Xlwings%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2022/09/20/Xlwings%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2022/09/20/Xlwings学习笔记/","title":"【笔记】Xlwings学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Xlwings学习笔记 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">安装模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88%E9%80%9A%E8%BF%87with%E2%80%A6as%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">快速入门（通过with…as）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">4.</span> <span class="nav-text">快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9Excl%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">对Excl应用程序的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.1.</span> <span class="nav-text">启动一个新的应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.2.</span> <span class="nav-text">激活应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.3.</span> <span class="nav-text">退出应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B"><span class="nav-number">5.4.</span> <span class="nav-text">关闭应用进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AF%B9%E8%B1%A1%E7%9A%84pid"><span class="nav-number">5.5.</span> <span class="nav-text">获取应用程序对象的pid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E6%98%BE%E7%A4%BAXlwings%E5%AF%B9Excl%E7%9A%84%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="nav-number">5.6.</span> <span class="nav-text">是否显示Xlwings对Excl的操作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E6%98%BE%E7%A4%BA%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">5.7.</span> <span class="nav-text">是否显示操作过程中的对话框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%89%80%E6%9C%89Excl%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">对所有Excl应用程序的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.1.</span> <span class="nav-text">获取所有应用程序对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.2.</span> <span class="nav-text">获取指定应用程序对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%AA%E6%95%B0"><span class="nav-number">6.3.</span> <span class="nav-text">获取所有应用程序对象的个数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%B7%A5%E4%BD%9C%E7%B0%BF%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">对工作簿的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%B0%BF%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.1.</span> <span class="nav-text">创建工作簿对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.1.</span> <span class="nav-text">创建新的工作簿</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%96%B0%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8A%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">在新的应用程序上创建工作簿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8A%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">在当前选中的应用程序上创建工作簿</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.2.</span> <span class="nav-text">使用已经存在的工作簿</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%96%B0%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%89%93%E5%BC%80%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">在新的应用程序上打开工作簿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%89%93%E5%BC%80%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.1.2.2.</span> <span class="nav-text">在当前选中的应用程序上打开工作簿</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.2.</span> <span class="nav-text">保存工作簿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%B7%A5%E4%BD%9C%E7%B0%BF"><span class="nav-number">7.3.</span> <span class="nav-text">关闭工作簿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%B7%A5%E4%BD%9C%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">8.</span> <span class="nav-text">对工作表的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8"><span class="nav-number">8.1.</span> <span class="nav-text">创建工作表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B7%A5%E4%BD%9C%E8%A1%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">8.2.</span> <span class="nav-text">获取工作表对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%B7%A5%E4%BD%9C%E8%A1%A8%E5%90%8D%E8%8E%B7%E5%8F%96"><span class="nav-number">8.2.1.</span> <span class="nav-text">通过工作表名获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%B7%A5%E4%BD%9C%E8%A1%A8%E7%B4%A2%E5%BC%95%E8%8E%B7%E5%8F%96"><span class="nav-number">8.2.2.</span> <span class="nav-text">通过工作表索引获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%A4%84%E4%BA%8E%E7%84%A6%E7%82%B9%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%A1%A8"><span class="nav-number">8.2.3.</span> <span class="nav-text">获取当前处于焦点的工作表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B7%A5%E4%BD%9C%E8%A1%A8%E6%95%B0%E9%87%8F"><span class="nav-number">8.3.</span> <span class="nav-text">获取工作表数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E8%A1%A8%E5%90%8D"><span class="nav-number">8.4.</span> <span class="nav-text">获取当前工作表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E8%A1%A8%E7%B4%A2%E5%BC%95"><span class="nav-number">8.5.</span> <span class="nav-text">获取当前工作表索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%B7%A5%E4%BD%9C%E8%A1%A8"><span class="nav-number">8.6.</span> <span class="nav-text">删除工作表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">9.</span> <span class="nav-text">对单元格的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E8%A1%8C%E9%AB%98%E6%88%96%E5%88%97%E5%AE%BD"><span class="nav-number">9.1.</span> <span class="nav-text">自动调整行高或列宽</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E8%A1%8C%E9%AB%98"><span class="nav-number">9.1.1.</span> <span class="nav-text">自动调整行高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E5%88%97%E5%AE%BD"><span class="nav-number">9.1.2.</span> <span class="nav-text">自动调整列宽</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.2.</span> <span class="nav-text">获取所有单元格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.</span> <span class="nav-text">选取单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E5%8F%96%E4%B8%80%E4%B8%AA%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.1.</span> <span class="nav-text">选取一个单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.1.1.</span> <span class="nav-text">通过类对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87app%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.1.2.</span> <span class="nav-text">通过app对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87sheet%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.1.3.</span> <span class="nav-text">通过sheet对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87sheet%E6%95%B0%E7%BB%84%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.1.4.</span> <span class="nav-text">通过sheet数组选取单元格</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E5%8F%96%E4%B8%80%E7%BB%84%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.2.</span> <span class="nav-text">选取一组单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC-1"><span class="nav-number">9.3.2.1.</span> <span class="nav-text">通过类对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87app%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC-1"><span class="nav-number">9.3.2.2.</span> <span class="nav-text">通过app对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87sheet%E5%AF%B9%E8%B1%A1%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC-1"><span class="nav-number">9.3.2.3.</span> <span class="nav-text">通过sheet对象选取单元格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87sheet%E6%95%B0%E7%BB%84%E9%80%89%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC-1"><span class="nav-number">9.3.2.4.</span> <span class="nav-text">通过sheet数组选取单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%8E%E5%B7%A6%E4%B8%8A%E8%A7%92%E5%BC%80%E5%A7%8B%E9%80%89%E5%8F%96"><span class="nav-number">9.3.2.4.1.</span> <span class="nav-text">从左上角开始选取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E9%80%89%E4%B8%AD%E7%9A%84%E5%8C%BA%E5%9F%9F%E5%81%8F%E7%A7%BB"><span class="nav-number">9.3.3.</span> <span class="nav-text">将选中的区域偏移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E9%80%89%E4%B8%AD%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">9.3.4.</span> <span class="nav-text">调整选中区域的大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E5%8F%96%E5%85%A8%E9%83%A8%E6%9C%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.3.5.</span> <span class="nav-text">选取全部有数据的单元格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%8C%BA%E5%9F%9F"><span class="nav-number">9.3.6.</span> <span class="nav-text">扩展区域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9"><span class="nav-number">9.4.</span> <span class="nav-text">修改单元格内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E4%B8%BA%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE"><span class="nav-number">9.4.1.</span> <span class="nav-text">赋值为单个数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E4%B8%BA%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.4.2.</span> <span class="nav-text">赋值为一组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E5%A1%AB%E5%85%85%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.4.2.1.</span> <span class="nav-text">横向填充一组数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%B5%E5%90%91%E5%A1%AB%E5%85%85%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.4.2.2.</span> <span class="nav-text">纵向填充一组数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%9C%E5%90%91%E5%A1%AB%E5%85%85%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.4.2.3.</span> <span class="nav-text">斜向填充一组数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E6%89%A9%E5%B1%95%E5%8C%BA%E5%9F%9F"><span class="nav-number">9.4.3.</span> <span class="nav-text">自动填充扩展区域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9"><span class="nav-number">9.5.</span> <span class="nav-text">获取单元格内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.5.1.</span> <span class="nav-text">一维的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.5.2.</span> <span class="nav-text">二维的数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8D%95%E5%85%83%E6%A0%BC%E6%A0%B7%E5%BC%8F"><span class="nav-number">9.6.</span> <span class="nav-text">修改单元格样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E6%A0%BC%E8%83%8C%E6%99%AF%E8%89%B2"><span class="nav-number">9.6.1.</span> <span class="nav-text">修改表格背景色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E5%B9%B6-%E5%8F%96%E6%B6%88%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.6.2.</span> <span class="nav-text">合并&#x2F;取消合并单元格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F"><span class="nav-number">9.7.</span> <span class="nav-text">修改字体样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%90%8D%E7%A7%B0"><span class="nav-number">9.7.1.</span> <span class="nav-text">设置字体名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2"><span class="nav-number">9.7.2.</span> <span class="nav-text">设置字体颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%AD%97%E5%8F%B7"><span class="nav-number">9.7.3.</span> <span class="nav-text">设置字体字号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%8A%A0%E7%B2%97"><span class="nav-number">9.7.4.</span> <span class="nav-text">设置字体加粗</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E5%AD%97%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">9.8.</span> <span class="nav-text">修改文字对齐方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B4%E5%B9%B3%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">9.8.1.</span> <span class="nav-text">水平对齐方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9E%82%E7%9B%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">9.8.2.</span> <span class="nav-text">垂直对齐方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%BE%B9%E6%A1%86%E6%A0%B7%E5%BC%8F"><span class="nav-number">9.9.</span> <span class="nav-text">修改边框样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%83%B3%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E8%BE%B9%E6%A1%86"><span class="nav-number">9.9.1.</span> <span class="nav-text">选择想要设置的边框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%BE%B9%E6%A1%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.9.2.</span> <span class="nav-text">设置边框类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E6%A1%86%E7%B2%97%E7%BB%86"><span class="nav-number">9.9.3.</span> <span class="nav-text">边框粗细</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">9.10.</span> <span class="nav-text">修改数据格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.11.</span> <span class="nav-text">删除单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B4%E8%A1%8C-%E6%95%B4%E5%88%97"><span class="nav-number">9.11.1.</span> <span class="nav-text">删除整行&#x2F;整列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%A1%8C%E7%BC%96%E5%8F%B7-%E5%88%97%E7%BC%96%E5%8F%B7"><span class="nav-number">9.11.1.1.</span> <span class="nav-text">指定行编号&#x2F;列编号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">9.11.1.2.</span> <span class="nav-text">指定单元格</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E6%A5%9A%E5%8D%95%E5%85%83%E6%A0%BC%E6%95%B0%E6%8D%AE%E6%88%96%E6%A0%B7%E5%BC%8F"><span class="nav-number">9.12.</span> <span class="nav-text">清楚单元格数据或样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.12.1.</span> <span class="nav-text">清除所有单元格的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E6%A0%BC%E5%BC%8F"><span class="nav-number">9.12.2.</span> <span class="nav-text">清除所有单元格的数据和格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E6%8C%87%E5%AE%9A%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">9.12.3.</span> <span class="nav-text">清除指定单元格的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E6%8C%87%E5%AE%9A%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E6%A0%BC%E5%BC%8F"><span class="nav-number">9.12.4.</span> <span class="nav-text">清除指定单元格的数据和格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C-%E5%88%97"><span class="nav-number">9.13.</span> <span class="nav-text">获取最后一行&#x2F;列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%97%E7%AC%AC%E4%B8%80%E8%A1%8C%E9%80%89%E5%8F%96%E5%88%B0%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C"><span class="nav-number">9.13.1.</span> <span class="nav-text">从当前列第一行选取到最后一行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E9%A2%9C%E8%89%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E6%95%B0%E5%80%BC"><span class="nav-number">10.</span> <span class="nav-text">将颜色转换成数值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">11.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">12.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2022/09/20/Xlwings%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Xlwings学习笔记 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Xlwings学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-20 20:01:42" itemprop="dateCreated datePublished" datetime="2022-09-20T20:01:42+08:00">2022-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python3利用Xlwings模块实现Excel的办公自动化</p>
+<span id="more"></span>
+
+<h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xlwings</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速入门（通过with…as）"><a href="#快速入门（通过with…as）" class="headerlink" title="快速入门（通过with…as）"></a>快速入门（通过with…as）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlwings</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建应用程序对象</span></span><br><span class="line"><span class="keyword">with</span> xlwings.App() <span class="keyword">as</span> app:</span><br><span class="line">  <span class="comment"># 在应用程序上创建工作簿</span></span><br><span class="line">  book = app.books.add()</span><br><span class="line">  <span class="comment"># 在工作簿中创建工作表</span></span><br><span class="line">  sheet = book.sheets.add()</span><br><span class="line">  <span class="comment"># 修改单元格内的值</span></span><br><span class="line">  sheet.<span class="built_in">range</span>(<span class="string">&quot;A1&quot;</span>).value = <span class="string">&quot;值&quot;</span></span><br><span class="line">  <span class="comment"># 保存到文件</span></span><br><span class="line">  book.save(<span class="string">&quot;./filename.xlsx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><blockquote>
+<p><code>A1</code>：单元格坐标<br><code>值</code>：写入单元格的数据</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlwings</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在新的应用程序上创建新的工作簿</span></span><br><span class="line">book = xlwings.Book()</span><br><span class="line"><span class="comment"># 在工作簿上选择工作表</span></span><br><span class="line">sheet = book.sheets[<span class="string">&quot;Sheet1&quot;</span>]</span><br><span class="line"><span class="comment"># 修改单元格内的值</span></span><br><span class="line">sheet.<span class="built_in">range</span>(<span class="string">&quot;A1&quot;</span>).value = <span class="string">&quot;值&quot;</span></span><br><span class="line"><span class="comment"># 保存工作簿</span></span><br><span class="line">book.save()</span><br><span class="line"><span class="comment"># 退出工作簿</span></span><br><span class="line">book.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="对Excl应用程序的操作"><a href="#对Excl应用程序的操作" class="headerlink" title="对Excl应用程序的操作"></a>对Excl应用程序的操作</h2><h3 id="启动一个新的应用程序"><a href="#启动一个新的应用程序" class="headerlink" title="启动一个新的应用程序"></a>启动一个新的应用程序</h3><ul>
+<li>需要安装<code>Microsoft Office Excl</code></li>
+</ul>
+<blockquote>
+<p>参数列表</p>
+<blockquote>
+<p><code>visiable=None</code>：是否可视</p>
+<blockquote>
+<p><code>True</code>：可视<br><code>False</code>：不可视</p>
+</blockquote>
+<p><code>spec=None</code>：指定Excl程序的位置</p>
+<blockquote>
+<p>如果是Windows，就在设置中指定默认的Excl打开方式<br>如果是Mac，可以直接在这里传递Excl应用程序的路径</p>
+</blockquote>
+<p><code>add_book=True</code>：是否在打开应用程序时自动创建工作簿</p>
+<blockquote>
+<p><code>True</code>：自动创建工作簿<br><code>False</code>：不自动创建工作簿</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = xlwings.App()</span><br></pre></td></tr></table></figure>
+
+<h3 id="激活应用程序"><a href="#激活应用程序" class="headerlink" title="激活应用程序"></a>激活应用程序</h3><ul>
+<li>将焦点从Python转移到Excl上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.activate()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.activate(steal_focus=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="退出应用程序"><a href="#退出应用程序" class="headerlink" title="退出应用程序"></a>退出应用程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.quit()</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭应用进程"><a href="#关闭应用进程" class="headerlink" title="关闭应用进程"></a>关闭应用进程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.kill()</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取应用程序对象的pid"><a href="#获取应用程序对象的pid" class="headerlink" title="获取应用程序对象的pid"></a>获取应用程序对象的pid</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.pid</span><br></pre></td></tr></table></figure>
+
+<h3 id="是否显示Xlwings对Excl的操作过程"><a href="#是否显示Xlwings对Excl的操作过程" class="headerlink" title="是否显示Xlwings对Excl的操作过程"></a>是否显示Xlwings对Excl的操作过程</h3><blockquote>
+<p><code>True</code>：显示Xlwings对Excl的操作过程<br><code>False</code>：隐藏Xlwings对Excl的操作过程</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.display_alerts = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="是否显示操作过程中的对话框"><a href="#是否显示操作过程中的对话框" class="headerlink" title="是否显示操作过程中的对话框"></a>是否显示操作过程中的对话框</h3><blockquote>
+<p><code>True</code>：显示操作过程中的对话框<br><code>False</code>：隐藏操作过程中的对话框</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.screen_updating = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="对所有Excl应用程序的操作"><a href="#对所有Excl应用程序的操作" class="headerlink" title="对所有Excl应用程序的操作"></a>对所有Excl应用程序的操作</h2><h3 id="获取所有应用程序对象"><a href="#获取所有应用程序对象" class="headerlink" title="获取所有应用程序对象"></a>获取所有应用程序对象</h3><ul>
+<li>返回一个应用程序对象列表</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings.apps</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取指定应用程序对象"><a href="#获取指定应用程序对象" class="headerlink" title="获取指定应用程序对象"></a>获取指定应用程序对象</h3><ul>
+<li>通过pid获取一个已经创建的应用程序对象</li>
+</ul>
+<blockquote>
+<p><code>&lt;pid&gt;</code>：指定对象的pid</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = xlwings.apps[&lt;pid&gt;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取所有应用程序对象的个数"><a href="#获取所有应用程序对象的个数" class="headerlink" title="获取所有应用程序对象的个数"></a>获取所有应用程序对象的个数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings.apps.count</span><br></pre></td></tr></table></figure>
+
+<h2 id="对工作簿的操作"><a href="#对工作簿的操作" class="headerlink" title="对工作簿的操作"></a>对工作簿的操作</h2><ul>
+<li>通过应用程序对象对工作簿的操作</li>
+</ul>
+<blockquote>
+<p><code>app</code>：应用程序对象</p>
+</blockquote>
+<h3 id="创建工作簿对象"><a href="#创建工作簿对象" class="headerlink" title="创建工作簿对象"></a>创建工作簿对象</h3><h4 id="创建新的工作簿"><a href="#创建新的工作簿" class="headerlink" title="创建新的工作簿"></a>创建新的工作簿</h4><h5 id="在新的应用程序上创建工作簿"><a href="#在新的应用程序上创建工作簿" class="headerlink" title="在新的应用程序上创建工作簿"></a>在新的应用程序上创建工作簿</h5><ul>
+<li>创建一个新的应用程序对象，然后利用这个对象创建一个新的工作簿</li>
+</ul>
+<blockquote>
+<p><code>&lt;name&gt;</code>：指定文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book = xlwings.Book()</span><br><span class="line"></span><br><span class="line">book = xlwings.Book(<span class="string">&quot;&lt;name&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="在当前选中的应用程序上创建工作簿"><a href="#在当前选中的应用程序上创建工作簿" class="headerlink" title="在当前选中的应用程序上创建工作簿"></a>在当前选中的应用程序上创建工作簿</h5><blockquote>
+<p><code>&lt;name&gt;</code>：指定文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book = app.books.add()</span><br><span class="line"></span><br><span class="line">book = app.books.add(<span class="string">&quot;&lt;name&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用已经存在的工作簿"><a href="#使用已经存在的工作簿" class="headerlink" title="使用已经存在的工作簿"></a>使用已经存在的工作簿</h4><ul>
+<li>使用已经存在的工作簿获取工作簿对象</li>
+</ul>
+<h5 id="在新的应用程序上打开工作簿"><a href="#在新的应用程序上打开工作簿" class="headerlink" title="在新的应用程序上打开工作簿"></a>在新的应用程序上打开工作簿</h5><blockquote>
+<p><code>&lt;file&gt;</code>：Excl文件的路径</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book = xlwings.Book(<span class="string">r&quot;&lt;file&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="在当前选中的应用程序上打开工作簿"><a href="#在当前选中的应用程序上打开工作簿" class="headerlink" title="在当前选中的应用程序上打开工作簿"></a>在当前选中的应用程序上打开工作簿</h5><blockquote>
+<p><code>&lt;file&gt;</code>：Excl文件的路径</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book = app.books.<span class="built_in">open</span>(<span class="string">r&quot;&lt;file&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="保存工作簿"><a href="#保存工作簿" class="headerlink" title="保存工作簿"></a>保存工作簿</h3><ul>
+<li>如果不指定文件的保存路径，会默认在当前目录保存名为<code>工作簿1.xlsx</code>的文件 </li>
+<li>如果保存时文件名相同，那么表示保存</li>
+<li>如果保存时文件名不同，那么表示另存为</li>
+</ul>
+<blockquote>
+<p><code>&lt;file&gt;</code>：指定文件的保存路径</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book.save()</span><br><span class="line"></span><br><span class="line">book.save(<span class="string">&quot;&lt;file&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭工作簿"><a href="#关闭工作簿" class="headerlink" title="关闭工作簿"></a>关闭工作簿</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="对工作表的操作"><a href="#对工作表的操作" class="headerlink" title="对工作表的操作"></a>对工作表的操作</h2><ul>
+<li>通过工作簿对象对工作表的操作</li>
+</ul>
+<blockquote>
+<p><code>book</code>：工作簿对象</p>
+</blockquote>
+<h3 id="创建工作表"><a href="#创建工作表" class="headerlink" title="创建工作表"></a>创建工作表</h3><ul>
+<li>如果不指定排列的位置，那么默认将新的工作表放到最前面</li>
+</ul>
+<blockquote>
+<p><code>before=&quot;&quot;</code>：将新创建的工作表放到指定表前面<br><code>after=&quot;&quot;</code>：将新创建的工作表放到指定表后面</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book.sheets.add()</span><br><span class="line"></span><br><span class="line">book.sheets.add(<span class="string">&quot;工作表名&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取工作表对象"><a href="#获取工作表对象" class="headerlink" title="获取工作表对象"></a>获取工作表对象</h3><ul>
+<li>创建工作簿后可以直接使用自动创建的工作表</li>
+</ul>
+<h4 id="通过工作表名获取"><a href="#通过工作表名获取" class="headerlink" title="通过工作表名获取"></a>通过工作表名获取</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet = book.sheets(<span class="string">&quot;工作表名&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过工作表索引获取"><a href="#通过工作表索引获取" class="headerlink" title="通过工作表索引获取"></a>通过工作表索引获取</h4><ul>
+<li>索引从1开始</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet = book.sheets(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前处于焦点的工作表"><a href="#获取当前处于焦点的工作表" class="headerlink" title="获取当前处于焦点的工作表"></a>获取当前处于焦点的工作表</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet = book.sheets.active</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取工作表数量"><a href="#获取工作表数量" class="headerlink" title="获取工作表数量"></a>获取工作表数量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.count</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前工作表名"><a href="#获取当前工作表名" class="headerlink" title="获取当前工作表名"></a>获取当前工作表名</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.name</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前工作表索引"><a href="#获取当前工作表索引" class="headerlink" title="获取当前工作表索引"></a>获取当前工作表索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.index</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除工作表"><a href="#删除工作表" class="headerlink" title="删除工作表"></a>删除工作表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.delete()</span><br></pre></td></tr></table></figure>
+
+<h2 id="对单元格的操作"><a href="#对单元格的操作" class="headerlink" title="对单元格的操作"></a>对单元格的操作</h2><ul>
+<li>通过工作表对象对单元格的操作</li>
+</ul>
+<blockquote>
+<p><code>app</code>：应用程序对象<br><code>sheet</code>：工作表对象</p>
+</blockquote>
+<h3 id="自动调整行高或列宽"><a href="#自动调整行高或列宽" class="headerlink" title="自动调整行高或列宽"></a>自动调整行高或列宽</h3><h4 id="自动调整行高"><a href="#自动调整行高" class="headerlink" title="自动调整行高"></a>自动调整行高</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.autofit(<span class="string">&quot;1&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动调整列宽"><a href="#自动调整列宽" class="headerlink" title="自动调整列宽"></a>自动调整列宽</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.autofit(<span class="string">&quot;A&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取所有单元格"><a href="#获取所有单元格" class="headerlink" title="获取所有单元格"></a>获取所有单元格</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.cells</span><br></pre></td></tr></table></figure>
+
+<h3 id="选取单元格"><a href="#选取单元格" class="headerlink" title="选取单元格"></a>选取单元格</h3><h4 id="选取一个单元格"><a href="#选取一个单元格" class="headerlink" title="选取一个单元格"></a>选取一个单元格</h4><blockquote>
+<p><code>&quot;A1&quot;</code>：单元格编号，字母表示当前单元格列编号，数字表示当前单元格行编号<br><code>(1, 1)</code>：数轴坐标，左上角单元格视为<code>(1,1)</code>点，第一个数表示行索引，第二个数表示列索引</p>
+</blockquote>
+<h5 id="通过类对象选取单元格"><a href="#通过类对象选取单元格" class="headerlink" title="通过类对象选取单元格"></a>通过类对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = xlwings.Range(<span class="string">&quot;A1&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = xlwings.Range((<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过app对象选取单元格"><a href="#通过app对象选取单元格" class="headerlink" title="通过app对象选取单元格"></a>通过app对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = app.<span class="built_in">range</span>(<span class="string">&quot;A1&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = app.<span class="built_in">range</span>((<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过sheet对象选取单元格"><a href="#通过sheet对象选取单元格" class="headerlink" title="通过sheet对象选取单元格"></a>通过sheet对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = sheet.<span class="built_in">range</span>(<span class="string">&quot;A1&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = sheet.<span class="built_in">range</span>((<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过sheet数组选取单元格"><a href="#通过sheet数组选取单元格" class="headerlink" title="通过sheet数组选取单元格"></a>通过sheet数组选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = sheet[<span class="string">&quot;A1&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell = sheet[<span class="number">0</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="选取一组单元格"><a href="#选取一组单元格" class="headerlink" title="选取一组单元格"></a>选取一组单元格</h4><ul>
+<li>选取一个矩形区域的一组单元格</li>
+</ul>
+<blockquote>
+<p><code>A1:B2</code>：利用单元格编号选取，第一个编号表示选取区域的左上角，第二个编号表示选取区域的右下角<br><code>(1, 1), (2, 2)</code>：利用两个数轴坐标来选取，第一组坐标表示选取区域的左上角</p>
+</blockquote>
+<h5 id="通过类对象选取单元格-1"><a href="#通过类对象选取单元格-1" class="headerlink" title="通过类对象选取单元格"></a>通过类对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings.Range(<span class="string">&quot;A1:B2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings.Range((<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过app对象选取单元格-1"><a href="#通过app对象选取单元格-1" class="headerlink" title="通过app对象选取单元格"></a>通过app对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="built_in">range</span>(<span class="string">&quot;A1:B2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="built_in">range</span>((<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过sheet对象选取单元格-1"><a href="#通过sheet对象选取单元格-1" class="headerlink" title="通过sheet对象选取单元格"></a>通过sheet对象选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.<span class="built_in">range</span>(<span class="string">&quot;A1:B2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.<span class="built_in">range</span>((<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过sheet数组选取单元格-1"><a href="#通过sheet数组选取单元格-1" class="headerlink" title="通过sheet数组选取单元格"></a>通过sheet数组选取单元格</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet[<span class="string">&quot;A1:B2&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h6 id="从左上角开始选取"><a href="#从左上角开始选取" class="headerlink" title="从左上角开始选取"></a>从左上角开始选取</h6><ul>
+<li>从左上角开始选取，一直选取到指定的行和列</li>
+</ul>
+<blockquote>
+<p><code>2</code>：指定选取区域右下角单元格所在的行数<br><code>3</code>：指定选取区域右下角单元格所在的列数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet[:<span class="number">2</span>,:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="将选中的区域偏移"><a href="#将选中的区域偏移" class="headerlink" title="将选中的区域偏移"></a>将选中的区域偏移</h4><ul>
+<li>只偏移选中的区域，不改变数据</li>
+</ul>
+<blockquote>
+<p><code>row_offset=1</code>：行偏移，正数表示向下偏移，负数表向上偏移<br><code>column_offset=1</code>：列偏移，正数表示向右偏移，负数表向左偏移</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.offset(row_offset=<span class="number">1</span>, column_offset=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="调整选中区域的大小"><a href="#调整选中区域的大小" class="headerlink" title="调整选中区域的大小"></a>调整选中区域的大小</h4><ul>
+<li>只调整选中的区域，不改变数据</li>
+</ul>
+<blockquote>
+<p><code>row_size=1</code>：调整后选中的行的数量<br><code>column_size=1</code>：调整后选中的列的数量</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.resize(row_size=<span class="number">1</span>, column_size=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="选取全部有数据的单元格"><a href="#选取全部有数据的单元格" class="headerlink" title="选取全部有数据的单元格"></a>选取全部有数据的单元格</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet[<span class="string">&quot;A1&quot;</span>].expand(<span class="string">&quot;table&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="扩展区域"><a href="#扩展区域" class="headerlink" title="扩展区域"></a>扩展区域</h4><ul>
+<li>自动填充扩展区域</li>
+</ul>
+<blockquote>
+<p><code>mode=&quot;&quot;</code>：填充的模式</p>
+<blockquote>
+<p><code>down</code>：向下填充<br><code>right</code>：向右填充<br><code>table</code>：向右下填充</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.expand(mode=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改单元格内容"><a href="#修改单元格内容" class="headerlink" title="修改单元格内容"></a>修改单元格内容</h3><h4 id="赋值为单个数据"><a href="#赋值为单个数据" class="headerlink" title="赋值为单个数据"></a>赋值为单个数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.value = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="赋值为一组数据"><a href="#赋值为一组数据" class="headerlink" title="赋值为一组数据"></a>赋值为一组数据</h4><h5 id="横向填充一组数据"><a href="#横向填充一组数据" class="headerlink" title="横向填充一组数据"></a>横向填充一组数据</h5><ul>
+<li>将一组数据从当前单元格位置横向赋值到临近的单元格</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cell.value = []</span><br><span class="line"></span><br><span class="line">cell.options(transpose=<span class="literal">False</span>).value = []</span><br><span class="line"></span><br><span class="line">cell.options(expand=<span class="string">&quot;right&quot;</span>).value = []</span><br></pre></td></tr></table></figure>
+
+<h5 id="纵向填充一组数据"><a href="#纵向填充一组数据" class="headerlink" title="纵向填充一组数据"></a>纵向填充一组数据</h5><ul>
+<li>将一组数据从当前单元格位置纵向赋值到临近的单元格</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cell.options(transpose=<span class="literal">True</span>).value = []</span><br><span class="line"></span><br><span class="line">cell.options(expand=<span class="string">&quot;down&quot;</span>).value = []</span><br></pre></td></tr></table></figure>
+
+<h5 id="斜向填充一组数据"><a href="#斜向填充一组数据" class="headerlink" title="斜向填充一组数据"></a>斜向填充一组数据</h5><ul>
+<li>将一组数据从当前单元格位置向右下方向选中一个矩形区域进行填充</li>
+</ul>
+<blockquote>
+<p><code>1</code>：为选中区域第1行第1列赋值<br><code>2</code>：为选中区域第1行第2列赋值<br><code>3</code>：为选中区域第2行第1列赋值<br><code>4</code>：为选中区域第2行第2列赋值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.options(expand=<span class="string">&quot;table&quot;</span>).value = [(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动填充扩展区域"><a href="#自动填充扩展区域" class="headerlink" title="自动填充扩展区域"></a>自动填充扩展区域</h4><blockquote>
+<p><code>mode=&quot;&quot;</code>：填充的模式</p>
+<blockquote>
+<p><code>down</code>：向下填充<br><code>right</code>：向右填充<br><code>table</code>：向右下填充</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.expand(mode=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取单元格内容"><a href="#获取单元格内容" class="headerlink" title="获取单元格内容"></a>获取单元格内容</h3><h4 id="一维的数据"><a href="#一维的数据" class="headerlink" title="一维的数据"></a>一维的数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.value</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.value.options(ndim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="二维的数据"><a href="#二维的数据" class="headerlink" title="二维的数据"></a>二维的数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.value.options(ndim=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改单元格样式"><a href="#修改单元格样式" class="headerlink" title="修改单元格样式"></a>修改单元格样式</h3><h4 id="修改表格背景色"><a href="#修改表格背景色" class="headerlink" title="修改表格背景色"></a>修改表格背景色</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.color = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.color = <span class="number">0xFFFFFF</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="合并-取消合并单元格"><a href="#合并-取消合并单元格" class="headerlink" title="合并&#x2F;取消合并单元格"></a>合并&#x2F;取消合并单元格</h4><ul>
+<li><code>api</code>对象访问的是<code>winpy32</code>对象，所以这些操作只能在Windows上生效</li>
+</ul>
+<blockquote>
+<p><code>cell</code>：选择一组相邻的单元格对象</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.merge()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.unmerge()</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改字体样式"><a href="#修改字体样式" class="headerlink" title="修改字体样式"></a>修改字体样式</h3><h4 id="设置字体名称"><a href="#设置字体名称" class="headerlink" title="设置字体名称"></a>设置字体名称</h4><blockquote>
+<p><code>&lt;name&gt;</code>：字体名称</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Font.Name = &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置字体颜色"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Font.Color = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Font.Color = <span class="number">0xFFFFFF</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="设置字体字号"><a href="#设置字体字号" class="headerlink" title="设置字体字号"></a>设置字体字号</h4><blockquote>
+<p><code>&lt;num&gt;</code>：字号</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Font.Size = &lt;num&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置字体加粗"><a href="#设置字体加粗" class="headerlink" title="设置字体加粗"></a>设置字体加粗</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Font.Bold = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文字对齐方式"><a href="#修改文字对齐方式" class="headerlink" title="修改文字对齐方式"></a>修改文字对齐方式</h3><h4 id="水平对齐方式"><a href="#水平对齐方式" class="headerlink" title="水平对齐方式"></a>水平对齐方式</h4><blockquote>
+<p><code>&lt;num&gt;</code>：参数</p>
+<blockquote>
+<p><code>-4108</code>、<code>xlwings.constants.HAlign.xlHAlignCenter</code>：缺省值，水平居中<br><code>-4131</code>：水平靠左<br><code>-4152</code>：水平靠右</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.HorizontalAlignment = &lt;num&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="垂直对齐方式"><a href="#垂直对齐方式" class="headerlink" title="垂直对齐方式"></a>垂直对齐方式</h4><blockquote>
+<p><code>&lt;num&gt;</code>：参数</p>
+<blockquote>
+<p><code>-4108</code>、<code>xlwings.constants.VAlign.xlHAlignCenter</code>：缺省值，垂直居中<br><code>-4160</code>：垂直靠上<br><code>-4107</code>：垂直靠下<br><code>-4130</code>：自动换行对齐</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.VerticalAlignment = &lt;num&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改边框样式"><a href="#修改边框样式" class="headerlink" title="修改边框样式"></a>修改边框样式</h3><h4 id="选择想要设置的边框"><a href="#选择想要设置的边框" class="headerlink" title="选择想要设置的边框"></a>选择想要设置的边框</h4><blockquote>
+<p><code>&lt;num&gt;</code>：参数</p>
+<blockquote>
+<p><code>5</code>：从区域中每个单元格的左上角到右下角的边框<br><code>6</code>：从区域中每个单元格的左下角到右上角的边框<br><code>7</code>：区域左边框<br><code>8</code>：区域顶边框<br><code>9</code>：区域底边框<br><code>10</code>：区域右边框<br><code>11</code>：区域中所有单元格的垂直边框<br><code>12</code>：区域中所有单元格的水平边框</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Border(&lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置边框类型"><a href="#设置边框类型" class="headerlink" title="设置边框类型"></a>设置边框类型</h4><blockquote>
+<p><code>&lt;type&gt;</code>：参数</p>
+<blockquote>
+<p><code>1</code>：实线<br><code>-4115</code>：虚线<br><code>4</code>：1点1划相间线<br><code>5</code>：2点1划相间线<br><code>-4118</code>：点式线<br><code>-4119</code>：双线<br><code>-4142</code>：无线<br><code>13</code>：倾斜的划线</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Borders.LineStyle(&lt;<span class="built_in">type</span>&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Borders(&lt;num&gt;).LineStyle(&lt;<span class="built_in">type</span>&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="边框粗细"><a href="#边框粗细" class="headerlink" title="边框粗细"></a>边框粗细</h4><ul>
+<li>Office2016不能设置粗细</li>
+</ul>
+<blockquote>
+<p><code>&lt;weight&gt;</code>：粗细值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Borders.Weight(&lt;weight&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.Borders(&lt;num&gt;).Weight(&lt;weight&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据格式"><a href="#修改数据格式" class="headerlink" title="修改数据格式"></a>修改数据格式</h3><ul>
+<li>例如设置保留2位小数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.api.NumberFormat = <span class="string">&quot;0.00&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除单元格"><a href="#删除单元格" class="headerlink" title="删除单元格"></a>删除单元格</h3><ul>
+<li>将单元格删除，当前列后面的所有单元格会向上移动</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.delete()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除整行-整列"><a href="#删除整行-整列" class="headerlink" title="删除整行&#x2F;整列"></a>删除整行&#x2F;整列</h4><h5 id="指定行编号-列编号"><a href="#指定行编号-列编号" class="headerlink" title="指定行编号&#x2F;列编号"></a>指定行编号&#x2F;列编号</h5><blockquote>
+<p><code>1</code>：行编号，冒号两侧的值相同<br><code>A</code>：列编号，冒号两侧的值相同</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.<span class="built_in">range</span>(<span class="string">&quot;1:1&quot;</span>).delete()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.<span class="built_in">range</span>(<span class="string">&quot;A:A&quot;</span>).delete()</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定单元格"><a href="#指定单元格" class="headerlink" title="指定单元格"></a>指定单元格</h5><ul>
+<li>删除指定单元格所在的行或列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cell.api.EntireRow.Delete()</span><br><span class="line"></span><br><span class="line">cell.api.EntireColumn.Delete()</span><br></pre></td></tr></table></figure>
+
+<h3 id="清楚单元格数据或样式"><a href="#清楚单元格数据或样式" class="headerlink" title="清楚单元格数据或样式"></a>清楚单元格数据或样式</h3><h4 id="清除所有单元格的数据"><a href="#清除所有单元格的数据" class="headerlink" title="清除所有单元格的数据"></a>清除所有单元格的数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.clear_contents()</span><br></pre></td></tr></table></figure>
+
+<h4 id="清除所有单元格的数据和格式"><a href="#清除所有单元格的数据和格式" class="headerlink" title="清除所有单元格的数据和格式"></a>清除所有单元格的数据和格式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet.clear()</span><br></pre></td></tr></table></figure>
+
+<h4 id="清除指定单元格的数据"><a href="#清除指定单元格的数据" class="headerlink" title="清除指定单元格的数据"></a>清除指定单元格的数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.clear_contents()</span><br></pre></td></tr></table></figure>
+
+<h4 id="清除指定单元格的数据和格式"><a href="#清除指定单元格的数据和格式" class="headerlink" title="清除指定单元格的数据和格式"></a>清除指定单元格的数据和格式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.clear()</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取最后一行-列"><a href="#获取最后一行-列" class="headerlink" title="获取最后一行&#x2F;列"></a>获取最后一行&#x2F;列</h3><ul>
+<li>获取指定单元格所在列有数据的部分的最后一行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.current_region.last_cell.row</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取指定单元格所在行有数据的部分的最后一列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.current_region.last_cell.column</span><br></pre></td></tr></table></figure>
+
+<h4 id="从当前列第一行选取到最后一行"><a href="#从当前列第一行选取到最后一行" class="headerlink" title="从当前列第一行选取到最后一行"></a>从当前列第一行选取到最后一行</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet[<span class="string">&quot;A1:A&#123;&#125;&quot;</span>.<span class="built_in">format</span>(sheet[<span class="string">&quot;A1&quot;</span>].current_region.last_cell.row)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="将颜色转换成数值"><a href="#将颜色转换成数值" class="headerlink" title="将颜色转换成数值"></a>将颜色转换成数值</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings.utils.rgb_to_int((<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1Th411W7bo/">哔哩哔哩——千锋教育</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Office/" rel="tag"># Office</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/20/Powercfg%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】Powercfg学习笔记">
+                  <i class="fa fa-angle-left"></i> 【笔记】Powercfg学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/21/MacOS%E8%A7%A3%E5%8E%8Bpkg%E5%AE%89%E8%A3%85%E5%8C%85/" rel="next" title="【笔记】MacOS解压pkg安装包">
+                  【笔记】MacOS解压pkg安装包 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>

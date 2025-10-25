@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言JS的函数学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】JS的函数">
+<meta property="og:url" content="https://loli.fj.cn/2025/03/12/JS%E7%9A%84%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g55qE5Y2a5a6i">
+<meta property="og:description" content="前言JS的函数学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-12T08:48:26.000Z">
+<meta property="article:modified_time" content="2025-10-25T07:39:44.878Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2025/03/12/JS%E7%9A%84%E5%87%BD%E6%95%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2025/03/12/JS%E7%9A%84%E5%87%BD%E6%95%B0/","path":"2025/03/12/JS的函数/","title":"【笔记】JS的函数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】JS的函数 | 57uv6Z6g55qE5Y2a5a6i</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="981ed5a0-eea5-4426-a8a9-c16a789ccc3f" src="https://umami.loli.fj.cn/script.js" data-host-url="https://umami.loli.fj.cn/"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g55qE5Y2a5a6i" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g55qE5Y2a5a6i</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><font color="red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</font></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-contribute"><a href="/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">通过函数声明定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.1.1.</span> <span class="nav-text">无返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.1.2.</span> <span class="nav-text">有返回值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">通过函数表达式定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%88ES6%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">箭头函数（ES6）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">通过构造函数创建函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">调用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC-1"><span class="nav-number">3.1.</span> <span class="nav-text">无返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC-1"><span class="nav-number">3.2.</span> <span class="nav-text">有返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E8%AF%AD%E6%B3%95%E5%AE%9A%E4%B9%89%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">通过类语法定义构造函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">函数声明定义函数与函数表达式定义函数的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E7%AD%89%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">头等函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E7%AD%89%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">6.1.</span> <span class="nav-text">头等函数的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="nav-number">6.1.1.</span> <span class="nav-text">函数可以赋值给变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%8F%98%E9%87%8F%E4%B9%8B%E9%97%B4%E6%9D%A5%E5%9B%9E%E4%BC%A0%E9%80%92"><span class="nav-number">6.1.2.</span> <span class="nav-text">函数可以在变量之间来回传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E8%BF%9B%E8%A1%8C%E4%BC%A0%E9%80%92"><span class="nav-number">6.1.3.</span> <span class="nav-text">函数可以作为函数的参数进行传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">6.1.4.</span> <span class="nav-text">函数可以作为函数的返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">6.1.5.</span> <span class="nav-text">函数可以作为对象的属性值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%88Immediate-Invocation-Function-Expression-IIFE%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">立即执行函数（Immediate Invocation Function Expression, IIFE）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8B%AC%E5%8F%B7%E5%8C%85%E8%A3%B9%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.</span> <span class="nav-text">使用括号包裹匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BD%9C%E4%B8%BA%E5%89%8D%E7%BC%80"><span class="nav-number">8.2.</span> <span class="nav-text">使用运算符作为前缀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">10.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E9%97%AD%E5%8C%85"><span class="nav-number">10.1.</span> <span class="nav-text">小闭包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">11.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">递归函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">13.</span> <span class="nav-text">函数的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%A9%E4%BD%99%E5%8F%82%E6%95%B0%EF%BC%88ES6%EF%BC%89"><span class="nav-number">13.1.</span> <span class="nav-text">剩余参数（ES6）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88ES6%EF%BC%89"><span class="nav-number">13.2.</span> <span class="nav-text">展开运算符（ES6）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC%EF%BC%88ES6%EF%BC%89"><span class="nav-number">13.3.</span> <span class="nav-text">参数默认值（ES6）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.</span> <span class="nav-text">函数对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">14.1.</span> <span class="nav-text">属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D"><span class="nav-number">14.1.1.</span> <span class="nav-text">函数名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E6%80%BB%E6%95%B0"><span class="nav-number">14.1.2.</span> <span class="nav-text">形参总数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E5%90%91"><span class="nav-number">15.</span> <span class="nav-text">this指向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this%E7%BB%91%E5%AE%9A%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">15.1.</span> <span class="nav-text">this绑定的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this%E7%BB%91%E5%AE%9A%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">15.2.</span> <span class="nav-text">this绑定的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bind%E5%87%BD%E6%95%B0"><span class="nav-number">15.3.</span> <span class="nav-text">bind函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%87%BD%E6%95%B0%E7%9A%84this%E6%8C%87%E5%90%91"><span class="nav-number">15.3.1.</span> <span class="nav-text">改变函数的this指向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call%E5%87%BD%E6%95%B0"><span class="nav-number">15.4.</span> <span class="nav-text">call函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0-1"><span class="nav-number">15.4.1.</span> <span class="nav-text">调用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%87%BD%E6%95%B0%E7%9A%84this%E6%8C%87%E5%90%91-1"><span class="nav-number">15.4.2.</span> <span class="nav-text">改变函数的this指向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply%E5%87%BD%E6%95%B0"><span class="nav-number">15.5.</span> <span class="nav-text">apply函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0-2"><span class="nav-number">15.5.1.</span> <span class="nav-text">调用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%87%BD%E6%95%B0%E7%9A%84this%E6%8C%87%E5%90%91-2"><span class="nav-number">15.5.2.</span> <span class="nav-text">改变函数的this指向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84this%E6%8C%87%E5%90%91"><span class="nav-number">15.6.</span> <span class="nav-text">特殊的this指向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92this%E7%9A%84%E6%8C%87%E5%90%91"><span class="nav-number">15.7.</span> <span class="nav-text">传递this的指向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%8A%E5%B1%82%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92%EF%BC%88ES5%EF%BC%89"><span class="nav-number">15.7.1.</span> <span class="nav-text">通过上层变量传递（ES5）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%88ES6%EF%BC%89"><span class="nav-number">15.7.2.</span> <span class="nav-text">通过箭头函数传递（ES6）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arguments%E5%AF%B9%E8%B1%A1"><span class="nav-number">16.</span> <span class="nav-text">arguments对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B4%A2%E5%BC%95%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%AE%9E%E5%8F%82"><span class="nav-number">16.1.</span> <span class="nav-text">通过索引访问运算符获取指定实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AE%9E%E5%8F%82%E5%88%97%E8%A1%A8"><span class="nav-number">16.2.</span> <span class="nav-text">遍历实参列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">16.3.</span> <span class="nav-text">arguments转数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%88ES6%EF%BC%89"><span class="nav-number">16.3.1.</span> <span class="nav-text">可迭代对象转数组（ES6）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88ES6%EF%BC%89-1"><span class="nav-number">16.3.2.</span> <span class="nav-text">展开运算符（ES6）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E7%89%87"><span class="nav-number">16.3.3.</span> <span class="nav-text">切片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%EF%BC%88Pure%EF%BC%89"><span class="nav-number">17.</span> <span class="nav-text">纯函数（Pure）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96%E5%87%BD%E6%95%B0"><span class="nav-number">18.</span> <span class="nav-text">柯里化函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%86%99"><span class="nav-number">18.1.</span> <span class="nav-text">简写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#with%E6%89%A9%E5%B1%95%E4%BB%A3%E7%A0%81%E5%BF%AB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">19.</span> <span class="nav-text">with扩展代码快的作用域链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C"><span class="nav-number">20.</span> <span class="nav-text">eval将字符串作为函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">21.</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">22.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:00-isomer-cabbies@icloud.com" title="E-Mail → mailto:00-isomer-cabbies@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/LittleSweetCookie" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;LittleSweetCookie" rel="noopener me" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2025/03/12/JS%E7%9A%84%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.gif">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="5o2V5o2J5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】JS的函数 | 57uv6Z6g55qE5Y2a5a6i">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】JS的函数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-12 16:48:26" itemprop="dateCreated datePublished" datetime="2025-03-12T16:48:26+08:00">2025-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-25 15:39:44" itemprop="dateModified" datetime="2025-10-25T15:39:44+08:00">2025-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">JavaScript学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS的函数学习笔记</p>
+<span id="more"></span>
+
+<h2 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h2><h3 id="通过函数声明定义函数"><a href="#通过函数声明定义函数" class="headerlink" title="通过函数声明定义函数"></a>通过函数声明定义函数</h3><h4 id="无返回值"><a href="#无返回值" class="headerlink" title="无返回值"></a>无返回值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参列表) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="有返回值"><a href="#有返回值" class="headerlink" title="有返回值"></a>有返回值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参列表) &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> 返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过函数表达式定义函数"><a href="#通过函数表达式定义函数" class="headerlink" title="通过函数表达式定义函数"></a>通过函数表达式定义函数</h3><ul>
+<li>通过函数表达式定义的函数，在调用时，使用变量名当作函数名进行调用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="箭头函数（ES6）"><a href="#箭头函数（ES6）" class="headerlink" title="箭头函数（ES6）"></a>箭头函数（ES6）</h4><ul>
+<li>箭头函数是函数表达式定义函数的语法糖</li>
+<li>箭头函数不绑定this，箭头函数体中调用this会向上层作用于查找</li>
+<li>箭头函数不绑定arguments，箭头函数体中调用arguments会向上层作用于查找</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="function">(<span class="params">形参列表</span>) =&gt;</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过构造函数创建函数"><a href="#通过构造函数创建函数" class="headerlink" title="通过构造函数创建函数"></a>通过构造函数创建函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&quot;形参1&quot;</span>, <span class="string">&quot;形参2&quot;</span>, <span class="string">&quot;return 返回值&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h2><ul>
+<li>函数的实参可以是任意的数据类型，调用函数时解析器不会检查实参的类型，所以要注意，是否有可能会接收到非法的参数，如果有可能则对参数进行类型的检查</li>
+<li>调用函数时解析器不会检查实参的数量，多余实参不会被赋值，如果实参的数量少于形参的数量，则没有对应实参的形参将是undefined</li>
+</ul>
+<h3 id="无返回值-1"><a href="#无返回值-1" class="headerlink" title="无返回值"></a>无返回值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名(实参列表);</span><br></pre></td></tr></table></figure>
+
+<h3 id="有返回值-1"><a href="#有返回值-1" class="headerlink" title="有返回值"></a>有返回值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = 函数名(实参列表);</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><ul>
+<li>相当于Java中定义类，用于创建对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">function</span> (<span class="params">属性<span class="number">1</span>, 属性<span class="number">2</span></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.属性<span class="number">1</span> = 属性<span class="number">1</span>;</span><br><span class="line">  <span class="variable language_">this</span>.属性<span class="number">2</span> = 属性<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过类语法定义构造函数"><a href="#通过类语法定义构造函数" class="headerlink" title="通过类语法定义构造函数"></a>通过类语法定义构造函数</h3><p><a href="/2025/03/12/JS%E7%9A%84%E5%AF%B9%E8%B1%A1/#%E9%80%9A%E8%BF%87%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">传送门</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> 函数名 &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">属性<span class="number">1</span>, 属性<span class="number">2</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.属性<span class="number">1</span> = 属性<span class="number">1</span>;</span><br><span class="line">    <span class="variable language_">this</span>.属性<span class="number">2</span> = 属性<span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数声明定义函数与函数表达式定义函数的区别"><a href="#函数声明定义函数与函数表达式定义函数的区别" class="headerlink" title="函数声明定义函数与函数表达式定义函数的区别"></a>函数声明定义函数与函数表达式定义函数的区别</h2><ul>
+<li>函数声明定义函数时，可以将调用函数的代码写在函数定义之前</li>
+<li>函数表达式定义函数时，必须将调用函数的代码写在函数定义之后</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">函数名();</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">变量名();</span><br></pre></td></tr></table></figure>
+
+<h2 id="头等函数"><a href="#头等函数" class="headerlink" title="头等函数"></a>头等函数</h2><ul>
+<li>头等函数（first-class function）又称为<strong>第一级函数</strong>，是指在JS中函数被当作<strong>头等公民</strong></li>
+<li>JS支持使用<strong>头等公民</strong>的方式编程，这种编程方式被称为<strong>函数式编程</strong></li>
+</ul>
+<h3 id="头等函数的特点"><a href="#头等函数的特点" class="headerlink" title="头等函数的特点"></a>头等函数的特点</h3><h4 id="函数可以赋值给变量"><a href="#函数可以赋值给变量" class="headerlink" title="函数可以赋值给变量"></a>函数可以赋值给变量</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">变量名();</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数可以在变量之间来回传递"><a href="#函数可以在变量之间来回传递" class="headerlink" title="函数可以在变量之间来回传递"></a>函数可以在变量之间来回传递</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> 变量名<span class="number">2</span> = 变量名;</span><br><span class="line"></span><br><span class="line">变量名<span class="number">2</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数可以作为函数的参数进行传递"><a href="#函数可以作为函数的参数进行传递" class="headerlink" title="函数可以作为函数的参数进行传递"></a>函数可以作为函数的参数进行传递</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 函数名 = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> 函数名<span class="number">2</span>(参数) &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名<span class="number">2</span>(函数名);</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数可以作为函数的返回值"><a href="#函数可以作为函数的返回值" class="headerlink" title="函数可以作为函数的返回值"></a>函数可以作为函数的返回值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(参数) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> 变量名 = 函数名();</span><br><span class="line"></span><br><span class="line">变量名();</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数可以作为对象的属性值"><a href="#函数可以作为对象的属性值" class="headerlink" title="函数可以作为对象的属性值"></a>函数可以作为对象的属性值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 对象名 = &#123;</span><br><span class="line">  属性名: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">对象名.属性名();</span><br></pre></td></tr></table></figure>
+
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><ul>
+<li>如果一个函数没有定义函数名，则这个函数就是匿名函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="立即执行函数（Immediate-Invocation-Function-Expression-IIFE）"><a href="#立即执行函数（Immediate-Invocation-Function-Expression-IIFE）" class="headerlink" title="立即执行函数（Immediate Invocation Function Expression, IIFE）"></a>立即执行函数（Immediate Invocation Function Expression, IIFE）</h2><ul>
+<li>立即执行函数实质上是匿名函数自调用</li>
+</ul>
+<h3 id="使用括号包裹匿名函数"><a href="#使用括号包裹匿名函数" class="headerlink" title="使用括号包裹匿名函数"></a>使用括号包裹匿名函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)(实参列表);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;(实参列表));</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用运算符作为前缀"><a href="#使用运算符作为前缀" class="headerlink" title="使用运算符作为前缀"></a>使用运算符作为前缀</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+<span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;(实参列表);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;(实参列表);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">function</span> (<span class="params">形参列表</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;(实参列表);</span><br></pre></td></tr></table></figure>
+
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><ul>
+<li>将函数作为参数传递给其他函数，如果这个函数在其他函数中被执行，这个函数就被称为回调函数</li>
+<li>传递回调函数时通常传递匿名函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(函数形参) &#123;</span><br><span class="line">  函数形参();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">函数名(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">/* 回调函数 */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><ul>
+<li>闭包（Closure）：在支持头等函数的语言中，实现词法绑定的一种技术</li>
+<li>闭包在实现上是一个结构体，它存储了一个函数和一个关联环境</li>
+<li>闭包跟函数最大的区别在于，当捕捉闭包的时候，它的自由变量会在捕捉时被确定，这样即使脱离了捕捉时的上下文，它也能照常运行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">/* 闭包 */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> 变量名 = 函数名();</span><br></pre></td></tr></table></figure>
+
+<h3 id="小闭包"><a href="#小闭包" class="headerlink" title="小闭包"></a>小闭包</h3><ul>
+<li>匿名函数自调用是小闭包</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">形参</span>) &#123;</span><br><span class="line">  <span class="comment">/* 小闭包 */</span></span><br><span class="line">&#125;)(实参);</span><br></pre></td></tr></table></figure>
+
+<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><ul>
+<li>如果一个函数满足以下两个条件的任意条件，则该函数就是一个高阶函数<ul>
+<li>如果一个函数的实参传递的是一个函数（这个实参就是回调函数）</li>
+<li>如果一个函数的返回值是一个函数（这个返回值就是闭包）</li>
+</ul>
+</li>
+</ul>
+<h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><ul>
+<li>如果一个函数自己调用自己，则这个函数就是递归函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">return</span> 函数名();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果没有定义跳出条件，则会产生无限调用，报错：<code>Maximum call stack size exceeded</code></li>
+</ul>
+<h2 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h2><h3 id="剩余参数（ES6）"><a href="#剩余参数（ES6）" class="headerlink" title="剩余参数（ES6）"></a>剩余参数（ES6）</h3><ul>
+<li>剩余参数（Rest Parameter）：将不定数量的实参放到一个数组作为形参</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(...形参) &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名(实参<span class="number">1</span>, 实参<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果函数有除了剩余参数以外的形参，剩余参数必须放在末尾</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参<span class="number">1</span>, ...形参<span class="number">2</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名(实参<span class="number">1</span>, 实参<span class="number">2</span>, 实参<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="展开运算符（ES6）"><a href="#展开运算符（ES6）" class="headerlink" title="展开运算符（ES6）"></a>展开运算符（ES6）</h3><ul>
+<li>将一个数组中的多个实参打散，依次传递给函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">形参<span class="number">1</span>, 形参<span class="number">2</span></span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> 实参列表 = [实参<span class="number">1</span>, 实参<span class="number">2</span>];</span><br><span class="line"><span class="title function_">fn</span>(...实参列表);</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数默认值（ES6）"><a href="#参数默认值（ES6）" class="headerlink" title="参数默认值（ES6）"></a>参数默认值（ES6）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参 = 默认值) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h2><ul>
+<li>JS中函数也是对象</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="函数名"><a href="#函数名" class="headerlink" title="函数名"></a>函数名</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名.<span class="property">name</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="形参总数"><a href="#形参总数" class="headerlink" title="形参总数"></a>形参总数</h4><ul>
+<li>对于剩余参数，<code>length</code>不会计算</li>
+<li>对于传递了默认值的形参，<code>length</code>不会计算</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名.<span class="property">length</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h2><h3 id="this绑定的分类"><a href="#this绑定的分类" class="headerlink" title="this绑定的分类"></a>this绑定的分类</h3><ul>
+<li><p>默认绑定</p>
+<ul>
+<li>函数没有绑定到对象上，则默认绑定到<code>window</code>对象上</li>
+</ul>
+</li>
+<li><p>隐式绑定</p>
+<ul>
+<li>函数由哪个对象调用的，就隐式绑定到哪个对象</li>
+</ul>
+</li>
+<li><p>显式绑定</p>
+<ul>
+<li>通过<code>bind()</code>、<code>call()</code>、<code>apply()</code>函数改变this指向</li>
+</ul>
+</li>
+<li><p>new绑定</p>
+<ul>
+<li>通过<code>new</code>关键字创建对象时，第三个内置操作会进行this绑定</li>
+</ul>
+</li>
+</ul>
+<h3 id="this绑定的优先级"><a href="#this绑定的优先级" class="headerlink" title="this绑定的优先级"></a>this绑定的优先级</h3><ul>
+<li>优先级从高到底<ol>
+<li>new绑定</li>
+<li>显示绑定通过<code>bind()</code>绑定</li>
+<li>显示绑定通过<code>apply()</code>、<code>call()</code>绑定</li>
+<li>隐式绑定</li>
+<li>默认绑定</li>
+</ol>
+</li>
+</ul>
+<h3 id="bind函数"><a href="#bind函数" class="headerlink" title="bind函数"></a>bind函数</h3><h4 id="改变函数的this指向"><a href="#改变函数的this指向" class="headerlink" title="改变函数的this指向"></a>改变函数的this指向</h4><ul>
+<li><code>bind()</code>不会立即执行函数，只会改变函数的this指向</li>
+<li>返回的是原函数的拷贝</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> 新函数 = 函数名.<span class="title function_">bind</span>(对象名);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>bind()</code>函数传递的实参将作为新函数参数的默认值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参) &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> 新函数 = 函数名.<span class="title function_">bind</span>(对象名, 实参);</span><br></pre></td></tr></table></figure>
+
+<h3 id="call函数"><a href="#call函数" class="headerlink" title="call函数"></a>call函数</h3><h4 id="调用函数-1"><a href="#调用函数-1" class="headerlink" title="调用函数"></a>调用函数</h4><ul>
+<li><code>call()</code>只能调用无需传递参数的函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">call</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="改变函数的this指向-1"><a href="#改变函数的this指向-1" class="headerlink" title="改变函数的this指向"></a>改变函数的this指向</h4><ul>
+<li><code>call()</code>会立即执行函数，并改变函数的this指向</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">call</span>(对象名);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参) &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">call</span>(对象名, 实参);</span><br></pre></td></tr></table></figure>
+
+<h3 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h3><ul>
+<li><code>apply()</code>可以调用需要传递参数的函数，向调用的函数传递参数时只能是数组类型数据</li>
+</ul>
+<h4 id="调用函数-2"><a href="#调用函数-2" class="headerlink" title="调用函数"></a>调用函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">apply</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参) &#123;&#125;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">apply</span>(<span class="literal">null</span>, [实参]);</span><br></pre></td></tr></table></figure>
+
+<h4 id="改变函数的this指向-2"><a href="#改变函数的this指向-2" class="headerlink" title="改变函数的this指向"></a>改变函数的this指向</h4><ul>
+<li><code>apply()</code>会立即执行函数，并改变函数的this指向</li>
+<li>如果将<code>null</code>、<code>undefined</code>作为第一个参数，则函数的this指向为<code>window</code>对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">apply</span>(对象名);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名(形参) &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> 对象名 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">函数名.<span class="title function_">apply</span>(对象名, [实参]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="特殊的this指向"><a href="#特殊的this指向" class="headerlink" title="特殊的this指向"></a>特殊的this指向</h3><ul>
+<li>将对象2的函数赋值给对象1并直接调用，则函数的this指向为<code>window</code>对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 对象名<span class="number">1</span> = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> 对象名<span class="number">2</span> = &#123;</span><br><span class="line">  函数名: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(对象名<span class="number">1.</span>函数名 = 对象名<span class="number">2.</span>函数名)();</span><br></pre></td></tr></table></figure>
+
+<h3 id="传递this的指向"><a href="#传递this的指向" class="headerlink" title="传递this的指向"></a>传递this的指向</h3><h4 id="通过上层变量传递（ES5）"><a href="#通过上层变量传递（ES5）" class="headerlink" title="通过上层变量传递（ES5）"></a>通过上层变量传递（ES5）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(_this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过箭头函数传递（ES6）"><a href="#通过箭头函数传递（ES6）" class="headerlink" title="通过箭头函数传递（ES6）"></a>通过箭头函数传递（ES6）</h4><ul>
+<li>由于箭头函数不会绑定this指向，所以可以用作传递this的指向</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">var</span> 函数名 = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h2><ul>
+<li>在函数中，可以通过可迭代对象<code>arguments</code>，获取实参列表中的任意参数，不论形参定义的参数个数如何，都能正确拿到所有实参</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">arguments</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过索引访问运算符获取指定实参"><a href="#通过索引访问运算符获取指定实参" class="headerlink" title="通过索引访问运算符获取指定实参"></a>通过索引访问运算符获取指定实参</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">arguments</span>[索引];</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历实参列表"><a href="#遍历实参列表" class="headerlink" title="遍历实参列表"></a>遍历实参列表</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">arguments</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> arg <span class="keyword">of</span> <span class="variable language_">arguments</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="arguments转数组"><a href="#arguments转数组" class="headerlink" title="arguments转数组"></a>arguments转数组</h3><h4 id="可迭代对象转数组（ES6）"><a href="#可迭代对象转数组（ES6）" class="headerlink" title="可迭代对象转数组（ES6）"></a>可迭代对象转数组（ES6）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">arguments</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="展开运算符（ES6）-1"><a href="#展开运算符（ES6）-1" class="headerlink" title="展开运算符（ES6）"></a>展开运算符（ES6）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [...<span class="variable language_">arguments</span>];</span><br></pre></td></tr></table></figure>
+
+<h4 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h4><ul>
+<li>从开头截取到末尾</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [].<span class="property">slice</span>.<span class="title function_">apply</span>(<span class="variable language_">arguments</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">apply</span>(<span class="variable language_">arguments</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="纯函数（Pure）"><a href="#纯函数（Pure）" class="headerlink" title="纯函数（Pure）"></a>纯函数（Pure）</h2><ul>
+<li><p>所有支持函数式编程的语言中均支持</p>
+</li>
+<li><p>在程序设计中，若一个函数符合以下要求，则它可能被认为是纯函数：（<a href="/302.html?target=https://zh.wikipedia.org/zh-hans/%E7%BA%AF%E5%87%BD%E6%95%B0">维基百科</a>）</p>
+<ul>
+<li>此函数在相同的输入值时，需产生相同的输出。函数的输出和输入值以外的其他隐藏信息或状态无关，也和由I&#x2F;O设备产生的外部输出无关。</li>
+<li>该函数不能有语义上可观察的函数副作用，诸如“触发事件”，使输出设备输出，或更改输出值以外物件的内容等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="柯里化函数"><a href="#柯里化函数" class="headerlink" title="柯里化函数"></a>柯里化函数</h2><ul>
+<li><p>所有支持函数式编程的语言中均支持</p>
+</li>
+<li><p>在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。这个技术由克里斯托弗·斯特雷奇以逻辑学家哈斯凯尔·加里命名的，尽管它是Moses Schönfinkel和戈特洛布·弗雷格发明的。（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E6%9F%AF%E9%87%8C%E5%8C%96">维基百科</a>）</p>
+</li>
+<li><p>将普通函数转化成柯里化函数的过程被称为柯里化</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">y</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">z</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> x + y + z;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="number">1</span>)(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">fn</span> = x =&gt; <span class="function"><span class="params">y</span> =&gt;</span> <span class="function"><span class="params">z</span> =&gt;</span> x + y + z;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="with扩展代码快的作用域链"><a href="#with扩展代码快的作用域链" class="headerlink" title="with扩展代码快的作用域链"></a>with扩展代码快的作用域链</h2><ul>
+<li>将指定对象的属性和方法，添加到当前作用域链中</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">key</span>: value,</span><br><span class="line">  <span class="attr">fn</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">  <span class="title function_">fn</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="eval将字符串作为函数执行"><a href="#eval将字符串作为函数执行" class="headerlink" title="eval将字符串作为函数执行"></a>eval将字符串作为函数执行</h2><ul>
+<li>最后一个语句的返回值会作为<code>eval()</code>函数的返回值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">eval</span>(<span class="string">&#x27;function fn() &#123;return 1&#125;; fn();&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kv411W73u/">哔哩哔哩——Python小清风</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DY41177dM/">哔哩哔哩——黑马前端</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/12/JS%E7%9A%84%E5%AF%B9%E8%B1%A1/" rel="prev" title="【笔记】JS的对象">
+                  <i class="fa fa-angle-left"></i> 【笔记】JS的对象
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/12/N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】N学习笔记">
+                  【笔记】N学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.loli.fj.cn","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
