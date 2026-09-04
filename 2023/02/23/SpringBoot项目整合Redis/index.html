@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言SpringBoot项目整合Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】SpringBoot项目整合Redis">
+<meta property="og:url" content="https://loli.fj.cn/2023/02/23/SpringBoot%E9%A1%B9%E7%9B%AE%E6%95%B4%E5%90%88Redis/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言SpringBoot项目整合Redis">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-23T13:24:12.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.668Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/02/23/SpringBoot%E9%A1%B9%E7%9B%AE%E6%95%B4%E5%90%88Redis/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/02/23/SpringBoot%E9%A1%B9%E7%9B%AE%E6%95%B4%E5%90%88Redis/","path":"2023/02/23/SpringBoot项目整合Redis/","title":"【笔记】SpringBoot项目整合Redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】SpringBoot项目整合Redis | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="nav-number">0x000000000002</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000003</span> <span class="nav-text">修改配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000004</span> <span class="nav-text">获取对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000005</span> <span class="nav-text">新增数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E6%96%B0%E5%80%BC"><span class="nav-number">0x000000000105</span> <span class="nav-text">覆盖新值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-number">0x000000000205</span> <span class="nav-text">指定过期时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E6%97%B6%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000305</span> <span class="nav-text">不存在时新增数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000405</span> <span class="nav-text">批量插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000010405</span> <span class="nav-text">覆盖批量插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E8%A6%86%E7%9B%96%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000020405</span> <span class="nav-text">不覆盖批量插入数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000006</span> <span class="nav-text">删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4"><span class="nav-number">0x000000000106</span> <span class="nav-text">批量删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000007</span> <span class="nav-text">查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000107</span> <span class="nav-text">批量查询数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%85%B6%E5%AE%83%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000008</span> <span class="nav-text">处理其它数据类型的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000108</span> <span class="nav-text">处理字符串类型的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000010108</span> <span class="nav-text">获取字符串长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%AD%90%E4%B8%B2"><span class="nav-number">0x000000020108</span> <span class="nav-text">向字符串末尾追加子串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%95%B0%E5%80%BC%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000208</span> <span class="nav-text">处理数值型的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E5%80%BC%E8%87%AA%E5%A2%9E1"><span class="nav-number">0x000000010208</span> <span class="nav-text">对数值自增1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E5%80%BC%E8%87%AA%E5%87%8F1"><span class="nav-number">0x000000020208</span> <span class="nav-text">对数值自减1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E9%9B%86%E5%90%88%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000308</span> <span class="nav-text">处理集合型的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000010308</span> <span class="nav-text">获取集合的长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E9%9B%86%E5%90%88%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%80%BC"><span class="nav-number">0x000000020308</span> <span class="nav-text">从集合中获取值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E7%9A%84%E5%80%BC"><span class="nav-number">0x000001020308</span> <span class="nav-text">获取指定下标的值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E5%8C%BA%E9%97%B4%E7%9A%84%E5%80%BC"><span class="nav-number">0x000002020308</span> <span class="nav-text">获取指定下标区间的值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%9B%86%E5%90%88%E4%B8%AD%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000030308</span> <span class="nav-text">在集合中追加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E4%BD%8D%E7%BD%AE%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000001030308</span> <span class="nav-text">在指定下标位置追加数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E9%9B%86%E5%90%88%E5%A4%B4%E9%83%A8%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000002030308</span> <span class="nav-text">在集合头部追加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%BF%BD%E5%8A%A0"><span class="nav-number">0x000102030308</span> <span class="nav-text">批量追加</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89%E5%BD%93%E9%9B%86%E5%90%88%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E8%BF%BD%E5%8A%A0"><span class="nav-number">0x000202030308</span> <span class="nav-text">只有当集合存在时才追加</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E9%9B%86%E5%90%88%E5%B0%BE%E9%83%A8%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000003030308</span> <span class="nav-text">在集合尾部追加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%BF%BD%E5%8A%A0-1"><span class="nav-number">0x000103030308</span> <span class="nav-text">批量追加</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89%E5%BD%93%E9%9B%86%E5%90%88%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E8%BF%BD%E5%8A%A0-1"><span class="nav-number">0x000203030308</span> <span class="nav-text">只有当集合存在时才追加</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E9%9B%86%E5%90%88%E4%B8%AD%E7%A7%BB%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000040308</span> <span class="nav-text">从集合中移除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E9%9B%86%E5%90%88%E5%A4%B4%E9%83%A8%E7%A7%BB%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000001040308</span> <span class="nav-text">从集合头部移除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4"><span class="nav-number">0x000101040308</span> <span class="nav-text">指定等待时间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E9%9B%86%E5%90%88%E5%B0%BE%E9%83%A8%E7%A7%BB%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000002040308</span> <span class="nav-text">从集合尾部移除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4-1"><span class="nav-number">0x000102040308</span> <span class="nav-text">指定等待时间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E5%80%BC"><span class="nav-number">0x000003040308</span> <span class="nav-text">移除指定的值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E7%A7%BB%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000050308</span> <span class="nav-text">转移数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E6%8C%87%E5%AE%9A%E9%95%BF%E5%BA%A6%E7%9A%84%E9%9B%86%E5%90%88"><span class="nav-number">0x000000060308</span> <span class="nav-text">截取指定长度的集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E9%94%AE%E5%80%BC%E5%AF%B9%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000408</span> <span class="nav-text">处理键值对型的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000010408</span> <span class="nav-text">新增键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E8%A6%86%E7%9B%96%E6%96%B0%E5%A2%9E"><span class="nav-number">0x000001010408</span> <span class="nav-text">不覆盖新增</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000020408</span> <span class="nav-text">获取键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC%E5%AF%B9%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000030408</span> <span class="nav-text">获取键值对的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC%E5%AF%B9%E7%9A%84%E9%94%AE"><span class="nav-number">0x000000040408</span> <span class="nav-text">获取键值对的键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC%E5%AF%B9%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000050408</span> <span class="nav-text">获取键值对长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E9%94%AE%E5%80%BC%E5%AF%B9%E7%9A%84%E9%94%AE%E8%87%AA%E5%A2%9E"><span class="nav-number">0x000000060408</span> <span class="nav-text">将键值对的键自增</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E9%94%AE%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000070408</span> <span class="nav-text">批量获取指定键的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000080408</span> <span class="nav-text">根据指定键批量删除键值对</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000009</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x00000000000A</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/02/23/SpringBoot%E9%A1%B9%E7%9B%AE%E6%95%B4%E5%90%88Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】SpringBoot项目整合Redis | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】SpringBoot项目整合Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-23 21:24:12" itemprop="dateCreated datePublished" datetime="2023-02-23T21:24:12+08:00">2023-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116194281862468474</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SpringBoot项目整合Redis</p>
+<span id="more"></span>
+
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight xml"><figcaption><span>pom.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><figure class="highlight properties"><figcaption><span>application.properties</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.redis.host</span>=<span class="string">localhost </span></span><br><span class="line"><span class="attr">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="attr">spring.redis.database</span>=<span class="string">0</span></span><br><span class="line"><span class="attr">spring.redis.password</span>=<span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取对象"><a href="#获取对象" class="headerlink" title="获取对象"></a>获取对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增数据"><a href="#新增数据" class="headerlink" title="新增数据"></a>新增数据</h2><blockquote>
+<p><code>&lt;key&gt;</code>：键<br><code>&lt;value&gt;</code>：值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().set(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="覆盖新值"><a href="#覆盖新值" class="headerlink" title="覆盖新值"></a>覆盖新值</h3><ul>
+<li>返回被覆盖的值</li>
+</ul>
+<blockquote>
+<p><code>&lt;new_value&gt;</code>：新值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">old_value</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().getAndSet(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;new_value&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定过期时间"><a href="#指定过期时间" class="headerlink" title="指定过期时间"></a>指定过期时间</h3><ul>
+<li>达到过期时间会自动销毁</li>
+</ul>
+<blockquote>
+<p><code>&lt;num&gt;</code>：指定过期时间，单位由第四个参数决定<br><code>TimeUnit.SECONDS</code>：以秒为单位</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().set(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>, &lt;num&gt;, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+<h3 id="不存在时新增数据"><a href="#不存在时新增数据" class="headerlink" title="不存在时新增数据"></a>不存在时新增数据</h3><ul>
+<li>如果键不存在则插入键值对；如果键存在则中止插入数据</li>
+<li>返回是否插入成功的布尔值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().setIfAbsent(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h3><h4 id="覆盖批量插入数据"><a href="#覆盖批量插入数据" class="headerlink" title="覆盖批量插入数据"></a>覆盖批量插入数据</h4><ul>
+<li>如果已经存在键，则直接覆盖，并继续完成所有数据的插入</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Map</span>&lt;Sring, String&gt; <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">stringRedisTemplate.opsForValue().multiSet(map);</span><br></pre></td></tr></table></figure>
+
+<h4 id="不覆盖批量插入数据"><a href="#不覆盖批量插入数据" class="headerlink" title="不覆盖批量插入数据"></a>不覆盖批量插入数据</h4><ul>
+<li>如果已经存在键，则中止插入，并回滚所有数据的插入</li>
+<li>返回是否插入成功的布尔值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Map</span>&lt;Sring, String&gt; <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"><span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().multiSetIfAbsent(map);</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><ul>
+<li>通过指定键删除键值对</li>
+<li>返回是否删除成功的布尔值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().getOperations().delete(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量删除"><a href="#批量删除" class="headerlink" title="批量删除"></a>批量删除</h3><ul>
+<li>返回成功删除的数据个数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span>&lt;String&gt; <span class="variable">keys</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="type">long</span> <span class="variable">results</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().getOperations().delete(Arrays.asList(<span class="string">&quot;test1&quot;</span>, <span class="string">&quot;test2&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><ul>
+<li>如果不存在返回null</li>
+</ul>
+<blockquote>
+<p><code>&lt;key&gt;</code>：通过键获取值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().get(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量查询数据"><a href="#批量查询数据" class="headerlink" title="批量查询数据"></a>批量查询数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span>&lt;String&gt; <span class="variable">keys</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="type">List</span>&lt;String&gt; <span class="variable">values</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().multiGet(keys);</span><br></pre></td></tr></table></figure>
+
+<h2 id="处理其它数据类型的值"><a href="#处理其它数据类型的值" class="headerlink" title="处理其它数据类型的值"></a>处理其它数据类型的值</h2><h3 id="处理字符串类型的值"><a href="#处理字符串类型的值" class="headerlink" title="处理字符串类型的值"></a>处理字符串类型的值</h3><h4 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().size(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="向字符串末尾追加子串"><a href="#向字符串末尾追加子串" class="headerlink" title="向字符串末尾追加子串"></a>向字符串末尾追加子串</h4><ul>
+<li>返回新字符串的长度</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：子串</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">append</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().append(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理数值型的值"><a href="#处理数值型的值" class="headerlink" title="处理数值型的值"></a>处理数值型的值</h3><ul>
+<li>如果没有指定键，则立即通过指定键创建键值对，值默认为0；如果指定键，但对应的值为非数值，则报错</li>
+</ul>
+<h4 id="对数值自增1"><a href="#对数值自增1" class="headerlink" title="对数值自增1"></a>对数值自增1</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().increment(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="对数值自减1"><a href="#对数值自减1" class="headerlink" title="对数值自减1"></a>对数值自减1</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().decrement(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理集合型的值"><a href="#处理集合型的值" class="headerlink" title="处理集合型的值"></a>处理集合型的值</h3><h4 id="获取集合的长度"><a href="#获取集合的长度" class="headerlink" title="获取集合的长度"></a>获取集合的长度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().size(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="从集合中获取值"><a href="#从集合中获取值" class="headerlink" title="从集合中获取值"></a>从集合中获取值</h4><h5 id="获取指定下标的值"><a href="#获取指定下标的值" class="headerlink" title="获取指定下标的值"></a>获取指定下标的值</h5><blockquote>
+<p><code>&lt;index&gt;</code>：指定下标</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> stringRedisTemplate.opsForList().index(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;index&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取指定下标区间的值"><a href="#获取指定下标区间的值" class="headerlink" title="获取指定下标区间的值"></a>获取指定下标区间的值</h5><blockquote>
+<p><code>&lt;index_start&gt;</code>：开始位置下标<br><code>&lt;index_end&gt;</code>：结束位置下标</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span>&lt;String&gt; <span class="variable">list</span> <span class="operator">=</span> stringRedisTemplate.opsForList().range(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;index_start&gt;, &lt;index_stop&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="在集合中追加数据"><a href="#在集合中追加数据" class="headerlink" title="在集合中追加数据"></a>在集合中追加数据</h4><ul>
+<li>返回新的集合长度</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：追加的集合子元素</p>
+</blockquote>
+<h5 id="在指定下标位置追加数据"><a href="#在指定下标位置追加数据" class="headerlink" title="在指定下标位置追加数据"></a>在指定下标位置追加数据</h5><ul>
+<li>如果指定下标位置没有数据，则添加数据，如果指定下标位置有数据，则覆盖数据</li>
+<li>如果下标超出，则报错</li>
+</ul>
+<blockquote>
+<p><code>&lt;index&gt;</code>：下标位置<br><code>&lt;str&gt;</code>：追加的数据</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForList().set(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;index&gt;, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="在集合头部追加数据"><a href="#在集合头部追加数据" class="headerlink" title="在集合头部追加数据"></a>在集合头部追加数据</h5><ul>
+<li>如果键不存在，则立即创建键值对</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().leftPush(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="批量追加"><a href="#批量追加" class="headerlink" title="批量追加"></a>批量追加</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().leftPushAll(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str_1&gt;&quot;</span>, <span class="string">&quot;&lt;str_2&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="只有当集合存在时才追加"><a href="#只有当集合存在时才追加" class="headerlink" title="只有当集合存在时才追加"></a>只有当集合存在时才追加</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().leftPushIfPresent(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="在集合尾部追加数据"><a href="#在集合尾部追加数据" class="headerlink" title="在集合尾部追加数据"></a>在集合尾部追加数据</h5><ul>
+<li>如果键不存在，则立即创建键值对</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPush(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="批量追加-1"><a href="#批量追加-1" class="headerlink" title="批量追加"></a>批量追加</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPushAll(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str_1&gt;&quot;</span>, <span class="string">&quot;&lt;str_2&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="只有当集合存在时才追加-1"><a href="#只有当集合存在时才追加-1" class="headerlink" title="只有当集合存在时才追加"></a>只有当集合存在时才追加</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPushIfPresent(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="从集合中移除数据"><a href="#从集合中移除数据" class="headerlink" title="从集合中移除数据"></a>从集合中移除数据</h4><ul>
+<li>移除后返回被移除的数据</li>
+<li>如果移除后集合为空，则直接删除键值对</li>
+</ul>
+<h5 id="从集合头部移除数据"><a href="#从集合头部移除数据" class="headerlink" title="从集合头部移除数据"></a>从集合头部移除数据</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForList().leftPop(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="指定等待时间"><a href="#指定等待时间" class="headerlink" title="指定等待时间"></a>指定等待时间</h6><ul>
+<li>指定等待时间，在等待时间内如果出现数据则移除数据，如果没出现数据则无操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForList().leftPop(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;num&gt;, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+<h5 id="从集合尾部移除数据"><a href="#从集合尾部移除数据" class="headerlink" title="从集合尾部移除数据"></a>从集合尾部移除数据</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPop(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="指定等待时间-1"><a href="#指定等待时间-1" class="headerlink" title="指定等待时间"></a>指定等待时间</h6><ul>
+<li>指定等待时间，在等待时间内如果出现数据则移除数据，如果没出现数据则无操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPop(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;num&gt;, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+<h5 id="移除指定的值"><a href="#移除指定的值" class="headerlink" title="移除指定的值"></a>移除指定的值</h5><ul>
+<li>移除与指定字符串相同的值</li>
+</ul>
+<blockquote>
+<p><code>&lt;str&gt;</code>：用于作对比的字符串<br><code>&lt;num&gt;</code>：如果出现多个相同的值，指定移除哪个</p>
+<blockquote>
+<p><code>&gt;0</code>：移除从左到右数，第<code>&lt;num&gt;</code>次出现相同的值<br><code>&lt;0</code>：移除从右到左数，第<code>&lt;num&gt;</code>次出现相同的值<br><code>=0</code>：移除所有出现相同的值</p>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForList().remove(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;num&gt;, <span class="string">&quot;&lt;str&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="转移数据"><a href="#转移数据" class="headerlink" title="转移数据"></a>转移数据</h4><ul>
+<li>从集合尾部移除并追加在另一个集合头部</li>
+<li>返回这个被转移的数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForList().rightPopAndLeftPush(<span class="string">&quot;&lt;str_1&gt;&quot;</span>, <span class="string">&quot;&lt;str_2&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="截取指定长度的集合"><a href="#截取指定长度的集合" class="headerlink" title="截取指定长度的集合"></a>截取指定长度的集合</h4><ul>
+<li>根据指定的下标截取集合的长度，多出来的数据将被移除</li>
+</ul>
+<blockquote>
+<p><code>&lt;index_start&gt;</code>：开始位置下标<br><code>&lt;index_end&gt;</code>：结束位置下标</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForList().trim(<span class="string">&quot;&lt;key&gt;&quot;</span>, &lt;index_start&gt;, &lt;index_end&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理键值对型的值"><a href="#处理键值对型的值" class="headerlink" title="处理键值对型的值"></a>处理键值对型的值</h3><h4 id="新增键值对"><a href="#新增键值对" class="headerlink" title="新增键值对"></a>新增键值对</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForHash().put(<span class="string">&quot;&lt;key&gt;&quot;</span>,<span class="string">&quot;&lt;value_k&gt;&quot;</span>,<span class="string">&quot;&lt;value_v&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Map</span>&lt;String, String&gt; <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;&lt;value_k_1&gt;&quot;</span>, <span class="string">&quot;value_v_1&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;&lt;value_k_2&gt;&quot;</span>, <span class="string">&quot;value_v_2&quot;</span>);</span><br><span class="line">stringRedisTemplate.opsForHash().putAll(<span class="string">&quot;&lt;key&gt;&quot;</span>, map);</span><br></pre></td></tr></table></figure>
+
+<h5 id="不覆盖新增"><a href="#不覆盖新增" class="headerlink" title="不覆盖新增"></a>不覆盖新增</h5><ul>
+<li>如果键存在，则新增不存在的键值对；如果键不存在，则创建新的键值对</li>
+<li>返回是否成功新增</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().putIfAbsent(<span class="string">&quot;&lt;key&gt;&quot;</span>,<span class="string">&quot;&lt;value_k&gt;&quot;</span>,<span class="string">&quot;&lt;value_v&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取键值对"><a href="#获取键值对" class="headerlink" title="获取键值对"></a>获取键值对</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Map</span>&lt;String, Map&lt;String, String&gt;&gt; <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().entries(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取键值对的值"><a href="#获取键值对的值" class="headerlink" title="获取键值对的值"></a>获取键值对的值</h4><ul>
+<li>如果值不存在返回null</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().get(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;value_k&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取键值对的键"><a href="#获取键值对的键" class="headerlink" title="获取键值对的键"></a>获取键值对的键</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Set</span>&lt;String&gt; <span class="variable">keys</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().keys(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取键值对长度"><a href="#获取键值对长度" class="headerlink" title="获取键值对长度"></a>获取键值对长度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().size(<span class="string">&quot;&lt;key&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="将键值对的键自增"><a href="#将键值对的键自增" class="headerlink" title="将键值对的键自增"></a>将键值对的键自增</h4><ul>
+<li>键值对的键必须是数值型，否则报错</li>
+</ul>
+<blockquote>
+<p><code>&lt;step&gt;</code>：自增的步长</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().increment(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;key-k&gt;&quot;</span>, &lt;step&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="批量获取指定键的值"><a href="#批量获取指定键的值" class="headerlink" title="批量获取指定键的值"></a>批量获取指定键的值</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span>&lt;String&gt; <span class="variable">values</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().multiGet(<span class="string">&quot;&lt;key&gt;&quot;</span>, Arrays.asList(<span class="string">&quot;&lt;key_k_1&gt;&quot;</span>, <span class="string">&quot;&lt;key_k_2&gt;&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键批量删除键值对"><a href="#根据指定键批量删除键值对" class="headerlink" title="根据指定键批量删除键值对"></a>根据指定键批量删除键值对</h4><ul>
+<li>返回删除成功的键值对个数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().delete(<span class="string">&quot;&lt;key&gt;&quot;</span>, <span class="string">&quot;&lt;key_k_1&gt;&quot;</span>, <span class="string">&quot;&lt;key_k_2&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://blog.csdn.net/weixin_43835717/article/details/92802040">CSDN——阿靖哦</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/23/%E5%BC%80%E5%A7%8B%E8%8F%9C%E5%8D%95%E7%A7%BB%E9%99%A4%E5%B7%B2%E5%9B%BA%E5%AE%9A%E7%9A%84%E7%A3%81%E8%B4%B4%E9%80%89%E9%A1%B9/" rel="prev" title="【笔记】开始菜单移除已固定的磁贴选项">
+                  <i class="fa fa-angle-left"></i> 【笔记】开始菜单移除已固定的磁贴选项
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/23/Hibernate%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】Hibernate学习笔记">
+                  【笔记】Hibernate学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

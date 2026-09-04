@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Unity是一款跨平台的游戏引擎，可用于开发2D和3D游戏，支持多种个人电脑、移动设备、游戏主机、网页平台、增强现实和虚拟现实，其中在iOS和Android系统的游戏开发上特别受欢迎，许多人认为容易上手，并在独立游戏开发中广受欢迎。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Unity的API学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2026/01/04/Unity%E7%9A%84API%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言Unity是一款跨平台的游戏引擎，可用于开发2D和3D游戏，支持多种个人电脑、移动设备、游戏主机、网页平台、增强现实和虚拟现实，其中在iOS和Android系统的游戏开发上特别受欢迎，许多人认为容易上手，并在独立游戏开发中广受欢迎。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-04T21:25:12.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.674Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2026/01/04/Unity%E7%9A%84API%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2026/01/04/Unity%E7%9A%84API%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2026/01/04/Unity的API学习笔记/","title":"【笔记】Unity的API学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Unity的API学习笔记 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E8%84%9A%E6%9C%AC"><span class="nav-number">0x000000000002</span> <span class="nav-text">游戏对象脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E7%9A%84%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000000102</span> <span class="nav-text">脚本的消息函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0"><span class="nav-number">0x000000000202</span> <span class="nav-text">脚本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%8E%A7%E8%84%9A%E6%9C%AC"><span class="nav-number">0x000000000302</span> <span class="nav-text">主控脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="nav-number">0x000000000003</span> <span class="nav-text">输出语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%B8%A7%E7%8E%87"><span class="nav-number">0x000000000004</span> <span class="nav-text">指定帧率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">0x000000000005</span> <span class="nav-text">随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%EF%BC%88GameObject%EF%BC%89"><span class="nav-number">0x000000000006</span> <span class="nav-text">游戏对象（GameObject）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000106</span> <span class="nav-text">获取游戏对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000010106</span> <span class="nav-text">获取当前游戏对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%90%8D%E6%9F%A5%E6%89%BE%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000020106</span> <span class="nav-text">通过游戏对象名查找游戏对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%90%8D%E7%A7%B0"><span class="nav-number">0x000000000206</span> <span class="nav-text">获取游戏对象名称</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%90%8D%E7%A7%B0"><span class="nav-number">0x000000010206</span> <span class="nav-text">获取当前游戏对象名称</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%97%8F%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000306</span> <span class="nav-text">隐藏游戏对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2%E7%BB%84%E4%BB%B6%EF%BC%88Transform%EF%BC%89"><span class="nav-number">0x000000000007</span> <span class="nav-text">变换组件（Transform）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E6%8D%A2%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000000000107</span> <span class="nav-text">获取游戏对象的变换组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%98%E6%8D%A2%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000000010107</span> <span class="nav-text">获取当前游戏对象的变换组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%EF%BC%88Position%EF%BC%89"><span class="nav-number">0x000000000207</span> <span class="nav-text">位置（Position）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E4%BA%8E%E4%B8%96%E7%95%8C%E5%8E%9F%E7%82%B9%E7%9A%84%E4%BD%8D%E7%BD%AE%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">0x000000010207</span> <span class="nav-text">相对于世界原点的位置三维向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E4%BA%8E%E6%9C%AC%E5%9C%B0%E5%8E%9F%E7%82%B9%E7%9A%84%E4%BD%8D%E7%BD%AE%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">0x000000020207</span> <span class="nav-text">相对于本地原点的位置三维向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E5%81%8F%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="nav-number">0x000000030207</span> <span class="nav-text">位置偏移方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%EF%BC%88Rotation%EF%BC%89"><span class="nav-number">0x000000000307</span> <span class="nav-text">旋转（Rotation）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E4%BA%8E%E4%B8%96%E7%95%8C%E5%8E%9F%E7%82%B9%E7%9A%84%E6%97%8B%E8%BD%AC%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">0x000000010307</span> <span class="nav-text">相对于世界原点的旋转三维向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E4%BA%8E%E6%9C%AC%E5%9C%B0%E5%8E%9F%E7%82%B9%E7%9A%84%E6%97%8B%E8%BD%AC%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">0x000000020307</span> <span class="nav-text">相对于本地原点的旋转三维向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%92%E5%BA%A6%E5%81%8F%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="nav-number">0x000000030307</span> <span class="nav-text">角度偏移方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1z%E8%BD%B4%E6%9C%9D%E5%90%91%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000040307</span> <span class="nav-text">将游戏对象z轴朝向另一个游戏对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%98%E6%8D%A2%E7%BB%84%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%90%8D%E7%A7%B0"><span class="nav-number">0x000000000407</span> <span class="nav-text">通过变换组件获取游戏对象名称</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F%EF%BC%88Vector3%EF%BC%89"><span class="nav-number">0x000000000008</span> <span class="nav-text">三维向量（Vector3）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">0x000000000108</span> <span class="nav-text">创建三维向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">0x000000000208</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-0-0"><span class="nav-number">0x000000010208</span> <span class="nav-text">(0, 0, 0)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0-1-0"><span class="nav-number">0x000000020208</span> <span class="nav-text">(0, 1, 0)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0-0-1"><span class="nav-number">0x000000030208</span> <span class="nav-text">(0, 0, 1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0-0"><span class="nav-number">0x000000040208</span> <span class="nav-text">(1, 0, 0)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000000308</span> <span class="nav-text">向量的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000010308</span> <span class="nav-text">位置属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E8%BF%90%E7%AE%97"><span class="nav-number">0x000000000408</span> <span class="nav-text">向量运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000000508</span> <span class="nav-text">向量的长度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E5%90%91%E9%87%8F%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="nav-number">0x000000010508</span> <span class="nav-text">计算两个向量的距离</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%8C%96%E5%90%91%E9%87%8F"><span class="nav-number">0x000000000608</span> <span class="nav-text">标准化向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%BD%8D%E5%90%91%E9%87%8F%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">0x000000000708</span> <span class="nav-text">三位向量转换为字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%97%B6%E9%97%B4%EF%BC%88Time%EF%BC%89"><span class="nav-number">0x000000000009</span> <span class="nav-text">游戏时间（Time）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%97%B6%E9%97%B4%E5%B7%AE"><span class="nav-number">0x000000000109</span> <span class="nav-text">游戏对象初始化到现在的时间差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E4%B8%8A%E4%B8%80%E6%AC%A1%E5%B8%A7%E6%9B%B4%E6%96%B0%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%97%B6%E9%97%B4%E5%B7%AE"><span class="nav-number">0x000000000209</span> <span class="nav-text">游戏对象上一次帧更新到现在的时间差</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%BE%93%E5%85%A5"><span class="nav-number">0x00000000000A</span> <span class="nav-text">获取输入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E8%BE%93%E5%85%A5"><span class="nav-number">0x00000000010A</span> <span class="nav-text">鼠标输入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B"><span class="nav-number">0x00000001010A</span> <span class="nav-text">鼠标按键按下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E6%8A%AC%E8%B5%B7"><span class="nav-number">0x00000002010A</span> <span class="nav-text">鼠标按键抬起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E6%8C%89%E4%BD%8F"><span class="nav-number">0x00000003010A</span> <span class="nav-text">鼠标按键按住</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%BC%A0%E6%A0%87%E5%BD%93%E5%89%8D%E7%9A%84%E5%B1%8F%E5%B9%95%E4%BD%8D%E7%BD%AE"><span class="nav-number">0x00000004010A</span> <span class="nav-text">获取鼠标当前的屏幕位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">0x00000000020A</span> <span class="nav-text">键盘输入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B"><span class="nav-number">0x00000001020A</span> <span class="nav-text">键盘按键按下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E6%8C%89%E9%94%AE%E6%8A%AC%E8%B5%B7"><span class="nav-number">0x00000002020A</span> <span class="nav-text">键盘按键抬起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E6%8C%89%E9%94%AE%E6%8C%89%E4%BD%8F"><span class="nav-number">0x00000003020A</span> <span class="nav-text">键盘按键按住</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B1%8F%E5%B9%95%E4%BD%8D%E7%BD%AE"><span class="nav-number">0x00000000000B</span> <span class="nav-text">游戏对象位置转换为屏幕位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x00000000000C</span> <span class="nav-text">屏幕尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%EF%BC%88Component%EF%BC%89"><span class="nav-number">0x00000000000D</span> <span class="nav-text">组件（Component）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000000010D</span> <span class="nav-text">获取游戏对象的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000001010D</span> <span class="nav-text">获取当前游戏对象的组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000000020D</span> <span class="nav-text">组件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E7%BB%84%E4%BB%B6%EF%BC%88AudioSource%EF%BC%89"><span class="nav-number">0x00000000030D</span> <span class="nav-text">音频组件（AudioSource）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%9F%B3%E9%A2%91%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000001030D</span> <span class="nav-text">获取游戏对象的音频组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%9F%B3%E9%A2%91%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000101030D</span> <span class="nav-text">获取当前游戏对象的音频组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%98%AF%E5%90%A6%E6%92%AD%E6%94%BE%E4%B8%AD"><span class="nav-number">0x00000002030D</span> <span class="nav-text">判断当前是否播放中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%92%AD%E6%94%BE"><span class="nav-number">0x00000003030D</span> <span class="nav-text">播放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2"><span class="nav-number">0x00000004030D</span> <span class="nav-text">停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9A%82%E5%81%9C"><span class="nav-number">0x00000005030D</span> <span class="nav-text">暂停</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE"><span class="nav-number">0x00000006030D</span> <span class="nav-text">自动播放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%92%AD%E6%94%BE%E4%B8%80%E6%AC%A1%E6%8C%87%E5%AE%9A%E9%9F%B3%E9%A2%91"><span class="nav-number">0x00000007030D</span> <span class="nav-text">播放一次指定音频</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E6%B8%B2%E6%9F%93%E7%BB%84%E4%BB%B6%EF%BC%88MeshRenderer%EF%BC%89"><span class="nav-number">0x00000000040D</span> <span class="nav-text">网格渲染组件（MeshRenderer）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9D%90%E8%B4%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000001040D</span> <span class="nav-text">获取游戏对象的材质组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9D%90%E8%B4%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">0x00000101040D</span> <span class="nav-text">获取当前游戏对象的材质组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9D%90%E8%B4%A8"><span class="nav-number">0x00000002040D</span> <span class="nav-text">修改材质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%85%B6%E4%BB%96%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8C%87%E5%AE%9A%E7%BB%84%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">0x00000000000E</span> <span class="nav-text">调用其他游戏对象的指定组件的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AE%9A%E4%B9%89%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0"><span class="nav-number">0x00000000010E</span> <span class="nav-text">通过定义游戏对象作为脚本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AE%9A%E4%B9%89%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8C%87%E5%AE%9A%E7%BB%84%E4%BB%B6%E4%BD%9C%E4%B8%BA%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0"><span class="nav-number">0x00000000020E</span> <span class="nav-text">通过定义游戏对象的指定组件作为脚本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-number">0x00000000030E</span> <span class="nav-text">通过发送消息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%AD%90%E7%BA%A7"><span class="nav-number">0x00000000000F</span> <span class="nav-text">父子级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BA%A7%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000010F</span> <span class="nav-text">获取父级变换对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%AD%90%E7%BA%A7%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000020F</span> <span class="nav-text">获取所有子级变换对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E5%AD%90%E7%BA%A7%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000030F</span> <span class="nav-text">获取指定索引子级变换对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%90%8D%E6%9F%A5%E6%89%BE%E5%AD%90%E7%BA%A7%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000040F</span> <span class="nav-text">通过游戏对象名查找子级变换对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%88%B6%E7%BA%A7%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000050F</span> <span class="nav-text">修改父级变换对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%A0%B9%E4%BD%9C%E4%B8%BA%E6%96%B0%E7%9A%84%E7%88%B6%E7%BA%A7"><span class="nav-number">0x00000001050F</span> <span class="nav-text">指定根作为新的父级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%85%B6%E4%BB%96%E5%8F%98%E6%8D%A2%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E6%96%B0%E7%9A%84%E7%88%B6%E7%BA%A7"><span class="nav-number">0x00000002050F</span> <span class="nav-text">指定其他变换对象作为新的父级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88Invoke%EF%BC%89"><span class="nav-number">0x000000000010</span> <span class="nav-text">定时器（Invoke）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">0x000000000110</span> <span class="nav-text">延迟执行定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%A4%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">0x000000000210</span> <span class="nav-text">反复执行定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%AE%9A%E6%97%B6%E5%99%A8%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E4%BA%8E%E5%AE%9A%E6%97%B6%E5%99%A8%E9%98%9F%E5%88%97"><span class="nav-number">0x000000000310</span> <span class="nav-text">判断定时器是否存在于定时器队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">0x000000000410</span> <span class="nav-text">停止执行定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%89%80%E6%9C%89%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">0x000000010410</span> <span class="nav-text">停止所有定时器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%8C%87%E5%AE%9A%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">0x000000020410</span> <span class="nav-text">停止指定定时器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%EF%BC%88Thread%EF%BC%89"><span class="nav-number">0x000000000011</span> <span class="nav-text">线程（Thread）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%BA%BF%E7%A8%8B"><span class="nav-number">0x000000000111</span> <span class="nav-text">获取当前线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%BA%BF%E7%A8%8B%E5%8F%B7"><span class="nav-number">0x000000000211</span> <span class="nav-text">获取当前线程号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%88%B6%E4%BD%93"><span class="nav-number">0x000000000012</span> <span class="nav-text">预制体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E9%A2%84%E5%88%B6%E4%BD%93%E5%88%9B%E5%BB%BA%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000112</span> <span class="nav-text">通过预制体创建游戏对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%A0%B9%E4%BD%9C%E4%B8%BA%E7%88%B6%E7%BA%A7"><span class="nav-number">0x000000010112</span> <span class="nav-text">指定根作为父级</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%80%E6%AF%81%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000212</span> <span class="nav-text">销毁游戏对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E"><span class="nav-number">0x000000000013</span> <span class="nav-text">物理引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000000113</span> <span class="nav-text">消息函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%A2%B0%E6%92%9E%E7%9B%AE%E6%A0%87%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000213</span> <span class="nav-text">获取碰撞目标游戏对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000014</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x000000000015</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2026/01/04/Unity%E7%9A%84API%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Unity的API学习笔记 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Unity的API学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 05:25:12" itemprop="dateCreated datePublished" datetime="2026-01-05T05:25:12+08:00">2026-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116194310357137978</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Unity是一款跨平台的游戏引擎，可用于开发2D和3D游戏，支持多种个人电脑、移动设备、游戏主机、网页平台、增强现实和虚拟现实，其中在iOS和Android系统的游戏开发上特别受欢迎，许多人认为容易上手，并在独立游戏开发中广受欢迎。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/Unity_(%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E)">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="游戏对象脚本"><a href="#游戏对象脚本" class="headerlink" title="游戏对象脚本"></a>游戏对象脚本</h2><ul>
+<li>游戏对象脚本必须继承自<code>MonoBehaviour</code>类</li>
+</ul>
+<figure class="highlight cs"><figcaption><span>Script.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本的消息函数"><a href="#脚本的消息函数" class="headerlink" title="脚本的消息函数"></a>脚本的消息函数</h3><ul>
+<li><p>消息函数实质上就是回调函数</p>
+</li>
+<li><p>消息函数执行顺序：第一个游戏对象的<code>Awake()</code>&#x3D;&gt;第二个游戏对象的<code>Awake()</code>&#x3D;&gt;…&#x3D;&gt;第一个游戏对象的<code>Start()</code>&#x3D;&gt;第二个游戏对象的<code>Start()</code>&#x3D;&gt;…&#x3D;&gt;每个游戏对象的<code>Update()</code>&#x3D;&gt;…</p>
+</li>
+</ul>
+<blockquote>
+<p><code>Awake()</code>：游戏对象初始化时调用，在<code>Start()</code>之前执行，无论游戏对象是否被禁用都会被调用，只会执行一次<br><code>Start()</code>：游戏对象初始化时调用，在<code>Awake()</code>之后执行，只有游戏对象启用时才会被调用，只会执行一次<br><code>Update()</code>：每当游戏对象帧更新时调用<br><code>OnEnable()</code>：每当每当游戏对象启用时调用<br><code>OnDisable()</code>：每当游戏对象禁用时调用</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本参数"><a href="#脚本参数" class="headerlink" title="脚本参数"></a>脚本参数</h3><ul>
+<li><p>通过为类定义权限为<code>public</code>的属性来定义脚本参数</p>
+<ul>
+<li>属性名通常采用小驼峰命名</li>
+<li>属性值会作为脚本参数的默认值</li>
+</ul>
+</li>
+<li><p>脚本参数会在Unity编辑器的检查器（<code>Inspector</code>）中显示，并可以修改</p>
+<ul>
+<li>在Unity编辑器中，脚本参名会自动根据驼峰拆分单词，每个单词首字母大写并用空格隔开</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>[ Tooltip(&quot;文本内容&quot;) ]</code>：当鼠标悬浮在Unity编辑器的脚本参数名上时显示的提示内容</p>
+</blockquote>
+<blockquote>
+<p>数据类型</p>
+<blockquote>
+<p>值类型</p>
+<blockquote>
+<p><code>int</code>、<code>float</code>、<code>bool</code>、<code>string</code></p>
+</blockquote>
+<p>结构体类型</p>
+<blockquote>
+<p><code>Vector3</code>、<code>Color</code><br><code>GameObject</code>：在检查器中通过拖拽的方式传递其他游戏对象，该游戏对象会作为参数<br><code>AudioSource</code>：在检查器中通过拖拽的方式传递其他游戏对象，此时该游戏对象的对应类型组件会作为参数<br>其他脚本类名：在检查器中通过拖拽的方式传递其他游戏对象，此时该游戏对象的对应脚本文件会作为参数（因为脚本的本质就是一个组件）<br><code>AudioClip</code>：在检查器中通过拖拽的方式传递音频文件</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight cs"><figcaption><span>Script.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [ Tooltip(<span class="string">&quot;文本内容&quot;</span>) ]</span><br><span class="line">    <span class="keyword">public</span> 数据类型 脚本参数名 = 默认值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主控脚本"><a href="#主控脚本" class="headerlink" title="主控脚本"></a>主控脚本</h3><ol>
+<li>创建一个空游戏对象（Empty）</li>
+</ol>
+<ul>
+<li><code>+</code>-&gt;<code>Create Empty</code></li>
+</ul>
+<ol start="2">
+<li>为这个空游戏对象添加游戏对象脚本，在脚本中通过<code>Awake()</code>全局初始化</li>
+<li>强制提升优先级</li>
+</ol>
+<ul>
+<li><code>Edit</code>-&gt;<code>Project Settings</code>-&gt;<code>Script Execution Order</code>-&gt;修改这个空游戏对象的优先级（数值越小，优先级越大）</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MainScript</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Debug.Log(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="指定帧率"><a href="#指定帧率" class="headerlink" title="指定帧率"></a>指定帧率</h2><ul>
+<li>要求Unity尽可能在指定帧率下帧更新游戏对象</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Application.targetFrameRate = <span class="number">60</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><ul>
+<li>获取范围为[1,2)的随机整数</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> num = Random.Range(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="游戏对象（GameObject）"><a href="#游戏对象（GameObject）" class="headerlink" title="游戏对象（GameObject）"></a>游戏对象（GameObject）</h2><h3 id="获取游戏对象"><a href="#获取游戏对象" class="headerlink" title="获取游戏对象"></a>获取游戏对象</h3><h4 id="获取当前游戏对象"><a href="#获取当前游戏对象" class="headerlink" title="获取当前游戏对象"></a>获取当前游戏对象</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject gameObject = <span class="keyword">this</span>.gameObject;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过游戏对象名查找游戏对象"><a href="#通过游戏对象名查找游戏对象" class="headerlink" title="通过游戏对象名查找游戏对象"></a>通过游戏对象名查找游戏对象</h4><blockquote>
+<p><code>&lt;name&gt;</code>：游戏对象名，如果有多个相同名称的游戏对象，则需要使用绝对路径</p>
+<blockquote>
+<p><code>&lt;name&gt;</code>：相当于在<code>./</code>目录下查找名为<code>&lt;name&gt;</code>的游戏对象<br><code>/&lt;name&gt;</code>：相当于在<code>/</code>根目录下查找名为<code>&lt;name&gt;</code>的游戏对象<br><code>&lt;dir&gt;/&lt;name&gt;</code>：相当于在<code>&lt;dir&gt;</code>目录下查找名为<code>&lt;name&gt;</code>的游戏对象</p>
+</blockquote>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject gameObject = GameObject.Find(<span class="string">&quot;&lt;name&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取游戏对象名称"><a href="#获取游戏对象名称" class="headerlink" title="获取游戏对象名称"></a>获取游戏对象名称</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> name = gameObject.name;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前游戏对象名称"><a href="#获取当前游戏对象名称" class="headerlink" title="获取当前游戏对象名称"></a>获取当前游戏对象名称</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> name = <span class="keyword">this</span>.gameObject.name;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> name = <span class="keyword">this</span>.name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="隐藏游戏对象"><a href="#隐藏游戏对象" class="headerlink" title="隐藏游戏对象"></a>隐藏游戏对象</h3><blockquote>
+<p><code>visible</code>：<code>true</code>表示显示，<code>false</code>表示隐藏</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> visible = gameObject.activeSelf;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gameObject.SetActive(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="变换组件（Transform）"><a href="#变换组件（Transform）" class="headerlink" title="变换组件（Transform）"></a>变换组件（Transform）</h2><ul>
+<li>每个游戏对象一定都有一个变换组件</li>
+</ul>
+<h3 id="获取游戏对象的变换组件"><a href="#获取游戏对象的变换组件" class="headerlink" title="获取游戏对象的变换组件"></a>获取游戏对象的变换组件</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform transform = gameObject.transform;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前游戏对象的变换组件"><a href="#获取当前游戏对象的变换组件" class="headerlink" title="获取当前游戏对象的变换组件"></a>获取当前游戏对象的变换组件</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform transform = <span class="keyword">this</span>.gameObject.transform;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform transform2 = <span class="keyword">this</span>.transform;</span><br></pre></td></tr></table></figure>
+
+<h3 id="位置（Position）"><a href="#位置（Position）" class="headerlink" title="位置（Position）"></a>位置（Position）</h3><h4 id="相对于世界原点的位置三维向量"><a href="#相对于世界原点的位置三维向量" class="headerlink" title="相对于世界原点的位置三维向量"></a>相对于世界原点的位置三维向量</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = transform.position;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.position = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="相对于本地原点的位置三维向量"><a href="#相对于本地原点的位置三维向量" class="headerlink" title="相对于本地原点的位置三维向量"></a>相对于本地原点的位置三维向量</h4><ul>
+<li>相对于父对象的位置</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = transform.localPosition;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.position = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="位置偏移方法"><a href="#位置偏移方法" class="headerlink" title="位置偏移方法"></a>位置偏移方法</h4><blockquote>
+<p><code>&lt;dx&gt;</code>：x轴坐标偏移量<br><code>&lt;dy&gt;</code>：y轴坐标偏移量<br><code>&lt;dz&gt;</code>：z轴坐标偏移量</p>
+</blockquote>
+<blockquote>
+<p><code>Space.Self</code>：缺省值，参考本地坐标系偏移<br><code>Space.World</code>：参考世界坐标系偏移</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.Translate(&lt;dx&gt;, &lt;dy&gt;, &lt;dz&gt;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.Translate(&lt;dx&gt;, &lt;dy&gt;, &lt;dz&gt;, Space.Self);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 vector3 = <span class="keyword">new</span> Vector3(&lt;dx&gt;, &lt;dy&gt;, &lt;dz&gt;);</span><br><span class="line"></span><br><span class="line">transform.Translate(vector3, Space.Self);</span><br></pre></td></tr></table></figure>
+
+<h3 id="旋转（Rotation）"><a href="#旋转（Rotation）" class="headerlink" title="旋转（Rotation）"></a>旋转（Rotation）</h3><h4 id="相对于世界原点的旋转三维向量"><a href="#相对于世界原点的旋转三维向量" class="headerlink" title="相对于世界原点的旋转三维向量"></a>相对于世界原点的旋转三维向量</h4><ul>
+<li>欧拉角（EulerAngle）</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 vector3 = transform.eulerAngle;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.eulerAngle = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="相对于本地原点的旋转三维向量"><a href="#相对于本地原点的旋转三维向量" class="headerlink" title="相对于本地原点的旋转三维向量"></a>相对于本地原点的旋转三维向量</h4><ul>
+<li>欧拉角（EulerAngle）</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 vector3 = transform.localEulerAngle;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.localEulerAngle = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="角度偏移方法"><a href="#角度偏移方法" class="headerlink" title="角度偏移方法"></a>角度偏移方法</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.Rotate(&lt;dx&gt;, &lt;dy&gt;, &lt;dz&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="将游戏对象z轴朝向另一个游戏对象"><a href="#将游戏对象z轴朝向另一个游戏对象" class="headerlink" title="将游戏对象z轴朝向另一个游戏对象"></a>将游戏对象z轴朝向另一个游戏对象</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Transform transform = <span class="keyword">this</span>.gameObject.transform;</span><br><span class="line">Transform otherTransform;</span><br><span class="line"></span><br><span class="line">transform.LookAt(otherTransform);</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过变换组件获取游戏对象名称"><a href="#通过变换组件获取游戏对象名称" class="headerlink" title="通过变换组件获取游戏对象名称"></a>通过变换组件获取游戏对象名称</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> name = transform.gameObject.name;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> name = transform.name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三维向量（Vector3）"><a href="#三维向量（Vector3）" class="headerlink" title="三维向量（Vector3）"></a>三维向量（Vector3）</h2><h3 id="创建三维向量"><a href="#创建三维向量" class="headerlink" title="创建三维向量"></a>创建三维向量</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = <span class="keyword">new</span> Vector3(&lt;x&gt;, &lt;y&gt;, &lt;z&gt;, Space.Self);</span><br></pre></td></tr></table></figure>
+
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><h4 id="0-0-0"><a href="#0-0-0" class="headerlink" title="(0, 0, 0)"></a>(0, 0, 0)</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor3 = Vector3.zero;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0-1-0"><a href="#0-1-0" class="headerlink" title="(0, 1, 0)"></a>(0, 1, 0)</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = Vector3.up;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0-0-1"><a href="#0-0-1" class="headerlink" title="(0, 0, 1)"></a>(0, 0, 1)</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = Vector3.forward;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-0-0"><a href="#1-0-0" class="headerlink" title="(1, 0, 0)"></a>(1, 0, 0)</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = Vector3.right;</span><br></pre></td></tr></table></figure>
+
+<h3 id="向量的属性"><a href="#向量的属性" class="headerlink" title="向量的属性"></a>向量的属性</h3><h4 id="位置属性"><a href="#位置属性" class="headerlink" title="位置属性"></a>位置属性</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> x = vector3.x;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> y = vector3.y;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> z = vector3.z;</span><br></pre></td></tr></table></figure>
+
+<h3 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor31;</span><br><span class="line">Verctor3 verctor32;</span><br><span class="line"></span><br><span class="line">Verctor3 result = verctor31 + verctor32;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor31;</span><br><span class="line">Verctor3 verctor32;</span><br><span class="line"></span><br><span class="line">Verctor3 result = verctor31 - verctor32;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>标准乘法</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor31;</span><br><span class="line">Verctor3 verctor32;</span><br><span class="line"></span><br><span class="line">Verctor3 result = verctor31 * verctor32;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>点积</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor31;</span><br><span class="line">Verctor3 verctor32;</span><br><span class="line"></span><br><span class="line">Verctor3 result = Verctor3.Dot(verctor31, verctor32);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>差积</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor31;</span><br><span class="line">Verctor3 verctor32;</span><br><span class="line"></span><br><span class="line">Verctor3 result = Verctor3.Cross(verctor31, verctor32);</span><br></pre></td></tr></table></figure>
+
+<h3 id="向量的长度"><a href="#向量的长度" class="headerlink" title="向量的长度"></a>向量的长度</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> magnitude = vector3.magnitude;</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算两个向量的距离"><a href="#计算两个向量的距离" class="headerlink" title="计算两个向量的距离"></a>计算两个向量的距离</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = <span class="keyword">this</span>.gameObject.transform.position;</span><br><span class="line">Vector3 otherVector3;</span><br><span class="line">Verctor3 direction = otherVector3 - vector3;</span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span> distance = direction.magnitude;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> distance = Vector3.Distance(vector3, otherVector3);</span><br></pre></td></tr></table></figure>
+
+<h3 id="标准化向量"><a href="#标准化向量" class="headerlink" title="标准化向量"></a>标准化向量</h3><ul>
+<li>缩放一个变量，使其长度为1</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Verctor3 verctor3 = vector3.normalized;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三位向量转换为字符串"><a href="#三位向量转换为字符串" class="headerlink" title="三位向量转换为字符串"></a>三位向量转换为字符串</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> result = vector3.toString(<span class="string">&quot;F3&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="游戏时间（Time）"><a href="#游戏时间（Time）" class="headerlink" title="游戏时间（Time）"></a>游戏时间（Time）</h2><h3 id="游戏对象初始化到现在的时间差"><a href="#游戏对象初始化到现在的时间差" class="headerlink" title="游戏对象初始化到现在的时间差"></a>游戏对象初始化到现在的时间差</h3><ul>
+<li>单位为秒</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> time = Time.time;</span><br></pre></td></tr></table></figure>
+
+<h3 id="游戏对象上一次帧更新到现在的时间差"><a href="#游戏对象上一次帧更新到现在的时间差" class="headerlink" title="游戏对象上一次帧更新到现在的时间差"></a>游戏对象上一次帧更新到现在的时间差</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> deltaTime = Time.deltaTime;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取输入"><a href="#获取输入" class="headerlink" title="获取输入"></a>获取输入</h2><h3 id="鼠标输入"><a href="#鼠标输入" class="headerlink" title="鼠标输入"></a>鼠标输入</h3><h4 id="鼠标按键按下"><a href="#鼠标按键按下" class="headerlink" title="鼠标按键按下"></a>鼠标按键按下</h4><blockquote>
+<p><code>&lt;code&gt;</code>：鼠标按键码值</p>
+<blockquote>
+<p><code>0</code>：鼠标左键<br><code>1</code>：鼠标右键<br><code>2</code>：鼠标中键</p>
+</blockquote>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetMouseButtonDown(&lt;code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="鼠标按键抬起"><a href="#鼠标按键抬起" class="headerlink" title="鼠标按键抬起"></a>鼠标按键抬起</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetMounseButtonUp(&lt;code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="鼠标按键按住"><a href="#鼠标按键按住" class="headerlink" title="鼠标按键按住"></a>鼠标按键按住</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetMouseButton(&lt;code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取鼠标当前的屏幕位置"><a href="#获取鼠标当前的屏幕位置" class="headerlink" title="获取鼠标当前的屏幕位置"></a>获取鼠标当前的屏幕位置</h4><ul>
+<li>原点为屏幕左下角</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = Input.mousePosition;</span><br></pre></td></tr></table></figure>
+
+<h3 id="键盘输入"><a href="#键盘输入" class="headerlink" title="键盘输入"></a>键盘输入</h3><blockquote>
+<p><code>&lt;key_code&gt;</code>：键码值</p>
+<blockquote>
+<p><code>KeyCode.A</code>：A键</p>
+</blockquote>
+</blockquote>
+<h4 id="键盘按键按下"><a href="#键盘按键按下" class="headerlink" title="键盘按键按下"></a>键盘按键按下</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetKeyDown(&lt;key_code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="键盘按键抬起"><a href="#键盘按键抬起" class="headerlink" title="键盘按键抬起"></a>键盘按键抬起</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetKeyUp(&lt;key_code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="键盘按键按住"><a href="#键盘按键按住" class="headerlink" title="键盘按键按住"></a>键盘按键按住</h4><ul>
+<li>只要是鼠标按键按住，则始终返回<code>true</code></li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = Input.GetKey(&lt;key_code&gt;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="游戏对象位置转换为屏幕位置"><a href="#游戏对象位置转换为屏幕位置" class="headerlink" title="游戏对象位置转换为屏幕位置"></a>游戏对象位置转换为屏幕位置</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = Camera.main.WorldToScreenPoint(<span class="keyword">this</span>.gameObject.transform.position);</span><br></pre></td></tr></table></figure>
+
+<h2 id="屏幕尺寸"><a href="#屏幕尺寸" class="headerlink" title="屏幕尺寸"></a>屏幕尺寸</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> width = Screen.width;</span><br><span class="line"><span class="built_in">int</span> height = Screen.height;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件（Component）"><a href="#组件（Component）" class="headerlink" title="组件（Component）"></a>组件（Component）</h2><h3 id="获取游戏对象的组件"><a href="#获取游戏对象的组件" class="headerlink" title="获取游戏对象的组件"></a>获取游戏对象的组件</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 组件变量名 = gameObject.GetComponent&lt;数据类型&gt;();</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前游戏对象的组件"><a href="#获取当前游戏对象的组件" class="headerlink" title="获取当前游戏对象的组件"></a>获取当前游戏对象的组件</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 组件变量名 = <span class="keyword">this</span>.gameObject.GetComponent&lt;数据类型&gt;();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 组件变量名 = <span class="keyword">this</span>.GetComponent&lt;数据类型&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件属性"><a href="#组件属性" class="headerlink" title="组件属性"></a>组件属性</h3><ul>
+<li>获取组件属性</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 变量名 = 组件变量名.属性名;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改组件属性</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">组件变量名.属性名 = 值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="音频组件（AudioSource）"><a href="#音频组件（AudioSource）" class="headerlink" title="音频组件（AudioSource）"></a>音频组件（AudioSource）</h3><h4 id="获取游戏对象的音频组件"><a href="#获取游戏对象的音频组件" class="headerlink" title="获取游戏对象的音频组件"></a>获取游戏对象的音频组件</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AudioSource audioSource = gameObject.GetComponent&lt;AudioSource&gt;();</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取当前游戏对象的音频组件"><a href="#获取当前游戏对象的音频组件" class="headerlink" title="获取当前游戏对象的音频组件"></a>获取当前游戏对象的音频组件</h5><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AudioSource audioSource = <span class="keyword">this</span>.gameObject.GetComponent&lt;AudioSource&gt;();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AudioSource audioSource = <span class="keyword">this</span>.GetComponent&lt;AudioSource&gt;();</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断当前是否播放中"><a href="#判断当前是否播放中" class="headerlink" title="判断当前是否播放中"></a>判断当前是否播放中</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = audioSource.isPlaying;</span><br></pre></td></tr></table></figure>
+
+<h4 id="播放"><a href="#播放" class="headerlink" title="播放"></a>播放</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">audioSource.Play();</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">audioSource.Stop();</span><br></pre></td></tr></table></figure>
+
+<h4 id="暂停"><a href="#暂停" class="headerlink" title="暂停"></a>暂停</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">audioSource.Pause();</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动播放"><a href="#自动播放" class="headerlink" title="自动播放"></a>自动播放</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> yes = audioSource.playOnAwake;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">audioSource.playOnAwake = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="播放一次指定音频"><a href="#播放一次指定音频" class="headerlink" title="播放一次指定音频"></a>播放一次指定音频</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AudioClip audioClip;</span><br><span class="line"></span><br><span class="line">audioSource.PlayOneShot(audioClip);</span><br></pre></td></tr></table></figure>
+
+<h3 id="网格渲染组件（MeshRenderer）"><a href="#网格渲染组件（MeshRenderer）" class="headerlink" title="网格渲染组件（MeshRenderer）"></a>网格渲染组件（MeshRenderer）</h3><h4 id="获取游戏对象的材质组件"><a href="#获取游戏对象的材质组件" class="headerlink" title="获取游戏对象的材质组件"></a>获取游戏对象的材质组件</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MeshRenderer meshRenderer = gameObject.GetComponent&lt;MeshRenderer&gt;();</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取当前游戏对象的材质组件"><a href="#获取当前游戏对象的材质组件" class="headerlink" title="获取当前游戏对象的材质组件"></a>获取当前游戏对象的材质组件</h5><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MeshRenderer meshRenderer = <span class="keyword">this</span>.gameObject.GetComponent&lt;MeshRenderer&gt;();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MeshRenderer meshRenderer = <span class="keyword">this</span>.GetComponent&lt;MeshRenderer&gt;();</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改材质"><a href="#修改材质" class="headerlink" title="修改材质"></a>修改材质</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Material material;</span><br><span class="line"></span><br><span class="line">meshRenderer.material = material;</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用其他游戏对象的指定组件的方法"><a href="#调用其他游戏对象的指定组件的方法" class="headerlink" title="调用其他游戏对象的指定组件的方法"></a>调用其他游戏对象的指定组件的方法</h2><h3 id="通过定义游戏对象作为脚本参数"><a href="#通过定义游戏对象作为脚本参数" class="headerlink" title="通过定义游戏对象作为脚本参数"></a>通过定义游戏对象作为脚本参数</h3><figure class="highlight cs"><figcaption><span>A.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">A</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>(<span class="params"><span class="built_in">string</span> arg</span>)</span></span><br><span class="line">    &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><figcaption><span>B.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">B</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> GameObject gameObject;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        gameObject.GetComponent&lt;A&gt;().method(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过定义游戏对象的指定组件作为脚本参数"><a href="#通过定义游戏对象的指定组件作为脚本参数" class="headerlink" title="通过定义游戏对象的指定组件作为脚本参数"></a>通过定义游戏对象的指定组件作为脚本参数</h3><figure class="highlight cs"><figcaption><span>A.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">A</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>(<span class="params"><span class="built_in">string</span> arg</span>)</span></span><br><span class="line">    &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><figcaption><span>B.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">B</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> A a;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        a.method(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过发送消息"><a href="#通过发送消息" class="headerlink" title="通过发送消息"></a>通过发送消息</h3><figure class="highlight cs"><figcaption><span>A.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">A</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>(<span class="params"><span class="built_in">string</span> arg</span>)</span></span><br><span class="line">    &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向其他游戏对象发送消息，目标游戏对象<strong>所有</strong>组件中只要有这个方法就<strong>都会</strong>被调用</li>
+</ul>
+<figure class="highlight cs"><figcaption><span>B.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">B</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> GameObject gameObject;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        gameObject.SendMessage(<span class="string">&quot;method&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="父子级"><a href="#父子级" class="headerlink" title="父子级"></a>父子级</h2><ul>
+<li>Unity中的父子级关系是在变换组件中维护的，也就是说只能获取变换组件的父子级而不是直接获取游戏对象的父子级，但是游戏对象和变换对象是一对一映射的，所以可以通过变换组件间接获取游戏对象父子级关系</li>
+</ul>
+<h3 id="获取父级变换对象"><a href="#获取父级变换对象" class="headerlink" title="获取父级变换对象"></a>获取父级变换对象</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform fatherTransform = <span class="keyword">this</span>.gameObject.transform.parent;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取所有子级变换对象"><a href="#获取所有子级变换对象" class="headerlink" title="获取所有子级变换对象"></a>获取所有子级变换对象</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (Transform childTransform <span class="keyword">in</span> <span class="keyword">this</span>.gameObject.transform)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取指定索引子级变换对象"><a href="#获取指定索引子级变换对象" class="headerlink" title="获取指定索引子级变换对象"></a>获取指定索引子级变换对象</h3><blockquote>
+<p><code>&lt;index&gt;</code>：子级索引</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform childTransform = <span class="keyword">this</span>.gameObject.transform.GetChild(&lt;index&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过游戏对象名查找子级变换对象"><a href="#通过游戏对象名查找子级变换对象" class="headerlink" title="通过游戏对象名查找子级变换对象"></a>通过游戏对象名查找子级变换对象</h3><blockquote>
+<p><code>&lt;name&gt;</code>：子级游戏对象名，如果需要查找孙子，则需要使用绝对路径</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform childTransform = <span class="keyword">this</span>.gameObject.transform.Find(<span class="string">&quot;&lt;name&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改父级变换对象"><a href="#修改父级变换对象" class="headerlink" title="修改父级变换对象"></a>修改父级变换对象</h3><h4 id="指定根作为新的父级"><a href="#指定根作为新的父级" class="headerlink" title="指定根作为新的父级"></a>指定根作为新的父级</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.gameObject.transform.setParent(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="指定其他变换对象作为新的父级"><a href="#指定其他变换对象作为新的父级" class="headerlink" title="指定其他变换对象作为新的父级"></a>指定其他变换对象作为新的父级</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Transform otherTransform;</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.gameObject.transform.setParent(otherTransform);</span><br></pre></td></tr></table></figure>
+
+<h2 id="定时器（Invoke）"><a href="#定时器（Invoke）" class="headerlink" title="定时器（Invoke）"></a>定时器（Invoke）</h2><h3 id="延迟执行定时器"><a href="#延迟执行定时器" class="headerlink" title="延迟执行定时器"></a>延迟执行定时器</h3><blockquote>
+<p><code>&lt;delay&gt;</code>：延迟时间，单位秒</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.Invoke(<span class="string">&quot;method&quot;</span>, &lt;delay&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="反复执行定时器"><a href="#反复执行定时器" class="headerlink" title="反复执行定时器"></a>反复执行定时器</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.InvokeRepeating(<span class="string">&quot;method&quot;</span>, &lt;delay&gt;, &lt;interval&gt;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断定时器是否存在于定时器队列"><a href="#判断定时器是否存在于定时器队列" class="headerlink" title="判断定时器是否存在于定时器队列"></a>判断定时器是否存在于定时器队列</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> exist = IsInvoking(<span class="string">&quot;method&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="停止执行定时器"><a href="#停止执行定时器" class="headerlink" title="停止执行定时器"></a>停止执行定时器</h3><h4 id="停止所有定时器"><a href="#停止所有定时器" class="headerlink" title="停止所有定时器"></a>停止所有定时器</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CancelInvoke();</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止指定定时器"><a href="#停止指定定时器" class="headerlink" title="停止指定定时器"></a>停止指定定时器</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method</span>()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">CancelInvoke(<span class="string">&quot;method&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程（Thread）"><a href="#线程（Thread）" class="headerlink" title="线程（Thread）"></a>线程（Thread）</h2><h3 id="获取当前线程"><a href="#获取当前线程" class="headerlink" title="获取当前线程"></a>获取当前线程</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = Thread.CurrentThread;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前线程号"><a href="#获取当前线程号" class="headerlink" title="获取当前线程号"></a>获取当前线程号</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> threadId = thread.ManagedThreadId;</span><br></pre></td></tr></table></figure>
+
+<h2 id="预制体"><a href="#预制体" class="headerlink" title="预制体"></a>预制体</h2><h3 id="通过预制体创建游戏对象"><a href="#通过预制体创建游戏对象" class="headerlink" title="通过预制体创建游戏对象"></a>通过预制体创建游戏对象</h3><h4 id="指定根作为父级"><a href="#指定根作为父级" class="headerlink" title="指定根作为父级"></a>指定根作为父级</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GameObject prefab;</span><br><span class="line"></span><br><span class="line">GameObject gameObject = Object.Instantiate(prefab, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="销毁游戏对象"><a href="#销毁游戏对象" class="headerlink" title="销毁游戏对象"></a>销毁游戏对象</h3><ul>
+<li><code>Destroy()</code>会在本轮<code>Update()</code>执行结束后才会执行</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.Destroy(gameObject);</span><br></pre></td></tr></table></figure>
+
+<h2 id="物理引擎"><a href="#物理引擎" class="headerlink" title="物理引擎"></a>物理引擎</h2><h3 id="消息函数"><a href="#消息函数" class="headerlink" title="消息函数"></a>消息函数</h3><blockquote>
+<p><code>OnCollisionEnter()</code>：每当游戏对象开始碰撞时调用<br><code>OnCollisionStay()</code>：每当游戏对象持续碰撞时每帧调用<br><code>OnCollisionExit()</code>：每当游戏对象结束碰撞时调用</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionEnter</span>(<span class="params">Collision collision</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionStay</span>(<span class="params">Collision collision</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionExit</span>(<span class="params">Collision collision</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取碰撞目标游戏对象"><a href="#获取碰撞目标游戏对象" class="headerlink" title="获取碰撞目标游戏对象"></a>获取碰撞目标游戏对象</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject gameObject = collision.gameObject;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1TZ4y1o76s">哔哩哔哩——阿发你好</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/717328787">知乎——博毅创为</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/Unity/" rel="tag"># Unity</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/02/Nim%E7%9A%84%E8%BF%87%E7%A8%8B/" rel="prev" title="【笔记】Nim的过程">
+                  <i class="fa fa-angle-left"></i> 【笔记】Nim的过程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/04/Unity%E7%9A%84API%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E5%8C%80%E9%80%9F%E8%BF%90%E5%8A%A8/" rel="next" title="【代码】Unity的API实现游戏对象匀速运动">
+                  【代码】Unity的API实现游戏对象匀速运动 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

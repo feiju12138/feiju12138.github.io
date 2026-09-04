@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Flutter的Scaffold脚手架组件学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Flutter的Scaffold脚手架组件">
+<meta property="og:url" content="https://loli.fj.cn/2023/06/24/Flutter%E7%9A%84Scaffold%E8%84%9A%E6%89%8B%E6%9E%B6%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言Flutter的Scaffold脚手架组件学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-24T10:04:53.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.593Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Dart">
+<meta property="article:tag" content="Flutter">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/06/24/Flutter%E7%9A%84Scaffold%E8%84%9A%E6%89%8B%E6%9E%B6%E7%BB%84%E4%BB%B6/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/06/24/Flutter%E7%9A%84Scaffold%E8%84%9A%E6%89%8B%E6%9E%B6%E7%BB%84%E4%BB%B6/","path":"2023/06/24/Flutter的Scaffold脚手架组件/","title":"【笔记】Flutter的Scaffold脚手架组件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Flutter的Scaffold脚手架组件 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaffold%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000000000002</span> <span class="nav-text">Scaffold组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BottomNavigationBar%E5%BA%95%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="nav-number">0x000000000003</span> <span class="nav-text">BottomNavigationBar底部导航栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%AD%E9%97%B4%E5%87%B8%E8%B5%B7%E7%9A%84%E5%BA%95%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="nav-number">0x000000000103</span> <span class="nav-text">实现中间凸起的底部导航栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">0x000000000004</span> <span class="nav-text">侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F%E5%A4%B4%E9%83%A8"><span class="nav-number">0x000000000104</span> <span class="nav-text">菜单栏头部</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8D%A0%E6%BB%A1%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">0x000000010104</span> <span class="nav-text">头部背景图占满侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Drawer%E5%AE%9E%E7%8E%B0"><span class="nav-number">0x000001010104</span> <span class="nav-text">通过Drawer实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87UserAccountsDrawerHeader%E5%AE%9E%E7%8E%B0"><span class="nav-number">0x000002010104</span> <span class="nav-text">通过UserAccountsDrawerHeader实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppBar%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="nav-number">0x000000000005</span> <span class="nav-text">AppBar顶部导航栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%9A%E8%BF%87%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2"><span class="nav-number">0x000000000105</span> <span class="nav-text">实现通过顶部导航栏切换页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84tab%E7%B4%A2%E5%BC%95%E5%80%BC"><span class="nav-number">0x000000010105</span> <span class="nav-text">获取当前选中的tab索引值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%80%E6%AF%81controller"><span class="nav-number">0x000000020105</span> <span class="nav-text">销毁controller</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%AB%98%E5%BA%A6"><span class="nav-number">0x000000000205</span> <span class="nav-text">定义顶部导航栏高度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%98%B4%E5%BD%B1"><span class="nav-number">0x000000000305</span> <span class="nav-text">定义顶部导航栏阴影</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000006</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x000000000007</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/06/24/Flutter%E7%9A%84Scaffold%E8%84%9A%E6%89%8B%E6%9E%B6%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Flutter的Scaffold脚手架组件 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Flutter的Scaffold脚手架组件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-24 18:04:53" itemprop="dateCreated datePublished" datetime="2023-06-24T18:04:53+08:00">2023-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Flutter%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">Flutter学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116181551454465309</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Flutter的Scaffold脚手架组件学习笔记</p>
+<span id="more"></span>
+
+<h2 id="Scaffold组件"><a href="#Scaffold组件" class="headerlink" title="Scaffold组件"></a>Scaffold组件</h2><blockquote>
+<p><code>appBar</code>：定义顶部导航栏<br><code>body</code>：定义页面主体</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(</span><br><span class="line">        title: <span class="title class_">Text</span>(<span class="string">&quot;文本内容&quot;</span>),</span><br><span class="line">      ),</span><br><span class="line">      body: <span class="keyword">const</span> <span class="title class_">Center</span>(</span><br><span class="line">        child: <span class="title class_">Text</span>(</span><br><span class="line">          <span class="string">&quot;文本内容&quot;</span>,</span><br><span class="line">          textDirection: <span class="title class_">TextDirection</span>.ltr,</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BottomNavigationBar底部导航栏"><a href="#BottomNavigationBar底部导航栏" class="headerlink" title="BottomNavigationBar底部导航栏"></a>BottomNavigationBar底部导航栏</h2><figure class="highlight dart"><figcaption><span>lib/main.dart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./pages/tabs.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(),</span><br><span class="line">      body: <span class="keyword">const</span> <span class="title class_">Tabs</span>(),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>iconSize</code>：图标大小<br><code>fixedColor</code>：选中的图标颜色<br><code>type: BottomNavigationBarType.fixed</code>：可以放大于3个按钮<br><code>bottomNavigationBar</code>：定义底部导航栏<br><code>currentIndex</code>：定义当前选中按钮的索引<br><code>onTap</code>：按钮被点击触发的事件<br><code>items</code>：所有按钮元素</p>
+</blockquote>
+<figure class="highlight dart"><figcaption><span>lib/pages/tabs.dart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./tabs/page_one.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./tabs/page_two.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tabs</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Tabs</span>(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">State</span>&lt;<span class="title class_">Tabs</span>&gt; <span class="title function_">createState</span>() =&gt; <span class="title class_">_TabsState</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_TabsState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">Tabs</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> _currentIndex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">final</span> <span class="title class_">List</span>&lt;<span class="title class_">Widget</span>&gt; _pages = <span class="keyword">const</span> [</span><br><span class="line">    <span class="title class_">PageOne</span>(),</span><br><span class="line">    <span class="title class_">PageTwo</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">Widget</span> <span class="title function_">build</span>(<span class="title class_">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Scaffold</span>(</span><br><span class="line">      body: _pages[_currentIndex],</span><br><span class="line">      bottomNavigationBar: <span class="title class_">BottomNavigationBar</span>(</span><br><span class="line">        iconSize: <span class="number">20</span>,</span><br><span class="line">        fixedColor: <span class="title class_">Colors</span>.red,</span><br><span class="line">        type: <span class="title class_">BottomNavigationBarType</span>.fixed,</span><br><span class="line">        currentIndex: _currentIndex,</span><br><span class="line">        onTap: (index) &#123;</span><br><span class="line">          <span class="title function_">setState</span>(() &#123;</span><br><span class="line">            _currentIndex = index;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        items: <span class="keyword">const</span> [</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageOne&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageTwo&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><figcaption><span>lib/pages/tabs/page_one.dart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageOne</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">PageOne</span>(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">State</span>&lt;<span class="title class_">PageOne</span>&gt; <span class="title function_">createState</span>() =&gt; <span class="title class_">_PageOneState</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_PageOneState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">PageOne</span>&gt; </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">Widget</span> <span class="title function_">build</span>(<span class="title class_">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;PageOne&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><figcaption><span>lib/pages/tabs/page_two.dart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageTwo</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">PageTwo</span>(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">State</span>&lt;<span class="title class_">PageTwo</span>&gt; <span class="title function_">createState</span>() =&gt; <span class="title class_">_PageTwoState</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_PageTwoState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">PageTwo</span>&gt; </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">Widget</span> <span class="title function_">build</span>(<span class="title class_">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;PageTwo&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现中间凸起的底部导航栏"><a href="#实现中间凸起的底部导航栏" class="headerlink" title="实现中间凸起的底部导航栏"></a>实现中间凸起的底部导航栏</h3><blockquote>
+<p><code>color</code>：浮动按钮的底纹颜色<br><code>borderRadius</code>：浮动按钮的底纹圆角<br><code>backgroundColor</code>：浮动按钮的背景颜色<br><code>floatingActionButtonLocation</code>：浮动按钮的位置</p>
+<blockquote>
+<p><code>FloatingActionButtonLocation.centerDocked</code>：Dock中间<br><code>FloatingActionButtonLocation.centerFloat</code>：屏幕浮动中间<br><code>FloatingActionButtonLocation.centerTop</code>：屏幕顶部中间<br><code>FloatingActionButtonLocation.endDocked</code>：Dock右边<br><code>FloatingActionButtonLocation.endFloat</code>：屏幕浮动右边<br><code>FloatingActionButtonLocation.endTop</code>：屏幕顶部右边<br><code>FloatingActionButtonLocation.endContained</code>：屏幕底部右边<br><code>FloatingActionButtonLocation.startDocked</code>：Dock左边<br><code>FloatingActionButtonLocation.startFloat</code>：屏幕浮动左边<br><code>FloatingActionButtonLocation.startTop</code>：屏幕顶部左边</p>
+</blockquote>
+</blockquote>
+<figure class="highlight dart"><figcaption><span>lib/pages/tabs.dart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./tabs/page_one.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./tabs/page_two.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tabs</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Tabs</span>(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">State</span>&lt;<span class="title class_">Tabs</span>&gt; <span class="title function_">createState</span>() =&gt; <span class="title class_">_TabsState</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_TabsState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">Tabs</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> _currentIndex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">final</span> <span class="title class_">List</span>&lt;<span class="title class_">Widget</span>&gt; _pages = <span class="keyword">const</span> [</span><br><span class="line">    <span class="title class_">PageOne</span>(),</span><br><span class="line">    <span class="title class_">PageTwo</span>(),</span><br><span class="line">    <span class="title class_">PageOne</span>(),</span><br><span class="line">    <span class="title class_">PageTwo</span>(),</span><br><span class="line">    <span class="title class_">PageOne</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">Widget</span> <span class="title function_">build</span>(<span class="title class_">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Scaffold</span>(</span><br><span class="line">      body: _pages[_currentIndex],</span><br><span class="line">      bottomNavigationBar: <span class="title class_">BottomNavigationBar</span>(</span><br><span class="line">        type: <span class="title class_">BottomNavigationBarType</span>.fixed,</span><br><span class="line">        currentIndex: _currentIndex,</span><br><span class="line">        onTap: (index) &#123;</span><br><span class="line">          <span class="title function_">setState</span>(() &#123;</span><br><span class="line">            _currentIndex = index;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        items: <span class="keyword">const</span> [</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageOne&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageTwo&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageOne&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageTwo&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">BottomNavigationBarItem</span>(</span><br><span class="line">            icon: <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.home),</span><br><span class="line">            label: <span class="string">&quot;PageOne&quot;</span>,</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">      floatingActionButton: <span class="title class_">Container</span>(</span><br><span class="line">        width: <span class="number">60</span>,</span><br><span class="line">        height: <span class="number">60</span>,</span><br><span class="line">        padding: <span class="keyword">const</span> <span class="title class_">EdgeInsets</span>.<span class="title function_">all</span>(<span class="number">5</span>),</span><br><span class="line">        decoration: <span class="title class_">BoxDecoration</span>(</span><br><span class="line">          color: <span class="title class_">Colors</span>.white,</span><br><span class="line">          borderRadius: <span class="title class_">BorderRadius</span>.<span class="title function_">circular</span>(<span class="number">30</span>),</span><br><span class="line">        ),</span><br><span class="line">        child: <span class="title class_">FloatingActionButton</span>(</span><br><span class="line">          backgroundColor: _currentIndex==<span class="number">2</span>?<span class="title class_">Colors</span>.blue:<span class="title class_">Colors</span>.black,</span><br><span class="line">          child: <span class="keyword">const</span> <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.add),</span><br><span class="line">          onPressed: () &#123;</span><br><span class="line">            <span class="title function_">setState</span>(() &#123;</span><br><span class="line">              _currentIndex = <span class="number">2</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;,</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      floatingActionButtonLocation: <span class="title class_">FloatingActionButtonLocation</span>.centerDocked,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h2><ul>
+<li>侧边栏既可以通过点击菜单按钮展现，也可以通过从屏幕边缘向屏幕中间滑动展现</li>
+</ul>
+<blockquote>
+<p><code>drawer</code>：定义左侧侧边栏<br><code>endDrawer</code>：定义右侧侧边栏</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(),</span><br><span class="line">      drawer: <span class="keyword">const</span> <span class="title class_">Drawer</span>(</span><br><span class="line">        child: <span class="title class_">Text</span>(<span class="string">&quot;左侧侧边栏&quot;</span>),</span><br><span class="line">      ),</span><br><span class="line">      endDrawer: <span class="keyword">const</span> <span class="title class_">Drawer</span>(</span><br><span class="line">        child: <span class="title class_">Text</span>(<span class="string">&quot;右侧侧边栏&quot;</span>),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏头部"><a href="#菜单栏头部" class="headerlink" title="菜单栏头部"></a>菜单栏头部</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(),</span><br><span class="line">      drawer: <span class="keyword">const</span> <span class="title class_">Drawer</span>(</span><br><span class="line">        child: <span class="title class_">Column</span>(</span><br><span class="line">          children: [</span><br><span class="line">            <span class="title class_">DrawerHeader</span>(child: <span class="title class_">Text</span>(<span class="string">&quot;左侧侧边栏&quot;</span>))</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="头部背景图占满侧边栏"><a href="#头部背景图占满侧边栏" class="headerlink" title="头部背景图占满侧边栏"></a>头部背景图占满侧边栏</h4><h5 id="通过Drawer实现"><a href="#通过Drawer实现" class="headerlink" title="通过Drawer实现"></a>通过Drawer实现</h5><blockquote>
+<p><code>&lt;url&gt;</code>：图片URL</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(),</span><br><span class="line">      drawer: <span class="keyword">const</span> <span class="title class_">Drawer</span>(</span><br><span class="line">        child: <span class="title class_">Column</span>(</span><br><span class="line">          children: [</span><br><span class="line">            <span class="title class_">Row</span>(</span><br><span class="line">              children: [</span><br><span class="line">                <span class="title class_">Expanded</span>(</span><br><span class="line">                  flex: <span class="number">1</span>,</span><br><span class="line">                  child: <span class="title class_">DrawerHeader</span>(</span><br><span class="line">                    decoration: <span class="title class_">BoxDecoration</span>(</span><br><span class="line">                      image: <span class="title class_">DecorationImage</span>(</span><br><span class="line">                          image: <span class="title class_">NetworkImage</span>(<span class="string">&quot;&lt;url&gt;&quot;</span>),</span><br><span class="line">                          fit: <span class="title class_">BoxFit</span>.cover,</span><br><span class="line">                      )</span><br><span class="line">                    ),</span><br><span class="line">                    child: <span class="title class_">Text</span>(<span class="string">&quot;左侧侧边栏&quot;</span>)</span><br><span class="line">                  ),</span><br><span class="line">                )</span><br><span class="line">              ],</span><br><span class="line">            )</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过UserAccountsDrawerHeader实现"><a href="#通过UserAccountsDrawerHeader实现" class="headerlink" title="通过UserAccountsDrawerHeader实现"></a>通过UserAccountsDrawerHeader实现</h5><blockquote>
+<p><code>accountName</code>：定义用户名<br><code>accountEmail</code>：定义用户邮箱<br><code>decoration</code>：定义背景图<br><code>currentAccountPicture</code>：定义用户当前头像<br><code>otherAccountsPictures</code>：定义用户其他头像</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(),</span><br><span class="line">      drawer: <span class="keyword">const</span> <span class="title class_">Drawer</span>(</span><br><span class="line">        child: <span class="title class_">Column</span>(</span><br><span class="line">          children: [</span><br><span class="line">            <span class="title class_">Row</span>(</span><br><span class="line">              children: [</span><br><span class="line">                <span class="title class_">Expanded</span>(</span><br><span class="line">                  flex: <span class="number">1</span>,</span><br><span class="line">                  child: <span class="title class_">UserAccountsDrawerHeader</span>(</span><br><span class="line">                    accountName: <span class="title class_">Text</span>(<span class="string">&quot;用户名&quot;</span>),</span><br><span class="line">                    accountEmail: <span class="title class_">Text</span>(<span class="string">&quot;邮箱&quot;</span>),</span><br><span class="line">                    decoration: <span class="title class_">BoxDecoration</span>(</span><br><span class="line">                      image: <span class="title class_">DecorationImage</span>(</span><br><span class="line">                        fit: <span class="title class_">BoxFit</span>.cover,</span><br><span class="line">                        image: <span class="title class_">NetworkImage</span>(<span class="string">&quot;&lt;url&gt;&quot;</span>)</span><br><span class="line">                      ),</span><br><span class="line">                    ),</span><br><span class="line">                    currentAccountPicture: <span class="title class_">CircleAvatar</span>(</span><br><span class="line">                      backgroundImage: <span class="title class_">NetworkImage</span>(<span class="string">&quot;&lt;url&gt;&quot;</span>),</span><br><span class="line">                    ),</span><br><span class="line">                    otherAccountsPictures: [</span><br><span class="line">                      <span class="title class_">CircleAvatar</span>(</span><br><span class="line">                        backgroundImage: <span class="title class_">NetworkImage</span>(<span class="string">&quot;&lt;url&gt;&quot;</span>),</span><br><span class="line">                      ),</span><br><span class="line">                      <span class="title class_">CircleAvatar</span>(</span><br><span class="line">                        backgroundImage: <span class="title class_">NetworkImage</span>(<span class="string">&quot;&lt;url&gt;&quot;</span>),</span><br><span class="line">                      )</span><br><span class="line">                    ],</span><br><span class="line">                  ),</span><br><span class="line">                )</span><br><span class="line">              ],</span><br><span class="line">            )</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="AppBar顶部导航栏"><a href="#AppBar顶部导航栏" class="headerlink" title="AppBar顶部导航栏"></a>AppBar顶部导航栏</h2><blockquote>
+<p><code>title</code>：标题<br><code>leading</code>：左侧图标，通常是菜单图标或返回图标<br><code>actions</code>：右侧图标，可以定义多个<br><code>backgroundColor</code>：背景颜色</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(</span><br><span class="line">        title: <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;文本内容&quot;</span>),</span><br><span class="line">        leading: <span class="title class_">IconButton</span>(</span><br><span class="line">          icon: <span class="keyword">const</span> <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.menu),</span><br><span class="line">          onPressed: () &#123;&#125;,</span><br><span class="line">        ),</span><br><span class="line">        actions: [</span><br><span class="line">          <span class="title class_">IconButton</span>(</span><br><span class="line">            icon: <span class="keyword">const</span> <span class="title class_">Icon</span>(<span class="title class_">Icons</span>.search),</span><br><span class="line">            onPressed: () &#123;&#125;,</span><br><span class="line">          )</span><br><span class="line">        ],</span><br><span class="line">        backgroundColor: <span class="title class_">Colors</span>.red,</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现通过顶部导航栏切换页面"><a href="#实现通过顶部导航栏切换页面" class="headerlink" title="实现通过顶部导航栏切换页面"></a>实现通过顶部导航栏切换页面</h3><ul>
+<li><code>TabController</code>的<code>length</code>，与<code>TabBar</code>的<code>tabs</code>数量要保持一致</li>
+<li><code>TabController</code>的<code>length</code>，与<code>TabBarView</code>的<code>children</code>数量要保持一致</li>
+</ul>
+<blockquote>
+<p><code>isScrollable</code>：定义是否可以滚动<br><code>indicatorColor</code>：指示器（当前选项卡底部的光标）的颜色<br><code>indicatorWeight</code>：指示器的粗细<br><code>indicatorSize</code>：指示器的长度</p>
+<blockquote>
+<p><code>TabBarIndicatorSize.label</code>：与文字等长<br><code>TabBarIndicatorSize.tab</code>：与标签等长</p>
+</blockquote>
+<p><code>indicator</code>：指示器样式</p>
+<blockquote>
+<p><code>color</code>：指示器背景颜色<br><code>borderRadius</code>：指示器圆角</p>
+</blockquote>
+<p><code>labelColor</code>：所有文字颜色<br><code>unselectedLabelColor</code>：未选中文字颜色<br><code>labelStyle</code>：文字样式</p>
+<blockquote>
+<p><code>fontSize</code>：字号</p>
+</blockquote>
+<p><code>padding</code>：边距</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>( <span class="keyword">const</span> <span class="title class_">MaterialApp</span>(</span><br><span class="line">    title: <span class="string">&quot;文本内容&quot;</span>,</span><br><span class="line">    home: <span class="title class_">App</span>(),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">App</span>(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">State</span>&lt;<span class="title class_">App</span>&gt; <span class="title function_">createState</span>() =&gt; <span class="title class_">_AppState</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_AppState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">App</span>&gt; <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">late</span> <span class="title class_">TabController</span> _tabController;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">initState</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>.<span class="title function_">initState</span>();</span><br><span class="line">    _tabController = <span class="title class_">TabController</span>(length: <span class="number">3</span>, vsync: <span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="title class_">Widget</span> <span class="title function_">build</span>(<span class="title class_">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(</span><br><span class="line">        title: <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;文本内容&quot;</span>),</span><br><span class="line">        bottom: <span class="title class_">TabBar</span>(</span><br><span class="line">          controller: _tabController,</span><br><span class="line">          tabs: <span class="keyword">const</span> [</span><br><span class="line">            <span class="title class_">Tab</span>(</span><br><span class="line">              child: <span class="title class_">Text</span>(<span class="string">&quot;文本标题1&quot;</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="title class_">Tab</span>(</span><br><span class="line">              child: <span class="title class_">Text</span>(<span class="string">&quot;文本标题2&quot;</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="title class_">Tab</span>(</span><br><span class="line">              child: <span class="title class_">Text</span>(<span class="string">&quot;文本标题3&quot;</span>),</span><br><span class="line">            ),</span><br><span class="line">          ],</span><br><span class="line">          isScrollable: <span class="keyword">true</span>,</span><br><span class="line">          indicatorColor: <span class="title class_">Colors</span>.white,</span><br><span class="line">          indicatorWeight: <span class="number">2</span>,</span><br><span class="line">          indicatorSize: <span class="title class_">TabBarIndicatorSize</span>.tab,</span><br><span class="line">          indicator: <span class="title class_">BoxDecoration</span>(</span><br><span class="line">            color: <span class="title class_">Colors</span>.black,</span><br><span class="line">            borderRadius: <span class="title class_">BorderRadius</span>.<span class="title function_">circular</span>(<span class="number">5</span>),</span><br><span class="line">          ),</span><br><span class="line">          labelColor: <span class="title class_">Colors</span>.red,</span><br><span class="line">          unselectedLabelColor: <span class="title class_">Colors</span>.white,</span><br><span class="line">          labelStyle: <span class="keyword">const</span> <span class="title class_">TextStyle</span>(</span><br><span class="line">            fontSize: <span class="number">20</span></span><br><span class="line">          ),</span><br><span class="line">          padding: <span class="keyword">const</span> <span class="title class_">EdgeInsets</span>.<span class="title function_">all</span>(<span class="number">5</span>),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      body: <span class="title class_">TabBarView</span>(</span><br><span class="line">        controller: _tabController,</span><br><span class="line">        children: [</span><br><span class="line">          <span class="title class_">ListView</span>(</span><br><span class="line">            children: <span class="keyword">const</span> [</span><br><span class="line">              <span class="title class_">ListTile</span>(</span><br><span class="line">                title: <span class="title class_">Text</span>(<span class="string">&quot;文本内容1&quot;</span>),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">ListView</span>(</span><br><span class="line">            children: <span class="keyword">const</span> [</span><br><span class="line">              <span class="title class_">ListTile</span>(</span><br><span class="line">                title: <span class="title class_">Text</span>(<span class="string">&quot;文本内容2&quot;</span>),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">          <span class="title class_">ListView</span>(</span><br><span class="line">            children: <span class="keyword">const</span> [</span><br><span class="line">              <span class="title class_">ListTile</span>(</span><br><span class="line">                title: <span class="title class_">Text</span>(<span class="string">&quot;文本内容3&quot;</span>),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前选中的tab索引值"><a href="#获取当前选中的tab索引值" class="headerlink" title="获取当前选中的tab索引值"></a>获取当前选中的tab索引值</h4><ul>
+<li>监听tabController的改变事件，获取当前选中的tab索引值</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">initState</span>() &#123;</span><br><span class="line">  <span class="keyword">super</span>.<span class="title function_">initState</span>();</span><br><span class="line">  _tabController = <span class="title class_">TabController</span>(length: <span class="number">3</span>, vsync: <span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// 监听tabController的改变事件，获取当前选中的tab索引值</span></span><br><span class="line">  _tabController.<span class="title function_">addListener</span>(() &#123;</span><br><span class="line">    <span class="keyword">if</span> (_tabController.animation!.value == _tabController.index) &#123;</span><br><span class="line">      <span class="title function_">print</span>(_tabController.index);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="销毁controller"><a href="#销毁controller" class="headerlink" title="销毁controller"></a>销毁controller</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dispose</span>() &#123;</span><br><span class="line">  <span class="keyword">super</span>.<span class="title function_">dispose</span>();</span><br><span class="line">  _tabController.<span class="title function_">dispose</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义顶部导航栏高度"><a href="#定义顶部导航栏高度" class="headerlink" title="定义顶部导航栏高度"></a>定义顶部导航栏高度</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">PreferredSize</span>(</span><br><span class="line">        preferredSize: <span class="keyword">const</span> <span class="title class_">Size</span>.<span class="title function_">fromHeight</span>(<span class="number">50</span>),</span><br><span class="line">        child: <span class="title class_">AppBar</span>(</span><br><span class="line">          title: <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;文本内容&quot;</span>),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义顶部导航栏阴影"><a href="#定义顶部导航栏阴影" class="headerlink" title="定义顶部导航栏阴影"></a>定义顶部导航栏阴影</h3><blockquote>
+<p><code>elevation</code>：定义顶部导航栏阴影大小</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="title function_">runApp</span>(<span class="title class_">MaterialApp</span>(</span><br><span class="line">    home: <span class="title class_">Scaffold</span>(</span><br><span class="line">      appBar: <span class="title class_">AppBar</span>(</span><br><span class="line">        title: <span class="keyword">const</span> <span class="title class_">Text</span>(<span class="string">&quot;文本内容&quot;</span>),</span><br><span class="line">        elevation: <span class="number">10</span>,</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV1S4411E7LY/">哔哩哔哩——筱筱知晓</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Dart/" rel="tag"># Dart</a>
+              <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/24/Flutter%E7%9A%84MaterialApp%E6%9D%90%E6%96%99%E7%BB%84%E4%BB%B6/" rel="prev" title="【笔记】Flutter的MaterialApp材料组件">
+                  <i class="fa fa-angle-left"></i> 【笔记】Flutter的MaterialApp材料组件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/24/Flutter%E7%9A%84Container%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6/" rel="next" title="【笔记】Flutter的Container容器组件">
+                  【笔记】Flutter的Container容器组件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

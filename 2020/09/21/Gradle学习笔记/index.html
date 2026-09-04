@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化建构工具。Gradle 构建脚本使用的是 Groovy 或 Kotlin 的特定领域语言来编写的，而不是传统的XML。（维基百科）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Gradle学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2020/09/21/Gradle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化建构工具。Gradle 构建脚本使用的是 Groovy 或 Kotlin 的特定领域语言来编写的，而不是传统的XML。（维基百科）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-21T00:11:40.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.603Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="Grovvy">
+<meta property="article:tag" content="Kotlin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2020/09/21/Gradle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2020/09/21/Gradle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2020/09/21/Gradle学习笔记/","title":"【笔记】Gradle学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Gradle学习笔记 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">0x000000000002</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%94%AF%E6%8C%81%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="nav-number">0x000000000003</span> <span class="nav-text">查看支持的任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E6%9E%84%E5%BB%BA%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">0x000000000004</span> <span class="nav-text">清理构建的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5JVM%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%A2%E5%BC%8F%E8%BF%90%E8%A1%8C"><span class="nav-number">0x000000000005</span> <span class="nav-text">以JVM应用程序的形式运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81"><span class="nav-number">0x000000000006</span> <span class="nav-text">编译代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="nav-number">0x000000000007</span> <span class="nav-text">测试代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%9E%84%E5%BB%BA"><span class="nav-number">0x000000000008</span> <span class="nav-text">完整构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Groovy%E4%BD%9C%E4%B8%BA%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="nav-number">0x000000000009</span> <span class="nav-text">使用Groovy作为构建脚本语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><span class="nav-number">0x000000000109</span> <span class="nav-text">Java项目构建脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaWeb%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><span class="nav-number">0x000000000209</span> <span class="nav-text">JavaWeb项目构建脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E7%88%B6%E5%AD%90%E7%BA%A7%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><span class="nav-number">0x000000000309</span> <span class="nav-text">包含父子级模块的微服务项目构建脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E7%BB%A7%E6%89%BF%E7%88%B6%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="nav-number">0x000000010309</span> <span class="nav-text">子模块继承父模块的依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E5%85%B6%E4%BB%96%E5%AD%90%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="nav-number">0x000000020309</span> <span class="nav-text">子模块引用其他子模块的依赖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Kotlin%E4%BD%9C%E4%B8%BA%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="nav-number">0x00000000000A</span> <span class="nav-text">使用Kotlin作为构建脚本语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC-1"><span class="nav-number">0x00000000010A</span> <span class="nav-text">Java项目构建脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86Maven%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%BD%9C%E4%B8%BAGradle%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="nav-number">0x00000000000B</span> <span class="nav-text">将Maven的本地仓库作为Gradle的本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#settings-gradle"><span class="nav-number">0x00000000000C</span> <span class="nav-text">settings.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#settings%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000000010C</span> <span class="nav-text">settings对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%A0%B9%E9%A1%B9%E7%9B%AE%E5%90%8D"><span class="nav-number">0x00000001010C</span> <span class="nav-text">定义根项目名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#settings%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">0x00000000020C</span> <span class="nav-text">settings对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="nav-number">0x00000001020C</span> <span class="nav-text">配置插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">0x00000002020C</span> <span class="nav-text">配置子模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6%E4%BB%93%E5%BA%93%E5%92%8C%E4%BE%9D%E8%B5%96%E4%BB%93%E5%BA%93"><span class="nav-number">0x00000003020C</span> <span class="nav-text">配置插件仓库和依赖仓库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#build-gradle"><span class="nav-number">0x00000000000D</span> <span class="nav-text">build.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#project%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000000010D</span> <span class="nav-text">project对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%BB%84ID"><span class="nav-number">0x00000001010D</span> <span class="nav-text">定义组ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A1%B9%E7%9B%AE%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">0x00000002010D</span> <span class="nav-text">定义项目版本号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A1%B9%E7%9B%AE%E5%90%8D"><span class="nav-number">0x00000003010D</span> <span class="nav-text">定义项目名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">0x00000004010D</span> <span class="nav-text">定义项目描述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#project%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">0x00000000020D</span> <span class="nav-text">project对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6-1"><span class="nav-number">0x00000001020D</span> <span class="nav-text">配置插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BE%9D%E8%B5%96%E4%BB%93%E5%BA%93"><span class="nav-number">0x00000002020D</span> <span class="nav-text">配置依赖仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00000003020D</span> <span class="nav-text">配置项目依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9C%BA%E6%99%AF%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00000103020D</span> <span class="nav-text">配置不同场景的依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00010103020D</span> <span class="nav-text">配置依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEAPI%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00020103020D</span> <span class="nav-text">配置API依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%85%E7%BC%96%E8%AF%91%E6%97%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00030103020D</span> <span class="nav-text">配置仅编译时依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%85%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00040103020D</span> <span class="nav-text">配置仅运行时依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%85%E6%B5%8B%E8%AF%95%E6%97%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00050103020D</span> <span class="nav-text">配置仅测试时依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%85%E5%AE%89%E5%8D%93%E6%B5%8B%E8%AF%95%E6%97%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00060103020D</span> <span class="nav-text">配置仅安卓测试时依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEJava%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00070103020D</span> <span class="nav-text">配置Java注解处理依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEKotlin%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00080103020D</span> <span class="nav-text">配置Kotlin注解处理依赖</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E4%BD%9C%E4%B8%BA%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00000203020D</span> <span class="nav-text">指定本地文件作为依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="nav-number">0x00010203020D</span> <span class="nav-text">指定文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%9B%AE%E5%BD%95"><span class="nav-number">0x00020203020D</span> <span class="nav-text">指定目录</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%AD%90%E6%A8%A1%E5%9D%97%E4%BD%9C%E4%B8%BA%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00000303020D</span> <span class="nav-text">指定子模块作为依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8E%92%E9%99%A4%E5%AD%90%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00000403020D</span> <span class="nav-text">配置排除子依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8E%92%E9%99%A4%E5%8D%95%E4%B8%AA%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00010403020D</span> <span class="nav-text">排除单个依赖</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8E%92%E9%99%A4%E6%95%B4%E7%BB%84%E4%BE%9D%E8%B5%96"><span class="nav-number">0x00020403020D</span> <span class="nav-text">排除整组依赖</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E4%BE%9D%E8%B5%96%E7%89%88%E6%9C%AC"><span class="nav-number">0x00000503020D</span> <span class="nav-text">强制依赖版本</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%B5%8B%E8%AF%95"><span class="nav-number">0x00000004020D</span> <span class="nav-text">配置测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEJava%E7%89%88%E6%9C%AC%EF%BC%88Java%E6%8F%92%E4%BB%B6%EF%BC%89"><span class="nav-number">0x00000005020D</span> <span class="nav-text">配置Java版本（Java插件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E7%B1%BB%EF%BC%88Application%E6%8F%92%E4%BB%B6%EF%BC%89"><span class="nav-number">0x00000006020D</span> <span class="nav-text">配置主类（Application插件）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000000000E</span> <span class="nav-text">任务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%96%E4%BF%AE%E6%94%B9%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000000010E</span> <span class="nav-text">添加或修改任务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000001010E</span> <span class="nav-text">添加自定义任务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E4%BB%BB%E5%8A%A1%E7%B1%BB%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000002010E</span> <span class="nav-text">根据任务类添加自定义任务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%B7%B2%E5%AD%98%E5%9C%A8%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000003010E</span> <span class="nav-text">修改已存在任务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9build%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000004010E</span> <span class="nav-text">修改build任务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000005010E</span> <span class="nav-text">修改默认任务配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E9%BB%98%E8%AE%A4%E4%BB%BB%E5%8A%A1"><span class="nav-number">0x00000000020E</span> <span class="nav-text">指定默认任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%BB%E5%8A%A1%E6%B7%BB%E5%8A%A0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">0x00000000030E</span> <span class="nav-text">为任务添加生命周期函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%BB%E5%8A%A1%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">0x00000000040E</span> <span class="nav-text">为任务添加命令行参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E6%89%80%E5%9C%A8%E7%BB%84"><span class="nav-number">0x00000000050E</span> <span class="nav-text">定义任务所在组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">0x00000000060E</span> <span class="nav-text">定义任务描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E4%BA%8E%E5%85%B6%E4%BB%96%E4%BB%BB%E5%8A%A1"><span class="nav-number">0x00000000070E</span> <span class="nav-text">依赖于其他任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83"><span class="nav-number">0x00000000000F</span> <span class="nav-text">项目发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5maven-publish%E6%8F%92%E4%BB%B6"><span class="nav-number">0x00000000010F</span> <span class="nav-text">引入maven-publish插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%91%E5%B8%83%E9%85%8D%E7%BD%AE"><span class="nav-number">0x00000000020F</span> <span class="nav-text">添加发布配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000010</span> <span class="nav-text">多模块项目配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E6%A8%A1%E5%9D%97%E5%8F%8A%E6%89%80%E6%9C%89%E5%AD%90%E6%A8%A1%E5%9D%97%E9%83%BD%E7%94%9F%E6%95%88%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000110</span> <span class="nav-text">当前模块及所有子模块都生效的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%AD%90%E6%A8%A1%E5%9D%97%E9%83%BD%E7%94%9F%E6%95%88%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000210</span> <span class="nav-text">所有子模块都生效的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6-2"><span class="nav-number">0x000000010210</span> <span class="nav-text">配置插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5Kotlin%E6%96%87%E4%BB%B6%E4%BD%9C%E4%B8%BAGradle%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000011</span> <span class="nav-text">以Kotlin文件作为Gradle配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5kotlin-dsl%E6%8F%92%E4%BB%B6"><span class="nav-number">0x000000000111</span> <span class="nav-text">引入kotlin-dsl插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000000211</span> <span class="nav-text">自定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000010211</span> <span class="nav-text">定义函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000020211</span> <span class="nav-text">调用函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000000311</span> <span class="nav-text">自定义属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000010311</span> <span class="nav-text">定义属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000020311</span> <span class="nav-text">调用属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6%E5%8F%8A%E4%BB%BB%E5%8A%A1"><span class="nav-number">0x000000000411</span> <span class="nav-text">自定义插件及任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6%E7%B1%BB"><span class="nav-number">0x000000010411</span> <span class="nav-text">定义插件类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%8F%92%E4%BB%B6%E7%B1%BB%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6id"><span class="nav-number">0x000000020411</span> <span class="nav-text">通过插件类配置插件id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">0x000000030411</span> <span class="nav-text">调用插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000012</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x000000000013</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2020/09/21/Gradle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Gradle学习笔记 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Gradle学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-21 08:11:40" itemprop="dateCreated datePublished" datetime="2020-09-21T08:11:40+08:00">2020-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116182878430729750</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化建构工具。Gradle 构建脚本使用的是 Groovy 或 Kotlin 的特定领域语言来编写的，而不是传统的XML。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/Gradle">维基百科</a>）</p>
+<span id="more"></span>
+
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><ul>
+<li>如果当前目录不为空，会提示是否覆盖</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle init</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看支持的任务"><a href="#查看支持的任务" class="headerlink" title="查看支持的任务"></a>查看支持的任务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle tasks</span><br></pre></td></tr></table></figure>
+
+<h2 id="清理构建的文件"><a href="#清理构建的文件" class="headerlink" title="清理构建的文件"></a>清理构建的文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle clean</span><br></pre></td></tr></table></figure>
+
+<h2 id="以JVM应用程序的形式运行"><a href="#以JVM应用程序的形式运行" class="headerlink" title="以JVM应用程序的形式运行"></a>以JVM应用程序的形式运行</h2><ul>
+<li>来自application插件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle run</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h2><ul>
+<li>来自java插件</li>
+</ul>
+<blockquote>
+<p><code>-q</code>：不显示输出</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle classes</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><ul>
+<li>来自java插件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle test</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整构建"><a href="#完整构建" class="headerlink" title="完整构建"></a>完整构建</h2><ul>
+<li>包含编译和测试</li>
+<li>来自application插件和java插件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle build</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Groovy作为构建脚本语言"><a href="#使用Groovy作为构建脚本语言" class="headerlink" title="使用Groovy作为构建脚本语言"></a>使用Groovy作为构建脚本语言</h2><h3 id="Java项目构建脚本"><a href="#Java项目构建脚本" class="headerlink" title="Java项目构建脚本"></a>Java项目构建脚本</h3><figure class="highlight plaintext"><figcaption><span>settings.gradle</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = &#x27;&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight groovy"><figcaption><span>build.gradle</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">&#x27;java&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group = <span class="string">&#x27;org.example&#x27;</span></span><br><span class="line">version = <span class="string">&#x27;1.0-SNAPSHOT&#x27;</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testImplementation platform(<span class="string">&#x27;org.junit:junit-bom:5.10.0&#x27;</span>)</span><br><span class="line">    testImplementation <span class="string">&#x27;org.junit.jupiter:junit-jupiter&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test &#123;</span><br><span class="line">    useJUnitPlatform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JavaWeb项目构建脚本"><a href="#JavaWeb项目构建脚本" class="headerlink" title="JavaWeb项目构建脚本"></a>JavaWeb项目构建脚本</h3><ul>
+<li>在<code>src/main</code>目录下创建<code>webapp/WEB-INF/web.xml</code>文件</li>
+</ul>
+<figure class="highlight xml"><figcaption><span>src/main/webapp/WEB-INF/web.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">&quot;2.4&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee</span></span></span><br><span class="line"><span class="string"><span class="tag">      http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>build.gradle</code>文件中添加<code>war</code>插件</li>
+</ul>
+<figure class="highlight groovy"><figcaption><span>build.gradle</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">&#x27;java&#x27;</span></span><br><span class="line">    id <span class="string">&#x27;war&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group <span class="string">&#x27;org.example&#x27;</span></span><br><span class="line">version <span class="string">&#x27;1.0-SNAPSHOT&#x27;</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testImplementation platform(<span class="string">&#x27;org.junit:junit-bom:5.10.0&#x27;</span>)</span><br><span class="line">    testImplementation <span class="string">&#x27;org.junit.jupiter:junit-jupiter&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test &#123;</span><br><span class="line">    useJUnitPlatform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="包含父子级模块的微服务项目构建脚本"><a href="#包含父子级模块的微服务项目构建脚本" class="headerlink" title="包含父子级模块的微服务项目构建脚本"></a>包含父子级模块的微服务项目构建脚本</h3><h4 id="子模块继承父模块的依赖"><a href="#子模块继承父模块的依赖" class="headerlink" title="子模块继承父模块的依赖"></a>子模块继承父模块的依赖</h4><ul>
+<li>如果希望子模块继承父模块的依赖，可以在父模块的<code>build.gradle</code>文件通过<code>allprojects&#123;&#125;</code>定义公共依赖，此时所有子模块<code>build.gradle</code>即使什么也不配置，也同样拥有所有被<code>allprojects&#123;&#125;</code>包裹起来的配置</li>
+</ul>
+<figure class="highlight groovy"><figcaption><span>build.gradle</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    plugins &#123;</span><br><span class="line">        id <span class="string">&#x27;java&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    group <span class="string">&#x27;org.example&#x27;</span></span><br><span class="line">    version <span class="string">&#x27;1.0-SNAPSHOT&#x27;</span></span><br><span class="line">    </span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    dependencies &#123;</span><br><span class="line">        testImplementation platform(<span class="string">&#x27;org.junit:junit-bom:5.10.0&#x27;</span>)</span><br><span class="line">        testImplementation <span class="string">&#x27;org.junit.jupiter:junit-jupiter&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    test &#123;</span><br><span class="line">        useJUnitPlatform()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="子模块引用其他子模块的依赖"><a href="#子模块引用其他子模块的依赖" class="headerlink" title="子模块引用其他子模块的依赖"></a>子模块引用其他子模块的依赖</h4><ul>
+<li>如果多个子模块需要引用相同的依赖，可以通过在其中一个子模块的<code>build.gradle</code>文件配置依赖，然后在另一个子模块引用这个子模块的所有依赖</li>
+</ul>
+<blockquote>
+<p><code>:子模块名</code>：其他子模块名可以在父模块的<code>settings.gradle</code>中复制</p>
+</blockquote>
+<figure class="highlight groovy"><figcaption><span>build.gradle</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile(<span class="string">&quot;:子模块名&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Kotlin作为构建脚本语言"><a href="#使用Kotlin作为构建脚本语言" class="headerlink" title="使用Kotlin作为构建脚本语言"></a>使用Kotlin作为构建脚本语言</h2><h3 id="Java项目构建脚本-1"><a href="#Java项目构建脚本-1" class="headerlink" title="Java项目构建脚本"></a>Java项目构建脚本</h3><figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;java&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group = <span class="string">&quot;org.example&quot;</span></span><br><span class="line">version = <span class="string">&quot;1.0-SNAPSHOT&quot;</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testImplementation(platform(<span class="string">&quot;org.junit:junit-bom:5.10.0&quot;</span>))</span><br><span class="line">    testImplementation(<span class="string">&quot;org.junit.jupiter:junit-jupiter&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tasks.test &#123;</span><br><span class="line">    useJUnitPlatform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将Maven的本地仓库作为Gradle的本地仓库"><a href="#将Maven的本地仓库作为Gradle的本地仓库" class="headerlink" title="将Maven的本地仓库作为Gradle的本地仓库"></a>将Maven的本地仓库作为Gradle的本地仓库</h2><figure class="highlight shell"><figcaption><span>~/.bashrc</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export GRADLE_USER_HOME=&quot;Maven的本地仓库路径&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="settings-gradle"><a href="#settings-gradle" class="headerlink" title="settings.gradle"></a>settings.gradle</h2><ul>
+<li><code>settings.gradle</code>文件的全局对象为<code>settings</code>，可以省略</li>
+</ul>
+<h3 id="settings对象的属性"><a href="#settings对象的属性" class="headerlink" title="settings对象的属性"></a>settings对象的属性</h3><h4 id="定义根项目名"><a href="#定义根项目名" class="headerlink" title="定义根项目名"></a>定义根项目名</h4><figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = <span class="string">&quot;项目名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="settings对象的方法"><a href="#settings对象的方法" class="headerlink" title="settings对象的方法"></a>settings对象的方法</h3><h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><blockquote>
+<p><code>id(&quot;&quot;)</code>：根据插件ID指定插件<br><code>version(&quot;&quot;)</code>：指定插件版本</p>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;&quot;</span>) version <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置子模块"><a href="#配置子模块" class="headerlink" title="配置子模块"></a>配置子模块</h4><figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include(<span class="string">&quot;子模块名&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include(<span class="string">&quot;子模块名1&quot;</span>, <span class="string">&quot;子模块名2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置插件仓库和依赖仓库"><a href="#配置插件仓库和依赖仓库" class="headerlink" title="配置插件仓库和依赖仓库"></a>配置插件仓库和依赖仓库</h4><blockquote>
+<p><code>gradlePluginPortal()</code>：Gradle插件仓库<br><code>google()</code>：Google插件仓库<br><code>maven</code>：配置Maven插件仓库</p>
+<blockquote>
+<p><code>setUrl(&quot;&quot;)</code>：配置Maven仓库URL</p>
+<blockquote>
+<p><code>https://maven.aliyun.com/repository/public</code>：阿里云Maven仓库</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>settings.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pluginManagement &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        gradlePluginPortal()</span><br><span class="line">        google()</span><br><span class="line">        maven &#123;</span><br><span class="line">            setUrl(<span class="string">&quot;https://maven.aliyun.com/repository/public&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h2><ul>
+<li><code>build.gradle</code>文件的全局对象为<code>project</code>，可以省略</li>
+</ul>
+<h3 id="project对象的属性"><a href="#project对象的属性" class="headerlink" title="project对象的属性"></a>project对象的属性</h3><h4 id="定义组ID"><a href="#定义组ID" class="headerlink" title="定义组ID"></a>定义组ID</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group = <span class="string">&quot;org.example&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="定义项目版本号"><a href="#定义项目版本号" class="headerlink" title="定义项目版本号"></a>定义项目版本号</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version = <span class="string">&quot;1.0-SNAPSHOT&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="定义项目名"><a href="#定义项目名" class="headerlink" title="定义项目名"></a>定义项目名</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;demo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="定义项目描述"><a href="#定义项目描述" class="headerlink" title="定义项目描述"></a>定义项目描述</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">description = <span class="string">&quot;项目描述&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="project对象的方法"><a href="#project对象的方法" class="headerlink" title="project对象的方法"></a>project对象的方法</h3><h4 id="配置插件-1"><a href="#配置插件-1" class="headerlink" title="配置插件"></a>配置插件</h4><blockquote>
+<p><code>id(&quot;java&quot;)</code>：构建Java项目<br><code>id(&quot;war&quot;)</code>：构建JavaWeb项目<br><code>id(&quot;application&quot;)</code>：构建Java项目，生成可执行程序（Jar包）<br><code>id(&quot;cpp-application&quot;)</code>：构建C++应用<br><code>id(&quot;swift-application&quot;)</code>：构建Swift应用<br><code>id(&quot;org.jetbrains.kotlin.jvm&quot;) version &quot;2.1.21&quot;</code>、<code>kotlin(&quot;jvm&quot;) version &quot;2.1.21&quot;</code>：构建Kotlin项目</p>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;java&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置依赖仓库"><a href="#配置依赖仓库" class="headerlink" title="配置依赖仓库"></a>配置依赖仓库</h4><blockquote>
+<p><code>mavenCentral()</code>：Maven官方仓库<br><code>maven</code>：配置Maven仓库</p>
+<blockquote>
+<p><code>setUrl(&quot;&quot;)</code>：配置Maven仓库URL</p>
+<blockquote>
+<p><code>https://maven.aliyun.com/repository/public</code>：阿里云Maven仓库</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">respositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">    maven &#123;</span><br><span class="line">        setUrl(<span class="string">&quot;https://maven.aliyun.com/repository/public&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置项目依赖"><a href="#配置项目依赖" class="headerlink" title="配置项目依赖"></a>配置项目依赖</h4><ul>
+<li>传递一个参数</li>
+</ul>
+<blockquote>
+<p><code>5.10.0</code>：指定具体版本<br><code>+</code>：指定最新版本</p>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(platform(<span class="string">&quot;org.junit:junit-bom:5.10.0&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>传递三个参数</li>
+</ul>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(platform(<span class="string">&quot;org.junit&quot;</span>, <span class="string">&quot;junit-bom&quot;</span>, <span class="string">&quot;5.10.0&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置不同场景的依赖"><a href="#配置不同场景的依赖" class="headerlink" title="配置不同场景的依赖"></a>配置不同场景的依赖</h5><h6 id="配置依赖"><a href="#配置依赖" class="headerlink" title="配置依赖"></a>配置依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置API依赖"><a href="#配置API依赖" class="headerlink" title="配置API依赖"></a>配置API依赖</h6><ul>
+<li>API依赖会暴露给所有项目的模块</li>
+</ul>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    api(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置仅编译时依赖"><a href="#配置仅编译时依赖" class="headerlink" title="配置仅编译时依赖"></a>配置仅编译时依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compileOnly(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置仅运行时依赖"><a href="#配置仅运行时依赖" class="headerlink" title="配置仅运行时依赖"></a>配置仅运行时依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    runtimeOnly(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置仅测试时依赖"><a href="#配置仅测试时依赖" class="headerlink" title="配置仅测试时依赖"></a>配置仅测试时依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    testImplementation(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置仅安卓测试时依赖"><a href="#配置仅安卓测试时依赖" class="headerlink" title="配置仅安卓测试时依赖"></a>配置仅安卓测试时依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    androidTestImplementation(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置Java注解处理依赖"><a href="#配置Java注解处理依赖" class="headerlink" title="配置Java注解处理依赖"></a>配置Java注解处理依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    annotationProcessor(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="配置Kotlin注解处理依赖"><a href="#配置Kotlin注解处理依赖" class="headerlink" title="配置Kotlin注解处理依赖"></a>配置Kotlin注解处理依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    kapt(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定本地文件作为依赖"><a href="#指定本地文件作为依赖" class="headerlink" title="指定本地文件作为依赖"></a>指定本地文件作为依赖</h5><h6 id="指定文件"><a href="#指定文件" class="headerlink" title="指定文件"></a>指定文件</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(files(<span class="string">&quot;lib/&lt;file_1&gt;.jar&quot;</span>), files(<span class="string">&quot;lib/&lt;file_2&gt;.jar&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(fileTree(<span class="string">&quot;lib&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定子模块作为依赖"><a href="#指定子模块作为依赖" class="headerlink" title="指定子模块作为依赖"></a>指定子模块作为依赖</h5><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(project(<span class="string">&quot;:模块名&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置排除子依赖"><a href="#配置排除子依赖" class="headerlink" title="配置排除子依赖"></a>配置排除子依赖</h5><h6 id="排除单个依赖"><a href="#排除单个依赖" class="headerlink" title="排除单个依赖"></a>排除单个依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        exclude(<span class="string">&quot;org.junit&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="排除整组依赖"><a href="#排除整组依赖" class="headerlink" title="排除整组依赖"></a>排除整组依赖</h6><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        exclude(<span class="string">&quot;org.junit&quot;</span>, <span class="string">&quot;junit-bom&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="强制依赖版本"><a href="#强制依赖版本" class="headerlink" title="强制依赖版本"></a>强制依赖版本</h5><blockquote>
+<p><code>!!</code>：强制指定的依赖版本</p>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation(platform(<span class="string">&quot;org.junit:junit-bom:5.10.0!!&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置测试"><a href="#配置测试" class="headerlink" title="配置测试"></a>配置测试</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.test &#123;</span><br><span class="line">    useJUnitPlatform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置Java版本（Java插件）"><a href="#配置Java版本（Java插件）" class="headerlink" title="配置Java版本（Java插件）"></a>配置Java版本（Java插件）</h4><blockquote>
+<p><code>souceCompatibility</code>：定义编码时的Java版本<br><code>targetCompatibility</code>：定义编译后需要的Java版本</p>
+</blockquote>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java &#123;</span><br><span class="line">    souceCompatibility = JavaVersion.VERSION_21</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_21</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">configure&lt;JavaPluginExtension&gt; &#123;</span><br><span class="line">    souceCompatibility = JavaVersion.VERSION_21</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_21</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置主类（Application插件）"><a href="#配置主类（Application插件）" class="headerlink" title="配置主类（Application插件）"></a>配置主类（Application插件）</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">application &#123;</span><br><span class="line">    mainClass = <span class="string">&quot;org.example.demo.Main&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">configure&lt;JavaApplication&gt; &#123;</span><br><span class="line">    mainClass = <span class="string">&quot;org.example.demo.Main&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务配置"><a href="#任务配置" class="headerlink" title="任务配置"></a>任务配置</h2><h3 id="添加或修改任务配置"><a href="#添加或修改任务配置" class="headerlink" title="添加或修改任务配置"></a>添加或修改任务配置</h3><h4 id="添加自定义任务配置"><a href="#添加自定义任务配置" class="headerlink" title="添加自定义任务配置"></a>添加自定义任务配置</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;新任务名&quot;</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据任务类添加自定义任务配置"><a href="#根据任务类添加自定义任务配置" class="headerlink" title="根据任务类添加自定义任务配置"></a>根据任务类添加自定义任务配置</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> 任务类名 : DefaultTask() &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> 属性名: String = <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@TaskAction</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">doTask</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">method</span><span class="params">(形参)</span></span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tasks.register&lt;任务类名&gt;(属性值) &#123;</span><br><span class="line">    method(实参)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改已存在任务配置"><a href="#修改已存在任务配置" class="headerlink" title="修改已存在任务配置"></a>修改已存在任务配置</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.named(<span class="string">&quot;已存在任务名&quot;</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改build任务配置"><a href="#修改build任务配置" class="headerlink" title="修改build任务配置"></a>修改build任务配置</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.build &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改默认任务配置"><a href="#修改默认任务配置" class="headerlink" title="修改默认任务配置"></a>修改默认任务配置</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.register&lt;Task&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定默认任务"><a href="#指定默认任务" class="headerlink" title="指定默认任务"></a>指定默认任务</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaultTasks(<span class="string">&quot;任务名&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew</span><br></pre></td></tr></table></figure>
+
+<h3 id="为任务添加生命周期函数"><a href="#为任务添加生命周期函数" class="headerlink" title="为任务添加生命周期函数"></a>为任务添加生命周期函数</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line">    doFirst &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    doLast &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew 任务名</span><br></pre></td></tr></table></figure>
+
+<h3 id="为任务添加命令行参数"><a href="#为任务添加命令行参数" class="headerlink" title="为任务添加命令行参数"></a>为任务添加命令行参数</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line">    doFirst &#123;</span><br><span class="line">        println(project.properties[<span class="string">&quot;参数名&quot;</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    doLast &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew 任务名 -P 参数名=值</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义任务所在组"><a href="#定义任务所在组" class="headerlink" title="定义任务所在组"></a>定义任务所在组</h3><ul>
+<li>在IDEA的Gradle插件中会以组区分任务，默认组名为<code>build</code></li>
+</ul>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    group = <span class="string">&quot;build&quot;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义任务描述"><a href="#定义任务描述" class="headerlink" title="定义任务描述"></a>定义任务描述</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    description = <span class="string">&quot;任务描述&quot;</span></span><br><span class="line"></span><br><span class="line">    doFirst &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    doLast &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew tasks</span><br></pre></td></tr></table></figure>
+
+<h3 id="依赖于其他任务"><a href="#依赖于其他任务" class="headerlink" title="依赖于其他任务"></a>依赖于其他任务</h3><ul>
+<li>在其他任务执行之后执行当前任务</li>
+</ul>
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    dependsOn(<span class="string">&quot;任务名&quot;</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tasks.register(<span class="string">&quot;任务名&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    dependsOn(tasks.compileJava)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目发布"><a href="#项目发布" class="headerlink" title="项目发布"></a>项目发布</h2><h3 id="引入maven-publish插件"><a href="#引入maven-publish插件" class="headerlink" title="引入maven-publish插件"></a>引入<code>maven-publish</code>插件</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;maven-publish&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加发布配置"><a href="#添加发布配置" class="headerlink" title="添加发布配置"></a>添加发布配置</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">publishing &#123;</span><br><span class="line">    publications &#123;</span><br><span class="line">        create&lt;MavenPublication&gt;(<span class="string">&quot;library&quot;</span>) &#123;</span><br><span class="line">            groupId = <span class="string">&quot;org.example&quot;</span></span><br><span class="line">            artifact = <span class="string">&quot;demo&quot;</span></span><br><span class="line">            version = <span class="string">&quot;1.0-SNAPSHOT&quot;</span></span><br><span class="line">            from(components[<span class="string">&quot;java&quot;</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenLocal()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多模块项目配置"><a href="#多模块项目配置" class="headerlink" title="多模块项目配置"></a>多模块项目配置</h2><h3 id="当前模块及所有子模块都生效的配置"><a href="#当前模块及所有子模块都生效的配置" class="headerlink" title="当前模块及所有子模块都生效的配置"></a>当前模块及所有子模块都生效的配置</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="所有子模块都生效的配置"><a href="#所有子模块都生效的配置" class="headerlink" title="所有子模块都生效的配置"></a>所有子模块都生效的配置</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置插件-2"><a href="#配置插件-2" class="headerlink" title="配置插件"></a>配置插件</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;</span><br><span class="line">    apply(plugin = <span class="string">&quot;java&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="以Kotlin文件作为Gradle配置"><a href="#以Kotlin文件作为Gradle配置" class="headerlink" title="以Kotlin文件作为Gradle配置"></a>以Kotlin文件作为Gradle配置</h2><h3 id="引入kotlin-dsl插件"><a href="#引入kotlin-dsl插件" class="headerlink" title="引入kotlin-dsl插件"></a>引入<code>kotlin-dsl</code>插件</h3><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;kotlin-dsl&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h3><h4 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h4><figure class="highlight kt"><figcaption><span>src/main/kotlin/Maven.kt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.gradle.api.artifacts.dsl.RepositoryHandler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> RepositoryHandler.<span class="title">mavenAlibaba</span><span class="params">()</span></span> = maven &#123;</span><br><span class="line">    setUrl(<span class="string">&quot;https://maven.aliyun.com/repository/public&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenAlibaba()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h3><h4 id="定义属性"><a href="#定义属性" class="headerlink" title="定义属性"></a>定义属性</h4><figure class="highlight kt"><figcaption><span>src/main/kotlin/Maven.kt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.gradle.api.JavaVersion</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> Version &#123;</span><br><span class="line">    <span class="keyword">val</span> sourceVersion = JavaVersion.VERSION_21</span><br><span class="line">    <span class="keyword">val</span> targetVersion = JavaVersion.VERSION_21</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="调用属性"><a href="#调用属性" class="headerlink" title="调用属性"></a>调用属性</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">configure&lt;JavaPluginExtension&gt; &#123;</span><br><span class="line">    sourceCompatibility = Version.sourceVersion</span><br><span class="line">    targetCompatibility = Version.targetVersion</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义插件及任务"><a href="#自定义插件及任务" class="headerlink" title="自定义插件及任务"></a>自定义插件及任务</h3><h4 id="定义插件类"><a href="#定义插件类" class="headerlink" title="定义插件类"></a>定义插件类</h4><figure class="highlight kt"><figcaption><span>src/main/kotlin/Plugin.kt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.gradle.api.Plugin</span><br><span class="line"><span class="keyword">import</span> org.gradle.api.Project</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> 插件类名 : Plugin&lt;Project&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(target: <span class="type">Project</span>)</span></span> &#123;</span><br><span class="line">        target.tasks.register(<span class="string">&quot;任务名1&quot;</span>) &#123;</span><br><span class="line">            doFirst &#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">            doLast &#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        target.tasks.register(<span class="string">&quot;任务名2&quot;</span>) &#123;</span><br><span class="line">            doFirst &#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">            doLast &#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过插件类配置插件id"><a href="#通过插件类配置插件id" class="headerlink" title="通过插件类配置插件id"></a>通过插件类配置插件id</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gradlePlugin &#123;</span><br><span class="line">    plugins &#123;</span><br><span class="line">        create(<span class="string">&quot;插件名&quot;</span>) &#123;</span><br><span class="line">            id = <span class="string">&quot;自定义插件id&quot;</span></span><br><span class="line">            implementationClass = <span class="string">&quot;插件类全局限定名&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="调用插件"><a href="#调用插件" class="headerlink" title="调用插件"></a>调用插件</h4><figure class="highlight kts"><figcaption><span>build.gradle.kts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;自定义插件id&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1At411375J/">哔哩哔哩——代码基基</a><br><a target="_blank" rel="noopener" href="https://www.javaroad.cn/questions/138479">javaroad</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fc411x7xF">哔哩哔哩——青空の霞光</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+              <a href="/tags/Grovvy/" rel="tag"># Grovvy</a>
+              <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/09/19/%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95%E6%B1%82%E8%B4%A8%E6%95%B0/" rel="prev" title="【代码】递归方法求质数">
+                  <i class="fa fa-angle-left"></i> 【代码】递归方法求质数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/09/23/IDEASpringBootDI%E6%B3%A8%E5%85%A5%E6%8A%A5%E9%94%99/" rel="next" title="【踩坑】IDEA Spring Boot DI 注入报错">
+                  【踩坑】IDEA Spring Boot DI 注入报错 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言ES全称是ECAMScript，它是由ECAM国际标准化组织制定的一项脚本语言的标准化规范从ES5之后的更新，从2015年6月开始每1年更新1次，并增加1次版本号如2015年6月的版本为ES2015，又被称为ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】ES5及以后的新特性">
+<meta property="og:url" content="https://loli.fj.cn/2023/05/14/ES5%E5%8F%8A%E4%BB%A5%E5%90%8E%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言ES全称是ECAMScript，它是由ECAM国际标准化组织制定的一项脚本语言的标准化规范从ES5之后的更新，从2015年6月开始每1年更新1次，并增加1次版本号如2015年6月的版本为ES2015，又被称为ES6">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-14T08:43:48.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.589Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2023/05/14/ES5%E5%8F%8A%E4%BB%A5%E5%90%8E%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2023/05/14/ES5%E5%8F%8A%E4%BB%A5%E5%90%8E%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/","path":"2023/05/14/ES5及以后的新特性/","title":"【笔记】ES5及以后的新特性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】ES5及以后的新特性 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%80%9A%E8%BF%87forEach-%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E9%81%8D%E5%8E%86"><span class="nav-number">0x000000000002</span> <span class="nav-text">数组通过forEach()函数进行遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%80%9A%E8%BF%87filter-%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E7%AD%9B%E9%80%89"><span class="nav-number">0x000000000003</span> <span class="nav-text">数组通过filter()函数进行筛选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%80%9A%E8%BF%87some-%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%9F%A5%E6%89%BE"><span class="nav-number">0x000000000004</span> <span class="nav-text">数组通过some()函数进行查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8E%BB%E9%99%A4%E9%A6%96%E5%B0%BE%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">0x000000000005</span> <span class="nav-text">字符串去除首尾空白字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">0x000000000006</span> <span class="nav-text">对象的属性描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E4%BA%8E%E7%9A%84%E5%8F%98%E9%87%8F"><span class="nav-number">0x000000000007</span> <span class="nav-text">具有块级作用于的变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">0x000000000107</span> <span class="nav-text">let关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">0x000000000207</span> <span class="nav-text">const关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA"><span class="nav-number">0x000000000008</span> <span class="nav-text">对象增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E5%A2%9E%E5%BC%BA"><span class="nav-number">0x000000000108</span> <span class="nav-text">对象属性的增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E5%A2%9E%E5%BC%BA"><span class="nav-number">0x000000000208</span> <span class="nav-text">对象方法的增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%90%8D"><span class="nav-number">0x000000000308</span> <span class="nav-text">计算属性名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">0x000000000009</span> <span class="nav-text">Symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89Symbol"><span class="nav-number">0x000000000109</span> <span class="nav-text">定义Symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">0x000000010109</span> <span class="nav-text">Symbol的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000001010109</span> <span class="nav-text">获取对象的属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">0x000000000209</span> <span class="nav-text">Symbol的描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%85%B7%E6%9C%89%E6%8F%8F%E8%BF%B0%E7%9A%84Symbol"><span class="nav-number">0x000000010209</span> <span class="nav-text">定义具有描述的Symbol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Symbol%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">0x000000020209</span> <span class="nav-text">获取Symbol的描述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%9B%B8%E5%90%8C%E7%9A%84Symbol"><span class="nav-number">0x000000000309</span> <span class="nav-text">定义相同的Symbol</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%EF%BC%88Destructuring%EF%BC%89"><span class="nav-number">0x00000000000A</span> <span class="nav-text">解构（Destructuring）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%9E%84"><span class="nav-number">0x00000000010A</span> <span class="nav-text">数组的解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">0x00000000020A</span> <span class="nav-text">对象的结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E5%BC%80%E8%AF%AD%E6%B3%95%EF%BC%88Spread-Syntax%EF%BC%89"><span class="nav-number">0x00000000000B</span> <span class="nav-text">展开语法（Spread Syntax）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%B1%95%E5%BC%80%E7%9A%84%E5%8F%98%E9%87%8F"><span class="nav-number">0x00000000010B</span> <span class="nav-text">可展开的变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">0x00000001010B</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">0x00000002010B</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000003010B</span> <span class="nav-text">对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E5%BC%80%E8%AF%AD%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">0x00000000020B</span> <span class="nav-text">展开语法的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E6%97%B6"><span class="nav-number">0x00000001020B</span> <span class="nav-text">调用函数时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E6%97%B6"><span class="nav-number">0x00000002020B</span> <span class="nav-text">定义数组时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%97%B6"><span class="nav-number">0x00000003020B</span> <span class="nav-text">创建对象时</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">0x00000000000C</span> <span class="nav-text">模板字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E5%B9%B6%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">0x00000000010C</span> <span class="nav-text">通过模板字符串调用函数并传递参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">0x00000000000D</span> <span class="nav-text">变量默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%BA%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">0x00000000010D</span> <span class="nav-text">通过空值合并操作符为变量定义默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">0x00000000020D</span> <span class="nav-text">为函数形参定义默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E5%85%B7%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E6%97%B6%E7%9A%84%E5%BD%A2%E5%8F%82%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">0x00000001020D</span> <span class="nav-text">形参具有默认值时的形参书写顺序（推荐）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E5%85%B7%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E6%97%B6%E7%9A%84%E5%8F%82%E6%95%B0%E4%B8%AA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x00000002020D</span> <span class="nav-text">形参具有默认值时的参数个数统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC%E5%AE%9A%E4%B9%89%E4%B8%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000003020D</span> <span class="nav-text">函数的默认值定义为对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">0x00000000000E</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F%E8%A1%A8%E7%A4%BA"><span class="nav-number">0x00000000000F</span> <span class="nav-text">不同进制数的字面量表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">0x00000000010F</span> <span class="nav-text">十进制数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">0x00000000020F</span> <span class="nav-text">二进制数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">0x00000000030F</span> <span class="nav-text">八进制数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">0x00000000040F</span> <span class="nav-text">十六进制数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set%E9%9B%86%E5%90%88"><span class="nav-number">0x000000000010</span> <span class="nav-text">Set集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set%E9%9B%86%E5%90%88-1"><span class="nav-number">0x000000000110</span> <span class="nav-text">Set集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89Set%E9%9B%86%E5%90%88"><span class="nav-number">0x000000010110</span> <span class="nav-text">定义Set集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E6%80%BB%E6%95%B0"><span class="nav-number">0x000000020110</span> <span class="nav-text">获取元素总数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">0x000000030110</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">0x000000040110</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0"><span class="nav-number">0x000000050110</span> <span class="nav-text">删除所有元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0"><span class="nav-number">0x000000060110</span> <span class="nav-text">判断是否包含指定元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86Set%E9%9B%86%E5%90%88"><span class="nav-number">0x000000070110</span> <span class="nav-text">遍历Set集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set%E9%9B%86%E5%90%88%E4%B8%8E%E6%95%B0%E7%BB%84%E4%BA%92%E8%BD%AC"><span class="nav-number">0x000000080110</span> <span class="nav-text">Set集合与数组互转</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BASet%E9%9B%86%E5%90%88"><span class="nav-number">0x000001080110</span> <span class="nav-text">数组转换为Set集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Set%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">0x000002080110</span> <span class="nav-text">Set集合转换为数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakSet%E9%9B%86%E5%90%88"><span class="nav-number">0x000000000210</span> <span class="nav-text">WeakSet集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89WeakSet%E9%9B%86%E5%90%88"><span class="nav-number">0x000000010210</span> <span class="nav-text">定义WeakSet集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0-1"><span class="nav-number">0x000000020210</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0-1"><span class="nav-number">0x000000030210</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0-1"><span class="nav-number">0x000000040210</span> <span class="nav-text">判断是否包含指定元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E6%98%A0%E5%B0%84"><span class="nav-number">0x000000000011</span> <span class="nav-text">Map映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map%E6%98%A0%E5%B0%84-1"><span class="nav-number">0x000000000111</span> <span class="nav-text">Map映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89Map%E6%98%A0%E5%B0%84"><span class="nav-number">0x000000010111</span> <span class="nav-text">定义Map映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC%E5%AF%B9%E6%80%BB%E6%95%B0"><span class="nav-number">0x000000020111</span> <span class="nav-text">获取键值对总数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%96%E4%BF%AE%E6%94%B9%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000030111</span> <span class="nav-text">添加或修改键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E8%8E%B7%E5%8F%96%E5%80%BC"><span class="nav-number">0x000000040111</span> <span class="nav-text">根据指定键获取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000050111</span> <span class="nav-text">根据指定键删除键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000060111</span> <span class="nav-text">删除所有键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E5%88%A4%E5%AE%9A%E9%94%AE%E5%80%BC%E5%AF%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">0x000000070111</span> <span class="nav-text">根据指定键判定键值对是否存在</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000080111</span> <span class="nav-text">遍历键值对</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WakeMap%E6%98%A0%E5%B0%84"><span class="nav-number">0x000000000211</span> <span class="nav-text">WakeMap映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89WeakMap%E6%98%A0%E5%B0%84"><span class="nav-number">0x000000010211</span> <span class="nav-text">定义WeakMap映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%96%E4%BF%AE%E6%94%B9%E9%94%AE%E5%80%BC%E5%AF%B9-1"><span class="nav-number">0x000000020211</span> <span class="nav-text">添加或修改键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E8%8E%B7%E5%8F%96%E5%80%BC-1"><span class="nav-number">0x000000030211</span> <span class="nav-text">根据指定键获取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9-1"><span class="nav-number">0x000000040211</span> <span class="nav-text">根据指定键删除键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E9%94%AE%E5%88%A4%E5%AE%9A%E9%94%AE%E5%80%BC%E5%AF%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8-1"><span class="nav-number">0x000000050211</span> <span class="nav-text">根据指定键判定键值对是否存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0"><span class="nav-number">0x000000000012</span> <span class="nav-text">判断数组中是否存在指定元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%BC%80%E5%A7%8B%E6%9F%A5%E6%89%BE%E4%BD%8D%E7%BD%AE"><span class="nav-number">0x000000000112</span> <span class="nav-text">指定开始查找位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B9%98%E6%96%B9"><span class="nav-number">0x000000000013</span> <span class="nav-text">计算乘方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%80%E6%9C%89%E9%94%AE%E5%92%8C%E6%89%80%E6%9C%89%E5%80%BC"><span class="nav-number">0x000000000014</span> <span class="nav-text">获取对象的所有键和所有值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">0x000000000015</span> <span class="nav-text">将对象转换为二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">0x000000000115</span> <span class="nav-text">将字符串转换为二维数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%B9%E6%8D%AE%E9%95%BF%E5%BA%A6%E8%A1%A5%E9%BD%90%E7%A9%BA%E7%99%BD"><span class="nav-number">0x000000000016</span> <span class="nav-text">字符串根据长度补齐空白</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%A6%96%E9%83%A8%E8%A1%A5%E9%BD%90%E7%A9%BA%E7%99%BD"><span class="nav-number">0x000000000116</span> <span class="nav-text">从字符串首部补齐空白</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%BE%E9%83%A8%E8%A1%A5%E9%BD%90%E7%A9%BA%E7%99%BD"><span class="nav-number">0x000000000216</span> <span class="nav-text">从字符串尾部补齐空白</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%B7%BB%E5%8A%A0%E9%80%97%E5%8F%B7"><span class="nav-number">0x000000000017</span> <span class="nav-text">允许参数列表末尾添加逗号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">0x000000000018</span> <span class="nav-text">获取对象的属性描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E4%B8%8A%E4%BD%BF%E7%94%A8%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">0x000000000019</span> <span class="nav-text">对象上使用展开运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="nav-number">0x00000000001A</span> <span class="nav-text">将多维数组数组扁平化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%85%E8%BF%9B%E8%A1%8C%E6%89%81%E5%B9%B3%E5%8C%96"><span class="nav-number">0x00000000011A</span> <span class="nav-text">仅进行扁平化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E5%86%8D%E8%BF%9B%E8%A1%8C%E6%89%81%E5%B9%B3%E5%8C%96"><span class="nav-number">0x00000000021A</span> <span class="nav-text">先处理数据再进行扁平化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x00000000001B</span> <span class="nav-text">将二维数组转换为对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8E%BB%E9%99%A4%E9%A6%96%E5%B0%BE%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6-1"><span class="nav-number">0x00000000001C</span> <span class="nav-text">字符串去除首尾空白字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E9%A6%96%E5%B0%BE%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">0x00000000011C</span> <span class="nav-text">去除首尾空白字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E9%A6%96%E9%83%A8%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">0x00000000021C</span> <span class="nav-text">去除首部空白字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E5%B0%BE%E9%83%A8%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="nav-number">0x00000000031C</span> <span class="nav-text">去除尾部空白字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol%E7%9A%84%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">0x00000000001D</span> <span class="nav-text">Symbol的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BigInt"><span class="nav-number">0x00000000001E</span> <span class="nav-text">BigInt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">0x00000000001F</span> <span class="nav-text">空值合并操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">0x000000000020</span> <span class="nav-text">可选链操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000000000120</span> <span class="nav-text">安全的访问属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%9F%AD%E8%B7%AF%E4%B8%8E"><span class="nav-number">0x000000010120</span> <span class="nav-text">通过短路与</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">0x000000020120</span> <span class="nav-text">通过可选链操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000000220</span> <span class="nav-text">安全的执行函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%9F%AD%E8%B7%AF%E4%B8%8E-1"><span class="nav-number">0x000000010220</span> <span class="nav-text">通过短路与</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6-1"><span class="nav-number">0x000000020220</span> <span class="nav-text">通过可选链操作符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000021</span> <span class="nav-text">全局对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for%E2%80%A6in%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">0x000000000022</span> <span class="nav-text">for…in标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E8%A2%ABGC%E5%9B%9E%E6%94%B6%E5%90%8E%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">0x000000000023</span> <span class="nav-text">对象被GC回收后的回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000024</span> <span class="nav-text">弱引用对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">0x000000000025</span> <span class="nav-text">逻辑赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6"><span class="nav-number">0x000000000026</span> <span class="nav-text">长数字分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%BF%E6%8D%A2%E5%AD%90%E4%B8%B2"><span class="nav-number">0x000000000027</span> <span class="nav-text">字符串替换子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E8%AE%BF%E9%97%AE%E6%96%B9%E6%B3%95"><span class="nav-number">0x000000000028</span> <span class="nav-text">元素访问方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%B1%9E%E6%80%A7%E6%98%AF%E5%90%A6%E5%9C%A8%E5%BD%93%E5%89%8D%E5%AF%B9%E8%B1%A1%E4%B8%8A%E8%80%8C%E9%9D%9E%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E4%B8%8A"><span class="nav-number">0x000000000029</span> <span class="nav-text">判断属性是否在当前对象上而非原型对象上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%96%B0%E6%88%90%E5%91%98"><span class="nav-number">0x00000000002A</span> <span class="nav-text">类中的新成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%85%B1%E5%B1%9E%E6%80%A7%E5%92%8C%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000000012A</span> <span class="nav-text">公共属性和私有属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%85%B1%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000001012A</span> <span class="nav-text">公共属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%A6%E5%AE%9A%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000002012A</span> <span class="nav-text">约定的私有属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000003012A</span> <span class="nav-text">私有属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E5%92%8C%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000000022A</span> <span class="nav-text">实例属性和静态属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000001022A</span> <span class="nav-text">实例属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000002022A</span> <span class="nav-text">静态属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">0x00000102022A</span> <span class="nav-text">静态私有属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">0x00000000032A</span> <span class="nav-text">静态代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x00000000002B</span> <span class="nav-text">完成</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2023/05/14/ES5%E5%8F%8A%E4%BB%A5%E5%90%8E%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】ES5及以后的新特性 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】ES5及以后的新特性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-14 16:43:48" itemprop="dateCreated datePublished" datetime="2023-05-14T16:43:48+08:00">2023-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">JavaScript学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116181541542308769</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ES全称是ECAMScript，它是由ECAM国际标准化组织制定的一项脚本语言的标准化规范<br>从ES5之后的更新，从2015年6月开始每1年更新1次，并增加1次版本号<br>如2015年6月的版本为ES2015，又被称为ES6</p>
+<span id="more"></span>
+
+<h2 id="数组通过forEach-函数进行遍历"><a href="#数组通过forEach-函数进行遍历" class="headerlink" title="数组通过forEach()函数进行遍历"></a>数组通过<code>forEach()</code>函数进行遍历</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = arr.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">currentValue, index, array, thisArg</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentValue, index, array, thisArg);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组通过filter-函数进行筛选"><a href="#数组通过filter-函数进行筛选" class="headerlink" title="数组通过filter()函数进行筛选"></a>数组通过<code>filter()</code>函数进行筛选</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = arr.<span class="title function_">filter</span>(<span class="keyword">function</span> (<span class="params">currentValue, index, array, thisArg</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> currentValue;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组通过some-函数进行查找"><a href="#数组通过some-函数进行查找" class="headerlink" title="数组通过some()函数进行查找"></a>数组通过<code>some()</code>函数进行查找</h2><ul>
+<li>回调函数返回true时会立即终止循环</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> exist = arr.<span class="title function_">some</span>(<span class="keyword">function</span> (<span class="params">currentValue, index, array, thisArg</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串去除首尾空白字符"><a href="#字符串去除首尾空白字符" class="headerlink" title="字符串去除首尾空白字符"></a>字符串去除首尾空白字符</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;  hello world  &quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">trim</span>(); <span class="comment">// &quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的属性描述符"><a href="#对象的属性描述符" class="headerlink" title="对象的属性描述符"></a>对象的属性描述符</h2><p><a href="/2025/03/12/JS%E7%9A%84%E5%AF%B9%E8%B1%A1/#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6">传送门</a></p>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&quot;key&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>, <span class="comment">// 不可被再次修改描述符</span></span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span>, <span class="comment">// 不可被枚举</span></span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">false</span>, <span class="comment">// 不可被修改</span></span><br><span class="line">  <span class="attr">value</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 定义属性的值</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">_key</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&quot;key&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>, <span class="comment">// 不可被再次修改描述符</span></span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span>, <span class="comment">// 不可被枚举</span></span><br><span class="line">  <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">// 被读取时触发的回调函数</span></span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">_key</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">value</span>) &#123; <span class="comment">// 被修改时触发的回调函数</span></span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">_key</span> = value;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="具有块级作用于的变量"><a href="#具有块级作用于的变量" class="headerlink" title="具有块级作用于的变量"></a>具有块级作用于的变量</h2><ul>
+<li><p>var定义的变量在全局作用域都有效，let和const定义的变量是块级变量，只有在当前的块级作用域有效</p>
+</li>
+<li><p>存在作用域的变量：let定义的变量、const定义的变量、function定义的函数、class定义的类</p>
+</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> b = <span class="literal">null</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>var定义的变量可以再次被定义，let和const定义的变量不能再次定义</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// const a = &quot;&quot;;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>var在全局作用域定义的变量会作为window对象的属性，let和const在全局作用域定义的变量不会作为window对象的属性</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">a</span>); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">a</span>); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="let关键字"><a href="#let关键字" class="headerlink" title="let关键字"></a>let关键字</h3><ul>
+<li>let可以先声明变量再赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a;</span><br><span class="line">a = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>let也可以直接定义变量</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="const关键字"><a href="#const关键字" class="headerlink" title="const关键字"></a>const关键字</h3><ul>
+<li>const定义的变量是只读变量，不能被修改</li>
+<li>const必须直接定义变量，不能先声明变量再赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>const定义的变量不能再次赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// a = 0;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="对象增强"><a href="#对象增强" class="headerlink" title="对象增强"></a>对象增强</h2><h3 id="对象属性的增强"><a href="#对象属性的增强" class="headerlink" title="对象属性的增强"></a>对象属性的增强</h3><ul>
+<li>将一个变量值作为对象的一个属性值时，如果变量名与属性名相同，可以简写</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">key</span>: key</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  key</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对象方法的增强"><a href="#对象方法的增强" class="headerlink" title="对象方法的增强"></a>对象方法的增强</h3><ul>
+<li>在对象中定义方法时，可以简写</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">fn</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="title function_">fn</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算属性名"><a href="#计算属性名" class="headerlink" title="计算属性名"></a>计算属性名</h3><ul>
+<li>在对象中定义一个属性时，如果这个属性名是可能会变化的，可以将变量值作为属性名</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="string">&quot;filed-name&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义对象并定义属性</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  [key]: <span class="string">&quot;value&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加或修改属性</span></span><br><span class="line">obj[key] = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除属性</span></span><br><span class="line"><span class="keyword">delete</span> obj[key];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 属性修饰符</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="定义Symbol"><a href="#定义Symbol" class="headerlink" title="定义Symbol"></a>定义Symbol</h3><ul>
+<li>通过<code>Symbol()</code>可以得到一个绝对唯一的标识符</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="title class_">Symbol</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbol的应用"><a href="#Symbol的应用" class="headerlink" title="Symbol的应用"></a>Symbol的应用</h4><ul>
+<li>作为<a href="./#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%90%8D">计算属性名</a></li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbol = <span class="title class_">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义对象并定义属性</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  [symbol]: <span class="string">&quot;value&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加或修改属性</span></span><br><span class="line">obj[symbol] = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除属性</span></span><br><span class="line"><span class="keyword">delete</span> obj[symbol];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 属性修饰符</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, symbol, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取对象的属性"><a href="#获取对象的属性" class="headerlink" title="获取对象的属性"></a>获取对象的属性</h6><ul>
+<li>获取除了Symbol定义的属性</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取Symbol定义的属性</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbols = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Symbol的描述"><a href="#Symbol的描述" class="headerlink" title="Symbol的描述"></a>Symbol的描述</h3><h4 id="定义具有描述的Symbol"><a href="#定义具有描述的Symbol" class="headerlink" title="定义具有描述的Symbol"></a>定义具有描述的Symbol</h4><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbol = <span class="title class_">Symbol</span>(<span class="string">&quot;description&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取Symbol的描述"><a href="#获取Symbol的描述" class="headerlink" title="获取Symbol的描述"></a>获取Symbol的描述</h4><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(symbol.<span class="property">description</span>); <span class="comment">// &quot;description&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义相同的Symbol"><a href="#定义相同的Symbol" class="headerlink" title="定义相同的Symbol"></a>定义相同的Symbol</h3><ul>
+<li>Symbol默认无论如何定义都是不相同的</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbol1 = <span class="title class_">Symbol</span>(<span class="string">&quot;description&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> symbol2 = <span class="title class_">Symbol</span>(<span class="string">&quot;description&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(symbol1 === symbol2); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果使用<code>for()</code>函数定义Symbol，如果描述相同，则Symbol相同</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbol1 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;description&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> symbol2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;description&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(symbol1 === symbol2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="解构（Destructuring）"><a href="#解构（Destructuring）" class="headerlink" title="解构（Destructuring）"></a>解构（Destructuring）</h2><ul>
+<li>一些编程语言，…，允许多个变量被并行的赋值，…，如果赋值的右手侧是一个单一变量（比如一个数组或结构），这个特征就叫做解包（unpacking）或解构（<a href="/302.html?target=https://zh.wikipedia.org/wiki/%E6%8C%87%E5%AE%9A%E6%95%98%E8%BF%B0#%E5%B9%B6%E8%A1%8C%E8%B5%8B%E5%80%BC">维基百科</a>）</li>
+</ul>
+<h3 id="数组的解构"><a href="#数组的解构" class="headerlink" title="数组的解构"></a>数组的解构</h3><ul>
+<li>解构数组时，映射到等号左面的变量名有顺序要求</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;value&quot;</span>, <span class="string">&quot;value&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> [ key1, key2 ] = arr;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构数组时，如果数值对应索引的值被抛弃，则对应索引位置的变量需留空</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;value1&quot;</span>, <span class="string">&quot;value2&quot;</span>, <span class="string">&quot;value3&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> [ key1, , key3 ] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key3); <span class="comment">// &quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构数组时，映射到等号左面的变量个数超出，则多出来的变量值为<code>undefined</code></li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;value&quot;</span>, <span class="string">&quot;value&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> [ key1, key2, key3 ] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key3); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构数组时，映射到等号左边的变量期望是数组时，需要使用<code>...</code>扩展运算符，得到剩余参数</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key2 = []</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;value1&quot;</span>, <span class="string">&quot;value2&quot;</span>, <span class="string">&quot;value3&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> [ key1, ...keyOther ] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(keyOther); <span class="comment">// [&quot;value2&quot;, &quot;value3&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构数组时，可以为等号左边的变量定义缺省值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;value1&quot;</span>, <span class="literal">undefined</span>];</span><br><span class="line"><span class="keyword">const</span> [ key1, key2 = <span class="string">&quot;default2&quot;</span>, key3 = <span class="string">&quot;default3&quot;</span> ] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key2); <span class="comment">// &quot;default2&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key3); <span class="comment">// &quot;default3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对象的结构"><a href="#对象的结构" class="headerlink" title="对象的结构"></a>对象的结构</h3><ul>
+<li>通过与对象相同的属性名的变量进行解构匹配</li>
+<li>解构对象时，映射到等号左面的变量名没有顺序要求</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key1</span>: <span class="string">&quot;value&quot;</span>, <span class="attr">key2</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123; key1, key2 &#125; = obj;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果变量名与解构的属性名不相同，需要手动指定变量<ul>
+<li>通过<code>:</code>定义实际映射的变量名</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key1</span>: <span class="string">&quot;value1&quot;</span>, <span class="attr">key2</span>: <span class="string">&quot;value2&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">key1</span>: key3, key2 &#125; = obj;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key3); <span class="comment">// &quot;value1&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key2); <span class="comment">// &quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构对象时，映射到等号左边的变量期望是对象时，需要使用<code>...</code>扩展运算符，得到剩余参数</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key1</span>: <span class="string">&quot;value1&quot;</span>, <span class="attr">key2</span>: <span class="string">&quot;value2&quot;</span>, <span class="attr">key3</span>: <span class="string">&quot;value3&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123; key1, ...keyOther &#125; = obj;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(keyOther); <span class="comment">// &#123;key2: &quot;value2&quot;, key3: &quot;value3&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解构对象时，可以为等号左边的变量定义缺省值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key1</span>: <span class="literal">undefined</span>, <span class="attr">key2</span>: <span class="literal">undefined</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">key1</span>: key3 = <span class="string">&quot;default1&quot;</span>, key2 = <span class="string">&quot;default2&quot;</span> &#125; = obj;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key3); <span class="comment">// &quot;default1&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key2); <span class="comment">// &quot;default2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="展开语法（Spread-Syntax）"><a href="#展开语法（Spread-Syntax）" class="headerlink" title="展开语法（Spread Syntax）"></a>展开语法（Spread Syntax）</h2><h3 id="可展开的变量"><a href="#可展开的变量" class="headerlink" title="可展开的变量"></a>可展开的变量</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul>
+<li>将一个数组转换成一组用逗号分隔的参数序列</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...arr);</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ul>
+<li>将一个字符串转换成一组用逗号分隔的字符序列</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...str);</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><ul>
+<li>将一个对象转换成一组用逗号分隔的键值对序列</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES9.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">key1</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  ...obj1,</span><br><span class="line">  <span class="attr">key2</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2); <span class="comment">// &#123; key1: &quot;value&quot;, key2: &quot;value&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="展开语法的使用场景"><a href="#展开语法的使用场景" class="headerlink" title="展开语法的使用场景"></a>展开语法的使用场景</h3><h4 id="调用函数时"><a href="#调用函数时" class="headerlink" title="调用函数时"></a>调用函数时</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [ <span class="string">&quot;value1&quot;</span>, <span class="string">&quot;value2&quot;</span> ];</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1); <span class="comment">// &quot;value1&quot;</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arg2); <span class="comment">// &quot;value2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(...arr);</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义数组时"><a href="#定义数组时" class="headerlink" title="定义数组时"></a>定义数组时</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [ <span class="string">&quot;value1&quot;</span>, <span class="string">&quot;value2&quot;</span> ];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = [ ...arr1, <span class="string">&quot;value3&quot;</span> ];</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建对象时"><a href="#创建对象时" class="headerlink" title="创建对象时"></a>创建对象时</h4><ul>
+<li>将一个对象在另一个对象中展开，这个对象的所有属性键值对会赋值给另一个对象</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES9.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">key1</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  ...obj1,</span><br><span class="line">  <span class="attr">key2</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2); <span class="comment">// &#123; key1: &quot;value&quot;, key2: &quot;value&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="string">&quot;文本内容&quot;</span> + a;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="string">`文本内容<span class="subst">$&#123;a&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过模板字符串调用函数并传递参数"><a href="#通过模板字符串调用函数并传递参数" class="headerlink" title="通过模板字符串调用函数并传递参数"></a>通过模板字符串调用函数并传递参数</h3><ul>
+<li>将模板字符串中的字符串作为第一个参数传递给函数，如果字符串中插入了变量，会根据变量位置拆分字符串，以字符串数组的形式作为第一个参数，其他参数依次是插入的变量值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">...args</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>([<span class="string">&quot;front&quot;</span>, <span class="string">&quot;middle&quot;</span>, <span class="string">&quot;back&quot;</span>], <span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">...args</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// fn([&quot;front&quot;, &quot;middle&quot;, &quot;back&quot;], 1, 2);</span></span><br><span class="line">fn<span class="string">`front&#123;1&#125;middle<span class="subst">$&#123;<span class="number">2</span>&#125;</span>back`</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量默认值"><a href="#变量默认值" class="headerlink" title="变量默认值"></a>变量默认值</h2><h3 id="通过空值合并操作符为变量定义默认值"><a href="#通过空值合并操作符为变量定义默认值" class="headerlink" title="通过空值合并操作符为变量定义默认值"></a>通过空值合并操作符为变量定义默认值</h3><ul>
+<li>为变量赋值时，如果变量值为<code>null</code>或<code>undefined</code>，则实际使用默认值赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> b = a ?? <span class="string">&quot;default&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为函数形参定义默认值"><a href="#为函数形参定义默认值" class="headerlink" title="为函数形参定义默认值"></a>为函数形参定义默认值</h3><ul>
+<li>为函数形参赋值时，如果实参值为<code>undefined</code>，则实际使用默认值赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a = <span class="string">&quot;default&quot;</span></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="形参具有默认值时的形参书写顺序（推荐）"><a href="#形参具有默认值时的形参书写顺序（推荐）" class="headerlink" title="形参具有默认值时的形参书写顺序（推荐）"></a>形参具有默认值时的形参书写顺序（推荐）</h4><ul>
+<li>具有多个形参时，具有默认值的形参最好写在最后</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a, b = <span class="string">&quot;default&quot;</span></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&quot;value&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>具有多个形参时，具有默认值的形参与剩余参数最好都写在最后，剩余参数最好写在具有默认值的形参之后</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a, b = <span class="string">&quot;default&quot;</span>, ...args</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&quot;value&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="形参具有默认值时的参数个数统计"><a href="#形参具有默认值时的参数个数统计" class="headerlink" title="形参具有默认值时的参数个数统计"></a>形参具有默认值时的参数个数统计</h4><ul>
+<li>函数的形参具有默认值时，统计参数个数时，不会被算在内</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a = <span class="string">&quot;default&quot;</span></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn.<span class="property">length</span>); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数的形参具有默认值时，统计arguments的长度时，会根据实参决定arguments的长度</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a = <span class="string">&quot;default&quot;</span></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">length</span>); <span class="comment">// 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a = <span class="string">&quot;default&quot;</span></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">length</span>); <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数的默认值定义为对象"><a href="#函数的默认值定义为对象" class="headerlink" title="函数的默认值定义为对象"></a>函数的默认值定义为对象</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">obj = &#123; key: <span class="string">&quot;value&quot;</span> &#125;</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用结构赋值得到形参默认值对象的属性</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">&#123; key &#125; = &#123; key: <span class="string">&quot;value&quot;</span> &#125;</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结构对象时为属性定义默认值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">&#123; key = <span class="string">&quot;value&quot;</span> &#125; = &#123;&#125;</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><ul>
+<li>箭头函数不能作为构造函数使用</li>
+<li>箭头函数没有super</li>
+<li>箭头函数不绑定this指向，其this指向是上层this指向</li>
+<li>箭头函数没有arguments，无法通过arguments获取参数</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params">arg1, arg2</span>) =&gt; &#123;<span class="variable language_">console</span>.<span class="title function_">log</span>()&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只有一个形参，可以省略小括号</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = arg =&gt; &#123;<span class="variable language_">console</span>.<span class="title function_">log</span>()&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码块内只有一句代码，且为返回语句，可以省略大括号和<code>return</code>关键字</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params">arg1, arg2</span>) =&gt; <span class="string">&quot;value&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码块内只有一句代码，且为返回语句，且返回的是对象，虽然可以省略大括号和<code>return</code>关键字，但要使用<code>()</code>包裹返回的对象</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params">arg1, arg2</span>) =&gt; (&#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="不同进制数的字面量表示"><a href="#不同进制数的字面量表示" class="headerlink" title="不同进制数的字面量表示"></a>不同进制数的字面量表示</h2><h3 id="十进制数"><a href="#十进制数" class="headerlink" title="十进制数"></a>十进制数</h3><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二进制数"><a href="#二进制数" class="headerlink" title="二进制数"></a>二进制数</h3><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">0b1010</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="八进制数"><a href="#八进制数" class="headerlink" title="八进制数"></a>八进制数</h3><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">012</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">0o12</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="十六进制数"><a href="#十六进制数" class="headerlink" title="十六进制数"></a>十六进制数</h3><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">0xA</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h2><ul>
+<li>Set集合中的值不会重复，如果添加重复数据，会自动去重</li>
+</ul>
+<h3 id="Set集合-1"><a href="#Set集合-1" class="headerlink" title="Set集合"></a>Set集合</h3><ul>
+<li>Set集合可以存储任意类型数据</li>
+</ul>
+<h4 id="定义Set集合"><a href="#定义Set集合" class="headerlink" title="定义Set集合"></a>定义Set集合</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取元素总数"><a href="#获取元素总数" class="headerlink" title="获取元素总数"></a>获取元素总数</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = set.<span class="property">size</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><ul>
+<li>元素会自动去重</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.<span class="title function_">add</span>(<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> success = set.<span class="title function_">delete</span>(<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有元素"><a href="#删除所有元素" class="headerlink" title="删除所有元素"></a>删除所有元素</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.<span class="title function_">clear</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断是否包含指定元素"><a href="#判断是否包含指定元素" class="headerlink" title="判断是否包含指定元素"></a>判断是否包含指定元素</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> exist = set.<span class="title function_">has</span>(<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历Set集合"><a href="#遍历Set集合" class="headerlink" title="遍历Set集合"></a>遍历Set集合</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> set) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Set集合与数组互转"><a href="#Set集合与数组互转" class="headerlink" title="Set集合与数组互转"></a>Set集合与数组互转</h4><h5 id="数组转换为Set集合"><a href="#数组转换为Set集合" class="headerlink" title="数组转换为Set集合"></a>数组转换为Set集合</h5><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Set集合转换为数组"><a href="#Set集合转换为数组" class="headerlink" title="Set集合转换为数组"></a>Set集合转换为数组</h5><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(set);</span><br></pre></td></tr></table></figure>
+
+<h3 id="WeakSet集合"><a href="#WeakSet集合" class="headerlink" title="WeakSet集合"></a>WeakSet集合</h3><ul>
+<li>WeakSet集合只能存储引用类型数据，不能存储基本类型数据</li>
+<li>WeakSet集合存储的引用类型数据是弱引用，如果加入到集合的数据没有被其他引用，则会被GC清理</li>
+<li>WeakSet集合不能被遍历，因为元素可能不存在，所以没有<code>size</code>属性和<code>clear()</code>方法</li>
+</ul>
+<h4 id="定义WeakSet集合"><a href="#定义WeakSet集合" class="headerlink" title="定义WeakSet集合"></a>定义WeakSet集合</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> weakSet = <span class="keyword">new</span> <span class="title class_">WeakSet</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加元素-1"><a href="#添加元素-1" class="headerlink" title="添加元素"></a>添加元素</h4><ul>
+<li>元素会自动去重</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line">weakSet.<span class="title function_">add</span>(key);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除元素-1"><a href="#删除元素-1" class="headerlink" title="删除元素"></a>删除元素</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line">weakSet.<span class="title function_">delete</span>(key);</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断是否包含指定元素-1"><a href="#判断是否包含指定元素-1" class="headerlink" title="判断是否包含指定元素"></a>判断是否包含指定元素</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exist = weakSet.<span class="title function_">has</span>(key);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map映射"><a href="#Map映射" class="headerlink" title="Map映射"></a>Map映射</h2><h3 id="Map映射-1"><a href="#Map映射-1" class="headerlink" title="Map映射"></a>Map映射</h3><ul>
+<li>Map对象在<code>toString()</code>操作时会完整返回结构，而Object对象在<code>toString()</code>操作时只会输出<code>[Object object]</code><ul>
+<li>所以相比于Object对象，Map对象更适合作为<a href="./#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%90%8D">计算属性名</a></li>
+</ul>
+</li>
+<li>Map不仅可以将任意类型数据作为值，还可以将任意类型数据作为键，而Object对象只能将字符串或Symbol作为键</li>
+</ul>
+<h4 id="定义Map映射"><a href="#定义Map映射" class="headerlink" title="定义Map映射"></a>定义Map映射</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取键值对总数"><a href="#获取键值对总数" class="headerlink" title="获取键值对总数"></a>获取键值对总数</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = map.<span class="title function_">size</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加或修改键值对"><a href="#添加或修改键值对" class="headerlink" title="添加或修改键值对"></a>添加或修改键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.<span class="title function_">set</span>(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键获取值"><a href="#根据指定键获取值" class="headerlink" title="根据指定键获取值"></a>根据指定键获取值</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = map.<span class="title function_">get</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键删除键值对"><a href="#根据指定键删除键值对" class="headerlink" title="根据指定键删除键值对"></a>根据指定键删除键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> success = map.<span class="title function_">delete</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有键值对"><a href="#删除所有键值对" class="headerlink" title="删除所有键值对"></a>删除所有键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.<span class="title function_">clear</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键判定键值对是否存在"><a href="#根据指定键判定键值对是否存在" class="headerlink" title="根据指定键判定键值对是否存在"></a>根据指定键判定键值对是否存在</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> exist = map.<span class="title function_">has</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历键值对"><a href="#遍历键值对" class="headerlink" title="遍历键值对"></a>遍历键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> map) &#123;</span><br><span class="line">  <span class="keyword">const</span> [key, value] = item;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map.<span class="title function_">forEach</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="WakeMap映射"><a href="#WakeMap映射" class="headerlink" title="WakeMap映射"></a>WakeMap映射</h3><ul>
+<li>WeakMap映射的键只能存储引用类型数据，不能存储基本类型数据</li>
+<li>WeakMap映射存储的键值对的键是弱引用，如果加入到映射的键没有被其他引用，则会被GC清理</li>
+<li>WeakMap映射不能被遍历，因为键值对可能不存在，所以没有<code>size</code>属性和<code>clear()</code>方法</li>
+</ul>
+<h4 id="定义WeakMap映射"><a href="#定义WeakMap映射" class="headerlink" title="定义WeakMap映射"></a>定义WeakMap映射</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> weakMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加或修改键值对-1"><a href="#添加或修改键值对-1" class="headerlink" title="添加或修改键值对"></a>添加或修改键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weakMap.<span class="title function_">set</span>(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键获取值-1"><a href="#根据指定键获取值-1" class="headerlink" title="根据指定键获取值"></a>根据指定键获取值</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = weakMap.<span class="title function_">get</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键删除键值对-1"><a href="#根据指定键删除键值对-1" class="headerlink" title="根据指定键删除键值对"></a>根据指定键删除键值对</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> success = weakMap.<span class="title function_">delete</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据指定键判定键值对是否存在-1"><a href="#根据指定键判定键值对是否存在-1" class="headerlink" title="根据指定键判定键值对是否存在"></a>根据指定键判定键值对是否存在</h4><figure class="highlight js"><figcaption><span>ES6.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> exist = weakMap.<span class="title function_">has</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断数组中是否存在指定元素"><a href="#判断数组中是否存在指定元素" class="headerlink" title="判断数组中是否存在指定元素"></a>判断数组中是否存在指定元素</h2><figure class="highlight js"><figcaption><span>ES7.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exist = arr.<span class="title function_">includes</span>(<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定开始查找位置"><a href="#指定开始查找位置" class="headerlink" title="指定开始查找位置"></a>指定开始查找位置</h3><blockquote>
+<p>0：缺省值，从头查找</p>
+</blockquote>
+<figure class="highlight js"><figcaption><span>ES7.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exist = arr.<span class="title function_">includes</span>(<span class="string">&quot;value&quot;</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="计算乘方"><a href="#计算乘方" class="headerlink" title="计算乘方"></a>计算乘方</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES7.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="number">2</span> ** <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取对象的所有键和所有值"><a href="#获取对象的所有键和所有值" class="headerlink" title="获取对象的所有键和所有值"></a>获取对象的所有键和所有值</h2><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> values = <span class="title class_">Object</span>.<span class="title function_">values</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="将对象转换为二维数组"><a href="#将对象转换为二维数组" class="headerlink" title="将对象转换为二维数组"></a>将对象转换为二维数组</h2><figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key1</span>: <span class="string">&quot;value&quot;</span>, <span class="attr">key2</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = <span class="title class_">Object</span>.<span class="title function_">entries</span>(obj); <span class="comment">// [[&quot;key1&quot;, &quot;value&quot;], [&quot;key2&quot;, &quot;value&quot;]]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将字符串转换为二维数组"><a href="#将字符串转换为二维数组" class="headerlink" title="将字符串转换为二维数组"></a>将字符串转换为二维数组</h3><figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;value&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = <span class="title class_">Object</span>.<span class="title function_">entries</span>(str); <span class="comment">// [[&quot;0&quot;, &quot;v&quot;], [&quot;1&quot;, &quot;a&quot;], [&quot;2&quot;, &quot;l&quot;], [&quot;3&quot;, &quot;u&quot;], [&quot;4&quot;, &quot;e&quot;]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串根据长度补齐空白"><a href="#字符串根据长度补齐空白" class="headerlink" title="字符串根据长度补齐空白"></a>字符串根据长度补齐空白</h2><h3 id="从字符串首部补齐空白"><a href="#从字符串首部补齐空白" class="headerlink" title="从字符串首部补齐空白"></a>从字符串首部补齐空白</h3><blockquote>
+<p><code>2</code>：字符串最短长度<br><code>&quot;0&quot;</code>：用于填充空白字符的字符串</p>
+</blockquote>
+<figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&quot;0&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="从字符串尾部补齐空白"><a href="#从字符串尾部补齐空白" class="headerlink" title="从字符串尾部补齐空白"></a>从字符串尾部补齐空白</h3><figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">padEnd</span>(<span class="number">2</span>, <span class="string">&quot;0&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="允许参数列表末尾添加逗号"><a href="#允许参数列表末尾添加逗号" class="headerlink" title="允许参数列表末尾添加逗号"></a>允许参数列表末尾添加逗号</h2><figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">arg, </span>) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&quot;&quot;</span>, )</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取对象的属性描述符"><a href="#获取对象的属性描述符" class="headerlink" title="获取对象的属性描述符"></a>获取对象的属性描述符</h2><figure class="highlight js"><figcaption><span>ES8.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptors</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象上使用展开运算符"><a href="#对象上使用展开运算符" class="headerlink" title="对象上使用展开运算符"></a>对象上使用展开运算符</h2><p><a href="./#%E5%AF%B9%E8%B1%A1">传送门</a></p>
+<figure class="highlight js"><figcaption><span>ES9.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">key1</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  ...obj1,</span><br><span class="line">  <span class="attr">key2</span>: <span class="string">&quot;value&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2); <span class="comment">// &#123; key1: &quot;value&quot;, key2: &quot;value&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="将多维数组数组扁平化"><a href="#将多维数组数组扁平化" class="headerlink" title="将多维数组数组扁平化"></a>将多维数组数组扁平化</h2><h3 id="仅进行扁平化"><a href="#仅进行扁平化" class="headerlink" title="仅进行扁平化"></a>仅进行扁平化</h3><blockquote>
+<p><code>1</code>：指定层级</p>
+<blockquote>
+<p><code>Infinity</code>：无穷大，展开所有层级</p>
+</blockquote>
+</blockquote>
+<figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, [<span class="number">2</span>]];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = arr.<span class="title function_">flat</span>(<span class="number">1</span>); <span class="comment">// [1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="先处理数据再进行扁平化"><a href="#先处理数据再进行扁平化" class="headerlink" title="先处理数据再进行扁平化"></a>先处理数据再进行扁平化</h3><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [</span><br><span class="line">  <span class="string">&quot;key1 value1 value2&quot;</span>,</span><br><span class="line">  <span class="string">&quot;key2 value&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="title function_">split</span>(<span class="string">&quot; &quot;</span>)).<span class="title function_">flat</span>(<span class="number">1</span>); <span class="comment">// [&quot;key1&quot;, &quot;value1&quot;, &quot;value2&quot;, &quot;key2&quot;, &quot;value&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [</span><br><span class="line">  <span class="string">&quot;key1 value1 value2&quot;</span>,</span><br><span class="line">  <span class="string">&quot;key2 value&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = arr.<span class="title function_">flatMap</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="title function_">split</span>(<span class="string">&quot; &quot;</span>)); <span class="comment">// [&quot;key1&quot;, &quot;value1&quot;, &quot;value2&quot;, &quot;key2&quot;, &quot;value&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="将二维数组转换为对象"><a href="#将二维数组转换为对象" class="headerlink" title="将二维数组转换为对象"></a>将二维数组转换为对象</h2><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [[<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value&quot;</span>], [<span class="string">&quot;key2&quot;</span>, <span class="string">&quot;value&quot;</span>]];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串去除首尾空白字符-1"><a href="#字符串去除首尾空白字符-1" class="headerlink" title="字符串去除首尾空白字符"></a>字符串去除首尾空白字符</h2><h3 id="去除首尾空白字符"><a href="#去除首尾空白字符" class="headerlink" title="去除首尾空白字符"></a>去除首尾空白字符</h3><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;  hello world  &quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">trim</span>(); <span class="comment">// &quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="去除首部空白字符"><a href="#去除首部空白字符" class="headerlink" title="去除首部空白字符"></a>去除首部空白字符</h3><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;  hello world  &quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">trimStart</span>(); <span class="comment">// &quot;hello world  &quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="去除尾部空白字符"><a href="#去除尾部空白字符" class="headerlink" title="去除尾部空白字符"></a>去除尾部空白字符</h3><figure class="highlight js"><figcaption><span>ES10.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;  hello world  &quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">trimEnd</span>(); <span class="comment">// &quot;  hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Symbol的描述-1"><a href="#Symbol的描述-1" class="headerlink" title="Symbol的描述"></a>Symbol的描述</h2><p><a href="./#Symbol%E7%9A%84%E6%8F%8F%E8%BF%B0">传送门</a></p>
+<h2 id="BigInt"><a href="#BigInt" class="headerlink" title="BigInt"></a>BigInt</h2><ul>
+<li>通过在整数末位添加<code>n</code>来表示大整数</li>
+</ul>
+<figure class="highlight jsx"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bigInt = <span class="number">9007199254740993n</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空值合并操作符"><a href="#空值合并操作符" class="headerlink" title="空值合并操作符"></a>空值合并操作符</h2><p><a href="./#%E9%80%9A%E8%BF%87%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%BA%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC">传送门</a></p>
+<h2 id="可选链操作符"><a href="#可选链操作符" class="headerlink" title="可选链操作符"></a>可选链操作符</h2><h3 id="安全的访问属性"><a href="#安全的访问属性" class="headerlink" title="安全的访问属性"></a>安全的访问属性</h3><h4 id="通过短路与"><a href="#通过短路与" class="headerlink" title="通过短路与"></a>通过短路与</h4><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> value = obj &amp;&amp; obj.<span class="property">key</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过可选链操作符"><a href="#通过可选链操作符" class="headerlink" title="通过可选链操作符"></a>通过可选链操作符</h4><figure class="highlight js"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> value = obj?.<span class="property">key</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安全的执行函数"><a href="#安全的执行函数" class="headerlink" title="安全的执行函数"></a>安全的执行函数</h3><h4 id="通过短路与-1"><a href="#通过短路与-1" class="headerlink" title="通过短路与"></a>通过短路与</h4><figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">method</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125; &#125;</span><br><span class="line"></span><br><span class="line">obj &amp;&amp; obj.<span class="title function_">method</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过可选链操作符-1"><a href="#通过可选链操作符-1" class="headerlink" title="通过可选链操作符"></a>通过可选链操作符</h4><figure class="highlight js"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">method</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125; &#125;</span><br><span class="line"></span><br><span class="line">obj?.<span class="property">method</span>?.();</span><br></pre></td></tr></table></figure>
+
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><p><a href="/2025/05/17/JS%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8API%E7%9A%84BOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">传送门</a></p>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(globalThis);</span><br></pre></td></tr></table></figure>
+
+<h2 id="for…in标准化"><a href="#for…in标准化" class="headerlink" title="for…in标准化"></a>for…in标准化</h2><ul>
+<li>for…in从ES3开始就被定义，但直到ES11才被标准化，定义for…in遍历对象时，只会遍历对象的键</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES11.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象被GC回收后的回调函数"><a href="#对象被GC回收后的回调函数" class="headerlink" title="对象被GC回收后的回调函数"></a>对象被GC回收后的回调函数</h2><figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义对象</span></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">const</span> finalizationRegistry = <span class="keyword">new</span> <span class="title class_">FinalizationRegistry</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value, <span class="string">&quot;callback success&quot;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绑定需要监听的对象</span></span><br><span class="line">finalizationRegistry.<span class="title function_">register</span>(obj1);</span><br><span class="line">finalizationRegistry.<span class="title function_">register</span>(obj2, <span class="string">&quot;obj2&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解除对象引用，等待GC回收</span></span><br><span class="line">obj1 = <span class="literal">null</span>;</span><br><span class="line">obj2 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="弱引用对象"><a href="#弱引用对象" class="headerlink" title="弱引用对象"></a>弱引用对象</h2><figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义对象</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span>, <span class="attr">fn</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义弱引用对象</span></span><br><span class="line"><span class="keyword">let</span> weakRef = <span class="keyword">new</span> <span class="title class_">WeakRef</span>(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从弱引用对象中获取属性，如果对象被GC回收则会获取失败</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(weakRef.<span class="title function_">deref</span>().<span class="property">key</span>); <span class="comment">// value</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从弱引用对象中调用方法，如果对象被GC回收则会调用失败</span></span><br><span class="line">weakRef.<span class="title function_">deref</span>().<span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="逻辑赋值运算符"><a href="#逻辑赋值运算符" class="headerlink" title="逻辑赋值运算符"></a>逻辑赋值运算符</h2><ul>
+<li>如果传递了零值，则使用默认值为变量赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">key</span>) &#123;</span><br><span class="line">  key ||= <span class="string">&quot;default&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果传递了undefined或null，则使用默认值为变量赋值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">key</span>) &#123;</span><br><span class="line">  key ??= <span class="string">&quot;default&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果对象中存在指定属性，就将指定属性的值作为对象的值</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">obj</span>: &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125; &#125;;</span><br><span class="line"></span><br><span class="line">obj &amp;&amp;= obj.<span class="property">obj</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="长数字分隔符"><a href="#长数字分隔符" class="headerlink" title="长数字分隔符"></a>长数字分隔符</h2><ul>
+<li>利用<code>_</code>分隔数字，可以提高代码的可读性，不限制<code>_</code>书写的位置</li>
+</ul>
+<p>英式数字分隔法</p>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oneBillion = <span class="number">1_000_000_000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>中式数字分隔法</p>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oneBillion = <span class="number">10_0000_0000</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串替换子串"><a href="#字符串替换子串" class="headerlink" title="字符串替换子串"></a>字符串替换子串</h2><ul>
+<li>替换一次</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;old&quot;</span>;</span><br><span class="line"></span><br><span class="line">str.<span class="title function_">replace</span>(<span class="string">&quot;old&quot;</span>, <span class="string">&quot;new&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>替换全部</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES12.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;old&quot;</span>;</span><br><span class="line"></span><br><span class="line">str.<span class="title function_">replaceAll</span>(<span class="string">&quot;old&quot;</span>, <span class="string">&quot;new&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="元素访问方法"><a href="#元素访问方法" class="headerlink" title="元素访问方法"></a>元素访问方法</h2><ul>
+<li>ES5通过<code>[]</code>只能正向访问（从0开始），不能逆向访问</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;&quot;</span>]</span><br><span class="line"></span><br><span class="line">arr[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ES13通过<code>at()</code>可以正向访问（从0开始），也可以逆向访问（从-1开始）</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;&quot;</span>]</span><br><span class="line"></span><br><span class="line">arr.<span class="title function_">at</span>(<span class="number">0</span>);</span><br><span class="line">arr.<span class="title function_">at</span>(-<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断属性是否在当前对象上而非原型对象上"><a href="#判断属性是否在当前对象上而非原型对象上" class="headerlink" title="判断属性是否在当前对象上而非原型对象上"></a>判断属性是否在当前对象上而非原型对象上</h2><figure class="highlight js"><figcaption><span>ES3.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exist = obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">key</span>: <span class="string">&quot;value&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exist = <span class="title class_">Object</span>.<span class="title function_">hasOwn</span>(obj, <span class="string">&quot;key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="类中的新成员"><a href="#类中的新成员" class="headerlink" title="类中的新成员"></a>类中的新成员</h2><ul>
+<li>直接在类中定义实例属性，而不是在构造方法中定义实例属性</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="公共属性和私有属性"><a href="#公共属性和私有属性" class="headerlink" title="公共属性和私有属性"></a>公共属性和私有属性</h3><h4 id="公共属性"><a href="#公共属性" class="headerlink" title="公共属性"></a>公共属性</h4><ul>
+<li>没有使用修饰符作为属性名前缀的属性为公共属性（public）</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cls = <span class="keyword">new</span> <span class="title class_">Cls</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cls.<span class="property">key</span>); <span class="comment">// &quot;value&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="约定的私有属性"><a href="#约定的私有属性" class="headerlink" title="约定的私有属性"></a>约定的私有属性</h4><ul>
+<li>约定的私有属性使用<code>_</code>作为属性名前缀</li>
+</ul>
+<p>使用<code>_</code>作为属性名前缀的属性仍然可以被在外部被访问</p>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  _key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cls = <span class="keyword">new</span> <span class="title class_">Cls</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cls.<span class="property">_key</span>); <span class="comment">// &quot;value&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="私有属性"><a href="#私有属性" class="headerlink" title="私有属性"></a>私有属性</h4><ul>
+<li>真正的私有属性（private）使用<code>#</code>作为属性名前缀</li>
+</ul>
+<p>使用<code>#</code>作为属性名前缀的属性不可以在外部被访问，只能在类内部被访问</p>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  #key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cls = <span class="keyword">new</span> <span class="title class_">Cls</span>();</span><br><span class="line"><span class="comment">// console.log(cls.#key);</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实例属性和静态属性"><a href="#实例属性和静态属性" class="headerlink" title="实例属性和静态属性"></a>实例属性和静态属性</h3><h4 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h4><ul>
+<li>没有使用修饰符修饰的属性为实例属性，实例属性只能通过对象访问</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cls = <span class="keyword">new</span> <span class="title class_">Cls</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cls.<span class="property">key</span>); <span class="comment">// &quot;value&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态属性"><a href="#静态属性" class="headerlink" title="静态属性"></a>静态属性</h4><ul>
+<li>使用<code>static</code>作为修饰符修饰的属性为静态属性，静态属性只能通过类访问</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Cls</span>.<span class="property">key</span>); <span class="comment">// &quot;value&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="静态私有属性"><a href="#静态私有属性" class="headerlink" title="静态私有属性"></a>静态私有属性</h5><figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> #key = <span class="string">&quot;value&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(Cls.#key);</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><ul>
+<li>静态代码块会在加载解析类时立即执行（创建对象之前）且只会执行一次</li>
+</ul>
+<figure class="highlight js"><figcaption><span>ES13.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cls</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/14/JS%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/" rel="prev" title="【笔记】JS递归函数">
+                  <i class="fa fa-angle-left"></i> 【笔记】JS递归函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/16/Go%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E9%87%8D%E5%86%99String%E6%96%B9%E6%B3%95/" rel="next" title="【笔记】Go项目通过脚本自动重写String方法">
+                  【笔记】Go项目通过脚本自动重写String方法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

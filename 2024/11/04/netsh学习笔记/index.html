@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言netsh（亦称网络壳层）是一个存在于自微软Windows 2000开始的所有Windows NT系列中的命令行工具。（维基百科） Windows通过CMD的netsh命令管理防火墙学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】netsh学习笔记">
+<meta property="og:url" content="https://loli.fj.cn/2024/11/04/netsh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言netsh（亦称网络壳层）是一个存在于自微软Windows 2000开始的所有Windows NT系列中的命令行工具。（维基百科） Windows通过CMD的netsh命令管理防火墙学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-04T02:50:10.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.695Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="CMD">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/11/04/netsh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/11/04/netsh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2024/11/04/netsh学习笔记/","title":"【笔记】netsh学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】netsh学习笔记 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000002</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000102</span> <span class="nav-text">查看网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000010102</span> <span class="nav-text">查看IP地址配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89"><span class="nav-number">0x000000020102</span> <span class="nav-text">查看IP地址配置（详细）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BDNS%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000030102</span> <span class="nav-text">查看DNS配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E6%8E%A5%E5%8F%A3%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x000000040102</span> <span class="nav-text">查看IP接口统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF"><span class="nav-number">0x000000050102</span> <span class="nav-text">查看IP地址信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E7%BD%91%E7%BB%9C%E5%AA%92%E4%BD%93%E6%98%A0%E5%B0%84"><span class="nav-number">0x000000060102</span> <span class="nav-text">查看IP网络媒体映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BIP%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x000000070102</span> <span class="nav-text">查看IP统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">0x000000080102</span> <span class="nav-text">查看TCP连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BTCP%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x000000090102</span> <span class="nav-text">查看TCP统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BUDP%E8%BF%9E%E6%8E%A5"><span class="nav-number">0x0000000A0102</span> <span class="nav-text">查看UDP连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BUDP%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x0000000B0102</span> <span class="nav-text">查看UDP统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BICMP%E7%BB%9F%E8%AE%A1"><span class="nav-number">0x0000000C0102</span> <span class="nav-text">查看ICMP统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E7%BB%8F%E5%8A%A0%E5%85%A5%E7%9A%84%E5%A4%9A%E6%92%AD%E7%BB%84"><span class="nav-number">0x0000000D0102</span> <span class="nav-text">查看已经加入的多播组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%B8%E8%BD%BD%E4%BF%A1%E6%81%AF"><span class="nav-number">0x0000000E0102</span> <span class="nav-text">查看卸载信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BWINS%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">0x0000000F0102</span> <span class="nav-text">查看WINS服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000202</span> <span class="nav-text">修改网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BA%E9%9D%99%E6%80%81IP%E5%9C%B0%E5%9D%80"><span class="nav-number">0x000000010202</span> <span class="nav-text">修改为静态IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BADHCP%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80"><span class="nav-number">0x000000020202</span> <span class="nav-text">修改为DHCP获取IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000302</span> <span class="nav-text">导入和导出网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000010302</span> <span class="nav-text">导出网络配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000020302</span> <span class="nav-text">导入网络配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE%EF%BC%88firewall%EF%BC%89"><span class="nav-number">0x000000000003</span> <span class="nav-text">防火墙配置（firewall）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE"><span class="nav-number">0x000000000103</span> <span class="nav-text">查看防火墙配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">0x000000000203</span> <span class="nav-text">启用防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">0x000000000303</span> <span class="nav-text">禁用防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE%EF%BC%88advfirewall%EF%BC%89"><span class="nav-number">0x000000000004</span> <span class="nav-text">防火墙配置（advfirewall）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE-1"><span class="nav-number">0x000000000104</span> <span class="nav-text">查看防火墙配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99-1"><span class="nav-number">0x000000000204</span> <span class="nav-text">启用防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99-1"><span class="nav-number">0x000000000304</span> <span class="nav-text">禁用防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E9%98%B2%E7%81%AB%E5%A2%99%E5%87%BA%E5%8E%82%E8%AE%BE%E7%BD%AE"><span class="nav-number">0x000000000404</span> <span class="nav-text">恢复防火墙出厂设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E9%98%B2%E7%81%AB%E5%A2%99%E9%BB%98%E8%AE%A4%E5%85%A5%E7%AB%99%E5%92%8C%E5%87%BA%E7%AB%99%E7%AD%96%E7%95%A5"><span class="nav-number">0x000000000504</span> <span class="nav-text">恢复防火墙默认入站和出站策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000005</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x000000000006</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/11/04/netsh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】netsh学习笔记 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】netsh学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-04 10:50:10" itemprop="dateCreated datePublished" datetime="2024-11-04T10:50:10+08:00">2024-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116185705043226652</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>netsh（亦称网络壳层）是一个存在于自微软Windows 2000开始的所有Windows NT系列中的命令行工具。（<a href="/302.html?target=https://zh.wikipedia.org/wiki/Netsh">维基百科</a>）</p>
+<p>Windows通过CMD的netsh命令管理防火墙学习笔记</p>
+<span id="more"></span>
+
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="查看网络配置"><a href="#查看网络配置" class="headerlink" title="查看网络配置"></a>查看网络配置</h3><h4 id="查看IP地址配置"><a href="#查看IP地址配置" class="headerlink" title="查看IP地址配置"></a>查看IP地址配置</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show address</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">接口 &quot;以太网&quot; 的配置</span><br><span class="line">    DHCP 已启用:                          是</span><br><span class="line">    IP 地址:                           10.0.8.5</span><br><span class="line">    子网前缀:                        10.0.8.0/22 (掩码 255.255.252.0)</span><br><span class="line">    默认网关:                         10.0.8.1</span><br><span class="line">    网关跃点数:                       0</span><br><span class="line">    InterfaceMetric:                      15</span><br><span class="line"></span><br><span class="line">接口 &quot;Loopback Pseudo-Interface 1&quot; 的配置</span><br><span class="line">    DHCP 已启用:                          否</span><br><span class="line">    IP 地址:                           127.0.0.1</span><br><span class="line">    子网前缀:                        127.0.0.0/8 (掩码 255.0.0.0)</span><br><span class="line">    InterfaceMetric:                      75</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看IP地址配置（详细）"><a href="#查看IP地址配置（详细）" class="headerlink" title="查看IP地址配置（详细）"></a>查看IP地址配置（详细）</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show config</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">接口 &quot;以太网&quot; 的配置</span><br><span class="line">    DHCP 已启用:                          是</span><br><span class="line">    IP 地址:                           10.0.8.5</span><br><span class="line">    子网前缀:                        10.0.8.0/22 (掩码 255.255.252.0)</span><br><span class="line">    默认网关:                         10.0.8.1</span><br><span class="line">    网关跃点数:                       0</span><br><span class="line">    InterfaceMetric:                      15</span><br><span class="line">    通过 DHCP 配置的 DNS 服务器:      183.60.83.19</span><br><span class="line">                                          183.60.82.98</span><br><span class="line">    用哪个前缀注册:                   只是主要</span><br><span class="line">    通过 DHCP 配置的 WINS 服务器:     无</span><br><span class="line"></span><br><span class="line">接口 &quot;Loopback Pseudo-Interface 1&quot; 的配置</span><br><span class="line">    DHCP 已启用:                          否</span><br><span class="line">    IP 地址:                           127.0.0.1</span><br><span class="line">    子网前缀:                        127.0.0.0/8 (掩码 255.0.0.0)</span><br><span class="line">    InterfaceMetric:                      75</span><br><span class="line">    静态配置的 DNS 服务器:            无</span><br><span class="line">    用哪个前缀注册:                   只是主要</span><br><span class="line">    静态配置的 WINS 服务器:           无</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看DNS配置"><a href="#查看DNS配置" class="headerlink" title="查看DNS配置"></a>查看DNS配置</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show dns</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">接口 &quot;以太网&quot; 的配置</span><br><span class="line">    通过 DHCP 配置的 DNS 服务器:      183.60.83.19</span><br><span class="line">                                          183.60.82.98</span><br><span class="line">    用哪个前缀注册:                   只是主要</span><br><span class="line"></span><br><span class="line">接口 &quot;Loopback Pseudo-Interface 1&quot; 的配置</span><br><span class="line">    静态配置的 DNS 服务器:            无</span><br><span class="line">    用哪个前缀注册:                   只是主要</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看IP接口统计"><a href="#查看IP接口统计" class="headerlink" title="查看IP接口统计"></a>查看IP接口统计</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show interface</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Idx     Met         MTU          状态                名称</span><br><span class="line">---  ----------  ----------  ------------  ---------------------------</span><br><span class="line">  1          75  4294967295  connected     Loopback Pseudo-Interface 1</span><br><span class="line"> 12          15        1500  connected     以太网</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看IP地址信息"><a href="#查看IP地址信息" class="headerlink" title="查看IP地址信息"></a>查看IP地址信息</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show ipaddress</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">接口 1: Loopback Pseudo-Interface 1</span><br><span class="line"></span><br><span class="line">地址类型   DAD 状态    有效寿命   首选寿命   地址</span><br><span class="line">---------  ----------- ---------- ---------- ------------------------</span><br><span class="line">其他         首选项           infinite   infinite 127.0.0.1</span><br><span class="line"></span><br><span class="line">接口 12: 以太网</span><br><span class="line"></span><br><span class="line">地址类型   DAD 状态    有效寿命   首选寿命   地址</span><br><span class="line">---------  ----------- ---------- ---------- ------------------------</span><br><span class="line">DHCP       首选项           infinite   infinite 10.0.8.5</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看IP网络媒体映射"><a href="#查看IP网络媒体映射" class="headerlink" title="查看IP网络媒体映射"></a>查看IP网络媒体映射</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show ipnet</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MIB-II IP 网络到媒体项目</span><br><span class="line">物理地址              IP 地址          类型               接口</span><br><span class="line">--------------------  ---------------  -----------------  -------------</span><br><span class="line">                      224.0.0.22       静态               Loopback Pseudo-Interface 1</span><br><span class="line">fe-ee-30-30-20-26     10.0.8.1         动态               以太网</span><br><span class="line">ff-ff-ff-ff-ff-ff     10.0.11.255      静态               以太网</span><br><span class="line">fe-ee-30-30-20-26     169.254.128.11   动态               以太网</span><br><span class="line">fe-ee-30-30-20-26     169.254.128.13   动态               以太网</span><br><span class="line">fe-ee-30-30-20-26     169.254.169.254  动态               以太网</span><br><span class="line">01-00-5e-00-00-16     224.0.0.22       静态               以太网</span><br><span class="line">01-00-5e-00-00-fb     224.0.0.251      静态               以太网</span><br><span class="line">ff-ff-ff-ff-ff-ff     255.255.255.255  静态               以太网</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看IP统计"><a href="#查看IP统计" class="headerlink" title="查看IP统计"></a>查看IP统计</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show ipstats</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">MIB-II IP 统计</span><br><span class="line">------------------------------------------------------</span><br><span class="line">转发:                             已禁用</span><br><span class="line">默认 TTL:                         128</span><br><span class="line">入站接收:                         96259</span><br><span class="line">入站头错误:                     0</span><br><span class="line">入站地址错误:                     6</span><br><span class="line">转发的数据报:                     0</span><br><span class="line">入站未知协议:                     0</span><br><span class="line">入站丢弃:                         9</span><br><span class="line">入站传递:                         96279</span><br><span class="line">出站请求:                         85781</span><br><span class="line">路由丢弃:                         0</span><br><span class="line">出站丢弃:                         0</span><br><span class="line">出站无路由:                       0</span><br><span class="line">重新组合超时:                     60</span><br><span class="line">需要重新组合:                     0</span><br><span class="line">重新组合完成:                     0</span><br><span class="line">重新组合失败:                     0</span><br><span class="line">分段完成:                         0</span><br><span class="line">分段失败:                         0</span><br><span class="line">分段已创建:                       0</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看TCP连接"><a href="#查看TCP连接" class="headerlink" title="查看TCP连接"></a>查看TCP连接</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show tcpconn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">MIB-II TCP 连接项目</span><br><span class="line">本地地址        本地端口        远程地址        远程端口        状态</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">        0.0.0.0      135               0.0.0.0          0           侦听</span><br><span class="line">       10.0.8.5      139               0.0.0.0          0           侦听</span><br><span class="line">      127.0.0.1     1434               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0     3389               0.0.0.0          0           侦听</span><br><span class="line">       10.0.8.5     3389        115.206.151.27      62986          已建立</span><br><span class="line">      127.0.0.1    16450             127.0.0.1      49799          已建立</span><br><span class="line">       10.0.8.5    16451              10.0.8.5      49801          已建立</span><br><span class="line">        0.0.0.0    16452               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    16453               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    17001               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49664               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49665               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49666               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49667               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49668               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49671               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    49677               0.0.0.0          0           侦听</span><br><span class="line">       10.0.8.5    49712         169.254.0.138       8186          已建立</span><br><span class="line">      127.0.0.1    49780               0.0.0.0          0           侦听</span><br><span class="line">       10.0.8.5    49790          169.254.0.55       5574          已建立</span><br><span class="line">       10.0.8.5    49791          169.254.0.55       5574          已建立</span><br><span class="line">      127.0.0.1    49799             127.0.0.1      16450          已建立</span><br><span class="line">       10.0.8.5    49801              10.0.8.5      16451          已建立</span><br><span class="line">        0.0.0.0      445               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0     5985               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    16450               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    16451               0.0.0.0          0           侦听</span><br><span class="line">        0.0.0.0    47001               0.0.0.0          0           侦听</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看TCP统计"><a href="#查看TCP统计" class="headerlink" title="查看TCP统计"></a>查看TCP统计</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show tcpstats</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TCP 统计信息</span><br><span class="line">------------------------------------------------------</span><br><span class="line">超时算法:                      Van Jacobson 的算法</span><br><span class="line">最短超时:                        5</span><br><span class="line">最长超时:                        4294967295</span><br><span class="line">最大连接数:                    动态</span><br><span class="line">主动打开次数:                           2694</span><br><span class="line">被动打开次数:                          109</span><br><span class="line">失败尝试数:                        104</span><br><span class="line">已建立的重置:                     96</span><br><span class="line">当前已建立:                  11</span><br><span class="line">接收段数:                            97740</span><br><span class="line">发送段数:                           86317</span><br><span class="line">重新传输段数:                 43</span><br><span class="line">接收错误数:                              0</span><br><span class="line">发送重置次数:                             335</span><br><span class="line">Fastopen 主动打开次数:                  0</span><br><span class="line">Fastopen 被动打开次数:                 0</span><br><span class="line">Fastopen 失败尝试数:               0</span><br><span class="line">首次同步的重新传输次数:               7</span><br><span class="line">首次同步的重新传输次数(Fastopen):    0</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看UDP连接"><a href="#查看UDP连接" class="headerlink" title="查看UDP连接"></a>查看UDP连接</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show udpconn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MIB-II UDP 侦听器项目</span><br><span class="line">   本地地址                    本地端口</span><br><span class="line">-------------------------------------------------</span><br><span class="line">         0.0.0.0                  123</span><br><span class="line">        10.0.8.5                  137</span><br><span class="line">        10.0.8.5                  138</span><br><span class="line">         0.0.0.0                  500</span><br><span class="line">         0.0.0.0                 3389</span><br><span class="line">         0.0.0.0                 4500</span><br><span class="line">         0.0.0.0                 5353</span><br><span class="line">         0.0.0.0                 5355</span><br><span class="line">       127.0.0.1                57411</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看UDP统计"><a href="#查看UDP统计" class="headerlink" title="查看UDP统计"></a>查看UDP统计</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show udpstats</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看ICMP统计"><a href="#查看ICMP统计" class="headerlink" title="查看ICMP统计"></a>查看ICMP统计</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show icmp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">MIB-II ICMP 统计</span><br><span class="line">------------------------------------------------------</span><br><span class="line">输入</span><br><span class="line">信息:                           878</span><br><span class="line">错误:                           0</span><br><span class="line">无法连接目标:                   0</span><br><span class="line">超过时间:                       0</span><br><span class="line">参数问题:                       0</span><br><span class="line">源结束:                         0</span><br><span class="line">重定向:                         0</span><br><span class="line">请求回显:                       878</span><br><span class="line">回显答复:                       0</span><br><span class="line">请求时间戳:                     0</span><br><span class="line">回复时间戳:                     0</span><br><span class="line">请求地址掩码:                   0</span><br><span class="line">回复地址掩码:                   0</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">信息:                           887</span><br><span class="line">错误:                           0</span><br><span class="line">无法连接目标:                   6</span><br><span class="line">超过时间:                       0</span><br><span class="line">参数问题:                       0</span><br><span class="line">源熄灭:                         0</span><br><span class="line">重定向:                         0</span><br><span class="line">请求回显:                       3</span><br><span class="line">回显答复:                       878</span><br><span class="line">请求时间戳:                     0</span><br><span class="line">回复时间戳:                     0</span><br><span class="line">请求地址掩码:                   0</span><br><span class="line">回复地址掩码:                   0</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看已经加入的多播组"><a href="#查看已经加入的多播组" class="headerlink" title="查看已经加入的多播组"></a>查看已经加入的多播组</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show joins</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">接口 12: 以太网</span><br><span class="line"></span><br><span class="line">作用域       参照       上一次 地址</span><br><span class="line">----------  ----------  ----   ---------------------------------</span><br><span class="line">0                    0  是     224.0.0.1</span><br><span class="line">0                    1  是     224.0.0.251</span><br><span class="line">0                    1  是     224.0.0.252</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看卸载信息"><a href="#查看卸载信息" class="headerlink" title="查看卸载信息"></a>查看卸载信息</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show offload</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">接口 1: Loopback Pseudo-Interface 1</span><br><span class="line"></span><br><span class="line">udp transmit 支持校验和。</span><br><span class="line">tcp transmit 支持校验和。</span><br><span class="line">udp receive 支持校验和。</span><br><span class="line">tcp receive 支持校验和。</span><br><span class="line"></span><br><span class="line">接口 12: 以太网</span><br><span class="line"></span><br><span class="line">ipv4 transmit 支持校验和。</span><br><span class="line">ipv4 receive 支持校验和。</span><br><span class="line">udp receive 支持校验和。</span><br><span class="line">tcp receive 支持校验和。</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看WINS服务器"><a href="#查看WINS服务器" class="headerlink" title="查看WINS服务器"></a>查看WINS服务器</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip show wins</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">接口 &quot;以太网&quot; 的配置</span><br><span class="line">    通过 DHCP 配置的 WINS 服务器:     无</span><br><span class="line"></span><br><span class="line">接口 &quot;Loopback Pseudo-Interface 1&quot; 的配置</span><br><span class="line">    静态配置的 WINS 服务器:           无</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改网络配置"><a href="#修改网络配置" class="headerlink" title="修改网络配置"></a>修改网络配置</h3><h4 id="修改为静态IP地址"><a href="#修改为静态IP地址" class="headerlink" title="修改为静态IP地址"></a>修改为静态IP地址</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip <span class="built_in">set</span> address &quot;以太网&quot; static <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">2</span> <span class="number">255</span>.<span class="number">255</span>.<span class="number">255</span>.<span class="number">0</span> <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip <span class="built_in">set</span> address &quot;以太网&quot; static <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">2</span></span><br><span class="line">netsh interface ip <span class="built_in">set</span> dns &quot;以太网&quot; static <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span></span><br><span class="line">netsh interface ip <span class="built_in">set</span> wins &quot;以太网&quot; static <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="修改为DHCP获取IP地址"><a href="#修改为DHCP获取IP地址" class="headerlink" title="修改为DHCP获取IP地址"></a>修改为DHCP获取IP地址</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ip <span class="built_in">set</span> address &quot;以太网&quot; dhcp</span><br><span class="line">netsh interface ip <span class="built_in">set</span> dns &quot;以太网&quot; dhcp</span><br><span class="line">netsh interface ip <span class="built_in">set</span> wins &quot;以太网&quot; dhcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="导入和导出网络配置"><a href="#导入和导出网络配置" class="headerlink" title="导入和导出网络配置"></a>导入和导出网络配置</h3><h4 id="导出网络配置"><a href="#导出网络配置" class="headerlink" title="导出网络配置"></a>导出网络配置</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh -c interface dump &gt; &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="导入网络配置"><a href="#导入网络配置" class="headerlink" title="导入网络配置"></a>导入网络配置</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh -f &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh exec &lt;file&gt;.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="防火墙配置（firewall）"><a href="#防火墙配置（firewall）" class="headerlink" title="防火墙配置（firewall）"></a>防火墙配置（firewall）</h2><ul>
+<li>旧版防火墙，主要用于WindowsXP、WindowsServer2003</li>
+</ul>
+<h3 id="查看防火墙配置"><a href="#查看防火墙配置" class="headerlink" title="查看防火墙配置"></a>查看防火墙配置</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall show state</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">防火墙状态:</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">配置文件                          = 标准</span><br><span class="line">操作模式                          = 禁用</span><br><span class="line">例外模式                          = 启用</span><br><span class="line">多播/广播响应模式                 = 启用</span><br><span class="line">通知模式                          = 禁用</span><br><span class="line">组策略版本                        = Windows Defender 防火墙</span><br><span class="line">远程管理模式                      = 禁用</span><br><span class="line"></span><br><span class="line">所有网络接口上的端口当前均为打开状态:</span><br><span class="line">端口   协议  版本  程序</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">当前没有在所有网络接口上打开的端口。</span><br><span class="line"></span><br><span class="line">重要信息: 已成功执行命令。</span><br><span class="line">但是，&quot;netsh firewall&quot; 已弃用；</span><br><span class="line">请改用 &quot;netsh advfirewall firewall&quot; 。</span><br><span class="line">有关使用 &quot;netsh advfirewall firewall&quot; 命令</span><br><span class="line">而非 &quot;netsh firewall&quot; 的详细信息，请参阅</span><br><span class="line"> https://go.microsoft.com/fwlink/?linkid=121488 上的 KB 文章 947709。</span><br></pre></td></tr></table></figure>
+
+<h3 id="启用防火墙"><a href="#启用防火墙" class="headerlink" title="启用防火墙"></a>启用防火墙</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall <span class="built_in">set</span> opmode enable</span><br></pre></td></tr></table></figure>
+
+<h3 id="禁用防火墙"><a href="#禁用防火墙" class="headerlink" title="禁用防火墙"></a>禁用防火墙</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall <span class="built_in">set</span> opmode disable</span><br></pre></td></tr></table></figure>
+
+<h2 id="防火墙配置（advfirewall）"><a href="#防火墙配置（advfirewall）" class="headerlink" title="防火墙配置（advfirewall）"></a>防火墙配置（advfirewall）</h2><ul>
+<li>新版防火墙，主要用于Windows7及以上、WindowsServer2008及以上</li>
+</ul>
+<blockquote>
+<p><code>allprofiles</code>：全部防火墙<br><code>domainprofile</code>：域网络防火墙<br><code>privateprofile</code>：专用网络防火墙<br><code>publicprofile</code>：公用网络防火墙</p>
+</blockquote>
+<h3 id="查看防火墙配置-1"><a href="#查看防火墙配置-1" class="headerlink" title="查看防火墙配置"></a>查看防火墙配置</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall show allprofiles</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">域配置文件 设置:</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">状态                                  关闭</span><br><span class="line">防火墙策略                          BlockInbound,AllowOutbound</span><br><span class="line">LocalFirewallRules                    N/A (仅 GPO 存储)</span><br><span class="line">LocalConSecRules                      N/A (仅 GPO 存储)</span><br><span class="line">InboundUserNotification               禁用</span><br><span class="line">RemoteManagement                      禁用</span><br><span class="line">UnicastResponseToMulticast            启用</span><br><span class="line"></span><br><span class="line">日志:</span><br><span class="line">LogAllowedConnections                 禁用</span><br><span class="line">LogDroppedConnections                 禁用</span><br><span class="line">FileName                              %systemroot%\system32\LogFiles\Firewall\pfirewall.log</span><br><span class="line">MaxFileSize                           4096</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">专用配置文件 设置:</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">状态                                  关闭</span><br><span class="line">防火墙策略                          BlockInbound,AllowOutbound</span><br><span class="line">LocalFirewallRules                    N/A (仅 GPO 存储)</span><br><span class="line">LocalConSecRules                      N/A (仅 GPO 存储)</span><br><span class="line">InboundUserNotification               禁用</span><br><span class="line">RemoteManagement                      禁用</span><br><span class="line">UnicastResponseToMulticast            启用</span><br><span class="line"></span><br><span class="line">日志:</span><br><span class="line">LogAllowedConnections                 禁用</span><br><span class="line">LogDroppedConnections                 禁用</span><br><span class="line">FileName                              %systemroot%\system32\LogFiles\Firewall\pfirewall.log</span><br><span class="line">MaxFileSize                           4096</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">公用配置文件 设置:</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">状态                                  关闭</span><br><span class="line">防火墙策略                          BlockInbound,AllowOutbound</span><br><span class="line">LocalFirewallRules                    N/A (仅 GPO 存储)</span><br><span class="line">LocalConSecRules                      N/A (仅 GPO 存储)</span><br><span class="line">InboundUserNotification               禁用</span><br><span class="line">RemoteManagement                      禁用</span><br><span class="line">UnicastResponseToMulticast            启用</span><br><span class="line"></span><br><span class="line">日志:</span><br><span class="line">LogAllowedConnections                 禁用</span><br><span class="line">LogDroppedConnections                 禁用</span><br><span class="line">FileName                              %systemroot%\system32\LogFiles\Firewall\pfirewall.log</span><br><span class="line">MaxFileSize                           4096</span><br><span class="line"></span><br><span class="line">确定。</span><br></pre></td></tr></table></figure>
+
+<h3 id="启用防火墙-1"><a href="#启用防火墙-1" class="headerlink" title="启用防火墙"></a>启用防火墙</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall <span class="built_in">set</span> allprofiles state on</span><br></pre></td></tr></table></figure>
+
+<h3 id="禁用防火墙-1"><a href="#禁用防火墙-1" class="headerlink" title="禁用防火墙"></a>禁用防火墙</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall <span class="built_in">set</span> allprofiles state off</span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复防火墙出厂设置"><a href="#恢复防火墙出厂设置" class="headerlink" title="恢复防火墙出厂设置"></a>恢复防火墙出厂设置</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall reset</span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复防火墙默认入站和出站策略"><a href="#恢复防火墙默认入站和出站策略" class="headerlink" title="恢复防火墙默认入站和出站策略"></a>恢复防火墙默认入站和出站策略</h3><ul>
+<li>允许所有入站策略，允许所有出站策略</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall <span class="built_in">set</span> allprofiles firewallpolicy allowinbound,allowoutbound</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>拒绝所有入站策略，拒绝所有出站策略</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall <span class="built_in">set</span> allprofiles firewallpolicy blockinbound,blockoutbound</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Fuel_Ming/article/details/123992944">CSDN——欧恩意</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/CMD/" rel="tag"># CMD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/02/NPS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="【笔记】NPS学习笔记">
+                  <i class="fa fa-angle-left"></i> 【笔记】NPS学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/04/Impacket%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【笔记】Impacket学习笔记">
+                  【笔记】Impacket学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

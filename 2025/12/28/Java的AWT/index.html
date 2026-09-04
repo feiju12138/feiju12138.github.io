@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Java通过AWT实现GUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Java的AWT">
+<meta property="og:url" content="https://loli.fj.cn/2025/12/28/Java%E7%9A%84AWT/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言Java通过AWT实现GUI">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-28T23:36:51.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.618Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2025/12/28/Java%E7%9A%84AWT/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2025/12/28/Java%E7%9A%84AWT/","path":"2025/12/28/Java的AWT/","title":"【笔记】Java的AWT"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Java的AWT | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWT-Abstract-Window-Toolkit"><span class="nav-number">0x000000000002</span> <span class="nav-text">AWT(Abstract Window Toolkit)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3"><span class="nav-number">0x000000000102</span> <span class="nav-text">窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000010102</span> <span class="nav-text">创建窗口对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3%E5%AF%B9%E8%B1%A1%E6%97%B6%E6%8C%87%E5%AE%9A%E7%AA%97%E5%8F%A3%E6%A0%87%E9%A2%98"><span class="nav-number">0x000001010102</span> <span class="nav-text">创建窗口对象时指定窗口标题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">0x000000020102</span> <span class="nav-text">窗口对象的实例方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%AA%97%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="nav-number">0x000001020102</span> <span class="nav-text">修改窗口设置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">0x000101020102</span> <span class="nav-text">设置窗口可见性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E6%A0%87%E9%A2%98"><span class="nav-number">0x000201020102</span> <span class="nav-text">设置窗口标题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E4%BD%8D%E7%BD%AE"><span class="nav-number">0x000301020102</span> <span class="nav-text">设置窗口位置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x000401020102</span> <span class="nav-text">设置窗口尺寸</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E4%BD%8D%E7%BD%AE%E5%92%8C%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F"><span class="nav-number">0x000501020102</span> <span class="nav-text">同时设置窗口位置和窗口大小</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2"><span class="nav-number">0x000601020102</span> <span class="nav-text">设置窗口背景颜色</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E7%BD%AE%E9%A1%B6"><span class="nav-number">0x000701020102</span> <span class="nav-text">设置窗口置顶</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E4%B8%8D%E5%85%81%E8%AE%B8%E6%94%B9%E5%8F%98%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x000801020102</span> <span class="nav-text">设置窗口不允许改变尺寸</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%85%89%E6%A0%87"><span class="nav-number">0x000901020102</span> <span class="nav-text">设置光标</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AA%97%E5%8F%A3%E5%B1%9E%E6%80%A7"><span class="nav-number">0x000002020102</span> <span class="nav-text">获取窗口属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AA%97%E5%8F%A3%E6%A0%87%E9%A2%98"><span class="nav-number">0x000102020102</span> <span class="nav-text">获取窗口标题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AA%97%E5%8F%A3%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x000202020102</span> <span class="nav-text">获取窗口尺寸</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E7%AA%97%E5%8F%A3%E5%B9%B6%E9%80%80%E5%87%BA%E8%BF%9B%E7%A8%8B"><span class="nav-number">0x000003020102</span> <span class="nav-text">关闭窗口并退出进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%AA%97%E5%8F%A3%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000004020102</span> <span class="nav-text">添加窗口事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E6%89%93%E5%BC%80%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000104020102</span> <span class="nav-text">监听窗口打开事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E5%85%B3%E9%97%AD%E6%8C%89%E9%92%AE"><span class="nav-number">0x000204020102</span> <span class="nav-text">监听窗口关闭按钮</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E5%85%B3%E9%97%AD%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000304020102</span> <span class="nav-text">监听窗口关闭事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E6%9C%80%E5%B0%8F%E5%8C%96%E6%8C%89%E9%92%AE"><span class="nav-number">0x000404020102</span> <span class="nav-text">监听窗口最小化按钮</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E8%BF%98%E5%8E%9F%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000504020102</span> <span class="nav-text">监听窗口还原最小化事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000604020102</span> <span class="nav-text">监听窗口获取焦点事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E7%AA%97%E5%8F%A3%E5%A4%B1%E5%8E%BB%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000704020102</span> <span class="nav-text">监听窗口失去焦点事件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000005020102</span> <span class="nav-text">添加键盘事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000105020102</span> <span class="nav-text">监听按键输入事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000205020102</span> <span class="nav-text">监听按键按下事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E6%8C%89%E9%94%AE%E6%8A%AC%E8%B5%B7%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000305020102</span> <span class="nav-text">监听按键抬起事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%EF%BC%88KeyEvent%EF%BC%89%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">0x000405020102</span> <span class="nav-text">键盘事件（KeyEvent）实例方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000006020102</span> <span class="nav-text">添加鼠标事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000106020102</span> <span class="nav-text">监听鼠标按键点击事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E6%8C%89%E4%B8%8B%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000206020102</span> <span class="nav-text">监听鼠标按键按下事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E9%BC%A0%E6%A0%87%E6%8C%89%E9%94%AE%E6%8A%AC%E8%B5%B7%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000306020102</span> <span class="nav-text">监听鼠标按键抬起事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E9%BC%A0%E6%A0%87%E8%BF%9B%E5%85%A5%E7%AA%97%E5%8F%A3%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000406020102</span> <span class="nav-text">监听鼠标进入窗口事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%87%BA%E7%AA%97%E5%8F%A3%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000506020102</span> <span class="nav-text">监听鼠标移出窗口事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%EF%BC%88MouseEvent%EF%BC%89%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">0x000606020102</span> <span class="nav-text">鼠标事件（MouseEvent）实例方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%85%A8%E5%B1%80%E5%AD%97%E4%BD%93"><span class="nav-number">0x000000030102</span> <span class="nav-text">设置全局字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%9B%BE%E6%A0%87"><span class="nav-number">0x000000040102</span> <span class="nav-text">设置图标</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEMacOS%E7%9A%84Dock%E6%A0%8F%E5%9B%BE%E6%A0%87"><span class="nav-number">0x000001040102</span> <span class="nav-text">设置MacOS的Dock栏图标</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AA%97%E5%8F%A3%E4%BF%AE%E9%A5%B0"><span class="nav-number">0x000000050102</span> <span class="nav-text">自定义窗口修饰</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E7%AA%97%E5%8F%A3%E4%BF%AE%E9%A5%B0"><span class="nav-number">0x000001050102</span> <span class="nav-text">取消操作系统默认窗口修饰</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%AA%97%E5%8F%A3%E5%BD%A2%E7%8A%B6"><span class="nav-number">0x000002050102</span> <span class="nav-text">定义窗口形状</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%86%E8%A7%92%E7%9F%A9%E5%BD%A2"><span class="nav-number">0x000102050102</span> <span class="nav-text">圆角矩形</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000000202</span> <span class="nav-text">布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000010202</span> <span class="nav-text">默认布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000020202</span> <span class="nav-text">空布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000030202</span> <span class="nav-text">边界布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%AE%BE%E7%BD%AE%E4%BD%8D%E7%BD%AE"><span class="nav-number">0x000001030202</span> <span class="nav-text">组件设置位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%97%B4%E6%A8%AA%E5%90%91%E9%97%B4%E8%B7%9D"><span class="nav-number">0x000002030202</span> <span class="nav-text">设置组件间横向间距</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%97%B4%E7%BA%B5%E5%90%91%E9%97%B4%E8%B7%9D"><span class="nav-number">0x000003030202</span> <span class="nav-text">设置组件间纵向间距</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000040202</span> <span class="nav-text">流式布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%97%B4%E6%A8%AA%E5%90%91%E9%97%B4%E8%B7%9D-1"><span class="nav-number">0x000001040202</span> <span class="nav-text">设置组件间横向间距</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%97%B4%E7%BA%B5%E5%90%91%E9%97%B4%E8%B7%9D-1"><span class="nav-number">0x000002040202</span> <span class="nav-text">设置组件间纵向间距</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%B9%E9%BD%90"><span class="nav-number">0x000003040202</span> <span class="nav-text">设置对齐</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%A1%E7%89%87%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000050202</span> <span class="nav-text">卡片布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000001050202</span> <span class="nav-text">切换组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80"><span class="nav-number">0x000000060202</span> <span class="nav-text">网格布局</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000000000302</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E6%9D%BF"><span class="nav-number">0x000000010302</span> <span class="nav-text">面板</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E9%9D%A2%E6%9D%BF"><span class="nav-number">0x000001010302</span> <span class="nav-text">滚动面板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%A2%E6%9D%BF%E6%B7%BB%E5%8A%A0%E7%BB%84%E4%BB%B6"><span class="nav-number">0x000002010302</span> <span class="nav-text">面板添加组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-number">0x000000020302</span> <span class="nav-text">标签</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93"><span class="nav-number">0x000001020302</span> <span class="nav-text">设置字体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%89%8D%E6%99%AF%E8%89%B2"><span class="nav-number">0x000002020302</span> <span class="nav-text">设置前景色</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E8%89%B2"><span class="nav-number">0x000003020302</span> <span class="nav-text">设置背景色</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%92%AE"><span class="nav-number">0x000000030302</span> <span class="nav-text">按钮</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000001030302</span> <span class="nav-text">添加按钮事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000101030302</span> <span class="nav-text">监听按钮点击事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86"><span class="nav-number">0x000000040302</span> <span class="nav-text">文本框</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E6%A1%86%E5%86%85%E5%AE%B9"><span class="nav-number">0x000001040302</span> <span class="nav-text">获取文本框内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6"><span class="nav-number">0x000002040302</span> <span class="nav-text">设置显示字符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%9F%9F"><span class="nav-number">0x000000050302</span> <span class="nav-text">文本域</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E6%9C%AC%E5%9F%9F%E5%86%85%E5%AE%B9"><span class="nav-number">0x000001050302</span> <span class="nav-text">获取文本域内容</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%A1%86"><span class="nav-number">0x000000060302</span> <span class="nav-text">选框</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%A4%9A%E9%80%89%E6%A1%86%E7%8A%B6%E6%80%81"><span class="nav-number">0x000001060302</span> <span class="nav-text">获取多选框状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%89%E6%A1%86%E7%BB%84"><span class="nav-number">0x000002060302</span> <span class="nav-text">选框组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A2%AB%E9%80%89%E4%B8%AD%E7%9A%84%E9%80%89%E6%A1%86"><span class="nav-number">0x000102060302</span> <span class="nav-text">获取被选中的选框</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">0x000000070302</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%97%E8%A1%A8%E9%A1%B9"><span class="nav-number">0x000001070302</span> <span class="nav-text">添加列表项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%85%81%E8%AE%B8%E5%A4%9A%E9%80%89"><span class="nav-number">0x000002070302</span> <span class="nav-text">设置允许多选</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B7%B2%E9%80%89%E4%B8%AD%E5%88%97%E8%A1%A8%E9%A1%B9"><span class="nav-number">0x000003070302</span> <span class="nav-text">获取已选中列表项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%97%E8%A1%A8%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000004070302</span> <span class="nav-text">添加列表事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E5%88%97%E8%A1%A8%E9%A1%B9%E6%94%B9%E5%8F%98%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000104070302</span> <span class="nav-text">监听列表项改变事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="nav-number">0x000000080302</span> <span class="nav-text">菜单栏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95"><span class="nav-number">0x000001080302</span> <span class="nav-text">菜单栏添加菜单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-number">0x000002080302</span> <span class="nav-text">菜单添加菜单项</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%AF%E5%8B%BE%E9%80%89%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-number">0x000102080302</span> <span class="nav-text">添加可勾选菜单项</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">0x000003080302</span> <span class="nav-text">菜单项添加快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E9%A1%B9%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x000004080302</span> <span class="nav-text">添加菜单项事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x000104080302</span> <span class="nav-text">监听菜单项点击事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95%EF%BC%88%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%EF%BC%89"><span class="nav-number">0x000000090302</span> <span class="nav-text">弹出菜单（右键菜单）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-number">0x000001090302</span> <span class="nav-text">弹出菜单添加菜单项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95"><span class="nav-number">0x000002090302</span> <span class="nav-text">显示弹出菜单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E9%A1%B9%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8-1"><span class="nav-number">0x000003090302</span> <span class="nav-text">添加菜单项事件监听器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">0x0000000A0302</span> <span class="nav-text">对话框</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">0x0000010A0302</span> <span class="nav-text">设置对话框可见性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AF%B9%E8%AF%9D%E6%A1%86%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">0x0000020A0302</span> <span class="nav-text">添加对话框事件监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%85%B3%E9%97%AD%E4%BA%8B%E4%BB%B6"><span class="nav-number">0x0001020A0302</span> <span class="nav-text">监听对话框关闭事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E9%80%89%E6%8B%A9%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">0x0000000B0302</span> <span class="nav-text">文件选择对话框</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%8F%AF%E8%A7%81%E6%80%A7-1"><span class="nav-number">0x0000010B0302</span> <span class="nav-text">设置对话框可见性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%89%E6%8B%A9%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="nav-number">0x0000020B0302</span> <span class="nav-text">获取选择的目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%89%E6%8B%A9%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">0x0000030B0302</span> <span class="nav-text">获取选择的文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6"><span class="nav-number">0x0000000C0302</span> <span class="nav-text">自定义组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%BB%E7%AC%94%E9%A2%9C%E8%89%B2"><span class="nav-number">0x0000010C0302</span> <span class="nav-text">设置画笔颜色</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A1%AB%E5%85%85%E5%9B%BE%E5%BD%A2"><span class="nav-number">0x0000020C0302</span> <span class="nav-text">绘制填充图形</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2"><span class="nav-number">0x0001020C0302</span> <span class="nav-text">绘制矩形</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC"><span class="nav-number">0x0000030C0302</span> <span class="nav-text">绘制文本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87"><span class="nav-number">0x0000040C0302</span> <span class="nav-text">绘制图片</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BB%BA%E8%AE%AE%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x0000000D0302</span> <span class="nav-text">组件的建议尺寸</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%AD%97%E4%BD%93%E6%95%B0%E7%BB%84"><span class="nav-number">0x000000000003</span> <span class="nav-text">获取所有字体数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8"><span class="nav-number">0x000000000004</span> <span class="nav-text">获取屏幕尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E6%A0%87"><span class="nav-number">0x000000000005</span> <span class="nav-text">光标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000000105</span> <span class="nav-text">内置光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%85%89%E6%A0%87"><span class="nav-number">0x000000010105</span> <span class="nav-text">默认光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E6%98%9F%E5%85%89%E6%A0%87"><span class="nav-number">0x000000020105</span> <span class="nav-text">准星光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%85%89%E6%A0%87"><span class="nav-number">0x000000030105</span> <span class="nav-text">文本光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E5%85%89%E6%A0%87"><span class="nav-number">0x000000040105</span> <span class="nav-text">等待光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A5%BF%E5%8D%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000050105</span> <span class="nav-text">西南方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9C%E5%8D%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000060105</span> <span class="nav-text">东南方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A5%BF%E5%8C%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000070105</span> <span class="nav-text">西北方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9C%E5%8C%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000080105</span> <span class="nav-text">东北方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x000000090105</span> <span class="nav-text">北方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%97%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x0000000A0105</span> <span class="nav-text">南方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A5%BF%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x0000000B0105</span> <span class="nav-text">西方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9C%E6%96%B9%E5%90%91%E7%BC%A9%E6%94%BE%E5%85%89%E6%A0%87"><span class="nav-number">0x0000000C0105</span> <span class="nav-text">东方向缩放光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%85%89%E6%A0%87"><span class="nav-number">0x0000000D0105</span> <span class="nav-text">手光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="nav-number">0x0000000E0105</span> <span class="nav-text">移动光标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x000000000006</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x000000000007</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2025/12/28/Java%E7%9A%84AWT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Java的AWT | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Java的AWT
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-29 07:36:51" itemprop="dateCreated datePublished" datetime="2025-12-29T07:36:51+08:00">2025-12-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8C%97/" itemprop="url" rel="index"><span itemprop="name">Java学习指北</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116180729854581526</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java通过AWT实现GUI</p>
+<span id="more"></span>
+
+<h2 id="AWT-Abstract-Window-Toolkit"><a href="#AWT-Abstract-Window-Toolkit" class="headerlink" title="AWT(Abstract Window Toolkit)"></a>AWT(Abstract Window Toolkit)</h2><h3 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h3><h4 id="创建窗口对象"><a href="#创建窗口对象" class="headerlink" title="创建窗口对象"></a>创建窗口对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Frame</span> <span class="variable">frame</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Frame</span>();</span><br></pre></td></tr></table></figure>
+
+<h5 id="创建窗口对象时指定窗口标题"><a href="#创建窗口对象时指定窗口标题" class="headerlink" title="创建窗口对象时指定窗口标题"></a>创建窗口对象时指定窗口标题</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Frame</span> <span class="variable">frame</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Frame</span>(<span class="string">&quot;窗口标题&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="窗口对象的实例方法"><a href="#窗口对象的实例方法" class="headerlink" title="窗口对象的实例方法"></a>窗口对象的实例方法</h4><h5 id="修改窗口设置"><a href="#修改窗口设置" class="headerlink" title="修改窗口设置"></a>修改窗口设置</h5><h6 id="设置窗口可见性"><a href="#设置窗口可见性" class="headerlink" title="设置窗口可见性"></a>设置窗口可见性</h6><blockquote>
+<p><code>false</code>：缺省值，不可见<br><code>true</code>：可见</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口标题"><a href="#设置窗口标题" class="headerlink" title="设置窗口标题"></a>设置窗口标题</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setTitle(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口位置"><a href="#设置窗口位置" class="headerlink" title="设置窗口位置"></a>设置窗口位置</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setLocation(&lt;x&gt;, &lt;y&gt;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口尺寸"><a href="#设置窗口尺寸" class="headerlink" title="设置窗口尺寸"></a>设置窗口尺寸</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setSize(&lt;width&gt;, &lt;height&gt;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setSize(<span class="keyword">new</span> <span class="title class_">Dimension</span>(&lt;width&gt;, &lt;height&gt;));</span><br></pre></td></tr></table></figure>
+
+<h6 id="同时设置窗口位置和窗口大小"><a href="#同时设置窗口位置和窗口大小" class="headerlink" title="同时设置窗口位置和窗口大小"></a>同时设置窗口位置和窗口大小</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口背景颜色"><a href="#设置窗口背景颜色" class="headerlink" title="设置窗口背景颜色"></a>设置窗口背景颜色</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setBackground(<span class="keyword">new</span> <span class="title class_">Color</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setBackground(Color.WHITE);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口置顶"><a href="#设置窗口置顶" class="headerlink" title="设置窗口置顶"></a>设置窗口置顶</h6><blockquote>
+<p><code>false</code>：缺省值，窗口不置顶<br><code>true</code>：窗口置顶</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setAlwaysOnTop(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置窗口不允许改变尺寸"><a href="#设置窗口不允许改变尺寸" class="headerlink" title="设置窗口不允许改变尺寸"></a>设置窗口不允许改变尺寸</h6><blockquote>
+<p><code>true</code>：缺省值，允许改变尺寸<br><code>false</code>：不允许改变尺寸</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setResizable(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="设置光标"><a href="#设置光标" class="headerlink" title="设置光标"></a>设置光标</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setCursor();</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取窗口属性"><a href="#获取窗口属性" class="headerlink" title="获取窗口属性"></a>获取窗口属性</h5><h6 id="获取窗口标题"><a href="#获取窗口标题" class="headerlink" title="获取窗口标题"></a>获取窗口标题</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">title</span> <span class="operator">=</span> frame.getTitle();</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取窗口尺寸"><a href="#获取窗口尺寸" class="headerlink" title="获取窗口尺寸"></a>获取窗口尺寸</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">width</span> <span class="operator">=</span> frame.getWidth();</span><br><span class="line"><span class="type">int</span> <span class="variable">height</span> <span class="operator">=</span> frame.getHeight();</span><br></pre></td></tr></table></figure>
+
+<h5 id="关闭窗口并退出进程"><a href="#关闭窗口并退出进程" class="headerlink" title="关闭窗口并退出进程"></a>关闭窗口并退出进程</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.dispose();</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加窗口事件监听器"><a href="#添加窗口事件监听器" class="headerlink" title="添加窗口事件监听器"></a>添加窗口事件监听器</h5><h6 id="监听窗口打开事件"><a href="#监听窗口打开事件" class="headerlink" title="监听窗口打开事件"></a>监听窗口打开事件</h6><ul>
+<li>窗口可见性设置为<code>true</code>时执行的事件</li>
+<li>监听器先监听，然后修改窗口可见性，才会触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowOpened</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口关闭按钮"><a href="#监听窗口关闭按钮" class="headerlink" title="监听窗口关闭按钮"></a>监听窗口关闭按钮</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowClosing</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        frame.dispose();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口关闭事件"><a href="#监听窗口关闭事件" class="headerlink" title="监听窗口关闭事件"></a>监听窗口关闭事件</h6><ul>
+<li>窗口执行<code>dispose()</code>方法之后才触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowOpened</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口最小化按钮"><a href="#监听窗口最小化按钮" class="headerlink" title="监听窗口最小化按钮"></a>监听窗口最小化按钮</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowIconified</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口还原最小化事件"><a href="#监听窗口还原最小化事件" class="headerlink" title="监听窗口还原最小化事件"></a>监听窗口还原最小化事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowDeiconified</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口获取焦点事件"><a href="#监听窗口获取焦点事件" class="headerlink" title="监听窗口获取焦点事件"></a>监听窗口获取焦点事件</h6><ul>
+<li>窗口每次获取焦点都会触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowActivated</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听窗口失去焦点事件"><a href="#监听窗口失去焦点事件" class="headerlink" title="监听窗口失去焦点事件"></a>监听窗口失去焦点事件</h6><ul>
+<li>窗口每次失去都会触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowDeactivated</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加键盘事件监听器"><a href="#添加键盘事件监听器" class="headerlink" title="添加键盘事件监听器"></a>添加键盘事件监听器</h5><ul>
+<li>按键按下事件&#x3D;&gt;按键输入事件&#x3D;&gt;按键抬起事件</li>
+</ul>
+<h6 id="监听按键输入事件"><a href="#监听按键输入事件" class="headerlink" title="监听按键输入事件"></a>监听按键输入事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addKeyListener(<span class="keyword">new</span> <span class="title class_">KeyAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">keyTyped</span><span class="params">(KeyEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听按键按下事件"><a href="#监听按键按下事件" class="headerlink" title="监听按键按下事件"></a>监听按键按下事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addKeyListener(<span class="keyword">new</span> <span class="title class_">KeyAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">keyPressed</span><span class="params">(KeyEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听按键抬起事件"><a href="#监听按键抬起事件" class="headerlink" title="监听按键抬起事件"></a>监听按键抬起事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addKeyListener(<span class="keyword">new</span> <span class="title class_">KeyAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">keyReleased</span><span class="params">(KeyEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="键盘事件（KeyEvent）实例方法"><a href="#键盘事件（KeyEvent）实例方法" class="headerlink" title="键盘事件（KeyEvent）实例方法"></a>键盘事件（KeyEvent）实例方法</h6><ul>
+<li>获取按键字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="variable">keyChar</span> <span class="operator">=</span> e.getKeyChar();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取按键键码值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">keyCode</span> <span class="operator">=</span> e.getKeyCode();</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加鼠标事件监听器"><a href="#添加鼠标事件监听器" class="headerlink" title="添加鼠标事件监听器"></a>添加鼠标事件监听器</h5><h6 id="监听鼠标按键点击事件"><a href="#监听鼠标按键点击事件" class="headerlink" title="监听鼠标按键点击事件"></a>监听鼠标按键点击事件</h6><ul>
+<li>左键按下事件&#x3D;&gt;（快速）&#x3D;&gt;左键释放事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> <span class="title class_">MouseAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">mouseClicked</span><span class="params">(MouseEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听鼠标按键按下事件"><a href="#监听鼠标按键按下事件" class="headerlink" title="监听鼠标按键按下事件"></a>监听鼠标按键按下事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> <span class="title class_">MouseAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">mousePressed</span><span class="params">(MouseEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听鼠标按键抬起事件"><a href="#监听鼠标按键抬起事件" class="headerlink" title="监听鼠标按键抬起事件"></a>监听鼠标按键抬起事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> <span class="title class_">MouseAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">mouseReleased</span><span class="params">(MouseEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听鼠标进入窗口事件"><a href="#监听鼠标进入窗口事件" class="headerlink" title="监听鼠标进入窗口事件"></a>监听鼠标进入窗口事件</h6><ul>
+<li>无论窗口是否是焦点，都会触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> <span class="title class_">MouseAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">mouseEntered</span><span class="params">(MouseEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="监听鼠标移出窗口事件"><a href="#监听鼠标移出窗口事件" class="headerlink" title="监听鼠标移出窗口事件"></a>监听鼠标移出窗口事件</h6><ul>
+<li>无论窗口是否是焦点，都会触发事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> <span class="title class_">MouseAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">mouseExited</span><span class="params">(MouseEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="鼠标事件（MouseEvent）实例方法"><a href="#鼠标事件（MouseEvent）实例方法" class="headerlink" title="鼠标事件（MouseEvent）实例方法"></a>鼠标事件（MouseEvent）实例方法</h6><ul>
+<li>获取鼠标相对于屏幕的坐标</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> e.getLocationOnScreen();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> e.getXOnScreen();</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> e.getYOnScreen();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取鼠标相对于窗口的坐标</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> e.getPoint();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> e.getX();</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> e.getY();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>获取按键点击次数</p>
+</li>
+<li><p>如果被点击了多次，会依次得到次数</p>
+<ul>
+<li>比如点击3次，会依次得到1、2、3，而不是只得到3</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">clickCount</span> <span class="operator">=</span> e.getClickCount();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取被点击的按键</li>
+</ul>
+<blockquote>
+<p>返回值</p>
+<blockquote>
+<p><code>1</code>：左键<br><code>2</code>：中键<br><code>3</code>：右键<br><code>4</code>：滚轮</p>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">button</span> <span class="operator">=</span> e.getButton();</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置全局字体"><a href="#设置全局字体" class="headerlink" title="设置全局字体"></a>设置全局字体</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setFont(<span class="keyword">new</span> <span class="title class_">Font</span>(<span class="string">&quot;宋体&quot;</span>, Font.PLAIN, <span class="number">12</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置图标"><a href="#设置图标" class="headerlink" title="设置图标"></a>设置图标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span> <span class="variable">image</span> <span class="operator">=</span> ImageIO.read(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;icon.png&quot;</span>));</span><br><span class="line"></span><br><span class="line">frame.setIconImage(image);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置MacOS的Dock栏图标"><a href="#设置MacOS的Dock栏图标" class="headerlink" title="设置MacOS的Dock栏图标"></a>设置MacOS的Dock栏图标</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span> <span class="variable">image</span> <span class="operator">=</span> ImageIO.read(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;icon.png&quot;</span>));</span><br><span class="line"></span><br><span class="line">Application.getApplication().setDockIconImage(image);</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义窗口修饰"><a href="#自定义窗口修饰" class="headerlink" title="自定义窗口修饰"></a>自定义窗口修饰</h4><h5 id="取消操作系统默认窗口修饰"><a href="#取消操作系统默认窗口修饰" class="headerlink" title="取消操作系统默认窗口修饰"></a>取消操作系统默认窗口修饰</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setUndecorated(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义窗口形状"><a href="#定义窗口形状" class="headerlink" title="定义窗口形状"></a>定义窗口形状</h5><h6 id="圆角矩形"><a href="#圆角矩形" class="headerlink" title="圆角矩形"></a>圆角矩形</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setShape(<span class="keyword">new</span> <span class="title class_">RoundRectangle2D</span>.Double(<span class="number">0</span>, <span class="number">0</span>, frame.getWidth(), frame.getHeight(), <span class="number">10</span>, <span class="number">10</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><h4 id="默认布局"><a href="#默认布局" class="headerlink" title="默认布局"></a>默认布局</h4><ul>
+<li>默认布局所有组件尺寸与窗口相同</li>
+</ul>
+<h4 id="空布局"><a href="#空布局" class="headerlink" title="空布局"></a>空布局</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setLayout(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="边界布局"><a href="#边界布局" class="headerlink" title="边界布局"></a>边界布局</h4><ul>
+<li>默认有东、南、西、北、中五个位置，添加组件时需要指定位置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BorderLayout</span> <span class="variable">borderLayout</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BorderLayout</span>();</span><br><span class="line">frame.setLayout(borderLayout);</span><br></pre></td></tr></table></figure>
+
+<table border="1">
+  <tr>
+    <td colspan="3">顶部</td>
+  <tr>
+  <tr>
+    <td>左侧</td>
+    <td>中间</td>
+    <td>右侧</td>
+  <tr>
+  <tr>
+    <td colspan="3">底部</td>
+  <tr>
+</table>
+
+<h5 id="组件设置位置"><a href="#组件设置位置" class="headerlink" title="组件设置位置"></a>组件设置位置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">frame.add(&lt;component&gt;, BorderLayout.CENTER);</span><br><span class="line">frame.add(&lt;component&gt;, BorderLayout.NORTH);</span><br><span class="line">frame.add(&lt;component&gt;, BorderLayout.SOUTH);</span><br><span class="line">frame.add(&lt;component&gt;, BorderLayout.WEST);</span><br><span class="line">frame.add(&lt;component&gt;, BorderLayout.EAST);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置组件间横向间距"><a href="#设置组件间横向间距" class="headerlink" title="设置组件间横向间距"></a>设置组件间横向间距</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">borderLayout.setHgap(&lt;size&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置组件间纵向间距"><a href="#设置组件间纵向间距" class="headerlink" title="设置组件间纵向间距"></a>设置组件间纵向间距</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">borderLayout.setVgap(&lt;size&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h4><ul>
+<li>默认从左向右排列，只有一行，默认每行居中，每个组件之间有间距</li>
+<li>窗口尺寸改变时，一行展示不下的组件会被挤到下一行，继续从左向右排列</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FlowLayout</span> <span class="variable">flowLayout</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FlowLayout</span>();</span><br><span class="line">frame.setLayout(<span class="keyword">new</span> <span class="title class_">FlowLayout</span>());</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置组件间横向间距-1"><a href="#设置组件间横向间距-1" class="headerlink" title="设置组件间横向间距"></a>设置组件间横向间距</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flowLayout.setHgap(&lt;size&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置组件间纵向间距-1"><a href="#设置组件间纵向间距-1" class="headerlink" title="设置组件间纵向间距"></a>设置组件间纵向间距</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flowLayout.setVgap(&lt;size&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置对齐"><a href="#设置对齐" class="headerlink" title="设置对齐"></a>设置对齐</h5><blockquote>
+<p><code>&lt;align&gt;</code>：对齐规则</p>
+<blockquote>
+<p><code>FlowLayout.CENTER</code>：缺省值，居中<br><code>FlowLayout.LEFT</code>：居左<br><code>FlowLayout.RIGHT</code>：居右</p>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flowLayout.setAlignment(&lt;align&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="卡片布局"><a href="#卡片布局" class="headerlink" title="卡片布局"></a>卡片布局</h4><ul>
+<li>添加组件时，默认叠放所有组件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CardLayout</span> <span class="variable">cardLayout</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CardLayout</span>();</span><br><span class="line">frame.setLayout(cardLayout);</span><br></pre></td></tr></table></figure>
+
+<h5 id="切换组件"><a href="#切换组件" class="headerlink" title="切换组件"></a>切换组件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cardLayout.next(frame);</span><br></pre></td></tr></table></figure>
+
+<h4 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h4><ul>
+<li>添加组件时，从左向右、从上向下依次放入网格中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GridLayout</span> <span class="variable">gridLayout</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GridLayout</span>(&lt;row&gt;, &lt;column&gt;);</span><br><span class="line">frame.setLayout(gridLayout);</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li>AWT中组件默认位置为<strong>包含</strong>窗口标题的窗口左上角</li>
+</ul>
+<h4 id="面板"><a href="#面板" class="headerlink" title="面板"></a>面板</h4><ul>
+<li>存放组件的组件<ul>
+<li>面板也是组件，面板中也可以放面板</li>
+</ul>
+</li>
+<li>面板也是容器，也可以设置布局</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Panel</span> <span class="variable">panel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Panel</span>();</span><br><span class="line">frame.add(panel);</span><br></pre></td></tr></table></figure>
+
+<h5 id="滚动面板"><a href="#滚动面板" class="headerlink" title="滚动面板"></a>滚动面板</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ScrollPane</span> <span class="variable">scrollPane</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ScrollPane</span>();</span><br><span class="line">frame.add(scrollPane);</span><br></pre></td></tr></table></figure>
+
+<h5 id="面板添加组件"><a href="#面板添加组件" class="headerlink" title="面板添加组件"></a>面板添加组件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">panel.add(&lt;component&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Label</span> <span class="variable">label</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>(<span class="string">&quot;标签&quot;</span>);</span><br><span class="line">label.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br><span class="line">frame.add(label);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置字体"><a href="#设置字体" class="headerlink" title="设置字体"></a>设置字体</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label.setFont(<span class="keyword">new</span> <span class="title class_">Font</span>(<span class="string">&quot;宋体&quot;</span>, Font.PLAIN, <span class="number">12</span>));</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置前景色"><a href="#设置前景色" class="headerlink" title="设置前景色"></a>设置前景色</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label.setForeground(Color.RED);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置背景色"><a href="#设置背景色" class="headerlink" title="设置背景色"></a>设置背景色</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label.setBackground(Color.RED);</span><br></pre></td></tr></table></figure>
+
+<h4 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Button</span> <span class="variable">button</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Button</span>(<span class="string">&quot;按钮&quot;</span>);</span><br><span class="line">button.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br><span class="line">frame.add(button);</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加按钮事件监听器"><a href="#添加按钮事件监听器" class="headerlink" title="添加按钮事件监听器"></a>添加按钮事件监听器</h5><h6 id="监听按钮点击事件"><a href="#监听按钮点击事件" class="headerlink" title="监听按钮点击事件"></a>监听按钮点击事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">button.addActionListener(<span class="keyword">new</span> <span class="title class_">ActionListener</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">actionPerformed</span><span class="params">(ActionEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本框"><a href="#文本框" class="headerlink" title="文本框"></a>文本框</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TextField</span> <span class="variable">textField</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;默认值&quot;</span>);</span><br><span class="line">textField.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br><span class="line">frame.add(textField);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取文本框内容"><a href="#获取文本框内容" class="headerlink" title="获取文本框内容"></a>获取文本框内容</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> textField.getText();</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置显示字符"><a href="#设置显示字符" class="headerlink" title="设置显示字符"></a>设置显示字符</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.setEchoChar(<span class="string">&#x27;*&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TextArea</span> <span class="variable">textArea</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TextArea</span>(<span class="string">&quot;默认值&quot;</span>);</span><br><span class="line">textArea.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br><span class="line">frame.add(textArea);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取文本域内容"><a href="#获取文本域内容" class="headerlink" title="获取文本域内容"></a>获取文本域内容</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> textArea.getText();</span><br></pre></td></tr></table></figure>
+
+<h4 id="选框"><a href="#选框" class="headerlink" title="选框"></a>选框</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Checkbox</span> <span class="variable">checkbox</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Checkbox</span>(<span class="string">&quot;选项&quot;</span>);</span><br><span class="line">checkbox.setBounds(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br><span class="line">frame.add(checkbox);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取多选框状态"><a href="#获取多选框状态" class="headerlink" title="获取多选框状态"></a>获取多选框状态</h5><ul>
+<li>被选中返回<code>true</code>，未被选中返回<code>false</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">selected</span> <span class="operator">=</span> checkbox.getState();</span><br></pre></td></tr></table></figure>
+
+<h5 id="选框组"><a href="#选框组" class="headerlink" title="选框组"></a>选框组</h5><ul>
+<li>通过选框组将多个选框关联起来，只允许组内其中一个选框被选中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Checkbox</span> <span class="variable">checkbox1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Checkbox</span>(<span class="string">&quot;选项&quot;</span>);</span><br><span class="line"><span class="type">Checkbox</span> <span class="variable">checkbox2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Checkbox</span>(<span class="string">&quot;选项&quot;</span>);</span><br><span class="line"><span class="type">CheckboxGroup</span> <span class="variable">checkboxGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CheckboxGroup</span>();</span><br><span class="line"></span><br><span class="line">checkbox1.setCheckboxGroup(checkboxGroup);</span><br><span class="line">checkbox2.setCheckboxGroup(checkboxGroup);</span><br></pre></td></tr></table></figure>
+
+<h6 id="获取被选中的选框"><a href="#获取被选中的选框" class="headerlink" title="获取被选中的选框"></a>获取被选中的选框</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Checkbox</span> <span class="variable">selectedCheckbox</span> <span class="operator">=</span> checkboxGroup.getSelectedCheckbox();</span><br></pre></td></tr></table></figure>
+
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">List</span>();</span><br><span class="line">frame.add(list);</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加列表项"><a href="#添加列表项" class="headerlink" title="添加列表项"></a>添加列表项</h5><ul>
+<li>列表项只能是字符串类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.add(<span class="string">&quot;列表项&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置允许多选"><a href="#设置允许多选" class="headerlink" title="设置允许多选"></a>设置允许多选</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.setMultipleMode(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取已选中列表项"><a href="#获取已选中列表项" class="headerlink" title="获取已选中列表项"></a>获取已选中列表项</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span>[] <span class="variable">selectedItems</span> <span class="operator">=</span> list.getSelectedItems();</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加列表事件监听器"><a href="#添加列表事件监听器" class="headerlink" title="添加列表事件监听器"></a>添加列表事件监听器</h5><h6 id="监听列表项改变事件"><a href="#监听列表项改变事件" class="headerlink" title="监听列表项改变事件"></a>监听列表项改变事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list.addItemListener(<span class="keyword">new</span> <span class="title class_">ItemListener</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">itemStateChanged</span><span class="params">(ItemEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MenuBar</span> <span class="variable">menuBar</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MenuBar</span>();</span><br><span class="line">frame.add(menuBar);</span><br></pre></td></tr></table></figure>
+
+<h5 id="菜单栏添加菜单"><a href="#菜单栏添加菜单" class="headerlink" title="菜单栏添加菜单"></a>菜单栏添加菜单</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Menu</span> <span class="variable">menu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Menu</span>(<span class="string">&quot;菜单&quot;</span>);</span><br><span class="line">menuBar.add(menu);</span><br></pre></td></tr></table></figure>
+
+<h5 id="菜单添加菜单项"><a href="#菜单添加菜单项" class="headerlink" title="菜单添加菜单项"></a>菜单添加菜单项</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MenuItem</span> <span class="variable">menuItem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MenuItem</span>(<span class="string">&quot;菜单项&quot;</span>);</span><br><span class="line">menu.add(menuItem);</span><br></pre></td></tr></table></figure>
+
+<h6 id="添加可勾选菜单项"><a href="#添加可勾选菜单项" class="headerlink" title="添加可勾选菜单项"></a>添加可勾选菜单项</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CheckboxMenuItem</span> <span class="variable">checkboxMenuItem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CheckboxMenuItem</span>(<span class="string">&quot;可勾选菜单项&quot;</span>);</span><br><span class="line">menu.add(checkboxMenuItem);</span><br></pre></td></tr></table></figure>
+
+<h5 id="菜单项添加快捷键"><a href="#菜单项添加快捷键" class="headerlink" title="菜单项添加快捷键"></a>菜单项添加快捷键</h5><ul>
+<li>默认为<code>Ctrl</code>（<code>Command</code>）+指定字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menuItem.setShortcut(<span class="keyword">new</span> <span class="title class_">MenuShortcut</span>(<span class="string">&#x27;A&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二个参数为<code>true</code>时，需要按<code>Ctrl</code>（<code>Command</code>）+<code>Shift</code>+指定字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menuItem.setShortcut(<span class="keyword">new</span> <span class="title class_">MenuShortcut</span>(<span class="string">&#x27;A&#x27;</span>, <span class="literal">true</span>));</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加菜单项事件监听器"><a href="#添加菜单项事件监听器" class="headerlink" title="添加菜单项事件监听器"></a>添加菜单项事件监听器</h5><h6 id="监听菜单项点击事件"><a href="#监听菜单项点击事件" class="headerlink" title="监听菜单项点击事件"></a>监听菜单项点击事件</h6><ul>
+<li>无论是鼠标点击还是快捷键触发，都会触发此监听器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">menuItem.addActionListener(<span class="keyword">new</span> <span class="title class_">ActionListener</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">actionPerformed</span><span class="params">(ActionEvent e)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="弹出菜单（右键菜单）"><a href="#弹出菜单（右键菜单）" class="headerlink" title="弹出菜单（右键菜单）"></a>弹出菜单（右键菜单）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">PopupMenu</span> <span class="variable">popupMenu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PopupMenu</span>();</span><br><span class="line">frame.add(popupMenu);</span><br></pre></td></tr></table></figure>
+
+<h5 id="弹出菜单添加菜单项"><a href="#弹出菜单添加菜单项" class="headerlink" title="弹出菜单添加菜单项"></a>弹出菜单添加菜单项</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MenuItem</span> <span class="variable">menuItem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MenuItem</span>(<span class="string">&quot;菜单项&quot;</span>);</span><br><span class="line">popupMenu.add(menuItem);</span><br></pre></td></tr></table></figure>
+
+<h5 id="显示弹出菜单"><a href="#显示弹出菜单" class="headerlink" title="显示弹出菜单"></a>显示弹出菜单</h5><ul>
+<li>指定基于哪个组件上显示，以及相对于组件的显示位置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popupMenu.show(frame, &lt;x&gt;, &lt;y&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加菜单项事件监听器-1"><a href="#添加菜单项事件监听器-1" class="headerlink" title="添加菜单项事件监听器"></a>添加菜单项事件监听器</h5><p><a href="./#%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E9%A1%B9%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%99%A8">传送门</a></p>
+<h4 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Dialog</span> <span class="variable">dialog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dialog</span>(frame, <span class="string">&quot;对话框&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三个参数为<code>true</code>表示对话框弹出后，依赖的窗口（第一个参数）不可聚焦</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Dialog</span> <span class="variable">dialog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dialog</span>(frame, <span class="string">&quot;对话框&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置对话框可见性"><a href="#设置对话框可见性" class="headerlink" title="设置对话框可见性"></a>设置对话框可见性</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dialog.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加对话框事件监听器"><a href="#添加对话框事件监听器" class="headerlink" title="添加对话框事件监听器"></a>添加对话框事件监听器</h5><h6 id="监听对话框关闭事件"><a href="#监听对话框关闭事件" class="headerlink" title="监听对话框关闭事件"></a>监听对话框关闭事件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dialog.addWindowListener(<span class="keyword">new</span> <span class="title class_">WindowAdapter</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">windowClosing</span><span class="params">(WindowEvent e)</span> &#123;</span><br><span class="line">        dialog.dispose();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件选择对话框"><a href="#文件选择对话框" class="headerlink" title="文件选择对话框"></a>文件选择对话框</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileDialog</span> <span class="variable">fileDialog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileDialog</span>(frame, <span class="string">&quot;文件选择对话框&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置对话框可见性-1"><a href="#设置对话框可见性-1" class="headerlink" title="设置对话框可见性"></a>设置对话框可见性</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileDialog.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取选择的目录"><a href="#获取选择的目录" class="headerlink" title="获取选择的目录"></a>获取选择的目录</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileDialog.getDirectory();</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取选择的文件"><a href="#获取选择的文件" class="headerlink" title="获取选择的文件"></a>获取选择的文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileDialog.getFile();</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h4><ul>
+<li>创建一个继承<code>Component</code>类的子类，重写<code>paint(Graphics g)</code>方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Class Cls <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">paint</span><span class="params">(Graphics g)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置画笔颜色"><a href="#设置画笔颜色" class="headerlink" title="设置画笔颜色"></a>设置画笔颜色</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.setColor(Color.RED);</span><br></pre></td></tr></table></figure>
+
+<h5 id="绘制填充图形"><a href="#绘制填充图形" class="headerlink" title="绘制填充图形"></a>绘制填充图形</h5><h6 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fillRect(&lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="绘制文本"><a href="#绘制文本" class="headerlink" title="绘制文本"></a>绘制文本</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.drawString(<span class="string">&quot;文本内容&quot;</span>, &lt;x&gt;, &lt;y&gt;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="绘制图片"><a href="#绘制图片" class="headerlink" title="绘制图片"></a>绘制图片</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span> <span class="variable">image</span> <span class="operator">=</span> ImageIO.read(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;image.png&quot;</span>));</span><br><span class="line"></span><br><span class="line">g.drawImage(image, &lt;x&gt;, &lt;y&gt;, &lt;width&gt;, &lt;height&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="组件的建议尺寸"><a href="#组件的建议尺寸" class="headerlink" title="组件的建议尺寸"></a>组件的建议尺寸</h4><ul>
+<li>在布局没有强制要求尺寸的情况下会采用组件的建议尺寸</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button.setPreferredSize(<span class="keyword">new</span> <span class="title class_">Dimension</span>(&lt;width&gt;, &lt;height&gt;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取所有字体数组"><a href="#获取所有字体数组" class="headerlink" title="获取所有字体数组"></a>获取所有字体数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Font</span>[] <span class="variable">fonts</span> <span class="operator">=</span> GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取屏幕尺寸"><a href="#获取屏幕尺寸" class="headerlink" title="获取屏幕尺寸"></a>获取屏幕尺寸</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Dimension</span> <span class="variable">screenSize</span> <span class="operator">=</span> Toolkit.getDefaultToolkit().getScreenSize();</span><br></pre></td></tr></table></figure>
+
+<h2 id="光标"><a href="#光标" class="headerlink" title="光标"></a>光标</h2><h3 id="内置光标"><a href="#内置光标" class="headerlink" title="内置光标"></a>内置光标</h3><h4 id="默认光标"><a href="#默认光标" class="headerlink" title="默认光标"></a>默认光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="准星光标"><a href="#准星光标" class="headerlink" title="准星光标"></a>准星光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本光标"><a href="#文本光标" class="headerlink" title="文本光标"></a>文本光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="等待光标"><a href="#等待光标" class="headerlink" title="等待光标"></a>等待光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="西南方向缩放光标"><a href="#西南方向缩放光标" class="headerlink" title="西南方向缩放光标"></a>西南方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="东南方向缩放光标"><a href="#东南方向缩放光标" class="headerlink" title="东南方向缩放光标"></a>东南方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="西北方向缩放光标"><a href="#西北方向缩放光标" class="headerlink" title="西北方向缩放光标"></a>西北方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="东北方向缩放光标"><a href="#东北方向缩放光标" class="headerlink" title="东北方向缩放光标"></a>东北方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="北方向缩放光标"><a href="#北方向缩放光标" class="headerlink" title="北方向缩放光标"></a>北方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="南方向缩放光标"><a href="#南方向缩放光标" class="headerlink" title="南方向缩放光标"></a>南方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="西方向缩放光标"><a href="#西方向缩放光标" class="headerlink" title="西方向缩放光标"></a>西方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="东方向缩放光标"><a href="#东方向缩放光标" class="headerlink" title="东方向缩放光标"></a>东方向缩放光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="手光标"><a href="#手光标" class="headerlink" title="手光标"></a>手光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cursor</span> <span class="variable">cursor</span> <span class="operator">=</span> Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.bilibili.com/video/BV163GGz2E8c">哔哩哔哩——青空の霞光</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/25/%E8%85%BE%E8%AE%AF%E4%BA%91%E4%BA%91%E5%87%BD%E6%95%B0%E5%AE%89%E8%A3%85pip%E4%BE%9D%E8%B5%96/" rel="prev" title="【笔记】腾讯云云函数安装pip依赖">
+                  <i class="fa fa-angle-left"></i> 【笔记】腾讯云云函数安装pip依赖
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/29/Java%E7%9A%84Swing/" rel="next" title="【笔记】Java的Swing">
+                  【笔记】Java的Swing <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>

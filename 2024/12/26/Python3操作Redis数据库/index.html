@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-package/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-package/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-package/favicon-16x16.png">
+  <link rel="mask-icon" href="/assets/images/favicon-package/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+  <meta name="google-site-verification" content="qIz-Tg08U6gyN_53z89yii0ZmKx2avfsO-iyOWhsRx8">
+  <meta name="msvalidate.01" content="096F3D01D2AA04148F10750CD4566535">
+  <meta name="yandex-verification" content="43f790b7e38394a4">
+  <meta name="baidu-site-verification" content="codeva-LMZoUaXjJl">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"loli.fj.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"right","width_expanded":400,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism-one-light","dark":"prism-one-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言Python3操作Redis数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】Python3操作Redis数据库">
+<meta property="og:url" content="https://loli.fj.cn/2024/12/26/Python3%E6%93%8D%E4%BD%9CRedis%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="57uv6Z6g">
+<meta property="og:description" content="前言Python3操作Redis数据库">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-26T08:21:53.000Z">
+<meta property="article:modified_time" content="2026-09-04T16:30:45.652Z">
+<meta property="article:author" content="57uv6Z6g">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://loli.fj.cn/2024/12/26/Python3%E6%93%8D%E4%BD%9CRedis%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://loli.fj.cn/2024/12/26/Python3%E6%93%8D%E4%BD%9CRedis%E6%95%B0%E6%8D%AE%E5%BA%93/","path":"2024/12/26/Python3操作Redis数据库/","title":"【笔记】Python3操作Redis数据库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【笔记】Python3操作Redis数据库 | 57uv6Z6g</title>
+  
+
+
+
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uyox5hl1zo");
+</script>
+
+
+  <script async defer data-website-id="54a06d99-9c98-42f8-b737-88622d58c3b4" src="https://umami-vercel.loli.fj.cn/script.js" data-host-url="https://umami-vercel.loli.fj.cn"></script>
+
+
+  
+  <script src="/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="/lib/@next-theme/pjax/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="/lib/medium-zoom/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+  <script src="/lib/pangu/dist/browser/pangu.umd.js" integrity="sha256-erngBMP3zzoIM6eqQ8dmrReh2vqCRgWmORroIfVoDlE=" crossorigin="anonymous" defer></script>
+<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"/lib/mathjax/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="57uv6Z6g" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">57uv6Z6g</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">MS4wLjABAAAA5qMD8Gzdcgq7HXUOviKB59i0-ybJ59jJvNzyaPt5XOsVNqP6DU7WLcoAXvdxvYdp💗<br><span style="color: red">本站所有文章仅作技术研究，请勿非法破坏，请遵守相关法律法规，后果自负</span></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/pages/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-reward"><a href="/pages/reward/" rel="section"><i class="fa fa-hand-holding-heart fa-fw"></i>赞助</a></li><li class="menu-item menu-item-command"><a href="/pages/command/" rel="section"><i class="fa fa-book fa-fw"></i>指令</a></li><li class="menu-item menu-item-typesetting"><a href="/pages/typesetting/" rel="section"><i class="fa fa-marker fa-fw"></i>排版</a></li><li class="menu-item menu-item-contribute"><a href="/pages/contribute/" rel="section"><i class="fa fa-chart-line fa-fw"></i>贡献</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>订阅</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link rel="manifest" href="/assets/images/favicon-package/site.webmanifest">
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">0x000000000001</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">0x000000000002</span> <span class="nav-text">下载依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">0x000000000003</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1"><span class="nav-number">0x000000000004</span> <span class="nav-text">创建连接对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%AF%86%E7%A0%81"><span class="nav-number">0x000000000104</span> <span class="nav-text">无密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%AF%86%E7%A0%81"><span class="nav-number">0x000000000204</span> <span class="nav-text">有密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AE%EF%BC%88string%EF%BC%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x000000000005</span> <span class="nav-text">对字符串数据（string）的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%88%96%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000105</span> <span class="nav-text">新增或修改数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%AE%BAkey%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E9%83%BD%E6%89%A7%E8%A1%8C%EF%BC%88%E8%A6%86%E7%9B%96%EF%BC%89"><span class="nav-number">0x000000010105</span> <span class="nav-text">无论key是否存在都执行（覆盖）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89key%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E6%89%A7%E8%A1%8C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">0x000000020105</span> <span class="nav-text">只有key存在时才执行（修改）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89key%E4%B8%8D%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E6%89%A7%E8%A1%8C%EF%BC%88%E6%96%B0%E5%A2%9E%EF%BC%89"><span class="nav-number">0x000000030105</span> <span class="nav-text">只有key不存在时才执行（新增）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000205</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%96%B0%E5%A2%9E"><span class="nav-number">0x000000000305</span> <span class="nav-text">批量新增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2"><span class="nav-number">0x000000000405</span> <span class="nav-text">批量查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E9%94%AE%E5%80%BC%E5%AF%B9%E6%95%B0%E6%8D%AE%EF%BC%88map%EF%BC%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x000000000006</span> <span class="nav-text">对键值对数据（map）的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000000106</span> <span class="nav-text">新增键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89key%E4%B8%8D%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E6%89%A7%E8%A1%8C%EF%BC%88%E6%96%B0%E5%A2%9E%EF%BC%89-1"><span class="nav-number">0x000000010106</span> <span class="nav-text">只有key不存在时才执行（新增）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000000206</span> <span class="nav-text">查询键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E7%9A%84%E9%94%AE"><span class="nav-number">0x000000010206</span> <span class="nav-text">查询所有的键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000020206</span> <span class="nav-text">查询所有的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%8F%96%E5%80%BC"><span class="nav-number">0x000000030206</span> <span class="nav-text">根据键取值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA"><span class="nav-number">0x000001030206</span> <span class="nav-text">单个</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA"><span class="nav-number">0x000002030206</span> <span class="nav-text">多个</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000040206</span> <span class="nav-text">查询所有键值对</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%96%B0%E5%A2%9E-1"><span class="nav-number">0x000000000306</span> <span class="nav-text">批量新增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2-1"><span class="nav-number">0x000000000406</span> <span class="nav-text">批量查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">0x000000000506</span> <span class="nav-text">判断是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">0x000000000606</span> <span class="nav-text">删除键值对</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE%EF%BC%88list%EF%BC%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x000000000007</span> <span class="nav-text">对列表数据（list）的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%88%96%E4%BF%AE%E6%94%B9%E5%88%97%E8%A1%A8"><span class="nav-number">0x000000000107</span> <span class="nav-text">新增或修改列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%AE%BAkey%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E9%83%BD%E6%89%A7%E8%A1%8C%EF%BC%88%E8%A6%86%E7%9B%96%EF%BC%89-1"><span class="nav-number">0x000000010107</span> <span class="nav-text">无论key是否存在都执行（覆盖）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E5%B7%A6%E4%BE%A7%E6%96%B0%E5%A2%9E"><span class="nav-number">0x000001010107</span> <span class="nav-text">从左侧新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E5%8F%B3%E4%BE%A7%E6%96%B0%E5%A2%9E"><span class="nav-number">0x000002010107</span> <span class="nav-text">从右侧新增</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89key%E5%AD%98%E5%9C%A8%E6%97%B6%E6%89%8D%E6%89%A7%E8%A1%8C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89-1"><span class="nav-number">0x000000020107</span> <span class="nav-text">只有key存在时才执行（修改）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E5%B7%A6%E4%BE%A7%E6%96%B0%E5%A2%9E-1"><span class="nav-number">0x000001020107</span> <span class="nav-text">从左侧新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E5%8F%B3%E4%BE%A7%E6%96%B0%E5%A2%9E-1"><span class="nav-number">0x000002020107</span> <span class="nav-text">从右侧新增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%88%97%E8%A1%A8%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000000207</span> <span class="nav-text">查询列表长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%B8%80%E7%BB%84%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000307</span> <span class="nav-text">查询一组列表中的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%88%97%E8%A1%A8%E4%B8%AD%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000407</span> <span class="nav-text">修改列表中指定索引的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E6%8C%87%E5%AE%9A%E5%80%BC%E5%B9%B6%E4%BB%8E%E5%88%97%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4"><span class="nav-number">0x000000000507</span> <span class="nav-text">寻找指定值并从列表中删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000607</span> <span class="nav-text">弹出列表中的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E6%9C%80%E5%B7%A6%E4%BE%A7%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000010607</span> <span class="nav-text">弹出最左侧的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E6%9C%80%E5%8F%B3%E4%BE%A7%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000020607</span> <span class="nav-text">弹出最右侧的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95%E4%B9%8B%E5%A4%96%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000707</span> <span class="nav-text">删除索引之外的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%97%A0%E5%BA%8F%E9%9B%86%E5%90%88%E6%95%B0%E6%8D%AE%EF%BC%88%E6%97%A0%E5%BA%8Fset%EF%BC%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x000000000008</span> <span class="nav-text">对无序集合数据（无序set）的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE"><span class="nav-number">0x000000000108</span> <span class="nav-text">新增数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9B%86%E5%90%88%E9%95%BF%E5%BA%A6"><span class="nav-number">0x000000000208</span> <span class="nav-text">查询集合长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9B%86%E5%90%88%E4%B8%AD%E6%89%80%E6%9C%89%E5%80%BC"><span class="nav-number">0x000000000308</span> <span class="nav-text">查询集合中所有值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EPython%E5%88%97%E8%A1%A8"><span class="nav-number">0x000000010308</span> <span class="nav-text">返回Python列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EPython%E5%85%83%E7%BB%84"><span class="nav-number">0x000000020308</span> <span class="nav-text">返回Python元组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EPython%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">0x000000030308</span> <span class="nav-text">返回Python迭代器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="nav-number">0x000000000408</span> <span class="nav-text">集合运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E4%BA%A4%E9%9B%86"><span class="nav-number">0x000000010408</span> <span class="nav-text">求交集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E4%BA%A4%E9%9B%86%E7%BB%84%E7%BB%87%E4%B8%BA%E6%96%B0%E7%9A%84%E9%9B%86%E5%90%88"><span class="nav-number">0x000001010408</span> <span class="nav-text">将交集组织为新的集合</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E5%B9%B6%E9%9B%86"><span class="nav-number">0x000000020408</span> <span class="nav-text">求并集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E7%BB%93%E6%9E%9C%E7%BB%84%E7%BB%87%E4%B8%BA%E6%96%B0%E7%9A%84%E9%9B%86%E5%90%88"><span class="nav-number">0x000001020408</span> <span class="nav-text">将结果组织为新的集合</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E5%B7%AE%E9%9B%86"><span class="nav-number">0x000000030408</span> <span class="nav-text">求差集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E7%BB%93%E6%9E%9C%E7%BB%84%E7%BB%87%E4%B8%BA%E6%96%B0%E7%9A%84%E9%9B%86%E5%90%88-1"><span class="nav-number">0x000001030408</span> <span class="nav-text">将结果组织为新的集合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E6%8C%87%E5%AE%9A%E5%80%BC%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">0x000000000508</span> <span class="nav-text">判断集合中的指定值是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E4%B8%AD%E6%8C%87%E5%AE%9A%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000608</span> <span class="nav-text">删除集合中指定的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%BC%B9%E5%87%BA%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000708</span> <span class="nav-text">随机弹出集合中的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E6%95%B0%E6%8D%AE%EF%BC%88%E6%9C%89%E5%BA%8Fset%EF%BC%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x000000000009</span> <span class="nav-text">对有序集合数据（有序set）的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE-1"><span class="nav-number">0x000000000109</span> <span class="nav-text">新增数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9B%86%E5%90%88%E9%95%BF%E5%BA%A6-1"><span class="nav-number">0x000000000209</span> <span class="nav-text">查询集合长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E5%80%BC"><span class="nav-number">0x000000000309</span> <span class="nav-text">查询集合中的所有值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EPython%E8%BF%AD%E4%BB%A3%E5%99%A8-1"><span class="nav-number">0x000000010309</span> <span class="nav-text">返回Python迭代器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E4%B8%80%E7%BB%84%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000409</span> <span class="nav-text">根据索引范围查询一组集合中的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%8C%85%E5%90%AB%E5%88%86%E6%95%B0"><span class="nav-number">0x000000010409</span> <span class="nav-text">结果包含分数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E5%88%86%E6%95%B0%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E4%B8%80%E7%BB%84%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000509</span> <span class="nav-text">根据分数范围查询一组集合中的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%8C%85%E5%90%AB%E5%88%86%E6%95%B0-1"><span class="nav-number">0x000000010509</span> <span class="nav-text">结果包含分数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E6%A0%B9%E6%8D%AE%E5%88%86%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">0x000000020509</span> <span class="nav-text">结果根据分数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%BA%8F"><span class="nav-number">0x000001020509</span> <span class="nav-text">正序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%80%92%E5%BA%8F"><span class="nav-number">0x000002020509</span> <span class="nav-text">倒序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E9%9B%86%E5%90%88%E5%86%85%E7%9A%84%E6%8C%87%E5%AE%9A%E5%80%BC%E8%87%AA%E5%A2%9E"><span class="nav-number">0x000000000609</span> <span class="nav-text">将集合内的指定值自增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E6%8C%87%E5%AE%9A%E5%80%BC%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%85%B6%E7%B4%A2%E5%BC%95"><span class="nav-number">0x000000000709</span> <span class="nav-text">寻找指定值并获取其索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E6%8C%87%E5%AE%9A%E5%80%BC%E5%B9%B6%E5%88%A0%E9%99%A4%E8%BF%99%E4%B8%AA%E5%80%BC"><span class="nav-number">0x000000000809</span> <span class="nav-text">寻找指定值并删除这个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E4%B8%AD%E6%8C%87%E5%AE%9A%E6%8E%92%E8%A1%8C%E8%8C%83%E5%9B%B4%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000909</span> <span class="nav-text">删除集合中指定排行范围的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E4%B8%AD%E6%8C%87%E5%AE%9A%E5%88%86%E6%95%B0%E8%8C%83%E5%9B%B4%E7%9A%84%E5%80%BC"><span class="nav-number">0x000000000A09</span> <span class="nav-text">删除集合中指定分数范围的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BB%BB%E6%84%8F%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">0x00000000000A</span> <span class="nav-text">对任意类型数据的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">0x00000000010A</span> <span class="nav-text">根据键删除指定数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%88%A4%E6%96%AD%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">0x00000000020A</span> <span class="nav-text">根据键判断指定数据是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%94%AE%E9%87%8D%E6%96%B0%E6%8C%87%E5%AE%9A%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-number">0x00000000030A</span> <span class="nav-text">根据键重新指定过期时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E6%8C%87%E5%AE%9A%E9%94%AE%E9%87%8D%E5%91%BD%E5%90%8D%E9%94%AE%E5%90%8D"><span class="nav-number">0x00000000040A</span> <span class="nav-text">为指定键重命名键名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E9%94%AE"><span class="nav-number">0x00000000050A</span> <span class="nav-text">随机获取一个键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%94%AE%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">0x00000000060A</span> <span class="nav-text">根据键获取数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">0x00000000000B</span> <span class="nav-text">完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">0x00000000000C</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="57uv6Z6g"
+      src="/assets/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">57uv6Z6g</p>
+  <div class="site-description" itemprop="description">5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:techno.dinette-0p@icloud.com" title="E-Mail → mailto:techno.dinette-0p@icloud.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+<div id="aplayer-app"></div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://loli.fj.cn/2024/12/26/Python3%E6%93%8D%E4%BD%9CRedis%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+      <meta itemprop="name" content="57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="57uv6Z6g">
+      <meta itemprop="description" content="5LiA5Y+q54ix5oqY6IW+55qE57uv6Z6g">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【笔记】Python3操作Redis数据库 | 57uv6Z6g">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【笔记】Python3操作Redis数据库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-26 16:21:53" itemprop="dateCreated datePublished" datetime="2024-12-26T16:21:53+08:00">2024-12-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-05 00:30:45" itemprop="dateModified" datetime="2026-09-05T00:30:45+08:00">2026-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div id="toot-id" style="display: none">116186445018958220</div><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python3操作Redis数据库</p>
+<span id="more"></span>
+
+<h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install redis</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建连接对象"><a href="#创建连接对象" class="headerlink" title="创建连接对象"></a>创建连接对象</h2><h3 id="无密码"><a href="#无密码" class="headerlink" title="无密码"></a>无密码</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn = redis.Redis(host=<span class="string">&#x27;&lt;ip&gt;&#x27;</span>, port=<span class="number">6379</span>, db=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有密码"><a href="#有密码" class="headerlink" title="有密码"></a>有密码</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn = redis.Redis(host=<span class="string">&#x27;&lt;ip&gt;&#x27;</span>, port=<span class="number">6379</span>, db=<span class="number">0</span>, password=<span class="string">&#x27;&lt;password&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对字符串数据（string）的操作"><a href="#对字符串数据（string）的操作" class="headerlink" title="对字符串数据（string）的操作"></a>对字符串数据（string）的操作</h2><h3 id="新增或修改数据"><a href="#新增或修改数据" class="headerlink" title="新增或修改数据"></a>新增或修改数据</h3><blockquote>
+<p><code>ex=&lt;num&gt;</code>：指定过期时间，单位秒<br><code>px=&lt;num&gt;</code>：指定过期时间，单位毫秒</p>
+</blockquote>
+<h4 id="无论key是否存在都执行（覆盖）"><a href="#无论key是否存在都执行（覆盖）" class="headerlink" title="无论key是否存在都执行（覆盖）"></a>无论key是否存在都执行（覆盖）</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.<span class="built_in">set</span>(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="只有key存在时才执行（修改）"><a href="#只有key存在时才执行（修改）" class="headerlink" title="只有key存在时才执行（修改）"></a>只有key存在时才执行（修改）</h4><ul>
+<li>执行成功返回True，执行失败返回None</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = conn.<span class="built_in">set</span>(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>, xx=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="只有key不存在时才执行（新增）"><a href="#只有key不存在时才执行（新增）" class="headerlink" title="只有key不存在时才执行（新增）"></a>只有key不存在时才执行（新增）</h4><ul>
+<li>执行成功返回True，执行失败返回None</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = conn.<span class="built_in">set</span>(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>, nx=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = conn.setnx(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.get(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量新增"><a href="#批量新增" class="headerlink" title="批量新增"></a>批量新增</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.mset(&#123;&lt;key_1&gt;: &lt;value&gt;, &lt;key_2&gt;: &lt;value&gt;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量查询"><a href="#批量查询" class="headerlink" title="批量查询"></a>批量查询</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.mget(&lt;key_1&gt;, &lt;key_2&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对键值对数据（map）的操作"><a href="#对键值对数据（map）的操作" class="headerlink" title="对键值对数据（map）的操作"></a>对键值对数据（map）的操作</h2><h3 id="新增键值对"><a href="#新增键值对" class="headerlink" title="新增键值对"></a>新增键值对</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hset(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="只有key不存在时才执行（新增）-1"><a href="#只有key不存在时才执行（新增）-1" class="headerlink" title="只有key不存在时才执行（新增）"></a>只有key不存在时才执行（新增）</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hsetnx(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询键值对"><a href="#查询键值对" class="headerlink" title="查询键值对"></a>查询键值对</h3><h4 id="查询所有的键"><a href="#查询所有的键" class="headerlink" title="查询所有的键"></a>查询所有的键</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hkeys(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询所有的值"><a href="#查询所有的值" class="headerlink" title="查询所有的值"></a>查询所有的值</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hvals(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据键取值"><a href="#根据键取值" class="headerlink" title="根据键取值"></a>根据键取值</h4><h5 id="单个"><a href="#单个" class="headerlink" title="单个"></a>单个</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hget(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="多个"><a href="#多个" class="headerlink" title="多个"></a>多个</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hmget(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询所有键值对"><a href="#查询所有键值对" class="headerlink" title="查询所有键值对"></a>查询所有键值对</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hgetall(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量新增-1"><a href="#批量新增-1" class="headerlink" title="批量新增"></a>批量新增</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hmset(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &#123;&lt;value_key_1&gt;: &lt;value_value&gt;, &lt;value_key_2&gt;: &lt;value_value&gt;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量查询-1"><a href="#批量查询-1" class="headerlink" title="批量查询"></a>批量查询</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hmget(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;value_key_1&gt;, &lt;value_key_2&gt;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hmget(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, [&lt;value_key_1&gt;, &lt;value_key_2&gt;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断是否存在"><a href="#判断是否存在" class="headerlink" title="判断是否存在"></a>判断是否存在</h3><ul>
+<li>存在返回True，不存在返回False</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = conn.hexists(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除键值对"><a href="#删除键值对" class="headerlink" title="删除键值对"></a>删除键值对</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.hdel(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对列表数据（list）的操作"><a href="#对列表数据（list）的操作" class="headerlink" title="对列表数据（list）的操作"></a>对列表数据（list）的操作</h2><h3 id="新增或修改列表"><a href="#新增或修改列表" class="headerlink" title="新增或修改列表"></a>新增或修改列表</h3><h4 id="无论key是否存在都执行（覆盖）-1"><a href="#无论key是否存在都执行（覆盖）-1" class="headerlink" title="无论key是否存在都执行（覆盖）"></a>无论key是否存在都执行（覆盖）</h4><ul>
+<li>如果列表不存在，就先新增列表，再添加数据</li>
+</ul>
+<h5 id="从左侧新增"><a href="#从左侧新增" class="headerlink" title="从左侧新增"></a>从左侧新增</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lpush(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="从右侧新增"><a href="#从右侧新增" class="headerlink" title="从右侧新增"></a>从右侧新增</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.rpush(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="只有key存在时才执行（修改）-1"><a href="#只有key存在时才执行（修改）-1" class="headerlink" title="只有key存在时才执行（修改）"></a>只有key存在时才执行（修改）</h4><h5 id="从左侧新增-1"><a href="#从左侧新增-1" class="headerlink" title="从左侧新增"></a>从左侧新增</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lpushx(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="从右侧新增-1"><a href="#从右侧新增-1" class="headerlink" title="从右侧新增"></a>从右侧新增</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.rpushx(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询列表长度"><a href="#查询列表长度" class="headerlink" title="查询列表长度"></a>查询列表长度</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.llen(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询一组列表中的值"><a href="#查询一组列表中的值" class="headerlink" title="查询一组列表中的值"></a>查询一组列表中的值</h3><blockquote>
+<p><code>&lt;index_start&gt;</code>：开始索引，可以为负数<br><code>&lt;index_end&gt;</code>：结束索引，可以为负数</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lrange(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;index_start&gt;, &lt;index_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改列表中指定索引的值"><a href="#修改列表中指定索引的值" class="headerlink" title="修改列表中指定索引的值"></a>修改列表中指定索引的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lset(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;index&gt;, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="寻找指定值并从列表中删除"><a href="#寻找指定值并从列表中删除" class="headerlink" title="寻找指定值并从列表中删除"></a>寻找指定值并从列表中删除</h3><blockquote>
+<p><code>&lt;count&gt;</code>：删除次数</p>
+<blockquote>
+<p>正数：从左向右删除与这个值相同的值，并指定删除的次数<br>负数：从右向左删除与这个值相同的值，并指定删除的次数<br>0：删除所有与这个值相同的值</p>
+</blockquote>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lrem(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>, &lt;count&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="弹出列表中的值"><a href="#弹出列表中的值" class="headerlink" title="弹出列表中的值"></a>弹出列表中的值</h3><ul>
+<li>删除这个值，并返回这个值</li>
+</ul>
+<h4 id="弹出最左侧的值"><a href="#弹出最左侧的值" class="headerlink" title="弹出最左侧的值"></a>弹出最左侧的值</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.lpop(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="弹出最右侧的值"><a href="#弹出最右侧的值" class="headerlink" title="弹出最右侧的值"></a>弹出最右侧的值</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.rpop(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除索引之外的值"><a href="#删除索引之外的值" class="headerlink" title="删除索引之外的值"></a>删除索引之外的值</h3><ul>
+<li>只保留指定索引中的值，删除索引之外的值</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.ltrim(<span class="string">&quot;list2&quot;</span>, &lt;index_start&gt;, &lt;index_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对无序集合数据（无序set）的操作"><a href="#对无序集合数据（无序set）的操作" class="headerlink" title="对无序集合数据（无序set）的操作"></a>对无序集合数据（无序set）的操作</h2><h3 id="新增数据"><a href="#新增数据" class="headerlink" title="新增数据"></a>新增数据</h3><ul>
+<li>如果集合不存在，就先新增集合，再添加数据</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sadd(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询集合长度"><a href="#查询集合长度" class="headerlink" title="查询集合长度"></a>查询集合长度</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.scard(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询集合中所有值"><a href="#查询集合中所有值" class="headerlink" title="查询集合中所有值"></a>查询集合中所有值</h3><h4 id="返回Python列表"><a href="#返回Python列表" class="headerlink" title="返回Python列表"></a>返回Python列表</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.smembers(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回Python元组"><a href="#返回Python元组" class="headerlink" title="返回Python元组"></a>返回Python元组</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sscan(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回Python迭代器"><a href="#返回Python迭代器" class="headerlink" title="返回Python迭代器"></a>返回Python迭代器</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sscan_iter(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h3><h4 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sinter(<span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="将交集组织为新的集合"><a href="#将交集组织为新的集合" class="headerlink" title="将交集组织为新的集合"></a>将交集组织为新的集合</h5><blockquote>
+<p><code>&lt;key_3&gt;</code>：新的集合的键</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sinterstore(<span class="string">&#x27;&lt;key_3&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="求并集"><a href="#求并集" class="headerlink" title="求并集"></a>求并集</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coon.sunion(<span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="将结果组织为新的集合"><a href="#将结果组织为新的集合" class="headerlink" title="将结果组织为新的集合"></a>将结果组织为新的集合</h5><blockquote>
+<p><code>&lt;key_3&gt;</code>：新的集合的键</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sunionstore(<span class="string">&#x27;&lt;key_3&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="求差集"><a href="#求差集" class="headerlink" title="求差集"></a>求差集</h4><ul>
+<li>在集合<code>&lt;key_1&gt;</code>中但是不在集合<code>&lt;key_2&gt;</code>中的数据</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sdiff(<span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="将结果组织为新的集合-1"><a href="#将结果组织为新的集合-1" class="headerlink" title="将结果组织为新的集合"></a>将结果组织为新的集合</h5><blockquote>
+<p><code>&lt;key_3&gt;</code>：新的集合的键</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sdiffstore(<span class="string">&#x27;&lt;key_3&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断集合中的指定值是否存在"><a href="#判断集合中的指定值是否存在" class="headerlink" title="判断集合中的指定值是否存在"></a>判断集合中的指定值是否存在</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.sismember(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除集合中指定的值"><a href="#删除集合中指定的值" class="headerlink" title="删除集合中指定的值"></a>删除集合中指定的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.srem(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="随机弹出集合中的值"><a href="#随机弹出集合中的值" class="headerlink" title="随机弹出集合中的值"></a>随机弹出集合中的值</h3><ul>
+<li>随机删除值，并返回这个值</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.spop(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对有序集合数据（有序set）的操作"><a href="#对有序集合数据（有序set）的操作" class="headerlink" title="对有序集合数据（有序set）的操作"></a>对有序集合数据（有序set）的操作</h2><h3 id="新增数据-1"><a href="#新增数据-1" class="headerlink" title="新增数据"></a>新增数据</h3><ul>
+<li>如果集合不存在，就先新增集合，再添加数据</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zadd(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_1&gt;&#x27;</span>, <span class="string">&#x27;&lt;value_2&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询集合长度-1"><a href="#查询集合长度-1" class="headerlink" title="查询集合长度"></a>查询集合长度</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zcard(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询集合中的所有值"><a href="#查询集合中的所有值" class="headerlink" title="查询集合中的所有值"></a>查询集合中的所有值</h3><h4 id="返回Python迭代器-1"><a href="#返回Python迭代器-1" class="headerlink" title="返回Python迭代器"></a>返回Python迭代器</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zscan_iter(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据索引范围查询一组集合中的值"><a href="#根据索引范围查询一组集合中的值" class="headerlink" title="根据索引范围查询一组集合中的值"></a>根据索引范围查询一组集合中的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrange(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;index_start&gt;, &lt;index_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果包含分数"><a href="#结果包含分数" class="headerlink" title="结果包含分数"></a>结果包含分数</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrange(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;index_start&gt;, &lt;index_end&gt;, withscores=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据分数范围查询一组集合中的值"><a href="#根据分数范围查询一组集合中的值" class="headerlink" title="根据分数范围查询一组集合中的值"></a>根据分数范围查询一组集合中的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrangebyscore(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果包含分数-1"><a href="#结果包含分数-1" class="headerlink" title="结果包含分数"></a>结果包含分数</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrangebyscore(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;, withscores=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果根据分数排序"><a href="#结果根据分数排序" class="headerlink" title="结果根据分数排序"></a>结果根据分数排序</h4><h5 id="正序"><a href="#正序" class="headerlink" title="正序"></a>正序</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrangebyscore(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="倒序"><a href="#倒序" class="headerlink" title="倒序"></a>倒序</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zscan(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="将集合内的指定值自增"><a href="#将集合内的指定值自增" class="headerlink" title="将集合内的指定值自增"></a>将集合内的指定值自增</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zincrby(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>, amount=&lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="寻找指定值并获取其索引"><a href="#寻找指定值并获取其索引" class="headerlink" title="寻找指定值并获取其索引"></a>寻找指定值并获取其索引</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrank(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="寻找指定值并删除这个值"><a href="#寻找指定值并删除这个值" class="headerlink" title="寻找指定值并删除这个值"></a>寻找指定值并删除这个值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zrem(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;value&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除集合中指定排行范围的值"><a href="#删除集合中指定排行范围的值" class="headerlink" title="删除集合中指定排行范围的值"></a>删除集合中指定排行范围的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zremrangebyrank(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除集合中指定分数范围的值"><a href="#删除集合中指定分数范围的值" class="headerlink" title="删除集合中指定分数范围的值"></a>删除集合中指定分数范围的值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.zremrangebyscore(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, &lt;score_start&gt;, &lt;score_end&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对任意类型数据的操作"><a href="#对任意类型数据的操作" class="headerlink" title="对任意类型数据的操作"></a>对任意类型数据的操作</h2><h3 id="根据键删除指定数据"><a href="#根据键删除指定数据" class="headerlink" title="根据键删除指定数据"></a>根据键删除指定数据</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.delete(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据键判断指定数据是否存在"><a href="#根据键判断指定数据是否存在" class="headerlink" title="根据键判断指定数据是否存在"></a>根据键判断指定数据是否存在</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.exists(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据键重新指定过期时间"><a href="#根据键重新指定过期时间" class="headerlink" title="根据键重新指定过期时间"></a>根据键重新指定过期时间</h3><blockquote>
+<p><code>&lt;num&gt;</code>：过期时间，单位秒</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.expire(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, time=&lt;num&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="为指定键重命名键名"><a href="#为指定键重命名键名" class="headerlink" title="为指定键重命名键名"></a>为指定键重命名键名</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.rename(<span class="string">&#x27;&lt;key&gt;&#x27;</span>, <span class="string">&#x27;&lt;key_new&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="随机获取一个键"><a href="#随机获取一个键" class="headerlink" title="随机获取一个键"></a>随机获取一个键</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.randomkey()</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据键获取数据类型"><a href="#根据键获取数据类型" class="headerlink" title="根据键获取数据类型"></a>根据键获取数据类型</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.<span class="built_in">type</span>(<span class="string">&#x27;&lt;key&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="/302.html?target=https://www.runoob.com/w3cnote/python-redis-intro.html">菜鸟笔记</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div><svg class="coin" width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.045 25.5454C7.69377 25.5454 2.54504 20.3967 2.54504 14.0454C2.54504 7.69413 7.69377 2.54541 14.045 2.54541C20.3963 2.54541 25.545 7.69413 25.545 14.0454C25.545 17.0954 24.3334 20.0205 22.1768 22.1771C20.0201 24.3338 17.095 25.5454 14.045 25.5454ZM9.66202 6.81624H18.2761C18.825 6.81624 19.27 7.22183 19.27 7.72216C19.27 8.22248 18.825 8.62807 18.2761 8.62807H14.95V10.2903C17.989 10.4444 20.3766 12.9487 20.3855 15.9916V17.1995C20.3854 17.6997 19.9799 18.1052 19.4796 18.1052C18.9793 18.1052 18.5738 17.6997 18.5737 17.1995V15.9916C18.5667 13.9478 16.9882 12.2535 14.95 12.1022V20.5574C14.95 21.0577 14.5444 21.4633 14.0441 21.4633C13.5437 21.4633 13.1382 21.0577 13.1382 20.5574V12.1022C11.1 12.2535 9.52148 13.9478 9.51448 15.9916V17.1995C9.5144 17.6997 9.10883 18.1052 8.60856 18.1052C8.1083 18.1052 7.70273 17.6997 7.70265 17.1995V15.9916C7.71158 12.9487 10.0992 10.4444 13.1382 10.2903V8.62807H9.66202C9.11309 8.62807 8.66809 8.22248 8.66809 7.72216C8.66809 7.22183 9.11309 6.81624 9.66202 6.81624Z" fill="currentColor"></path></svg></div>
+  <button>
+    储钱罐
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/assets/images/reward/images/wxpay.png" alt="57uv6Z6g 微信支付">
+        <span>微信支付</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/alipay.png" alt="57uv6Z6g 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/qqpay.png" alt="57uv6Z6g qqpay">
+        <span>qqpay</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/bitcoin.png" alt="57uv6Z6g 比特币">
+        <span>比特币</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/ethereum.png" alt="57uv6Z6g ethereum">
+        <span>ethereum</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/monero.png" alt="57uv6Z6g monero">
+        <span>monero</span>
+      </div>
+      <div>
+        <img src="/assets/images/reward/images/paypal.png" alt="57uv6Z6g 贝宝">
+        <span>贝宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/26/Python3%E5%AE%9E%E7%8E%B0MySQL%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4%E5%B7%A5%E5%85%B7/" rel="prev" title="【代码】Python3实现MySQL密码爆破工具">
+                  <i class="fa fa-angle-left"></i> 【代码】Python3实现MySQL密码爆破工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/26/Python3%E5%AE%9E%E7%8E%B0Redis%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4%E5%B7%A5%E5%85%B7/" rel="next" title="【代码】Python3实现Redis密码爆破工具">
+                  【代码】Python3实现Redis密码爆破工具 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-Mastodon Comments">Mastodon Comments</a></li>
+            <li class="tab"><a href="#comment-twikoo">twikoo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane Mastodon Comments" id="comment-Mastodon Comments">
+              <div class="comments"><div id="mastodon-comments"></div></div>
+            </div>
+            <div class="tab-pane twikoo" id="comment-twikoo">
+              <div class="comments"><div id="twikoo-comments"></div></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">57uv6Z6g</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div id="site-time"></div>
+
+
+<div id="current-visitors-count"></div>
+
+
+<div id="site-badge"></div>
+
+
+<div id="loading-door-left"></div>
+<div id="loading-door-right"></div>
+<a id="loading-door-a" href="javascript:loadingDoorOpen();">芝麻开门</a>
+
+
+<div id="waifu">
+  <div id="waifu-tips"></div>
+  <canvas id="live2d" width="800" height="800"></canvas>
+</div>
+<div id="waifu-toggle">
+  <span>看板娘</span>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.css">
+<link rel="stylesheet" href="/dist/bundle.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/feiju12138/APlayer@1.10.2/dist/APlayer.min.js"></script>
+<script src="/dist/bundle.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="mastodon-comments" type="application/json">{"enable":true,"MASTODON_DOMAIN":"mastodon.social","MASTODON_USER":"feiju_blog_robot"}</script>
+
+<script>
+  document.addEventListener("page:loaded", () => {
+    if (!CONFIG.page.comments) return;
+
+    NexT.utils.loadComments("#mastodon-comments")
+      .then(() => NexT.utils.getScript(CONFIG["mastodon-comments"].JS || "https://cdn.jsdelivr.net/gh/feiju12138/mastodon-comments@4/dist/mastodon-comments.min.js"))
+      .then(() => {
+        const tootIdEl = document.getElementById("toot-id");
+        if (tootIdEl && tootIdEl.textContent !== "undefined") {
+          initMastodonComments({
+            MASTODON_DOMAIN: CONFIG["mastodon-comments"].MASTODON_DOMAIN,
+            MASTODON_USER: CONFIG["mastodon-comments"].MASTODON_USER,
+            TOOT_ID: tootIdEl.textContent
+          });
+        } else {
+          document.innerHTML = '<div style="padding: 16px; color: #666;">当前文章未绑定嘟文</div>';
+        }
+      });
+  });
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo-vercel.loli.fj.cn/","jsUrl":"https://unpkg.com/twikoo@1/dist/twikoo.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<script>
+  // 显示箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.add('back-to-top-on');
+  }, 500);
+  // 旋转箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.5s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(720deg)";
+  }, 1000);
+  // 隐藏箭头
+  setTimeout(() => {
+    document.querySelector('.back-to-top').classList.remove('back-to-top-on');
+  }, 1500);
+  // 单击旋转箭头
+  document.querySelector('.back-to-top').addEventListener('click', () => {
+    document.querySelector('.back-to-top i').style.transition = "transform 0.2s ease";
+    document.querySelector('.back-to-top i').style.transform = "rotate(180deg)";
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(360deg)";
+    }, 400);
+    setTimeout(() => {
+      document.querySelector('.back-to-top i').style.transform = "rotate(0deg)";
+    }, 600);
+  });
+  // 双击返回底部
+  document.querySelector('.back-to-top').addEventListener('dblclick', () => {
+    window.anime({
+      targets  : document.scrollingElement,
+      duration : 500,
+      easing   : 'linear',
+      scrollTop: document.querySelector('footer').offsetTop
+    });
+  });
+</script>
+</body>
+</html>
